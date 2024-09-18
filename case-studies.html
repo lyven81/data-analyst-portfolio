@@ -1,3 +1,8 @@
+---
+layout: default
+title: "All Case Studies"
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,17 +22,14 @@
     <section class="case-studies">
         <h2>All Case Studies</h2>
 
-        <div class="case-study-item">
-            <h3><a href="/case-studies/airbnb-revenue-pricing-management/">Improving Airbnb Revenue: Strategic Pricing and Availability Management</a></h3>
-            <p><strong>Description</strong>: This study provides an in-depth look at optimizing Airbnb pricing strategies to balance availability and occupancy for maximum revenue. Learn how strategic adjustments lead to significant improvements in occupancy rates.</p>
-        </div>
-
-        <div class="case-study-item">
-            <h3><a href="/case-studies/sentiment-analysis-jewelry-products/">Sentiment Analysis on Jewelry Products</a></h3>
-            <p><strong>Description</strong>: Discover how sentiment analysis was used to analyze customer feedback from Amazon, helping businesses understand customer preferences and improve product strategies in the jewelry market.</p>
-        </div>
-
-        <!-- Add additional case studies here following the same format -->
+        <ul>
+          {% for case in site.case-studies %}
+            <li class="case-study-item">
+              <h3><a href="{{ case.url }}">{{ case.title }}</a></h3>
+              <p>{{ case.description }}</p>
+            </li>
+          {% endfor %}
+        </ul>
 
     </section>
 
