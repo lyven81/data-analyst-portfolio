@@ -1,9 +1,9 @@
 title: "Lee Yih Ven's Data Analyst Portfolio"
 description: "My professional portfolio showcasing case studies and data analysis projects."
-baseurl: "" # Leave this blank if you are deploying to a custom domain
-url: "https://lyven81.github.io" # Change this if you use a custom domain
-theme: minima # You can customize this later with another theme
+baseurl: "/data-analyst-portfolio"
+url: "https://lyven81.github.io"
+theme: minima
 
 collections:
   case-studies:
-    output: true  # This tells Jekyll to output the collection as HTML pages
+    output: true
