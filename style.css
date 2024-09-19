@@ -8,7 +8,7 @@ body {
     color: #333;
 }
 
-/* Two-Column Layout */
+/* Container for Layout */
 .container {
     display: flex;
     max-width: 1200px;
@@ -26,46 +26,44 @@ body {
     border-radius: 5px;
 }
 
-.left-column h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+/* Same Font Size for Left and Right Column */
+.left-column h1,
+.right-column h1 {
+    font-size: 2em; /* Make the font size consistent for headers */
 }
 
-.left-column h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
+.left-column h2,
+.right-column h2 {
+    font-size: 1.5em; /* Consistent subheading font size */
 }
 
-.left-column p, .left-column ul {
-    font-size: 1.2em;
+.left-column p,
+.right-column p {
+    font-size: 1em; /* Consistent body text size */
 }
 
-/* Right Column (Case Study List or Content) */
+.left-column ul li {
+    font-size: 1em; /* Same font size for list items */
+}
+
+/* Right Column (Case Studies) */
 .right-column {
     width: 70%;
-    overflow-y: auto; /* Allows scrolling */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Case Study List Page */
+/* Case Study List */
 .case-studies {
     margin-bottom: 20px;
-    padding: 20px 0;
+    padding: 20px 0; /* Padding similar to the portfolio page */
 }
 
 .case-study-list {
     display: block; /* Vertical layout */
+    gap: 20px;
 }
 
 .case-study-item {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px; /* Adds spacing between items */
 }
 
 .case-study-item h3 {
@@ -85,21 +83,19 @@ body {
     text-decoration: underline;
 }
 
-/* Case Study Content Page */
-.case-study-content {
-    margin-bottom: 20px;
-    line-height: 1.8;
+/* Explore Section */
+.explore p {
+    text-align: center;
+    font-size: 1.2em;
 }
 
-.case-study-content h2, .case-study-content h3 {
-    margin-top: 20px;
+.explore a {
+    color: #007BFF;
+    text-decoration: none;
 }
 
-.case-study-content img {
-    max-width: 100%;
-    margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.explore a:hover {
+    text-decoration: underline;
 }
 
 /* Footer */
@@ -108,4 +104,9 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
+}
+
+/* Limit of 10 case studies for vertical scroll */
+.case-study-list > .case-study-item:nth-child(n+11) {
+    display: none; /* Hide case studies after the 10th */
 }
