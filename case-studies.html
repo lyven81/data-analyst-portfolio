@@ -14,9 +14,10 @@
 
     <section>
         <ul>
-            <li><a href="/data-analyst-portfolio/case-studies/amazon-product-review-sentiment-analysis.html">Amazon Product Review Sentiment Analysis</a></li>
-            <li><a href="/data-analyst-portfolio/case-studies/airbnb-revenue-pricing-management.html">Airbnb Revenue: Strategic Pricing and Availability Management</a></li>
-            <!-- Add more case studies here following the same format -->
+            <!-- Jekyll loop to automatically list case studies -->
+            {% for case in site.case-studies %}
+                <li><a href="{{ case.url }}">{{ case.title }}</a></li>
+            {% endfor %}
         </ul>
     </section>
 
