@@ -53,13 +53,18 @@ body {
     margin-bottom: 20px;
 }
 
+/* Horizontal Scrolling for Case Studies */
 .case-study-list {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    gap: 20px; /* Spacing between case study cards */
+    padding-bottom: 10px; /* Ensures there's space for scrollbar */
+    max-width: 100%; /* Limit the width for horizontal scrolling */
 }
 
 .case-study-item {
+    min-width: 300px; /* Set a minimum width for each case study card */
+    flex: 0 0 auto; /* Prevents shrinking and ensures horizontal scrolling */
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -100,4 +105,9 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
+}
+
+/* Limit of 10 case studies for horizontal scroll */
+.case-study-list > .case-study-item:nth-child(n+11) {
+    display: none; /* Hide case studies after the 10th */
 }
