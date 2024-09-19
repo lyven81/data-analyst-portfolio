@@ -7,4 +7,3 @@ theme: minima
 collections:
   case-studies:
     output: true
-
