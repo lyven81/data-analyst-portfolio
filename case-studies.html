@@ -9,7 +9,7 @@ title: "Case Studies"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Studies - Lee Yih Ven's Data Analyst Portfolio</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css"> <!-- Correctly link the CSS -->
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
 </head>
 <body>
     <header>
@@ -19,7 +19,6 @@ title: "Case Studies"
 
     <section>
         <ul>
-            <!-- Jekyll loop to automatically list case studies -->
             {% for case in site.case-studies %}
                 <li><a href="{{ case.url }}">{{ case.title }}</a></li>
             {% endfor %}
