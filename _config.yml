@@ -6,5 +6,4 @@ theme: minima # You can customize this later with another theme
 
 collections:
   case-studies:
-    output: true
-
+    output: true  # This tells Jekyll to output the collection as HTML pages
