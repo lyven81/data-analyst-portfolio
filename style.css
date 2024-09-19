@@ -8,7 +8,7 @@ body {
     color: #333;
 }
 
-/* Container for Layout */
+/* Two-Column Layout */
 .container {
     display: flex;
     max-width: 1200px;
@@ -17,7 +17,7 @@ body {
     gap: 40px;
 }
 
-/* Left Column (Navigation, Contact) */
+/* Left Column (Personal Info and Contact) */
 .left-column {
     width: 30%;
     background-color: #fff;
@@ -36,33 +36,36 @@ body {
     margin-bottom: 20px;
 }
 
-.left-column .contact ul {
-    list-style-type: none;
-    padding: 0;
+.left-column p, .left-column ul {
+    font-size: 1.2em;
 }
 
-.left-column .contact ul li {
-    margin-bottom: 10px;
-}
-
-/* Right Column (Case Studies) */
+/* Right Column (Case Study List or Content) */
 .right-column {
     width: 70%;
+    overflow-y: auto; /* Allows scrolling */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Case Study List */
+/* Case Study List Page */
 .case-studies {
     margin-bottom: 20px;
-    padding: 20px 0; /* Ensures padding similar to portfolio page */
+    padding: 20px 0;
 }
 
 .case-study-list {
-    display: block; /* Changes layout back to vertical */
-    gap: 20px;
+    display: block; /* Vertical layout */
 }
 
 .case-study-item {
-    margin-bottom: 20px; /* Adds spacing between items */
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .case-study-item h3 {
@@ -82,27 +85,21 @@ body {
     text-decoration: underline;
 }
 
-/* Explore Section */
-.explore p {
-    text-align: center;
-    font-size: 1.2em;
+/* Case Study Content Page */
+.case-study-content {
+    margin-bottom: 20px;
+    line-height: 1.8;
 }
 
-.explore a {
-    color: #007BFF;
-    text-decoration: none;
+.case-study-content h2, .case-study-content h3 {
+    margin-top: 20px;
 }
 
-.explore a:hover {
-    text-decoration: underline;
-}
-
-/* Centered Container for Consistent Layout */
-.centered-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: left; /* Keeps the text aligned to the left inside the centered container */
+.case-study-content img {
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer */
@@ -111,9 +108,4 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
-}
-
-/* Limit of 10 case studies for vertical scroll */
-.case-study-list > .case-study-item:nth-child(n+11) {
-    display: none; /* Hide case studies after the 10th */
 }
