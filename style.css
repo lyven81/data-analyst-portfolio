@@ -13,51 +13,29 @@ body {
     padding: 20px;
 }
 
-/* Container for alignment */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
 /* Header styling */
 header {
     background-color: #333;
     color: #fff;
-    padding: 10px 0;
+    padding: 20px 0;
     text-align: center;
 }
 
-.header-container h1 {
-    margin-bottom: 5px;
+header h1 {
+    font-size: 2.5em;
 }
 
-.header-container p {
+header p {
     font-size: 1.2em;
+    margin-top: 10px;
 }
 
-/* About section */
-.about {
+/* Project and case study section styling */
+.projects, .explore, .contact, section ul {
     margin: 20px 0;
 }
 
-.about h2 {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-}
-
-/* Capabilities section */
-.capabilities ul {
-    list-style-type: none;
-    margin: 10px 0;
-}
-
-.capabilities li {
-    margin-bottom: 10px;
-}
-
-/* Projects section */
-.projects .project-item {
+.project-item, section ul li {
     background-color: #fff;
     padding: 20px;
     margin-bottom: 20px;
@@ -65,35 +43,17 @@ header {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.projects .project-item h3 a {
+.project-item h3, section ul li a {
     color: #333;
     text-decoration: none;
 }
 
-.projects .project-item h3 a:hover {
+.project-item h3:hover, section ul li a:hover {
     color: #007BFF;
     text-decoration: underline;
 }
 
-/* Contact section */
-.contact ul {
-    list-style-type: none;
-}
-
-.contact li {
-    margin-bottom: 10px;
-}
-
-.contact a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.contact a:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
+/* Footer styling */
 footer {
     text-align: center;
     margin-top: 40px;
