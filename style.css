@@ -10,13 +10,13 @@ body {
 
 /* Framed Container */
 .framed-container {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 900px; /* Limiting the width of the frame */
+    margin: 0 auto; /* Centers the container */
     padding: 30px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for visual effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for visual effect */
 }
 
 /* Case Study List */
