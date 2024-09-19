@@ -8,6 +8,7 @@ body {
     color: #333;
 }
 
+/* Container for Layout */
 .container {
     display: flex;
     max-width: 1200px;
@@ -49,11 +50,12 @@ body {
     width: 70%;
 }
 
+/* Case Study List */
 .case-studies {
     margin-bottom: 20px;
+    padding: 20px 0; /* Ensures padding similar to portfolio page */
 }
 
-/* Horizontal Scrolling for Case Studies */
 .case-study-list {
     display: flex;
     overflow-x: auto; /* Enables horizontal scrolling */
@@ -62,6 +64,7 @@ body {
     max-width: 100%; /* Limit the width for horizontal scrolling */
 }
 
+/* Case Study Items */
 .case-study-item {
     min-width: 300px; /* Set a minimum width for each case study card */
     flex: 0 0 auto; /* Prevents shrinking and ensures horizontal scrolling */
@@ -69,10 +72,15 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .case-study-item h3 {
     font-size: 1.5em;
+}
+
+.case-study-item p {
+    font-size: 1em;
 }
 
 .case-study-item a {
@@ -97,6 +105,14 @@ body {
 
 .explore a:hover {
     text-decoration: underline;
+}
+
+/* Centered Container for Consistent Layout */
+.centered-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left; /* Keeps the text aligned to the left inside the centered container */
 }
 
 /* Footer */
