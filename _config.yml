@@ -3,7 +3,3 @@ description: "My professional portfolio showcasing case studies and data analysi
 baseurl: "/data-analyst-portfolio"
 url: "https://lyven81.github.io"
 theme: minima
-
-collections:
-  case-studies:
-    output: true
