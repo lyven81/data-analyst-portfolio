@@ -8,8 +8,23 @@ body {
     color: #333;
 }
 
-/* Framed Container */
-.framed-container {
+/* Specific Styles for Portfolio Page */
+.portfolio-page .case-studies {
+    display: flex; /* Use flexbox for the portfolio layout */
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.portfolio-page .case-study-item {
+    flex: 1; /* Allow items to take up equal space */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Framed Container for Case Study List Only */
+.case-study-list-container {
     max-width: 900px; /* Limit width */
     margin: 0 auto; /* Center the container */
     padding: 30px;
@@ -20,12 +35,12 @@ body {
 }
 
 /* Case Study List */
-.case-studies {
+.case-study-list-container .case-studies {
     margin-bottom: 20px;
     padding: 20px 0;
 }
 
-.case-study-item {
+.case-study-list-container .case-study-item {
     margin-bottom: 20px;
     padding: 20px;
     background-color: #f9f9f9; /* Slightly lighter background for case study items */
@@ -33,21 +48,21 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
 }
 
-.case-study-item h3 {
+.case-study-list-container .case-study-item h3 {
     font-size: 1.5em;
 }
 
-.case-study-item p {
+.case-study-list-container .case-study-item p {
     font-size: 1em;
     color: #555;
 }
 
-.case-study-item a {
+.case-study-list-container .case-study-item a {
     color: #007BFF;
     text-decoration: none;
 }
 
-.case-study-item a:hover {
+.case-study-list-container .case-study-item a:hover {
     text-decoration: underline;
 }
 
