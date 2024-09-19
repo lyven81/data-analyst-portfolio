@@ -1,63 +1,91 @@
-/* Basic reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    padding: 20px;
 }
 
-/* Header styling */
+/* Header */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
     text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
 }
 
 header h1 {
     font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
 header p {
     font-size: 1.2em;
-    margin-top: 10px;
 }
 
-/* Project and case study section styling */
-.projects, .explore, .contact, section ul {
-    margin: 20px 0;
-}
-
-.project-item, section ul li {
-    background-color: #fff;
+/* Case Study Section */
+.case-studies {
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.project-item h3, section ul li a {
-    color: #333;
+.case-study-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.case-study-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(50% - 40px); /* Responsive for 2 columns */
+}
+
+.case-study-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.case-study-item p {
+    font-size: 1em;
+}
+
+.case-study-item a {
+    color: #007BFF;
     text-decoration: none;
 }
 
-.project-item h3:hover, section ul li a:hover {
-    color: #007BFF;
+.case-study-item a:hover {
     text-decoration: underline;
 }
 
-/* Footer styling */
+/* Contact Section */
+.contact {
+    padding: 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+}
+
+.contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact ul li {
+    margin-bottom: 10px;
+}
+
+/* Footer */
 footer {
     text-align: center;
-    margin-top: 40px;
-    padding: 20px 0;
+    padding: 20px;
     background-color: #333;
-    color: #fff;
+    color: white;
 }
