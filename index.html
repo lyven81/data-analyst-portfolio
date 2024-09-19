@@ -20,6 +20,7 @@ title: "Lee Yih Ven's Data Analyst Portfolio"
     <section class="projects">
         <h2>Featured Case Studies</h2>
         <ul>
+            <!-- Jekyll loop to dynamically display featured case studies -->
             {% for case in site.case-studies %}
                 <li>
                     <h3><a href="{{ case.url }}">{{ case.title }}</a></h3>
@@ -27,6 +28,12 @@ title: "Lee Yih Ven's Data Analyst Portfolio"
                 </li>
             {% endfor %}
         </ul>
+    </section>
+
+    <section class="explore">
+        <h2>Explore My Work</h2>
+        <p>Discover more projects and case studies:</p>
+        <p><a href="/data-analyst-portfolio/case-studies.html">View All Case Studies</a></p>
     </section>
 
     <footer>
