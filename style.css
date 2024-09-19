@@ -8,88 +8,101 @@ body {
     color: #333;
 }
 
-/* Specific Styles for Portfolio Page */
-.portfolio-page .case-studies {
-    display: flex; /* Use flexbox for the portfolio layout */
-    gap: 20px;
+/* Container for Layout */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 40px;
+}
+
+/* Left Column (Navigation, Contact) */
+.left-column {
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.left-column h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.left-column h2 {
+    font-size: 1.5em;
     margin-bottom: 20px;
 }
 
-.portfolio-page .case-study-item {
-    flex: 1; /* Allow items to take up equal space */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.left-column .contact ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-/* Framed Container for Case Study List Only */
-.case-study-list-container {
-    max-width: 900px; /* Limit width */
-    margin: 0 auto; /* Center the container */
-    padding: 30px;
-    background-color: #fff;
-    border: 1px solid #ddd; /* Add a light border */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for visual effect */
+.left-column .contact ul li {
+    margin-bottom: 10px;
+}
+
+/* Right Column (Case Studies) */
+.right-column {
+    width: 70%;
 }
 
 /* Case Study List */
-.case-study-list-container .case-studies {
+.case-studies {
     margin-bottom: 20px;
-    padding: 20px 0;
+    padding: 20px 0; /* Ensures padding similar to portfolio page */
 }
 
-.case-study-list-container .case-study-item {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #f9f9f9; /* Slightly lighter background for case study items */
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+.case-study-list {
+    display: block; /* Changes layout back to vertical */
+    gap: 20px;
 }
 
-.case-study-list-container .case-study-item h3 {
+.case-study-item {
+    margin-bottom: 20px; /* Adds spacing between items */
+}
+
+.case-study-item h3 {
     font-size: 1.5em;
 }
 
-.case-study-list-container .case-study-item p {
+.case-study-item p {
     font-size: 1em;
-    color: #555;
 }
 
-.case-study-list-container .case-study-item a {
+.case-study-item a {
     color: #007BFF;
     text-decoration: none;
 }
 
-.case-study-list-container .case-study-item a:hover {
+.case-study-item a:hover {
     text-decoration: underline;
 }
 
-/* Call to Action Section */
-.cta {
+/* Explore Section */
+.explore p {
     text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    background-color: #f4f4f4;
-    border-top: 1px solid #ddd;
+    font-size: 1.2em;
 }
 
-.cta h2 {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-}
-
-.cta-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
+.explore a {
+    color: #007BFF;
     text-decoration: none;
-    border-radius: 5px;
 }
 
-.cta-button:hover {
-    background-color: #0056b3;
+.explore a:hover {
+    text-decoration: underline;
+}
+
+/* Centered Container for Consistent Layout */
+.centered-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left; /* Keeps the text aligned to the left inside the centered container */
 }
 
 /* Footer */
@@ -98,4 +111,9 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
+}
+
+/* Limit of 10 case studies for vertical scroll */
+.case-study-list > .case-study-item:nth-child(n+11) {
+    display: none; /* Hide case studies after the 10th */
 }
