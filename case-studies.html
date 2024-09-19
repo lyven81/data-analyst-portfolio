@@ -13,12 +13,13 @@ title: "Case Studies"
 </head>
 <body>
     <header>
-        <h1>Case Studies</h1>
+        <h1>All Case Studies</h1>
         <p>Explore detailed case studies showcasing my work in data analysis.</p>
     </header>
 
     <section>
         <ul>
+            <!-- Jekyll loop to automatically list case studies -->
             {% for case in site.case-studies %}
                 <li><a href="{{ case.url }}">{{ case.title }}</a></li>
             {% endfor %}
