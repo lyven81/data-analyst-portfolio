@@ -1,4 +1,6 @@
+# Adding the new case study to the case-studies.html file
 
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,6 +59,12 @@
                         <a href="/data-analyst-portfolio/case-studies/airbnb-night-requirements-pricing.html">Read More</a>
                     </div>
 
+                    <div class="case-study-item">
+                        <h3>Impact of Neighborhood Location on Airbnb Pricing</h3>
+                        <p>Analyzing how neighborhood location influences pricing strategies for Airbnb listings in Seattle.</p>
+                        <a href="/data-analyst-portfolio/case-studies/airbnb-neighborhood-pricing.html">Read More</a>
+                    </div>
+
                 </div>
             </section>
         </main>
@@ -69,3 +77,14 @@
 
 </body>
 </html>
+"""
+
+# Define the filename for the updated HTML file
+html_filename = "case-studies.html"
+
+# Save the updated case-studies.html file
+file_path = f'/mnt/data/{html_filename}'
+with open(file_path, 'w') as file:
+    file.write(html_content)
+
+file_path
