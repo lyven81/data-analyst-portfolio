@@ -50,6 +50,12 @@
                         <a href="/data-analyst-portfolio/case-studies/airbnb-strategy-pricing-and-availability-management.html">Read More</a>
                     </div>
 
+                    <div class="case-study-item">
+                        <h3>Impact of Minimum and Maximum Night Requirements on Airbnb Pricing</h3>
+                        <p>Analyzing how stay duration impacts pricing strategies and occupancy rates for Airbnb listings.</p>
+                        <a href="/data-analyst-portfolio/case-studies/airbnb-night-requirements-pricing.html">Read More</a>
+                    </div>
+
                 </div>
             </section>
         </main>
@@ -62,3 +68,14 @@
 
 </body>
 </html>
+"""
+
+# Define the filename for the HTML file
+case_studies_filename = "case-studies.html"
+
+# Save the updated case studies HTML content to the file
+case_studies_path = f'/mnt/data/{case_studies_filename}'
+with open(case_studies_path, 'w') as file:
+    file.write(case_studies_html)
+
+case_studies_path
