@@ -1,3 +1,6 @@
+# Updating the index.html file to reflect the new Featured Case Studies and remove the existing ones
+
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,9 +48,15 @@
                     </div>
 
                     <div class="case-study-item">
-                        <h3>Airbnb Revenue Optimization</h3>
-                        <p>Data-driven pricing strategies to boost occupancy rates and revenue.</p>
-                        <a href="/data-analyst-portfolio/case-studies/airbnb-revenue-pricing-management.html">Read More</a>
+                        <h3>Impact of Neighborhood Location on Airbnb Pricing</h3>
+                        <p>Analyzing how neighborhood location influences pricing strategies for Airbnb listings in Seattle.</p>
+                        <a href="/data-analyst-portfolio/case-studies/airbnb-neighborhood-pricing.html">Read More</a>
+                    </div>
+
+                    <div class="case-study-item">
+                        <h3>Trading Volume Patterns and Price Changes</h3>
+                        <p>Analyzing trading volume patterns and their relationship with price changes during critical market periods.</p>
+                        <a href="/data-analyst-portfolio/case-studies/trading-volume-price-changes.html">Read More</a>
                     </div>
                 </div>
 
@@ -67,3 +76,14 @@
 
 </body>
 </html>
+"""
+
+# Define the filename for the updated HTML file
+html_filename = "index.html"
+
+# Save the updated index.html file
+file_path = f'/mnt/data/{html_filename}'
+with open(file_path, 'w') as file:
+    file.write(html_content)
+
+file_path
