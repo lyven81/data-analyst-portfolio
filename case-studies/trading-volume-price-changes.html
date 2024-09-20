@@ -1,0 +1,167 @@
+# Updating the HTML content to embed visualizations for the new case study
+
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Volume Patterns and Price Changes | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Trading Volume Patterns and Price Changes</h1>
+                    <p>Analyzing trading volume patterns and their relationship with price changes during critical market periods.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study examines trading volume patterns and their relationship with price changes from late February to early April over multiple years. The analysis reveals consistent trends, such as increased trading volumes in March and notable correlations between volume and price changes, providing retail investors with actionable insights to guide their investment strategies during these critical periods.</p>
+                </section>
+
+                <!-- Embedded Visualization 1 -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/trading-volume-price-change/Visualization%201.png" alt="Trading Volume and Price Change Visualization 1" />
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>Retail investors need to identify optimal periods for trading based on historical data to maximize returns. Understanding the relationship between trading volume and price changes during specific months can provide valuable insights to help investors optimize their trading strategies.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Dataset Used:</strong> The dataset includes historical trading volumes and price changes from late February to early April from 2020 to 2024.</p>
+                    <p><strong>Data Analysis Techniques:</strong></p>
+                    <ul>
+                        <li>Trend Analysis: Examined trading volumes and price changes to identify recurring patterns.</li>
+                        <li>Comparative Analysis: Compared trading volumes and price changes across different years to highlight consistent trends and deviations.</li>
+                        <li>Correlation Analysis: Assessed the relationship between trading volume and price changes to identify significant correlations.</li>
+                    </ul>
+                </section>
+
+                <!-- Embedded Visualization 2 -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/trading-volume-price-change/Visualization%202.png" alt="Trading Volume and Price Change Visualization 2" />
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>Notable Increase in Trading Volume in March Every Year</h3>
+                    <p>March consistently shows an increase in trading volume, suggesting it is a critical month for market activity. This increase often correlates with price increases, particularly in the third and fourth weeks.</p>
+
+                    <h3>U-Shape Trading Curve in 2020 and 2021</h3>
+                    <p>Both 2020 and 2021 exhibit a U-shape trading volume pattern, with high volume in the final week of February, a dip, and a resurgence in March. This pattern often aligns with price increases in the third and fourth weeks.</p>
+
+                    <h3>High Trading Volume in Specific Weeks</h3>
+                    <ul>
+                        <li>February 2022: The third week of February 2022 recorded the highest trading volume and a price decrease of 5.94%, indicating that high volume does not always correlate with price increases.</li>
+                        <li>February 2023: The second week of February 2023 saw peak trading volume with a price increase of 12.01%, followed by continued high volumes and price increases in the third week.</li>
+                        <li>March 2024: The first week of March 2024 had the highest trading volume and a price increase of 2.69%, followed by a steady decline in both volume and price.</li>
+                    </ul>
+
+                    <h3>Correlation Between Trading Volume and Price Changes</h3>
+                    <ul>
+                        <li>Price increased with higher volume: 15 times (weekly basis)</li>
+                        <li>Price decreased with lower volume: 10 times (weekly basis)</li>
+                        <li>Price increased with higher volume: 3 times (monthly basis)</li>
+                        <li>Price decreased with lower volume: 2 times (monthly basis)</li>
+                    </ul>
+                    <p><strong>Insight:</strong> While higher trading volumes often correlate with price increases, there are exceptions, particularly during periods of market volatility or external economic events.</p>
+
+                    <h3>Steady Decline in Trading Volume After Early March 2024</h3>
+                    <p>The decline in trading volume after the first week of March 2024 may indicate market stabilization or reduced investor engagement. This period often shows price decreases despite earlier volume spikes.</p>
+                </section>
+
+                <!-- Embedded Visualization 3 -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/trading-volume-price-change/Visualization%203.png" alt="Trading Volume and Price Change Visualization 3" />
+                </section>
+
+                <!-- Embedded Visualization 4 -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/trading-volume-price-change/Visualization%204.png" alt="Trading Volume and Price Change Visualization 4" />
+                </section>
+
+                <!-- Embedded Visualization 5 -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/trading-volume-price-change/Visualization%205.png" alt="Trading Volume and Price Change Visualization 5" />
+                </section>
+
+                <!-- Embedded Visualization 6 -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/trading-volume-price-change/Visualization%206.png" alt="Trading Volume and Price Change Visualization 6" />
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Focus on March for Trading Activities:</strong> Given the consistent increase in trading volumes and their general correlation with price increases during March, retail investors should consider adjusting their strategies to capitalize on the heightened market activity during this month.</li>
+                        <li><strong>Monitor Late February to Mid-March Trends:</strong> The recurring peaks in trading volume and corresponding price changes during this period suggest that investors should be prepared for increased market volatility. Utilizing volume-based indicators could help in timing trades more effectively.</li>
+                        <li><strong>Be Cautious of Declining Volumes Post-March:</strong> The decline in trading volumes and the frequent price decreases after early March suggest a period of market calm. Investors might consider adopting more conservative strategies during this time, focusing on longer-term positions or reducing exposure until trading volumes increase again.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>The analysis of trading volumes and price changes from late February to early April reveals valuable patterns for retail investors. Higher trading volumes generally correspond to price increases, particularly in March, making it a critical period for trading activities. However, the data also show that high trading volumes do not always guarantee price gains, indicating the influence of other market factors. By recognizing these patterns, investors can better navigate market fluctuations, optimize their entry and exit points, and make more informed and potentially profitable trading decisions.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
+"""
+
+# Define the filename for the HTML file
+html_filename = "trading-volume-price-changes.html"
+
+# Save the generated HTML content to the file
+file_path = f'/mnt/data/{html_filename}'
+with open(file_path, 'w') as file:
+    file.write(html_content)
+
+file_path
