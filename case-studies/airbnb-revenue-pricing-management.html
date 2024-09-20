@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improving Airbnb Revenue: Strategic Pricing and Availability Management | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Improving Airbnb Revenue: Strategic Pricing and Availability Management</h1>
+                    <p>Optimizing pricing strategies to enhance occupancy and maximize revenue for Airbnb listings.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study examines the impact of pricing and availability on revenue management for Airbnb listings in Seattle, WA. By analyzing trends in pricing and availability, we aimed to optimize pricing strategies to enhance occupancy rates and maximize revenue. The study identified a price equilibrium between $100 and $138, where availability and occupancy are balanced, offering actionable insights for dynamic pricing adjustments.</p>
+                </section>
+
+                <!-- Embedded Visualization -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/airbnb-revenue-pricing-management/001%20Price%20equilibrium.png" alt="Price Equilibrium" />
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The business challenge addressed in this study was optimizing revenue management for Airbnb listings by identifying pricing strategies that balance availability and occupancy. Ineffective pricing strategies could result in either underutilization of properties or missed revenue opportunities.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Dataset Used:</strong> The analysis utilized a dataset from Airbnb, detailing listing activities in Seattle, including daily prices, availability status, and night requirements.</p>
+                    <p><strong>Data Analytic Techniques:</strong></p>
+                    <ul>
+                        <li>SQL Queries: Calculated the total number of available nights and the average price per listing over a specified period.</li>
+                        <li>Correlation Analysis: Assessed the relationship between availability and pricing, identifying key trends.</li>
+                        <li>Price Range Identification: Determined a practical price range where demand and supply are effectively balanced.</li>
+                    </ul>
+                </section>
+
+                <!-- Embedded Visualization -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/airbnb-revenue-pricing-management/002%20Average%20price%20and%20total%20available%20night.png" alt="Average Price and Available Nights" />
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>High Availability Indicators</h3>
+                    <p>Listings with high availability often experienced lower demand, potentially due to higher-than-ideal pricing. Adjusting pricing strategies for these listings could increase occupancy.</p>
+
+                    <h3>Negative Correlation Between Price and Availability</h3>
+                    <p>A correlation of -0.278 was observed, indicating that higher prices generally lead to lower occupancy. However, the correlation is not strong, suggesting that additional factors may influence availability.</p>
+
+                    <h3>Optimal Price Range</h3>
+                    <p>The $100 to $138 price range was identified as the equilibrium point where availability stabilizes, representing the optimal price point for balancing supply and demand.</p>
+                </section>
+
+                <!-- Embedded Visualization -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/airbnb-revenue-pricing-management/003%20optimal%20price%20range.png" alt="Optimal Price Range" />
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Dynamic Pricing Implementation:</strong> Listings with high availability should adopt dynamic pricing strategies, lowering prices during off-peak periods to boost occupancy.</li>
+                        <li><strong>Pricing Review for Low Availability Listings:</strong> For listings with low availability but higher pricing, ensure that prices align with market demand, particularly during peak periods.</li>
+                        <li><strong>Continuous Monitoring and Adjustment:</strong> Regularly monitor price and availability data, adjusting prices based on real-time demand, local events, and seasonal trends to optimize revenue.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>By adopting the recommended strategies, Airbnb hosts can better align their pricing with market demand, optimize occupancy rates, and potentially increase overall revenue. The identified price equilibrium provides a solid foundation for making informed pricing decisions that balance availability and profitability.</p>
+                </section>
+
+                <!-- Embedded Visualization -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/airbnb-revenue-pricing-management/004%20Dashboard.png" alt="Dashboard" />
+                </section>
+
+                <section>
+                    <h2>Key Insights and Recommendations</h2>
+                    <ul>
+                        <li><strong>Key Findings:</strong></li>
+                        <ul>
+                            <li>A negative correlation of -0.278 suggests that as average prices increase, the total available nights tend to decrease, though the relationship is not strongly linear.</li>
+                            <li>The optimal price range for balancing availability appears to be between $100 and $138, as seen in the middle cluster of data points.</li>
+                        </ul>
+                        <li><strong>Recommendations:</strong></li>
+                        <ul>
+                            <li>Implement dynamic pricing strategies, especially for listings priced above $300, to improve occupancy rates.</li>
+                            <li>Consider pricing listings within the $100-$138 range to maximize both availability and occupancy.</li>
+                        </ul>
+                    </ul>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
