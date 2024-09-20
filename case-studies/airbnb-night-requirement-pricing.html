@@ -1,0 +1,138 @@
+# Saving the edited HTML content with embedded visualizations to a file
+
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact of Minimum and Maximum Night Requirements on Airbnb Pricing | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Impact of Minimum and Maximum Night Requirements on Airbnb Pricing</h1>
+                    <p>Analyzing how stay duration impacts pricing strategies and occupancy rates for Airbnb listings.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study explores the impact of minimum and maximum night requirements on the pricing and occupancy rates of Airbnb listings in Seattle, WA. The analysis shows that while stay duration has a weak correlation with pricing, other factors such as availability, location, and seasonal demand are more significant in determining prices. These findings help guide Airbnb hosts in optimizing their booking strategies to maximize occupancy and revenue.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The primary business problem addressed in this case study was understanding how stay duration (minimum and maximum nights) impacts Airbnb listing prices in Seattle, WA. The objective was to provide actionable insights that help hosts optimize pricing strategies to improve booking rates and maximize revenue.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Dataset Used:</strong> The dataset included daily listing activity for Airbnb homestays in Seattle, detailing availability, pricing, and stay requirements (minimum and maximum nights).</p>
+                    <p><strong>Data Analysis Techniques:</strong></p>
+                    <ul>
+                        <li>SQL Queries: Utilized to calculate average prices based on different stay durations and analyze correlations between stay duration and pricing.</li>
+                        <li>Exploratory Data Analysis (EDA): Conducted to identify patterns and trends in the relationship between stay duration and pricing, as well as to explore how other factors such as availability, location, and seasonality influence pricing.</li>
+                    </ul>
+                </section>
+
+                <!-- Embedded Visualization -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/airbnb-night-requirement-pricing/analyzing%20stay%20duration%20and%20pricing%20-%201.png" alt="Analyzing Stay Duration and Pricing 1" />
+                </section>
+
+                <section>
+                    <h2>Key Insights</h2>
+                    <h3>Correlation between Stay Duration and Pricing</h3>
+                    <p>Scatter plots reveal the weak correlation between minimum/maximum night requirements and pricing. Listings with shorter stay durations show a wide range of average prices, but the overall correlation remains weak.</p>
+
+                    <h3>Stay Duration vs. Average Pricing</h3>
+                    <p>Bar charts illustrate how average pricing varies across different stay durations. Listings with short minimum nights often have higher average prices, but this trend is inconsistent as stay duration increases.</p>
+                    <h3>Pricing Trends Based on Availability Status</h3>
+                    <p>Line charts show that available listings command higher average prices than unavailable ones. Maintaining high availability could be a profitable strategy for hosts, allowing them to command higher prices.</p>
+                </section>
+
+                <!-- Embedded Visualization -->
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/airbnb-night-requirement-pricing/analyzng%20stay%20duration%20and%20pricing%202.png" alt="Analyzing Stay Duration and Pricing 2" />
+                </section>
+
+                <section>
+                    <h2>Summary of Findings</h2>
+                    <ul>
+                        <li>Weak Correlation: The correlation between stay duration (both minimum and maximum nights) and pricing is minimal, suggesting that stay duration is not the primary driver of pricing.</li>
+                        <li>Variable Pricing: Listings with low minimum night requirements often show higher average prices, but this trend does not hold consistently across all listings, highlighting the importance of other factors like location, amenities, and seasonal demand.</li>
+                        <li>Impact of Availability: Available listings tend to command higher prices, emphasizing the importance of maintaining availability to maximize revenue.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Holistic Pricing Strategy:</strong> Hosts should consider a variety of factors beyond stay duration, including location, amenities, and seasonal demand, when setting prices. This holistic approach can help set competitive prices that attract bookings while maximizing revenue.</li>
+                        <li><strong>Maximize Availability:</strong> To capitalize on the higher prices associated with available listings, hosts should strive to maintain availability, particularly during high-demand periods.</li>
+                        <li><strong>Focus on Amenities and Location:</strong> Since factors beyond stay duration significantly impact pricing, hosts should enhance their listings through improved amenities and by leveraging their location to justify higher prices.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>The findings suggest that while stay duration (minimum and maximum nights) has some impact on pricing, it is not the primary driver of Airbnb listing prices in Seattle, WA. The visualizations reveal that other factors, such as availability, location, and seasonal demand, play a more significant role in determining pricing. To optimize their pricing strategies effectively, hosts should adopt a more holistic approach, considering these various factors to maximize occupancy rates and increase overall revenue.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
+"""
+
+# Define the filename for the HTML file
+html_filename = "airbnb-night-requirements-pricing.html"
+
+# Save the generated HTML content to the file
+file_path = f'/mnt/data/{html_filename}'
+with open(file_path, 'w') as file:
+    file.write(html_content)
+
+file_path
