@@ -1,4 +1,4 @@
-
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Improving Airbnb Revenue: Strategic Pricing and Availability Management | Lee Yih Ven</title>
     <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -136,3 +142,14 @@
 
 </body>
 </html>
+"""
+
+# Define the filename for the HTML file
+html_filename = "airbnb-revenue-pricing-management.html"
+
+# Save the generated HTML content to the file
+file_path = f'/mnt/data/{html_filename}'
+with open(file_path, 'w') as file:
+    file.write(html_content)
+
+file_path
