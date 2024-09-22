@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicting High-Spending Customers with Logistic Regression | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Predicting High-Spending Customers with Logistic Regression</h1>
+                    <p>Using predictive modeling to identify high-value customers for retail businesses.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study examines how retail businesses can use predictive modeling to identify high-spending customers. Using a logistic regression model, the study analyzes customer demographics and purchasing patterns to predict which customers are likely to spend over $1,000. The findings offer actionable insights for targeting high-value customers through personalized promotions, loyalty programs, and marketing campaigns.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>Retailers face challenges in identifying high-spending customers who can be targeted for promotions and loyalty programs. This case study aims to predict high spenders using customer demographic data and purchasing behavior, helping businesses optimize their marketing strategies and improve revenue.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Dataset:</strong> The dataset, titled "Retail Sales and Customer Demographics Dataset," includes attributes like age, gender, product category, and total amount spent.</p>
+                    <p><strong>Analytic Framework:</strong></p>
+                    <ul>
+                        <li>Logistic regression was used to predict high spenders based on age, gender, and product preferences. SQL queries were employed to analyze spending behavior.</li>
+                        <li>The logistic regression model was trained using customer demographic and purchasing data, achieving high precision and accuracy. The model predicted whether a customer would spend more than $1,000 based on input features such as gender, age group, and product category.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>High Spender Breakdown by Gender</h3>
+                    <ul>
+                        <li>Male: 15.71% of male customers were predicted to be high spenders.</li>
+                        <li>Female: 14.9% of female customers were predicted to be high spenders.</li>
+                    </ul>
+                    <p><strong>Insight:</strong> Both genders have a similar likelihood of being high spenders, suggesting businesses can target both groups effectively.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%201.png" alt="High Spender Breakdown by Gender">
+                </section>
+
+                <section>
+                    <h3>High Spender Breakdown by Age Group</h3>
+                    <ul>
+                        <li>Millennials: Lead with 57 predicted high spenders.</li>
+                        <li>Gen X: Follow closely with 45 high spenders.</li>
+                    </ul>
+                    <p><strong>Insight:</strong> Millennials and Gen X are the most likely age groups to be high spenders. Businesses should focus on these groups for promotions.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%202.png" alt="High Spender Breakdown by Age Group">
+                </section>
+
+                <section>
+                    <h3>High Spender Breakdown by Product Category</h3>
+                    <ul>
+                        <li>Electronics: 53 high spenders.</li>
+                        <li>Clothing and Beauty: 52 and 48 high spenders, respectively.</li>
+                    </ul>
+                    <p><strong>Insight:</strong> Electronics has the highest number of high spenders, making it a key category for high-value marketing efforts.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%203.png" alt="High Spender Breakdown by Product Category">
+                </section>
+
+                <section>
+                    <h3>Predictive Accuracy of the Model</h3>
+                    <ul>
+                        <li>Precision and Recall: The model achieved perfect precision, recall, and accuracy scores of 1.0, correctly identifying all high spenders.</li>
+                        <li>Model Confidence: With a low log loss of 0.047 and an AUC-ROC score of 1.0, the model confidently predicts high spenders.</li>
+                    </ul>
+                    <p><strong>Insight:</strong> The model’s high precision and accuracy demonstrate its reliability in predicting high-value customers, ensuring targeted marketing efforts are successful.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%204.png" alt="Predictive Accuracy of the Model">
+                </section>
+
+                <section>
+                    <h3>ROC Curve and Model Performance</h3>
+                    <p>One of the key ways we measure how well a model can predict outcomes is through something called the ROC Curve. This curve helps us see how well the model balances between identifying true positives (correct predictions) and avoiding false positives (incorrect predictions).</p>
+                    <p>The AUC score (Area Under the Curve) tells us how accurate the model is. A perfect score is 1.0, and that's exactly what our model achieved, meaning it's making perfect predictions. This level of performance means the model can confidently and accurately distinguish between different customer groups.</p>
+                </section>
+
+                <section>
+                    <h2>Key Insights</h2>
+                    <ul>
+                        <li><strong>Demographic Targeting:</strong> Millennials and Gen X customers, especially males shopping for electronics, are prime candidates for high-value promotions.</li>
+                        <li><strong>Product Category Focus:</strong> Electronics, Beauty, and Clothing should be prioritized for high-spending customers, with Millennials showing a particular preference for Clothing and Beauty.</li>
+                        <li><strong>Gender Balance:</strong> Males and females are almost equally likely to be high spenders, suggesting a balanced marketing approach.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Target Millennials and Gen X for Promotions:</strong> Businesses should focus their marketing strategies on Millennials and Gen X, as they are most likely to be high spenders. Customized promotions based on their product preferences (Electronics, Beauty, Clothing) will drive better engagement.</li>
+                        <li><strong>Leverage Product-Specific Promotions:</strong> Electronics leads in high spenders, making it a lucrative category for high-ticket promotions. Similarly, targeted campaigns in Beauty and Clothing can also capture a significant share of high-spending customers.</li>
+                        <li><strong>Develop Personalized Campaigns for Both Genders:</strong> With high spender rates almost equal between males and females, businesses should develop gender-neutral promotions while slightly prioritizing male customers for high-value campaigns.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>By using logistic regression to predict high spenders, businesses can strategically target their most valuable customers. The model's high accuracy and clear insights into customer demographics and preferences make it an essential tool for developing personalized marketing campaigns.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
