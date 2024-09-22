@@ -1,6 +1,3 @@
-# Updating the case-studies.html file to add a new case study "Trading Volume Patterns and Price Changes"
-
-html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,12 +39,6 @@ html_content = """
                 <h2>All Case Studies</h2>
                 <div class="case-study-list">
                     <div class="case-study-item">
-                        <h3>Amazon Product Review Sentiment Analysis</h3>
-                        <p>Unlocking customer feedback to enhance products and marketing strategies.</p>
-                        <a href="/data-analyst-portfolio/case-studies/amazon-product-review-sentiment-analysis.html">Read More</a>
-                    </div>
-
-                    <div class="case-study-item">
                         <h3>Airbnb Strategy Pricing and Availability Management</h3>
                         <p>Data-driven pricing strategies to boost occupancy rates and revenue.</p>
                         <a href="/data-analyst-portfolio/case-studies/airbnb-revenue-pricing-management.html">Read More</a>
@@ -71,6 +62,12 @@ html_content = """
                         <a href="/data-analyst-portfolio/case-studies/trading-volume-price-changes.html">Read More</a>
                     </div>
 
+                    <div class="case-study-item">
+                        <h3>Predicting High-Spending Customers with Logistic Regression</h3>
+                        <p>Using predictive modeling to identify high-value customers for retail businesses.</p>
+                        <a href="/data-analyst-portfolio/case-studies/predicting-high-spending-customers.html">Read More</a>
+                    </div>
+
                 </div>
             </section>
         </main>
@@ -83,14 +80,3 @@ html_content = """
 
 </body>
 </html>
-"""
-
-# Define the filename for the updated HTML file
-html_filename = "case-studies.html"
-
-# Save the updated case-studies.html file
-file_path = f'/mnt/data/{html_filename}'
-with open(file_path, 'w') as file:
-    file.write(html_content)
-
-file_path
