@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicting Customer Response to Discounts | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Predicting Customer Response to Discounts</h1>
+                    <p>Leveraging predictive modeling to identify customers most likely to respond positively to discount offers.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study explores how predictive modeling can identify customers most likely to respond positively to discount offers, based on historical purchasing behavior. By leveraging a logistic regression model, we analyzed customer data, revealing that 84.72% of customers are likely to respond to discounts. This insight enables businesses to optimize their discount campaigns and target high-value customers more effectively.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>Retail businesses need to optimize their discount strategies by targeting customers who are most likely to respond to promotional offers. This case study aims to predict which customers are likely to respond positively to discounts, helping businesses enhance their marketing efforts and improve overall campaign efficiency.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Dataset Overview:</strong> The dataset contains transaction-level information on customer behavior, including total spending, purchase frequency, discount usage, and product category. Key features such as "Positive Response to Discount" were used to identify patterns in customer responsiveness to promotional offers.</p>
+                    <p><strong>Study Framework:</strong> A logistic regression model was built to predict whether customers will respond positively to future discount offers based on historical data. The model used metrics such as total spending, purchase frequency, previous discount usage, and product categories.</p>
+                    <p><strong>Descriptive Analysis:</strong> SQL queries were applied to summarize customer spending patterns, showing that categories like Beauty, Home & Kitchen, and Electronics have high discount response rates.</p>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>Customer Response to Discounts</h3>
+                    <p>84.72% Positive Response Rate: The model predicts that 84.72% of customers will respond positively to discount offers, indicating the effectiveness of discount-driven strategies. High-Value Customers Identified: Customers like ID 2500, 3713, and 3870 emerged as top spenders, making them key targets for future promotions.</p>
+                    <img src="https://github.com/lyven81/data-analyst-portfolio/raw/main/images/predicting-customer-response-discount/001.png" alt="Customer Response to Discounts Visualization">
+
+                    <h3>Top Product Categories</h3>
+                    <p><strong>Beauty and Home & Kitchen:</strong> These categories showed the highest total spending and discount response rates, making them ideal for focused marketing campaigns.</p>
+                    <p><strong>Electronics:</strong> Despite having the highest average discount offered (27.32%), it still garnered strong responses, showing that discounting is effective in this category.</p>
+                    <img src="https://github.com/lyven81/data-analyst-portfolio/raw/main/images/predicting-customer-response-discount/002.png" alt="Top Product Categories Visualization">
+
+                    <h3>Predictive Model Performance</h3>
+                    <p><strong>ROC AUC Score:</strong> 1.0, demonstrating perfect performance in distinguishing between customers who will and will not respond to discounts. The model accurately identified customers who are highly likely to respond to future offers, aiding in personalized marketing efforts.</p>
+                    <img src="https://github.com/lyven81/data-analyst-portfolio/raw/main/images/predicting-customer-response-discount/003.png" alt="Predictive Model Performance Visualization">
+                </section>
+
+                <section>
+                    <h2>Key Insights</h2>
+                    <ul>
+                        <li><strong>Discount Effectiveness:</strong> Discounts are highly effective, with over 84% of customers predicted to respond positively. This suggests that businesses can benefit from continuing or even increasing their discount offers for targeted segments.</li>
+                        <li><strong>High-Priority Categories:</strong> Categories like Beauty, Home & Kitchen, and Electronics generate the highest responses to discounts, making them essential focal points for future promotions.</li>
+                        <li><strong>Targeting High-Value Customers:</strong> High spenders with consistent positive responses to discounts should be targeted for personalized campaigns, optimizing conversion rates and customer retention.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Focus on High-Performing Product Categories:</strong> Direct discount offers and marketing campaigns toward Beauty, Home & Kitchen, and Electronics, as these categories show the highest customer response and spending patterns.</li>
+                        <li><strong>Personalized Discount Strategies:</strong> Use the predictive model to offer personalized discounts to customers who are likely to respond positively. This can increase the effectiveness of campaigns, driving more engagement and sales.</li>
+                        <li><strong>Leverage High-Value Customer Data:</strong> Focus on high-value customers, such as those identified in the top 10 responders, by providing exclusive offers or loyalty rewards. This approach will maximize customer retention and long-term revenue growth.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>The predictive analysis confirms that discounts are an effective strategy for driving customer engagement, with more than 84% of customers likely to respond positively. By focusing on high-performing product categories and leveraging the predictive model, businesses can optimize their discount strategies, improve campaign performance, and increase revenue. The logistic regression model, with its perfect performance, ensures that marketing efforts are data-driven and highly targeted...</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
+"""
