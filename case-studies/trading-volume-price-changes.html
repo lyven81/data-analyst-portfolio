@@ -1,6 +1,3 @@
-# Updating the HTML content to embed visualizations for the new case study
-
-html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,13 +152,3 @@ html_content = """
 </body>
 </html>
 """
-
-# Define the filename for the HTML file
-html_filename = "trading-volume-price-changes.html"
-
-# Save the generated HTML content to the file
-file_path = f'/mnt/data/{html_filename}'
-with open(file_path, 'w') as file:
-    file.write(html_content)
-
-file_path
