@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stationery Product Discount Optimization | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Stationery Product Discount Optimization</h1>
+                    <p>Using predictive analytics to optimize discount strategies and maximize sales performance for stationery products.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study examines the impact of targeted discounts on stationery product sales using historical sales data. The analysis focused on identifying which products generate higher sales when discounts are applied and how to optimize discount strategies for maximum revenue. A logistic regression model was built to predict products that would generate total revenue above $10,000 when discounts are applied. The model demonstrated perfect accuracy, providing actionable insights for targeted discounting strategies.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The business challenge was to predict which stationery products would generate higher sales (above a $10,000 revenue threshold) when targeted discounts were applied. The objective was to optimize promotional campaigns and resource allocation during high-demand periods based on predictive insights.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Data Preparation:</strong> Aggregated sales data for stationery products, including metrics like units sold, discounts applied, revenue, and seasonality.</p>
+                    <p><strong>Feature Engineering:</strong> Created features such as units sold, discount applied, and seasonal factors (e.g., back-to-school season) to identify trends.</p>
+                    <p><strong>Logistic Regression Model:</strong> Built to predict whether discounted products would generate more than $10,000 in revenue. The model was trained on historical data with features including discounts and sales performance.</p>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>Descriptive Analysis</h3>
+                    <p>Products like the Faber-Castell Eraser (high unit price, moderate sales) and Parker Jotter Ballpoint Pen (high sales volume, lower revenue) offered insights into which products drive revenue. Discounts contributed to 52.81% of total sales, showing that discounting plays a crucial role in boosting sales volume.</p>
+                    <img src="https://github.com/lyven81/data-analyst-portfolio/blob/main/images/stationery-product-discount-optimization/01.png" alt="Descriptive Analysis Visualization">
+                    <h3>Prediction Model Performance</h3>
+                    <p>The logistic regression model achieved a perfect ROC AUC score of 1.0, indicating no errors in predicting high-revenue products based on discounts.</p>
+                    <img src="https://github.com/lyven81/data-analyst-portfolio/blob/main/images/stationery-product-discount-optimization/02.png" alt="Model Performance Visualization">
+                    <h3>Predictive Results</h3>
+                    <p>35 products achieved sales above 1,000 units, while 5 products underperformed, generating fewer than 1,000 units in sales. Strategic insights revealed opportunities to focus on high-performing products and adjust discount strategies for lower-performing ones.</p>
+                    <img src="https://github.com/lyven81/data-analyst-portfolio/blob/main/images/stationery-product-discount-optimization/03.png" alt="Predictive Results Visualization">
+                </section>
+
+                <section>
+                    <h2>Key Insights</h2>
+                    <ul>
+                        <li><strong>High-Performing Products:</strong> Products like Paper Mate InkJoy Pen (high sales volume, mid-range price) should be prioritized for future promotions due to their strong performance under discount strategies.</li>
+                        <li><strong>Targeted Discounts for Low Performers:</strong> Underperforming products like BIC Cristal Pen could benefit from more aggressive discount strategies to boost sales.</li>
+                        <li><strong>Non-Discounted Success:</strong> Products such as Zebra Mildliner Highlighter perform well without discounts, suggesting they maintain strong value perception and can sustain full-price sales.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Optimize Discount Strategies for High-Volume Products:</strong> Continue offering discounts for top-performing products, but explore ways to reduce discount reliance to preserve profit margins.</li>
+                        <li><strong>Reevaluate Discount Necessity for Low-Selling Products:</strong> Consider applying more frequent or deeper discounts for underperforming products to stimulate demand and increase revenue.</li>
+                        <li><strong>Maintain Pricing for Non-Discounted Items:</strong> For products that perform well without discounts, such as the BIC Cristal Pen, focus on marketing strategies that emphasize product quality to maintain full-price sales.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>By leveraging predictive insights, businesses can optimize discount strategies, improve promotional effectiveness, and ensure steady revenue growth across product categories.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
+"""
