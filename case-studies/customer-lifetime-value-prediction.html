@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Lifetime Value (CLV) Prediction | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Customer Lifetime Value (CLV) Prediction for a Contact Lens Retailer</h1>
+                    <p>Leveraging predictive modeling to enhance customer retention, loyalty, and revenue growth.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study focuses on predicting and analyzing Customer Lifetime Value (CLV) for a contact lens retailer using customer data. By leveraging predictive modeling, the analysis highlights key customers and provides insights to enhance customer retention, loyalty, and revenue growth. The results demonstrate the strategic importance of targeting high-CLV customers with personalized promotions, loyalty programs, and optimized pricing strategies to maximize business impact.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The contact lens retailer aims to enhance customer retention and maximize revenue by identifying high-value customers and predicting their future spending behavior. The primary challenge is to efficiently allocate marketing resources to boost loyalty and increase spending, particularly by targeting customers with high predicted CLV.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Model:</strong> A linear regression model was built to predict customer lifetime value based on several key factors: Unit Price, Quantity Sold, Purchase Frequency, Discount Usage, and Loyalty Program Membership. These independent variables allow the model to forecast total spending (used as a proxy for CLV), offering actionable insights into customer behavior.</p>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>Customer Lifetime Value Prediction</h3>
+                    <p>The linear regression model predicts CLV with an RMSE (Root Mean Squared Error) of 283.90, indicating the average error between predicted and actual values. While the result is acceptable, the model suggests there is room for improvement in accuracy.</p>
+
+                    <h3>Top Customers by Predicted CLV</h3>
+                    <ul>
+                        <li><strong>Customer 2583:</strong> Predicted CLV of $573.32, high purchase frequency (15), member of the loyalty program, no discount usage.</li>
+                        <li><strong>Customer 1010:</strong> Predicted CLV of $465.68, moderate purchase frequency (10), not a loyalty program member, no discount usage.</li>
+                        <li><strong>Customer 9405:</strong> Predicted CLV of $446.09, low purchase frequency (2), responds to discounts, not a loyalty program member.</li>
+                        <li><strong>Customer 3248:</strong> Predicted CLV of $413.83, highest purchase frequency (18), discount user, not a loyalty program member.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Insights from Predictive Analysis</h2>
+                    <ul>
+                        <li>Customers who don’t use discounts but have a high CLV (like Customers 2583 and 1010) demonstrate pricing resilience, suggesting that promotions should focus on enhancing product value and customer experience.</li>
+                        <li>Customers with high purchase frequencies (like Customers 2583 and 3248) offer opportunities for cross-selling and upselling, potentially without heavy reliance on discounts.</li>
+                        <li>Discount users (Customers 9405 and 3248) respond well to promotions, indicating that targeted discounts could drive higher purchase frequency.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Strategic Recommendations</h2>
+                    <ul>
+                        <li><strong>Enhance Loyalty Program Enrollment:</strong> Target high CLV customers who are not yet enrolled in the loyalty program (Customers 1010, 9405, and 3248) with exclusive offers and personalized incentives to increase engagement and lifetime value.</li>
+                        <li><strong>Tailored Discount Strategies:</strong> Customers like 9405 and 3248 are responsive to discounts, and personalized promotions could drive more frequent purchases, increasing their overall CLV.</li>
+                        <li><strong>Leverage High Purchase Frequency:</strong> For customers with high purchase frequency but lower CLV (like 3248), focus on upselling and cross-selling opportunities. Exclusive product bundles or early access to new products can encourage higher spending without discounts.</li>
+                        <li><strong>Maximize Value Without Discounts:</strong> High-value customers who do not rely on discounts (Customers 2583 and 1010) can be engaged through enhanced product experiences or premium loyalty perks, preserving profit margins while increasing engagement.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>By analyzing customer lifetime value through predictive modeling, the contact lens retailer can strategically target high-value customers, optimize marketing efforts, and improve revenue. Focusing on loyalty program enrollment, personalized promotions, and upselling strategies will enhance customer retention and maximize CLV, driving long-term business success.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
