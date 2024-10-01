@@ -43,7 +43,9 @@ body {
 }
 
 .left-column ul li {
-    font-size: 1em; /* Same font size for list items */
+    font-size: 0.9em; /* Adjusted font size for list items */
+    word-wrap: normal; /* Prevent wrapping of long text */
+    white-space: nowrap; /* Force the email to stay on one line */
 }
 
 /* Right Column (Case Studies) */
