@@ -43,9 +43,10 @@ body {
 }
 
 .left-column ul li {
-    font-size: 0.9em; /* Adjusted font size for list items */
-    word-wrap: normal; /* Prevent wrapping of long text */
+    font-size: 0.85em; /* Reduce the font size for list items */
     white-space: nowrap; /* Force the email to stay on one line */
+    overflow: hidden; /* Prevent any overflow beyond container */
+    text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
 }
 
 /* Right Column (Case Studies) */
