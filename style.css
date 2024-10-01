@@ -108,8 +108,3 @@ footer {
     background-color: #333;
     color: white;
 }
-
-/* Limit of 10 case studies for vertical scroll */
-.case-study-list > .case-study-item:nth-child(n+11) {
-    display: none; /* Hide case studies after the 10th */
-}
