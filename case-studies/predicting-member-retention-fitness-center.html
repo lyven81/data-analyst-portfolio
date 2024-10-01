@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicting Member Retention for a Fitness Center | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Predicting Member Retention for a Fitness Center</h1>
+                    <p>Leveraging predictive modeling to identify members at risk of canceling their memberships and implementing strategies to improve retention.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study focuses on predicting and analyzing member retention for a fitness center, leveraging predictive modeling to identify members at risk of canceling their memberships. By understanding key characteristics such as age, membership type, participation levels, and time spent at the gym, the fitness center can implement targeted retention strategies to reduce cancellations and enhance customer engagement.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The fitness center faces challenges with member retention, particularly among specific age groups and long-term members. A predictive model was developed to forecast which members are at risk of canceling their memberships and to help the fitness center take proactive measures to improve retention rates.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p><strong>Dataset Background:</strong> The dataset includes details of fitness center members, such as membership type, class participation, personal training sessions, and attendance patterns. The key objective is to predict which members are likely to cancel their memberships, allowing the fitness center to intervene early.</p>
+                    <p><strong>Predictive Model Development:</strong> A predictive model was built and evaluated to forecast membership cancellations. The model was trained on member behavior data and evaluated based on accuracy, precision, recall, F1 score, and ROC AUC metrics to ensure its reliability.</p>
+                    <ul>
+                        <li><strong>Precision:</strong> 52.27%, meaning the model correctly predicted member retention 52% of the time.</li>
+                        <li><strong>Recall:</strong> 84.12%, indicating that the model successfully identified 84% of members who were retained.</li>
+                        <li><strong>Accuracy:</strong> 52.13%, suggesting a modest prediction success rate.</li>
+                        <li><strong>F1 Score:</strong> 64.47%, representing a balance between precision and recall.</li>
+                        <li><strong>Log Loss:</strong> 0.6922, indicating some uncertainty in the predictions.</li>
+                        <li><strong>ROC AUC:</strong> 53.69%, showing performance slightly better than random guessing.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Descriptive Insights</h2>
+                    <h3>Retention Status</h3>
+                    <p>86.05% of members are predicted to remain, while 13.95% are likely to cancel their memberships.</p>
+
+                    <h3>Age Group</h3>
+                    <p>Members over the age of 55 represent the largest share (43.68%) of predicted cancellations, making this group a critical focus for retention efforts.</p>
+
+                    <h3>Membership Type</h3>
+                    <p>Annual members make up 52.27% of predicted cancellations, suggesting a need for renewal incentives and loyalty rewards to retain this segment.</p>
+
+                    <h3>Participation</h3>
+                    <p>Members with low engagement in personal training and class participation are at higher risk of canceling. Promoting personal training and class participation could boost retention in this group.</p>
+
+                    <h3>Attendance</h3>
+                    <p>Members who visit the gym fewer than 10 days a month are at the highest risk of cancellation, with 79.95% falling into this category.</p>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <p>The predictive model identified 419 members (13.95%) at risk of canceling their memberships. The analysis highlights several key factors influencing cancellations, including age, membership length, class participation, and attendance levels. Members over 55, long-term members, and those with low participation or attendance are particularly vulnerable to cancellation.</p>
+                </section>
+
+                <section>
+                    <h2>Actionable Recommendations</h2>
+                    <ul>
+                        <li><strong>Focus on Older Members:</strong> With 43.68% of predicted cancellations occurring among members over 55, the fitness center should develop tailored communication, health-focused programs, and incentives to re-engage this high-risk group.</li>
+                        <li><strong>Engage Long-Term Members:</strong> Since long-term members make up the majority of those at risk (67.78%), offering loyalty rewards, personalized renewal incentives, and regular check-ins can help retain this valuable segment.</li>
+                        <li><strong>Promote Class Participation:</strong> Given that no members with high class participation are predicted to cancel, promoting class involvement and offering free trial sessions for moderate and low participants could significantly improve retention.</li>
+                        <li><strong>Encourage Personal Training:</strong> Since all members at risk of canceling have low personal training engagement, offering free or discounted sessions could provide a direct path to increasing engagement and retention.</li>
+                        <li><strong>Increase Attendance:</strong> With 79.95% of at-risk members attending fewer than 10 days per month, the fitness center can implement gym challenges, structured workout plans, and attendance reminders to motivate members to visit more frequently.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>By implementing targeted retention strategies focused on high-risk members—including older adults, long-term members, and those with low participation and attendance—the fitness center can proactively address membership cancellations. Improving class involvement, promoting personal training, and boosting attendance are key areas for intervention. These efforts will help enhance member retention and drive long-term business success.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
