@@ -1,6 +1,3 @@
-# Rewriting the HTML case study content due to environment reset
-
-html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +68,8 @@ html_content = """
                     <p><strong>Total Revenue Generated:</strong> $2,976,454</p>
                     <p><strong>Key Product Categories:</strong> Hardware, Plumbing, Lawn & Garden, Electrical</p>
                     <p><strong>Analysis:</strong> Product Category Vouchers demonstrate the highest effectiveness, with strong redemption rates (e.g., 36.3% for Electrical) and significant margin contributions. This type of voucher offers the best potential for revenue generation and engagement.</p>
-https://github.com/lyven81/data-analyst-portfolio/blob/main/images/predicting-discount-voucher-performance-hardware-shop/01.png
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-discount-voucher-performance-hardware-shop/01.png" alt="Product Category Voucher Performance" width="600">
+                    
                     <h3>Sales Day Vouchers (Least Performing)</h3>
                     <p><strong>Total Predicted Margin:</strong> $2,488,581</p>
                     <p><strong>Total Vouchers Issued:</strong> 142,292</p>
@@ -80,8 +78,9 @@ https://github.com/lyven81/data-analyst-portfolio/blob/main/images/predicting-di
                     <p><strong>Total Revenue Generated:</strong> $2,489,878</p>
                     <p><strong>Key Product Categories:</strong> Home Safety (high redemption), Electrical (low redemption)</p>
                     <p><strong>Analysis:</strong> Sales Day Vouchers underperform compared to Product Category Vouchers, with lower redemption rates and smaller margins, particularly in the Electrical and Lawn & Garden categories. Optimization is needed for better targeting.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-discount-voucher-performance-hardware-shop/02.png" alt="Sales Day Voucher Performance" width="600">
                 </section>
-https://github.com/lyven81/data-analyst-portfolio/blob/main/images/predicting-discount-voucher-performance-hardware-shop/02.png
+
                 <section>
                     <h2>Recommendations</h2>
                     <ul>
@@ -107,13 +106,3 @@ https://github.com/lyven81/data-analyst-portfolio/blob/main/images/predicting-di
 
 </body>
 </html>
-"""
-
-# Define the filename for the HTML file
-html_filename = "/mnt/data/predicting-discount-voucher-performance-hardware-shop.html"
-
-# Save the generated HTML content to the file
-with open(html_filename, 'w') as file:
-    file.write(html_content)
-
-html_filename
