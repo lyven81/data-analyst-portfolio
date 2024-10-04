@@ -1,81 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lee Yih Ven | Data Analytics Portfolio</title>
     <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
     <style>
-        .explore {
-            text-align: left;
-            margin-left: 0;
+        /* Mobile First Responsive Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        .case-study-list, .explore {
-            padding-left: 0;
+
+        /* Container for responsive layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Basic styling for header */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        /* Navigation Links (placed below the header on mobile) */
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content (Responsive for different screens) */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .case-study-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .case-study-item h3 {
+            font-size: 1.5em;
+        }
+
+        .case-study-item p {
+            font-size: 1em;
+        }
+
+        .case-study-item a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .case-study-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Media Queries for wider screens */
+        @media (min-width: 768px) {
+            .main-content {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .case-study-item {
+                flex: 1 1 calc(50% - 40px); /* 2 items per row */
+                margin: 10px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .case-study-item {
+                flex: 1 1 calc(33.33% - 40px); /* 3 items per row */
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Two-Column Layout Wrapper -->
+    <!-- Header Section -->
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p>Data Analytics Portfolio</p>
+        <p>Data-driven insights to unlock business growth and innovation.</p>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/case-studies.html">Case Studies</a>
+        <a href="/contact.html">Contact</a>
+    </nav>
+
+    <!-- Main Content (Case Studies) -->
     <div class="container">
+        <section class="main-content">
+            <div class="case-study-item">
+                <h3>Predicting Dropout Before New Semester</h3>
+                <p>Identify and support at-risk students to improve retention rates and academic success.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-dropout-before-new-semester.html">Read More</a>
+            </div>
 
-        <!-- Left Column (Navigation, Intro, Contact) -->
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven &nbsp;&nbsp; Data Analytics Portfolio</h1>
-            </header>
+            <div class="case-study-item">
+                <h3>Predicting Member Retention for a Fitness Center</h3>
+                <p>Identify members at risk of canceling their memberships and boost retention with personalized strategies.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-member-retention-fitness-center.html">Read More</a>
+            </div>
 
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
+            <div class="case-study-item">
+                <h3>Predicting Discount Voucher Performance for a Hardware Shop</h3>
+                <p>Maximize revenue by identifying which discount vouchers deliver the highest margin and customer engagement.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-discount-voucher-performance-hardware-shop.html">Read More</a>
+            </div>
 
-            <!-- Contact Section in Left Column -->
-            <section class="contact">
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
-                    <li>Phone: +6014-920709</li>
-                </ul>
-            </section>
-        </aside>
-
-        <!-- Right Column (Case Studies) -->
-        <main class="right-column">
-            <section class="case-studies">
-                <h2>Featured Case Studies</h2>
-                <div class="case-study-list">
-                    <div class="case-study-item">
-                        <h3>Predicting Dropout Before New Semester</h3>
-                        <p>Identify and support at-risk students to improve retention rates and academic success before the new semester.</p>
-                        <a href="/data-analyst-portfolio/case-studies/predicting-dropout-before-new-semester.html">Read More</a>
-                    </div>
-
-                    <div class="case-study-item">
-                        <h3>Predicting Member Retention for a Fitness Center</h3>
-                        <p>Identify members at risk of canceling their memberships and boost retention with personalized strategies.</p>
-                        <a href="/data-analyst-portfolio/case-studies/predicting-member-retention-fitness-center.html">Read More</a>
-                    </div>
-
-                    <div class="case-study-item">
-                        <h3>Predicting Discount Voucher Performance for a Hardware Shop</h3>
-                        <p>Maximize revenue by identifying which discount vouchers deliver the highest margin and customer engagement.</p>
-                        <a href="/data-analyst-portfolio/case-studies/predicting-discount-voucher-performance-hardware-shop.html">Read More</a>
-                    </div>
-
-                    <div class="case-study-item">
-                        <h3>Predicting Customer Lifetime Value for a Car Service Center</h3>
-                        <p>Leverage customer data to predict lifetime value, optimize services, and increase retention for high spenders.</p>
-                        <a href="/data-analyst-portfolio/case-studies/predicting-customer-lifetime-value-car-service-center.html">Read More</a>
-                    </div>
-                </div>
-
-                <!-- Link to explore all case studies -->
-                <section class="explore">
-                    <p><a href="/data-analyst-portfolio/case-studies.html">Explore All Case Studies</a></p>
-                </section>
-            </section>
-        </main>
-
+            <div class="case-study-item">
+                <h3>Predicting Customer Lifetime Value for a Car Service Center</h3>
+                <p>Leverage customer data to predict lifetime value, optimize services, and increase retention for high spenders.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-customer-lifetime-value-car-service-center.html">Read More</a>
+            </div>
+        </section>
     </div>
 
     <!-- Footer -->
