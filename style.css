@@ -6,13 +6,13 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    font-size: 1em; /* Default font size */
 }
 
 /* Container for Layout */
 .container {
     display: flex;
-    max-width: 1200px;
+    flex-direction: column; /* Stack columns on mobile */
+    width: 100%; /* Make it responsive to the full width of the screen */
     margin: 0 auto;
     padding: 20px;
     gap: 40px;
@@ -20,13 +20,15 @@ body {
 
 /* Left Column (Personal Info and Contact) */
 .left-column {
-    width: 30%;
+    width: 100%; /* Full width for mobile */
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    margin-bottom: 20px; /* Adds space before the right column */
 }
 
+/* Same Font Size for Left and Right Column */
 .left-column h1,
 .right-column h1 {
     font-size: 2em; /* Make the font size consistent for headers */
@@ -43,15 +45,15 @@ body {
 }
 
 .left-column ul li {
-    font-size: 0.85em; /* Reduced font size for list items */
+    font-size: 0.85em; /* Reduce the font size for list items */
     white-space: nowrap; /* Force the email to stay on one line */
-    overflow: hidden; /* Prevent any overflow beyond the container */
+    overflow: hidden; /* Prevent any overflow beyond container */
     text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
 }
 
 /* Right Column (Case Studies) */
 .right-column {
-    width: 70%;
+    width: 100%; /* Full width for mobile */
 }
 
 /* Case Study List */
@@ -109,67 +111,18 @@ footer {
     color: white;
 }
 
-/* Responsive Layout for Smaller Devices */
+/* Mobile Adjustments */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Stack columns vertically */
-        padding: 10px;
+        flex-direction: column;
+    }
+    
+    .left-column,
+    .right-column {
+        width: 100%;
     }
 
-    .left-column, .right-column {
-        width: 100%; /* Full width for both columns on mobile */
-        padding: 10px;
-    }
-
-    .left-column h1, .right-column h1 {
-        font-size: 1.8em; /* Adjust font size for smaller screens */
-    }
-
-    .left-column h2, .right-column h2 {
+    .case-study-item {
         font-size: 1.2em;
     }
-
-    .left-column p, .right-column p {
-        font-size: 0.9em; /* Reduce body text font size */
-    }
-}
-
-/* Increase Font Sizes and Padding for Mobile */
-@media (max-width: 480px) {
-    body {
-        font-size: 1.1em; /* Larger font size on mobile */
-    }
-
-    .left-column, .right-column {
-        padding: 15px; /* Increase padding for touch-friendly spacing */
-    }
-
-    .case-study-item h3 {
-        font-size: 1.2em; /* Increase case study title font size */
-    }
-
-    .case-study-item p {
-        font-size: 1em; /* Slightly larger body text */
-    }
-}
-
-/* Ensure Elements Scale Fluidly with Flexbox */
-.container {
-    display: flex;
-    flex-direction: column; /* Stack content vertically by default for mobile */
-    width: 100%;
-}
-
-.case-study-list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.case-study-item {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
 }
