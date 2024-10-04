@@ -6,13 +6,11 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
+/* Container for Layout */
 .container {
-    flex: 1; /* Ensures the main content area takes up the available space */
+    display: flex;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -103,14 +101,52 @@ body {
     text-decoration: underline;
 }
 
-/* Footer - Sticky at the bottom */
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;
     background-color: #333;
     color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: auto; /* Pushes the footer to the bottom of the viewport */
+}
+
+/* Responsive Image Styling for GitHub-Linked Visualizations */
+img, .visualization {
+    max-width: 100%; /* Ensures the image does not overflow the container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes any unwanted inline spacing */
+    margin: 0 auto; /* Centers the image */
+}
+
+/* Visualization Container for Extra Control (Optional) */
+.visualization-container {
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Ensure layout responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .left-column, .right-column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Make footer stick to bottom */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    footer {
+        margin-top: auto;
+        background-color: #333;
+        color: white;
+        padding: 10px;
+    }
 }
