@@ -19,7 +19,7 @@
             </header>
 
             <section class="intro">
-                <p>Turning data into smart, actionable insights to help businesses grow. Specializing in data-driven solutions that enable informed decisions.</p>
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
             </section>
 
             <!-- Contact Section in Left Column -->
@@ -28,7 +28,7 @@
                 <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
                 <ul>
                     <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
-                    <li>Phone: +6014-9207099</li>
+                    <li>Phone: +6014-920709</li>
                 </ul>
             </section>
         </aside>
@@ -37,33 +37,29 @@
         <main class="right-column">
             <section class="case-study-content">
                 <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/maximizing-revenue-with-price-adjustment/00.png" alt="Skincare Products Revenue Analysis" style="width:100%; height:auto;">
                     <h1>Maximizing Revenue with Data-Driven Price Adjustment for Skincare Products</h1>
-                    <p>In this study, we use data-driven insights to understand how adjusting prices impacts sales for skincare products. We examine how raising prices by 10% could impact sales volume and help skincare retailers optimize their pricing strategies for better profitability.</p>
+                    <p>This case study uncovers how strategic price adjustments can boost profitability without sacrificing sales volume. By leveraging predictive modeling, we identify which top-selling skincare products can sustain a price increase while maintaining demand. The insights offer a clear roadmap for skincare retailers to optimize pricing, enhance margins, and stay competitive in a dynamic market—ultimately driving revenue growth with precision and confidence.</p>
                 </header>
 
-                <!-- Executive Summary -->
+                <!-- Case Study Sections -->
                 <section>
                     <h2>Executive Summary</h2>
-                    <p>This case study focuses on predicting sales volume for skincare products and evaluating how price changes affect sales. By using a linear regression model, we predicted sales volume with high accuracy. We found that some products can maintain sales despite price increases, offering clear insights for improving pricing strategies.</p>
+                    <p>This case study examines sales volume prediction and pricing strategy evaluation for skincare products, focusing on how price and margin adjustments impact sales. A linear regression model was developed to predict sales volume with a Root Mean Squared Error (RMSE) of 270.71, demonstrating high accuracy in predictions. The analysis identifies key products that can sustain price increases while maintaining or increasing sales volume, providing actionable insights for strategic pricing decisions.</p>
                 </section>
 
-                <!-- Problem Statement -->
                 <section>
                     <h2>Problem Statement</h2>
-                    <p>The skincare retailer needs to find out which products can handle a 10% price increase without reducing demand. This will help them raise profit margins without losing customers.</p>
+                    <p>The skincare retailer aims to identify which of their top-selling products can sustain a 10% price and margin increase without significantly reducing demand. By understanding price sensitivity, the retailer can optimize pricing and margins to enhance profitability.</p>
                 </section>
 
-                <!-- Approach -->
                 <section>
                     <h2>Approach</h2>
-                    <p>We used a linear regression model to predict sales for skincare products. The model had an RMSE of 270.71, showing it can accurately predict sales volume. We focused on the top 5 best-selling products and analyzed how a 10% price increase would affect their sales compared to competitors.</p>
+                    <p>A linear regression model was developed to predict sales volume for skincare products, with an RMSE of 270.71, indicating minimal prediction error relative to the average sales volume of 93,938 units. The analysis focused on the top five best-selling skincare products, examining the impact of a 10% price and margin increase on sales volume, as well as comparing post-increase prices with competitors.</p>
                 </section>
 
-                <!-- Results -->
                 <section>
                     <h2>Results</h2>
-                    <h3>Top 5 Best-Selling Products</h3>
+                    <h3>Top Five Best-Selling Products by Predicted Sales Volume</h3>
                     <ul>
                         <li>Neutrogena Hydro Boost Gel: 98,635 units</li>
                         <li>Eucerin Advanced Repair Lotion: 95,542 units</li>
@@ -73,33 +69,57 @@
                     </ul>
                     <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/maximizing-revenue-with-price-adjustment/01.png" alt="Top Five Best-Selling Products">
 
-                    <h3>Impact of Price Increases on Sales</h3>
-                    <p>Neutrogena and Eucerin products are expected to increase sales despite a 10% price hike. However, Cetaphil, Drunk Elephant, and Bioderma are likely to see a drop in sales volume after the price increase.</p>
+                    <h3>Impact of 10% Price and Margin Increases on Sales Volume</h3>
+                    <p>Neutrogena Hydro Boost Gel and Eucerin Advanced Repair Lotion are expected to increase in sales volume despite a 10% price and margin increase. Cetaphil Gentle Cleanser, Drunk Elephant Vitamin C Serum, and Bioderma Sensibio H2O are predicted to experience a decline in sales volume following the price and margin increases.</p>
                     <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/maximizing-revenue-with-price-adjustment/02.png" alt="Impact of Price Increase on Sales Volume">
 
-                    <p>View the full visualization in <a href="https://lookerstudio.google.com/s/rurQR2l6N_E" target="_blank">Google Looker Studio</a>.</p>
+                    <h3>Price Comparison with Competitors</h3>
+                    <p>After a 10% price increase, all top five products would be priced higher than competitors, necessitating caution when implementing price hikes to avoid reducing competitiveness.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/maximizing-revenue-with-price-adjustment/03.png" alt="Price Comparison with Competitors">
                 </section>
 
-                <!-- Key Insights -->
+                <!-- Embedded Google Looker Studio Visualization -->
+                <section>
+                    <h2>Visualization</h2>
+                    <iframe 
+                        width="100%" 
+                        height="400" 
+                        src="https://lookerstudio.google.com/embed/reporting/rurQR2l6N_E/page/1" 
+                        frameborder="0" 
+                        style="border:0" 
+                        allowfullscreen>
+                    </iframe>
+                </section>
+
                 <section>
                     <h2>Key Insights</h2>
                     <ul>
-                        <li><strong>Neutrogena Hydro Boost Gel</strong> and <strong>Eucerin Advanced Repair Lotion</strong> can handle price increases while maintaining sales, making them great options for margin improvements.</li>
-                        <li><strong>Cetaphil Gentle Cleanser</strong> and <strong>Bioderma Sensibio H2O</strong> are more price-sensitive, so price increases should be approached cautiously.</li>
+                        <li><strong>Neutrogena Hydro Boost Gel</strong> and <strong>Eucerin Advanced Repair Lotion</strong> are strong candidates for price and margin increases, as they can maintain or increase sales despite higher prices.</li>
+                        <li><strong>Cetaphil Gentle Cleanser</strong> and <strong>Bioderma Sensibio H2O</strong> are more price-sensitive and may require a more cautious pricing approach.</li>
                     </ul>
                 </section>
 
-                <!-- Strategic Recommendations -->
                 <section>
                     <h2>Strategic Recommendations</h2>
                     <ul>
-                        <li><strong>Increase Prices for Key Products:</strong> Focus on raising prices for Neutrogena and Eucerin, as they can keep sales steady with higher prices.</li>
-                        <li><strong>Be Cautious with Sensitive Products:</strong> Products like Cetaphil and Bioderma may lose sales if prices rise too much. Be strategic with price increases for these items.</li>
-                        <li><strong>Stay Aware of Competitors:</strong> As price increases may lead to higher prices than competitors, the retailer should ensure they remain competitive.</li>
+                        <li><strong>Price Increase Feasibility:</strong> Focus on raising prices for Neutrogena Hydro Boost Gel and Eucerin Advanced Repair Lotion, which can sustain higher prices without sacrificing sales volume.</li>
+                        <li><strong>Competitor Awareness:</strong> Given that all products would be priced higher than competitors after a price increase, maintain competitive awareness and potentially limit price hikes for more price-sensitive products.</li>
+                        <li><strong>Margin Optimization:</strong> Consider margin increases for the top products to boost profitability without significantly affecting sales volume.</li>
                     </ul>
                 </section>
 
-                <!-- Conclusion -->
                 <section>
                     <h2>Conclusion</h2>
-                    <p
+                    <p>The model demonstrates that Neutrogena Hydro Boost Gel and Eucerin Advanced Repair Lotion are prime candidates for price and margin increases, offering opportunities for enhanced profitability. However, other products require a more nuanced strategy to avoid adverse impacts on demand.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
