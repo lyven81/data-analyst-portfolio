@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maximizing Revenue with Data-Driven Price Adjustment for Skincare Products | Lee Yih Ven</title>
+    <title>Predicting High-Spending Customers with Logistic Regression | Lee Yih Ven</title>
     <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -19,7 +25,7 @@
             </header>
 
             <section class="intro">
-                <p>Turning data into smart, actionable insights to help businesses grow. Specializing in data-driven solutions that enable informed decisions.</p>
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
             </section>
 
             <!-- Contact Section in Left Column -->
@@ -28,7 +34,7 @@
                 <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
                 <ul>
                     <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
-                    <li>Phone: +6014-9207099</li>
+                    <li>Phone: +6014-920709</li>
                 </ul>
             </section>
         </aside>
@@ -37,69 +43,92 @@
         <main class="right-column">
             <section class="case-study-content">
                 <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/maximizing-revenue-with-price-adjustment/00.png" alt="Skincare Products Revenue Analysis" style="width:100%; height:auto;">
-                    <h1>Maximizing Revenue with Data-Driven Price Adjustment for Skincare Products</h1>
-                    <p>In this study, we use data-driven insights to understand how adjusting prices impacts sales for skincare products. We examine how raising prices by 10% could impact sales volume and help skincare retailers optimize their pricing strategies for better profitability.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/007.png" alt="High-Spending Customer Analysis">
+                    <h1>Predicting High-Spending Customers with Logistic Regression</h1>
+                    <p>Using predictive modeling to identify high-value customers for retail businesses.</p>
                 </header>
 
-                <!-- Executive Summary -->
+                <!-- Case Study Sections -->
                 <section>
                     <h2>Executive Summary</h2>
-                    <p>This case study focuses on predicting sales volume for skincare products and evaluating how price changes affect sales. By using a linear regression model, we predicted sales volume with high accuracy. We found that some products can maintain sales despite price increases, offering clear insights for improving pricing strategies.</p>
+                    <p>This case study examines how retail businesses can use predictive modeling to identify high-spending customers. Using a logistic regression model, the study analyzes customer demographics and purchasing patterns to predict which customers are likely to spend over $1,000. The findings offer actionable insights for targeting high-value customers through personalized promotions, loyalty programs, and marketing campaigns.</p>
                 </section>
 
-                <!-- Problem Statement -->
                 <section>
                     <h2>Problem Statement</h2>
-                    <p>The skincare retailer needs to find out which products can handle a 10% price increase without reducing demand. This will help them raise profit margins without losing customers.</p>
+                    <p>Retailers face challenges in identifying high-spending customers who can be targeted for promotions and loyalty programs. This case study aims to predict high spenders using customer demographic data and purchasing behavior, helping businesses optimize their marketing strategies and improve revenue.</p>
                 </section>
 
-                <!-- Approach -->
                 <section>
                     <h2>Approach</h2>
-                    <p>We used a linear regression model to predict sales for skincare products. The model had an RMSE of 270.71, showing it can accurately predict sales volume. We focused on the top 5 best-selling products and analyzed how a 10% price increase would affect their sales compared to competitors.</p>
+                    <p><strong>Dataset:</strong> The dataset, titled "Retail Sales and Customer Demographics Dataset," includes attributes like age, gender, product category, and total amount spent.</p>
+                    <p><strong>Analytic Framework:</strong></p>
+                    <ul>
+                        <li>Logistic regression was used to predict high spenders based on age, gender, and product preferences. SQL queries were employed to analyze spending behavior.</li>
+                        <li>The logistic regression model was trained using customer demographic and purchasing data, achieving high precision and accuracy. The model predicted whether a customer would spend more than $1,000 based on input features such as gender, age group, and product category.</li>
+                    </ul>
                 </section>
 
-                <!-- Results -->
                 <section>
                     <h2>Results</h2>
-                    <h3>Top 5 Best-Selling Products</h3>
+                    <h3>High Spender Breakdown by Gender</h3>
                     <ul>
-                        <li>Neutrogena Hydro Boost Gel: 98,635 units</li>
-                        <li>Eucerin Advanced Repair Lotion: 95,542 units</li>
-                        <li>Drunk Elephant Vitamin C Serum: 91,308 units</li>
-                        <li>Cetaphil Gentle Cleanser: 87,281 units</li>
-                        <li>Bioderma Sensibio H2O: 80,399 units</li>
+                        <li>Male: 15.71% of male customers were predicted to be high spenders.</li>
+                        <li>Female: 14.9% of female customers were predicted to be high spenders.</li>
                     </ul>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/maximizing-revenue-with-price-adjustment/01.png" alt="Top Five Best-Selling Products">
-
-                    <h3>Impact of Price Increases on Sales</h3>
-                    <p>Neutrogena and Eucerin products are expected to increase sales despite a 10% price hike. However, Cetaphil, Drunk Elephant, and Bioderma are likely to see a drop in sales volume after the price increase.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/maximizing-revenue-with-price-adjustment/02.png" alt="Impact of Price Increase on Sales Volume">
-
-                    <p>View the full visualization in <a href="https://lookerstudio.google.com/s/rurQR2l6N_E" target="_blank">Google Looker Studio</a>.</p>
+                    <p><strong>Insight:</strong> Both genders have a similar likelihood of being high spenders, suggesting businesses can target both groups effectively.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%201.png" alt="High Spender Breakdown by Gender">
+                    
+                    <h3>High Spender Breakdown by Age Group</h3>
+                    <ul>
+                        <li>Millennials: Lead with 57 predicted high spenders.</li>
+                        <li>Gen X: Follow closely with 45 high spenders.</li>
+                    </ul>
+                    <p><strong>Insight:</strong> Millennials and Gen X are the most likely age groups to be high spenders. Businesses should focus on these groups for promotions.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%202.png" alt="High Spender Breakdown by Age Group">
+                    
+                    <h3>High Spender Breakdown by Product Category</h3>
+                    <ul>
+                        <li>Electronics: 53 high spenders.</li>
+                        <li>Clothing and Beauty: 52 and 48 high spenders, respectively.</li>
+                    </ul>
+                    <p><strong>Insight:</strong> Electronics has the highest number of high spenders, making it a key category for high-value marketing efforts.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%203.png" alt="High Spender Breakdown by Product Category">
+                    
+                    <p>View the full visualization here:</p>
+                    <iframe width="100%" height="450" src="https://lookerstudio.google.com/embed/reporting/475f0091-39e0-47b9-a156-bc34a8a2f7a1/page/I8hCE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
                 </section>
 
-                <!-- Key Insights -->
                 <section>
                     <h2>Key Insights</h2>
                     <ul>
-                        <li><strong>Neutrogena Hydro Boost Gel</strong> and <strong>Eucerin Advanced Repair Lotion</strong> can handle price increases while maintaining sales, making them great options for margin improvements.</li>
-                        <li><strong>Cetaphil Gentle Cleanser</strong> and <strong>Bioderma Sensibio H2O</strong> are more price-sensitive, so price increases should be approached cautiously.</li>
+                        <li><strong>Demographic Targeting:</strong> Millennials and Gen X customers, especially males shopping for electronics, are prime candidates for high-value promotions.</li>
+                        <li><strong>Product Category Focus:</strong> Electronics, Beauty, and Clothing should be prioritized for high-spending customers, with Millennials showing a particular preference for Clothing and Beauty.</li>
+                        <li><strong>Gender Balance:</strong> Males and females are almost equally likely to be high spenders, suggesting a balanced marketing approach.</li>
                     </ul>
                 </section>
 
-                <!-- Strategic Recommendations -->
                 <section>
-                    <h2>Strategic Recommendations</h2>
+                    <h2>Recommendations</h2>
                     <ul>
-                        <li><strong>Increase Prices for Key Products:</strong> Focus on raising prices for Neutrogena and Eucerin, as they can keep sales steady with higher prices.</li>
-                        <li><strong>Be Cautious with Sensitive Products:</strong> Products like Cetaphil and Bioderma may lose sales if prices rise too much. Be strategic with price increases for these items.</li>
-                        <li><strong>Stay Aware of Competitors:</strong> As price increases may lead to higher prices than competitors, the retailer should ensure they remain competitive.</li>
+                        <li><strong>Target Millennials and Gen X for Promotions:</strong> Businesses should focus their marketing strategies on Millennials and Gen X, as they are most likely to be high spenders. Customized promotions based on their product preferences (Electronics, Beauty, Clothing) will drive better engagement.</li>
+                        <li><strong>Leverage Product-Specific Promotions:</strong> Electronics leads in high spenders, making it a lucrative category for high-ticket promotions. Similarly, targeted campaigns in Beauty and Clothing can also capture a significant share of high-spending customers.</li>
+                        <li><strong>Develop Personalized Campaigns for Both Genders:</strong> With high spender rates almost equal between males and females, businesses should develop gender-neutral promotions while slightly prioritizing male customers for high-value campaigns.</li>
                     </ul>
                 </section>
 
-                <!-- Conclusion -->
                 <section>
                     <h2>Conclusion</h2>
-                    <p
+                    <p>By using logistic regression to predict high spenders, businesses can strategically target their most valuable customers. The model's high accuracy and clear insights into customer demographics and preferences make it an essential tool for developing personalized marketing campaigns. Focused efforts on Millennials, Gen X, and product categories like Electronics, Beauty, and Clothing will yield the best results for boosting revenue.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Pinnacles Learning Solutions</p>
+    </footer>
+
+</body>
+</html>
