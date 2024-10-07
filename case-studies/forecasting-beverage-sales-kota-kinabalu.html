@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forecasting Beverage Sales in Kota Kinabalu During the Chinese New Year Season | Lee Yih Ven</title>
     <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-    <style>
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
 </head>
 <body>
 
@@ -44,6 +37,7 @@
         <main class="right-column">
             <section class="case-study-content">
                 <header>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/forecasting-beverage-sales/010.png" alt="Beverage Sales Analysis" style="width:100%; height:auto;">
                     <h1>Forecasting Beverage Sales in Kota Kinabalu During the Chinese New Year Season</h1>
                     <p>Leveraging descriptive and predictive analytics to optimize inventory and promotions during high-demand periods like Chinese New Year.</p>
                 </header>
@@ -51,62 +45,60 @@
                 <!-- Case Study Sections -->
                 <section>
                     <h2>Executive Summary</h2>
-                    <p>This case study analyzes beverage sales performance across store locations in Kota Kinabalu during key events such as Chinese New Year, using descriptive and predictive analytics. The analysis revealed that beverages like Spritzer 1.5L consistently perform well during these high-demand periods. A linear regression model was employed to forecast future sales, allowing inventory and promotional strategies to be optimized. The model achieved an average prediction error (RMSE) of 276.51.</p>
+                    <p>This case study analyzes the beverage sales performance across different store locations during key events, such as Chinese New Year, using both descriptive and predictive analytics. The analysis revealed that certain beverages, particularly Spritzer 1.5L, consistently perform well during high-demand periods. By employing a linear regression model, we can forecast future sales and adjust inventory and promotional strategies to meet anticipated demand spikes. The predictive model was evaluated, resulting in an average prediction error (RMSE) of 276.51, demonstrating reasonable accuracy for forecasting sales.</p>
                 </section>
 
                 <section>
                     <h2>Problem Statement</h2>
-                    <p>Retailers face challenges in predicting sales performance during seasonal events, leading to missed opportunities for optimizing inventory and promotions. This study aims to forecast beverage sales during Chinese New Year in Kota Kinabalu, enabling retailers to make informed decisions on stocking and marketing.</p>
+                    <p>Retail businesses often face challenges in predicting sales performance during seasonal events, leading to missed opportunities in inventory optimization and promotional strategies. This study aims to predict future beverage sales during significant events, such as Chinese New Year, to help retailers make informed decisions on stocking and marketing.</p>
                 </section>
 
                 <section>
                     <h2>Approach</h2>
-                    <p><strong>Dataset Overview:</strong> The dataset includes transaction-level sales data during major festivals across multiple store locations in Kota Kinabalu.</p>
-                    <p><strong>Study Framework:</strong> SQL for business intelligence was used to identify total sales, top-performing products, and the impact of promotions. A linear regression model was built to predict future sales based on promotions, day of the week, and seasonal events.</p>
-                    <p><strong>Descriptive and Predictive Analytics:</strong> Historical data was analyzed to build the model, which was evaluated using RMSE to measure its accuracy.</p>
+                    <p><strong>Dataset Overview:</strong> The dataset includes detailed transaction-level data covering sales during promotional periods, major festivals, and across multiple store locations.</p>
+                    <p><strong>Study Framework:</strong> Using SQL for business intelligence, key metrics such as total sales, top-performing products, and promotional impacts were identified. A linear regression model was built to predict future sales based on factors like promotions, day of the week, and seasonal events.</p>
+                    <p><strong>Descriptive and Predictive Analytics:</strong> Historical data was used to build the linear regression model, which was evaluated using RMSE to ensure its effectiveness in forecasting future sales.</p>
                 </section>
 
                 <section>
                     <h2>Results</h2>
                     <h3>Top-Performing Products and Store Locations</h3>
-                    <p><strong>Spritzer 1.5L:</strong> Generated the highest sales in Kota Kinabalu during Chinese New Year, with 358 units sold, earning $2,737.32.</p>
+                    <p><strong>Spritzer 1.5L:</strong> Highest total sales in Kota Kinabalu during Chinese New Year, with 358 units sold, generating $2,737.32.</p>
                     <p><strong>Pepsi 330ml:</strong> Second-highest in sales, generating $1,307.75 from 330 units sold.</p>
-                    <p><strong>Key Store Locations:</strong> Kota Kinabalu emerged as the top-performing location, with total sales of $52,178.38 during the festive period.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/forecasting-beverage-sales/001-1.png" alt="Top-Performing Products and Store Locations">
-                </section>
+                    <p><strong>Key Store Locations:</strong> Kota Kinabalu, George Town, and Johor Bahru were the top-performing locations, with total sales of $52,178.38, $55,781.62, and $53,551.06, respectively.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/forecasting-beverage-sales/001-1.png" alt="Top-Performing Products and Locations" style="width:100%; height:auto;">
 
-                <section>
                     <h3>Predictive Model Performance</h3>
-                    <p><strong>RMSE (Root Mean Squared Error):</strong> The model achieved an RMSE of 276.51, indicating a reasonably accurate forecast for future sales.</p>
-                    <p><strong>Key Predictors:</strong> Promotions, major festivals, and specific store locations were identified as significant factors impacting sales performance.</p>
+                    <p><strong>RMSE (Root Mean Squared Error):</strong> The model achieved an RMSE of 276.51, indicating that the average prediction error for sales is approximately $276.51.</p>
+                    <p><strong>Key Predictors:</strong> The model identified promotions, major festivals, and specific store locations as significant factors impacting sales performance.</p>
 
                     <h3>Insights on Sales Trends</h3>
-                    <p>Significant sales spikes occurred during Chinese New Year, particularly for beverages such as Spritzer and Milo.</p>
-                    <p><strong>Coca-Cola 330ml:</strong> Underperformed in all store locations, suggesting a need for revised marketing strategies.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/forecasting-beverage-sales/002-1.png" alt="Sales Trends">
+                    <p>Sales during major festivals such as Chinese New Year saw significant spikes, particularly for beverages like Spritzer and Milo.</p>
+                    <p><strong>Coca-Cola 330ml:</strong> Consistently underperformed across all store locations, suggesting a need for a revised marketing strategy.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/forecasting-beverage-sales/002-1.png" alt="Sales Trends Insights" style="width:100%; height:auto;">
                 </section>
 
                 <section>
                     <h2>Key Insights</h2>
                     <ul>
-                        <li><strong>Sales Trends During Festive Periods:</strong> Spritzer 1.5L and Milo 1L perform well during Chinese New Year. Retailers should focus on stocking these products.</li>
-                        <li><strong>Predictive Model Accuracy:</strong> The model’s RMSE of 276.51 indicates reliable forecasts for future sales, allowing businesses to anticipate demand.</li>
-                        <li><strong>Importance of Promotions:</strong> Promotions are a crucial factor in driving sales, as evidenced by the performance of top-selling products.</li>
+                        <li><strong>Sales Trends During Festive Periods:</strong> Spritzer 1.5L and Milo 1L consistently perform well during high-demand periods like Chinese New Year. Retailers should focus their inventory and promotions on these products.</li>
+                        <li><strong>Predictive Model Accuracy:</strong> The model’s RMSE of 276.51 suggests it can reasonably forecast future sales, allowing businesses to anticipate demand and adjust accordingly.</li>
+                        <li><strong>Importance of Promotions:</strong> Promotional periods significantly influence sales, making them a crucial factor in planning marketing strategies.</li>
                     </ul>
                 </section>
 
                 <section>
                     <h2>Recommendations</h2>
                     <ul>
-                        <li><strong>Focus on High-Performing Products:</strong> Increase inventory and marketing for top-selling beverages such as Spritzer 1.5L and Milo 1L during festive periods.</li>
-                        <li><strong>Optimize Promotions:</strong> Tailor promotional strategies based on the predictive model to maximize revenue during high-demand periods.</li>
-                        <li><strong>Revise Strategy for Low-Performing Products:</strong> Reevaluate marketing strategies for underperforming products like Coca-Cola 330ml.</li>
+                        <li><strong>Focus on High-Performing Products:</strong> Increase stock and marketing efforts for top-selling beverages like Spritzer 1.5L and Milo 1L during Chinese New Year and other key events.</li>
+                        <li><strong>Optimize Promotions Based on Predictions:</strong> Use the predictive model to identify which products are likely to experience sales spikes and tailor promotions accordingly to maximize revenue.</li>
+                        <li><strong>Revise Strategy for Low-Performing Products:</strong> Consider revising marketing strategies for low-performing products like Coca-Cola 330ml to increase visibility and sales during peak periods.</li>
                     </ul>
                 </section>
 
                 <section>
                     <h2>Conclusion</h2>
-                    <p>By applying descriptive and predictive analytics, retailers can optimize inventory and promotional strategies during high-demand periods like Chinese New Year. The predictive model's accuracy provides a reliable basis for forecasting future sales, enabling businesses to make informed decisions and maximize revenue.</p>
+                    <p>By leveraging descriptive and predictive analytics, businesses can make data-driven decisions to optimize inventory, promotions, and staffing during high-demand periods. The predictive model’s accuracy allows retailers to confidently plan for future sales, ensuring they have the right products in stock and maximizing revenue potential during events like Chinese New Year.</p>
                 </section>
             </section>
         </main>
