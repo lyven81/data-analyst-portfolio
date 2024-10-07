@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicting High-Spending Customers with Logistic Regression | Lee Yih Ven</title>
+    <title>Predicting High-Revenue Product Categories | Lee Yih Ven</title>
     <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
     <style>
         img {
@@ -43,83 +43,86 @@
         <main class="right-column">
             <section class="case-study-content">
                 <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/007.png" alt="High-Spending Customer Analysis">
-                    <h1>Predicting High-Spending Customers with Logistic Regression</h1>
-                    <p>Using predictive modeling to identify high-value customers for retail businesses.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-revenue-product-categories/008.png" alt="High Revenue Product Analysis">
+                    <h1>Predicting High-Revenue Product Categories</h1>
+                    <p>Leveraging predictive modeling to identify top-performing product categories for revenue generation.</p>
                 </header>
 
                 <!-- Case Study Sections -->
                 <section>
                     <h2>Executive Summary</h2>
-                    <p>This case study examines how retail businesses can use predictive modeling to identify high-spending customers. Using a logistic regression model, the study analyzes customer demographics and purchasing patterns to predict which customers are likely to spend over $1,000. The findings offer actionable insights for targeting high-value customers through personalized promotions, loyalty programs, and marketing campaigns.</p>
+                    <p>This case study focuses on predicting which product categories are likely to generate the highest revenue in the upcoming quarter. By leveraging logistic regression modeling and historical sales data, the analysis identifies key product categories expected to exceed a $25,000 revenue threshold. The insights from this analysis enable businesses to target high-revenue categories for marketing and inventory optimization.</p>
                 </section>
 
                 <section>
                     <h2>Problem Statement</h2>
-                    <p>Retailers face challenges in identifying high-spending customers who can be targeted for promotions and loyalty programs. This case study aims to predict high spenders using customer demographic data and purchasing behavior, helping businesses optimize their marketing strategies and improve revenue.</p>
+                    <p>Retail businesses often struggle to forecast which product categories will drive significant sales, limiting their ability to optimize marketing strategies and inventory management. This case study aims to predict which product categories will generate higher sales based on historical transaction data, guiding businesses to make data-driven decisions.</p>
                 </section>
 
                 <section>
                     <h2>Approach</h2>
-                    <p><strong>Dataset:</strong> The dataset, titled "Retail Sales and Customer Demographics Dataset," includes attributes like age, gender, product category, and total amount spent.</p>
-                    <p><strong>Analytic Framework:</strong></p>
-                    <ul>
-                        <li>Logistic regression was used to predict high spenders based on age, gender, and product preferences. SQL queries were employed to analyze spending behavior.</li>
-                        <li>The logistic regression model was trained using customer demographic and purchasing data, achieving high precision and accuracy. The model predicted whether a customer would spend more than $1,000 based on input features such as gender, age group, and product category.</li>
-                    </ul>
+                    <p><strong>Dataset Overview:</strong> The dataset includes transactional data from July to September 2023, capturing various product categories and factors such as quantity sold, price, discounts applied, and customer location.</p>
+                    <p><strong>Study Framework:</strong> The objective is to predict which product categories will exceed the $25,000 revenue threshold using a logistic regression model. Key features include quantity sold, price, discount applied, and total revenue.</p>
+                    <p><strong>Logistic Regression Model:</strong> A logistic regression model was used to predict whether a product category will generate more than $25,000 in revenue for the next quarter.</p>
                 </section>
 
                 <section>
                     <h2>Results</h2>
-                    <h3>High Spender Breakdown by Gender</h3>
+                    <h3>Revenue Performance by Product Category</h3>
                     <ul>
-                        <li>Male: 15.71% of male customers were predicted to be high spenders.</li>
-                        <li>Female: 14.9% of female customers were predicted to be high spenders.</li>
+                        <li>High-Revenue Categories:</li>
+                        <ul>
+                            <li>Home Decor: $28,451.61</li>
+                            <li>Clothing: $26,460.83</li>
+                            <li>Groceries: $25,246.71</li>
+                        </ul>
+                        <li>Low-Revenue Categories:</li>
+                        <ul>
+                            <li>Books: $24,858.80</li>
+                            <li>Electronics: $20,359.13</li>
+                        </ul>
                     </ul>
-                    <p><strong>Insight:</strong> Both genders have a similar likelihood of being high spenders, suggesting businesses can target both groups effectively.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%201.png" alt="High Spender Breakdown by Gender">
-                    
-                    <h3>High Spender Breakdown by Age Group</h3>
-                    <ul>
-                        <li>Millennials: Lead with 57 predicted high spenders.</li>
-                        <li>Gen X: Follow closely with 45 high spenders.</li>
-                    </ul>
-                    <p><strong>Insight:</strong> Millennials and Gen X are the most likely age groups to be high spenders. Businesses should focus on these groups for promotions.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%202.png" alt="High Spender Breakdown by Age Group">
-                    
-                    <h3>High Spender Breakdown by Product Category</h3>
-                    <ul>
-                        <li>Electronics: 53 high spenders.</li>
-                        <li>Clothing and Beauty: 52 and 48 high spenders, respectively.</li>
-                    </ul>
-                    <p><strong>Insight:</strong> Electronics has the highest number of high spenders, making it a key category for high-value marketing efforts.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-spending-customers/Visualization%203.png" alt="High Spender Breakdown by Product Category">
-                    
-                    <p>View the full visualization here:</p>
-                    <iframe width="100%" height="450" src="https://lookerstudio.google.com/embed/reporting/475f0091-39e0-47b9-a156-bc34a8a2f7a1/page/I8hCE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                    <p><strong>Insight:</strong> Home Decor, Clothing, and Groceries generated higher revenue, making them the top-performing categories, while Books and Electronics fell below the $25,000 threshold.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-revenue-product-categories/000.png" alt="Revenue Performance by Product Category">
+
+                    <h3>Quantity Sold and Discount Analysis</h3>
+                    <p>Home Decor had the highest quantity sold (530 units), followed by Clothing and Groceries, each selling more than 499 units. Despite having the highest discount applied (16.22%), Books remained a low-revenue category, indicating that high discounts did not significantly boost revenue.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-revenue-product-categories/001.png" alt="Quantity Sold and Discount Analysis">
+
+                    <h3>Predictive Model Performance</h3>
+                    <p><strong>ROC AUC Score:</strong> 1.0, indicating perfect prediction accuracy in identifying product categories that would exceed or fall below the $25,000 revenue threshold.</p>
+                    <p><strong>Model Confidence:</strong> The high predictive power of the model allows businesses to confidently rely on it for future planning and decision-making.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-revenue-product-categories/002.png" alt="Predictive Model Performance">
+
+                    <h3>Customer Behavior Insights</h3>
+                    <p>Home Decor had the highest number of customers (101), with an average order value of $281.70, suggesting that customers spent significantly more in this category. Electronics had the lowest average order value ($214.31), contributing to its low revenue generation despite consistent customer demand.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-high-revenue-product-categories/003.png" alt="Customer Behavior Insights">
                 </section>
+
+                <p>View the full visualization here:</p>
+                <iframe width="100%" height="450" src="https://lookerstudio.google.com/reporting/24fc81a6-e7ee-4a61-959e-4620a1311c8c" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
 
                 <section>
                     <h2>Key Insights</h2>
                     <ul>
-                        <li><strong>Demographic Targeting:</strong> Millennials and Gen X customers, especially males shopping for electronics, are prime candidates for high-value promotions.</li>
-                        <li><strong>Product Category Focus:</strong> Electronics, Beauty, and Clothing should be prioritized for high-spending customers, with Millennials showing a particular preference for Clothing and Beauty.</li>
-                        <li><strong>Gender Balance:</strong> Males and females are almost equally likely to be high spenders, suggesting a balanced marketing approach.</li>
+                        <li><strong>High Revenue Drivers:</strong> Home Decor, Clothing, and Groceries consistently generate high revenue, driven by strong customer demand and higher average order values.</li>
+                        <li><strong>Low Revenue Challenges:</strong> Despite discounts, Books and Electronics remain under the $25,000 threshold, largely due to lower average order values.</li>
+                        <li><strong>Predictive Model Confidence:</strong> The logistic regression model's accuracy, with an ROC AUC of 1.0, ensures reliable predictions for product category performance.</li>
                     </ul>
                 </section>
 
                 <section>
                     <h2>Recommendations</h2>
                     <ul>
-                        <li><strong>Target Millennials and Gen X for Promotions:</strong> Businesses should focus their marketing strategies on Millennials and Gen X, as they are most likely to be high spenders. Customized promotions based on their product preferences (Electronics, Beauty, Clothing) will drive better engagement.</li>
-                        <li><strong>Leverage Product-Specific Promotions:</strong> Electronics leads in high spenders, making it a lucrative category for high-ticket promotions. Similarly, targeted campaigns in Beauty and Clothing can also capture a significant share of high-spending customers.</li>
-                        <li><strong>Develop Personalized Campaigns for Both Genders:</strong> With high spender rates almost equal between males and females, businesses should develop gender-neutral promotions while slightly prioritizing male customers for high-value campaigns.</li>
+                        <li><strong>Focus on High-Revenue Categories:</strong> Businesses should prioritize marketing and inventory for Home Decor, Clothing, and Groceries, as these categories are predicted to generate the highest revenue in the next quarter. Customizing promotions for these categories will likely drive sales growth.</li>
+                        <li><strong>Reevaluate Discount Strategies for Low-Revenue Categories:</strong> While Books and Electronics saw higher discounts, they remained in the low-revenue segment. Consider revising discount strategies or bundling these products with higher-performing categories to boost overall sales.</li>
+                        <li><strong>Target High-Value Customers:</strong> Focus marketing efforts on attracting high-spending customers in Home Decor, which has both the highest customer base and average order value. Understanding customer preferences can help businesses design better loyalty programs.</li>
                     </ul>
                 </section>
 
                 <section>
                     <h2>Conclusion</h2>
-                    <p>By using logistic regression to predict high spenders, businesses can strategically target their most valuable customers. The model's high accuracy and clear insights into customer demographics and preferences make it an essential tool for developing personalized marketing campaigns. Focused efforts on Millennials, Gen X, and product categories like Electronics, Beauty, and Clothing will yield the best results for boosting revenue.</p>
+                    <p>By using predictive modeling, businesses can accurately identify which product categories will generate the most revenue in the next quarter. Home Decor, Clothing, and Groceries are clear drivers of high revenue, while Books and Electronics require strategic adjustments to improve performance. The logistic regression model’s high accuracy offers businesses a reliable tool for data-driven decision-making, ensuring that marketing and inventory efforts are focused on maximizing profitability.</p>
                 </section>
             </section>
         </main>
@@ -127,7 +130,7 @@
     </div>
 
     <footer>
-        <p>© 2024 Lee Yih Ven | Pinnacles Learning Solutions</p>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
     </footer>
 
 </body>
