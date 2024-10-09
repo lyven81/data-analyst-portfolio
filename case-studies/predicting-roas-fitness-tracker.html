@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicting Return of Ad Spend for Fitness Tracker | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Predicting Return of Ad Spend for Fitness Tracker</h1>
+                    <p>Optimizing advertising budgets through ROAS predictions to maximize returns for fitness tracker campaigns.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This study aims to predict the Return on Ad Spend (ROAS) for the Fitness Tracker category, focusing on how Cost Per Click (CPC) and Daily Spend Limits impact ROAS. The goal is to optimize future advertising budgets to maximize returns. Analysis reveals that Display Ads perform best for Fitness Trackers, with top products like the Mi Smart Band 5 and Mi Band 7 delivering the highest returns.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The company seeks to enhance its ad strategy by predicting ROAS for Fitness Trackers under various scenarios. The objective is to identify which ad formats, products, and budget adjustments yield the highest ROAS.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <ul>
+                        <li><strong>Data Analysis:</strong> Analyzed historical ad performance data for Fitness Trackers.</li>
+                        <li><strong>Modeling:</strong> Built a model to predict ROAS based on changes in CPC and Daily Spend Limits.</li>
+                        <li><strong>Scenario Testing:</strong> Tested 10% increases and decreases in CPC and Daily Spend Limits to understand their impact on ROAS.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Key Findings</h2>
+                    <ul>
+                        <li><strong>Prediction Accuracy:</strong> The model’s Root Mean Squared Error (RMSE) is 8.98, showing moderate accuracy. Predictions fall within the actual ROAS range of 16.56 to 131.24.</li>
+                        <li><strong>Overall Findings:</strong></li>
+                        <ul>
+                            <li>Fitness Trackers: Predicted ROAS of 66.13, aligning closely with the original ROAS of 66.01, and potential revenue of $91,895.31.</li>
+                            <li>Top ROAS Product: Air Purifiers, with the highest predicted ROAS at 73.18.</li>
+                            <li>Lowest ROAS Product: Vacuum Cleaners, with a predicted ROAS of 46.53.</li>
+                        </ul>
+                        <li><strong>Ad Type Performance:</strong> Display Ads show a predicted ROAS of 72.58, outperforming Search Ads at 59.68, indicating greater effectiveness for Fitness Trackers.</li>
+                    </ul>
+                    
+                    <h3>Product-Level Insights for Search Ads</h3>
+                    <ul>
+                        <li><strong>High Performers:</strong> Mi Smart Band 5 (ROAS 112.15) and Mi Band 7 (ROAS 93.52).</li>
+                        <li><strong>Low Performers:</strong> Mi Band 6 and Mi Smart Band 6, with ROAS around 20.66, indicating low returns on search ads.</li>
+                    </ul>
+
+                    <h3>Scenario Analysis on ROAS Sensitivity</h3>
+                    <ul>
+                        <li><strong>10% CPC Increase:</strong> Mi Smart Band 5 and Mi Band 5 maintain high ROAS, while Mi Band 4’s ROAS decreases, indicating sensitivity to CPC changes.</li>
+                        <li><strong>10% CPC Decrease:</strong> ROAS improves for Mi Smart Band 6 and Mi Band 6, indicating better returns for cost-effective ads.</li>
+                        <li><strong>10% Daily Spend Limit Increase:</strong> Boosts ROAS for top performers like Mi Smart Band 5 (113.98 ROAS). Mi Band 6 shows minimal improvement.</li>
+                        <li><strong>10% Daily Spend Limit Decrease:</strong> Mi Band 4C and Mi Smart Band 5 show resilience with slight ROAS reductions, while Mi Band 3 and Mi Band 4 experience larger drops.</li>
+                    </ul>
+                </section>
+
+                <!-- Visualization -->
+                <section>
+                    <h2>Visualization</h2>
+                    <iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/87aea8a5-b815-45d4-ab28-ddd6e37fea67/page/4QjEE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Prioritize Display Ads for Fitness Trackers:</strong> Due to a higher predicted ROAS, Display Ads should be preferred over Search Ads for Fitness Tracker campaigns.</li>
+                        <li><strong>Invest in High-Performing Products:</strong> Focus the budget on Mi Smart Band 5 and Mi Band 7, which show high ROAS across scenarios, especially with increased Daily Spend Limits.</li>
+                        <li><strong>Reduce CPC for Low-ROAS Products:</strong> Avoid CPC increases for Mi Band 6 and Mi Smart Band 6. Instead, reallocate these funds to higher-performing models.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>Following these strategies will allow the company to boost ROAS by targeting ad spending on high-return products and ad types. This approach optimizes budget allocation, creating a cost-effective advertising strategy and maximizing campaign success.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
