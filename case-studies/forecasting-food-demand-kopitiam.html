@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecasting Food Demand in Kopitiam | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Forecasting Food Demand in Kopitiam</h1>
+                    <p>Leveraging predictive modeling to optimize food inventory and reduce waste in a local kopitiam.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This study aims to improve food inventory management at a local kopitiam by predicting demand for popular dishes. Using the ARIMA model, we assessed how well we could forecast demand for key items. This helps streamline inventory decisions, boosts sales during peak times, and reduces waste. Key outcomes include better inventory control and strategic promotions for high-demand dishes.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The kopitiam struggled with managing inventory, often leading to stockouts at busy times or surplus food waste during slow periods. This shows the need for a predictive model to better match food supply with demand, reducing costs and improving customer satisfaction.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p>Using historical sales data, we built an ARIMA model to predict food demand. We assessed the model's accuracy using metrics like the Akaike Information Criterion (AIC), variance, and log likelihood. Our analysis focused on the prediction accuracy for popular dishes and identified sales trends by time of day and week.</p>
+                </section>
+
+                <section>
+                    <h2>Key Findings</h2>
+                    <ul>
+                        <li><strong>Prediction Model Analysis:</strong></li>
+                        <ul>
+                            <li><strong>High Accuracy:</strong> Mee Goreng showed high prediction accuracy with a low AIC of -57.85 and minimal variance, making it reliable for inventory planning.</li>
+                            <li><strong>Moderate Accuracy:</strong> Roti Canai and Laksa had moderate accuracy, making them suitable for regular inventory updates.</li>
+                            <li><strong>Lower Accuracy:</strong> Nasi Kandar and Mihun Goreng had higher AIC and variance, indicating less reliable forecasts. A conservative inventory approach is recommended for these items.</li>
+                        </ul>
+                        <li><strong>Descriptive Analysis:</strong></li>
+                        <ul>
+                            <li><strong>Peak Sales Periods:</strong> Breakfast (6 am - 9 am) and lunch (12 pm - 2 pm) are peak times. Wantan Mee is most popular during breakfast, while Laksa leads at dinner, generating RM10,238.50 and RM10,477.50, respectively.</li>
+                            <li><strong>Holiday and Weekend Trends:</strong> Public holidays and weekends show demand spikes for Wantan Mee and Nasi Kandar, suggesting a need for strategic inventory adjustments during these times.</li>
+                        </ul>
+                        <p>Suggested Visualization: A heatmap showing sales volumes by time of day and day of the week, highlighting popular dishes during peak periods.</p>
+                    </ul>
+                    
+                    <h3>Strategic Insights</h3>
+                    <ul>
+                        <li><strong>Stock Optimization:</strong> Maintain higher stock levels of Mihun Goreng and Wantan Mee during peak hours to prevent shortages.</li>
+                        <li><strong>Dynamic Pricing:</strong> Consider higher prices during peak times for high-demand dishes like Laksa to boost revenue without affecting customer satisfaction.</li>
+                        <li><strong>Targeted Promotions:</strong> Use holiday and weekend data insights to create combo deals and special menus aligned with customer preferences.</li>
+                    </ul>
+                    <p>Suggested Visualization: A bar graph comparing sales during peak times vs. regular times, to support dynamic pricing and targeted promotions insights.</p>
+                    
+                    <!-- Visualization -->
+                    <h2>Visualization</h2>
+                    <iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/5439a834-afde-486f-9eaa-2c97f588007d/page/p_p6qs6lavld" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Enhanced Inventory Management:</strong> Use Mee Goreng’s high-accuracy predictions to set base inventory levels, ensuring availability during busy hours.</li>
+                        <li><strong>Promotional Strategy:</strong> Roll out holiday-themed promotions, particularly for popular breakfast and lunch dishes like Wantan Mee and Laksa.</li>
+                        <li><strong>Dynamic Pricing Implementation:</strong> Introduce premium pricing during peak times and offer discounts during slower hours to balance sales and minimize food waste.</li>
+                    </ul>
+                    <p>Suggested Visualization: An annotated chart showing the recommended pricing adjustments by time of day and highlighting the potential revenue impact.</p>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>Implementing these strategies allows the kopitiam to optimize food inventory, minimize waste, and capitalize on high-demand periods, ultimately improving customer satisfaction and profitability.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
