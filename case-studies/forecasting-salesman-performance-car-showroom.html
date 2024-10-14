@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecasting Salesman Performance in a Car Showroom | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Forecasting Salesman Performance in a Car Showroom</h1>
+                    <p>Using sales forecasts to set realistic targets, design incentives, and enhance sales strategies.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This analysis predicts each salesperson's sales performance for September based on their August sales data. The forecast helps set realistic sales targets, design incentives, and tailor sales strategies for optimal results.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The company wants to align sales targets and incentives with projected sales performance. By predicting individual sales for September, the company aims to maximize revenue, maintain effective sales strategies, and support underperforming team members.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <p>We used an ARIMA model to analyze historical sales data and forecast future performance. For each salesperson, the model included:</p>
+                    <ul>
+                        <li>Non-seasonal components: Autoregressive term (AR), differencing order, and moving average term (MA)</li>
+                        <li>Drift term: Added where needed to capture trends</li>
+                        <li>Seasonal detection: Weekly seasonality for specific sales patterns</li>
+                    </ul>
+                    <p>We assessed the model's accuracy using Akaike Information Criterion (AIC), variance, and sales trends.</p>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>August Sales Summary and ARIMA Model Accuracy</h3>
+                    <ul>
+                        <li><strong>Top Performer:</strong> Salesman 103 led in August with $17,901,466 in sales and 118 units sold.</li>
+                        <li><strong>Lowest Performer:</strong> Salesman 105 had the lowest sales, at $14,003,703 with 90 units sold.</li>
+                    </ul>
+                    
+                    <h3>Model Accuracy</h3>
+                    <ul>
+                        <li><strong>High Accuracy:</strong> Salesman 104’s ARIMA model showed the strongest predictive power, with low variance and a mix of AR and MA components.</li>
+                        <li><strong>Moderate Accuracy:</strong> Salesmen 101, 102, and 105 had moderate accuracy, capturing trends but lacking seasonal adjustments.</li>
+                        <li><strong>Low Accuracy:</strong> Salesman 103’s model showed limited accuracy due to a simpler ARIMA structure.</li>
+                    </ul>
+                    
+                    <h3>September Sales Forecast</h3>
+                    <ul>
+                        <li>Salesman 103: Projected sales growth of 1.5%, continuing strong performance.</li>
+                        <li>Salesman 104: Forecasted to almost double August sales, indicating high potential.</li>
+                        <li>Salesman 105: Expected to show a modest increase.</li>
+                        <li>Salesman 101: Predicted to decline, suggesting the need for a new approach.</li>
+                        <li>Salesman 102: Slight decrease forecasted, with stable performance anticipated.</li>
+                    </ul>
+                    
+                    <!-- Visualization -->
+                    <h2>Visualization</h2>
+                    <iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/02ceea8b-ce43-4fc0-9772-bfb124b591f4/page/p_rqu8e7dzld" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Sales Targets:</strong></li>
+                        <ul>
+                            <li>Salesman 104: Set the highest targets, focusing on acquiring high-value clients.</li>
+                            <li>Salesman 103: Maintain aggressive targets, with a focus on high-revenue accounts.</li>
+                            <li>Salesman 101: Needs a recovery plan, with coaching and an updated approach.</li>
+                            <li>Salesmen 102 and 105: Set targets for steady growth with incremental improvements.</li>
+                        </ul>
+                        <li><strong>Incentives and Commissions:</strong></li>
+                        <ul>
+                            <li>Salesman 104: Offer enhanced commissions for exceeding targets to maximize growth potential.</li>
+                            <li>Salesman 103: Adjust commissions to encourage high-value sales.</li>
+                            <li>Salesman 101: Implement incentives to counter the forecasted decline.</li>
+                            <li>Salesmen 102 and 105: Provide incentives for modest targets to maintain momentum.</li>
+                        </ul>
+                        <li><strong>Sales Strategies:</strong></li>
+                        <ul>
+                            <li>Salesmen 103 and 104: Assign high-revenue clients to capitalize on expected growth.</li>
+                            <li>Salesman 101: Test new techniques, like bundling products and expanding client segments.</li>
+                            <li>Salesmen 102 and 105: Focus on consistent performance and growing client portfolios.</li>
+                        </ul>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>By setting tailored sales targets, aligning incentives, and implementing strategies based on forecasted performance, the company can maximize September’s revenue potential and strengthen its overall sales success.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
