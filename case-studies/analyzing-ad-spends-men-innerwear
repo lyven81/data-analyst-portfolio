@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyzing the Impact of Ad Spend on Sales Revenue for a Men's Innerwear Retailer | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/case-studies/analyzing-ads-innerwear/00.png" alt="Ad Spend Analysis Overview" style="width:100%; height:auto;">
+                    <h1>Analyzing the Impact of Ad Spend on Sales Revenue for a Men's Innerwear Retailer</h1>
+                    <p>Evaluating the link between ad spending, revenue, and total sales to optimize marketing efforts for men's innerwear products.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This analysis looks at the relationship between ad spending and revenue, and the link between units sold through ads and total units sold for men's innerwear products. We found weak or almost no correlation in both cases. This means ad spending isn't driving revenue or total sales for these products. The insights suggest the business should rethink its advertising strategy and try other methods to boost sales.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The business has been investing a lot in advertising across men's innerwear products but isn’t seeing matching revenue or sales growth. This analysis aims to find out if there’s any real connection between ad spending and sales performance to help guide future marketing decisions.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <ul>
+                        <li><strong>Data Collection:</strong> We analyzed data on ad spend, total revenue, units sold through ads, and total units sold for various men's innerwear categories (like Boxer Briefs, Socks, Tank Tops, etc.).</li>
+                        <li><strong>Correlation Analysis:</strong> We used Pearson correlation to check the relationship between:
+                            <ul>
+                                <li>Ad spend and total revenue for each product category.</li>
+                                <li>Units sold through ads and total units sold.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>1. Ad Spend and Revenue Correlation</h3>
+                    <ul>
+                        <li>The correlation between ad spend and revenue was near-zero for all categories, from -0.0106 to 0.0192.</li>
+                        <li>Examples:
+                            <ul>
+                                <li>Boxer Briefs: Correlation = -0.0103, showing no connection between ad spend and revenue.</li>
+                                <li>Socks: Correlation = 0.0102, a slight positive correlation, but still insignificant.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Key Insight:</strong> Increasing ad spend does not meaningfully increase revenue for any of the categories.</li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/case-studies/analyzing-ads-innerwear/01.png" alt="Ad Spend vs Revenue Correlation" style="width:100%; height:auto;">
+                    
+                    <h3>2. Units Sold via Ads and Total Units Sold Correlation</h3>
+                    <ul>
+                        <li>The correlation between units sold via ads and total units sold was also near-zero across all categories, from -0.0037 to 0.0128.</li>
+                        <li>Examples:
+                            <ul>
+                                <li>Boxer Briefs: Correlation = 0.0044, indicating no significant connection.</li>
+                                <li>Socks: Correlation = 0.0128, slightly higher but still weak.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Key Insight:</strong> Sales from ads barely impact total sales performance.</li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/case-studies/analyzing-ads-innerwear/02.png" alt="Units Sold vs Total Sales Correlation" style="width:100%; height:auto;">
+                </section>
+
+                <!-- Visualization -->
+                <section>
+                    <h2>Visualization</h2>
+                    <p>Explore the full visualization here:</p>
+                    <iframe width="100%" height="400px" src="https://lookerstudio.google.com/embed/reporting/29e121b9-7b6f-4a16-9a02-4b71bac55bf0/page/unBGE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                </section>
+
+                <section>
+                    <h2>Strategic Recommendations</h2>
+                    <ul>
+                        <li><strong>Re-evaluate Ad Spending:</strong> Since ads don't seem to drive revenue or sales, the business should reconsider how it spends on advertising. Focus on categories where ads might work better, or try other strategies.</li>
+                        <li><strong>Explore Other Sales Strategies:</strong> Ads alone aren't boosting sales, so the business should look at product promotions, pricing changes, or customer loyalty programs as alternatives.</li>
+                        <li><strong>Further Analysis on Other Factors:</strong> Look into other factors like product demand, market trends, or competitors, which might be more influential on sales than advertising.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>The weak connection between ad spend and revenue, and between units sold via ads and total sales, suggests that the business should rethink its advertising strategy for these products. Shifting to strategies like promotions or loyalty programs might improve sales performance.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
