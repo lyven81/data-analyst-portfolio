@@ -6,153 +6,110 @@
     <title>Case Studies | Lee Yih Ven's Data Analytics Portfolio</title>
     <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
     <style>
-        /* General Styles */
+        /* Mobile First Responsive Styles */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
+            background-color: #f4f4f4;
             color: #333;
         }
 
-        /* Accent Color */
-        a, h3 {
-            color: #007BFF; /* Single accent color */
-        }
-
-        /* Layout Container */
+        /* Container for responsive layout */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Header Styling */
+        /* Basic styling for header */
         header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 20px;
         }
 
         header h1 {
-            font-size: 2em;
-            margin: 0;
-            color: #333;
+            font-size: 2.5em;
         }
 
         header p {
             font-size: 1.2em;
-            margin: 0;
         }
 
-        /* Sticky Navigation */
+        /* Navigation Links (placed below the header on mobile) */
         nav {
-            position: sticky;
-            top: 0;
-            background-color: #fff;
-            padding: 15px 0;
-            border-bottom: 1px solid #eaeaea;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         nav a {
             color: #007BFF;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.1em;
         }
 
         nav a:hover {
             text-decoration: underline;
         }
 
-        /* Horizontal Group Layout */
-        .case-study-groups {
+        /* Main content (Responsive for different screens) */
+        .main-content {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            flex-direction: column;
             gap: 20px;
         }
 
-        .case-study-group {
-            flex: 1 1 calc(33.33% - 20px); /* Adjust to show 3 groups per row */
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .case-study-group h2 {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eaeaea;
-            padding-bottom: 10px;
-        }
-
         .case-study-item {
-            padding: 10px;
             background-color: #fff;
-            margin-bottom: 10px;
+            padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .case-study-item h3 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
+            font-size: 1.5em;
         }
 
         .case-study-item p {
-            font-size: 0.9em;
-            margin-bottom: 10px;
+            font-size: 1em;
         }
 
         .case-study-item a {
             color: #007BFF;
             text-decoration: none;
-            font-weight: bold;
         }
 
-        .view-more {
-            margin-top: 10px;
+        .case-study-item a:hover {
+            text-decoration: underline;
         }
 
-        .view-more a {
-            color: #007BFF;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            padding: 8px 15px;
-            border: 1px solid #007BFF;
-            border-radius: 3px;
-        }
-
-        .view-more a:hover {
-            background-color: #007BFF;
-            color: #fff;
-        }
-
-        /* Footer Styling */
+        /* Footer */
         footer {
             text-align: center;
-            padding: 20px 0;
+            padding: 20px;
             background-color: #333;
-            color: #fff;
+            color: white;
+            margin-top: 20px;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 1024px) {
-            .case-study-group {
-                flex: 1 1 calc(50% - 20px); /* 2 groups per row on smaller screens */
+        /* Media Queries for wider screens */
+        @media (min-width: 768px) {
+            .main-content {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .case-study-item {
+                flex: 1 1 calc(50% - 40px); /* 2 items per row */
+                margin: 10px;
             }
         }
 
-        @media (max-width: 768px) {
-            .case-study-group {
-                flex: 1 1 100%; /* 1 group per row on small screens */
+        @media (min-width: 1200px) {
+            .case-study-item {
+                flex: 1 1 calc(33.33% - 40px); /* 3 items per row */
             }
         }
     </style>
@@ -163,114 +120,122 @@
     <header>
         <h1>Lee Yih Ven</h1>
         <p>Data Analytics Portfolio</p>
+        <p>Explore case studies showcasing data-driven insights for business growth and innovation.</p>
     </header>
 
-    <!-- Sticky Navigation -->
+    <!-- Navigation Section -->
     <nav>
         <a href="/data-analyst-portfolio/index.html">Home</a>
         <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
         <a href="/data-analyst-portfolio/contact.html">Contact</a>
     </nav>
 
-    <!-- Main Content (Case Study Groups in Horizontal Layout) -->
+    <!-- Main Content (Case Studies List) -->
     <div class="container">
-        <section class="case-study-groups">
+        <section class="main-content">
 
-            <!-- Boosting Sales and Profitability Group -->
-            <div class="case-study-group">
-                <h2>Boosting Sales & Profitability</h2>
-
-                <!-- Case Study 1 -->
-                <div class="case-study-item">
-                    <h3>Analyzing Ad Performance for an Online Gadget Shop</h3>
-                    <p>Uncover which ad strategies deliver the highest ROAS, enabling you to optimize spending and drive higher returns.</p>
-                    <a href="/data-analyst-portfolio/case-studies/ad-campaign-performance-analysis.html">Read More</a>
-                </div>
-
-                <!-- Case Study 2 -->
-                <div class="case-study-item">
-                    <h3>Analyzing the Impact of Ad Spend on Sales Revenue for a Men's Innerwear Retailer</h3>
-                    <p>Discover how ad spending impacts revenue and total sales for men's innerwear products, guiding better marketing investments.</p>
-                    <a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Read More</a>
-                </div>
-
-                <!-- View More Button -->
-                <div class="view-more">
-                    <a href="/data-analyst-portfolio/case-studies/boosting-sales-profitability.html">View All</a>
-                </div>
+            <div class="case-study-item">
+                <h3>Analyzing Ad Performance for an Online Gadget Shop</h3>
+                <p>Uncover which ad strategies deliver the highest ROAS, enabling you to optimize spending and drive higher returns.</p>
+                <a href="/data-analyst-portfolio/case-studies/ad-campaign-performance-analysis.html">Read More</a>
             </div>
 
-            <!-- Customer Targeting & Retention Group -->
-            <div class="case-study-group">
-                <h2>Customer Targeting & Retention</h2>
-
-                <!-- Case Study 1 -->
-                <div class="case-study-item">
-                    <h3>Forecasting Customer Lifetime Value for a Contact Lens Seller</h3>
-                    <p>Predict future customer spending to boost loyalty and create personalized marketing strategies that drive long-term growth.</p>
-                    <a href="/data-analyst-portfolio/case-studies/customer-lifetime-value-prediction.html">Read More</a>
-                </div>
-
-                <!-- Case Study 2 -->
-                <div class="case-study-item">
-                    <h3>Predicting Customer Lifetime Value for a Car Service Center</h3>
-                    <p>Gain insights into high-spending customers to improve retention and boost revenue with personalized services and loyalty programs.</p>
-                    <a href="/data-analyst-portfolio/case-studies/predicting-customer-lifetime-value-car-service-center.html">Read More</a>
-                </div>
-
-                <!-- View More Button -->
-                <div class="view-more">
-                    <a href="/data-analyst-portfolio/case-studies/customer-targeting-retention.html">View All</a>
-                </div>
+            <div class="case-study-item">
+                <h3>Analyzing the Impact of Ad Spend on Sales Revenue for a Men's Innerwear Retailer</h3>
+                <p>Discover how ad spending impacts revenue and total sales for men's innerwear products, guiding better marketing investments.</p>
+                <a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Read More</a>
             </div>
 
-            <!-- Sales Forecasting Group -->
-            <div class="case-study-group">
-                <h2>Sales Forecasting</h2>
-
-                <!-- Case Study 1 -->
-                <div class="case-study-item">
-                    <h3>Forecasting Beverage Sales in Kota Kinabalu During the Chinese New Year Season</h3>
-                    <p>Accurately forecast demand during peak seasons and keep your shelves stocked with high-selling beverages.</p>
-                    <a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Read More</a>
-                </div>
-
-                <!-- Case Study 2 -->
-                <div class="case-study-item">
-                    <h3>Forecasting Food Demand in Kopitiam</h3>
-                    <p>Increase profitability by anticipating customer demand and reducing food waste during peak hours and special events.</p>
-                    <a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Read More</a>
-                </div>
-
-                <!-- View More Button -->
-                <div class="view-more">
-                    <a href="/data-analyst-portfolio/case-studies/sales-forecasting.html">View All</a>
-                </div>
+            <div class="case-study-item">
+                <h3>Forecasting Beverage Sales in Kota Kinabalu During the Chinese New Year Season</h3>
+                <p>Accurately forecast demand during peak seasons and keep your shelves stocked with high-selling beverages.</p>
+                <a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Read More</a>
             </div>
 
-            <!-- Operational Efficiency Group -->
-            <div class="case-study-group">
-                <h2>Operational Efficiency</h2>
-
-                <!-- Case Study 1 -->
-                <div class="case-study-item">
-                    <h3>Predicting Dropout Before New Semester</h3>
-                    <p>Identify and support at-risk students to improve retention rates and academic success before the new semester.</p>
-                    <a href="/data-analyst-portfolio/case-studies/predicting-dropout-before-new-semester.html">Read More</a>
-                </div>
-
-                <!-- Case Study 2 -->
-                <div class="case-study-item">
-                    <h3>Predicting High-Spending Customers with Logistic Regression</h3>
-                    <p>Find out who your most valuable customers are and tailor your marketing for maximum returns.</p>
-                    <a href="/data-analyst-portfolio/case-studies/predicting-high-spending-customers.html">Read More</a>
-                </div>
-
-                <!-- View More Button -->
-                <div class="view-more">
-                    <a href="/data-analyst-portfolio/case-studies/operational-efficiency.html">View All</a>
-                </div>
+            <div class="case-study-item">
+                <h3>Forecasting Customer Lifetime Value for a Contact Lens Seller</h3>
+                <p>Predict future customer spending to boost loyalty and create personalized marketing strategies that drive long-term growth.</p>
+                <a href="/data-analyst-portfolio/case-studies/customer-lifetime-value-prediction.html">Read More</a>
             </div>
+
+            <div class="case-study-item">
+                <h3>Forecasting Food Demand in Kopitiam</h3>
+                <p>Increase profitability by anticipating customer demand and reducing food waste during peak hours and special events.</p>
+                <a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Forecasting Fruit Sales for October 2024</h3>
+                <p>Improve inventory planning and reduce waste by predicting how many fruits like Bananas and Lychees will sell in early October.</p>
+                <a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Forecasting Salesman Performance in a Car Showroom</h3>
+                <p>Set achievable sales targets and design effective incentives by forecasting individual sales performance.</p>
+                <a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Identifying Employees Likely to Resign After Receiving Bonus</h3>
+                <p>Enhance retention strategies by identifying employees at risk of leaving after bonuses are distributed.</p>
+                <a href="/data-analyst-portfolio/case-studies/identifying-employee-resignation-risk.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Maximizing Revenue with Data-Driven Price Adjustment for Skincare Products</h3>
+                <p>Boost profitability through strategic price adjustments for top-selling skincare products without sacrificing demand.</p>
+                <a href="/data-analyst-portfolio/case-studies/maximizing-revenue-with-price-adjustment-skincare.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Predicting Customer Lifetime Value for a Car Service Center</h3>
+                <p>Gain insights into high-spending customers to improve retention and boost revenue with personalized services and loyalty programs.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-customer-lifetime-value-car-service-center.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Predicting Customer Response to Discounts</h3>
+                <p>Boost your sales by targeting the right customers with discount offers they can’t resist.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-customer-response-discounts.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Predicting Discount Voucher Performance for a Hardware Shop</h3>
+                <p>Maximize revenue by identifying which discount vouchers deliver the highest margin and customer engagement.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-discount-voucher-performance-hardware-shop.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Predicting Dropout Before New Semester</h3>
+                <p>Identify and support at-risk students to improve retention rates and academic success before the new semester.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-dropout-before-new-semester.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Predicting High-Revenue Product Categories</h3>
+                <p>Identify which product categories are set to generate top revenue and focus your efforts where it matters.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-high-revenue-product-categories.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Predicting High-Spending Customers with Logistic Regression</h3>
+                <p>Find out who your most valuable customers are and tailor your marketing for maximum returns.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-high-spending-customers.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Predicting Return of Ad Spend for Fitness Tracker</h3>
+                <p>Maximize returns on your ad budget by identifying the most effective ad strategies for fitness trackers.</p>
+                <a href="/data-analyst-portfolio/case-studies/predicting-roas-fitness-tracker.html">Read More</a>
+            </div>
+
+            <div class="case-study-item">
+                <h3>Stationery Product Discount Optimization</h3>
+                <p>Maximize sales on your stationery products by optimizing discount strategies for better profitability.</p>
+                <a href="/data-analyst-portfolio/case-studies/stationery-product-discount-optimization.html">Read More</a>
+            </div>
+
         </section>
     </div>
 
