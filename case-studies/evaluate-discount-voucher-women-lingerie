@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluating the Impact of Discount Vouchers on Sales Performance for a Women's Lingerie and Sleepwear Shop | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluate-discount-voucher-women-linger/00.png" alt="Evaluating Discount Voucher Impact on Sales" style="width:100%; height:auto;">
+                    <h1>Evaluating the Impact of Discount Vouchers on Sales Performance for a Women's Lingerie and Sleepwear Shop</h1>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study explores the impact of discount vouchers on sales for a women's lingerie and sleepwear shop. The analysis shows that while vouchers are frequently used, they don’t have a major effect on increasing sales revenue or the total number of items sold. The findings suggest that vouchers may not be as effective as expected in driving sales growth.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The business wanted to understand if its voucher campaigns were boosting sales. The main goal was to see if vouchers increased sales revenue or led to more items sold, or if they were being used without much return.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <ol>
+                        <li><strong>Data Collection:</strong> We looked at data on voucher usage, total sales, and items sold across five types of vouchers.</li>
+                        <li><strong>Correlation Analysis:</strong> We ran a correlation analysis to see if there was a link between voucher usage and sales revenue, and between voucher usage and the number of items sold.</li>
+                        <li><strong>Evaluation:</strong> Correlation coefficients were calculated to show how much vouchers affected sales performance.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+                    <h3>1. Sales Performance:</h3>
+                    <ul>
+                        <li>Total Sales: $1,620,600</li>
+                        <li>Total Items Sold: 16,399</li>
+                        <li>Voucher Sales: 79.58% of all sales used vouchers, showing heavy discount usage.</li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluate-discount-voucher-women-linger/01.png" alt="Sales Performance Using Vouchers" style="width:100%; height:auto;">
+
+                    <h3>2. Voucher Effectiveness:</h3>
+                    <ul>
+                        <li><strong>Impact on Sales:</strong> Most vouchers didn’t have a strong positive link with sales. For example, the voucher "SAVE10" had a weak positive correlation of 0.078 with sales, and others, like "FRESH15" and "SUMMER25," had slight negative correlations.</li>
+                        <li><strong>Impact on Items Sold:</strong> Similar results were found with the number of items sold. "SUPERSAVE20" had a small positive effect (correlation of 0.048), but overall, vouchers didn’t have much of an impact.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluate-discount-voucher-women-linger/02.png" alt="Voucher Effectiveness Analysis" style="width:100%; height:auto;">
+                    <h2>Key Insights</h2>
+                    <ul>
+                        <li>Vouchers were popular but didn’t drive significant sales growth or a large increase in the number of items sold.</li>
+                        <li>"SAVE10" and "SUPERSAVE20" had small positive impacts, but overall, vouchers weren’t that effective.</li>
+                        <li>"HAPPYHOUR5" and "FRESH15," two of the most used vouchers, had no impact or even a slight negative impact on sales and quantity sold.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Visualization</h2>
+                    <p>Explore the full visualization here:</p>
+                    <iframe width="100%" height="400" src="https://lookerstudio.google.com/embed/reporting/a1724885-a4d5-4827-9767-dc677d613024/page/p_5t2dsk26ld" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                </section>
+
+                <section>
+                    <h2>Strategic Recommendations</h2>
+                    <ul>
+                        <li><strong>Revise Voucher Strategy:</strong> Adjust the focus of the vouchers, targeting high-value customers likely to make larger purchases rather than offering general discounts to everyone.</li>
+                        <li><strong>Consider Non-Discount Promotions:</strong> Since vouchers didn’t significantly boost sales, try promotions like exclusive product launches or limited-time offers to drive engagement without cutting into profits.</li>
+                        <li><strong>Segment Customers:</strong> Focus on loyal customers who shop without relying on vouchers. Offering them personalized deals or loyalty rewards could help maintain their business and reduce the need for discounts.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>The data shows that while discount vouchers are popular, they didn’t increase sales or the number of items sold by much. The business could achieve similar results without offering frequent discounts, providing a chance to rethink the cost-effectiveness of voucher promotions. Moving forward, exploring more targeted approaches might maximize sales without cutting into profits.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
