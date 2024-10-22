@@ -47,31 +47,28 @@
         nav a:hover {
             text-decoration: underline;
         }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .case-study-item {
-            background-color: #fff;
+        td {
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            vertical-align: top;
+            text-align: left;
         }
-        .case-study-item h3 {
+        td h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
-        .case-study-item p {
+        td p {
             font-size: 1rem;
             color: #555;
         }
-        .case-study-item a {
+        td a {
             color: #007BFF;
             text-decoration: none;
         }
-        .case-study-item a:hover {
+        td a:hover {
             text-decoration: underline;
         }
         footer {
@@ -97,34 +94,27 @@
         <a href="/data-analyst-portfolio/contact.html">Contact</a>
     </nav>
 
-    <!-- Main Content (Employee Performance and Retention Case Studies) -->
     <div class="container">
-        <section class="main-content">
-
-            <!-- Case Studies under Employee Performance and Retention -->
-
-            <div class="case-study-item">
-                <h3>Forecasting Salesman Performance in a Car Showroom</h3>
-                <p>Set achievable sales targets and design effective incentives by forecasting individual sales performance.</p>
-                <a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Identifying Employees Likely to Resign After Receiving Bonus</h3>
-                <p>Enhance retention strategies by identifying employees at risk of leaving after bonuses are distributed.</p>
-                <a href="/data-analyst-portfolio/case-studies/identifying-employee-resignation-risk.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Sales Associate Productivity Analysis in a Footwear Retail Store</h3>
-                <p>Improve sales efficiency by analyzing the performance of sales associates across different shifts.</p>
-                <a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Read More</a>
-            </div>
-
-        </section>
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Forecasting Salesman Performance in a Car Showroom</a></h3>
+                    <p>Set achievable sales targets and design effective incentives by forecasting individual sales performance.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/identifying-employee-resignation-risk.html">Identifying Employees Likely to Resign After Receiving Bonus</a></h3>
+                    <p>Enhance retention strategies by identifying employees at risk of leaving after bonuses are distributed.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Sales Associate Productivity Analysis in a Footwear Retail Store</a></h3>
+                    <p>Improve sales efficiency by analyzing the performance of sales associates across different shifts.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>© 2024 Lee Yih Ven | Pinnacles Learning Solutions</p>
     </footer>
