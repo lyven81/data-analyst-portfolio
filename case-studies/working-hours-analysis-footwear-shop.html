@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Associate Productivity Analysis in a Footwear Retail Store | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-920709</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <h1>Sales Associate Productivity Analysis in a Footwear Retail Store</h1>
+                    <p>This analysis explores the link between working hours and sales performance, helping optimize scheduling for better sales efficiency across different shifts and employees.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>This case study looks at the link between working hours and sales performance by analyzing different shifts and individual employees. The results show that night shift workers, even with fewer hours, are more efficient in sales than full-day and day shift workers. We also found a strong connection between the hours worked and sales for several employees. These insights will help guide better scheduling to boost sales and make better use of the workforce.</p>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <p>The business wants to understand how working hours impact sales for different shifts and individual employees. The goal is to find the best ways to schedule employees to increase productivity and sales without causing burnout.</p>
+                </section>
+
+                <section>
+                    <h2>Approach</h2>
+                    <ul>
+                        <li><strong>Data Analysis:</strong> We looked at employee data, including hours worked, items sold, and revenue generated.</li>
+                        <li><strong>Shift Analysis:</strong> We checked how different shifts (night, day, full-day) related to sales efficiency.</li>
+                        <li><strong>Employee Analysis:</strong> We studied how working hours and sales performance were linked for each employee.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Results</h2>
+
+                    <h3>Shift-Based Analysis</h3>
+                    <h4>Night Shift Efficiency:</h4>
+                    <ul>
+                        <li>Night shift workers worked fewer hours (6,012 hours) but sold 1.81 items per hour and generated $82 per hour.</li>
+                        <li>They showed a strong link between hours worked and sales, making the night shift very efficient.</li>
+                    </ul>
+
+                    <h4>Full-Day Shift Efficiency:</h4>
+                    <ul>
+                        <li>Full-day workers had the most hours (12,264 hours) but sold only 0.87 items per hour and generated $39.53 per hour.</li>
+                        <li>This shows that more hours didn’t lead to better sales, suggesting diminishing returns.</li>
+                    </ul>
+
+                    <h4>Day Shift Efficiency:</h4>
+                    <ul>
+                        <li>Day shift employees (EMP09 and EMP08) sold 1.76 items per hour and earned $78.34 per hour.</li>
+                        <li>Although efficient, they were slightly less productive than night shift workers.</li>
+                    </ul>
+                    
+                    <h3>Employee-Based Analysis</h3>
+                    <h4>Top Performers:</h4>
+                    <ul>
+                        <li>Employees like EMP14, EMP11, and EMP13 (night shift) were the most efficient. They had the strongest link between hours worked and sales, meaning giving them more hours could boost revenue.</li>
+                    </ul>
+
+                    <h4>Strong Positive Correlations:</h4>
+                    <ul>
+                        <li>Employees EMP01, EMP06, and EMP12 had strong correlations (above 0.85) between hours worked and sales. Increasing their hours could result in more sales.</li>
+                    </ul>
+
+                    <h4>Diminishing Returns:</h4>
+                    <ul>
+                        <li>EMP03 and EMP04 worked many hours but didn’t see much improvement in sales. Adding more hours for them may not increase sales and should be reconsidered.</li>
+                    </ul>
+
+                    <h4>Correlation Summary</h4>
+                    <ul>
+                        <li>Most employees had strong positive correlations between hours worked and sales, with values ranging from 0.80 to 0.91.</li>
+                        <li>Night shift workers generally showed better efficiency than day or full-day shifts.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Visualization</h2>
+                    <p>Explore the full visualization here:</p>
+                    <iframe width="100%" height="400" src="https://lookerstudio.google.com/embed/reporting/e58ff0d9-e18f-4bbb-81f5-94ccb392753d/page/p_v2lw8z17ld" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                </section>
+
+                <section>
+                    <h2>Strategic Recommendations</h2>
+                    <ol>
+                        <li><strong>Increase Hours for Night and Day Shifts:</strong>
+                            <ul>
+                                <li>Focus on top performers, especially in the night shift (EMP14, EMP11, and EMP13), to increase sales.</li>
+                                <li>Keep day shifts productive by giving optimal hours to efficient workers like EMP09 and EMP08.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Rethink Full-Day Shifts:</strong>
+                            <ul>
+                                <li>Full-day shifts are less efficient. Consider reducing hours and shifting focus to night or day shifts that show better results.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Reallocate Underperforming Shifts:</strong>
+                            <ul>
+                                <li>Reduce hours for employees like EMP03 and EMP04, where adding more hours doesn’t lead to more sales.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>This analysis shows that night shifts are more efficient than full-day shifts in generating sales. By focusing on top-performing employees and reconsidering shifts for those with diminishing returns, the business can improve efficiency, boost sales, and use its workforce better.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
