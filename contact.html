@@ -25,46 +25,69 @@
             padding: 40px 20px;
         }
 
-        /* Header */
+        /* Center Alignment Header */
         header {
             text-align: center;
             margin-bottom: 40px;
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #222;
             font-weight: 600;
             margin-bottom: 10px;
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #555;
             font-weight: 400;
-            margin: 0;
         }
 
-        /* Contact Section */
+        /* Centered Navigation */
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Left Alignment for Contact Section */
         .contact-section {
             background-color: #fff;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            text-align: center;
+            text-align: left;
+            margin-bottom: 40px;
         }
 
         .contact-section h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #222;
             font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            font-size: 1rem;
+            color: #555;
             margin-bottom: 20px;
         }
 
         .contact-section ul {
             list-style: none;
             padding: 0;
-            margin: 0 0 20px;
+            margin-bottom: 20px;
         }
 
         .contact-section ul li {
@@ -81,18 +104,11 @@
             text-decoration: underline;
         }
 
-        .contact-section p {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
         /* Google Form Styling */
         iframe {
             width: 100%;
-            height: 650px;
+            height: 600px;
             border: none;
-            margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -110,24 +126,35 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Center Alignment Header -->
     <header>
-        <h1>Contact</h1>
-        <p>Let's unlock the full potential of your data and turn insights into impactful business decisions.</p>
+        <h1>Lee Yih Ven</h1>
+        <p>Data Analytics Portfolio</p>
+        <p>Explore case studies showcasing data-driven insights for business growth and innovation.</p>
     </header>
 
-    <!-- Main Contact Section -->
+    <!-- Centered Navigation -->
+    <nav>
+        <a href="/data-analyst-portfolio/index.html">Home</a>
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+    </nav>
+
+    <!-- Left Alignment Contact Section -->
     <div class="container">
         <section class="contact-section">
-            <h2>Let's Connect</h2>
+            <h2>Contact</h2>
+            <p>Ready to unlock the full potential of your data? Let's collaborate to transform insights into impactful business decisions.</p>
+
             <ul>
                 <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
                 <li>Phone: +6014-920709</li>
             </ul>
-            <p>We look forward to partnering with you to drive data-driven success and help you make smarter business moves.</p>
 
-            <!-- Embed Google Form -->
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf0rAjyuXJtl83q32filKrk-I1xtE3zGUP6K7VxBe1WuNx0RA/viewform?embedded=true">Loading…</iframe>
+            <!-- Embed Google Form without Scroll -->
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf0rAjyuXJtl83q32filKrk-I1xtE3zGUP6K7VxBe1WuNx0RA/viewform?embedded=true">
+                Loading…
+            </iframe>
         </section>
     </div>
 
