@@ -47,31 +47,29 @@
         nav a:hover {
             text-decoration: underline;
         }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .case-study-item {
-            background-color: #fff;
+        td {
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            vertical-align: top;
         }
-        .case-study-item h3 {
+        td h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
+            text-align: left;
         }
-        .case-study-item p {
+        td p {
             font-size: 1rem;
             color: #555;
+            text-align: left;
         }
-        .case-study-item a {
+        td a {
             color: #007BFF;
             text-decoration: none;
         }
-        .case-study-item a:hover {
+        td a:hover {
             text-decoration: underline;
         }
         footer {
@@ -99,26 +97,32 @@
 
     <div class="container">
         <section class="main-content">
-            <div class="case-study-item">
-                <h3>Forecasting Fruit Sales for October 2024</h3>
-                <p>Improve inventory planning and reduce waste by predicting how many fruits like Bananas and Lychees will sell in early October.</p>
-                <a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Read More</a>
-            </div>
-            <div class="case-study-item">
-                <h3>Forecasting Food Demand in Kopitiam</h3>
-                <p>Increase profitability by anticipating customer demand and reducing food waste during peak hours and special events.</p>
-                <a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Read More</a>
-            </div>
-            <div class="case-study-item">
-                <h3>Sales Associate Productivity Analysis in a Footwear Retail Store</h3>
-                <p>Improve sales efficiency by analyzing the performance of sales associates across different shifts.</p>
-                <a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Read More</a>
-            </div>
-            <div class="case-study-item">
-                <h3>Evaluating the Impact of Discount Vouchers for a Women's Lingerie and Sleepwear Shop</h3>
-                <p>Learn how discount vouchers impact sales performance and discover strategic recommendations for improving their effectiveness.</p>
-                <a href="/data-analyst-portfolio/case-studies/evaluate-discount-voucher-women-lingerie.html">Read More</a>
-            </div>
+            <table>
+                <tr>
+                    <td>
+                        <h3>Forecasting Fruit Sales for October 2024</h3>
+                        <p>Improve inventory planning and reduce waste by predicting how many fruits like Bananas and Lychees will sell in early October.</p>
+                        <a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Read More</a>
+                    </td>
+                    <td>
+                        <h3>Forecasting Food Demand in Kopitiam</h3>
+                        <p>Increase profitability by anticipating customer demand and reducing food waste during peak hours and special events.</p>
+                        <a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Read More</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>Sales Associate Productivity Analysis in a Footwear Retail Store</h3>
+                        <p>Improve sales efficiency by analyzing the performance of sales associates across different shifts.</p>
+                        <a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Read More</a>
+                    </td>
+                    <td>
+                        <h3>Evaluating the Impact of Discount Vouchers for a Women's Lingerie and Sleepwear Shop</h3>
+                        <p>Learn how discount vouchers impact sales performance and discover strategic recommendations for improving their effectiveness.</p>
+                        <a href="/data-analyst-portfolio/case-studies/evaluate-discount-voucher-women-lingerie.html">Read More</a>
+                    </td>
+                </tr>
+            </table>
         </section>
     </div>
 
