@@ -47,31 +47,28 @@
         nav a:hover {
             text-decoration: underline;
         }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .case-study-item {
-            background-color: #fff;
+        td {
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            vertical-align: top;
+            text-align: left;
         }
-        .case-study-item h3 {
+        td h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
-        .case-study-item p {
+        td p {
             font-size: 1rem;
             color: #555;
         }
-        .case-study-item a {
+        td a {
             color: #007BFF;
             text-decoration: none;
         }
-        .case-study-item a:hover {
+        td a:hover {
             text-decoration: underline;
         }
         footer {
@@ -97,51 +94,41 @@
         <a href="/data-analyst-portfolio/contact.html">Contact</a>
     </nav>
 
-    <!-- Main Content (Customer Behavior Insights) -->
     <div class="container">
-        <section class="main-content">
-
-            <div class="case-study-item">
-                <h3>Forecasting Customer Lifetime Value for a Contact Lens Seller</h3>
-                <p>Predict future customer spending to boost loyalty and create personalized marketing strategies that drive long-term growth.</p>
-                <a href="/data-analyst-portfolio/case-studies/customer-lifetime-value-prediction.html">Read More</a>
-            </div>
-
-	   <div class="case-study-item">
-                <h3>Forecasting Salesman Performance in a Car Showroom</h3>
-                <p>Set achievable sales targets and design effective incentives by forecasting individual sales performance.</p>
-                <a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Read More</a>
-            </div>
-
-	   <div class="case-study-item">
-                <h3>Predicting Customer Lifetime Value for a Car Service Center</h3>
-                <p>Gain insights into high-spending customers to improve retention and boost revenue with personalized services and loyalty programs.</p>
-                <a href="/data-analyst-portfolio/case-studies/predicting-customer-lifetime-value-car-service-center.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Predicting Dropout Before New Semester</h3>
-                <p>Identify and support at-risk students to improve retention rates and academic success before the new semester.</p>
-                <a href="/data-analyst-portfolio/case-studies/predicting-dropout-before-new-semester.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Predicting High-Spending Customers with Logistic Regression</h3>
-                <p>Find out who your most valuable customers are and tailor your marketing for maximum returns.</p>
-                <a href="/data-analyst-portfolio/case-studies/predicting-high-spending-customers.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Predicting Member Retention for a Fitness Center</h3>
-                <p>Leverage predictive modeling to identify members at risk of canceling their memberships and take proactive steps to improve retention.</p>
-                <a href="/data-analyst-portfolio/case-studies/predicting-member-retention-fitness-center.html">Read More</a>
-            </div>
-
-
-        </section>
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/customer-lifetime-value-prediction.html">Forecasting Customer Lifetime Value for a Contact Lens Seller</a></h3>
+                    <p>Predict future customer spending to boost loyalty and create personalized marketing strategies that drive long-term growth.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Forecasting Salesman Performance in a Car Showroom</a></h3>
+                    <p>Set achievable sales targets and design effective incentives by forecasting individual sales performance.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-customer-lifetime-value-car-service-center.html">Predicting Customer Lifetime Value for a Car Service Center</a></h3>
+                    <p>Gain insights into high-spending customers to improve retention and boost revenue with personalized services and loyalty programs.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-dropout-before-new-semester.html">Predicting Dropout Before New Semester</a></h3>
+                    <p>Identify and support at-risk students to improve retention rates and academic success before the new semester.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-high-spending-customers.html">Predicting High-Spending Customers with Logistic Regression</a></h3>
+                    <p>Find out who your most valuable customers are and tailor your marketing for maximum returns.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-member-retention-fitness-center.html">Predicting Member Retention for a Fitness Center</a></h3>
+                    <p>Leverage predictive modeling to identify members at risk of canceling their memberships and take proactive steps to improve retention.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>© 2024 Lee Yih Ven | Pinnacles Learning Solutions</p>
     </footer>
