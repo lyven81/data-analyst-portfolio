@@ -47,32 +47,32 @@
         nav a:hover {
             text-decoration: underline;
         }
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .category-item {
-            background-color: #fff;
+        th, td {
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: calc(50% - 20px); /* 2 columns */
-            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
         }
-        .category-item h3 {
-            font-size: 1.8rem;
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        td h3 {
+            font-size: 1.5rem;
             margin-bottom: 10px;
         }
-        .category-item p {
-            font-size: 1.1rem;
+        td p {
+            font-size: 1rem;
             color: #555;
         }
-        .category-item a {
+        td a {
             color: #007BFF;
             text-decoration: none;
         }
-        .category-item a:hover {
+        td a:hover {
             text-decoration: underline;
         }
         footer {
@@ -81,13 +81,6 @@
             background-color: #333;
             color: white;
             margin-top: 20px;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .category-item {
-                width: 100%; /* Stack columns on smaller screens */
-            }
         }
     </style>
 </head>
@@ -106,33 +99,28 @@
     </nav>
 
     <div class="container">
-        <section class="main-content">
-
-            <!-- Sales and Revenue Growth Category -->
-            <div class="category-item">
-                <h3><a href="/data-analyst-portfolio/sales-category.html">Sales and Revenue Growth</a></h3>
-                <p>Discover how to boost your sales and improve revenue strategies with targeted case studies. Whether you want to forecast demand, identify top-performing products, or increase pricing strategies, this category focuses on growing your bottom line with data-driven solutions tailored to your business.</p>
-            </div>
-
-            <!-- Customer Behavior Insights Category -->
-            <div class="category-item">
-                <h3><a href="/data-analyst-portfolio/consumer-cetegory.html">Customer Behavior Insights</a></h3>
-                <p>Understanding your customers is key to unlocking business growth. This category highlights case studies that dive deep into customer spending habits, loyalty trends, and predictive models that help you better engage and retain high-value customers, ensuring long-term success for your business.</p>
-            </div>
-
-            <!-- Promotion and Discount Strategy Category -->
-            <div class="category-item">
-                <h3><a href="/data-analyst-portfolio/discount-category.html">Promotion and Discount Strategy</a></h3>
-                <p>Drive more sales with smarter promotions and discount strategies. Learn how to measure the effectiveness of your campaigns, make better use of vouchers, and predict customer response to discounts. These case studies focus on increasing returns through carefully crafted promotional techniques.</p>
-            </div>
-
-            <!-- Employee Performance and Retention Category -->
-            <div class="category-item">
-                <h3><a href="/data-analyst-portfolio/employee-category.html">Employee Performance and Retention</a></h3>
-                <p>Your employees are at the heart of your business. Explore case studies that help you identify performance trends, forecast employee success, and improve retention strategies. By focusing on the right data, you can drive efficiency and foster a motivated, high-performing workforce.</p>
-            </div>
-
-        </section>
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/sales-category.html">Sales and Revenue Growth</a></h3>
+                    <p>Learn how to increase your sales and revenue through data-driven strategies tailored to your business goals.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/consumer-category.html">Customer Behavior Insights</a></h3>
+                    <p>Gain deep insights into customer behavior and predict future trends to create more targeted and effective strategies.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/discount-category.html">Promotion and Discount Strategy</a></h3>
+                    <p>Discover how promotions and discounts can drive sales and increase customer loyalty through strategic planning.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/employee-category.html">Employee Performance and Retention</a></h3>
+                    <p>Enhance productivity and employee satisfaction with data-backed strategies focused on performance and retention.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <footer>
