@@ -47,31 +47,29 @@
         nav a:hover {
             text-decoration: underline;
         }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .case-study-item {
-            background-color: #fff;
+        td {
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            vertical-align: top;
+            text-align: left;
+            width: 50%;
         }
-        .case-study-item h3 {
+        td h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
-        .case-study-item p {
+        td p {
             font-size: 1rem;
             color: #555;
         }
-        .case-study-item a {
+        td a {
             color: #007BFF;
             text-decoration: none;
         }
-        .case-study-item a:hover {
+        td a:hover {
             text-decoration: underline;
         }
         footer {
@@ -99,57 +97,48 @@
 
     <!-- Main Content (Case Studies List) -->
     <div class="container">
-        <section class="main-content">
-
-            <div class="case-study-item">
-                <h3>Analyzing Ad Performance for an Online Gadget Shop</h3>
-                <p>Uncover which ad strategies deliver the highest ROAS, enabling you to optimize spending and drive higher returns.</p>
-                <a href="/data-analyst-portfolio/case-studies/ad-campaign-performance-analysis.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Analyzing the Impact of Ad Spend on Sales Revenue for a Men's Innerwear Retailer</h3>
-                <p>Discover how ad spending impacts revenue and total sales for men's innerwear products, guiding better marketing investments.</p>
-                <a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Forecasting Beverage Sales in Kota Kinabalu During the Chinese New Year Season</h3>
-                <p>Accurately forecast demand during peak seasons and keep your shelves stocked with high-selling beverages.</p>
-                <a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Forecasting Food Demand in Kopitiam</h3>
-                <p>Increase profitability by anticipating customer demand and reducing food waste during peak hours and special events.</p>
-                <a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Forecasting Fruit Sales for October 2024</h3>
-                <p>Improve inventory planning and reduce waste by predicting how many fruits like Bananas and Lychees will sell in early October.</p>
-                <a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Maximizing Revenue with Data-Driven Price Adjustment for Skincare Products</h3>
-                <p>Boost profitability through strategic price adjustments for top-selling skincare products without sacrificing demand.</p>
-                <a href="/data-analyst-portfolio/case-studies/maximizing-revenue-with-price-adjustment-skincare.html">Read More</a>
-            </div>
-
-  	    <div class="case-study-item">
-                <h3>Predicting High-Revenue Product Categories</h3>
-                <p>Identify which product categories are set to generate top revenue and focus your efforts where it matters.</p>
-                <a href="/data-analyst-portfolio/case-studies/predicting-high-revenue-product-categories.html">Read More</a>
-            </div>
-
-            <div class="case-study-item">
-                <h3>Predicting Return of Ad Spend for Fitness Tracker</h3>
-                <p>Maximize returns on your ad budget by identifying the most effective ad strategies for fitness trackers.</p>
-                <a href="/data-analyst-portfolio/case-studies/predicting-roas-fitness-tracker.html">Read More</a>
-            </div>
-
-        </section>
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/ad-campaign-performance-analysis.html">Analyzing Ad Performance for an Online Gadget Shop</a></h3>
+                    <p>Uncover which ad strategies deliver the highest ROAS, enabling you to optimize spending and drive higher returns.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Analyzing the Impact of Ad Spend on Sales Revenue for a Men's Innerwear Retailer</a></h3>
+                    <p>Discover how ad spending impacts revenue and total sales for men's innerwear products, guiding better marketing investments.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Forecasting Beverage Sales in Kota Kinabalu During the Chinese New Year Season</a></h3>
+                    <p>Accurately forecast demand during peak seasons and keep your shelves stocked with high-selling beverages.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Forecasting Food Demand in Kopitiam</a></h3>
+                    <p>Increase profitability by anticipating customer demand and reducing food waste during peak hours and special events.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Forecasting Fruit Sales for October 2024</a></h3>
+                    <p>Improve inventory planning and reduce waste by predicting how many fruits like Bananas and Lychees will sell in early October.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/maximizing-revenue-with-price-adjustment-skincare.html">Maximizing Revenue with Data-Driven Price Adjustment for Skincare Products</a></h3>
+                    <p>Boost profitability through strategic price adjustments for top-selling skincare products without sacrificing demand.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-high-revenue-product-categories.html">Predicting High-Revenue Product Categories</a></h3>
+                    <p>Identify which product categories are set to generate top revenue and focus your efforts where it matters.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-roas-fitness-tracker.html">Predicting Return of Ad Spend for Fitness Tracker</a></h3>
+                    <p>Maximize returns on your ad budget by identifying the most effective ad strategies for fitness trackers.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <!-- Footer -->
