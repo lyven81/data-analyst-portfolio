@@ -50,11 +50,14 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed; /* Ensures equal cell width */
         }
         td {
             padding: 20px;
             vertical-align: top;
             text-align: left;
+            height: 200px; /* Ensures equal cell height */
+            border: 1px solid #ddd; /* Optional: Adds borders to the cells */
         }
         td h3 {
             font-size: 1.5rem;
