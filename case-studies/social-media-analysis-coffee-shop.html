@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Sentiment and Keyword Analysis for a Coffee Shop</title>
+</head>
+<body>
+    <header>
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/social-media-analysis-coffee-shop/00.png" alt="Coffee Shop Analysis Overview" style="width:100%; height:auto;">
+        <h1>Social Media Sentiment and Keyword Analysis for a Coffee Shop</h1>
+        <p>Using customer feedback to improve product quality and shop performance.</p>
+    </header>
+    
+    <section id="executive-summary">
+        <h2>Executive Summary</h2>
+        <p>This case study reviews customer feedback for a coffee shop chain, focusing on sentiment trends across different product categories. Using social media reviews from January 1 to March 31, 2024, we identified top customer preferences and issues. The findings show areas to improve quality and value, especially for low-rated items like Banana Bread.</p>
+    </section>
+    
+    <section id="problem-statement">
+        <h2>Problem Statement</h2>
+        <p>The coffee shop wants to understand customer satisfaction and key concerns through social media reviews. Specifically, it aims to analyze sentiment and spot patterns in feedback across five product categories: hot coffee, iced drinks, non-coffee drinks, pastries, and light meals. These insights will help improve the customer experience and guide marketing strategies.</p>
+    </section>
+    
+    <section id="approach">
+        <h2>Approach</h2>
+        <ol>
+            <li><strong>Data Collection:</strong> We gathered customer reviews from Facebook, Instagram, Twitter, and Google, focusing on different product categories.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/social-media-analysis-coffee-shop/01.png" alt="Data Collection Process" style="width:100%; height:auto;">
+            <li><strong>Sentiment & Keyword Analysis:</strong> Using BigQuery’s Gemini, we categorized reviews as positive or negative and extracted keywords to identify common themes about taste, price, and service.</li>
+            <li><strong>Report Generation:</strong> Reports showed sentiment distribution and keyword frequency by product category, highlighting products with the best and worst reviews.</li>
+        </ol>
+    </section>
+    
+    <section id="results">
+        <h2>Results</h2>
+        <h3>1. Sentiment Overview</h3>
+        <ul>
+            <li>The overall sentiment was split, with 252 positive and 248 negative reviews.</li>
+            <li>Doughnuts had the highest positive feedback, praised for quality, while Banana Bread had the most negative reviews, often criticized for its price.</li>
+        </ul>
+        
+        <h3>2. Sentiment by Product Category</h3>
+        <ul>
+            <li><strong>Pastries and Baked Goods:</strong> 57 positive vs. 54 negative reviews, suggesting room for quality improvement.</li>
+            <li><strong>Hot Coffee:</strong> Similar numbers of positive (51) and negative (52) reviews, pointing to inconsistent customer experiences.</li>
+            <li><strong>Non-Coffee Drinks & Iced Drinks:</strong> More negative feedback, indicating quality concerns.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/social-media-analysis-coffee-shop/02.png" alt="Sentiment by Product Category" style="width:100%; height:auto;">
+        </ul>
+        
+        <h3>3. Key Themes</h3>
+        <ul>
+            <li>Positive reviews mentioned “great quality” and “highly recommended.”</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/social-media-analysis-coffee-shop/03%20word%20cloud%20for%20the%20keywords%20of%20the%20most%20popular%20product.png" alt="Positive Keywords Word Cloud" style="width:100%; height:auto;">
+            <li>Negative reviews focused on pricing and value issues, especially for Banana Bread.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/social-media-analysis-coffee-shop/04%20word%20cloud%20for%20the%20keywords%20of%20the%20least%20popular%20product.png" alt="Negative Keywords Word Cloud" style="width:100%; height:auto;">
+        </ul>
+    </section>
+    
+    <section id="visualization">
+        <h2>Visualization</h2>
+        <p>Explore the full visualization here:</p>
+        <iframe width="100%" height="400px" src="https://lookerstudio.google.com/embed/reporting/d9154bb6-5186-49df-932e-fcf38d05fa86/page/dzjPE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+    </section>
+    
+    <section id="recommendations">
+        <h2>Recommendations</h2>
+        <ul>
+            <li><strong>Enhance Value Perception:</strong> Address pricing concerns for low-rated items like Banana Bread by offering discounts or improving ingredient quality to match customer expectations.</li>
+            <li><strong>Improve Quality Consistency:</strong> Prioritize quality and service for beverages and pastries, as these items received mixed feedback.</li>
+            <li><strong>Platform-Specific Strategies:</strong> Pay close attention to Twitter, where reviews were more negative, and use Google and Instagram to promote well-rated items like Doughnuts through targeted campaigns.</li>
+        </ul>
+    </section>
+    
+    <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>By reviewing customer feedback from social media, this coffee shop chain can improve product quality, value, and marketing. Focusing on quality consistency and targeted promotions will create a better customer experience and increase loyalty.</p>
+    </section>
+</body>
+</html>
