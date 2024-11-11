@@ -84,30 +84,39 @@
 
         /* Mobile responsiveness */
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
+            }
             table {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
             }
             tr {
-                display: block;
-                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
             }
             td {
                 display: block;
                 width: 100%;
                 padding: 10px;
                 box-sizing: border-box;
+                height: auto;
             }
             td h3 {
                 font-size: 1.3rem;
             }
             td p {
                 font-size: 1rem;
-            }
-            nav a {
-                font-size: 1rem;
-            }
-            header h1 {
-                font-size: 2rem;
             }
         }
     </style>
