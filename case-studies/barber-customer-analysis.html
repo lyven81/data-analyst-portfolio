@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyzing Barber Shop Customer Reviews for Service Improvement | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <!-- Two-Column Layout Wrapper -->
+    <div class="container">
+
+        <!-- Left Column (Personal Info and Contact) -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to elevate customer satisfaction and service quality.</p>
+            </section>
+
+            <!-- Contact Section in Left Column -->
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column (Full Case Study Content) -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/barber-customer-analysis/00.png" alt="Case Study Overview">
+                    <h1>Analyzing Barber Shop Customer Reviews for Service Improvement</h1>
+                    <p>Discover key insights to improve service quality and customer satisfaction.</p>
+                </header>
+
+                <!-- Case Study Sections -->
+                <section id="executive-summary">
+                    <h2>Executive Summary</h2>
+                    <p>This report looks at customer satisfaction trends for a barber shop by analyzing social media reviews from January to March 2024. We used BigQuery's Gemini tool to see how customers feel about different services and stylists. Results showed that customers are happy with Hair Treatments but have complaints about Beard Grooming & Shaving. We recommend specific training for some stylists and ways to make services faster to improve customer satisfaction.</p>
+                </section>
+
+                <section id="problem-statement">
+                    <h2>Problem Statement</h2>
+                    <p>The barber shop wanted to understand how customers felt about their services. The goal was to find strengths and areas for improvement by analyzing customer feedback on haircuts, beard grooming, and the performance of individual stylists.</p>
+                </section>
+
+                <section id="approach">
+                    <h2>Approach</h2>
+                    <h3>1. Data Collection and Preparation</h3>
+                    <ul>
+                        <li>We gathered reviews from Google and Facebook.</li>
+                        <li>Reviews were sorted by service type, stylist, and date in BigQuery.</li>
+                    </ul>
+                    <h3>2. Sentiment Analysis</h3>
+                    <ul>
+                        <li>We used Gemini in BigQuery to analyze the reviews.</li>
+                        <li>The analysis found customer feelings (positive, negative) and important keywords for each service type and stylist.</li>
+                    </ul>
+                    <h3>3. Report Generation</h3>
+                    <ul>
+                        <li>Reports showed how customers felt about different services and stylists.</li>
+                        <li>We highlighted services and stylists who got the most positive or negative feedback.</li>
+                    </ul>
+                </section>
+
+                <section id="results">
+                    <h2>Results</h2>
+                    <h3>1. Customer Sentiment Trends</h3>
+                    <ul>
+                        <li>Positive Reviews: 267</li>
+                        <li>Negative Reviews: 233</li>
+                        <li>Hair Treatment got the highest positive reviews (66), showing strong satisfaction.</li>
+                        <li>Beard Grooming & Shaving had more negative reviews, indicating it needs improvement.</li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/barber-customer-analysis/01.png" alt="Customer Sentiment Trends">
+                    
+                    <h3>2. Stylist and Social Media Analysis</h3>
+                    <ul>
+                        <li>Reviews on Facebook and Google were similar, showing consistent service quality across platforms.</li>
+		    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/barber-customer-analysis/02.png" alt="Social Media Analysis">
+                    <ul>
+                        <li>Stylist 0033 got more negative feedback than positive feedback, suggesting this stylist needs more training.</li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/barber-customer-analysis/03.png" alt="Stylist Feedback">
+                    
+                    <h3>3. Key Themes</h3>
+                    <ul>
+                        <li>Positive Feedback: Customers mentioned "great experience," "perfect haircut," and "amazing service."</li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/barber-customer-analysis/04.png" alt="Positive Feedback Themes">
+                    <ul>
+                        <li>Negative Feedback: Complaints about "long wait," "disappointed," and "rough shave" showed issues with wait times and quality consistency.</li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/barber-customer-analysis/05.png" alt="Negative Feedback Themes">
+                </section>
+
+                <section id="visualization">
+                    <h2>Visualization</h2>
+                    <p>Explore the full visualization here</p>
+                    <iframe width="100%" height="400" src="https://lookerstudio.google.com/embed/reporting/358364a6-3a3a-4742-91b0-dd31ed09c0d2/page/p_v066ahlvmd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+                </section>
+
+                <section id="recommendations">
+                    <h2>Recommendations</h2>
+                    <h3>1. Service Improvement</h3>
+                    <p>Improve Beard Grooming & Shaving by reducing wait times and ensuring smoother service.</p>
+                    <h3>2. Stylist Training</h3>
+                    <p>Provide targeted training for Stylist 0033 to improve consistency and meet customer expectations.</p>
+                    <h3>3. Social Media Strategy</h3>
+                    <p>Keep service consistent across Facebook and Google to boost the brand's reputation.</p>
+                </section>
+
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>Using BigQuery's Gemini, we found important insights into customer satisfaction and service performance. Fixing these issues can make customers happier and increase loyalty.</p>
+                </section>
+            </section>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Lee Yih Ven | Pinnacles Learning Solutions</p>
+    </footer>
+
+</body>
+</html>
