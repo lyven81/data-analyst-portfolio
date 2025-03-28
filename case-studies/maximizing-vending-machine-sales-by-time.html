@@ -1,139 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maximizing Vending Machine Sales by Time</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maximizing Vending Machine Sales by Time</title>
+  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
 </head>
 <body>
+  <div class="container">
+    <!-- Left Column -->
+    <aside class="left-column">
+      <header>
+        <h1>Lee Yih Ven</h1>
+        <h2>Data Analytics Portfolio</h2>
+      </header>
+      <section class="intro">
+        <p>Boost vending machine revenue by knowing when customers buy most and aligning restocking and promotions with daily patterns.</p>
+      </section>
+      <section class="contact">
+        <h2>Contact</h2>
+        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+        <ul>
+          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+          <li>Phone: +6014-9207099</li>
+        </ul>
+      </section>
+    </aside>
 
-    <div class="container">
-        <!-- Left Column -->
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
+    <!-- Right Column -->
+    <main class="right-column">
+      <section class="case-study-content">
+        <header>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/cover%20image.png" alt="Cover Image" style="width:100%; max-width:700px;">
+          <h1>Maximizing Vending Machine Sales by Time</h1>
+          <p>Boost sales and restocking efficiency by understanding when customers buy most and aligning promotions with time-of-day patterns.</p>
+        </header>
 
-            <section class="intro">
-                <p>Uncovering when customers buy the most to help vending machine businesses boost sales and restock smarter.</p>
-            </section>
+        <section>
+          <h2>1. Identifying Sales Patterns</h2>
+          <p>This case study examines vending machine sales across morning, afternoon, and evening time blocks to help businesses make smarter restocking, pricing, and promotional decisions.</p>
+        </section>
 
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
+        <section>
+          <h2>2. Key Results</h2>
+          <ul>
+            <li><strong>Revenue by Time of Day:</strong>
+              <ul>
+                <li>Afternoon: $50,108.80</li>
+                <li>Morning: $39,106.20</li>
+                <li>Evening: $33,106.58</li>
+              </ul>
+              <p>Afternoons are best for volume deals, while mornings work better with premium pricing.</p>
+              <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Coffee%20Sales%20Peak%20in%20the%20Afternoon.png" alt="Coffee Sales Peak in Afternoon" style="width:100%; max-width:700px;">
+            </li>
+            <li><strong>Most Popular Drinks by Time:</strong>
+              <ul>
+                <li><strong>Morning:</strong> Americano (350), Americano variant (232), Café Latte (145)</li>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Americano%20Is%20the%20Best-Selling%20Coffee%20in%20the%20Morning.png" alt="Morning Coffee Popularity" style="width:100%; max-width:700px;">
+                <li><strong>Afternoon:</strong> Latte (335), Americano (313), Café Latte (213)</li>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Latte%20Is%20the%20Best-Selling%20Coffee%20in%20the%20Afternoon.png" alt="Afternoon Coffee Popularity" style="width:100%; max-width:700px;">
+                <li><strong>Evening:</strong> Latte (233), Americano (205), Café Latte (172)</li>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Latte%20is%20the%20Best-Selling%20Coffee%20in%20the%20Evening.png" alt="Evening Coffee Popularity" style="width:100%; max-width:700px;">
+              </ul>
+              <p>Americano, Latte, and Café Latte dominate across all time blocks.</p>
+            </li>
+            <li><strong>Low-Performing Drinks:</strong> Irish whiskey, chocolate, mocha chip, caramel with chocolate, and double latte sell poorly, especially in the evening.</li>
+          </ul>
+        </section>
 
-        <!-- Right Column (Case Study Content) -->
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/cover%20image.png" alt="Cover Image">
-                    <h1>Maximizing Vending Machine Sales by Time</h1>
-                    <p>Understand customer behavior across morning, afternoon, and evening to drive smarter sales, marketing, and restocking strategies.</p>
-                </header>
+        <section>
+          <h2>3. Aligning Insights with Business Goals</h2>
+          <ul>
+            <li><strong>Optimize Sales:</strong> Time promotions around peak revenue hours to boost results.</li>
+            <li><strong>Improve Efficiency:</strong> Restock smarter by focusing on top drinks at specific times.</li>
+            <li><strong>Maximize Promotions:</strong> Target the right products at the right time to improve engagement.</li>
+          </ul>
 
-                <section id="overview">
-                    <h2>Overview</h2>
-                    <p>The goal of this analysis is to understand customer behavior and sales trends based on different time blocks throughout the day—morning, afternoon, and evening. The aim is to provide actionable insights that help optimize product offerings, promotions, and restocking schedules for a coffee vending machine business.</p>
-                </section>
+          <p><strong>Impact:</strong></p>
+          <ul>
+            <li><strong>Revenue Growth:</strong> Afternoons are the highest-revenue slot—perfect for bundling offers.</li>
+            <li><strong>Efficient Restocking:</strong> Focus stock on Americano and Latte, especially during peak hours.</li>
+            <li><strong>Better Campaigns:</strong> Use time-of-day data to match offers with customer moods and preferences.</li>
+          </ul>
+        </section>
 
-                <section id="key-results">
-                    <h2>Key Results</h2>
-                    <h3>Revenue by Time of Day:</h3>
-                    <ul>
-                        <li>Afternoon: $50,108.80 (highest revenue)</li>
-                        <li>Morning: $39,106.20</li>
-                        <li>Evening: $33,106.58</li>
-                    </ul>
-                    <p>Afternoon is ideal for volume promotions, while morning suits premium offers due to higher AOV.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Coffee%20Sales%20Peak%20in%20the%20Afternoon.png" alt="Coffee Sales Peak in the Afternoon">
+        <section>
+          <h2>4. Interpreting Time-of-Day Purchase Behavior</h2>
+          <ul>
+            <li><strong>Time Variations:</strong> Behavior shifts by time—afternoons favor bulk buying, mornings suit premium drinks.</li>
+            <li><strong>Customer Favorites:</strong> Americano, Latte, and Café Latte remain top choices and should be consistently stocked and promoted.</li>
+            <li><strong>Struggling Drinks:</strong> Low sales for niche drinks may require rebranding or strategic promotion.</li>
+          </ul>
 
-                    <h3>Most Popular Drinks by Time of Day:</h3>
-                    <p><strong>Morning:</strong> Americano (350), Americano variant (232), Café Latte (145)</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Americano%20Is%20the%20Best-Selling%20Coffee%20in%20the%20Morning.png" alt="Morning Americano Popularity">
+          <p><strong>Context:</strong></p>
+          <ul>
+            <li><strong>Behavior:</strong> Strong coffee in the morning, smoother drinks later—promotions should reflect this.</li>
+            <li><strong>Promotion Timing:</strong> Smart scheduling can lift sales and improve brand perception.</li>
+          </ul>
+        </section>
 
-                    <p><strong>Afternoon:</strong> Latte (335), Americano (313), Café Latte (213)</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Latte%20Is%20the%20Best-Selling%20Coffee%20in%20the%20Afternoon.png" alt="Afternoon Latte Popularity">
+        <section>
+          <h2>5. Strategic Recommendations</h2>
+          <ul>
+            <li><strong>Time-Based Promotions:</strong>
+              <ul>
+                <li>Morning – promote premium drinks like Americano: “Morning Espresso Kick.”</li>
+                <li>Afternoon – volume deals like “Latte Lounge Hour.”</li>
+                <li>Evening – try “Smooth Latte Wind-Down” for lighter drinks.</li>
+              </ul>
+            </li>
+            <li><strong>Smart Restocking:</strong> Prioritize top-sellers like Americano and Latte during high-demand hours.</li>
+            <li><strong>Low Seller Strategy:</strong> Test limited offers, reformulations, or removal for persistently underperforming drinks.</li>
+            <li><strong>Test New Items at Off-Peak:</strong> Use quiet evening periods to introduce new drinks or drive promotions.</li>
+          </ul>
+        </section>
 
-                    <p><strong>Evening:</strong> Latte (233), Americano (205), Café Latte (172)</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/coffee-vending-machine/Latte%20is%20the%20Best-Selling%20Coffee%20in%20the%20Evening.png" alt="Evening Latte Popularity">
+        <section>
+          <h2>6. Conclusion</h2>
+          <p>This case study highlights the power of time-based data to improve vending operations. By aligning product availability and promotions with actual purchase behavior, vending businesses can grow revenue, reduce waste, and better satisfy customers.</p>
+        </section>
+      </section>
+    </main>
+  </div>
 
-                    <h3>Low-Performing Drinks:</h3>
-                    <p>Drinks like Irish whiskey, chocolate, mocha chip, caramel with chocolate, and double latte had very low frequency, especially in the evening.</p>
-                </section>
-
-                <section id="goals-alignment">
-                    <h2>Goals Alignment</h2>
-                    <ul>
-                        <li><strong>Optimizing Sales:</strong> Use peak sales data for timing promotions and restocking.</li>
-                        <li><strong>Improving Operational Efficiency:</strong> Stock high-demand drinks and minimize waste.</li>
-                        <li><strong>Maximizing Promotions:</strong> Promote the right drinks at the right times.</li>
-                    </ul>
-                </section>
-
-                <section id="impact">
-                    <h2>Impact</h2>
-                    <ul>
-                        <li><strong>Revenue Growth:</strong> Leverage high-revenue afternoon periods with targeted offers.</li>
-                        <li><strong>Efficiency in Restocking:</strong> Align stock levels with time-based demand.</li>
-                        <li><strong>Marketing Effectiveness:</strong> Tailor promotions by time block to boost engagement.</li>
-                    </ul>
-                </section>
-
-                <section id="data-interpretation">
-                    <h2>Data Interpretation</h2>
-                    <p><strong>Time-of-Day Variations:</strong> Afternoon drives more volume, morning has higher AOV—indicating need for different strategies.</p>
-                    <p><strong>Product Preferences:</strong> Americano, Latte, and Café Latte are top sellers across all time blocks.</p>
-                    <p><strong>Low-Performing Drinks:</strong> Irish whiskey and double latte may require rebranding, discounts, or removal.</p>
-                </section>
-
-                <section id="contextual-factors">
-                    <h2>Contextual Factors</h2>
-                    <ul>
-                        <li><strong>Customer Behavior:</strong> Strong coffee in the morning, lighter choices in the afternoon/evening.</li>
-                        <li><strong>Promotional Impact:</strong> Preferences vary with time—ideal for segmented marketing.</li>
-                    </ul>
-                </section>
-
-                <section id="insight-generation">
-                    <h2>Insight Generation</h2>
-                    <p>This analysis uncovers strong patterns in purchase timing and drink popularity, giving clear opportunities to drive sales, minimize waste, and boost satisfaction through tailored product strategies.</p>
-                </section>
-
-                <section id="recommendations">
-                    <h2>Recommendations</h2>
-                    <ul>
-                        <li><strong>Targeted Promotions:</strong>
-                            <ul>
-                                <li>Morning: Promote premium drinks (e.g., “Morning Espresso Kick”).</li>
-                                <li>Afternoon: Run volume-based promotions (e.g., “Latte Lounge Hour”).</li>
-                                <li>Evening: Offer relaxed, lighter drink specials (e.g., “Smooth Latte Wind-Down”).</li>
-                            </ul>
-                        </li>
-                        <li><strong>Restocking Strategy:</strong> Focus on Americano and Latte during peak hours.</li>
-                        <li><strong>Address Low-Performing Products:</strong> Test limited-time offers or remove low performers.</li>
-                        <li><strong>Experiment with Low-Sales Hours:</strong> Use evening periods to test new drinks and promotions.</li>
-                    </ul>
-                </section>
-
-                <section id="conclusion">
-                    <h2>Conclusion</h2>
-                    <p>The findings from this analysis offer actionable insights for optimizing sales, restocking schedules, and promotional strategies based on time-of-day purchase behavior. By aligning marketing efforts with customer preferences and focusing on both high-performing and underperforming products, the business can drive revenue growth while maintaining operational efficiency. Moving forward, these insights will enable more data-driven decisions that align with customer behavior and maximize overall sales potential.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-    </footer>
-
+  <footer>
+    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+  </footer>
 </body>
 </html>
