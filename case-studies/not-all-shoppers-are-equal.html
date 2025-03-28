@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Not All Shoppers Are Equal</title>
+  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Left Column -->
+    <aside class="left-column">
+      <header>
+        <h1>Lee Yih Ven</h1>
+        <h2>Data Analytics Portfolio</h2>
+      </header>
+      <section class="intro">
+        <p>Use customer segmentation to uncover high-value shoppers and reduce churn with smarter, more personalized strategies.</p>
+      </section>
+      <section class="contact">
+        <h2>Contact</h2>
+        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+        <ul>
+          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+          <li>Phone: +6014-9207099</li>
+        </ul>
+      </section>
+    </aside>
+
+    <!-- Right Column -->
+    <main class="right-column">
+      <section class="case-study-content">
+        <header>
+          <h1>Not All Shoppers Are Equal</h1>
+          <p>Identify your best and most at-risk customers with clustering analysis to boost retention and revenue growth.</p>
+        </header>
+
+        <section>
+          <h2>1. Segment Discovery and Key Findings</h2>
+          <p>This analysis identifies three distinct customer segments using clustering techniques to enable more targeted marketing and resource optimization.</p>
+
+          <h3>Key Results:</h3>
+          <ul>
+            <li><strong>Number of Customer Segments:</strong> 3 segments identified using the elbow method at k = 3 for optimal balance.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%201%20-%20elbow_plot.png" alt="Elbow Plot - Optimal Clusters">
+
+            <li><strong>Segment Characteristics:</strong>
+              <ul>
+                <li><strong>Cluster 0 (Silent High-Value):</strong> High CLV, low engagement — infrequent but large spenders.</li>
+                <li><strong>Cluster 1 (Low-Value Inactives):</strong> Low across all metrics — at risk of churn and low revenue contribution.</li>
+                <li><strong>Cluster 2 (Loyal High Spenders):</strong> High engagement and frequency — ideal for upselling and loyalty programs.</li>
+              </ul>
+              <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%202%20-%20cluster_scatter_clv_engagement.png" alt="Cluster Scatter - CLV vs Engagement">
+              <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%202%20-%20Customer%20Clusters%20Based%20on%20Spending%20Score.png" alt="Customer Clusters Based on Spending Score">
+            </li>
+
+            <li><strong>High-Value Segment:</strong> Cluster 2 offers the greatest growth potential with consistent, high-value behavior.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%203%20-%20Which%20Cluster%20Should%20We%20Prioritize%20Based%20on%20Growth%20Potential_.png" alt="Cluster Prioritization Based on Growth Potential">
+
+            <li><strong>Churn Risk:</strong> Cluster 1 requires reactivation efforts to reduce long-term revenue loss.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%204%20-%20churn_heatmap.png" alt="Churn Risk Heatmap">
+
+            <li><strong>CLV Stability:</strong> Customer value rises with tenure, though purchase frequency remains constant over time.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%205%20membership_trend_line.png" alt="CLV and Membership Duration Trend">
+          </ul>
+        </section>
+
+        <section>
+          <h2>2. Aligning Customer Segments with Business Strategy</h2>
+          <ul>
+            <li><strong>Targeted Marketing:</strong> Tailor campaigns to distinct customer needs for better engagement.</li>
+            <li><strong>Retention & Upselling:</strong> Focus on Cluster 2 for revenue growth and Cluster 1 for churn prevention.</li>
+            <li><strong>Resource Allocation:</strong> Maximize efficiency by targeting high-impact segments.</li>
+          </ul>
+
+          <h3>Impact:</h3>
+          <ul>
+            <li><strong>Revenue Growth:</strong> Loyalty programs for Cluster 2 boost long-term value.</li>
+            <li><strong>Churn Prevention:</strong> Early detection and targeted offers can retain at-risk customers in Cluster 1.</li>
+            <li><strong>Operational Efficiency:</strong> Streamlined resource use aligned with behavior and segment value.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>3. Interpreting Segment Behavior and Underlying Patterns</h2>
+          <ul>
+            <li><strong>Cluster 2:</strong> High engagement and repeat purchases — strong candidates for personalized engagement and upselling.</li>
+            <li><strong>Cluster 1:</strong> Long-tenure, low-activity customers — possible churn, ideal for reactivation strategies.</li>
+            <li><strong>Cluster 0:</strong> Large spenders with low frequency — target with high-ticket offers and exclusive deals.</li>
+          </ul>
+
+          <h3>Contextual Factors:</h3>
+          <ul>
+            <li><strong>Market Trends:</strong> Digital engagement and buyer behavior evolution impact how each segment behaves.</li>
+            <li><strong>Economic Factors:</strong> External conditions like disposable income and inflation influence lower-value customers more significantly.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>4. Strategic Recommendations for Segment-Based Growth</h2>
+          <ul>
+            <li><strong>Loyalty Campaigns for Cluster 2:</strong> Offer personalized perks, upsell, and cross-sell incentives to deepen value.</li>
+            <li><strong>Reactivation Plans for Cluster 1:</strong> Target with special offers and retention campaigns to re-engage.</li>
+            <li><strong>Re-engagement for Cluster 0:</strong> Develop strategies to increase frequency, like curated bundles or first-to-know promotions.</li>
+            <li><strong>Focus on Tenure-Based Retention:</strong> Invest in keeping customers longer as CLV grows with time.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>5. Conclusion: Driving Growth Through Segment-Driven Action Plans</h2>
+          <p>Customer segmentation reveals actionable strategies for retention, growth, and smarter marketing. By identifying high-value shoppers and reactivating at-risk segments, the business can increase ROI and build long-term loyalty through data-driven engagement.</p>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+  </footer>
+</body>
+</html>
