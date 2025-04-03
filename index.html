@@ -18,7 +18,7 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 20px;
     }
@@ -55,36 +55,32 @@
       text-decoration: underline;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-
-    td {
+    .case-study {
+      background-color: #fff;
+      border: 1px solid #ddd;
       padding: 20px;
-      vertical-align: top;
-      height: 300px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    td h3 {
+    .case-study h3 {
       font-size: 1.5rem;
       margin-bottom: 10px;
-      text-align: left;
     }
 
-    td p {
+    .case-study p {
       font-size: 1rem;
       color: #555;
-      text-align: left;
     }
 
-    td a {
+    .case-study a {
       color: #007BFF;
       text-decoration: none;
+      font-weight: 500;
     }
 
-    td a:hover {
+    .case-study a:hover {
       text-decoration: underline;
     }
 
@@ -93,44 +89,24 @@
       padding: 20px;
       background-color: #333;
       color: white;
-      margin-top: 20px;
+      margin-top: 40px;
     }
 
     @media (max-width: 768px) {
-      table {
-        width: 100%;
-        display: block;
-      }
-
-      tr {
-        display: block;
-        margin-bottom: 20px;
-      }
-
-      td {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-      }
-
-      td h3 {
-        font-size: 1.2rem;
-        margin-bottom: 5px;
-      }
-
-      td p {
-        font-size: 1rem;
-        color: #555;
-      }
-
-      nav a {
-        margin: 0 8px;
-        font-size: 1rem;
-      }
-
       header h1 {
         font-size: 2rem;
+      }
+
+      header p, nav a {
+        font-size: 1rem;
+      }
+
+      .case-study h3 {
+        font-size: 1.2rem;
+      }
+
+      .case-study p {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -150,46 +126,41 @@
 </nav>
 
 <div class="container">
-  <section class="main-content">
-    <table>
-      <tr>
-        <td>
-          <h3>Clothing Dominates Year-Round Sales</h3>
-          <p>Discover how clothing leads sales every season and how retailers can use this insight to boost revenue, manage inventory smarter, and plan effective promotions.</p>
-          <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/clothing-dominates-year-round-sales.html">Read More</a>
-        </td>
-        <td>
-          <h3>Do Dollars Drive Decisions?</h3>
-          <p>Uncovering lending patterns across income levels.</p>
-          <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Read More</a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <h3>Maximizing Vending Machine Sales by Time</h3>
-          <p>Boost sales and restocking efficiency by understanding when customers buy most and aligning promotions with time-of-day patterns.</p>
-          <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/maximizing-vending-machine-sales-by-time.html">Read More</a>
-        </td>
-        <td>
-          <h3>Not All Shoppers Are Equal</h3>
-          <p>Identify your best and most at-risk customers with clustering analysis to boost retention and revenue growth.</p>
-          <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/not-all-shoppers-are-equal.html">Read More</a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <h3>Saving the Silent Spenders in Coffee Vending Machines</h3>
-          <p>Unlock hidden revenue by identifying at-risk high-value customers.</p>
-          <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Read More</a>
-        </td>
-        <td>
-          <h3>When Good Cars Lose Value</h3>
-          <p>Uncover the hidden risks of mileage and condition to prevent losses and make smarter vehicle pricing decisions.</p>
-          <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/when-good-cars-lose-value.html">Read More</a>
-        </td>
-      </tr>
-    </table>
-  </section>
+  <div class="case-study">
+    <h3>Are Long Movies Better Movies?</h3>
+    <p>Explore how movie length affects viewer satisfaction and how streaming platforms and filmmakers can use this insight to boost engagement and optimize storytelling.</p>
+    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/are-long-movies-better.html">Read More</a>
+  </div>
+
+  <div class="case-study">
+    <h3>Clothing Dominates Year-Round Sales</h3>
+    <p>Discover how clothing leads sales every season and how retailers can use this insight to boost revenue, manage inventory smarter, and plan effective promotions.</p>
+    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/clothing-dominates-year-round-sales.html">Read More</a>
+  </div>
+
+  <div class="case-study">
+    <h3>Do Dollars Drive Decisions?</h3>
+    <p>Uncovering lending patterns across income levels.</p>
+    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Read More</a>
+  </div>
+
+  <div class="case-study">
+    <h3>Not All Shoppers Are Equal</h3>
+    <p>Identify your best and most at-risk customers with clustering analysis to boost retention and revenue growth.</p>
+    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/not-all-shoppers-are-equal.html">Read More</a>
+  </div>
+
+  <div class="case-study">
+    <h3>Saving the Silent Spenders in Coffee Vending Machines</h3>
+    <p>Unlock hidden revenue by identifying at-risk high-value customers.</p>
+    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Read More</a>
+  </div>
+
+  <div class="case-study">
+    <h3>When Good Cars Lose Value</h3>
+    <p>Uncover the hidden risks of mileage and condition to prevent losses and make smarter vehicle pricing decisions.</p>
+    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/when-good-cars-lose-value.html">Read More</a>
+  </div>
 </div>
 
 <footer>
