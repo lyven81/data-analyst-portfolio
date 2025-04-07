@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Are Nasi Lemak and Kopi O Customer Favorites? | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css" />
+</head>
+<body>
+
+<div class="container">
+    <aside class="left-column">
+        <header>
+            <h1>Lee Yih Ven</h1>
+            <h2>Data Analytics Portfolio</h2>
+        </header>
+
+        <section class="intro">
+            <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+        </section>
+
+        <section class="contact">
+            <h2>Contact</h2>
+            <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+            <ul>
+                <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                <li>Phone: +6014-920709</li>
+            </ul>
+        </section>
+    </aside>
+
+    <main class="right-column">
+        <section class="case-study-content">
+            <header>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/nasi-lemak-kopi-o/cover%20image.png" alt="Cover Image" style="width:100%; max-width:600px;" />
+                <h1>Are Nasi Lemak and Kopi O Customer Favorites?</h1>
+                <p>What Kopitiam Orders Reveal About Customer Behavior</p>
+            </header>
+
+            <section>
+                <h2>Overview:</h2>
+                <p>The purpose of this analysis is to explore customer ordering and spending behavior at a Malaysian kopitiam, focusing on understanding which items are popular, how spending patterns vary, and how these insights can drive decisions related to inventory, pricing, and promotions. This analysis is critical for optimizing daily operations and improving the customer experience through data-driven strategies.</p>
+            </section>
+
+            <section>
+                <h2>Key Results:</h2>
+                <ul>
+                    <li><strong>Spending Behavior:</strong>
+                        <ul>
+                            <li>Customer spending ranges primarily between RM12 and RM20, with a few customers spending significantly more. Statistical tests confirm that spending does not follow a normal distribution, but most customers spend within a typical range.</li>
+                            <li>Business Action: Promotions should be focused on customers spending within the typical range. Special offers or loyalty rewards could be designed for high spenders, despite being a minority.</li>
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/nasi-lemak-kopi-o/chart%201%20-%20histogram.png" alt="Spending Distribution Histogram" />
+                        </ul>
+                    </li>
+                    <li><strong>Kopi O Demand:</strong>
+                        <ul>
+                            <li>Only 16% of customers order Kopi O, making it a low-demand item. The probability of 3 out of 5 customers ordering Kopi O is just 2.74%, confirming that it is not a top-seller.</li>
+                            <li>Business Action: Avoid overstocking Kopi O. If sales need to be boosted, consider targeted promotions or bundling it with more popular items.</li>
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/nasi-lemak-kopi-o/chart%202%20-%20bar%20chart.png" alt="Kopi O Demand Bar Chart" />
+                        </ul>
+                    </li>
+                    <li><strong>Typical Order Size:</strong>
+                        <ul>
+                            <li>On average, customers order 4 items per transaction, with the most common order size being 3 to 5 items. The standard deviation is 1.64, indicating slight variation.</li>
+                            <li>Business Action: Plan kitchen prep and inventory based on the typical 4-item order. Offering 3–5 item set menus could match common purchasing behavior and streamline service.</li>
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/nasi-lemak-kopi-o/chart%203%20-%20bar%20chart.png" alt="Order Size Chart" />
+                        </ul>
+                    </li>
+                    <li><strong>Consistent Ordering Patterns:</strong>
+                        <ul>
+                            <li>Nasi Lemak is the most consistently ordered item, with an order rate of 82.6% and minimal variation (Standard deviation: 1.15). Other items like Roti Bakar and Char Kuey Teow also show steady ordering patterns.</li>
+                            <li>Business Action: Use these consistent patterns to forecast demand, optimizing inventory management, staffing, and reducing waste.</li>
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/nasi-lemak-kopi-o/chart%204%20-%20heat%20map.png" alt="Consistency Heatmap" />
+                        </ul>
+                    </li>
+                    <li><strong>Spending Thresholds:</strong>
+                        <ul>
+                            <li>Common spending thresholds are RM15, RM30, and RM50, with 20% of customers spending under RM15, 75% under RM30, and 95% under RM50.</li>
+                            <li>Business Action: Offer value meals at RM15, free drinks for purchases over RM30, and loyalty rewards or special offers for spending above RM50. These thresholds align with natural customer spending behavior and could guide promotions and upselling strategies.</li>
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/nasi-lemak-kopi-o/chart%205%20-%20histogram.png" alt="Spending Thresholds Chart" />
+                        </ul>
+                    </li>
+                    <li><strong>Predictable Demand for Items:</strong>
+                        <ul>
+                            <li>Nasi Lemak shows the highest sales on Sundays, and overall demand for various items follows predictable daily trends.</li>
+                            <li>Business Action: Use daily demand patterns for menu planning, ingredient prep, and staff scheduling. Predictable demand allows for better operational efficiency.</li>
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/nasi-lemak-kopi-o/chart%206%20-%20bar%20chart.png" alt="Daily Item Demand Bar Chart" />
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Goals Alignment:</h2>
+                <p>The key business goals for the kopitiam are:</p>
+                <ul>
+                    <li><strong>Optimize Inventory and Staff Scheduling:</strong> The business aims to align inventory and staffing based on demand patterns and customer preferences.</li>
+                    <li><strong>Increase Sales and Customer Satisfaction:</strong> By understanding what drives sales and customer behavior, the kopitiam can enhance the customer experience and increase sales.</li>
+                    <li><strong>Improve Promotional Strategies:</strong> Data on spending thresholds and popular items can guide targeted promotions and loyalty programs.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Impact:</h2>
+                <ul>
+                    <li><strong>Revenue Growth:</strong> Focused promotions on popular items like Nasi Lemak and value meals around RM15 will increase sales by catering to customer preferences.</li>
+                    <li><strong>Cost Efficiency:</strong> Predicting daily demand for popular items like Nasi Lemak and Kopi O helps in inventory planning, ensuring there is no overstock or waste.</li>
+                    <li><strong>Customer Retention:</strong> Tailored offers, such as rewards for customers spending above RM30, could increase customer retention and foster loyalty by catering to spending habits.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Data Interpretation:</h2>
+                <ul>
+                    <li><strong>Spending Distribution:</strong> The fact that most customers spend between RM12–RM20 with a few outliers suggests that the kopitiam caters to a broad range of customer budgets. However, the long tail of higher spenders indicates there is a small, but important, segment of high spenders that should not be overlooked.</li>
+                    <li><strong>Kopi O's Low Demand:</strong> The low demand for Kopi O is likely due to its limited appeal compared to other drinks like Teh Tarik or Kopi C. Despite its traditional appeal in a kopitiam, Kopi O does not have the same universal popularity, explaining its lower purchase rate.</li>
+                    <li><strong>Order Size Consistency:</strong> The data showing that most customers order 3–5 items supports the idea that customers prefer variety, and meal size consistency should be taken into account for menu planning and kitchen prep.</li>
+                    <li><strong>Item Predictability:</strong> Items like Nasi Lemak that show consistent ordering patterns can be modeled for future demand, making it easier to plan stock levels and predict peak sales days, especially on Sundays when demand is highest.</li>
+                    <li><strong>Spending Thresholds:</strong> The identified spending thresholds suggest that customers are naturally inclined to spend at certain levels, which aligns with behavioral economics. This insight should inform promotional strategies that target these natural spending patterns.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Contextual Factors:</h2>
+                <ul>
+                    <li><strong>Cultural Preferences:</strong> Nasi Lemak remains a popular and iconic dish, making it a consistent item in demand, especially in Malaysia. The cultural connection to the dish supports its consistent sales patterns.</li>
+                    <li><strong>Economic Conditions:</strong> Changes in disposable income and customer behavior may impact spending patterns, particularly during holidays or periods of economic change. The spending behavior analysis can help adjust pricing strategies accordingly.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Recommendation:</h2>
+                <ul>
+                    <li><strong>Promotions for Nasi Lemak:</strong> Since Nasi Lemak is a popular and consistent seller, the kopitiam should consider offering combo deals with beverages or side dishes. Offering a discount or combo deal on Sundays, when sales peak, could increase revenue even further.</li>
+                    <li><strong>Boost Kopi O Sales:</strong> Develop promotions like Kopi O with Nasi Lemak combo deals or special discounts on Kopi O for breakfast orders to increase interest in this underperforming item. A targeted approach, such as a “Kopi O Happy Hour”, could help increase its sales.</li>
+                    <li><strong>Targeted Pricing for Spending Thresholds:</strong> Offer value meals at RM15 to capture customers who typically spend less, while providing loyalty perks or discounts for customers spending over RM30. This could increase repeat visits and boost customer loyalty.</li>
+                    <li><strong>Menu and Staffing Optimization:</strong> Since most customers order 3–5 items, the kopitiam can offer set menus in this range, making it easier for customers to choose meals. Additionally, the business can optimize kitchen prep and staffing schedules based on peak demand patterns (e.g., increasing staff on Sundays for higher demand).</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Conclusion:</h2>
+                <p>The analysis of customer behavior at the kopitiam reveals that Nasi Lemak is a strong performer, while Kopi O has low demand, indicating the need for focused promotional efforts. By aligning marketing strategies, product bundling, and pricing with customer preferences, the kopitiam can enhance customer satisfaction, optimize inventory, and increase revenue. Tailoring promotions based on spending thresholds and offering menu options that match typical order sizes will further solidify the kopitiam’s position as a customer favorite. These data-driven decisions will improve operational efficiency and customer engagement.</p>
+            </section>
+        </section>
+    </main>
+</div>
+
+<footer>
+    <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+</footer>
+
+</body>
+</html>
