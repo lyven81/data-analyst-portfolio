@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cash or Credit Card | Lee Yih Ven</title>
+  <link rel="stylesheet" href="/data-analyst-portfolio/style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="left-column">
+      <header>
+        <h1>Lee Yih Ven</h1>
+        <h2>Data Analytics Portfolio</h2>
+      </header>
+      <section class="intro">
+        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+      </section>
+      <section class="contact">
+        <h2>Contact</h2>
+        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+        <ul>
+          <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+          <li>Phone: +6014-920709</li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="right-column">
+      <section class="case-study-content">
+        <header>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/cash-or-credit-card/cover%20image.png" alt="Cover Image">
+          <h1>Cash or Credit Card</h1>
+          <p>Is Payment Method a Reliable Way to Understand Your Customer?</p>
+        </header>
+
+        <section>
+          <h2>Study Context:</h2>
+          <p>This analysis is based on a dataset containing 3,400 records of simulated fashion retail sales data, capturing key details about customer purchases, including item categories, purchase amounts, review ratings, and payment methods. The objective is to assess whether payment method—credit card or cash—is a reliable indicator of customer spending behavior. This hypothesis testing analysis evaluates whether customers who pay with credit cards tend to spend more than those who pay with cash, which could inform targeted promotional strategies and payment method optimization.</p>
+        </section>
+
+        <section>
+          <h2>Overview:</h2>
+          <p>The purpose of this analysis is to explore the relationship between payment method and purchase amount in order to understand how these variables influence customer spending. By conducting hypothesis testing, the goal is to validate whether credit card users spend more on average than cash users, and to explore the practical implications of this difference. The findings will guide business decisions on promotional strategies, payment partnerships, and how to optimize the in-store checkout experience for increased sales and customer satisfaction.</p>
+        </section>
+
+        <section>
+          <h2>Key Questions</h2>
+          <h3>1. Is there a statistically significant difference in the average purchase amount between customers using Credit Cards and those using Cash?</h3>
+          <p>The analysis confirms that Credit Card users spend an average of $77.62, while Cash users spend $72.21. A p-value of 0.035 (below the standard threshold of 0.05) indicates that the difference is statistically significant. This suggests that customers using credit cards tend to spend more, on average, than cash users.</p>
+          <p>This supports the hypothesis that credit card payments are correlated with higher spending, which could guide the development of premium bundles, loyalty programs, or exclusive promotions targeted at credit card users.</p>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/cash-or-credit-card/chart%201%20-%20bar%20chart.png" alt="Bar Chart 1">
+
+          <h3>2. How strong is the effect?</h3>
+          <p>While the difference is statistically significant, the practical impact is modest. The average spend for Credit Card users is $160.37, while Cash users spend $152.70, a difference of $7.67. The Cohen’s d value of 0.018 indicates that the effect size is small, meaning the difference in spending behavior may not be substantial enough to warrant major changes in pricing or promotions based solely on payment method.</p>
+          <p>The small numerical gap suggests that businesses should not overemphasize the difference when planning promotions. Other factors, such as purchase frequency or product category, should also be considered.</p>
+
+          <h3>3. Is the sample size large enough to trust the result?</h3>
+          <p>With 1,438 credit transactions and 1,312 cash transactions, the sample size is sufficiently large to ensure reliable results. The confidence intervals for both groups are relatively narrow (±$21.49 for cash, ±$22.70 for credit), indicating stable estimates.</p>
+          <p>Decision-makers can confidently rely on these findings to inform business decisions, as the data provides statistically valid insights into customer spending behavior.</p>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/cash-or-credit-card/chart%203%20-%20bar%20chart.png" alt="Bar Chart 3">
+
+          <h3>4. How consistent is this pattern across customer segments or time periods?</h3>
+          <p>The analysis of spending patterns across time periods (Oct 2022–Oct 2023) reveals that the difference between credit and cash users is inconsistent. For example, in November 2022, cash users spent more than credit users ($198.32 vs. $156.52), while in December 2022, credit card users outspent cash users significantly ($223.59 vs. $147.49). These fluctuations suggest that seasonal demand or promotions may influence the spending behavior.</p>
+          <p>Businesses should be cautious about relying solely on payment method for segmentation. It may be more effective to layer in factors such as seasonal trends, promotions, or product categories for better-targeted marketing strategies.</p>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/cash-or-credit-card/chart%204%20-%20line%20chart.png" alt="Line Chart 4">
+
+          <h3>5. What does this mean for customer targeting and marketing strategy?</h3>
+          <p>Despite the average spending difference, both Credit Card and Cash users show a similar number of high spenders (345 vs. 331). A segmentation tree analysis reveals that payment method alone is not a strong predictor of spending behavior. Instead, total spend and frequency of purchases are more reliable indicators of customer value.</p>
+          <p>Marketing efforts should focus on behavioral segmentation, such as total spend, purchase frequency, and product preferences, rather than focusing exclusively on payment method. This allows for more personalized marketing, optimized bundling strategies, and better targeting of high-value customers.</p>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/cash-or-credit-card/chart%205%20-%20bar%20chart.png" alt="Bar Chart 5">
+        </section>
+
+        <section>
+          <h2>Goals Alignment:</h2>
+          <p>This analysis directly supports business objectives of:</p>
+          <ul>
+            <li><strong>Revenue Growth:</strong> By understanding that credit card users tend to spend more, businesses can create targeted promotions and product bundles to increase average transaction values.</li>
+            <li><strong>Cost Reduction:</strong> The analysis highlights that payment method alone may not justify distinct pricing strategies. By shifting focus to behavioral segmentation, businesses can optimize marketing spend more effectively.</li>
+            <li><strong>Customer Retention:</strong> By targeting high-value customers based on spending behavior, businesses can improve customer satisfaction and engagement through personalized promotions.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Impact:</h2>
+          <ul>
+            <li><strong>Optimized Content and Marketing Strategies:</strong> Insights from this analysis suggest that while credit card payments are correlated with higher spending, businesses should also segment by purchase behavior to maximize the impact of marketing campaigns and promotions.</li>
+            <li><strong>Streamlined Promotions:</strong> Understanding that payment method is not a strong predictor of high-value customers means businesses can avoid over-investing in payment-based promotions, instead focusing on factors like customer loyalty, product category preferences, and purchase frequency.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Data Interpretation:</h2>
+          <ul>
+            <li><strong>Statistical Difference in Spending:</strong> The t-test results confirm that credit card users tend to spend more on average. However, the practical impact is modest, and the small effect size (Cohen’s d = 0.018) suggests that businesses should not rely solely on payment method to determine pricing or promotional strategies.</li>
+            <li><strong>Fluctuating Spending Behavior:</strong> The inconsistencies in spending patterns across different months indicate that external factors, such as seasonal demand or specific promotions, may influence spending behavior. Businesses should account for these fluctuations when planning marketing campaigns.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Contextual Factors:</h2>
+          <ul>
+            <li><strong>Seasonality and Promotions:</strong> Seasonal trends (e.g., holidays) and special promotions likely play a significant role in the spending patterns observed in different months. This variability underscores the need for dynamic marketing strategies based on both payment method and external factors like seasonality and product trends.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Recommendation:</h2>
+          <p>Based on the results, businesses should continue to monitor payment method trends, but also focus on behavioral segmentation (e.g., total spend, frequency of purchases). This approach allows for more accurate targeting of high-value customers, regardless of their chosen payment method.</p>
+          <ul>
+            <li><strong>Personalized Marketing and Promotions:</strong> Use insights from spending behavior and customer segments to create tailored promotions, instead of focusing solely on payment method.</li>
+            <li><strong>Dynamic Promotions Based on Seasonality:</strong> Leverage seasonal demand and specific promotions to enhance customer engagement and spending, particularly around key shopping periods.</li>
+            <li><strong>Refine Customer Segmentation:</strong> Develop a comprehensive segmentation strategy based on total spend, frequency of purchases, and product preferences, in addition to payment method. This will help target the most profitable customers.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Conclusion:</h2>
+          <p>The analysis confirms that while credit card users spend more on average, the difference in spending is modest and may not justify separate pricing or promotional strategies. Instead, businesses should focus on behavioral segmentation to identify high-value customers and optimize marketing strategies. By considering seasonality, product preferences, and purchase frequency, businesses can improve customer targeting, maximize revenue, and drive higher ROI without overemphasizing payment methods.</p>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+  </footer>
+</body>
+</html>
