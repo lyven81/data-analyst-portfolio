@@ -1,4 +1,3 @@
-/* Global Reset */
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
@@ -8,29 +7,10 @@ body {
   color: #333;
 }
 
-/* Main Container */
 .container {
   max-width: 960px;
   margin: 0 auto;
   padding: 20px;
-}
-
-/* Header Section */
-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-header p {
-  font-size: 1.2rem;
-  color: #555;
-  margin: 6px 0;
 }
 
 /* Cover Image */
@@ -91,7 +71,7 @@ header p {
   color: #28a745;
 }
 
-/* Images and Charts */
+/* Visualizations */
 img, .visualization {
   max-width: 100%;
   height: auto;
@@ -101,38 +81,7 @@ img, .visualization {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/* Contact Section (Always Last) */
-.contact {
-  text-align: center;
-  background-color: #f1f1f1;
-  padding: 30px 20px;
-  margin-top: 60px;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-
-.contact h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.contact p {
-  font-size: 1rem;
-  color: #444;
-  margin: 6px 0;
-}
-
-/* Links */
-a {
-  color: #007BFF;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Footer (Optional, if included in full pages) */
+/* Footer (optional if used) */
 footer {
   text-align: center;
   padding: 20px;
@@ -142,12 +91,8 @@ footer {
   margin-top: 60px;
 }
 
-/* Mobile-Friendly Adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-  header h1 {
-    font-size: 2rem;
-  }
-
   .case-study-title {
     font-size: 1.6rem;
   }
@@ -160,8 +105,7 @@ footer {
     font-size: 1rem;
   }
 
-  .section p,
-  .contact p {
+  .section p {
     font-size: 0.95rem;
   }
 }
