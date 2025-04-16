@@ -1,186 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Behavior Insight | Lee Yih Ven's Data Analytics Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1.2rem;
-            color: #555;
-        }
-        nav {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        nav a {
-            color: #007BFF;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2rem;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-        td {
-            padding: 20px;
-            vertical-align: top;
-            text-align: left;
-            height: 200px;
-            border: 1px solid #ddd;
-        }
-        td h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        td p {
-            font-size: 1rem;
-            color: #555;
-        }
-        td a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        td a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            header h1 {
-                font-size: 2rem;
-            }
-            header p {
-                font-size: 1rem;
-            }
-            nav a {
-                font-size: 1rem;
-            }
-            table {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-            }
-            tr {
-                display: flex;
-                flex-direction: column;
-            }
-            td {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                box-sizing: border-box;
-                height: auto;
-            }
-            td h3 {
-                font-size: 1.3rem;
-            }
-            td p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Behavior Insight | Lee Yih Ven's Data Analytics Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    nav a {
+      color: #007BFF;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    td {
+      padding: 20px;
+      vertical-align: top;
+      text-align: left;
+      height: 200px;
+      border: 1px solid #ddd;
+    }
+    td h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    td p {
+      font-size: 1rem;
+      color: #555;
+    }
+    td a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    td a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+      table {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      tr {
+        display: flex;
+        flex-direction: column;
+      }
+      td {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        height: auto;
+      }
+      td h3 {
+        font-size: 1.3rem;
+      }
+      td p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <header>
-    <h1>Lee Yih Ven</h1>
-    <p>Data Analytics Portfolio</p>
-    <p>Explore case studies showcasing data-driven strategies to enhance business growth and customer satisfaction.</p>
+  <h1>Lee Yih Ven</h1>
+  <p>Data Analytics Portfolio</p>
+  <p>Explore case studies showcasing data-driven strategies to enhance business growth and customer satisfaction.</p>
 </header>
 
 <nav>
-    <a href="/data-analyst-portfolio/index.html">Home</a>
-    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  <a href="/data-analyst-portfolio/index.html">Home</a>
+  <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+  <a href="/data-analyst-portfolio/contact.html">Contact</a>
 </nav>
 
 <div class="container">
-    <table>
-        <tr>
-            <td>
-                <h3><a href="/data-analyst-portfolio/case-studies/analyzing-barber-shop-customer-reviews.html">Analyzing Barber Shop Customer Reviews for Service Improvement</a></h3>
-                <p>Discover key insights to improve service quality and customer satisfaction.</p>
-            </td>
-            <td>
-                <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Cash or Credit Card</a></h3>
-                <p>Understand how credit vs. cash payments influence average spend, and how businesses can use these insights to segment customers and personalize promotions.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h3><a href="/data-analyst-portfolio/case-studies/customer-lifetime-value-prediction.html">Customer Lifetime Value (CLV) Prediction for a Contact Lens Retailer</a></h3>
-                <p>Leveraging predictive modeling to enhance customer retention, loyalty, and revenue growth.</p>
-            </td>
-            <td>
-                <h3><a href="/data-analyst-portfolio/case-studies/did-you-sleep-well.html">Did You Sleep Well Last Night?</a></h3>
-                <p>Evaluate guest sleep quality and promote wellness-focused offerings to improve satisfaction and boost revenue.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h3><a href="/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Do Dollars Drive Decisions?</a></h3>
-                <p>Examine the impact of income on purchasing behavior to optimize marketing strategies and increase sales.</p>
-            </td>
-            <td>
-                <h3><a href="/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Saving the Silent Spenders in Coffee Vending Machines</a></h3>
-                <p>Unlock hidden revenue by identifying at-risk high-value customers and creating targeted loyalty, upsell, and recovery strategies.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <h3><a href="/data-analyst-portfolio/case-studies/best-movie-of-all-time.html">The Best Movie of All Time</a></h3>
-                <p>Explore how top-rated IMDb genres offer consistent performance and how studios can align production and marketing for strategic advantage.</p>
-            </td>
-            <td>
-                <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/why-sarawak.html">Why You Should Consider Sarawak</a></h3>
-                <p>Explore crime reduction trends across Malaysian states and why Sarawak stands out as a secure destination for long-term business and residential investments.</p>
-            </td>
-        </tr>
-    </table>
+  <table>
+    <tr>
+      <td>
+        <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/best-movie-of-all-time.html">The Best Movie of All Time</a></h3>
+        <p>Explore how top-rated IMDb genres offer consistent performance and how studios can align production and marketing for strategic advantage.</p>
+      </td>
+      <td>
+        <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Cash or Credit Card</a></h3>
+        <p>Understand how credit vs. cash payments influence average spend, and how businesses can use these insights to segment customers and personalize promotions.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/did-you-sleep-well.html">Did You Sleep Well Last Night?</a></h3>
+        <p>Evaluate guest sleep quality and promote wellness-focused offerings to improve satisfaction and boost revenue.</p>
+      </td>
+      <td>
+        <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Do Dollars Drive Decisions?</a></h3>
+        <p>Examine the impact of income on purchasing behavior to optimize marketing strategies and increase sales.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Saving the Silent Spenders in Coffee Vending Machines</a></h3>
+        <p>Unlock hidden revenue by identifying at-risk high-value customers and creating targeted loyalty, upsell, and recovery strategies.</p>
+      </td>
+      <td>
+        <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/why-sarawak.html">Why You Should Consider Sarawak</a></h3>
+        <p>Explore crime reduction trends across Malaysian states and why Sarawak stands out as a secure destination for long-term business and residential investments.</p>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <footer>
-    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
 </footer>
 
 </body>
