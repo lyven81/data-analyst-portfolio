@@ -1,103 +1,88 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     color: #333;
 }
 
 /* Container for Layout */
 .container {
-    display: flex;
-    max-width: 1200px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 20px;
-    gap: 40px;
 }
 
-/* Left Column (Personal Info and Contact) */
-.left-column {
-    width: 30%;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-/* Same Font Size for Left and Right Column */
-.left-column h1,
-.right-column h1 {
-    font-size: 2em; /* Make the font size consistent for headers */
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
-.left-column h2,
-.right-column h2 {
-    font-size: 1.5em; /* Consistent subheading font size */
+header p {
+    font-size: 1.2rem;
+    color: #555;
 }
 
-.left-column p,
-.right-column p {
-    font-size: 1em; /* Consistent body text size */
+/* Navigation Bar */
+nav {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.left-column ul li {
-    font-size: 0.85em; /* Reduce the font size for list items */
-    white-space: nowrap; /* Force the email to stay on one line */
-    overflow: hidden; /* Prevent any overflow beyond container */
-    text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
-}
-
-/* Right Column (Case Studies) */
-.right-column {
-    width: 70%;
-}
-
-/* Case Study List */
-.case-studies {
-    margin-bottom: 20px;
-    padding: 20px 0; /* Padding similar to the portfolio page */
-}
-
-.case-study-list {
-    display: block; /* Vertical layout */
-    gap: 20px;
-}
-
-.case-study-item {
-    margin-bottom: 20px; /* Adds spacing between items */
-}
-
-.case-study-item h3 {
-    font-size: 1.5em;
-}
-
-.case-study-item p {
-    font-size: 1em;
-}
-
-.case-study-item a {
+nav a {
     color: #007BFF;
     text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2rem;
 }
 
-.case-study-item a:hover {
+nav a:hover {
     text-decoration: underline;
 }
 
-/* Explore Section */
-.explore p {
-    text-align: center;
-    font-size: 1.2em;
+/* Case Study Box */
+.case-study {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.explore a {
+.case-study h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.case-study h3 {
+    font-size: 1.4rem;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.case-study p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Links */
+.case-study a {
     color: #007BFF;
     text-decoration: none;
+    font-weight: 500;
 }
 
-.explore a:hover {
+.case-study a:hover {
     text-decoration: underline;
 }
 
@@ -107,46 +92,36 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
+    margin-top: 40px;
 }
 
-/* Responsive Image Styling for GitHub-Linked Visualizations */
+/* Images and Visualizations */
 img, .visualization {
-    max-width: 100%; /* Ensures the image does not overflow the container */
-    height: auto; /* Maintains aspect ratio */
-    display: block; /* Removes any unwanted inline spacing */
-    margin: 0 auto; /* Centers the image */
-}
-
-/* Visualization Container for Extra Control (Optional) */
-.visualization-container {
     max-width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+    height: auto;
+    display: block;
+    margin: 20px auto;
 }
 
-/* Ensure layout responsiveness for smaller screens */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        padding: 10px;
+    header h1 {
+        font-size: 2rem;
     }
 
-    .left-column, .right-column {
-        width: 100%;
-        margin-bottom: 20px;
+    header p, nav a {
+        font-size: 1rem;
     }
 
-    /* Make footer stick to bottom */
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+    .case-study h2 {
+        font-size: 1.5rem;
     }
 
-    footer {
-        margin-top: auto;
-        background-color: #333;
-        color: white;
-        padding: 10px;
+    .case-study h3 {
+        font-size: 1.2rem;
+    }
+
+    .case-study p {
+        font-size: 0.95rem;
     }
 }
