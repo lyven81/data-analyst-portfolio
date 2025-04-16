@@ -1,201 +1,153 @@
-/* Base Styles */
+
+/* General Styles */
 body {
-  font-family: 'Lato', sans-serif;
-  line-height: 1.8;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  color: #444;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-/* Container */
+/* Container for Layout */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 40px;
 }
 
-/* Two-Column Layout */
-.column-layout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-}
-
-/* Left Column */
+/* Left Column (Personal Info and Contact) */
 .left-column {
-  flex: 1 1 300px;
-  max-width: 300px;
-  background-color: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 30%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
-/* Right Column */
+/* Same Font Size for Left and Right Column */
+.left-column h1,
+.right-column h1 {
+    font-size: 2em; /* Make the font size consistent for headers */
+}
+
+.left-column h2,
+.right-column h2 {
+    font-size: 1.5em; /* Consistent subheading font size */
+}
+
+.left-column p,
+.right-column p {
+    font-size: 1em; /* Consistent body text size */
+}
+
+.left-column ul li {
+    font-size: 0.85em; /* Reduce the font size for list items */
+    white-space: nowrap; /* Force the email to stay on one line */
+    overflow: hidden; /* Prevent any overflow beyond container */
+    text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
+}
+
+/* Right Column (Case Studies) */
 .right-column {
-  flex: 2 1 600px;
-  background-color: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    width: 70%;
 }
 
-/* Tagline & Contact */
-.tagline {
-  font-style: italic;
-  color: #777;
-  margin-bottom: 20px;
-  font-size: 1rem;
+/* Case Study List */
+.case-studies {
+    margin-bottom: 20px;
+    padding: 20px 0; /* Padding similar to the portfolio page */
 }
 
-.contact p {
-  margin: 6px 0;
-  font-size: 0.95rem;
+.case-study-list {
+    display: block; /* Vertical layout */
+    gap: 20px;
 }
 
-/* Cover Image */
-.cover-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin: 30px 0;
+.case-study-item {
+    margin-bottom: 20px; /* Adds spacing between items */
 }
 
-/* Case Study Title & Subtitle */
-.case-study-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
-  font-family: 'Poppins', sans-serif;
+.case-study-item h3 {
+    font-size: 1.5em;
 }
 
-.subtitle {
-  font-size: 1.1rem;
-  color: #666;
-  font-style: italic;
-  margin-bottom: 30px;
-  letter-spacing: 0.3px;
-  font-family: 'Poppins', sans-serif;
+.case-study-item p {
+    font-size: 1em;
 }
 
-/* Section Styling */
-.section {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
-  margin-bottom: 40px;
+.case-study-item a {
+    color: #007BFF;
+    text-decoration: none;
 }
 
-.section h2 {
-  position: relative;
-  font-size: 1.5rem;
-  padding-bottom: 10px;
-  margin-bottom: 25px;
-  color: #222;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
+.case-study-item a:hover {
+    text-decoration: underline;
 }
 
-.section h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 3px;
-  background-color: #007BFF;
-  border-radius: 2px;
+/* Explore Section */
+.explore p {
+    text-align: center;
+    font-size: 1.2em;
 }
 
-.section p {
-  font-size: 1rem;
-  color: #555;
+.explore a {
+    color: #007BFF;
+    text-decoration: none;
 }
 
-/* Lists */
-.section ul {
-  padding-left: 20px;
-  margin-top: 10px;
-}
-
-.section ul li {
-  margin-bottom: 10px;
-  position: relative;
-  padding-left: 16px;
-}
-
-.section ul li::before {
-  content: "";
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #28a745;
-  border-radius: 50%;
-  position: absolute;
-  left: 0;
-  top: 6px;
-}
-
-/* Visualizations */
-img, .visualization {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 20px auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.explore a:hover {
+    text-decoration: underline;
 }
 
 /* Footer */
 footer {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(to right, #222, #333);
-  color: white;
-  font-size: 0.95rem;
-  margin-top: 60px;
-  border-top: 4px solid #007BFF;
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .column-layout {
-    flex-direction: column;
-  }
+/* Responsive Image Styling for GitHub-Linked Visualizations */
+img, .visualization {
+    max-width: 100%; /* Ensures the image does not overflow the container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes any unwanted inline spacing */
+    margin: 0 auto; /* Centers the image */
+}
 
-  .left-column,
-  .right-column {
+/* Visualization Container for Extra Control (Optional) */
+.visualization-container {
     max-width: 100%;
-    padding: 20px 15px;
-    border-radius: 0;
-    box-shadow: none;
-  }
+    padding: 10px;
+    box-sizing: border-box;
+}
 
-  .container {
-    padding: 20px 15px;
-  }
+/* Ensure layout responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
 
-  .case-study-title {
-    font-size: 1.6rem;
-  }
+    .left-column, .right-column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 
-  .section h2 {
-    font-size: 1.3rem;
-  }
+    /* Make footer stick to bottom */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
 
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  .section p {
-    font-size: 0.95rem;
-  }
-
-  .section {
-    padding: 20px;
-  }
+    footer {
+        margin-top: auto;
+        background-color: #333;
+        color: white;
+        padding: 10px;
+    }
 }
