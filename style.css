@@ -1,149 +1,169 @@
-/* General Styles */
+/* Global Reset */
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
-/* Container Layout */
+/* Container */
 .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Header */
+/* Header (Name + Title + Tagline) */
 header {
-    text-align: center;
-    margin-bottom: 40px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 header p {
-    font-size: 1.2rem;
-    color: #555;
+  font-size: 1.2rem;
+  color: #555;
+  margin: 5px 0;
 }
 
-/* Navigation Bar */
-nav {
-    text-align: center;
-    margin-bottom: 30px;
+/* Cover Image */
+.cover-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin: 30px 0;
 }
 
-nav a {
-    color: #007BFF;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.2rem;
+/* Case Study Title */
+.case-study-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
-nav a:hover {
-    text-decoration: underline;
+/* Subtitle */
+.subtitle {
+  font-size: 1.1rem;
+  color: #777;
+  font-style: italic;
+  margin-bottom: 30px;
 }
 
-/* Case Study Layout */
-.case-study {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 30px;
-    margin-bottom: 40px;
-    border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+/* Section Headings */
+.section {
+  margin-bottom: 40px;
 }
 
-.case-study h2 {
-    font-size: 1.8rem;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #007BFF;
-    padding-bottom: 6px;
+.section h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #007BFF;
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+  color: #222;
 }
 
-.case-study h3 {
-    font-size: 1.4rem;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-.case-study p {
-    font-size: 1rem;
-    color: #555;
+/* Paragraphs */
+.section p {
+  font-size: 1rem;
+  color: #555;
 }
 
 /* Lists */
-.case-study ul {
-    padding-left: 20px;
+.section ul {
+  padding-left: 20px;
+  margin-top: 10px;
 }
 
-.case-study ul li {
-    margin-bottom: 10px;
-    position: relative;
+.section ul li {
+  margin-bottom: 10px;
+  position: relative;
 }
 
-.case-study ul li::before {
-    content: "✔️";
-    margin-right: 8px;
-    color: #28a745;
+.section ul li::before {
+  content: "✔️";
+  margin-right: 8px;
+  color: #28a745;
+}
+
+/* Visualizations and Images */
+img, .visualization {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Contact Section */
+.contact {
+  text-align: center;
+  margin-top: 60px;
+  padding: 30px;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.contact h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.contact p {
+  font-size: 1rem;
+  color: #444;
+  margin: 5px 0;
 }
 
 /* Links */
-.case-study a {
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: 500;
+a {
+  color: #007BFF;
+  text-decoration: none;
 }
 
-.case-study a:hover {
-    text-decoration: underline;
-}
-
-/* Images and Visualizations */
-img, .visualization {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+a:hover {
+  text-decoration: underline;
 }
 
 /* Footer */
 footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-    font-size: 0.95rem;
-    margin-top: 60px;
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  font-size: 0.95rem;
+  margin-top: 60px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
+  header h1 {
+    font-size: 2rem;
+  }
 
-    header p, nav a {
-        font-size: 1rem;
-    }
+  .case-study-title {
+    font-size: 1.6rem;
+  }
 
-    .case-study h2 {
-        font-size: 1.5rem;
-    }
+  .section h2 {
+    font-size: 1.3rem;
+  }
 
-    .case-study h3 {
-        font-size: 1.2rem;
-    }
+  .subtitle {
+    font-size: 1rem;
+  }
 
-    .case-study p {
-        font-size: 0.95rem;
-    }
+  .section p,
+  .contact p {
+    font-size: 0.95rem;
+  }
 }
