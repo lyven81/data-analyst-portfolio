@@ -8,7 +8,7 @@ body {
     color: #333;
 }
 
-/* Container for Layout */
+/* Container Layout */
 .container {
     max-width: 960px;
     margin: 0 auto;
@@ -49,19 +49,22 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Case Study Box */
+/* Case Study Layout */
 .case-study {
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 30px;
+    margin-bottom: 40px;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
 }
 
 .case-study h2 {
     font-size: 1.8rem;
-    margin-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 6px;
 }
 
 .case-study h3 {
@@ -75,6 +78,22 @@ nav a:hover {
     color: #555;
 }
 
+/* Lists */
+.case-study ul {
+    padding-left: 20px;
+}
+
+.case-study ul li {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.case-study ul li::before {
+    content: "✔️";
+    margin-right: 8px;
+    color: #28a745;
+}
+
 /* Links */
 .case-study a {
     color: #007BFF;
@@ -86,21 +105,24 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-    margin-top: 40px;
-}
-
 /* Images and Visualizations */
 img, .visualization {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    font-size: 0.95rem;
+    margin-top: 60px;
 }
 
 /* Responsive Design */
