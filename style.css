@@ -10,9 +10,48 @@ body {
 
 /* Container */
 .container {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+}
+
+/* Two-Column Layout */
+.column-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* Left Column */
+.left-column {
+  flex: 1 1 300px;
+  max-width: 300px;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Right Column */
+.right-column {
+  flex: 2 1 600px;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Tagline & Contact */
+.tagline {
+  font-style: italic;
+  color: #777;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.contact p {
+  margin: 6px 0;
+  font-size: 0.95rem;
 }
 
 /* Cover Image */
@@ -124,6 +163,22 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .column-layout {
+    flex-direction: column;
+  }
+
+  .left-column,
+  .right-column {
+    max-width: 100%;
+    padding: 20px 15px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .container {
+    padding: 20px 15px;
+  }
+
   .case-study-title {
     font-size: 1.6rem;
   }
