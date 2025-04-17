@@ -1,17 +1,17 @@
-
-/* General Styles */
+/* Updated General Styles with FMT-inspired Elements */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #ffffff;
+    color: #222;
 }
 
 /* Container for Layout */
 .container {
     display: flex;
+    flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -20,62 +20,81 @@ body {
 
 /* Left Column (Personal Info and Contact) */
 .left-column {
-    width: 30%;
-    background-color: #fff;
+    flex: 1 1 30%;
+    background-color: #f8f8f8;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-
-/* Same Font Size for Left and Right Column */
-.left-column h1,
-.right-column h1 {
-    font-size: 2em; /* Make the font size consistent for headers */
-}
-
-.left-column h2,
-.right-column h2 {
-    font-size: 1.5em; /* Consistent subheading font size */
-}
-
-.left-column p,
-.right-column p {
-    font-size: 1em; /* Consistent body text size */
-}
-
-.left-column ul li {
-    font-size: 0.85em; /* Reduce the font size for list items */
-    white-space: nowrap; /* Force the email to stay on one line */
-    overflow: hidden; /* Prevent any overflow beyond container */
-    text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
 }
 
 /* Right Column (Case Studies) */
 .right-column {
-    width: 70%;
+    flex: 1 1 65%;
 }
 
-/* Case Study List */
+/* Typography */
+.left-column h1,
+.right-column h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.left-column h2,
+.right-column h2 {
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+}
+
+.left-column p,
+.right-column p {
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+/* List and Contact Info */
+.left-column ul li {
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Case Study Section */
 .case-studies {
-    margin-bottom: 20px;
-    padding: 20px 0; /* Padding similar to the portfolio page */
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .case-study-list {
-    display: block; /* Vertical layout */
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .case-study-item {
-    margin-bottom: 20px; /* Adds spacing between items */
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.case-study-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .case-study-item h3 {
-    font-size: 1.5em;
+    font-size: 1.4em;
+    color: #007BFF;
+    margin-bottom: 0.3em;
 }
 
 .case-study-item p {
     font-size: 1em;
+    color: #555;
 }
 
 .case-study-item a {
@@ -106,26 +125,25 @@ body {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #222;
     color: white;
 }
 
-/* Responsive Image Styling for GitHub-Linked Visualizations */
+/* Responsive Images */
 img, .visualization {
-    max-width: 100%; /* Ensures the image does not overflow the container */
-    height: auto; /* Maintains aspect ratio */
-    display: block; /* Removes any unwanted inline spacing */
-    margin: 0 auto; /* Centers the image */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-/* Visualization Container for Extra Control (Optional) */
 .visualization-container {
     max-width: 100%;
     padding: 10px;
     box-sizing: border-box;
 }
 
-/* Ensure layout responsiveness for smaller screens */
+/* Responsive Design for Mobile */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -137,7 +155,6 @@ img, .visualization {
         margin-bottom: 20px;
     }
 
-    /* Make footer stick to bottom */
     body {
         display: flex;
         flex-direction: column;
@@ -146,8 +163,6 @@ img, .visualization {
 
     footer {
         margin-top: auto;
-        background-color: #333;
-        color: white;
         padding: 10px;
     }
 }
