@@ -3,205 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lee Yih Ven | Data Analytics Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: #555;
-    }
-
-    nav {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    nav a {
-      color: #007BFF;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 1.2rem;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .case-study {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .case-study h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
-
-    .case-study p {
-      font-size: 1rem;
-      color: #555;
-    }
-
-    .case-study a {
-      color: #007BFF;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .case-study a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2rem;
-      }
-
-      header p, nav a {
-        font-size: 1rem;
-      }
-
-      .case-study h3 {
-        font-size: 1.2rem;
-      }
-
-      .case-study p {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
+  <title>Connected or Disconnected? | Lee Yih Ven</title>
+  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
 </head>
 <body>
+  <div class="container">
+    <aside class="left-column">
+      <header>
+        <h1>Lee Yih Ven</h1>
+        <h2>Data Analytics Portfolio</h2>
+      </header>
+      <section class="intro">
+        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+      </section>
+      <section class="contact">
+        <h2>Contact</h2>
+        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+        <ul>
+          <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+          <li>Phone: +6014-9207099</li>
+        </ul>
+      </section>
+    </aside>
 
-<header>
-  <h1>Lee Yih Ven</h1>
-  <p>Data Analytics Portfolio</p>
-  <p>Discover how data empowers smarter decisions in your next big move.</p>
-</header>
+    <main class="right-column">
+      <section class="case-study-content">
+        <header>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/cover%20image.png" alt="Cover Image">
+          <h1>Connected or Disconnected?</h1>
+          <p><em>Understanding How Social Media Affects Real-Life Relationships</em></p>
+        </header>
 
-<nav>
-  <a href="/data-analyst-portfolio/index.html">Home</a>
-  <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-  <a href="/data-analyst-portfolio/contact.html">Contact</a>
-</nav>
+        <section>
+          <h2>Purpose and Key Results</h2>
+          <p>This case study explores how time spent on social media correlates with the quality of students’ real-life relationships, and how this relationship differs based on their living environment. The objective is to provide evidence-based insights for parents, educators, social workers, and counselors to better understand student social dynamics and intervene where necessary.</p>
 
-<div class="container">
-  <div class="case-study">
-    <h3>Are Nasi Lemak and Kopi O Customer Favorites?</h3>
-    <p>Reveal customer order patterns in a Malaysian kopitiam and use these insights to optimize inventory, menu planning, and targeted promotions for improved sales and customer satisfaction.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Read More</a>
+          <h3>1. Is there a measurable correlation between time spent on social media and real-life relationship quality?</h3>
+          <ul>
+            <li>There is a very weak positive correlation (Pearson r = 0.1244) between time spent on social media and real-life relationship quality, indicating no consistent trend across students. Although some heavy users report slightly better relationships, the wide variation suggests that screen time alone does not explain the outcome.</li>
+            <li>Among students who use social media heavily (score 4), 40% reported improved relationships, 33% no change, and 27% worsened. In contrast, moderate users (score 3) were evenly split—5 improved, 5 no change, 4 worsened—showing that the impact varies and likely depends more on how and why students use social media rather than how long.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%201%20-%20scatter%20plot.png" alt="Chart 1">
+          </ul>
+
+          <h3>2. Does this correlation vary across different living environments (urban, suburban, rural)?</h3>
+          <ul>
+            <li>The correlation between social media use and relationship quality varies by living environment: Urban students show the strongest positive correlation (+0.2375), rural students show a weak positive correlation (+0.0861), while suburban students show a weak negative correlation (–0.1667).</li>
+            <li>These findings suggest that urban and rural students may benefit modestly from social media as a tool for connection, while suburban students may need more guidance to ensure online activity supports rather than replaces real-world relationships.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%202%20-%20bar%20chart.png" alt="Chart 2">
+          </ul>
+
+          <h3>3. Are there noticeable patterns in how different usage levels report changes in their relationships?</h3>
+          <ul>
+            <li>Students using social media for 1–2 hours a day showed the most balanced outcomes, with roughly one-third reporting improved relationships, one-third no change, and one-third worsened — suggesting this range may be the safest for maintaining healthy social connections.</li>
+            <li>Students using 3–5 hours daily reported the lowest improvement (16.67%) and highest worsening (38.89%), while heavy users (5+ hours) saw the highest improvement rate (42.86%) but also a high rate of worsening (35.71%), indicating that more time online brings both potential benefits and greater risks.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%203%20-%20group%20bar%20chart.png" alt="Chart 3">
+          </ul>
+
+          <h3>4. Do some students report improved relationships despite high usage? What distinguishes these cases?</h3>
+          <ul>
+            <li>6 heavy social media users reported improved relationships, with 4 out of 6 preferring Facebook and 5 out of 6 using WhatsApp daily, suggesting that frequent, meaningful communication plays a key role in positive social outcomes.</li>
+            <li>Most of these students lived in urban (3) or rural (2) areas, indicating that purposeful use of social media—especially through community-based platforms and messaging apps—can help maintain close relationships across different environments.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%204%20-%20bar%20chart%20facebook.png" alt="Chart 4 Facebook">
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%204%20-%20bar%20chart%20whatsapp.png" alt="Chart 4 WhatsApp">
+          </ul>
+
+          <h3>5. What is the probability that social media improves relationships?</h3>
+          <ul>
+            <li>Only 30.61% of students reported improved relationships from social media, and while the rate is higher among heavy users (42.86%), most still did not benefit—showing that more time online does not guarantee better outcomes.</li>
+            <li>40% of students who felt their relationships improved were heavy users, suggesting that meaningful digital engagement can help, but it works best when paired with intentional communication habits—not just high usage.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%205.png" alt="Chart 5">
+          </ul>
+
+          <h3>6. Which group appears most at risk of worsened relationships, and what early signs should adults watch for?</h3>
+          <ul>
+            <li>Students most at risk of worsened relationships tend to use social media 3–5 hours per day (7 out of 17), live in urban (9) or rural (8) areas, and use WhatsApp daily (10 out of 17). Alarmingly, 14 out of these 17 students also reported negative mental health impacts.</li>
+            <li>Early warning signs for adults include prolonged screen time in the 3–5 hour range, frequent use of messaging apps, and signs of emotional withdrawal from face-to-face relationships.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%206%20-%20bar%20chart%201.png" alt="Chart 6">
+          </ul>
+
+          <h3>7. What is the probability that social media usage worsens relationship quality?</h3>
+          <ul>
+            <li>34.69% of all students reported worsened relationships due to social media, with the risk rising slightly to 35.71% among heavy users (5+ hours/day).</li>
+            <li>However, only 29.41% of those who felt harmed were heavy users, indicating that even moderate users are at risk—especially if online time displaces real-life interaction.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%207%20bar%20chart.png" alt="Chart 7">
+          </ul>
+
+          <h3>8. How does the use of messaging apps like WhatsApp relate to relationship outcomes?</h3>
+          <ul>
+            <li>Students who use WhatsApp daily reported a positive average relationship score of +0.11, suggesting that consistent, direct communication supports stronger real-life connections.</li>
+            <li>Those who use WhatsApp only a few times a week (-0.56) or never (-0.50) had negative scores, indicating that irregular or absent messaging is associated with poorer relationship quality.</li>
+            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/connected-or-disconnected/chart%208%20-%20bar%20chart.png" alt="Chart 8">
+          </ul>
+        </section>
+
+        <section>
+          <h2>Relevance to Community and Stakeholder Goals</h2>
+          <p>This study addresses the concerns of adults supporting youth by identifying how digital behavior relates to emotional well-being and social development.</p>
+          <ul>
+            <li><strong>For parents:</strong> it offers a clearer picture of when digital habits may be affecting their child’s emotional or social health.</li>
+            <li><strong>For teachers:</strong> it suggests when to adjust digital literacy instruction or offer guidance on healthy screen habits.</li>
+            <li><strong>For social workers and counselors:</strong> it helps prioritize students who show warning signs and tailor support programs by environment.</li>
+          </ul>
+          <p>Understanding these patterns allows stakeholders to support young individuals not simply by limiting screen time but by encouraging digital practices that foster meaningful interaction.</p>
+        </section>
+
+        <section>
+          <h2>Explaining the Results</h2>
+          <p>The weak overall correlation indicates that simply spending time on social media does not determine whether relationships get better or worse. Other factors, such as platform choice, communication frequency, and living environment, significantly influence outcomes.</p>
+          <p>For example:</p>
+          <ul>
+            <li>Daily WhatsApp use aligns with stronger reported relationship quality, possibly due to frequent and meaningful communication.</li>
+            <li>Students in urban settings may benefit more from digital platforms because they supplement busy or fragmented in-person interactions.</li>
+            <li>3–5 hours/day users show the most consistently negative outcomes, suggesting this is a threshold beyond which screen time may begin to displace offline bonding.</li>
+            <li>High-usage students who benefit tend to use social media in more personal and socially reinforcing ways, indicating purpose and platform matter more than volume.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Recommendations</h2>
+          <p>To promote healthier relationships and emotional well-being in young people, we recommend:</p>
+          <ul>
+            <li><strong>Encourage meaningful use:</strong> Guide students to use platforms like WhatsApp or group chats for frequent and sincere communication rather than passive browsing.</li>
+            <li><strong>Watch the 3–5 hour range:</strong> Students in this time bracket are the most at risk for worsened relationships. Offer targeted support and education for this group.</li>
+            <li><strong>Tailor strategies by living environment:</strong>
+              <ul>
+                <li><strong>In urban areas:</strong> promote balance by complementing fast-paced online communication with quality offline experiences.</li>
+                <li><strong>In suburban areas:</strong> focus on restoring offline engagement and community ties.</li>
+                <li><strong>In rural areas:</strong> digital tools can be an effective supplement to limited in-person social options but require careful emotional support.</li>
+              </ul>
+            </li>
+            <li><strong>Focus on early signs:</strong> Watch for students with:
+              <ul>
+                <li>Daily WhatsApp use</li>
+                <li>Emotional withdrawal</li>
+                <li>3–5 hours/day online habits</li>
+                <li>Reports of negative mental health</li>
+              </ul>
+              These are students most likely to benefit from check-ins and guided conversations about their social and emotional lives.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Conclusion</h2>
+          <p>This analysis shows that while social media use is not inherently good or bad, its impact depends on usage patterns, communication style, and social context. By shifting the focus from screen time to quality of interaction and emotional health, parents, teachers, and social workers can better support students in forming meaningful relationships both online and offline.</p>
+          <p>Moving forward, interventions should balance digital literacy with emotional education, helping youth build strong relationships in an increasingly connected yet complex world.</p>
+        </section>
+      </section>
+    </main>
   </div>
 
-  <div class="case-study">
-    <h3>Are Tunics Truly the Top Seller?</h3>
-    <p>Uncover whether tunics truly deserve premium pricing by evaluating customer ratings, seasonal trends, and bundling strategies to increase average cart value.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Cash or Credit Card</h3>
-    <p>Understand how credit vs. cash payments influence average spend, and how businesses can use these insights to segment customers and personalize promotions.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Connected or Disconnected?</h3>
-    <p>Find out how social media affects the real-life relationships of students across urban, suburban, and rural areas—and what educators and parents can do about it.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/connected-or-disconnected.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>East Coast Alert</h3>
-    <p>Why Selangor’s rape case count doesn’t tell the full story, and which states quietly lead in crime probability.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/east-coast-alert.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Experience Isn’t Everything</h3>
-    <p>Discover why experience alone doesn’t drive salary growth and how employees and HR can make smarter compensation and career decisions.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/experience-is-not-everthing.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Forecasting Demand at a Chicken Rice Restaurant</h3>
-    <p>Predict demand for steam chicken rice and barley to optimize ingredient prep, reduce waste, and boost operational efficiency during peak and off-peak periods.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/forecast-chicken-rice-restaurent.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Motorcyclists Dominate Malaysia’s Road Accidents</h3>
-    <p>Uncover how motorcyclists face the highest accident and injury probabilities—and what it means for insurers, policy makers, and public safety strategies.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/motorcyclist-accident.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>RON95 at a Crossroads</h3>
-    <p>Evaluate the risks and business implications if the Malaysian government stops subsidizing RON95 fuel—and how this shift could impact cost forecasting and consumer behavior.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/ron95.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Which Learning Paths Lead Where?</h3>
-    <p>Discover how students’ career goals influence their learning habits, engagement levels, and platform choices—and how to align study environments with long-term aspirations.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/learning-path.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Who is Buying the Croissant</h3>
-    <p>Uncover trends in croissant sales, identify peak demand periods, and explore product pairings that drive café revenue and improve customer satisfaction.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-is-buying-the-croissant.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Why You Should Consider Sarawak</h3>
-    <p>Explore crime reduction trends across Malaysian states and why Sarawak stands out as a secure destination for long-term business and residential investments.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/why-sarawak.html">Read More</a>
-  </div>
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
-
+  <footer>
+    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+  </footer>
 </body>
 </html>
