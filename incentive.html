@@ -1,207 +1,186 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lee Yih Ven | Data Analytics Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incentives and Performance | Lee Yih Ven's Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 20px;
+            vertical-align: top;
+            text-align: left;
+        }
+        td h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        td p {
+            font-size: 1rem;
+            color: #555;
+        }
+        td a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
 
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: #555;
-    }
-
-    nav {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    nav a {
-      color: #007BFF;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 1.2rem;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .case-study {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .case-study h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
-
-    .case-study p {
-      font-size: 1rem;
-      color: #555;
-    }
-
-    .case-study a {
-      color: #007BFF;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .case-study a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2rem;
-      }
-
-      header p, nav a {
-        font-size: 1rem;
-      }
-
-      .case-study h3 {
-        font-size: 1.2rem;
-      }
-
-      .case-study p {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
+        @media (max-width: 768px) {
+            table {
+                display: block;
+            }
+            tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+            td {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            td h3 {
+                font-size: 1.3rem;
+            }
+            td p {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Lee Yih Ven</h1>
-  <p>Data Analytics Portfolio</p>
-  <p>Discover how data empowers smarter decisions in your next big move.</p>
-</header>
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p>Data Analytics Portfolio</p>
+        <p>Boost sales and motivate your team with well-crafted incentives.</p>
+    </header>
 
-<nav>
-  <a href="/data-analyst-portfolio/index.html">Home</a>
-  <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-  <a href="/data-analyst-portfolio/contact.html">Contact</a>
-</nav>
+    <nav>
+        <a href="/data-analyst-portfolio/index.html">Home</a>
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+    </nav>
 
-<div class="container">
-  <div class="case-study">
-    <h3>Are Nasi Lemak and Kopi O Customer Favorites?</h3>
-    <p>Reveal customer order patterns in a Malaysian kopitiam and use these insights to optimize inventory, menu planning, and targeted promotions for improved sales and customer satisfaction.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Read More</a>
-  </div>
+    <div class="container">
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/breaking-the-pattern.html">Breaking the Pattern</a></h3>
+                    <p>Pinpoint critical delays and operational inefficiencies in 2022 to improve airline performance.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/evaluate-discount-voucher-women-lingerie.html">Evaluating the Impact of Discount Vouchers for a Women's Lingerie and Sleepwear Shop</a></h3>
+                    <p>Learn how discount vouchers impact sales performance and discover strategic recommendations for improving their effectiveness.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/experience-is-not-everthing.html">Experience Isn’t Everything</a></h3>
+                    <p>Discover why experience alone doesn’t drive salary growth and how employees and HR can make smarter compensation and career decisions.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Forecasting Salesman Performance in a Car Showroom</a></h3>
+                    <p>Use data to predict sales performance and set achievable targets to improve showroom productivity.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/identifying-employee-resignation-risk.html">Identifying Employees Likely to Resign After Receiving Bonus</a></h3>
+                    <p>Identify and retain employees at risk of leaving after receiving bonuses with data-driven strategies.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-customer-response-discounts.html">Predicting Customer Response to Discounts</a></h3>
+                    <p>Boost your sales by targeting the right customers with discount offers they can’t resist.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-discount-voucher-performance-hardware-shop.html">Predicting Discount Voucher Performance for a Hardware Shop</a></h3>
+                    <p>Maximize revenue by identifying which discount vouchers deliver the highest margin and customer engagement.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/sales-associate-productivity-footwear.html">Sales Associate Productivity Analysis in a Footwear Retail Store</a></h3>
+                    <p>Analyze shifts and productivity to optimize employee schedules and enhance store performance.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/stationery-product-discount-optimization.html">Stationery Product Discount Optimization</a></h3>
+                    <p>Maximize sales on your stationery products by optimizing discount strategies for better profitability.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/tiktok-live-influencer-sales-effectiveness.html">TikTok Live Influencer Sales Effectiveness Analysis for a Toy Retailer</a></h3>
+                    <p>Evaluate live streaming impact on sales to reward top performers and maximize revenue potential.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-  <div class="case-study">
-    <h3>Are Tunics Truly the Top Seller?</h3>
-    <p>Uncover whether tunics truly deserve premium pricing by evaluating customer ratings, seasonal trends, and bundling strategies to increase average cart value.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Breaking the Pattern</h3>
-    <p>Pinpoint critical delays and operational inefficiencies in 2022 to improve airline performance.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/breaking-the-pattern.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Connected or Disconnected?</h3>
-    <p>Find out how social media affects the real-life relationships of students across urban, suburban, and rural areas—and what educators and parents can do about it.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/connected-or-disconnected.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>East Coast Alert</h3>
-    <p>Why Selangor’s rape case count doesn’t tell the full story, and which states quietly lead in crime probability.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/east-coast-alert.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Experience Isn’t Everything</h3>
-    <p>Discover why experience alone doesn’t drive salary growth and how employees and HR can make smarter compensation and career decisions.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/experience-is-not-everthing.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Forecasting Demand at a Chicken Rice Restaurant</h3>
-    <p>Predict demand for steam chicken rice and barley to optimize ingredient prep, reduce waste, and boost operational efficiency during peak and off-peak periods.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/forecast-chicken-rice-restaurent.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Motorcyclists Dominate Malaysia’s Road Accidents</h3>
-    <p>Uncover how motorcyclists face the highest accident and injury probabilities—and what it means for insurers, policy makers, and public safety strategies.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/motorcyclist-accident.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>RON95 at a Crossroads</h3>
-    <p>Evaluate the risks and business implications if the Malaysian government stops subsidizing RON95 fuel—and how this shift could impact cost forecasting and consumer behavior.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/ron95.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Which Learning Paths Lead Where?</h3>
-    <p>Discover how students’ career goals influence their learning habits, engagement levels, and platform choices—and how to align study environments with long-term aspirations.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/learning-path.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Who is Buying the Croissant</h3>
-    <p>Uncover trends in croissant sales, identify peak demand periods, and explore product pairings that drive café revenue and improve customer satisfaction.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-is-buying-the-croissant.html">Read More</a>
-  </div>
-
-  <div class="case-study">
-    <h3>Why You Should Consider Sarawak</h3>
-    <p>Explore crime reduction trends across Malaysian states and why Sarawak stands out as a secure destination for long-term business and residential investments.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/why-sarawak.html">Read More</a>
-  </div>
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+    </footer>
 
 </body>
 </html>
