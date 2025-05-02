@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifying At-Risk Students Early | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Column -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/identify-at-risk-student/cover%20image.png" alt="Cover Image">
+                    <h1>Identifying At-Risk Students Early</h1>
+                    <p>Subtitle: A Predictive Model for Proactive Teaching</p>
+                </header>
+
+                <section>
+                    <h2>Overview</h2>
+                    <p>This analysis was conducted to support teachers in identifying students who are at risk of underperforming early in the semester using a data-driven approach. The study focuses on three key indicators—attendance rate, study hours, and previous exam scores—as predictors of academic performance. By analyzing these variables, we aim to build a reliable model that can forecast student outcomes with high accuracy and help teachers take timely action before learning gaps widen.</p>
+                    <p>The goal is to provide teachers with a practical, evidence-based tool for screening students who may need extra support. The model demonstrates strong predictive accuracy, with minimal error between actual and predicted scores, and successfully flags nearly one in four students as at risk when using a predicted exam score threshold of 65. This empowers teachers to intervene early, allocate support where it's most needed, and make informed decisions about how and when to assist students in improving their academic performance.</p>
+                </section>
+
+                <section>
+                    <h2>1. Which factors are statistically proven to impact student performance and should be prioritized for early intervention?</h2>
+                    <p>Based on statistical analysis, the most reliable indicators of exam performance are attendance, study hours, and past scores. Each of these has a strong correlation with exam results and extremely low p-values, which means they are not only related to performance but also consistently so. These factors should be the primary focus when identifying students who may need early support or intervention.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/identify-at-risk-student/chart%201.png" alt="Chart 1">
+                </section>
+
+                <section>
+                    <h2>2. Can we train a reliable model using part of the student data to predict outcomes for the rest?</h2>
+                    <p>Yes, the model developed using attendance, study hours, and previous scores is statistically reliable. It explains about 57% of the variation in exam scores, which is a strong result for educational data. The model as a whole is statistically significant and produces predictions that closely match actual outcomes when tested on new data.</p>
+                </section>
+
+                <section>
+                    <h2>3. How accurately can we predict exam scores for all students based on their attendance, study hours, and previous scores?</h2>
+                    <p>The model predicts exam scores with a high level of accuracy. The correlation between predicted and actual scores is around 0.77, indicating strong alignment. On average, the predictions are off by just 1.3 points, which is a very small margin in the context of academic assessments. This means the model can be confidently used for forecasting and planning.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/identify-at-risk-student/chart%203.png" alt="Chart 3">
+                </section>
+
+                <section>
+                    <h2>4. What are the predicted exam scores for students who are most at risk?</h2>
+                    <p>Students with the fewest study hours are predicted to score the lowest on average, at around 61.76. Those with the lowest attendance have an average predicted score of 62.89, while students with the lowest previous scores are expected to score slightly higher at 65.61. These predictions confirm that low attendance and minimal study time are more immediate warning signs than previous academic performance.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/identify-at-risk-student/chart%204%20-%20bar%20chart.png" alt="Chart 4 - Bar Chart">
+                </section>
+
+                <section>
+                    <h2>5. How much improvement in exam score can we expect if a student increases attendance, study time, or prior performance by 50% or 100%?</h2>
+                    <p>A 50% increase in attendance could improve a student’s exam score by nearly 8 points, while a 100% increase could raise it by over 15 points. Increasing study hours shows a moderate effect, with gains of about 3 points for a 50% increase and nearly 6 points for doubling study time. Previous scores have a smaller effect in the short term, leading to gains of 1.8 and 3.6 points, respectively. This shows that attendance is the most powerful lever for short-term improvement, followed by study habits.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/identify-at-risk-student/chart%205%20-%20bar%20chart.png" alt="Chart 5 - Bar Chart">
+                </section>
+
+                <section>
+                    <h2>6. How accurate is the model in identifying students who might underperform, and can it help us take action in time?</h2>
+                    <p>The model is very accurate in identifying students who may struggle. It has a strong correlation between predicted and actual scores (0.79) and a low average error of just 1.36 points. When a predicted score below 65 is used as a warning sign, the model identifies nearly one in four students as at risk. This means it can provide timely and actionable insights to teachers, allowing them to step in early and provide support before academic failure occurs.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/identify-at-risk-student/chart%206.png" alt="Chart 6">
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>Teachers can use a simple and reliable approach to identify students at risk of underperforming early in the semester. By monitoring three key indicators—attendance, study hours, and previous exam scores—teachers can detect students who are likely to struggle and take action before problems escalate. A predictive model based on these factors has proven to be both accurate and practical, with a strong alignment between predicted and actual exam scores. It can flag nearly one in four students as at risk, allowing for early intervention well before exam periods.</p>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>Track Attendance Consistently:</strong> Low attendance is the strongest indicator of poor academic outcomes. Teachers should set up early alerts for students who miss classes regularly and follow up with those students individually or through the school’s support system.</li>
+                        <li><strong>Monitor Study Effort:</strong> Encourage students to self-report or log their weekly study hours. Students with the lowest study time are predicted to score the lowest. Consider offering study planning sessions or time-management workshops.</li>
+                        <li><strong>Use Previous Exam Scores for Early Profiling:</strong> Although not as immediately influential as attendance and study time, past scores can help identify students who may need extra attention, especially when combined with current behavior patterns.</li>
+                        <li><strong>Use the Prediction Model for Early Risk Flagging:</strong> Apply the model by the second or third week of the semester using available attendance, study hours, and past performance. Students with predicted scores below 65 should be prioritized for support.</li>
+                        <li><strong>Focus Interventions on Boosting Attendance and Study Time:</strong> Simulation results show that improving attendance by 50–100% can raise exam scores by up to 15 points. Teachers should focus on strategies that improve classroom engagement and study discipline.</li>
+                        <li><strong>Provide Structured Support and Follow-Up:</strong> For students flagged as at-risk, offer follow-up in the form of peer tutoring, small-group instruction, or study accountability check-ins. Focus efforts where short-term improvements can yield the greatest impact.</li>
+                    </ul>
+                    <p>By acting early and focusing on measurable behaviors, teachers can shift student performance trajectories and reduce academic failure rates.</p>
+                </section>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+</body>
+</html>
