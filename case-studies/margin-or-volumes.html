@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Margin or Volume | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/margin-or-volume/cover%20image.png" alt="Margin or Volume Cover Image">
+                    <h1>Margin or Volume</h1>
+                    <p><strong>Subtitle:</strong> Which Drives Sales Growth More Effectively?</p>
+                </header>
+
+                <section>
+                    <h2>Overview</h2>
+                    <p>This analysis was conducted to help sales managers determine whether to focus on increasing product prices or driving higher sales volumes to boost total revenue. The central question is whether a margin-based strategy or a volume-based strategy has a greater impact on total revenue, enabling more informed decisions on where to allocate effort, promotions, and pricing adjustments. By examining the individual effects of price and quantity on sales outcomes, this report offers evidence-based insights into which lever contributes more effectively to revenue growth.</p>
+                    <p>Using a regression model, the study compares the strength of the relationship between unit price and quantity sold against total revenue. It evaluates which variables are statistically significant, tests how well the model predicts actual revenue, and explores how changes in price or volume influence revenue performance. These insights provide the foundation for prioritizing sales strategies—either by setting targeted pricing for high-margin products or scaling volume-based promotions for more stable growth. The goal is to guide decision-making with practical, data-driven evidence.</p>
+                </section>
+
+                <section>
+                    <h2>Question 1</h2>
+                    <p><strong>Which factor—price or quantity—shows a stronger relationship with total revenue, and are they too closely related to each other?</strong></p>
+                    <p>Price shows a stronger relationship with total revenue than quantity. The data reveals a high correlation between price and total revenue (0.85), while quantity shows a moderate correlation (0.33). This suggests that changes in price have a bigger impact on revenue than changes in quantity.</p>
+                    <p>The regression model supports this finding. Although both price and quantity are statistically significant predictors, price contributes more to revenue prediction. Importantly, the two variables are not too closely related to each other, meaning both can be included in the model without introducing multicollinearity or distortion.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/margin-or-volume/chart%201.png" alt="Chart 1">
+                </section>
+
+                <section>
+                    <h2>Question 2</h2>
+                    <p><strong>Which variables are statistically significant for predicting revenue, and should I focus only on those?</strong></p>
+                    <p>The regression analysis shows that both price and quantity are statistically significant for predicting total revenue. Their p-values are well below 0.05, indicating strong and reliable effects.</p>
+                    <p>For practical planning, it is best to focus on these two variables, as they directly influence revenue. Other variables such as payment method or customer location may be useful for segmentation, but they do not meaningfully improve prediction accuracy in this context.</p>
+                </section>
+
+                <section>
+                    <h2>Question 3</h2>
+                    <p><strong>What is the formula that predicts total revenue based on price and quantity, and how confident can I be in using it?</strong></p>
+                    <p>The regression equation is:<br>
+                    Total Revenue = 299.28 × Quantity + 2.80 × Price − 840.48</p>
+                    <p>This equation shows the expected increase in total revenue based on changes in quantity and price. Each additional unit sold is associated with an increase of about 299.28 in revenue, while each additional dollar in price adds about 2.80.</p>
+                    <p>You can be confident using this regression model. It explains 83.4% of the variation in total revenue, a strong indicator of fit. Both coefficients are statistically significant, and the confidence intervals are narrow, suggesting reliable and stable estimates.</p>
+                </section>
+
+                <section>
+                    <h2>Question 4</h2>
+                    <p><strong>What are the predicted total revenues for each order, and how do they compare to the actual revenues recorded?</strong></p>
+                    <p>The regression model was applied to 250 orders. On average, predicted revenues closely match actual values, with very low bias. The average residual—the difference between actual and predicted revenue—is near zero, indicating balanced performance across most records.</p>
+                    <p>However, some orders showed larger deviations, particularly at the extreme ends of price and quantity. These outliers may reflect other influencing factors not captured in the model, such as discounts or product type.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/margin-or-volume/chart%204.png" alt="Chart 4">
+                </section>
+
+                <section>
+                    <h2>Question 5</h2>
+                    <p><strong>How much revenue should we expect from orders with the lowest and highest price or quantity, and do these outliers follow expected patterns?</strong></p>
+                    <p>The regression model shows less accurate results for extreme values. For example:</p>
+                    <ul>
+                        <li>The order with the lowest price was overestimated by about 230 units of revenue.</li>
+                        <li>The highest-priced order was underestimated by over 1,600 units.</li>
+                        <li>The highest-quantity order was underestimated by nearly 2,000 units.</li>
+                    </ul>
+                    <p>These results suggest that the model underperforms for high-ticket or bulk orders. This may be due to missing features like product categories, discount levels, or nonlinear pricing behaviors that were not included in this version of the model.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/margin-or-volume/chart%205.png" alt="Chart 5">
+                </section>
+
+                <section>
+                    <h2>Question 6</h2>
+                    <p><strong>How would changes in price or quantity—such as a 50% increase or 100% drop—affect total revenue, and which lever has the greater financial impact?</strong></p>
+                    <p>The regression model shows that both price and quantity changes significantly influence total revenue. A 100% price increase results in a revenue gain of 961 units, while a 100% quantity increase results in a gain of 760 units. Conversely, a 100% drop in either price or quantity leads to near or total loss of revenue.</p>
+                    <p>While price adjustments create a larger immediate impact, quantity changes offer more predictable and scalable growth. In practical terms, raising prices may generate short-term gains, but increasing sales volume may lead to more sustainable long-term performance.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/margin-or-volume/chart%206.png" alt="Chart 6">
+                </section>
+
+                <section>
+                    <h2>Question 7</h2>
+                    <p><strong>How accurate is this regression model, and can I trust it for planning future sales strategies?</strong></p>
+                    <p>The regression model is accurate enough to support forward-looking sales planning. It accounts for 83.4% of the variation in total revenue, and both price and quantity are statistically significant. Prediction errors are generally small and centered around zero.</p>
+                    <p>The model performs well for standard orders but is less reliable for outlier cases involving very high prices or volumes. These may require model refinement with more variables or non-linear components. Still, the current model provides strong foundational insight for strategic planning.</p>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>Pursuing a volume-based strategy is the more stable and scalable path forward, especially when supported by targeted margin enhancements on select products or segments. This hybrid approach captures the strengths of both strategies and is grounded in your actual sales data.</p>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <p>Prioritize volume-driven strategies to support consistent revenue growth, such as bundling, upselling, and multi-unit offers. These tactics take advantage of the strong and stable relationship between quantity sold and total revenue.</p>
+                    <p>At the same time, apply targeted pricing and discounting to strengthen margins where appropriate:</p>
+                    <ul>
+                        <li>Set targeted pricing for high-performing or inelastic products—those that maintain demand even at higher prices. Use the regression model to identify where price changes are most effective.</li>
+                        <li>Design discounts strategically by customer or product segment. Emphasize volume-based discounts (e.g., “buy 3 get 1 free”) rather than general markdowns to maintain profitability while increasing units sold.</li>
+                        <li>Avoid extreme price adjustments on low-margin or high-variability items. Use small, incremental changes to test customer response and refine pricing tactics.</li>
+                    </ul>
+                    <p>This combination of scalable volume tactics with selective margin plays provides a balanced, data-driven path for improving total revenue while managing business risk.</p>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+</body>
+</html>
