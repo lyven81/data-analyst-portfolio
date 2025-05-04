@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicting Depression Risk in Students | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-student-depressiion-risk/cover%20image.png" alt="Depression Risk Cover Image">
+                    <h1>Predicting Depression Risk in Students</h1>
+                    <p>Subtitle: A Data-Driven Tool for Early Intervention</p>
+                </header>
+                <section>
+                    <h2>Overview</h2>
+                    <p>Student depression is often influenced by everyday challenges such as academic pressure, financial stress, long study hours, and poor dietary habits. This analysis helps mental health professionals detect early signs by examining how these factors relate to depression and whether they can be used to predict risk reliably.</p>
+                    <p>Using logistic regression, the study finds that all four factors are statistically significant predictors of depression. The model is accurate, easy to interpret, and practical for mental health programs, helping identify students who would benefit from early support and targeted interventions.</p>
+                </section>
+                <section>
+                    <h2>Key Factors Associated with Depression Risk</h2>
+                    <p>The analysis shows that four key factors are closely linked to depression among students: academic pressure, financial stress, work/study hours, and poor dietary habits. Academic pressure stands out with the strongest correlation, meaning that students who feel more pressure in their studies are more likely to show signs of depression. Financial stress and long hours spent studying or working also show a noticeable connection. Poor dietary habits are linked too, but to a lesser degree.</p>
+                    <p>To ensure these predictors aren’t too similar or overlapping (which could confuse the model), we checked for multicollinearity using Variance Inflation Factors (VIF). All VIF values were well below the threshold, confirming that these variables offer distinct information and can safely be used together in a predictive model.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-student-depressiion-risk/chart%201%20-%20bar%20chart.png" alt="Key Factor Correlation Bar Chart">
+                </section>
+                <section>
+                    <h2>Statistically Significant Predictors for Mental Health Assessment</h2>
+                    <p>All four predictors — academic pressure, financial stress, work/study hours, and poor dietary habits — were found to be statistically significant. This means their influence on depression is not due to random chance. In simple terms, these factors consistently show a real and meaningful connection to depression across the student population.</p>
+                    <p>Because these predictors are not only strong but also statistically reliable, they can be confidently included in a mental health screening framework to identify at-risk students and offer timely support.</p>
+                </section>
+                <section>
+                    <h2>Building a Reliable Depression Risk Prediction Model</h2>
+                    <p>The logistic regression model built using these four predictors performs well. It explains around 30% of the variation in depression risk — which is considered a strong result for this type of model. All predictors contribute significantly to the model, and the training process completed successfully.</p>
+                    <p>This means we have a dependable tool that uses key student factors — stress, workload, and lifestyle habits — to estimate how likely a student is to be facing depression. Schools and universities can use this model to prioritize students who may benefit from early counseling or intervention.</p>
+                </section>
+                <section>
+                    <h2>Identifying High-Risk Student Profiles</h2>
+                    <p>Students with high academic pressure, high financial stress, long study or work hours, and poor dietary habits are the most likely to experience depression. For example, a student with the highest levels in all these areas had a predicted depression probability of 98.5%, indicating a very high risk.</p>
+                    <p>These profiles help identify students who should be prioritized for mental health support. The model allows schools to move from a reactive to a proactive approach, offering help before students reach a crisis point.</p>
+                </section>
+                <section>
+                    <h2>Impact of Individual Factors on Depression Risk</h2>
+                    <p>The model shows that changing even one factor can make a meaningful difference. Increasing academic pressure by 50% raises the risk of depression from 31% to 85%. Financial stress has a similar impact, raising risk from 40% to nearly 79%. Work/study hours and poor dietary habits also influence the outcome, though to a lesser degree.</p>
+                    <p>This means that small improvements in workload balance, stress management, or healthy eating can reduce depression risk. Schools can use this insight to develop targeted wellness programs.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-student-depressiion-risk/chart%204%20-%20heat%20map.png" alt="Heat Map of Factor Impact">
+                </section>
+                <section>
+                    <h2>Model Reliability and Practical Use</h2>
+                    <p>The model is highly reliable. It correctly identifies about 86% of students overall. When it flags a student as at risk, it’s right nearly 88% of the time. It also successfully detects over 83% of actual depression cases. These results suggest that the model can be trusted to assess student mental health risk accurately.</p>
+                    <p>In addition, it uses predictors that are simple to collect through surveys, such as stress levels and study hours. Its transparency — showing how each factor contributes — allows mental health professionals to trust and explain its output confidently. This makes the model practical for real use in schools and universities, especially where resources are limited and early detection is critical.</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-student-depressiion-risk/chart%205%20-%20bar%20chart.png" alt="Model Accuracy Bar Chart">
+                </section>
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>The findings reveal that depression among students is most strongly associated with high academic pressure, financial stress, long hours of study or work, and poor dietary habits. These factors not only correlate significantly with depression but also show measurable effects on the predicted likelihood of experiencing it. Notably, academic pressure emerges as the most influential, with even moderate increases dramatically raising depression risk.</p>
+                    <p>These patterns offer clear, data-backed early warning signs. Students facing multiple high-risk conditions—especially combinations of academic and financial pressure, extended workloads, and poor lifestyle habits—should be closely monitored and supported. The model’s reliability and accuracy (over 85% in multiple performance metrics) confirm it can be used effectively to screen and prioritize mental health interventions.</p>
+                </section>
+                <section>
+                    <h2>Recommendations</h2>
+                    <h3>Who Should Receive Priority Support?</h3>
+                    <ul>
+                        <li>Students with high academic pressure and long study hours: These students consistently show the highest predicted risk and should be the first group identified for screening and proactive support.</li>
+                        <li>Students facing both academic and financial stress: This combination leads to compounding emotional strain and should trigger early intervention.</li>
+                        <li>Students with poor dietary habits and limited time for self-care: While dietary habits have a milder effect individually, they still raise depression risk and signal neglected well-being.</li>
+                    </ul>
+                    <h3>What Intervention Methods Are Most Appropriate?</h3>
+                    <ul>
+                        <li>Stress Management Programs: Introduce resilience-building workshops, mindfulness sessions, or 1:1 counseling to help students manage academic and financial stress.</li>
+                        <li>Time-Management and Workload Balancing Support: Offer practical support for planning schedules, reducing unnecessary academic load, and creating sustainable routines.</li>
+                        <li>Nutritional Guidance and Wellness Education: Promote healthy eating through cafeteria offerings, wellness campaigns, or workshops highlighting the mental health impact of nutrition.</li>
+                        <li>Peer Support and Group Forums: Foster safe spaces where students can share struggles and coping strategies, reducing isolation and building community care.</li>
+                    </ul>
+                </section>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+</body>
+</html>
