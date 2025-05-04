@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who’s Likely to Quit | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img src="https://github.com/lyven81/data-analyst-portfolio/blob/main/images/who-is-likely-to-quit/cover%20image.png">
+                    <h1>Who’s Likely to Quit</h1>
+                    <p>Find out how data-driven employee profiling can help business owners.</p>
+                </header>
+
+                <section>
+                    <h2>Overview</h2>
+                    <p>Employee resignations, especially among skilled or high-potential staff, can disrupt operations and drive up replacement costs. This analysis helps business owners identify which employees are most likely to quit and the factors influencing those decisions.</p>
+                    <p>Using logistic regression, we examined patterns across tenure, salary tier, age, experience, location, bench status, education, and gender. The findings offer actionable insights for targeted retention—enabling employers to focus efforts where risk is highest and talent is most valuable.</p>
+                </section>
+
+                <section>
+                    <h2>Key Questions & Findings</h2>
+                    <p><strong>Q1: Can we build a reliable model to predict which employees are most at risk of quitting?</strong><br>
+                    Yes. The model explains 12.1% of variation in resignations—acceptable for behavioral data—and all predictors are statistically significant. Key drivers include gender, tenure, city, education level, pay tier, bench status, and age. The results align with workplace realities: benched employees face higher quit risk, while longer tenure and higher pay correlate with retention.</p>
+
+                    <p><strong>Q2: How accurate is this model, and can it guide business decisions?</strong><br>
+                    With 85.67% prediction accuracy, the model is dependable for real-world use. It correctly identified 36 actual quitters, and scores for precision (56%), recall (47%), and F1 (51%) show a balanced ability to detect resignation risk and guide HR actions.</p>
+
+                    <p><strong>Q3: Are female employees more likely to quit than males?</strong><br>
+                    Yes. Female employees show a 75.81% quit probability compared to 54.83% for males—a 21-point gap. This highlights a need for gender-specific retention strategies, including flexible work options and career development support.</p>
+
+                    <p><strong>Q4: Are employees aged 25 and below more likely to quit?</strong><br>
+                    Yes. Younger employees have a 69.09% chance of quitting, compared to 49.73% for older colleagues. This suggests early-career staff may benefit from structured onboarding, mentorship, and clear advancement pathways.</p>
+
+                    <p><strong>Q5: How does tenure affect quit likelihood?</strong><br>
+                    Resignation risk declines sharply with tenure. Employees with one year of service have a 72.73% chance of quitting, while those with 15 years fall to 15.87%. Retention efforts are most critical during the early years.</p>
+
+                    <p><strong>Q6: Does domain experience reduce resignation risk?</strong><br>
+                    Yes. Employees with no domain experience have a 67.46% quit probability, while those with 10 years drop to 29.78%. Role familiarity appears to enhance commitment, supporting internal mobility and training programs.</p>
+
+                    <p><strong>Q7: Do lower-paid employees quit more often?</strong><br>
+                    Yes. Tier 3 employees (lowest salary) have a 64.44% chance of quitting versus 39.92% for Tier 1—a 24.5-point gap. This reinforces the value of competitive pay and tailored retention strategies for lower-tier staff.</p>
+
+                    <p><strong>Q8: How does education level affect quit risk?</strong><br>
+                    PhD holders are the least likely to quit (38.85%), while Master’s degree holders are the most likely (64.16%). Bachelor's degree holders fall in between (48.39%). Clear career paths and role alignment may improve engagement for Master's holders.</p>
+
+                    <p><strong>Q9: Are benched employees more likely to quit?</strong><br>
+                    Yes. Benched staff have a 65.54% quit probability, compared to 48.33% for actively assigned employees. This gap highlights the need to keep benched employees engaged through training or temporary assignments.</p>
+
+                    <p><strong>Q10: What is the profile of employees most and least likely to quit?</strong><br>
+                    Most likely to quit: a young, male employee in Pune, with low pay, no domain experience, and benched status (88% probability).<br>
+                    Least likely: a senior female employee in New Delhi with long tenure, high salary, domain expertise, and active assignment (18.73%).</p>
+                </section>
+
+                <section>
+                    <h2>Visualization</h2>
+                    <p>Take a closer look at the data visualizations below:</p>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/e-employee-quit-risk/01.png" alt="Quit Probability by Demographic Factors">
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/e-employee-quit-risk/02.png" alt="Tenure and Quit Risk Visualization">
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>Resignation risk is highest among younger, less experienced, lower-paid, and benched employees. In contrast, experienced, well-compensated staff with stable assignments are more likely to stay. These insights help business owners strengthen workforce planning and direct retention resources where they matter most.</p>
+                </section>
+
+                <section>
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li><strong>High-Risk But Valuable – Retain:</strong>
+                            <ul>
+                                <li>Early-career employees: Invest in mentorship and development programs.</li>
+                                <li>Tier 3 staff: Review compensation and create progression plans.</li>
+                                <li>Master’s holders: Align responsibilities with career expectations.</li>
+                                <li>Benched employees: Offer training or short-term projects to maintain engagement.</li>
+                            </ul>
+                        </li>
+                        <li><strong>High-Risk and Lower Strategic Value – Reassess Fit:</strong>
+                            <ul>
+                                <li>Staff with low performance and limited engagement may benefit from role realignment or separation if retention efforts fail.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Low-Risk and High Value – Strengthen Loyalty:</strong>
+                            <ul>
+                                <li>Experienced, long-serving employees with domain expertise should be recognized and supported through leadership paths and flexible benefits.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+</body>
+</html>
