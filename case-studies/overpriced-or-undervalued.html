@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overpriced or Undervalued? | Lee Yih Ven</title>
+  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="left-column">
+      <header>
+        <h1>Lee Yih Ven</h1>
+        <h2>Data Analytics Portfolio</h2>
+      </header>
+      <section class="intro">
+        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+      </section>
+      <section class="contact">
+        <h2>Contact</h2>
+        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
+        <ul>
+          <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
+          <li>Phone: +6014-9207099</li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="right-column">
+      <section class="case-study-content">
+        <header>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalued-or-overpriced/cover%20image.png" alt="Gold Case Study Cover">
+          <h1>Overpriced or Undervalued?</h1>
+          <p>What the Trend Tells Us About Gold Today</p>
+        </header>
+
+        <section>
+          <h2>Overview</h2>
+          <p>Retail investors often ask: Is gold currently undervalued or overpriced? This case study answers that question using a simple trend-based model. By comparing actual gold prices to a model-predicted "fair value," we help investors spot when prices are too low, too high, or just right.</p>
+          <p>Our analysis shows that gold typically follows a steady upward trend, with temporary drops during crises. Seasonal effects like summer slowdowns or year-end rallies have little impact. This model helps investors make clearer decisions—whether to buy, hold, or wait—based on how far the current price deviates from its long-term trend.</p>
+        </section>
+
+        <section>
+          <h2>Q1: How closely does gold’s price follow a long-term trend?</h2>
+          <p>Gold’s price steadily increases over time. Our model found a strong link between time and price growth—confirming gold’s long-term upward trend.</p>
+          <p>The "Open" price closely matches the closing price, but using both in the model causes duplication. Seasonal effects, like crisis dips or summer slowdowns, don’t show meaningful influence.</p>
+          <p><strong>Investor insight:</strong> Gold tends to follow a consistent long-term trend. Short-term or seasonal factors have minor impact.</p>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalued-or-overpriced/chart%201.png" alt="Long-Term Trend Chart">
+        </section>
+
+        <section>
+          <h2>Q2: Are there repeating cycles in gold prices?</h2>
+          <p>Yes, gold prices exhibit both long-term and short-term repeating patterns. Major corrections occur every 7–10 years, often linked to economic crises like the dot-com bubble, 2008 financial crisis, or COVID-19.</p>
+          <p>Short-term volatility clusters appear every 1–2 years and are often tied to geopolitical events or policy shifts. Seasonal trends—such as summer slowdowns or year-end rallies—are observable but weak.</p>
+          <p><strong>Investor insight:</strong> Recognizing long-term corrections and short-term clusters helps with entry timing. Seasonal effects are secondary.</p>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalued-or-overpriced/chart%202.png" alt="Repeating Cycles Chart">
+        </section>
+
+        <section>
+          <h2>Q3: How strong is the connection between seasonal cycles and gold prices?</h2>
+          <p>The connection is weak. Correlation analysis shows season_short_term_volatility has a slight negative effect on price, while the others are near zero. These patterns do not have predictive strength when modeled individually.</p>
+          <p><strong>Investor insight:</strong> Seasonal indicators are not meaningful drivers of price movement. Rely instead on long-term trend alignment.</p>
+        </section>
+
+        <section>
+          <h2>Q4: Which factors are statistically reliable?</h2>
+          <p>We looked at how strongly each variable affects gold’s price and whether the relationship is statistically solid:</p>
+          <ul>
+            <li><strong>Open:</strong> Strongest relationship, best used for current analysis.</li>
+            <li><strong>time_index:</strong> Reliable trend indicator unless Open is already used.</li>
+            <li><strong>season_short_term_volatility:</strong> Adds value in modeling crisis periods.</li>
+            <li><strong>Other seasonal effects:</strong> Not reliable predictors.</li>
+          </ul>
+          <p><strong>Investor insight:</strong> For long-term models, use time_index or Open (not both). Add short-term volatility as a crisis indicator. Ignore weak seasonal variables.</p>
+        </section>
+
+        <section>
+          <h2>Q5: Can this model reliably track historical behavior?</h2>
+          <p>Yes. The model explains 77.5% of gold’s price movement over time. It shows gold increases by about $0.12 per week, which matches real-world patterns. Crisis periods show only a minor dip.</p>
+          <p>However, the model does not react well to sudden changes. Its strength lies in long-term patterns, not short-term predictions.</p>
+          <p><strong>Investor insight:</strong> This model is useful for judging long-term value. Use other tools if you're trying to predict short-term price swings.</p>
+        </section>
+
+        <section>
+          <h2>Q6: What might happen under different scenarios?</h2>
+          <p>Model predictions across five scenarios:</p>
+          <ul>
+            <li>12 weeks ahead: $308.63 under normal trend.</li>
+            <li>Week 1450, normal vs. crisis: $274.28 vs. $271.81. Crisis leads to minor –$2.47 dip.</li>
+            <li>2015–2017 in-sample check: Model underestimates during strong rallies.</li>
+            <li>2008 crisis: Estimated drop of –$2.13.</li>
+            <li>Current market vs. fair value: Model = $306.21, actual = $300.00 (–$6.21 undervalued).</li>
+          </ul>
+          <p><strong>Investor insight:</strong> The model supports moderate buy signals when prices fall below trend. Crises cause short dips but do not erase long-term growth.</p>
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalued-or-overpriced/chaft%206.png" alt="Scenario Comparison Chart">
+          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalued-or-overpriced/Q6%20prediction%203.png" alt="Prediction Accuracy Chart">
+        </section>
+
+        <section>
+          <h2>Q7: Can this model be trusted?</h2>
+          <p>Yes—for understanding long-term value. It tracks gold’s overall trend well but doesn’t handle short-term price moves or volatility.</p>
+          <p><strong>Key stats:</strong></p>
+          <ul>
+            <li>Explains 77.5% of price movement</li>
+            <li>Long-term trend is statistically solid</li>
+            <li>Misses quick upswings or downswings</li>
+          </ul>
+          <p><strong>Strengths:</strong></p>
+          <ul>
+            <li>Reliable for spotting long-term patterns</li>
+            <li>Easy to interpret</li>
+            <li>Good for identifying undervalued price levels</li>
+          </ul>
+          <p><strong>Limitations:</strong></p>
+          <ul>
+            <li>Doesn’t predict short-term price spikes</li>
+            <li>Doesn’t account for market momentum or news events</li>
+          </ul>
+          <p><strong>Investor takeaway:</strong> Use this model to spot when gold moves away from its usual path. Combine it with news or market signals for short-term decisions.</p>
+        </section>
+
+        <section>
+          <h2>Final Guidance: When Is Gold Undervalued or Overpriced?</h2>
+          <p><strong>Gold is likely undervalued when:</strong></p>
+          <ul>
+            <li>Market price falls significantly below predicted value (e.g., –$6.21 deviation)</li>
+            <li>Price aligns with historical crisis dips (e.g., 2008, 2020)</li>
+            <li>Residuals trend negative after sharp pullbacks</li>
+          </ul>
+          <p><strong>Gold may be overpriced when:</strong></p>
+          <ul>
+            <li>Price significantly exceeds trend for extended periods</li>
+            <li>The model underpredicts during rallies</li>
+            <li>Residuals show sustained positive clusters</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Recommendations</h2>
+          <p>Note: Fair value is calculated using the model’s predicted closing price, derived from a linear regression that factors in time progression and short-term crisis effects. When the actual market price deviates significantly from this predicted value, it may indicate undervaluation or overpricing.</p>
+          <p>At the time of reporting, the model-calculated fair value is approximately $306.21, based on the most recent time index and assuming no short-term crisis effect. However, this estimate is subject to change over time as new data becomes available, especially with shifts in trend direction or market volatility.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Condition</th>
+                <th>Suggested Action</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Price below model fair value</td>
+                <td>Buy</td>
+                <td>Indicates undervaluation with upside potential</td>
+              </tr>
+              <tr>
+                <td>Price near model fair value</td>
+                <td>Hold</td>
+                <td>Aligns with long-term trend; no urgent signal</td>
+              </tr>
+              <tr>
+                <td>Price above model fair value + volatility</td>
+                <td>Wait</td>
+                <td>Signals speculative risk; wait for a pullback</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+      </section>
+    </main>
+  </div>
+  <footer>
+    <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+  </footer>
+</body>
+</html>
