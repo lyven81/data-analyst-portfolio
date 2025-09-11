@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistical Testing | Lee Yih Ven's Data Analytics Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    nav a {
+      color: #007BFF;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 20px;
+      vertical-align: top;
+      text-align: left;
+      width: 50%;
+    }
+    td h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    td h3 a {
+      color: #333;
+      text-decoration: none;
+    }
+    td h3 a:hover {
+      color: #007BFF;
+    }
+    td p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    .case-study-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .case-study-links a {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #f5f5dc;
+      color: #333;
+      text-decoration: none;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .case-study-links a:hover {
+      background-color: #e8e8dc;
+      transform: translateY(-2px);
+    }
+    .empty-cell {
+      visibility: hidden;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #777;
+    }
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      td {
+        width: 100%;
+        display: block;
+      }
+      table, tbody, tr {
+        display: block;
+      }
+      .case-study-links {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Statistical Testing</h1>
+      <p>Hypothesis testing and statistical significance analysis</p>
+    </header>
+
+    <nav>
+      <a href="/data-analyst-portfolio/index.html">← Back to Portfolio</a>
+    </nav>
+
+    <table>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Analyzing Ads - Innerwear Campaign</a></h3>
+          <p>A/B testing framework for intimate apparel advertising effectiveness using statistical significance testing.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/analyzing-ads-innerwear-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Are Tunics Truly the Top Seller?</a></h3>
+          <p>Fashion retail hypothesis testing using t-tests and ANOVA to validate product performance claims.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/are-tunics-best-sellers-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/evaluate-discount-voucher-women-lingerie.html">Evaluating Discount Vouchers - Women's Lingerie</a></h3>
+          <p>Promotion effectiveness testing using chi-square and proportion tests for lingerie retail campaigns.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/evaluate-discount-voucher-women-lingerie.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/evaluate-discount-voucher-women-lingerie-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Nasi Lemak vs Kopi-O Preference Analysis</a></h3>
+          <p>Malaysian food preference study using statistical testing to understand cultural dining patterns.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/nasi-lemak-kopi-o-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/sentiment-analysis-jewelry-product-reviews.html">Sentiment Analysis - Jewelry Product Reviews</a></h3>
+          <p>Natural language processing with statistical validation for jewelry e-commerce review analysis.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/sentiment-analysis-jewelry-product-reviews.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/sentiment-analysis-jewelry-product-reviews-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/video-game-sales-trend-analysis.html">Video Game Sales Trend Analysis</a></h3>
+          <p>Gaming industry trend analysis using Mann-Whitney U tests and seasonal significance testing.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/video-game-sales-trend-analysis.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/video-game-sales-trend-analysis-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">What Makes a Song Go Viral?</a></h3>
+          <p>Music industry analytics using correlation analysis and significance testing for viral content factors.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/what-makes-a-song-go-viral-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Working Hours Analysis - Footwear Shop</a></h3>
+          <p>Retail operations optimization using ANOVA and post-hoc testing for staff scheduling effectiveness.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/working-hours-analysis-footwear-shop-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <footer>
+    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+  </footer>
+</body>
+</html>

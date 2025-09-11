@@ -1,232 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Series Analysis & Forecasting | Lee Yih Ven's Data Analytics Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .category-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .tagline {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #666;
-        }
-        nav {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        nav a {
-            color: #007BFF;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2rem;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        td {
-            padding: 20px;
-            vertical-align: top;
-            text-align: left;
-        }
-        td h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        td p {
-            font-size: 1rem;
-            color: #555;
-        }
-        td a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        td a:hover {
-            text-decoration: underline;
-        }
-        .case-study-links {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .case-study-links a {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #f5f5dc;
-            color: #333;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .case-study-links a:hover {
-            background-color: #daa520;
-            color: white;
-            border-color: #daa520;
-            transform: translateY(-1px);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 20px;
-        }
-        @media (max-width: 768px) {
-            table {
-                display: block;
-            }
-            tr {
-                display: block;
-                margin-bottom: 20px;
-            }
-            td {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                box-sizing: border-box;
-            }
-            td h3 {
-                font-size: 1.3rem;
-            }
-            td p {
-                font-size: 1rem;
-            }
-            nav a {
-                font-size: 1rem;
-            }
-            header h1 {
-                font-size: 2rem;
-            }
-            .category-title {
-                font-size: 1.5rem;
-            }
-            .tagline {
-                font-size: 1rem;
-            }
-            .case-study-links {
-                flex-direction: column;
-                gap: 5px;
-            }
-            .case-study-links a {
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Series Analysis | Lee Yih Ven's Data Analytics Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    nav a {
+      color: #007BFF;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 20px;
+      vertical-align: top;
+      text-align: left;
+      width: 50%;
+    }
+    td h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    td h3 a {
+      color: #333;
+      text-decoration: none;
+    }
+    td h3 a:hover {
+      color: #007BFF;
+    }
+    td p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    .case-study-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .case-study-links a {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #f5f5dc;
+      color: #333;
+      text-decoration: none;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .case-study-links a:hover {
+      background-color: #e8e8dc;
+      transform: translateY(-2px);
+    }
+    .empty-cell {
+      visibility: hidden;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #777;
+    }
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      td {
+        width: 100%;
+        display: block;
+      }
+      table, tbody, tr {
+        display: block;
+      }
+      .case-study-links {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-
+  <div class="container">
     <header>
-        <h1>Lee Yih Ven</h1>
-        <p class="category-title">Time Series Analysis & Forecasting</p>
-        <p class="tagline">Spotting patterns in data to see what comes next.</p>
+      <h1>Time Series Analysis</h1>
+      <p>Forecasting trends and patterns through temporal data analysis</p>
     </header>
 
     <nav>
-        <a href="/data-analyst-portfolio/index.html">Home</a>
-        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      <a href="/data-analyst-portfolio/index.html">← Back to Portfolio</a>
     </nav>
 
-    <div class="container">
-        <table>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/when-to-buy-google.html">When to Buy and Sell Google Stock</a></h3>
-                    <p>Discover how seasonal patterns in Google stock can guide optimal investment timing through time series decomposition.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/when-to-buy-google.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/when-to-buy-google-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/pattern-behind-price.html">Patterns Behind the Price - Microsoft Stock</a></h3>
-                    <p>Explore Microsoft's stock price growth patterns and crisis resilience through comprehensive time series analysis.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/pattern-behind-price.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/pattern-behind-price-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/what-sells-best.html">What Sells Best and When - Pizza Sales</a></h3>
-                    <p>A data-driven guide to improving pizza sales and operations through temporal sales pattern analysis.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/what-sells-best.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/what-sells-best-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/ron95.html">RON95 Fuel Price Volatility Analysis</a></h3>
-                    <p>Comprehensive analysis of Malaysian fuel price dynamics examining volatility and government policy impacts.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/ron95.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/ron95-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap? - Google Price Fluctuations</a></h3>
-                    <p>Decode Google's price fluctuations using time series analysis to distinguish sustainable trends from market traps.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Forecasting Beverage Sales in Kota Kinabalu</a></h3>
-                    <p>Sales forecasting analysis for beverage distribution using time series modeling and seasonal decomposition.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/forecasting-beverage-sales-kota-kinabalu-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <table>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Forecasting Beverage Sales in Kota Kinabalu</a></h3>
+          <p>Chinese New Year seasonal demand analysis for beverage retailers using time series forecasting models.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/forecasting-beverage-sales-kota-kinabalu-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Forecasting Food Demand - Kopitiam</a></h3>
+          <p>Traditional Malaysian coffeehouse demand forecasting using historical sales patterns and seasonal adjustments.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/forecasting-food-demand-kopitiam.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/forecasting-food-demand-kopitiam-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Forecasting Salesman Performance - Car Showroom</a></h3>
+          <p>Automotive sales performance prediction using historical trends and seasonal patterns.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/forecasting-salesman-performance-car-showroom.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/forecasting-salesman-performance-car-showroom-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Fruit Sales Forecast - October 2024</a></h3>
+          <p>Seasonal fruit market demand forecasting using ARIMA and exponential smoothing models.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/fruit-sales-forecast-october-2024-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/predicting-sales-trend-grocery-store.html">Predicting Sales Trends - Grocery Store</a></h3>
+          <p>Comprehensive grocery retail forecasting with multi-variate time series analysis and demand planning.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/predicting-sales-trend-grocery-store.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/predicting-sales-trend-grocery-store-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/ron95.html">RON95 Fuel Price Volatility Analysis</a></h3>
+          <p>Malaysian petrol price forecasting using economic indicators and seasonal decomposition techniques.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/ron95.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/ron95-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/too-hot-to-harvest.html">Too Hot to Harvest - Agricultural Climate Analysis</a></h3>
+          <p>Climate impact forecasting on agricultural yields using temperature and precipitation time series data.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/too-hot-to-harvest.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/too-hot-to-harvest-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+        <td>
+          <h3><a href="/data-analyst-portfolio/case-studies/trading-volume-price-changes.html">Trading Volume & Price Changes Analysis</a></h3>
+          <p>Financial market trend analysis using high-frequency trading data and volatility forecasting models.</p>
+          <div class="case-study-links">
+            <a href="/data-analyst-portfolio/case-studies/trading-volume-price-changes.html">Read More →</a>
+            <a href="/data-analyst-portfolio/dashboards/trading-volume-price-changes-dashboard.html">View Dashboard</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-    <footer>
-        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-    </footer>
-
+  <footer>
+    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+  </footer>
 </body>
 </html>
