@@ -1,158 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Hidden Power of Affiliates | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/hidden-power-of-affliate-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/cover%20image.png" alt="Affiliate Marketing Cover Image">
-                    <h1>The Hidden Power of Affiliates</h1>
-                    <p>Should You Invest in Affiliate Marketing?</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>In a competitive environment where maximizing sales growth is critical, this analysis was undertaken to help the company optimize its marketing investments. The primary business challenge is identifying whether increasing spending on Affiliate Marketing—the channel showing the strongest preliminary impact—can meaningfully drive product sales. By quantifying the relationship between Affiliate Marketing spend and units sold, the company aims to predict future sales uplift and guide smarter budget allocation.</p>
-                    <p>This case study provides clear, data-driven insights to inform marketing decisions. It evaluates how Affiliate Marketing spending influences sales, whether the relationship is statistically reliable, and how much additional sales can be expected with greater investment. By building a predictive model, the company can forecast returns under different spending scenarios and recommend strategies to maximize the effectiveness of marketing resources.</p>
-                </section>
-
-                <section>
-                    <h2>Key Question 1</h2>
-                    <p><strong>How strongly does Affiliate Marketing spending explain changes in Product Sold?</strong></p>
-                    <p>The R-squared (R²) value from the regression analysis is 0.374, indicating that Affiliate Marketing spending explains about one-third of the variation in Product Sold. This suggests a moderate relationship: while Affiliate Marketing spend contributes significantly to sales, other factors—such as product quality, seasonal demand, customer experience, and other marketing channels—also play substantial roles.</p>
-                    <p>From a marketing management perspective, the results support increasing investment in Affiliate Marketing to drive additional sales. However, it is equally important to maintain a broader marketing strategy to address other sales drivers.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/chart%201%20-%20scatter%20plot.png" alt="Scatter Plot - Affiliate Spend vs Sales">
-                </section>
-
-                <section>
-                    <h2>Key Question 2</h2>
-                    <p><strong>Is the relationship between Affiliate Marketing spending and Product Sold statistically significant?</strong></p>
-                    <p>Yes, the relationship is statistically significant. The p-value for Affiliate Marketing spend is 0.000, well below the 0.05 threshold. This strong result confirms that changes in Affiliate Marketing spending are reliably associated with changes in Product Sold and not due to random chance.</p>
-                    <p>This provides marketing managers with a high level of confidence to recommend budget increases for Affiliate Marketing, knowing that these investments are strongly linked to measurable sales outcomes.</p>
-                </section>
-
-                <section>
-                    <h2>Key Question 3</h2>
-                    <p><strong>What is the estimated increase in Product Sold for each additional $1 spent on Affiliate Marketing?</strong></p>
-                    <p>According to the regression model, the slope coefficient for Affiliate Marketing spend is 3.7486. This means that for every additional $1 invested, the company can expect to sell approximately 3.75 more units.</p>
-                    <p>For instance, a $1,000 increase in Affiliate Marketing spend is estimated to result in about 3,750 additional units sold. This predictable relationship enables precise budgeting and forecasting for future marketing initiatives.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/chart%203%20-%20line%20chart.png" alt="Line Chart - Predicting Sales Increase">
-                </section>
-
-                <section>
-                    <h2>Key Question 4</h2>
-                    <p><strong>Can we create a simple formula to predict Product Sold based on Affiliate Marketing spend?</strong></p>
-                    <p>Yes, a simple predictive formula has been established based on the regression results:</p>
-                    <p><em>Product Sold = (3.7486 × Affiliate Marketing Spend) + 5215.6016</em></p>
-                    <p>Where:</p>
-                    <ul>
-                        <li>3.7486 is the expected increase in units sold per $1 spent.</li>
-                        <li>5215.6016 represents the baseline level of sales without additional Affiliate Marketing spending.</li>
-                    </ul>
-                    <p>Using this formula, marketing managers can predict future sales outcomes across various spending scenarios:</p>
-
-                    <table border="1" cellpadding="8" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Increase in Affiliate Marketing Spend</th>
-                                <th>Expected Increase in Product Sold</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>$500</td>
-                                <td>1,874 units</td>
-                            </tr>
-                            <tr>
-                                <td>$1,000</td>
-                                <td>3,749 units</td>
-                            </tr>
-                            <tr>
-                                <td>$1,500</td>
-                                <td>5,623 units</td>
-                            </tr>
-                            <tr>
-                                <td>$2,000</td>
-                                <td>7,498 units</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/chart%204%20-%20bar%20chart.png" alt="Bar Chart - Sales Increase by Budget">
-                </section>
-
-                <section>
-                    <h2>Key Question 5</h2>
-                    <p><strong>How well does the model predict new (unseen) spending scenarios?</strong></p>
-                    <p>The model provides a moderate level of prediction accuracy. While Affiliate Marketing spending is a significant driver of sales, as captured by the R² value of 0.374, more than half of sales variation is influenced by other factors like product competitiveness, seasonality, and market dynamics.</p>
-                    <p><strong>Strengths of the model include:</strong></p>
-                    <ul>
-                        <li>High statistical significance (p-value &lt; 0.001).</li>
-                        <li>A stable, measurable relationship for guiding marketing investment decisions.</li>
-                    </ul>
-                    <p><strong>Limitations to consider:</strong></p>
-                    <ul>
-                        <li>Since over 60% of sales variation remains unexplained, predictions should be used as guides rather than guarantees.</li>
-                        <li>Regular model updates with new data are recommended to maintain forecasting accuracy.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>Increasing ad spend on Affiliate Marketing is likely to contribute meaningfully to higher product sales but will not maximize sales on its own. Affiliate Marketing spending explains a significant portion of sales variation and is a reliable, statistically supported growth driver. However, a complete sales strategy must continue to address other influences through multi-channel marketing efforts.</p>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <ul>
-                        <li><strong>Increase Affiliate Marketing Budget with Confidence:</strong> Each additional $1 invested is estimated to generate approximately 3.75 more units sold, offering a strong return on investment.</li>
-                        <li><strong>Allocate Incremental Budget Proportionally:</strong> A 10%–20% increase in Affiliate Marketing spend is recommended as a reasonable starting point, especially for historically underfunded campaigns.</li>
-                        <li><strong>Monitor Performance Regularly:</strong> Track actual sales uplift monthly or quarterly to verify if outcomes align with model predictions and adjust spending accordingly.</li>
-                        <li><strong>Diversify Investments Across Channels:</strong> Support other marketing efforts such as social media, content marketing, and SEO to capture the remaining sources of sales variation.</li>
-                        <li><strong>Refresh the Model with Updated Data:</strong> Periodically re-run regression analyses to validate and refine the relationship between Affiliate Marketing spend and sales performance.</li>
-                    </ul>
-                </section>
-            </section>
-        </main>
-
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   The Hidden Power of Affiliates | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/hidden-power-of-affliate-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Affiliate Marketing Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/cover%20image.png"/>
+      <h1>
+       The Hidden Power of Affiliates
+      </h1>
+      <p>
+       Should You Invest in Affiliate Marketing?
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       In a competitive environment where maximizing sales growth is critical, this analysis was undertaken to help the company optimize its marketing investments. The primary business challenge is identifying whether increasing spending on Affiliate Marketing—the channel showing the strongest preliminary impact—can meaningfully drive product sales. By quantifying the relationship between Affiliate Marketing spend and units sold, the company aims to predict future sales uplift and guide smarter budget allocation.
+      </p>
+      <p>
+       This case study provides clear, data-driven insights to inform marketing decisions. It evaluates how Affiliate Marketing spending influences sales, whether the relationship is statistically reliable, and how much additional sales can be expected with greater investment. By building a predictive model, the company can forecast returns under different spending scenarios and recommend strategies to maximize the effectiveness of marketing resources.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Question 1
+      </h2>
+      <p>
+       <strong>
+        How strongly does Affiliate Marketing spending explain changes in Product Sold?
+       </strong>
+      </p>
+      <p>
+       The R-squared (R²) value from the regression analysis is 0.374, indicating that Affiliate Marketing spending explains about one-third of the variation in Product Sold. This suggests a moderate relationship: while Affiliate Marketing spend contributes significantly to sales, other factors—such as product quality, seasonal demand, customer experience, and other marketing channels—also play substantial roles.
+      </p>
+      <p>
+       From a marketing management perspective, the results support increasing investment in Affiliate Marketing to drive additional sales. However, it is equally important to maintain a broader marketing strategy to address other sales drivers.
+      </p>
+      <img alt="Scatter Plot - Affiliate Spend vs Sales" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/chart%201%20-%20scatter%20plot.png"/>
+     </section>
+     <section>
+      <h2>
+       Key Question 2
+      </h2>
+      <p>
+       <strong>
+        Is the relationship between Affiliate Marketing spending and Product Sold statistically significant?
+       </strong>
+      </p>
+      <p>
+       Yes, the relationship is statistically significant. The p-value for Affiliate Marketing spend is 0.000, well below the 0.05 threshold. This strong result confirms that changes in Affiliate Marketing spending are reliably associated with changes in Product Sold and not due to random chance.
+      </p>
+      <p>
+       This provides marketing managers with a high level of confidence to recommend budget increases for Affiliate Marketing, knowing that these investments are strongly linked to measurable sales outcomes.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Question 3
+      </h2>
+      <p>
+       <strong>
+        What is the estimated increase in Product Sold for each additional $1 spent on Affiliate Marketing?
+       </strong>
+      </p>
+      <p>
+       According to the regression model, the slope coefficient for Affiliate Marketing spend is 3.7486. This means that for every additional $1 invested, the company can expect to sell approximately 3.75 more units.
+      </p>
+      <p>
+       For instance, a $1,000 increase in Affiliate Marketing spend is estimated to result in about 3,750 additional units sold. This predictable relationship enables precise budgeting and forecasting for future marketing initiatives.
+      </p>
+      <img alt="Line Chart - Predicting Sales Increase" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/chart%203%20-%20line%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Key Question 4
+      </h2>
+      <p>
+       <strong>
+        Can we create a simple formula to predict Product Sold based on Affiliate Marketing spend?
+       </strong>
+      </p>
+      <p>
+       Yes, a simple predictive formula has been established based on the regression results:
+      </p>
+      <p>
+       <em>
+        Product Sold = (3.7486 × Affiliate Marketing Spend) + 5215.6016
+       </em>
+      </p>
+      <p>
+       Where:
+      </p>
+      <ul>
+       <li>
+        3.7486 is the expected increase in units sold per $1 spent.
+       </li>
+       <li>
+        5215.6016 represents the baseline level of sales without additional Affiliate Marketing spending.
+       </li>
+      </ul>
+      <p>
+       Using this formula, marketing managers can predict future sales outcomes across various spending scenarios:
+      </p>
+      <table border="1" cellpadding="8" cellspacing="0">
+       <thead>
+        <tr>
+         <th>
+          Increase in Affiliate Marketing Spend
+         </th>
+         <th>
+          Expected Increase in Product Sold
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td>
+          $500
+         </td>
+         <td>
+          1,874 units
+         </td>
+        </tr>
+        <tr>
+         <td>
+          $1,000
+         </td>
+         <td>
+          3,749 units
+         </td>
+        </tr>
+        <tr>
+         <td>
+          $1,500
+         </td>
+         <td>
+          5,623 units
+         </td>
+        </tr>
+        <tr>
+         <td>
+          $2,000
+         </td>
+         <td>
+          7,498 units
+         </td>
+        </tr>
+       </tbody>
+      </table>
+      <img alt="Bar Chart - Sales Increase by Budget" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-power-of-affliate/chart%204%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Key Question 5
+      </h2>
+      <p>
+       <strong>
+        How well does the model predict new (unseen) spending scenarios?
+       </strong>
+      </p>
+      <p>
+       The model provides a moderate level of prediction accuracy. While Affiliate Marketing spending is a significant driver of sales, as captured by the R² value of 0.374, more than half of sales variation is influenced by other factors like product competitiveness, seasonality, and market dynamics.
+      </p>
+      <p>
+       <strong>
+        Strengths of the model include:
+       </strong>
+      </p>
+      <ul>
+       <li>
+        High statistical significance (p-value &lt; 0.001).
+       </li>
+       <li>
+        A stable, measurable relationship for guiding marketing investment decisions.
+       </li>
+      </ul>
+      <p>
+       <strong>
+        Limitations to consider:
+       </strong>
+      </p>
+      <ul>
+       <li>
+        Since over 60% of sales variation remains unexplained, predictions should be used as guides rather than guarantees.
+       </li>
+       <li>
+        Regular model updates with new data are recommended to maintain forecasting accuracy.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       Increasing ad spend on Affiliate Marketing is likely to contribute meaningfully to higher product sales but will not maximize sales on its own. Affiliate Marketing spending explains a significant portion of sales variation and is a reliable, statistically supported growth driver. However, a complete sales strategy must continue to address other influences through multi-channel marketing efforts.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Increase Affiliate Marketing Budget with Confidence:
+        </strong>
+        Each additional $1 invested is estimated to generate approximately 3.75 more units sold, offering a strong return on investment.
+       </li>
+       <li>
+        <strong>
+         Allocate Incremental Budget Proportionally:
+        </strong>
+        A 10%–20% increase in Affiliate Marketing spend is recommended as a reasonable starting point, especially for historically underfunded campaigns.
+       </li>
+       <li>
+        <strong>
+         Monitor Performance Regularly:
+        </strong>
+        Track actual sales uplift monthly or quarterly to verify if outcomes align with model predictions and adjust spending accordingly.
+       </li>
+       <li>
+        <strong>
+         Diversify Investments Across Channels:
+        </strong>
+        Support other marketing efforts such as social media, content marketing, and SEO to capture the remaining sources of sales variation.
+       </li>
+       <li>
+        <strong>
+         Refresh the Model with Updated Data:
+        </strong>
+        Periodically re-run regression analyses to validate and refine the relationship between Affiliate Marketing spend and sales performance.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

@@ -1,121 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Below the Average | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Left Column -->
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/below-the-average-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <!-- Right Column -->
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/cover%20image.png" alt="Cover Image">
-                    <h1>Below the Average</h1>
-                    <p>Selangor Isn’t Keeping Pace in Men’s Footwear Sales</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This case study evaluates Selangor’s sales performance in Men’s Athletic Footwear compared to other Malaysian states to support strategic decisions on resource allocation and regional sales planning. The analysis was conducted to determine whether Selangor’s performance is significantly different from the national average and whether any observed gap warrants business intervention. This is particularly important for the country sales manager.</p>
-                </section>
-
-                <section>
-                    <h2>Question 1: Is there a statistically significant difference in Men’s Athletic Footwear sales between Selangor and other states?</h2>
-                    <p>A statistical test was conducted to compare average sales between Selangor and other states. Selangor recorded a mean total sales of RM79,531 (n = 154), while other states recorded RM97,133 (n = 1,456). However, the test returned a p-value of 0.1159, which is greater than the 0.05 significance threshold. This means we fail to reject the null hypothesis.</p>
-                    <p>In simpler terms, the difference in average sales is not statistically significant and could be due to chance. This is further supported by the bar chart, which shows substantial overlap in error bars, and the histogram, which shows both groups have similar right-skewed distributions with overlapping shapes. Although the averages differ numerically, the variability within each group is too high to confirm a meaningful difference with confidence.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%201%20-%20histogram.png" alt="Histogram Chart">
-                </section>
-
-                <section>
-                    <h2>Question 2: Is Selangor above or below the national average?</h2>
-                    <p>The grouped sales data show that Selangor consistently performs below the national average. The mean total sales in Selangor is RM79,531, compared to RM97,133 in other states. The median values tell a similar story—RM8,292 for Selangor versus RM10,286 for other states. These figures suggest that both the typical and average sales in Selangor are lower than the national benchmark.</p>
-                    <p>The bar chart confirms this difference visually, with Selangor’s average bar visibly lower than that of other states. Although the error bars are wide, the gap in average height still reflects a performance gap worth noting.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%202%20-%20error%20bar%20chart.png" alt="Error Bar Chart">
-                </section>
-
-                <section>
-                    <h2>Question 3: Is the difference practically significant (Cohen’s d)?</h2>
-                    <p>To assess practical significance, Cohen’s d was calculated at −0.12. This effect size falls well below the commonly accepted threshold of 0.2 for a small effect. Despite the numerical difference in averages, the result suggests that the magnitude of this difference is too small to be meaningful in a business context.</p>
-                    <p>The visualization supports this finding. The error bar chart shows large standard deviations with significant overlap between the two groups. The annotation of Cohen’s d = −0.12 reinforces the interpretation that the difference, while measurable, is not impactful enough to drive strategic decisions on its own.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%203%20-%20error%20bar%20chart.png" alt="Error Bar Chart - Cohen's d">
-                </section>
-
-                <section>
-                    <h2>Question 4: What trends or patterns emerge when comparing monthly sales across Selangor and other states?</h2>
-                    <p>Monthly sales data reveal consistent underperformance by Selangor relative to other states. Selangor’s monthly sales remained modest throughout the period, with only small spikes in months like March 2020 and October 2021. In contrast, other states experienced robust sales growth, particularly in late 2020 and 2021, with a peak in August 2021 reaching nearly RM14 million.</p>
-                    <p>The line chart highlights these trends clearly. While the blue line (Other States) shows a dynamic pattern of growth and fluctuation, the orange line (Selangor) stays relatively flat and distant. Similarly, the stacked area chart illustrates that Selangor’s contribution to overall national sales is minimal and remains that way throughout the period.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%204%20-%20line%20chart.png" alt="Line Chart - Monthly Sales Trends">
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>The analysis across all four key questions consistently points to one clear finding: Selangor is underperforming relative to the national average in Men’s Athletic Footwear sales. Although the average sales in Selangor are lower than those in other states, this difference is not statistically significant and the practical impact is minimal based on the small effect size (Cohen’s d = −0.12).</p>
-                    <p>However, the monthly trend analysis reveals a persistent and notable performance gap. Other states show strong and accelerating sales growth, particularly throughout 2021, while Selangor’s sales remain relatively flat with minimal momentum. This long-term lag suggests underlying structural issues in Selangor’s sales operations that go beyond simple statistical comparison.</p>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <ul>
-                        <li><strong>Resource Allocation:</strong> Allocate resources strategically but cautiously to Selangor. Given the lack of current performance but the region’s potential due to its population size and economic significance, it would be worthwhile to:
-                            <ul>
-                                <li>Pilot local promotions, retailer incentives, or brand visibility campaigns.</li>
-                                <li>Increase store presence or digital channel outreach where customer access may be limited.</li>
-                            </ul>
-                            However, avoid overcommitting high-volume inventory or high-budget campaigns until concrete performance improvements are seen in early interventions.
-                        </li>
-                        <li><strong>Sales Targets:</strong> Set moderately aggressive but realistic targets for Selangor:
-                            <ul>
-                                <li>Focus on month-over-month growth rates rather than trying to immediately match the national average.</li>
-                                <li>Use relative KPIs, such as sales uplift post-campaign or customer acquisition per RM spent, to evaluate progress.</li>
-                                <li>Align targets with localized drivers—festivals, school reopening, or sports seasons—to exploit spikes.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Regional Strategy Alignment:</strong> Selangor may require a tailored regional strategy rather than adopting the same playbook used for high-performing states. Consider:
-                            <ul>
-                                <li>Localized market research to identify barriers—pricing, product fit, competitor dominance, or customer awareness.</li>
-                                <li>Partnerships with local retailers or influencers who resonate with Selangor’s demographic.</li>
-                                <li>Experimentation zones: Use Selangor as a testing ground for new formats, digital promotions, or bundling models before scaling nationwide.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Final Note</h2>
-                    <p>While Selangor is not dragging national performance down, it is clearly not contributing its fair share of growth. Closing this performance gap should be a strategic priority, starting with targeted, data-informed interventions, followed by careful monitoring before scaling investment.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Below the Average | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/below-the-average-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/cover%20image.png"/>
+      <h1>
+       Below the Average
+      </h1>
+      <p>
+       Selangor Isn’t Keeping Pace in Men’s Footwear Sales
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This case study evaluates Selangor’s sales performance in Men’s Athletic Footwear compared to other Malaysian states to support strategic decisions on resource allocation and regional sales planning. The analysis was conducted to determine whether Selangor’s performance is significantly different from the national average and whether any observed gap warrants business intervention. This is particularly important for the country sales manager.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 1: Is there a statistically significant difference in Men’s Athletic Footwear sales between Selangor and other states?
+      </h2>
+      <p>
+       A statistical test was conducted to compare average sales between Selangor and other states. Selangor recorded a mean total sales of RM79,531 (n = 154), while other states recorded RM97,133 (n = 1,456). However, the test returned a p-value of 0.1159, which is greater than the 0.05 significance threshold. This means we fail to reject the null hypothesis.
+      </p>
+      <p>
+       In simpler terms, the difference in average sales is not statistically significant and could be due to chance. This is further supported by the bar chart, which shows substantial overlap in error bars, and the histogram, which shows both groups have similar right-skewed distributions with overlapping shapes. Although the averages differ numerically, the variability within each group is too high to confirm a meaningful difference with confidence.
+      </p>
+      <img alt="Histogram Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%201%20-%20histogram.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 2: Is Selangor above or below the national average?
+      </h2>
+      <p>
+       The grouped sales data show that Selangor consistently performs below the national average. The mean total sales in Selangor is RM79,531, compared to RM97,133 in other states. The median values tell a similar story—RM8,292 for Selangor versus RM10,286 for other states. These figures suggest that both the typical and average sales in Selangor are lower than the national benchmark.
+      </p>
+      <p>
+       The bar chart confirms this difference visually, with Selangor’s average bar visibly lower than that of other states. Although the error bars are wide, the gap in average height still reflects a performance gap worth noting.
+      </p>
+      <img alt="Error Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%202%20-%20error%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 3: Is the difference practically significant (Cohen’s d)?
+      </h2>
+      <p>
+       To assess practical significance, Cohen’s d was calculated at −0.12. This effect size falls well below the commonly accepted threshold of 0.2 for a small effect. Despite the numerical difference in averages, the result suggests that the magnitude of this difference is too small to be meaningful in a business context.
+      </p>
+      <p>
+       The visualization supports this finding. The error bar chart shows large standard deviations with significant overlap between the two groups. The annotation of Cohen’s d = −0.12 reinforces the interpretation that the difference, while measurable, is not impactful enough to drive strategic decisions on its own.
+      </p>
+      <img alt="Error Bar Chart - Cohen's d" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%203%20-%20error%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 4: What trends or patterns emerge when comparing monthly sales across Selangor and other states?
+      </h2>
+      <p>
+       Monthly sales data reveal consistent underperformance by Selangor relative to other states. Selangor’s monthly sales remained modest throughout the period, with only small spikes in months like March 2020 and October 2021. In contrast, other states experienced robust sales growth, particularly in late 2020 and 2021, with a peak in August 2021 reaching nearly RM14 million.
+      </p>
+      <p>
+       The line chart highlights these trends clearly. While the blue line (Other States) shows a dynamic pattern of growth and fluctuation, the orange line (Selangor) stays relatively flat and distant. Similarly, the stacked area chart illustrates that Selangor’s contribution to overall national sales is minimal and remains that way throughout the period.
+      </p>
+      <img alt="Line Chart - Monthly Sales Trends" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%204%20-%20line%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis across all four key questions consistently points to one clear finding: Selangor is underperforming relative to the national average in Men’s Athletic Footwear sales. Although the average sales in Selangor are lower than those in other states, this difference is not statistically significant and the practical impact is minimal based on the small effect size (Cohen’s d = −0.12).
+      </p>
+      <p>
+       However, the monthly trend analysis reveals a persistent and notable performance gap. Other states show strong and accelerating sales growth, particularly throughout 2021, while Selangor’s sales remain relatively flat with minimal momentum. This long-term lag suggests underlying structural issues in Selangor’s sales operations that go beyond simple statistical comparison.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Resource Allocation:
+        </strong>
+        Allocate resources strategically but cautiously to Selangor. Given the lack of current performance but the region’s potential due to its population size and economic significance, it would be worthwhile to:
+        <ul>
+         <li>
+          Pilot local promotions, retailer incentives, or brand visibility campaigns.
+         </li>
+         <li>
+          Increase store presence or digital channel outreach where customer access may be limited.
+         </li>
+        </ul>
+        However, avoid overcommitting high-volume inventory or high-budget campaigns until concrete performance improvements are seen in early interventions.
+       </li>
+       <li>
+        <strong>
+         Sales Targets:
+        </strong>
+        Set moderately aggressive but realistic targets for Selangor:
+        <ul>
+         <li>
+          Focus on month-over-month growth rates rather than trying to immediately match the national average.
+         </li>
+         <li>
+          Use relative KPIs, such as sales uplift post-campaign or customer acquisition per RM spent, to evaluate progress.
+         </li>
+         <li>
+          Align targets with localized drivers—festivals, school reopening, or sports seasons—to exploit spikes.
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Regional Strategy Alignment:
+        </strong>
+        Selangor may require a tailored regional strategy rather than adopting the same playbook used for high-performing states. Consider:
+        <ul>
+         <li>
+          Localized market research to identify barriers—pricing, product fit, competitor dominance, or customer awareness.
+         </li>
+         <li>
+          Partnerships with local retailers or influencers who resonate with Selangor’s demographic.
+         </li>
+         <li>
+          Experimentation zones: Use Selangor as a testing ground for new formats, digital promotions, or bundling models before scaling nationwide.
+         </li>
+        </ul>
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Final Note
+      </h2>
+      <p>
+       While Selangor is not dragging national performance down, it is clearly not contributing its fair share of growth. Closing this performance gap should be a strategic priority, starting with targeted, data-informed interventions, followed by careful monitoring before scaling investment.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

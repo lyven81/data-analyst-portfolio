@@ -1,163 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Not All Shoppers Are Equal | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/not-all-shoppers-are-equal-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <h1>Not All Shoppers Are Equal</h1>
-                    <p>Identifying High-Growth and High-Risk Customer Segments</p>
-                </header>
-
-                <section>
-                    <h2>Overview:</h2>
-                    <p>The purpose of this analysis is to identify distinct customer segments using clustering techniques (e.g., K-Means) to enable more targeted marketing, improved customer engagement, and optimized resource allocation. By understanding the characteristics and behaviors of each segment, the company aims to refine its marketing efforts, tailor loyalty programs, and reduce churn.</p>
-                </section>
-
-                <section>
-                    <h2>Key Results:</h2>
-                    <ul>
-                        <li><strong>Number of Customer Segments:</strong><br>The analysis reveals 3 meaningful customer segments identified through clustering. The "elbow" point at k = 3 suggests that three segments provide the most meaningful and actionable segmentation, balancing accuracy and simplicity.</li>
-                        <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%201%20-%20elbow_plot.png" alt="Elbow Plot" style="max-width: 100%; height: auto;"></li>
-
-                        <li><strong>Segment Characteristics:</strong>
-                            <ul>
-                                <li><strong>Cluster 0 (Silent High-Value):</strong>
-                                    <ul>
-                                        <li>High Customer Lifetime Value (CLV) but low engagement and spending scores.</li>
-                                        <li>Likely represents infrequent but high-value customers, possibly acquired through large transactions but not consistently engaged.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Cluster 1 (Low-Value Inactives):</strong>
-                                    <ul>
-                                        <li>Very low scores across all metrics (CLV, engagement, spending score, frequency).</li>
-                                        <li>This segment represents low-value, low-engagement customers, possibly at risk of churn or contributing little to revenue.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Cluster 2 (Loyal High Spenders):</strong>
-                                    <ul>
-                                        <li>High engagement, moderate-to-high CLV, high spending score, and frequent purchases.</li>
-                                        <li>Represents loyal, consistent spenders with high potential for retention and upsell opportunities.</li>
-                                    </ul>
-                                </li>
-                                <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%202%20-%20cluster_scatter_clv_engagement.png" alt="CLV vs Engagement" style="max-width: 100%; height: auto;"></li>
-                                <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%202%20-%20Customer%20Clusters%20Based%20on%20Spending%20Score.png" alt="Spending Score" style="max-width: 100%; height: auto;"></li>
-                            </ul>
-                        </li>
-
-                        <li><strong>High-Value or High-Potential Segments:</strong><br>Cluster 2 stands out as the high-potential segment due to its high engagement, spending score, and frequency of purchases. This segment is ideal for focused loyalty programs, upsell strategies, and maximizing customer lifetime value.</li>
-                        <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%203%20-%20Which%20Cluster%20Should%20We%20Prioritize%20Based%20on%20Growth%20Potential_.png" alt="Growth Potential" style="max-width: 100%; height: auto;"></li>
-
-                        <li><strong>Risk of Churn or Inactivity:</strong><br>Cluster 1 is at the highest risk of churn, with low purchase frequency and moderate engagement. These customers are long-term but show declining activity. Targeting this segment for reactivation or personalized offers could reduce churn.</li>
-                        <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%204%20-%20Long-Term%20Customers%20at%20Risk%20of%20Churn.png" alt="At Risk of Churn" style="max-width: 100%; height: auto;"></li>
-
-                        <li><strong>Stability and Actionability Over Time:</strong>
-                            <ul>
-                                <li>Customer CLV increases steadily with membership duration, suggesting that retaining customers over time significantly increases their value to the business.</li>
-                                <li>Purchase frequency remains relatively stable across membership years, indicating that customers' spending amount (or basket size) may increase, but their frequency of purchases does not.</li>
-                                <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%205%20membership_trend_line.png" alt="Membership Trend" style="max-width: 100%; height: auto;"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Goals Alignment:</h2>
-                    <p>The business goals are to:</p>
-                    <ul>
-                        <li>Enhance customer engagement through personalized marketing and loyalty programs.</li>
-                        <li>Reduce churn by identifying low-engagement or low-value segments and targeting them with retention strategies.</li>
-                        <li>Maximize revenue by identifying high-value customers and focusing efforts on these groups.</li>
-                    </ul>
-                    <p>These findings align directly with the company's strategic priorities:</p>
-                    <ul>
-                        <li><strong>Targeted Marketing:</strong> By identifying 3 distinct customer segments, marketing efforts can be more personalized and effective, ensuring campaigns are tailored to the needs of each segment.</li>
-                        <li><strong>Retention and Upselling:</strong> Focusing on Cluster 2 (Loyal High Spenders) for upselling and loyalty programs and addressing the risk of churn in Cluster 1 aligns with the goal of maximizing revenue and customer retention.</li>
-                        <li><strong>Resource Allocation:</strong> The segmentation allows for optimized resource allocation by focusing efforts on high-value, high-potential customers while addressing the needs of low-value or inactive segments.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Impact:</h2>
-                    <ul>
-                        <li><strong>Revenue Growth:</strong> By targeting Cluster 2 with loyalty programs and personalized upsell offers, the business can increase overall revenue.</li>
-                        <li><strong>Churn Prevention:</strong> Identifying Cluster 1 as at-risk customers enables the company to take proactive measures, reducing churn and increasing customer lifetime value.</li>
-                        <li><strong>Operational Efficiency:</strong> Segmenting customers based on behavior and engagement allows for more effective resource allocation, ensuring that marketing efforts, inventory, and product offerings align with customer needs.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Data Interpretation:</h2>
-                    <ul>
-                        <li><strong>Cluster 2 (Loyal High Spenders):</strong> Exhibits strong potential for increasing value through personalized engagement. Their high engagement, spending, and frequency make them ideal targets for targeted promotions, loyalty programs, and cross-selling initiatives.</li>
-                        <li><strong>Cluster 1 (Low-Value Inactives):</strong> Demonstrates low engagement and spending, indicating they may be at risk of churn. Their lower-than-expected activity, combined with their long tenure, suggests that while they were once valuable, their behavior is now stagnating. Reactivating these customers with tailored promotions or loyalty incentives could help increase their engagement.</li>
-                        <li><strong>Cluster 0 (Silent High-Value):</strong> Represents customers who have a high CLV but engage infrequently. These customers may have made a large initial purchase but haven't interacted much since. These customers can be targeted for special offers or re-engagement strategies to boost their activity without over-relying on frequent transactions.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Contextual Factors:</h2>
-                    <ul>
-                        <li><strong>Market Trends:</strong> Shifts in consumer behavior, such as a growing preference for digital engagement or changes in purchasing power, may influence how customers in each segment behave over time. Understanding these trends can help refine marketing strategies.</li>
-                        <li><strong>Economic Factors:</strong> Broader economic conditions, such as disposable income levels, could affect customer spending behavior, especially in lower-value segments where spending sensitivity is higher.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Recommendation:</h2>
-                    <p>The analysis provides a roadmap for tailoring marketing efforts, engagement strategies, and retention plans. By focusing on high-value customers in Cluster 2 and addressing the risk of churn in Cluster 1, the business can improve customer retention and increase revenue. Additionally, targeting Cluster 0 with re-engagement offers can help capitalize on their high potential without expecting consistent frequent engagement.</p>
-                    <ul>
-                        <li><strong>Focus on High-Potential Segments:</strong> Develop targeted loyalty programs, special offers, and upselling campaigns for Cluster 2 (Loyal High Spenders). These customers have high engagement and are likely to respond well to personalized promotions.</li>
-                        <li><strong>Reactivation Campaigns for At-Risk Customers:</strong> For Cluster 1 (Low-Value Inactives), launch reactivation campaigns focused on re-engaging these customers. Consider offering incentives or tailored promotions to bring them back into the fold, as they show moderate engagement and tenure but need renewed attention.</li>
-                        <li><strong>Re-engagement Strategies for Silent High-Value Customers:</strong> For Cluster 0 (Silent High-Value) customers, implement targeted re-engagement efforts, such as exclusive offers or high-value product recommendations, to bring them back into regular purchasing activity.</li>
-                        <li><strong>Long-Term Retention Strategies:</strong> Invest in long-term retention strategies, as the data suggests that CLV increases with tenure. Focus on retaining customers from Cluster 2 while increasing engagement for other segments.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Conclusion:</h2>
-                    <p>The analysis provides valuable insights into customer behavior and highlights actionable opportunities to increase customer retention and maximize revenue. By leveraging segmentation insights, the business can implement personalized marketing campaigns, re-engagement strategies, and loyalty programs tailored to the needs of each segment. These data-driven decisions will help the company achieve its strategic goals of growth, customer retention, and optimized resource allocation.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Not All Shoppers Are Equal | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/not-all-shoppers-are-equal-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <h1>
+       Not All Shoppers Are Equal
+      </h1>
+      <p>
+       Identifying High-Growth and High-Risk Customer Segments
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview:
+      </h2>
+      <p>
+       The purpose of this analysis is to identify distinct customer segments using clustering techniques (e.g., K-Means) to enable more targeted marketing, improved customer engagement, and optimized resource allocation. By understanding the characteristics and behaviors of each segment, the company aims to refine its marketing efforts, tailor loyalty programs, and reduce churn.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Results:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Number of Customer Segments:
+        </strong>
+        <br/>
+        The analysis reveals 3 meaningful customer segments identified through clustering. The "elbow" point at k = 3 suggests that three segments provide the most meaningful and actionable segmentation, balancing accuracy and simplicity.
+       </li>
+       <li>
+        <img alt="Elbow Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%201%20-%20elbow_plot.png" style="max-width: 100%; height: auto;"/>
+       </li>
+       <li>
+        <strong>
+         Segment Characteristics:
+        </strong>
+        <ul>
+         <li>
+          <strong>
+           Cluster 0 (Silent High-Value):
+          </strong>
+          <ul>
+           <li>
+            High Customer Lifetime Value (CLV) but low engagement and spending scores.
+           </li>
+           <li>
+            Likely represents infrequent but high-value customers, possibly acquired through large transactions but not consistently engaged.
+           </li>
+          </ul>
+         </li>
+         <li>
+          <strong>
+           Cluster 1 (Low-Value Inactives):
+          </strong>
+          <ul>
+           <li>
+            Very low scores across all metrics (CLV, engagement, spending score, frequency).
+           </li>
+           <li>
+            This segment represents low-value, low-engagement customers, possibly at risk of churn or contributing little to revenue.
+           </li>
+          </ul>
+         </li>
+         <li>
+          <strong>
+           Cluster 2 (Loyal High Spenders):
+          </strong>
+          <ul>
+           <li>
+            High engagement, moderate-to-high CLV, high spending score, and frequent purchases.
+           </li>
+           <li>
+            Represents loyal, consistent spenders with high potential for retention and upsell opportunities.
+           </li>
+          </ul>
+         </li>
+         <li>
+          <img alt="CLV vs Engagement" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%202%20-%20cluster_scatter_clv_engagement.png" style="max-width: 100%; height: auto;"/>
+         </li>
+         <li>
+          <img alt="Spending Score" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%202%20-%20Customer%20Clusters%20Based%20on%20Spending%20Score.png" style="max-width: 100%; height: auto;"/>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         High-Value or High-Potential Segments:
+        </strong>
+        <br/>
+        Cluster 2 stands out as the high-potential segment due to its high engagement, spending score, and frequency of purchases. This segment is ideal for focused loyalty programs, upsell strategies, and maximizing customer lifetime value.
+       </li>
+       <li>
+        <img alt="Growth Potential" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%203%20-%20Which%20Cluster%20Should%20We%20Prioritize%20Based%20on%20Growth%20Potential_.png" style="max-width: 100%; height: auto;"/>
+       </li>
+       <li>
+        <strong>
+         Risk of Churn or Inactivity:
+        </strong>
+        <br/>
+        Cluster 1 is at the highest risk of churn, with low purchase frequency and moderate engagement. These customers are long-term but show declining activity. Targeting this segment for reactivation or personalized offers could reduce churn.
+       </li>
+       <li>
+        <img alt="At Risk of Churn" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/Chart%204%20-%20Long-Term%20Customers%20at%20Risk%20of%20Churn.png" style="max-width: 100%; height: auto;"/>
+       </li>
+       <li>
+        <strong>
+         Stability and Actionability Over Time:
+        </strong>
+        <ul>
+         <li>
+          Customer CLV increases steadily with membership duration, suggesting that retaining customers over time significantly increases their value to the business.
+         </li>
+         <li>
+          Purchase frequency remains relatively stable across membership years, indicating that customers' spending amount (or basket size) may increase, but their frequency of purchases does not.
+         </li>
+         <li>
+          <img alt="Membership Trend" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/chart%205%20membership_trend_line.png" style="max-width: 100%; height: auto;"/>
+         </li>
+        </ul>
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment:
+      </h2>
+      <p>
+       The business goals are to:
+      </p>
+      <ul>
+       <li>
+        Enhance customer engagement through personalized marketing and loyalty programs.
+       </li>
+       <li>
+        Reduce churn by identifying low-engagement or low-value segments and targeting them with retention strategies.
+       </li>
+       <li>
+        Maximize revenue by identifying high-value customers and focusing efforts on these groups.
+       </li>
+      </ul>
+      <p>
+       These findings align directly with the company's strategic priorities:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Targeted Marketing:
+        </strong>
+        By identifying 3 distinct customer segments, marketing efforts can be more personalized and effective, ensuring campaigns are tailored to the needs of each segment.
+       </li>
+       <li>
+        <strong>
+         Retention and Upselling:
+        </strong>
+        Focusing on Cluster 2 (Loyal High Spenders) for upselling and loyalty programs and addressing the risk of churn in Cluster 1 aligns with the goal of maximizing revenue and customer retention.
+       </li>
+       <li>
+        <strong>
+         Resource Allocation:
+        </strong>
+        The segmentation allows for optimized resource allocation by focusing efforts on high-value, high-potential customers while addressing the needs of low-value or inactive segments.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Revenue Growth:
+        </strong>
+        By targeting Cluster 2 with loyalty programs and personalized upsell offers, the business can increase overall revenue.
+       </li>
+       <li>
+        <strong>
+         Churn Prevention:
+        </strong>
+        Identifying Cluster 1 as at-risk customers enables the company to take proactive measures, reducing churn and increasing customer lifetime value.
+       </li>
+       <li>
+        <strong>
+         Operational Efficiency:
+        </strong>
+        Segmenting customers based on behavior and engagement allows for more effective resource allocation, ensuring that marketing efforts, inventory, and product offerings align with customer needs.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Cluster 2 (Loyal High Spenders):
+        </strong>
+        Exhibits strong potential for increasing value through personalized engagement. Their high engagement, spending, and frequency make them ideal targets for targeted promotions, loyalty programs, and cross-selling initiatives.
+       </li>
+       <li>
+        <strong>
+         Cluster 1 (Low-Value Inactives):
+        </strong>
+        Demonstrates low engagement and spending, indicating they may be at risk of churn. Their lower-than-expected activity, combined with their long tenure, suggests that while they were once valuable, their behavior is now stagnating. Reactivating these customers with tailored promotions or loyalty incentives could help increase their engagement.
+       </li>
+       <li>
+        <strong>
+         Cluster 0 (Silent High-Value):
+        </strong>
+        Represents customers who have a high CLV but engage infrequently. These customers may have made a large initial purchase but haven't interacted much since. These customers can be targeted for special offers or re-engagement strategies to boost their activity without over-relying on frequent transactions.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Market Trends:
+        </strong>
+        Shifts in consumer behavior, such as a growing preference for digital engagement or changes in purchasing power, may influence how customers in each segment behave over time. Understanding these trends can help refine marketing strategies.
+       </li>
+       <li>
+        <strong>
+         Economic Factors:
+        </strong>
+        Broader economic conditions, such as disposable income levels, could affect customer spending behavior, especially in lower-value segments where spending sensitivity is higher.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendation:
+      </h2>
+      <p>
+       The analysis provides a roadmap for tailoring marketing efforts, engagement strategies, and retention plans. By focusing on high-value customers in Cluster 2 and addressing the risk of churn in Cluster 1, the business can improve customer retention and increase revenue. Additionally, targeting Cluster 0 with re-engagement offers can help capitalize on their high potential without expecting consistent frequent engagement.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Focus on High-Potential Segments:
+        </strong>
+        Develop targeted loyalty programs, special offers, and upselling campaigns for Cluster 2 (Loyal High Spenders). These customers have high engagement and are likely to respond well to personalized promotions.
+       </li>
+       <li>
+        <strong>
+         Reactivation Campaigns for At-Risk Customers:
+        </strong>
+        For Cluster 1 (Low-Value Inactives), launch reactivation campaigns focused on re-engaging these customers. Consider offering incentives or tailored promotions to bring them back into the fold, as they show moderate engagement and tenure but need renewed attention.
+       </li>
+       <li>
+        <strong>
+         Re-engagement Strategies for Silent High-Value Customers:
+        </strong>
+        For Cluster 0 (Silent High-Value) customers, implement targeted re-engagement efforts, such as exclusive offers or high-value product recommendations, to bring them back into regular purchasing activity.
+       </li>
+       <li>
+        <strong>
+         Long-Term Retention Strategies:
+        </strong>
+        Invest in long-term retention strategies, as the data suggests that CLV increases with tenure. Focus on retaining customers from Cluster 2 while increasing engagement for other segments.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion:
+      </h2>
+      <p>
+       The analysis provides valuable insights into customer behavior and highlights actionable opportunities to increase customer retention and maximize revenue. By leveraging segmentation insights, the business can implement personalized marketing campaigns, re-engagement strategies, and loyalty programs tailored to the needs of each segment. These data-driven decisions will help the company achieve its strategic goals of growth, customer retention, and optimized resource allocation.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2024 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

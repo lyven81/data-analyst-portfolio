@@ -1,118 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Who Stays and Who Leaves? | Lee Yih Ven</title>
-  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Who Stays and Who Leaves? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
   <div class="container">
-    <aside class="left-column">
-      <header>
-        <h1>Lee Yih Ven</h1>
-        <h2>Data Analytics Portfolio</h2>
-      </header>
-      <section class="intro">
-        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-      </section>
-      <section class="contact">
-        <h2>Contact</h2>
-        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-        <ul>
-          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-          <li>Phone: +6014-9207099</li>
-        </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/who-stays-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-    <main class="right-column">
-      <section class="case-study-content">
-        <header>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/cover%20image.png" alt="Location Retention Analysis Cover">
-          <h1>Who Stays and Who Leaves?</h1>
-          <p>What Location Tells Us About Customer Retention</p>
-        </header>
-
-        <section>
-          <h2>Overview</h2>
-          <p>This analysis was developed to help marketers decide where to focus their customer retention efforts based on geographic location. It examined whether customers living in rural, suburban, or urban areas are more likely to stay with the brand or disengage. The goal is to provide simple, actionable insights that help marketing teams plan smarter campaigns.</p>
-          <p>Findings show that customers in suburban and rural areas are more likely to remain loyal, while urban customers are more likely to leave. Although location isn’t the only factor influencing retention, it offers a helpful starting point for segmenting audiences and adjusting campaign strategies by region.</p>
-        </section>
-
-        <section>
-          <h2>Q1. What percentage of customers are retained in each location category?</h2>
-          <p>The data revealed that suburban customers had the highest retention rate at 72.97%, followed closely by rural customers at 71.15%. Urban customers had the lowest retention rate at 64.24%. These differences suggest that suburban and rural regions have stronger customer loyalty, while urban areas may require additional marketing support to improve retention.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%201%20-%20bar%20chart.png" alt="Retention by Location Bar Chart">
-        </section>
-
-        <section>
-          <h2>Q2. How many retained and churned customers come from each location type?</h2>
-          <p>Rural areas had 222 retained and 90 churned customers. Suburban areas recorded 251 retained and 93 churned, while urban areas had a similar number of retained customers (221) but a much higher churn count at 123. This imbalance reinforces the need for targeted marketing strategies in urban areas, where customer loyalty appears less stable.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%202%20retention%20and%20churn.png" alt="Retention and Churn by Location">
-        </section>
-
-        <section>
-          <h2>Q3. Which location types show the strongest relationship with customer retention, and are any of them too similar in effect to distinguish?</h2>
-          <p>Location was the variable most strongly linked to retention, though the overall relationship was weak. It had little overlap with other predictors, meaning it contributed its own unique information. This makes it a useful feature for audience segmentation, even if it doesn’t offer deep predictive power on its own.</p>
-        </section>
-
-        <section>
-          <h2>Q4. Is customer location statistically significant in predicting retention, and which location group should we focus on for targeted campaigns?</h2>
-          <p>Customer location was found to have a modest but noticeable effect on retention. While the p-value (0.060) was just above the conventional significance threshold, it still suggested that customers in urban areas are less likely to stay. This supports the idea of focusing campaign efforts on retaining urban customers, who may respond better to proactive engagement strategies.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%203%20-%20correlation%20heatmap.png" alt="Correlation Heatmap">
-        </section>
-
-        <section>
-          <h2>Q5. Can we build a reliable model that predicts whether a customer will stay or churn based solely on their location?</h2>
-          <p>The model built using location alone was statistically valid, with a p-value under 0.05. However, it explained very little of the variation in customer outcomes. While the pattern was consistent—urban customers tended to churn more—the model lacked the strength to predict outcomes at an individual level. Location can help segment audiences, but it shouldn’t be the only factor used in campaign planning.</p>
-        </section>
-
-        <section>
-          <h2>Q6. What is the likelihood that a customer will stay with us based on their location?</h2>
-          <p>When predicting by location, rural customers had a 73.76% chance of staying, suburban customers 69.69%, and urban customers just 65.28%. These figures confirm the earlier trend: rural and suburban customers are more dependable, while urban customers may need more effort to retain.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%206b%20-%20retention_prediction_by_location.png" alt="Retention Prediction by Location">
-        </section>
-
-        <section>
-          <h2>Q7. What happens to retention likelihood when location assumptions shift?</h2>
-          <p>Simulations showed that shifting from a rural to an urban setting led to an 8.5 percentage point drop in expected retention. Semi-rural areas performed nearly as well as rural ones, with a 71.77% retention rate. Even a small behavioral shift in urban customers—toward suburban patterns—increased predicted retention to 65.74%. These “what-if” scenarios help marketers plan for expansion or demographic changes.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/char%206c%20location_shift_prediction_chart.png" alt="Location Shift Prediction Chart">
-        </section>
-
-        <section>
-          <h2>Q8. How accurate is our location-based model in identifying retention trends, and is it good enough to inform marketing actions?</h2>
-          <p>The model’s predictions tended to fall within a narrow range and leaned toward predicting most customers as “retained.” It captured general trends—like higher churn in urban areas—but lacked detail to support one-to-one targeting. With limited predictive strength, the model is better suited for high-level segmentation than for automating personalized campaign actions.</p>
-        </section>
-
-        <section>
-          <h2>Conclusion</h2>
-          <p>Location does have an influence on customer retention, though it’s modest. Customers in suburban and rural areas are more likely to stay, while those in urban regions are more prone to churn. These differences offer a practical starting point for marketers to segment their audiences, tailor messaging by location, and prioritize retention where it’s most needed.</p>
-        </section>
-
-        <section>
-          <h2>Recommendations</h2>
-          <ul>
-            <li><strong>Focus retention efforts on urban customers:</strong> Urban customers have the highest churn rates. They are ideal candidates for welcome incentives, win-back campaigns, and follow-up messaging.</li>
-            <li><strong>Reinforce loyalty in rural and suburban areas:</strong> These segments already show strong loyalty. Consider using referral or rewards programs to keep them engaged and amplify their value.</li>
-            <li><strong>Segment by retention risk:</strong> Use location to group customers by churn risk, and then layer on behavioral data to sharpen campaign focus.</li>
-            <li><strong>Plan for new or shifting markets:</strong> Use simulation results to predict retention in emerging or semi-developed areas. Tailor efforts accordingly.</li>
-            <li><strong>Avoid relying on location alone:</strong> Location helps, but only to a small extent. Stronger predictors like purchase behavior or engagement are essential for personalized targeting.</li>
-            <li><strong>Keep monitoring behavior across regions:</strong> If urban customers start acting more like suburban ones—or vice versa—update your segmentation and campaign strategy to reflect those shifts.</li>
-          </ul>
-        </section>
-
-      </section>
-    </main>
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/who-stays-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Location Retention Analysis Cover" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/cover%20image.png"/>
+      <h1>
+       Who Stays and Who Leaves?
+      </h1>
+      <p>
+       What Location Tells Us About Customer Retention
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis was developed to help marketers decide where to focus their customer retention efforts based on geographic location. It examined whether customers living in rural, suburban, or urban areas are more likely to stay with the brand or disengage. The goal is to provide simple, actionable insights that help marketing teams plan smarter campaigns.
+      </p>
+      <p>
+       Findings show that customers in suburban and rural areas are more likely to remain loyal, while urban customers are more likely to leave. Although location isn’t the only factor influencing retention, it offers a helpful starting point for segmenting audiences and adjusting campaign strategies by region.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Q1. What percentage of customers are retained in each location category?
+      </h2>
+      <p>
+       The data revealed that suburban customers had the highest retention rate at 72.97%, followed closely by rural customers at 71.15%. Urban customers had the lowest retention rate at 64.24%. These differences suggest that suburban and rural regions have stronger customer loyalty, while urban areas may require additional marketing support to improve retention.
+      </p>
+      <img alt="Retention by Location Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%201%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Q2. How many retained and churned customers come from each location type?
+      </h2>
+      <p>
+       Rural areas had 222 retained and 90 churned customers. Suburban areas recorded 251 retained and 93 churned, while urban areas had a similar number of retained customers (221) but a much higher churn count at 123. This imbalance reinforces the need for targeted marketing strategies in urban areas, where customer loyalty appears less stable.
+      </p>
+      <img alt="Retention and Churn by Location" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%202%20retention%20and%20churn.png"/>
+     </section>
+     <section>
+      <h2>
+       Q3. Which location types show the strongest relationship with customer retention, and are any of them too similar in effect to distinguish?
+      </h2>
+      <p>
+       Location was the variable most strongly linked to retention, though the overall relationship was weak. It had little overlap with other predictors, meaning it contributed its own unique information. This makes it a useful feature for audience segmentation, even if it doesn’t offer deep predictive power on its own.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Q4. Is customer location statistically significant in predicting retention, and which location group should we focus on for targeted campaigns?
+      </h2>
+      <p>
+       Customer location was found to have a modest but noticeable effect on retention. While the p-value (0.060) was just above the conventional significance threshold, it still suggested that customers in urban areas are less likely to stay. This supports the idea of focusing campaign efforts on retaining urban customers, who may respond better to proactive engagement strategies.
+      </p>
+      <img alt="Correlation Heatmap" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%203%20-%20correlation%20heatmap.png"/>
+     </section>
+     <section>
+      <h2>
+       Q5. Can we build a reliable model that predicts whether a customer will stay or churn based solely on their location?
+      </h2>
+      <p>
+       The model built using location alone was statistically valid, with a p-value under 0.05. However, it explained very little of the variation in customer outcomes. While the pattern was consistent—urban customers tended to churn more—the model lacked the strength to predict outcomes at an individual level. Location can help segment audiences, but it shouldn’t be the only factor used in campaign planning.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Q6. What is the likelihood that a customer will stay with us based on their location?
+      </h2>
+      <p>
+       When predicting by location, rural customers had a 73.76% chance of staying, suburban customers 69.69%, and urban customers just 65.28%. These figures confirm the earlier trend: rural and suburban customers are more dependable, while urban customers may need more effort to retain.
+      </p>
+      <img alt="Retention Prediction by Location" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/chart%206b%20-%20retention_prediction_by_location.png"/>
+     </section>
+     <section>
+      <h2>
+       Q7. What happens to retention likelihood when location assumptions shift?
+      </h2>
+      <p>
+       Simulations showed that shifting from a rural to an urban setting led to an 8.5 percentage point drop in expected retention. Semi-rural areas performed nearly as well as rural ones, with a 71.77% retention rate. Even a small behavioral shift in urban customers—toward suburban patterns—increased predicted retention to 65.74%. These “what-if” scenarios help marketers plan for expansion or demographic changes.
+      </p>
+      <img alt="Location Shift Prediction Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-stays/char%206c%20location_shift_prediction_chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Q8. How accurate is our location-based model in identifying retention trends, and is it good enough to inform marketing actions?
+      </h2>
+      <p>
+       The model’s predictions tended to fall within a narrow range and leaned toward predicting most customers as “retained.” It captured general trends—like higher churn in urban areas—but lacked detail to support one-to-one targeting. With limited predictive strength, the model is better suited for high-level segmentation than for automating personalized campaign actions.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       Location does have an influence on customer retention, though it’s modest. Customers in suburban and rural areas are more likely to stay, while those in urban regions are more prone to churn. These differences offer a practical starting point for marketers to segment their audiences, tailor messaging by location, and prioritize retention where it’s most needed.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Focus retention efforts on urban customers:
+        </strong>
+        Urban customers have the highest churn rates. They are ideal candidates for welcome incentives, win-back campaigns, and follow-up messaging.
+       </li>
+       <li>
+        <strong>
+         Reinforce loyalty in rural and suburban areas:
+        </strong>
+        These segments already show strong loyalty. Consider using referral or rewards programs to keep them engaged and amplify their value.
+       </li>
+       <li>
+        <strong>
+         Segment by retention risk:
+        </strong>
+        Use location to group customers by churn risk, and then layer on behavioral data to sharpen campaign focus.
+       </li>
+       <li>
+        <strong>
+         Plan for new or shifting markets:
+        </strong>
+        Use simulation results to predict retention in emerging or semi-developed areas. Tailor efforts accordingly.
+       </li>
+       <li>
+        <strong>
+         Avoid relying on location alone:
+        </strong>
+        Location helps, but only to a small extent. Stronger predictors like purchase behavior or engagement are essential for personalized targeting.
+       </li>
+       <li>
+        <strong>
+         Keep monitoring behavior across regions:
+        </strong>
+        If urban customers start acting more like suburban ones—or vice versa—update your segmentation and campaign strategy to reflect those shifts.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
   </div>
-
   <footer>
-    <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
   </footer>
-</body>
+ </body>
 </html>

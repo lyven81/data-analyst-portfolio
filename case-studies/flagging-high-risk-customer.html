@@ -1,111 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flagging High-Risk Borrowers | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/flagging-high-risk-customer-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                  <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/flagging-high-risk-borrowers/cover%20image.png" alt="Flagging High-Risk Borrowers Cover">
-                    <h1>Flagging High-Risk Borrowers</h1>
-                    <p>A Predictive Approach for Smarter Loan Decisions</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This analysis helps loan underwriters identify customers at high risk of default using a logistic regression model. By examining income, employment duration, and loan grade, the model estimates each applicant’s likelihood of default, enabling underwriters to approve, decline, or escalate applications based on risk level.</p>
-                    <p>While the model reliably flags low-risk applicants, it struggles to detect actual defaulters. For this reason, it should be used as a screening tool alongside manual review and supporting documentation to guide more balanced loan decisions.</p>
-                </section>
-
-                <section>
-                    <p><strong>Which customer characteristics have the strongest relationship with loan default risk, and are any of them too similar to be used together in the model?</strong></p>
-                    <p>The analysis shows that customers with a loan grade of "C" are significantly more likely to default, making it a strong risk indicator. Income is also important, with lower-income applicants being more prone to default. A multicollinearity check confirms that all predictors provide unique, independent information, meaning they can be safely used together in the model without distorting the results.</p>
-                </section>
-
-                <section>
-                    <p><strong>Which factors are statistically significant in predicting loan default and should be prioritized in the approval checklist?</strong></p>
-                    <p>Income and employment duration emerge as the most statistically significant predictors of default. Customers with lower income or shorter employment history are more likely to default, while those with loan grades B or C also present elevated risk—especially grade C. Although age is statistically significant, it has minimal impact on default prediction and should not be a primary decision factor. Applicants who meet multiple high-risk conditions should be reviewed more closely.</p>
-                </section>
-
-                <section>
-                    <p><strong>Based on the selected variables, how well does the model predict the likelihood of a customer defaulting on their loan?</strong></p>
-                    <p>The model performs better than random guessing and is statistically valid, but it explains only about 5% of the variation in default behavior. This is not unexpected given the complexity of loan default, which may involve personal or external events not captured in the dataset. The model is stable and reliable, but it should complement—rather than replace—existing approval checks like credit history or income verification.</p>
-                </section>
-
-                <section>
-                    <p><strong>What is the predicted default probability for customers at the financial extremes — such as the youngest, oldest, highest-income, and lowest-income applicants?</strong></p>
-                    <p>Predicted default risk varies across financial extremes. The youngest customer (age 20) has an 8.84% predicted default risk, while the oldest (age 144, likely a data entry error) has 11.86%. The lowest-income customer (RM 9,600) shows a 10.66% risk, while the highest-income customer (RM 500,000) has a surprisingly higher risk of 23.19%, possibly due to other influencing factors like job instability.</p>
-                </section>
-
-                <section>
-                    <p><strong>How does employment stability affect the predicted risk of default?</strong></p>
-                    <p>Employment history plays a strong role. The applicant with no employment history has a 24.44% predicted default rate, indicating that job stability is a key protective factor. Those with longer employment are generally less risky, reinforcing the need to assess employment duration in loan decisions.</p>
-                </section>
-
-                <section>
-                    <p><strong>Which individual customers in our dataset are currently at highest risk of default and should be manually reviewed before approval?</strong></p>
-                    <p>The top five customers with the highest predicted default probabilities (above 42%) tend to be young, have moderate to low income, and short or missing employment history. These applicants should be manually reviewed and may require additional documentation or a guarantor before approval is considered.</p>
-                </section>
-
-                <section>
-                    <p><strong>How accurate is the model overall, and how closely do the predicted default probabilities match the actual outcomes?</strong></p>
-                    <p>The model achieves a high overall accuracy of 79%, mainly by correctly identifying non-defaulting customers. However, it completely fails to detect actual defaulters—none of the 2,010 default cases in the test data were identified. This reveals a serious limitation: the model is overly biased toward predicting repayment and does not capture risky borrowers effectively.</p>
-                    <p>To improve its usefulness in real-world scenarios, the model requires adjustments such as rebalancing the training data, fine-tuning the probability threshold, or integrating with manual review processes. Until then, it should not be used alone to decline applications.</p>
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>The logistic regression model provides a structured and statistically sound way to assess loan default risk. It is effective in flagging safe borrowers and identifying some key risk factors such as low income, short employment duration, and loan grade. However, the model does not detect actual defaults well and is best used as a supportive tool in the underwriting process—not a stand-alone decision engine.</p>
-                    <p>For loan underwriters, this model can guide prioritization and triage, helping to identify which applicants deserve more attention. Final decisions should still consider additional factors and require human judgment, especially when predicted risk is high.</p>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <ul>
-                        <li><strong>When to Approve:</strong> Applicants with high income, long employment history, and low predicted risk (under 10%), especially with loan grades A or B and stable records.</li>
-                        <li><strong>When to Escalate for Manual Review:</strong> Applicants with moderate predicted risk (10–30%) or mixed indicators, such as high income but short job tenure, or those with a risky loan grade but otherwise acceptable profile.</li>
-                        <li><strong>When to Decline:</strong> Applicants with very high predicted risk (above 30%) and multiple red flags, such as low income, short or no job history, high-risk loan grade, or very young age with no financial background.</li>
-                    </ul>
-                    <p><strong>Final Note:</strong> This model should support—not replace—human decisions. When used alongside document checks, credit reviews, and contextual judgment, it helps underwriters make more balanced, consistent decisions.</p>
-                </section>
-            </section>
-        </main>
-
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Flagging High-Risk Borrowers | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/flagging-high-risk-customer-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Flagging High-Risk Borrowers Cover" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/flagging-high-risk-borrowers/cover%20image.png"/>
+      <h1>
+       Flagging High-Risk Borrowers
+      </h1>
+      <p>
+       A Predictive Approach for Smarter Loan Decisions
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis helps loan underwriters identify customers at high risk of default using a logistic regression model. By examining income, employment duration, and loan grade, the model estimates each applicant’s likelihood of default, enabling underwriters to approve, decline, or escalate applications based on risk level.
+      </p>
+      <p>
+       While the model reliably flags low-risk applicants, it struggles to detect actual defaulters. For this reason, it should be used as a screening tool alongside manual review and supporting documentation to guide more balanced loan decisions.
+      </p>
+     </section>
+     <section>
+      <p>
+       <strong>
+        Which customer characteristics have the strongest relationship with loan default risk, and are any of them too similar to be used together in the model?
+       </strong>
+      </p>
+      <p>
+       The analysis shows that customers with a loan grade of "C" are significantly more likely to default, making it a strong risk indicator. Income is also important, with lower-income applicants being more prone to default. A multicollinearity check confirms that all predictors provide unique, independent information, meaning they can be safely used together in the model without distorting the results.
+      </p>
+     </section>
+     <section>
+      <p>
+       <strong>
+        Which factors are statistically significant in predicting loan default and should be prioritized in the approval checklist?
+       </strong>
+      </p>
+      <p>
+       Income and employment duration emerge as the most statistically significant predictors of default. Customers with lower income or shorter employment history are more likely to default, while those with loan grades B or C also present elevated risk—especially grade C. Although age is statistically significant, it has minimal impact on default prediction and should not be a primary decision factor. Applicants who meet multiple high-risk conditions should be reviewed more closely.
+      </p>
+     </section>
+     <section>
+      <p>
+       <strong>
+        Based on the selected variables, how well does the model predict the likelihood of a customer defaulting on their loan?
+       </strong>
+      </p>
+      <p>
+       The model performs better than random guessing and is statistically valid, but it explains only about 5% of the variation in default behavior. This is not unexpected given the complexity of loan default, which may involve personal or external events not captured in the dataset. The model is stable and reliable, but it should complement—rather than replace—existing approval checks like credit history or income verification.
+      </p>
+     </section>
+     <section>
+      <p>
+       <strong>
+        What is the predicted default probability for customers at the financial extremes — such as the youngest, oldest, highest-income, and lowest-income applicants?
+       </strong>
+      </p>
+      <p>
+       Predicted default risk varies across financial extremes. The youngest customer (age 20) has an 8.84% predicted default risk, while the oldest (age 144, likely a data entry error) has 11.86%. The lowest-income customer (RM 9,600) shows a 10.66% risk, while the highest-income customer (RM 500,000) has a surprisingly higher risk of 23.19%, possibly due to other influencing factors like job instability.
+      </p>
+     </section>
+     <section>
+      <p>
+       <strong>
+        How does employment stability affect the predicted risk of default?
+       </strong>
+      </p>
+      <p>
+       Employment history plays a strong role. The applicant with no employment history has a 24.44% predicted default rate, indicating that job stability is a key protective factor. Those with longer employment are generally less risky, reinforcing the need to assess employment duration in loan decisions.
+      </p>
+     </section>
+     <section>
+      <p>
+       <strong>
+        Which individual customers in our dataset are currently at highest risk of default and should be manually reviewed before approval?
+       </strong>
+      </p>
+      <p>
+       The top five customers with the highest predicted default probabilities (above 42%) tend to be young, have moderate to low income, and short or missing employment history. These applicants should be manually reviewed and may require additional documentation or a guarantor before approval is considered.
+      </p>
+     </section>
+     <section>
+      <p>
+       <strong>
+        How accurate is the model overall, and how closely do the predicted default probabilities match the actual outcomes?
+       </strong>
+      </p>
+      <p>
+       The model achieves a high overall accuracy of 79%, mainly by correctly identifying non-defaulting customers. However, it completely fails to detect actual defaulters—none of the 2,010 default cases in the test data were identified. This reveals a serious limitation: the model is overly biased toward predicting repayment and does not capture risky borrowers effectively.
+      </p>
+      <p>
+       To improve its usefulness in real-world scenarios, the model requires adjustments such as rebalancing the training data, fine-tuning the probability threshold, or integrating with manual review processes. Until then, it should not be used alone to decline applications.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The logistic regression model provides a structured and statistically sound way to assess loan default risk. It is effective in flagging safe borrowers and identifying some key risk factors such as low income, short employment duration, and loan grade. However, the model does not detect actual defaults well and is best used as a supportive tool in the underwriting process—not a stand-alone decision engine.
+      </p>
+      <p>
+       For loan underwriters, this model can guide prioritization and triage, helping to identify which applicants deserve more attention. Final decisions should still consider additional factors and require human judgment, especially when predicted risk is high.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         When to Approve:
+        </strong>
+        Applicants with high income, long employment history, and low predicted risk (under 10%), especially with loan grades A or B and stable records.
+       </li>
+       <li>
+        <strong>
+         When to Escalate for Manual Review:
+        </strong>
+        Applicants with moderate predicted risk (10–30%) or mixed indicators, such as high income but short job tenure, or those with a risky loan grade but otherwise acceptable profile.
+       </li>
+       <li>
+        <strong>
+         When to Decline:
+        </strong>
+        Applicants with very high predicted risk (above 30%) and multiple red flags, such as low income, short or no job history, high-risk loan grade, or very young age with no financial background.
+       </li>
+      </ul>
+      <p>
+       <strong>
+        Final Note:
+       </strong>
+       This model should support—not replace—human decisions. When used alongside document checks, credit reviews, and contextual judgment, it helps underwriters make more balanced, consistent decisions.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

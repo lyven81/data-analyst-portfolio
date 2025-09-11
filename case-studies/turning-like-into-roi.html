@@ -1,102 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turning Likes into ROI | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/turning-like-into-roi-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-likes-into-roi/cover%20image.png" alt="Turning Likes into ROI Cover Image">
-                    <h1>Turning Likes into ROI</h1>
-                    <p>Using Engagement Scores to Drive Ad Performance</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This case study investigates whether higher engagement in social media ads—measured through likes, shares, and comments—leads to better return on investment (ROI). The goal is to help marketing managers understand if improving engagement is financially worthwhile and how it can guide decisions on budget allocation, content strategy, and performance targets.</p>
-                    <p>Using linear regression analysis, we found a moderate but statistically reliable relationship between engagement and ROI. Each one-point increase in engagement score is associated with an ROI gain of approximately 0.28. These insights provide a practical basis for setting engagement goals and investing in strategies that boost interaction to improve overall ad performance.</p>
-                </section>
-
-                <section>
-                    <h2>Question 1</h2>
-                    <p><strong>Is there a strong enough relationship between engagement score and ROI to make a prediction model meaningful?</strong></p>
-                    <p>Yes, there is a moderate and consistent relationship between engagement score and ROI. The correlation value is +0.355, which suggests that as engagement scores increase, return on investment also tends to rise. While not extremely strong, this relationship is stable enough to justify using engagement as a predictive factor. A scatter plot of the data supports this, showing a clear upward trend.</p>
-                </section>
-
-                <section>
-                    <h2>Question 2</h2>
-                    <p><strong>How strong is the prediction power of engagement score for ROI, and is the relationship statistically reliable?</strong></p>
-                    <p>The regression model indicates that engagement score explains about 12.6% of the variation in ROI, based on an R-squared value of 0.126. This may appear modest, but in marketing—where results are influenced by many variables—it remains meaningful. Additionally, the p-value is 0.000, confirming the relationship is statistically significant. Engagement is not the sole driver of ROI, but it is a dependable factor that merits attention.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-likes-into-roi/chatr%203%20-%20engament%20score.png" alt="Engagement Score Scatter Plot">
-                </section>
-
-                <section>
-                    <h2>Question 3</h2>
-                    <p><strong>How can we use the regression model to set future engagement score targets that are likely to deliver higher ROI?</strong></p>
-                    <p>By applying the regression formula (Predicted ROI = 0.2766 × Engagement Score + 1.9692), we can estimate ROI at various engagement levels. For example, a score of 1 predicts an ROI of 2.25, while a score of 10 predicts an ROI of 4.74. These estimates help set practical goals—raising engagement from a score of 3 to 7, for instance, could increase ROI from 2.80 to 3.91. Incremental improvements in engagement, when applied at scale, can lead to meaningful financial gains across campaigns.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-likes-into-roi/chart%204%20-%20bar%20chart.png" alt="Predicted ROI Bar Chart">
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>The analysis confirms that there is a moderate and statistically reliable relationship between engagement in social media ads and return on investment. While engagement is not the only factor influencing ROI, it is a valuable one. The evidence supports the case for marketing teams to invest in engagement-focused strategies as part of their broader effort to improve ad performance.</p>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <p>Based on the findings, the following actions are recommended to strengthen engagement and improve ROI:</p>
-                    <ul>
-                        <li><strong>Tailor Content to Your Audience:</strong> Use audience insights to create ads that align with their interests. Personalization increases the likelihood of interaction.</li>
-                        <li><strong>Use Eye-Catching Visuals and Short Videos:</strong> Visual content, especially short videos, performs better and attracts more attention on social media.</li>
-                        <li><strong>Craft Compelling Calls to Action (CTAs):</strong> Encourage engagement through clear prompts. Asking questions or using polls can invite user participation.</li>
-                        <li><strong>Post at Optimal Times:</strong> Schedule posts when your target audience is most active to maximize visibility and interaction.</li>
-                        <li><strong>Incorporate Trending or Timely Topics:</strong> Linking ads to current events or seasonal themes can boost relevance and engagement.</li>
-                        <li><strong>A/B Test Different Creative Variations:</strong> Test different headlines, visuals, and messaging to find what drives the most response.</li>
-                        <li><strong>Leverage Influencer or User-Generated Content:</strong> Featuring real people or trusted voices can increase engagement and build credibility.</li>
-                        <li><strong>Focus on Value and Authenticity:</strong> Content that informs, entertains, or builds trust tends to perform better than purely promotional messaging.</li>
-                    </ul>
-                </section>
-
-            </section>
-        </main>
-
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Turning Likes into ROI | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/turning-like-into-roi-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Turning Likes into ROI Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-likes-into-roi/cover%20image.png"/>
+      <h1>
+       Turning Likes into ROI
+      </h1>
+      <p>
+       Using Engagement Scores to Drive Ad Performance
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This case study investigates whether higher engagement in social media ads—measured through likes, shares, and comments—leads to better return on investment (ROI). The goal is to help marketing managers understand if improving engagement is financially worthwhile and how it can guide decisions on budget allocation, content strategy, and performance targets.
+      </p>
+      <p>
+       Using linear regression analysis, we found a moderate but statistically reliable relationship between engagement and ROI. Each one-point increase in engagement score is associated with an ROI gain of approximately 0.28. These insights provide a practical basis for setting engagement goals and investing in strategies that boost interaction to improve overall ad performance.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 1
+      </h2>
+      <p>
+       <strong>
+        Is there a strong enough relationship between engagement score and ROI to make a prediction model meaningful?
+       </strong>
+      </p>
+      <p>
+       Yes, there is a moderate and consistent relationship between engagement score and ROI. The correlation value is +0.355, which suggests that as engagement scores increase, return on investment also tends to rise. While not extremely strong, this relationship is stable enough to justify using engagement as a predictive factor. A scatter plot of the data supports this, showing a clear upward trend.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 2
+      </h2>
+      <p>
+       <strong>
+        How strong is the prediction power of engagement score for ROI, and is the relationship statistically reliable?
+       </strong>
+      </p>
+      <p>
+       The regression model indicates that engagement score explains about 12.6% of the variation in ROI, based on an R-squared value of 0.126. This may appear modest, but in marketing—where results are influenced by many variables—it remains meaningful. Additionally, the p-value is 0.000, confirming the relationship is statistically significant. Engagement is not the sole driver of ROI, but it is a dependable factor that merits attention.
+      </p>
+      <img alt="Engagement Score Scatter Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-likes-into-roi/chatr%203%20-%20engament%20score.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 3
+      </h2>
+      <p>
+       <strong>
+        How can we use the regression model to set future engagement score targets that are likely to deliver higher ROI?
+       </strong>
+      </p>
+      <p>
+       By applying the regression formula (Predicted ROI = 0.2766 × Engagement Score + 1.9692), we can estimate ROI at various engagement levels. For example, a score of 1 predicts an ROI of 2.25, while a score of 10 predicts an ROI of 4.74. These estimates help set practical goals—raising engagement from a score of 3 to 7, for instance, could increase ROI from 2.80 to 3.91. Incremental improvements in engagement, when applied at scale, can lead to meaningful financial gains across campaigns.
+      </p>
+      <img alt="Predicted ROI Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-likes-into-roi/chart%204%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis confirms that there is a moderate and statistically reliable relationship between engagement in social media ads and return on investment. While engagement is not the only factor influencing ROI, it is a valuable one. The evidence supports the case for marketing teams to invest in engagement-focused strategies as part of their broader effort to improve ad performance.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <p>
+       Based on the findings, the following actions are recommended to strengthen engagement and improve ROI:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Tailor Content to Your Audience:
+        </strong>
+        Use audience insights to create ads that align with their interests. Personalization increases the likelihood of interaction.
+       </li>
+       <li>
+        <strong>
+         Use Eye-Catching Visuals and Short Videos:
+        </strong>
+        Visual content, especially short videos, performs better and attracts more attention on social media.
+       </li>
+       <li>
+        <strong>
+         Craft Compelling Calls to Action (CTAs):
+        </strong>
+        Encourage engagement through clear prompts. Asking questions or using polls can invite user participation.
+       </li>
+       <li>
+        <strong>
+         Post at Optimal Times:
+        </strong>
+        Schedule posts when your target audience is most active to maximize visibility and interaction.
+       </li>
+       <li>
+        <strong>
+         Incorporate Trending or Timely Topics:
+        </strong>
+        Linking ads to current events or seasonal themes can boost relevance and engagement.
+       </li>
+       <li>
+        <strong>
+         A/B Test Different Creative Variations:
+        </strong>
+        Test different headlines, visuals, and messaging to find what drives the most response.
+       </li>
+       <li>
+        <strong>
+         Leverage Influencer or User-Generated Content:
+        </strong>
+        Featuring real people or trusted voices can increase engagement and build credibility.
+       </li>
+       <li>
+        <strong>
+         Focus on Value and Authenticity:
+        </strong>
+        Content that informs, entertains, or builds trust tends to perform better than purely promotional messaging.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

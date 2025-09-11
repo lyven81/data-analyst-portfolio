@@ -1,108 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undervalued and Overlooked | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/undervalued-and-overlooked-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/cover%20image.png" alt="Undervalued and Overlooked Cover Image">
-                    <h1>Undervalued and Overlooked</h1>
-                    <p>Why Mid-Sized Homes Offer the Best ROI</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This case study investigates how home prices vary across different square footage brackets to help real estate investors identify the most advantageous property sizes for investment. The analysis focuses on defining typical price ranges by size, evaluating price volatility, and simulating pricing expectations using a uniform distribution model. By comparing actual sales data with simulated benchmarks, the study provides insights into whether certain size categories are undervalued, stable, or volatile—insights essential for guiding acquisition, budgeting, and scaling strategies.</p>
-                    <p>The findings are particularly relevant for investors seeking to optimize price-to-space efficiency and manage risk exposure. Emphasis is placed on identifying home size segments where pricing is lower than expected, volatility is moderate, and market behavior reveals overlap between smaller and larger homes. These indicators help pinpoint where value is concentrated, with mid-sized properties between 1500–2499 sqft emerging as a consistently strong investment category.</p>
-                </section>
-
-                <section>
-                    <h2>Question 1: What is the typical price range for homes in each square footage bracket?</h2>
-                    <p>Home prices increase with square footage, but actual average prices remain below their simulated expectations across all brackets. For example, in the 1500–1999 sqft range, the simulated mean is $827,079, while the actual mean is only $430,846. Similarly, in the 2000–2499 sqft range, actual prices average $528,621, compared to a simulated mean of $978,380. This consistent undervaluation in the mid-sized segments suggests untapped investment opportunities, particularly where the gap between expected and observed prices is most pronounced.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%201%20-%20bar%20chart.png" alt="Chart 1 - Price Comparison by Bracket">
-                </section>
-
-                <section>
-                    <h2>Question 2: How wide is the price spread in each size bracket?</h2>
-                    <p>The price spread, defined as the difference between the maximum and minimum sale prices within each size category, increases with square footage. For smaller homes (1000–1499 sqft), the spread is approximately $955,000, while homes in the 4500–4999 sqft bracket show spreads exceeding $3.15 million. Simulated data using uniform distributions confirm the credibility of these patterns. This widening spread with size underscores that smaller homes present lower pricing variability, whereas larger homes introduce greater uncertainty—critical when matching investment strategies to risk tolerance.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%202%20%20bar%20chart.png" alt="Chart 2 - Price Spread by Size Bracket">
-                </section>
-
-                <section>
-                    <h2>Question 3: Which size brackets have high price volatility, and which are more stable and predictable?</h2>
-                    <p>Price volatility, measured by standard deviation, rises with home size. Smaller homes (1000–1499 sqft) demonstrate low volatility, with a standard deviation of approximately $138,152. Larger homes (4500–4999 sqft), however, reach standard deviations of over $680,000. Mid-sized homes in the 1500–2499 sqft range strike a practical balance: they provide more living space than smaller homes while maintaining moderate price variability. These findings help investors assess which brackets offer stability alongside return potential.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%203%20-%20bar%20chart.png" alt="Chart 3 - Volatility by Bracket">
-                </section>
-
-                <section>
-                    <h2>Question 4: Are there size ranges where home prices consistently underperform or outperform expectations?</h2>
-                    <p>Every size bracket underperforms relative to simulated expectations, with all p-values below 0.0001, confirming the statistical significance of the findings. The most notable gap occurs in the 3500–3999 sqft bracket, where actual prices fall short by over $717,000. Even the smallest bracket (1000–1499 sqft) underperforms by more than $200,000. While undervaluation is widespread, mid-sized homes (1500–2999 sqft) stand out for combining substantial pricing gaps with lower volatility—making them more appealing for investment than their larger counterparts.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%204%20-%20bar%20chart.png" alt="Chart 4 - Underperformance by Size">
-                </section>
-
-                <section>
-                    <h2>Question 5: Are there any overlaps in price between small and larger home sizes?</h2>
-                    <p>Simulated price distributions reveal clear overlap between smaller and mid-sized homes. Homes in the 1500–1999 sqft range often share price ranges with those in the 2000–2499 sqft bracket. This suggests that larger homes are sometimes priced similarly to smaller ones, offering savvy investors a chance to acquire more square footage without a proportionate increase in cost. Such pricing anomalies create an attractive entry point for value-driven acquisitions.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%205%20-%20overlapping%20histogram.png" alt="Chart 5 - Overlap Between Sizes">
-                </section>
-
-                <section>
-                    <h2>Question 6: Are there investment sweet spots—e.g., properties that are mid-sized but priced similarly to smaller ones?</h2>
-                    <p>The analysis identifies two investment sweet spots: the 1500–1999 sqft and 2000–2499 sqft brackets. These homes combine lower-than-average price per square foot—$246 and $235 respectively—with relatively low volatility. Both brackets fall below the expected pricing trendline, offering more living space for less cost. Larger homes, while commanding higher absolute prices, tend to deliver diminishing value per square foot and exhibit higher risk. These insights position mid-sized homes as ideal for balanced, growth-oriented investing.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%206%20-%20heatmap.png" alt="Chart 6 - Investment Sweet Spots">
-                </section>
-
-                <section>
-                    <h2>Investment Insights</h2>
-                    <p>Mid-sized homes between 1500–2499 sqft offer the best combination of affordability, price stability, and space-to-cost efficiency. These properties are consistently undervalued by $396,000 to $450,000 below simulated expectations and show lower pricing variability than larger homes. Price overlap with smaller homes further strengthens their value proposition, allowing investors to acquire more space at similar or only slightly higher cost.</p>
-                    <p>As home size increases beyond 2500 sqft, average price and volatility rise sharply. Homes above 3500 sqft show the highest standard deviations and deepest underperformance relative to expectations, suggesting higher potential returns but also increased risk. These properties may appeal to risk-tolerant investors but are less suited for those seeking stable, efficient capital use.</p>
-                </section>
-
-                <section>
-                    <h2>Investment Recommendations</h2>
-                    <ul>
-                        <li><strong>Prioritize Mid-Sized Brackets (1500–2499 sqft):</strong> These homes offer the most attractive balance of cost, risk, and return. Priced between $400K–$550K, they provide an optimal entry point for mid-level capital deployment, especially for investors looking to scale efficiently.</li>
-                        <li><strong>Expand Cautiously into 2500–2999 sqft Range:</strong> Larger homes offer more space but come with rising volatility. Focus on properties below the average price in this range or those overlapping with mid-sized pricing. Avoid properties above 3500 sqft unless the investment strategy prioritizes long-term appreciation with higher risk tolerance.</li>
-                        <li><strong>Diversify Within Mid-Size Segments:</strong> To balance exposure, consider diversifying within the mid-sized category by targeting properties across varied zip codes, condition ratings, or age. This helps mitigate local market fluctuations and strengthens long-term portfolio resilience.</li>
-                    </ul>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Undervalued and Overlooked | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/undervalued-and-overlooked-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Undervalued and Overlooked Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/cover%20image.png"/>
+      <h1>
+       Undervalued and Overlooked
+      </h1>
+      <p>
+       Why Mid-Sized Homes Offer the Best ROI
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This case study investigates how home prices vary across different square footage brackets to help real estate investors identify the most advantageous property sizes for investment. The analysis focuses on defining typical price ranges by size, evaluating price volatility, and simulating pricing expectations using a uniform distribution model. By comparing actual sales data with simulated benchmarks, the study provides insights into whether certain size categories are undervalued, stable, or volatile—insights essential for guiding acquisition, budgeting, and scaling strategies.
+      </p>
+      <p>
+       The findings are particularly relevant for investors seeking to optimize price-to-space efficiency and manage risk exposure. Emphasis is placed on identifying home size segments where pricing is lower than expected, volatility is moderate, and market behavior reveals overlap between smaller and larger homes. These indicators help pinpoint where value is concentrated, with mid-sized properties between 1500–2499 sqft emerging as a consistently strong investment category.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 1: What is the typical price range for homes in each square footage bracket?
+      </h2>
+      <p>
+       Home prices increase with square footage, but actual average prices remain below their simulated expectations across all brackets. For example, in the 1500–1999 sqft range, the simulated mean is $827,079, while the actual mean is only $430,846. Similarly, in the 2000–2499 sqft range, actual prices average $528,621, compared to a simulated mean of $978,380. This consistent undervaluation in the mid-sized segments suggests untapped investment opportunities, particularly where the gap between expected and observed prices is most pronounced.
+      </p>
+      <img alt="Chart 1 - Price Comparison by Bracket" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%201%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 2: How wide is the price spread in each size bracket?
+      </h2>
+      <p>
+       The price spread, defined as the difference between the maximum and minimum sale prices within each size category, increases with square footage. For smaller homes (1000–1499 sqft), the spread is approximately $955,000, while homes in the 4500–4999 sqft bracket show spreads exceeding $3.15 million. Simulated data using uniform distributions confirm the credibility of these patterns. This widening spread with size underscores that smaller homes present lower pricing variability, whereas larger homes introduce greater uncertainty—critical when matching investment strategies to risk tolerance.
+      </p>
+      <img alt="Chart 2 - Price Spread by Size Bracket" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%202%20%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 3: Which size brackets have high price volatility, and which are more stable and predictable?
+      </h2>
+      <p>
+       Price volatility, measured by standard deviation, rises with home size. Smaller homes (1000–1499 sqft) demonstrate low volatility, with a standard deviation of approximately $138,152. Larger homes (4500–4999 sqft), however, reach standard deviations of over $680,000. Mid-sized homes in the 1500–2499 sqft range strike a practical balance: they provide more living space than smaller homes while maintaining moderate price variability. These findings help investors assess which brackets offer stability alongside return potential.
+      </p>
+      <img alt="Chart 3 - Volatility by Bracket" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%203%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 4: Are there size ranges where home prices consistently underperform or outperform expectations?
+      </h2>
+      <p>
+       Every size bracket underperforms relative to simulated expectations, with all p-values below 0.0001, confirming the statistical significance of the findings. The most notable gap occurs in the 3500–3999 sqft bracket, where actual prices fall short by over $717,000. Even the smallest bracket (1000–1499 sqft) underperforms by more than $200,000. While undervaluation is widespread, mid-sized homes (1500–2999 sqft) stand out for combining substantial pricing gaps with lower volatility—making them more appealing for investment than their larger counterparts.
+      </p>
+      <img alt="Chart 4 - Underperformance by Size" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%204%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 5: Are there any overlaps in price between small and larger home sizes?
+      </h2>
+      <p>
+       Simulated price distributions reveal clear overlap between smaller and mid-sized homes. Homes in the 1500–1999 sqft range often share price ranges with those in the 2000–2499 sqft bracket. This suggests that larger homes are sometimes priced similarly to smaller ones, offering savvy investors a chance to acquire more square footage without a proportionate increase in cost. Such pricing anomalies create an attractive entry point for value-driven acquisitions.
+      </p>
+      <img alt="Chart 5 - Overlap Between Sizes" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%205%20-%20overlapping%20histogram.png"/>
+     </section>
+     <section>
+      <h2>
+       Question 6: Are there investment sweet spots—e.g., properties that are mid-sized but priced similarly to smaller ones?
+      </h2>
+      <p>
+       The analysis identifies two investment sweet spots: the 1500–1999 sqft and 2000–2499 sqft brackets. These homes combine lower-than-average price per square foot—$246 and $235 respectively—with relatively low volatility. Both brackets fall below the expected pricing trendline, offering more living space for less cost. Larger homes, while commanding higher absolute prices, tend to deliver diminishing value per square foot and exhibit higher risk. These insights position mid-sized homes as ideal for balanced, growth-oriented investing.
+      </p>
+      <img alt="Chart 6 - Investment Sweet Spots" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/undervalue-and-overlook/chart%206%20-%20heatmap.png"/>
+     </section>
+     <section>
+      <h2>
+       Investment Insights
+      </h2>
+      <p>
+       Mid-sized homes between 1500–2499 sqft offer the best combination of affordability, price stability, and space-to-cost efficiency. These properties are consistently undervalued by $396,000 to $450,000 below simulated expectations and show lower pricing variability than larger homes. Price overlap with smaller homes further strengthens their value proposition, allowing investors to acquire more space at similar or only slightly higher cost.
+      </p>
+      <p>
+       As home size increases beyond 2500 sqft, average price and volatility rise sharply. Homes above 3500 sqft show the highest standard deviations and deepest underperformance relative to expectations, suggesting higher potential returns but also increased risk. These properties may appeal to risk-tolerant investors but are less suited for those seeking stable, efficient capital use.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Investment Recommendations
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Prioritize Mid-Sized Brackets (1500–2499 sqft):
+        </strong>
+        These homes offer the most attractive balance of cost, risk, and return. Priced between $400K–$550K, they provide an optimal entry point for mid-level capital deployment, especially for investors looking to scale efficiently.
+       </li>
+       <li>
+        <strong>
+         Expand Cautiously into 2500–2999 sqft Range:
+        </strong>
+        Larger homes offer more space but come with rising volatility. Focus on properties below the average price in this range or those overlapping with mid-sized pricing. Avoid properties above 3500 sqft unless the investment strategy prioritizes long-term appreciation with higher risk tolerance.
+       </li>
+       <li>
+        <strong>
+         Diversify Within Mid-Size Segments:
+        </strong>
+        To balance exposure, consider diversifying within the mid-sized category by targeting properties across varied zip codes, condition ratings, or age. This helps mitigate local market fluctuations and strengthens long-term portfolio resilience.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

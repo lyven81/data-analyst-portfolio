@@ -1,147 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>East Coast Alert | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/east-coast-alert-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/img.png" alt="East Coast Alert Visualization">
-                    <h1>East Coast Alert</h1>
-                    <p><em>Why Selangor’s Rape Case Count Doesn’t Tell the Full Story—and Which States Quietly Lead in Crime Probability</em></p>
-                </header>
-
-                <section>
-                    <h2>Study Context</h2>
-                    <p>This analysis utilizes probability analysis to estimate the likelihood of rape crimes occurring across various states in Malaysia. The dataset used for this analysis was sourced from the Royal Malaysian Police and the Department of Statistics Malaysia, and includes actual crime data where convictions have been made between 2016 and 2023. All reported rape victims in the dataset are female, as defined by Malaysia's legal statutes. This probability analysis highlights which states pose higher risks for women and families considering relocation, housing choices, and workplace safety, making it a critical tool for personal risk assessments.</p>
-                </section>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>For women and families considering relocation, safety is a top priority. This analysis provides a detailed examination of rape crime probability across different states in Malaysia. It identifies which regions have higher rates of rape crimes and assesses whether these crimes are concentrated in specific states or years. The findings offer important insights into how housing choices, transportation routes, and workplace safety planning can be informed by regional crime trends, helping individuals make data-driven decisions to ensure safety in their personal and professional lives.</p>
-                </section>
-
-                <section>
-                    <h2>1. What is the probability of rape crimes occurring in each state compared to all crimes?</h2>
-                    <ul>
-                        <li>Perlis stands out with the highest rape crime probability at 2.75%, followed by Pahang (2.16%) and Sabah (1.95%). In contrast, Selangor has a lower probability of 0.84%, making it one of the safer regions for women and families.</li>
-                        <li>This means that nearly three out of every 100 reported crimes in Perlis involve rape, while the risk is lower in Selangor.</li>
-                        <li>Women and families looking to relocate should prioritize states with lower rape crime probabilities like Selangor, Kuala Lumpur, and Penang. Higher-risk areas like Perlis or Pahang may require extra safety measures, particularly in housing and transportation planning.</li>
-                    </ul>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%201.png" alt="Rape Crime Probability by State">
-                </section>
-
-                <section>
-                    <h2>2. Which states have a significantly higher probability of rape crimes than the national average?</h2>
-                    <ul>
-                        <li>Perlis has the highest Z-score of +2.48, meaning it has a statistically significant higher probability of rape crimes compared to the national average. Other states with significant deviations include Pahang (Z-score +1.60) and Terengganu (Z-score +1.23).</li>
-                        <li>States with significantly higher crime probabilities, such as Perlis and Pahang, should be considered higher-risk areas for women and families in terms of personal safety and should factor in additional precautions when planning to relocate or move.</li>
-                    </ul>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%202%20-%20z%20score.png" alt="Z-Scores by State">
-                </section>
-
-                <section>
-                    <h2>3. Are rape crime trends stable over time or concentrated in recent years?</h2>
-                    <ul>
-                        <li>Selangor has shown consistent high numbers of rape cases, from 614 in 2016 to 751 in 2023, while states like Sabah and Kedah have shown recent surges in cases, such as Sabah increasing from 288 in 2021 to 453 in 2023.</li>
-                        <li>States like Selangor with stable crime trends are generally more predictable and may be safer choices for relocation. Conversely, areas like Sabah and Kedah with recent surges in crime may pose higher risks in the short term, warranting caution in terms of housing safety and workplace security.</li>
-                    </ul>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%203.png" alt="Crime Trend Over Time">
-                </section>
-
-                <section>
-                    <h2>4. Are higher rape crime probabilities linked to specific regions or neighboring states?</h2>
-                    <ul>
-                        <li>The East Coast region (including Kelantan, Terengganu, and Pahang) has the highest average rape crime probability at 1.93%, with East Malaysia (including Sabah and Sarawak) at 1.59%. In contrast, the Central region (including Selangor and W.P. Kuala Lumpur) has a much lower average of 0.89%.</li>
-                        <li>East Coast states like Kelantan, Terengganu, and Pahang show consistently higher risks for women and families in terms of sexual violence. Relocation decisions to these states should be carefully considered, especially for families with children or those prioritizing workplace safety.</li>
-                    </ul>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%204.png" alt="Regional Comparison of Crime Probability">
-                </section>
-
-                <section>
-                    <h2>5. What social, economic, or reporting factors might explain variation in rape crime probability across states?</h2>
-                    <ul>
-                        <li>Urbanization in states like Selangor and Kuala Lumpur tends to result in better reporting systems, which can skew crime statistics by making it appear that crime rates are higher. In contrast, less urbanized states like Perlis and Pahang may have higher crime rates due to underreporting and social vulnerabilities.</li>
-                        <li>States with better reporting systems may appear less risky, but the overall social and economic conditions in states like Perlis and Pahang could lead to higher crime probabilities in reality. Families considering relocation should weigh these factors, as they influence both safety levels and quality of life.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Goals Alignment</h2>
-                    <ul>
-                        <li><strong>Safety & Risk Management:</strong> The analysis provides personal safety insights, helping individuals and families make data-driven relocation decisions based on rape crime probabilities across Malaysia.</li>
-                        <li><strong>Housing & Real Estate Planning:</strong> By identifying high-risk areas like Perlis, Pahang, and Sabah, businesses in real estate development and housing services can adjust marketing strategies and offer safety-focused properties.</li>
-                        <li><strong>Workplace Safety:</strong> Understanding crime trends is essential for workplace safety planning, particularly for businesses setting up offices or factories in high-risk areas.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Impact</h2>
-                    <p>By assessing rape crime probabilities, this report helps businesses and families prioritize low-risk areas such as Selangor and W.P. Kuala Lumpur for relocation. It also provides insights into which regions may need more investment in safety programs, infrastructure, and community support initiatives.</p>
-                </section>
-
-                <section>
-                    <h2>Data Interpretation</h2>
-                    <ul>
-                        <li><strong>Crime Probabilities:</strong> The analysis indicates that Perlis and Pahang have higher rape crime probabilities due to a combination of underreporting, social factors, and lower law enforcement presence.</li>
-                        <li><strong>Urbanization and Reporting:</strong> Urbanized states like Selangor show more consistent reporting, leading to higher visibility of crime, but not necessarily higher crime rates.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Contextual Factors</h2>
-                    <ul>
-                        <li><strong>Economic Conditions and Reporting Quality:</strong> States with weaker economic conditions or social vulnerabilities tend to show higher crime rates, while those with stronger economies, better reporting infrastructure, and police presence may show lower crime rates but higher visibility.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <p>Based on the findings, women and families considering relocation should prioritize states with lower crime probabilities, such as Selangor and W.P. Kuala Lumpur. States like Perlis, Pahang, and Sabah should be approached with caution due to higher-than-average rape crime risk.</p>
-                    <ul>
-                        <li><strong>Invest in Low-Risk Areas:</strong> Target Selangor, Penang, and W.P. Kuala Lumpur for families considering relocation or property investments due to their lower crime rates.</li>
-                        <li><strong>Tailor Safety Initiatives:</strong> For regions like Perlis and Pahang, businesses should consider increased security measures and community engagement programs to address crime risk.</li>
-                        <li><strong>Promote Safe Locations:</strong> Real estate businesses should market safe neighborhoods and security-enhanced properties in regions with lower crime risks.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>The analysis of rape crime probability across Malaysia reveals that Perlis, Pahang, and Sabah have higher crime risks than other states. Families and businesses should consider Selangor, Penang, and W.P. Kuala Lumpur for relocation due to their lower crime probabilities. High-risk regions should implement targeted safety measures and invest in community welfare to improve safety. By prioritizing data-driven relocation decisions, businesses and families can ensure greater safety and better quality of life.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-    <footer>
-        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   East Coast Alert | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/east-coast-alert-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="East Coast Alert Visualization" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/img.png"/>
+      <h1>
+       East Coast Alert
+      </h1>
+      <p>
+       <em>
+        Why Selangor’s Rape Case Count Doesn’t Tell the Full Story—and Which States Quietly Lead in Crime Probability
+       </em>
+      </p>
+     </header>
+     <section>
+      <h2>
+       Study Context
+      </h2>
+      <p>
+       This analysis utilizes probability analysis to estimate the likelihood of rape crimes occurring across various states in Malaysia. The dataset used for this analysis was sourced from the Royal Malaysian Police and the Department of Statistics Malaysia, and includes actual crime data where convictions have been made between 2016 and 2023. All reported rape victims in the dataset are female, as defined by Malaysia's legal statutes. This probability analysis highlights which states pose higher risks for women and families considering relocation, housing choices, and workplace safety, making it a critical tool for personal risk assessments.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       For women and families considering relocation, safety is a top priority. This analysis provides a detailed examination of rape crime probability across different states in Malaysia. It identifies which regions have higher rates of rape crimes and assesses whether these crimes are concentrated in specific states or years. The findings offer important insights into how housing choices, transportation routes, and workplace safety planning can be informed by regional crime trends, helping individuals make data-driven decisions to ensure safety in their personal and professional lives.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. What is the probability of rape crimes occurring in each state compared to all crimes?
+      </h2>
+      <ul>
+       <li>
+        Perlis stands out with the highest rape crime probability at 2.75%, followed by Pahang (2.16%) and Sabah (1.95%). In contrast, Selangor has a lower probability of 0.84%, making it one of the safer regions for women and families.
+       </li>
+       <li>
+        This means that nearly three out of every 100 reported crimes in Perlis involve rape, while the risk is lower in Selangor.
+       </li>
+       <li>
+        Women and families looking to relocate should prioritize states with lower rape crime probabilities like Selangor, Kuala Lumpur, and Penang. Higher-risk areas like Perlis or Pahang may require extra safety measures, particularly in housing and transportation planning.
+       </li>
+      </ul>
+      <img alt="Rape Crime Probability by State" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%201.png"/>
+     </section>
+     <section>
+      <h2>
+       2. Which states have a significantly higher probability of rape crimes than the national average?
+      </h2>
+      <ul>
+       <li>
+        Perlis has the highest Z-score of +2.48, meaning it has a statistically significant higher probability of rape crimes compared to the national average. Other states with significant deviations include Pahang (Z-score +1.60) and Terengganu (Z-score +1.23).
+       </li>
+       <li>
+        States with significantly higher crime probabilities, such as Perlis and Pahang, should be considered higher-risk areas for women and families in terms of personal safety and should factor in additional precautions when planning to relocate or move.
+       </li>
+      </ul>
+      <img alt="Z-Scores by State" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%202%20-%20z%20score.png"/>
+     </section>
+     <section>
+      <h2>
+       3. Are rape crime trends stable over time or concentrated in recent years?
+      </h2>
+      <ul>
+       <li>
+        Selangor has shown consistent high numbers of rape cases, from 614 in 2016 to 751 in 2023, while states like Sabah and Kedah have shown recent surges in cases, such as Sabah increasing from 288 in 2021 to 453 in 2023.
+       </li>
+       <li>
+        States like Selangor with stable crime trends are generally more predictable and may be safer choices for relocation. Conversely, areas like Sabah and Kedah with recent surges in crime may pose higher risks in the short term, warranting caution in terms of housing safety and workplace security.
+       </li>
+      </ul>
+      <img alt="Crime Trend Over Time" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%203.png"/>
+     </section>
+     <section>
+      <h2>
+       4. Are higher rape crime probabilities linked to specific regions or neighboring states?
+      </h2>
+      <ul>
+       <li>
+        The East Coast region (including Kelantan, Terengganu, and Pahang) has the highest average rape crime probability at 1.93%, with East Malaysia (including Sabah and Sarawak) at 1.59%. In contrast, the Central region (including Selangor and W.P. Kuala Lumpur) has a much lower average of 0.89%.
+       </li>
+       <li>
+        East Coast states like Kelantan, Terengganu, and Pahang show consistently higher risks for women and families in terms of sexual violence. Relocation decisions to these states should be carefully considered, especially for families with children or those prioritizing workplace safety.
+       </li>
+      </ul>
+      <img alt="Regional Comparison of Crime Probability" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/east-coast-alert/chart%204.png"/>
+     </section>
+     <section>
+      <h2>
+       5. What social, economic, or reporting factors might explain variation in rape crime probability across states?
+      </h2>
+      <ul>
+       <li>
+        Urbanization in states like Selangor and Kuala Lumpur tends to result in better reporting systems, which can skew crime statistics by making it appear that crime rates are higher. In contrast, less urbanized states like Perlis and Pahang may have higher crime rates due to underreporting and social vulnerabilities.
+       </li>
+       <li>
+        States with better reporting systems may appear less risky, but the overall social and economic conditions in states like Perlis and Pahang could lead to higher crime probabilities in reality. Families considering relocation should weigh these factors, as they influence both safety levels and quality of life.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Safety &amp; Risk Management:
+        </strong>
+        The analysis provides personal safety insights, helping individuals and families make data-driven relocation decisions based on rape crime probabilities across Malaysia.
+       </li>
+       <li>
+        <strong>
+         Housing &amp; Real Estate Planning:
+        </strong>
+        By identifying high-risk areas like Perlis, Pahang, and Sabah, businesses in real estate development and housing services can adjust marketing strategies and offer safety-focused properties.
+       </li>
+       <li>
+        <strong>
+         Workplace Safety:
+        </strong>
+        Understanding crime trends is essential for workplace safety planning, particularly for businesses setting up offices or factories in high-risk areas.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact
+      </h2>
+      <p>
+       By assessing rape crime probabilities, this report helps businesses and families prioritize low-risk areas such as Selangor and W.P. Kuala Lumpur for relocation. It also provides insights into which regions may need more investment in safety programs, infrastructure, and community support initiatives.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Crime Probabilities:
+        </strong>
+        The analysis indicates that Perlis and Pahang have higher rape crime probabilities due to a combination of underreporting, social factors, and lower law enforcement presence.
+       </li>
+       <li>
+        <strong>
+         Urbanization and Reporting:
+        </strong>
+        Urbanized states like Selangor show more consistent reporting, leading to higher visibility of crime, but not necessarily higher crime rates.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Economic Conditions and Reporting Quality:
+        </strong>
+        States with weaker economic conditions or social vulnerabilities tend to show higher crime rates, while those with stronger economies, better reporting infrastructure, and police presence may show lower crime rates but higher visibility.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <p>
+       Based on the findings, women and families considering relocation should prioritize states with lower crime probabilities, such as Selangor and W.P. Kuala Lumpur. States like Perlis, Pahang, and Sabah should be approached with caution due to higher-than-average rape crime risk.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Invest in Low-Risk Areas:
+        </strong>
+        Target Selangor, Penang, and W.P. Kuala Lumpur for families considering relocation or property investments due to their lower crime rates.
+       </li>
+       <li>
+        <strong>
+         Tailor Safety Initiatives:
+        </strong>
+        For regions like Perlis and Pahang, businesses should consider increased security measures and community engagement programs to address crime risk.
+       </li>
+       <li>
+        <strong>
+         Promote Safe Locations:
+        </strong>
+        Real estate businesses should market safe neighborhoods and security-enhanced properties in regions with lower crime risks.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis of rape crime probability across Malaysia reveals that Perlis, Pahang, and Sabah have higher crime risks than other states. Families and businesses should consider Selangor, Penang, and W.P. Kuala Lumpur for relocation due to their lower crime probabilities. High-risk regions should implement targeted safety measures and invest in community welfare to improve safety. By prioritizing data-driven relocation decisions, businesses and families can ensure greater safety and better quality of life.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2024 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

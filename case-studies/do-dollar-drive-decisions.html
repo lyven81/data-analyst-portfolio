@@ -1,130 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do Dollar Drive Decisions? | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/do-dollar-drive-decisions-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/cover%20image.png" alt="Cover Image" style="max-width: 100%; height: auto;">
-                    <h1>Do Dollar Drive Decisions?</h1>
-                    <p>Uncovering Lending Patterns Across Income Levels</p>
-                </header>
-
-                <section>
-                    <h2>Overview:</h2>
-                    <p>The purpose of this analysis is to assess whether income influences loan terms, including interest rates and loan amounts. The company, a lending institution, aims to determine if higher-income applicants are receiving preferential loan terms (e.g., lower interest rates, higher loan amounts) and whether these differences are justified by risk factors or are indicative of biases in the lending process.</p>
-                </section>
-
-                <section>
-                    <h2>Key Results:</h2>
-                    <ul>
-                        <li><strong>Interest Rate Differences by Income:</strong> Higher-income applicants receive slightly lower interest rates on average (10.90%) compared to lower-income applicants (11.99%), with a difference of approximately 1.09%. This suggests that income may be influencing interest rate assignment, likely due to perceptions of lower risk associated with higher-income borrowers.<br>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%201%20Low-Income%20Group%20Received%20Slightly%20Higher%20Interest%20Rates.png" alt="Chart 1" style="max-width: 100%; height: auto;"></li>
-
-                        <li><strong>Loan Amount and Income Relationship:</strong> No strong correlation was found between income and loan amount. The loan amounts for high-income applicants are not significantly higher than those for low-income applicants, with a weak correlation of 0.37. This suggests that income is not the primary factor influencing loan amounts.<br>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%202%20No%20Strong%20Correlation%20Found%20Between%20Income%20and%20Loan%20Amoun.png" alt="Chart 2" style="max-width: 100%; height: auto;"></li>
-
-                        <li><strong>Overrepresentation of Credit Grades in Income Groups:</strong> Higher-income applicants are more likely to receive better credit grades (A and B), while lower-income applicants are more likely to receive lower grades (C, D, and E). This disparity could suggest grading biases, particularly if the grades are not fully justified by objective risk measures.<br>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%203%20Higher-Income%20Group%20Is%20More%20Likely%20to%20Receive%20Better%20Loan%20Ratings.png" alt="Chart 3" style="max-width: 100%; height: auto;"></li>
-
-                        <li><strong>Financial Risk by Income Group:</strong> Higher-income applicants exhibit lower debt-to-income ratios and lower credit utilization compared to lower-income applicants, suggesting they pose lower financial risk.<br>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%204%20Higher-Income%20Group%20Has%20Lower%20Loan%20Risk.png" alt="Chart 4" style="max-width: 100%; height: auto;"></li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>2. Relating Results to Business Goals</h2>
-                    <h3>Goals Alignment:</h3>
-                    <p>The primary business goal is to ensure fairness and equity in the loan approval process, particularly in the assignment of interest rates and loan amounts. This aligns with the company’s objectives to:</p>
-                    <ul>
-                        <li>Maintain Fairness and Compliance: Ensuring that lending decisions are based on objective risk factors and not biased by income will help the company meet regulatory requirements and maintain customer trust.</li>
-                        <li>Optimize Loan Terms: By understanding how income influences loan terms, the company can develop more targeted, fair, and competitive loan products that cater to the needs of all income groups.</li>
-                        <li>Strengthen Customer Relationships: By addressing potential biases and offering fair terms based on objective risk metrics, the company can improve customer satisfaction and loyalty.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Impact:</h3>
-                    <ul>
-                        <li>Fairness in Lending: The findings help ensure that loan terms are assigned based on objective financial risk rather than income alone, promoting fairness and reducing the risk of legal challenges related to discrimination.</li>
-                        <li>Revenue Optimization: Understanding how income impacts loan terms allows the company to optimize pricing strategies and improve profitability while maintaining fairness.</li>
-                        <li>Regulatory Compliance: Addressing the potential for income-based biases helps ensure the company remains compliant with lending regulations and industry standards.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>3. Interpreting the Results in Context</h2>
-                    <h3>Data Interpretation:</h3>
-                    <ul>
-                        <li><strong>Interest Rate Differences by Income:</strong> The observed difference in interest rates between income groups is likely due to the lower financial risk posed by high-income applicants. These individuals generally have stronger credit profiles, which justifies their receiving lower interest rates. However, the company should ensure that this differentiation is based solely on risk and not unintentionally biased by income alone.</li>
-                        <li><strong>Loan Amount and Income Relationship:</strong> The lack of a strong correlation between income and loan amounts suggests that factors such as credit scores, financial obligations, or other risk factors (such as debt-to-income ratios) play a more significant role in determining loan amounts than income alone. This is an important insight, as it shows that income alone does not automatically grant higher loan amounts.</li>
-                        <li><strong>Overrepresentation of Credit Grades in Income Groups:</strong> The overrepresentation of higher credit grades in high-income groups may indicate a potential grading bias, as these applicants are receiving better grades despite not always presenting significantly better financial risk. The company should ensure that grades are assigned based on consistent, transparent criteria that accurately reflect financial risk and not be influenced by income bias.</li>
-                        <li><strong>Risk Factors and Financial Risk:</strong> High-income applicants exhibit lower debt-to-income ratios and lower credit utilization, both of which are indicators of lower financial risk. This justifies the lower interest rates and better credit grades for high-income applicants. However, this should not be used as a justification for systemic bias; rather, it should be used to inform the risk-based decision-making process.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Contextual Factors:</h3>
-                    <ul>
-                        <li>Economic Conditions: The broader economic environment can influence customer behavior and financial stability. For example, higher-income individuals may have better job security or more disposable income, leading to lower debt-to-income ratios and lower credit utilization. These factors contribute to their lower financial risk but may not fully account for biases in the lending process.</li>
-                        <li>Market Trends: Trends in lending, such as changes in interest rates or shifts in consumer preferences for loan products, could impact the observed relationships between income, loan terms, and risk profiles. Monitoring these trends will be crucial for maintaining fairness and competitiveness in loan offerings.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>4. Recommendation</h2>
-                    <p>The findings suggest that income does have an impact on loan terms, but it is important to ensure that this impact is based on objective risk factors and not biased by income. The company should take steps to review its lending policies to ensure fairness across income groups and avoid any unintentional biases.</p>
-                    <ul>
-                        <li><strong>Review Interest Rate Assignment Criteria:</strong> The company should ensure that interest rates are primarily determined by objective risk factors (e.g., credit score, debt-to-income ratio, financial stability) rather than income. This will help reduce any potential biases and ensure fairness in rate assignment.</li>
-                        <li><strong>Refine Credit Grading Systems:</strong> The company should assess whether the grading system is inadvertently favoring higher-income applicants. If biases are detected, the grading criteria should be adjusted to ensure that risk factors such as creditworthiness, debt management, and financial history are the primary determinants for credit grades.</li>
-                        <li><strong>Focus on Risk-Based Loan Amount Determination:</strong> Since income alone does not strongly correlate with loan amounts, the company should continue to base loan amount decisions on a combination of factors, including credit score, debt-to-income ratio, and financial history, rather than just income.</li>
-                        <li><strong>Monitor and Adjust for Sampling Bias:</strong> Ensure that the data used to evaluate lending patterns is representative and free from overrepresentation of certain income groups or credit grades. This will help prevent any skewed results and ensure that the analysis reflects the true nature of the lending process.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Conclusion:</h2>
-                    <p>The analysis reveals that income does influence loan terms, including interest rates and credit grades, but the differentiation is primarily driven by objective financial risk factors such as debt-to-income ratios and credit utilization. However, the potential for bias, especially in the overrepresentation of higher grades in high-income groups, suggests that the company should refine its grading and loan assignment processes to ensure fairness. By making data-driven adjustments to its lending policies, the company can maintain regulatory compliance, optimize its loan offerings, and build stronger customer trust.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Do Dollar Drive Decisions? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/do-dollar-drive-decisions-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/cover%20image.png" style="max-width: 100%; height: auto;"/>
+      <h1>
+       Do Dollar Drive Decisions?
+      </h1>
+      <p>
+       Uncovering Lending Patterns Across Income Levels
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview:
+      </h2>
+      <p>
+       The purpose of this analysis is to assess whether income influences loan terms, including interest rates and loan amounts. The company, a lending institution, aims to determine if higher-income applicants are receiving preferential loan terms (e.g., lower interest rates, higher loan amounts) and whether these differences are justified by risk factors or are indicative of biases in the lending process.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Results:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Interest Rate Differences by Income:
+        </strong>
+        Higher-income applicants receive slightly lower interest rates on average (10.90%) compared to lower-income applicants (11.99%), with a difference of approximately 1.09%. This suggests that income may be influencing interest rate assignment, likely due to perceptions of lower risk associated with higher-income borrowers.
+        <br/>
+        <img alt="Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%201%20Low-Income%20Group%20Received%20Slightly%20Higher%20Interest%20Rates.png" style="max-width: 100%; height: auto;"/>
+       </li>
+       <li>
+        <strong>
+         Loan Amount and Income Relationship:
+        </strong>
+        No strong correlation was found between income and loan amount. The loan amounts for high-income applicants are not significantly higher than those for low-income applicants, with a weak correlation of 0.37. This suggests that income is not the primary factor influencing loan amounts.
+        <br/>
+        <img alt="Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%202%20No%20Strong%20Correlation%20Found%20Between%20Income%20and%20Loan%20Amoun.png" style="max-width: 100%; height: auto;"/>
+       </li>
+       <li>
+        <strong>
+         Overrepresentation of Credit Grades in Income Groups:
+        </strong>
+        Higher-income applicants are more likely to receive better credit grades (A and B), while lower-income applicants are more likely to receive lower grades (C, D, and E). This disparity could suggest grading biases, particularly if the grades are not fully justified by objective risk measures.
+        <br/>
+        <img alt="Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%203%20Higher-Income%20Group%20Is%20More%20Likely%20to%20Receive%20Better%20Loan%20Ratings.png" style="max-width: 100%; height: auto;"/>
+       </li>
+       <li>
+        <strong>
+         Financial Risk by Income Group:
+        </strong>
+        Higher-income applicants exhibit lower debt-to-income ratios and lower credit utilization compared to lower-income applicants, suggesting they pose lower financial risk.
+        <br/>
+        <img alt="Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/do-dollar-drive-decisions/Chart%204%20Higher-Income%20Group%20Has%20Lower%20Loan%20Risk.png" style="max-width: 100%; height: auto;"/>
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       2. Relating Results to Business Goals
+      </h2>
+      <h3>
+       Goals Alignment:
+      </h3>
+      <p>
+       The primary business goal is to ensure fairness and equity in the loan approval process, particularly in the assignment of interest rates and loan amounts. This aligns with the company’s objectives to:
+      </p>
+      <ul>
+       <li>
+        Maintain Fairness and Compliance: Ensuring that lending decisions are based on objective risk factors and not biased by income will help the company meet regulatory requirements and maintain customer trust.
+       </li>
+       <li>
+        Optimize Loan Terms: By understanding how income influences loan terms, the company can develop more targeted, fair, and competitive loan products that cater to the needs of all income groups.
+       </li>
+       <li>
+        Strengthen Customer Relationships: By addressing potential biases and offering fair terms based on objective risk metrics, the company can improve customer satisfaction and loyalty.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h3>
+       Impact:
+      </h3>
+      <ul>
+       <li>
+        Fairness in Lending: The findings help ensure that loan terms are assigned based on objective financial risk rather than income alone, promoting fairness and reducing the risk of legal challenges related to discrimination.
+       </li>
+       <li>
+        Revenue Optimization: Understanding how income impacts loan terms allows the company to optimize pricing strategies and improve profitability while maintaining fairness.
+       </li>
+       <li>
+        Regulatory Compliance: Addressing the potential for income-based biases helps ensure the company remains compliant with lending regulations and industry standards.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       3. Interpreting the Results in Context
+      </h2>
+      <h3>
+       Data Interpretation:
+      </h3>
+      <ul>
+       <li>
+        <strong>
+         Interest Rate Differences by Income:
+        </strong>
+        The observed difference in interest rates between income groups is likely due to the lower financial risk posed by high-income applicants. These individuals generally have stronger credit profiles, which justifies their receiving lower interest rates. However, the company should ensure that this differentiation is based solely on risk and not unintentionally biased by income alone.
+       </li>
+       <li>
+        <strong>
+         Loan Amount and Income Relationship:
+        </strong>
+        The lack of a strong correlation between income and loan amounts suggests that factors such as credit scores, financial obligations, or other risk factors (such as debt-to-income ratios) play a more significant role in determining loan amounts than income alone. This is an important insight, as it shows that income alone does not automatically grant higher loan amounts.
+       </li>
+       <li>
+        <strong>
+         Overrepresentation of Credit Grades in Income Groups:
+        </strong>
+        The overrepresentation of higher credit grades in high-income groups may indicate a potential grading bias, as these applicants are receiving better grades despite not always presenting significantly better financial risk. The company should ensure that grades are assigned based on consistent, transparent criteria that accurately reflect financial risk and not be influenced by income bias.
+       </li>
+       <li>
+        <strong>
+         Risk Factors and Financial Risk:
+        </strong>
+        High-income applicants exhibit lower debt-to-income ratios and lower credit utilization, both of which are indicators of lower financial risk. This justifies the lower interest rates and better credit grades for high-income applicants. However, this should not be used as a justification for systemic bias; rather, it should be used to inform the risk-based decision-making process.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h3>
+       Contextual Factors:
+      </h3>
+      <ul>
+       <li>
+        Economic Conditions: The broader economic environment can influence customer behavior and financial stability. For example, higher-income individuals may have better job security or more disposable income, leading to lower debt-to-income ratios and lower credit utilization. These factors contribute to their lower financial risk but may not fully account for biases in the lending process.
+       </li>
+       <li>
+        Market Trends: Trends in lending, such as changes in interest rates or shifts in consumer preferences for loan products, could impact the observed relationships between income, loan terms, and risk profiles. Monitoring these trends will be crucial for maintaining fairness and competitiveness in loan offerings.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       4. Recommendation
+      </h2>
+      <p>
+       The findings suggest that income does have an impact on loan terms, but it is important to ensure that this impact is based on objective risk factors and not biased by income. The company should take steps to review its lending policies to ensure fairness across income groups and avoid any unintentional biases.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Review Interest Rate Assignment Criteria:
+        </strong>
+        The company should ensure that interest rates are primarily determined by objective risk factors (e.g., credit score, debt-to-income ratio, financial stability) rather than income. This will help reduce any potential biases and ensure fairness in rate assignment.
+       </li>
+       <li>
+        <strong>
+         Refine Credit Grading Systems:
+        </strong>
+        The company should assess whether the grading system is inadvertently favoring higher-income applicants. If biases are detected, the grading criteria should be adjusted to ensure that risk factors such as creditworthiness, debt management, and financial history are the primary determinants for credit grades.
+       </li>
+       <li>
+        <strong>
+         Focus on Risk-Based Loan Amount Determination:
+        </strong>
+        Since income alone does not strongly correlate with loan amounts, the company should continue to base loan amount decisions on a combination of factors, including credit score, debt-to-income ratio, and financial history, rather than just income.
+       </li>
+       <li>
+        <strong>
+         Monitor and Adjust for Sampling Bias:
+        </strong>
+        Ensure that the data used to evaluate lending patterns is representative and free from overrepresentation of certain income groups or credit grades. This will help prevent any skewed results and ensure that the analysis reflects the true nature of the lending process.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion:
+      </h2>
+      <p>
+       The analysis reveals that income does influence loan terms, including interest rates and credit grades, but the differentiation is primarily driven by objective financial risk factors such as debt-to-income ratios and credit utilization. However, the potential for bias, especially in the overrepresentation of higher grades in high-income groups, suggests that the company should refine its grading and loan assignment processes to ensure fairness. By making data-driven adjustments to its lending policies, the company can maintain regulatory compliance, optimize its loan offerings, and build stronger customer trust.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2024 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

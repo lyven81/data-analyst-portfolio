@@ -1,150 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Did You Sleep Well Last Night? | Lee Yih Ven</title>
-  <link rel="stylesheet" href="/data-analyst-portfolio/style.css" />
-</head>
-<body>
-
-<div class="container">
-  <aside class="left-column">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Did You Sleep Well Last Night? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
     <header>
-      <h1>Lee Yih Ven</h1>
-      <h2>Data Analytics Portfolio</h2>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
     </header>
     <section class="intro">
-      <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
     </section>
     <section class="contact">
-      <h2>Contact</h2>
-      <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-      <ul>
-        <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-        <li>Phone: +6014-9207099</li>
-      </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/hotel-sleep-analysis-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-  <main class="right-column">
-    <section class="case-study-content">
-      <header>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/cover%20image.png" alt="Cover Image">
-        <h1>Did You Sleep Well Last Night?</h1>
-        <p>Measuring Guest Sleep Quality in a Hotel</p>
-      </header>
-
-      <section>
-        <h2>Study Context:</h2>
-        <p>This study is conducted with the consent of 250 hotel guests, who participated voluntarily in the sleep tracking program. The hotel uses sleep tracking pads for opt-in guests, offering discounts on future stays as a reward for participation. During the data collection period, the hotel tracked and analysed daily Sleep Scores for each guest. The focus of this study is on identifying the proportion of guests who achieve a Sleep Score ≥ 85, which represents a high-quality sleep experience. The aim is to provide actionable insights for the hotel to improve sleep quality, market its wellness offerings, and enhance customer satisfaction.</p>
-      </section>
-
-      <section>
-        <h2>Overview:</h2>
-        <p>The objective of this analysis is to determine the proportion of hotel guests achieving high-quality sleep (Sleep Score ≥ 85) and assess the effectiveness of sleep-enhancing features like the Wellness Suite. The analysis also evaluates the reliability of these findings and provides insights into how the hotel can use this data to improve its offerings.</p>
-      </section>
-
-      <section>
-        <h2>Key Results:</h2>
-        <ul>
-          <li><strong>Proportion of Guests with High-Quality Sleep (Score ≥ 85):</strong>
-            <ul>
-              <li>55.2% of hotel guests achieved a Sleep Score of 85 or above, suggesting that over half of the guests experienced high-quality sleep. This result indicates that the hotel’s current sleep environment is effective for many guests, but there is still room for improvement to address the remaining 44.8% of guests who did not meet the benchmark.</li>
-              <li>The hotel can target improvements in sleep quality for the remaining 44.8% of guests, such as enhancing pillow quality, room soundproofing, or offering more personalized sleep packages.</li>
-              <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%201%20-%20bar%20chart.png" alt="Chart 1"></li>
-            </ul>
-          </li>
-
-          <li><strong>Wellness Suite vs. Other Room Types:</strong>
-            <ul>
-              <li>The Wellness Suite outperformed all other room types, with an average Sleep Score of 87.8, higher than the Suite at 87.7. The Standard, Deluxe, and Executive rooms all recorded average Sleep Scores below the target of 85.</li>
-              <li>Given the strong performance of the Wellness Suite, it should be marketed as a premium offering that delivers better sleep quality. Consider incorporating sleep-enhancing features from the Wellness Suite into other room types, possibly justifying premium pricing for rooms with similar features.</li>
-              <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%202%20-%20bar%20chart.png" alt="Chart 2"></li>
-            </ul>
-          </li>
-
-          <li><strong>Reliability of Results (Confidence Interval Analysis):</strong>
-            <ul>
-              <li>The average Sleep Score for the 250 guests is 84.3, with a 95% confidence interval ranging from 83.56 to 85.03. This indicates a high level of reliability, with a 95% probability that the true average Sleep Score for the population of guests falls within this range.</li>
-              <li>The hotel can confidently use these results to evaluate future sleep quality and wellness offerings, ensuring that marketing claims and operational decisions are based on reliable data.</li>
-              <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%203%20-%20histogram.png" alt="Chart 3"></li>
-            </ul>
-          </li>
-
-          <li><strong>Sample Size and Margin of Error:</strong>
-            <ul>
-              <li>For reliable insights with a ±10% margin of error, 95 guests are sufficient. For a ±5% margin of error, the recommended sample size increases to 380 guests. For very high precision (±1%), up to 9,500 guests would need to be surveyed.</li>
-              <li>Starting with a manageable target of 400 responses will ensure that the hotel can confidently analyze sleep performance and make data-driven decisions regarding room types and sleep packages.</li>
-              <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%204%20-%20line%20chart.png" alt="Chart 4"></li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Goals Alignment:</h2>
-        <ul>
-          <li><strong>Enhance Guest Satisfaction:</strong> Improve sleep quality by evaluating and refining sleep-related amenities and packages.</li>
-          <li><strong>Increase Revenue through Premium Offerings:</strong> Use insights from sleep scores to justify the promotion of premium room types and wellness offerings.</li>
-          <li><strong>Improve Operational Efficiency:</strong> Use reliable sleep score data to guide operational improvements, such as inventory management and staffing for wellness services.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Impact:</h2>
-        <ul>
-          <li><strong>Customer Satisfaction:</strong> The high percentage of guests achieving a Sleep Score ≥ 85 indicates that the hotel’s sleep environment is effective for a majority of guests. However, addressing the 44.8% who scored below 85 could further increase guest satisfaction.</li>
-          <li><strong>Revenue Growth:</strong> By highlighting the success of the Wellness Suite and its superior sleep quality, the hotel can effectively market this room type to health-conscious travelers, potentially increasing revenue.</li>
-          <li><strong>Operational Efficiency:</strong> Reliable data on sleep scores provides a benchmark that the hotel can use to make informed decisions about room enhancements, staffing, and wellness package offerings.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Data Interpretation:</h2>
-        <ul>
-          <li><strong>Proportion of Guests with Sleep Scores ≥ 85:</strong> The finding that 55.2% of guests achieved a Sleep Score ≥ 85 suggests that the hotel’s sleep environment works well for over half of the guests. The remaining guests may benefit from improvements such as better-quality pillows, more comfortable mattresses, or other enhancements to the sleep environment.</li>
-          <li><strong>Wellness Suite Performance:</strong> The Wellness Suite outperformed other rooms, likely due to the sleep-enhancing features it offers, such as aromatherapy, blackout curtains, and premium mattresses. This supports the effectiveness of these amenities and suggests that wellness-focused offerings can lead to higher guest satisfaction.</li>
-          <li><strong>Confidence Interval Reliability:</strong> The narrow confidence interval (83.56 to 85.03) provides strong evidence that the results are reliable and not due to sampling error. This gives decision-makers confidence that the sleep scores they are using to evaluate room types and wellness packages are based on solid data.</li>
-          <li><strong>Sample Size and Margin of Error:</strong> The analysis suggests that starting with 400 guests will provide reasonably precise results. The hotel should aim to gather a sufficient sample size to reduce the margin of error and improve the accuracy of its conclusions, especially when making decisions about potential upgrades or changes to wellness offerings.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Contextual Factors:</h2>
-        <ul>
-          <li><strong>Seasonality and Guest Behavior:</strong> Guest sleep quality may vary by season or external factors, such as the purpose of the stay (business vs. leisure). Future analysis could incorporate these variables to refine the understanding of what influences sleep scores.</li>
-          <li><strong>Market Trends:</strong> As wellness tourism continues to grow, offering sleep-focused amenities like those in the Wellness Suite may become increasingly important in differentiating the hotel from competitors.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Recommendation:</h2>
-        <p>The analysis shows that while a majority of guests report high-quality sleep, there is still room for improvement. The Wellness Suite is a clear standout, and the hotel should consider incorporating its sleep-enhancing features into other rooms or promoting it more effectively.</p>
-        <ul>
-          <li><strong>Market the Wellness Suite:</strong> The Wellness Suite has proven effective in enhancing sleep quality, making it a key selling point. The hotel should develop targeted marketing campaigns that highlight the sleep benefits of this room type. Consider offering a premium wellness package that includes features like aromatherapy and customized sleep experiences.</li>
-          <li><strong>Address Sleep Gaps for Guests Below 85:</strong> Investigate guest feedback for those who did not achieve a Sleep Score ≥ 85 and identify common pain points. Consider upgrading room amenities, such as introducing adjustable pillows, improving soundproofing, and enhancing lighting control to improve sleep quality.</li>
-          <li><strong>Optimize Pricing Based on Sleep Data:</strong> Use the sleep data to justify premium pricing for the Wellness Suite or other enhanced rooms. Position the hotel as a leader in wellness and sleep quality, targeting health-conscious travelers who value a restorative sleep environment.</li>
-          <li><strong>Expand Data Collection and Sample Size:</strong> Given the importance of reliable data, increase the number of participants in future studies. A larger sample size will provide more precise insights into sleep quality and allow for more confident business decisions.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Conclusion:</h2>
-        <p>This analysis confirms that the hotel’s sleep environment is effective for many guests, but improvements are needed to increase the proportion of guests achieving high-quality sleep. The Wellness Suite proves to be a strong offering, and its features could be incorporated into other rooms to increase overall satisfaction. By using confidence interval analysis to ensure reliable insights, the hotel can make data-driven decisions to enhance guest experience, optimize room offerings, and position itself as a leader in wellness tourism.</p>
-      </section>
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
     </section>
-  </main>
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
-
-</body>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/hotel-sleep-analysis-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/cover%20image.png"/>
+      <h1>
+       Did You Sleep Well Last Night?
+      </h1>
+      <p>
+       Measuring Guest Sleep Quality in a Hotel
+      </p>
+     </header>
+     <section>
+      <h2>
+       Study Context:
+      </h2>
+      <p>
+       This study is conducted with the consent of 250 hotel guests, who participated voluntarily in the sleep tracking program. The hotel uses sleep tracking pads for opt-in guests, offering discounts on future stays as a reward for participation. During the data collection period, the hotel tracked and analysed daily Sleep Scores for each guest. The focus of this study is on identifying the proportion of guests who achieve a Sleep Score ≥ 85, which represents a high-quality sleep experience. The aim is to provide actionable insights for the hotel to improve sleep quality, market its wellness offerings, and enhance customer satisfaction.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Overview:
+      </h2>
+      <p>
+       The objective of this analysis is to determine the proportion of hotel guests achieving high-quality sleep (Sleep Score ≥ 85) and assess the effectiveness of sleep-enhancing features like the Wellness Suite. The analysis also evaluates the reliability of these findings and provides insights into how the hotel can use this data to improve its offerings.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Results:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Proportion of Guests with High-Quality Sleep (Score ≥ 85):
+        </strong>
+        <ul>
+         <li>
+          55.2% of hotel guests achieved a Sleep Score of 85 or above, suggesting that over half of the guests experienced high-quality sleep. This result indicates that the hotel’s current sleep environment is effective for many guests, but there is still room for improvement to address the remaining 44.8% of guests who did not meet the benchmark.
+         </li>
+         <li>
+          The hotel can target improvements in sleep quality for the remaining 44.8% of guests, such as enhancing pillow quality, room soundproofing, or offering more personalized sleep packages.
+         </li>
+         <li>
+          <img alt="Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%201%20-%20bar%20chart.png"/>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Wellness Suite vs. Other Room Types:
+        </strong>
+        <ul>
+         <li>
+          The Wellness Suite outperformed all other room types, with an average Sleep Score of 87.8, higher than the Suite at 87.7. The Standard, Deluxe, and Executive rooms all recorded average Sleep Scores below the target of 85.
+         </li>
+         <li>
+          Given the strong performance of the Wellness Suite, it should be marketed as a premium offering that delivers better sleep quality. Consider incorporating sleep-enhancing features from the Wellness Suite into other room types, possibly justifying premium pricing for rooms with similar features.
+         </li>
+         <li>
+          <img alt="Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%202%20-%20bar%20chart.png"/>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Reliability of Results (Confidence Interval Analysis):
+        </strong>
+        <ul>
+         <li>
+          The average Sleep Score for the 250 guests is 84.3, with a 95% confidence interval ranging from 83.56 to 85.03. This indicates a high level of reliability, with a 95% probability that the true average Sleep Score for the population of guests falls within this range.
+         </li>
+         <li>
+          The hotel can confidently use these results to evaluate future sleep quality and wellness offerings, ensuring that marketing claims and operational decisions are based on reliable data.
+         </li>
+         <li>
+          <img alt="Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%203%20-%20histogram.png"/>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Sample Size and Margin of Error:
+        </strong>
+        <ul>
+         <li>
+          For reliable insights with a ±10% margin of error, 95 guests are sufficient. For a ±5% margin of error, the recommended sample size increases to 380 guests. For very high precision (±1%), up to 9,500 guests would need to be surveyed.
+         </li>
+         <li>
+          Starting with a manageable target of 400 responses will ensure that the hotel can confidently analyze sleep performance and make data-driven decisions regarding room types and sleep packages.
+         </li>
+         <li>
+          <img alt="Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hotel-sleep-analysis/chart%204%20-%20line%20chart.png"/>
+         </li>
+        </ul>
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Enhance Guest Satisfaction:
+        </strong>
+        Improve sleep quality by evaluating and refining sleep-related amenities and packages.
+       </li>
+       <li>
+        <strong>
+         Increase Revenue through Premium Offerings:
+        </strong>
+        Use insights from sleep scores to justify the promotion of premium room types and wellness offerings.
+       </li>
+       <li>
+        <strong>
+         Improve Operational Efficiency:
+        </strong>
+        Use reliable sleep score data to guide operational improvements, such as inventory management and staffing for wellness services.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Customer Satisfaction:
+        </strong>
+        The high percentage of guests achieving a Sleep Score ≥ 85 indicates that the hotel’s sleep environment is effective for a majority of guests. However, addressing the 44.8% who scored below 85 could further increase guest satisfaction.
+       </li>
+       <li>
+        <strong>
+         Revenue Growth:
+        </strong>
+        By highlighting the success of the Wellness Suite and its superior sleep quality, the hotel can effectively market this room type to health-conscious travelers, potentially increasing revenue.
+       </li>
+       <li>
+        <strong>
+         Operational Efficiency:
+        </strong>
+        Reliable data on sleep scores provides a benchmark that the hotel can use to make informed decisions about room enhancements, staffing, and wellness package offerings.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Proportion of Guests with Sleep Scores ≥ 85:
+        </strong>
+        The finding that 55.2% of guests achieved a Sleep Score ≥ 85 suggests that the hotel’s sleep environment works well for over half of the guests. The remaining guests may benefit from improvements such as better-quality pillows, more comfortable mattresses, or other enhancements to the sleep environment.
+       </li>
+       <li>
+        <strong>
+         Wellness Suite Performance:
+        </strong>
+        The Wellness Suite outperformed other rooms, likely due to the sleep-enhancing features it offers, such as aromatherapy, blackout curtains, and premium mattresses. This supports the effectiveness of these amenities and suggests that wellness-focused offerings can lead to higher guest satisfaction.
+       </li>
+       <li>
+        <strong>
+         Confidence Interval Reliability:
+        </strong>
+        The narrow confidence interval (83.56 to 85.03) provides strong evidence that the results are reliable and not due to sampling error. This gives decision-makers confidence that the sleep scores they are using to evaluate room types and wellness packages are based on solid data.
+       </li>
+       <li>
+        <strong>
+         Sample Size and Margin of Error:
+        </strong>
+        The analysis suggests that starting with 400 guests will provide reasonably precise results. The hotel should aim to gather a sufficient sample size to reduce the margin of error and improve the accuracy of its conclusions, especially when making decisions about potential upgrades or changes to wellness offerings.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Seasonality and Guest Behavior:
+        </strong>
+        Guest sleep quality may vary by season or external factors, such as the purpose of the stay (business vs. leisure). Future analysis could incorporate these variables to refine the understanding of what influences sleep scores.
+       </li>
+       <li>
+        <strong>
+         Market Trends:
+        </strong>
+        As wellness tourism continues to grow, offering sleep-focused amenities like those in the Wellness Suite may become increasingly important in differentiating the hotel from competitors.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendation:
+      </h2>
+      <p>
+       The analysis shows that while a majority of guests report high-quality sleep, there is still room for improvement. The Wellness Suite is a clear standout, and the hotel should consider incorporating its sleep-enhancing features into other rooms or promoting it more effectively.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Market the Wellness Suite:
+        </strong>
+        The Wellness Suite has proven effective in enhancing sleep quality, making it a key selling point. The hotel should develop targeted marketing campaigns that highlight the sleep benefits of this room type. Consider offering a premium wellness package that includes features like aromatherapy and customized sleep experiences.
+       </li>
+       <li>
+        <strong>
+         Address Sleep Gaps for Guests Below 85:
+        </strong>
+        Investigate guest feedback for those who did not achieve a Sleep Score ≥ 85 and identify common pain points. Consider upgrading room amenities, such as introducing adjustable pillows, improving soundproofing, and enhancing lighting control to improve sleep quality.
+       </li>
+       <li>
+        <strong>
+         Optimize Pricing Based on Sleep Data:
+        </strong>
+        Use the sleep data to justify premium pricing for the Wellness Suite or other enhanced rooms. Position the hotel as a leader in wellness and sleep quality, targeting health-conscious travelers who value a restorative sleep environment.
+       </li>
+       <li>
+        <strong>
+         Expand Data Collection and Sample Size:
+        </strong>
+        Given the importance of reliable data, increase the number of participants in future studies. A larger sample size will provide more precise insights into sleep quality and allow for more confident business decisions.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion:
+      </h2>
+      <p>
+       This analysis confirms that the hotel’s sleep environment is effective for many guests, but improvements are needed to increase the proportion of guests achieving high-quality sleep. The Wellness Suite proves to be a strong offering, and its features could be incorporated into other rooms to increase overall satisfaction. By using confidence interval analysis to ensure reliable insights, the hotel can make data-driven decisions to enhance guest experience, optimize room offerings, and position itself as a leader in wellness tourism.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Pinnacles Learning Solutions
+   </p>
+  </footer>
+ </body>
 </html>

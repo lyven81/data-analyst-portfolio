@@ -1,117 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What Makes a Song Trend? | Lee Yih Ven</title>
-  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   What Makes a Song Trend? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
   <div class="container">
-    <aside class="left-column">
-      <header>
-        <h1>Lee Yih Ven</h1>
-        <h2>Data Analytics Portfolio</h2>
-      </header>
-      <section class="intro">
-        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-      </section>
-      <section class="contact">
-        <h2>Contact</h2>
-        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-        <ul>
-          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-          <li>Phone: +6014-9207099</li>
-        </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/What-Makes-a-Song-Trends-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-    <main class="right-column">
-      <section class="case-study-content">
-        <header>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/cover%20image.png" alt="Cover image for What Makes a Song Trend?">
-          <h1>What Makes a Song Trend?</h1>
-          <p>A Content Creator’s Guide Backed by 20,000 Tracks</p>
-        </header>
-
-        <section>
-          <h2>Overview</h2>
-          <p>TikTok creators rely on music to grab attention and drive engagement—but not all songs are equally effective. This case study explores which musical traits—such as loudness, danceability, and explicit lyrics—are most strongly linked to virality on the platform. The goal is to help creators make smarter music choices that increase reach and viewer interaction.</p>
-          <p>Using a dataset of 20,000 songs, this analysis applies a predictive model to identify traits that boost a song’s popularity. The findings show how individual traits and their combinations impact performance, offering a practical guide to selecting high-potential tracks for short-form video content.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/chart%201.png" alt="Chart showing trait impact">
-        </section>
-
-        <section>
-          <h2>Which Traits Drive Virality?</h2>
-          <p>Loudness, danceability, and explicit lyrics are the top traits linked to viral success. Louder songs grab attention quickly—especially important in TikTok’s fast-scrolling environment. Danceable tracks with strong rhythms often fuel popular challenges and transitions. Songs with bold or expressive lyrics tend to resonate more with emotionally driven or edgy content. Together, these three traits consistently showed the strongest link to popularity.</p>
-        </section>
-
-        <section>
-          <h2>What Traits Should Guide Song Selection?</h2>
-          <p>Loudness, danceability, and explicit content all have a clear, positive impact and should be prioritized. In contrast, songs that are overly energetic, highly speech-like, acoustic, or instrumental tend to perform worse. These traits may lack the rhythm or emotional punch needed for engaging content. Traits such as tempo, emotion, and release date showed little influence and can generally be deprioritized.</p>
-        </section>
-
-        <section>
-          <h2>Can a Prediction Model Help Me Choose Better Music?</h2>
-          <p>Yes. While no model can guarantee virality—because social trends and timing matter—it can reliably highlight songs with stronger potential. The model was trained on a large sample and confirmed that loudness, danceability, and explicitness are statistically significant predictors of popularity. It's a helpful tool for filtering music that’s more likely to work.</p>
-        </section>
-
-        <section>
-          <h2>Which Songs in My Collection Are Most Promising?</h2>
-          <p>When the model was applied to a full collection, the top 10 songs stood out for their strong loudness, rhythm, and expressive lyrics. While predicted probabilities stayed under 20%—which is common in creative spaces—these tracks represent the strongest options for content seeking attention and shares.</p>
-        </section>
-
-        <section>
-          <h2>Do Extreme Traits Improve Popularity?</h2>
-          <p>Yes. Songs that are extremely loud, highly danceable, or very explicit show a significantly higher predicted chance of popularity. For example, songs at the top end of loudness or danceability reached probabilities as high as 2.85%, while those at the bottom approached zero. The data suggests that boldness and rhythm give songs a better chance of catching on.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/chart%205.png" alt="Chart showing impact of extreme traits">
-        </section>
-
-        <section>
-          <h2>Does Tweaking a Single Element Help?</h2>
-          <p>Only slightly. Changing one trait—like increasing loudness or explicitness—resulted in a minor bump in predicted popularity. This suggests no single trait is powerful enough to drive virality alone. The best results come from combining multiple strong traits.</p>
-        </section>
-
-        <section>
-          <h2>What If I Adjust Multiple Traits Together?</h2>
-          <p>Adjusting all three key traits—loudness, explicitness, and danceability—by 50% led to a noticeable increase in predicted popularity. Songs with all three reduced saw a drop in potential. This shows that combining strong elements amplifies a song’s viral potential more than any single adjustment.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/chart%207.png" alt="Chart on combining multiple traits">
-        </section>
-
-        <section>
-          <h2>Can I Trust This Model When Choosing Music?</h2>
-          <p>The model performs well in narrowing down song choices, especially when combined with creative judgment. It achieved 88% accuracy—mainly by correctly identifying non-viral songs. When it predicts a song will trend, it's right about half the time. While imperfect, the model is useful for filtering and prioritizing high-potential tracks.</p>
-        </section>
-
-        <section>
-          <h2>Conclusion</h2>
-          <p>Music selection can significantly influence a video’s ability to attract views, spark engagement, and drive conversions. Based on a robust analysis of 20,000 songs, certain traits—loudness, rhythm, and bold lyrics—consistently boost a song’s chances of becoming popular on TikTok. These traits help creators connect with trends, support choreography or transitions, and hook viewers in the first few seconds.</p>
-          <p>Conversely, soft, instrumental, or overly talky songs may reduce visibility. Understanding these dynamics helps creators make music choices that better align with platform behavior and audience expectations.</p>
-        </section>
-
-        <section>
-          <h2>Recommendations</h2>
-          <ul>
-            <li><strong>Prioritize Loud, Bold Tracks:</strong> Songs with high loudness grab attention fast—crucial in the first 1–2 seconds.</li>
-            <li><strong>Look for Strong Danceability:</strong> Tracks with steady beats are ideal for transitions, lip-syncs, and choreography.</li>
-            <li><strong>Use Explicit or Bold Lyrics Strategically:</strong> Bold lyrics boost emotional tone but should fit the video’s message and audience.</li>
-            <li><strong>Avoid Soft or Instrumental Tracks for High Engagement:</strong> These may suit calming content but underperform in driving reach and virality.</li>
-            <li><strong>Combine High-Impact Traits:</strong> Success comes from using songs that are loud, danceable, and expressive—together.</li>
-            <li><strong>Use the Model as a Filter, Not a Rule:</strong> Let the model shortlist high-potential songs, but trust your creative instincts and awareness of trends.</li>
-          </ul>
-        </section>
-
-      </section>
-    </main>
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/What-Makes-a-Song-Trends-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover image for What Makes a Song Trend?" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/cover%20image.png"/>
+      <h1>
+       What Makes a Song Trend?
+      </h1>
+      <p>
+       A Content Creator’s Guide Backed by 20,000 Tracks
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       TikTok creators rely on music to grab attention and drive engagement—but not all songs are equally effective. This case study explores which musical traits—such as loudness, danceability, and explicit lyrics—are most strongly linked to virality on the platform. The goal is to help creators make smarter music choices that increase reach and viewer interaction.
+      </p>
+      <p>
+       Using a dataset of 20,000 songs, this analysis applies a predictive model to identify traits that boost a song’s popularity. The findings show how individual traits and their combinations impact performance, offering a practical guide to selecting high-potential tracks for short-form video content.
+      </p>
+      <img alt="Chart showing trait impact" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/chart%201.png"/>
+     </section>
+     <section>
+      <h2>
+       Which Traits Drive Virality?
+      </h2>
+      <p>
+       Loudness, danceability, and explicit lyrics are the top traits linked to viral success. Louder songs grab attention quickly—especially important in TikTok’s fast-scrolling environment. Danceable tracks with strong rhythms often fuel popular challenges and transitions. Songs with bold or expressive lyrics tend to resonate more with emotionally driven or edgy content. Together, these three traits consistently showed the strongest link to popularity.
+      </p>
+     </section>
+     <section>
+      <h2>
+       What Traits Should Guide Song Selection?
+      </h2>
+      <p>
+       Loudness, danceability, and explicit content all have a clear, positive impact and should be prioritized. In contrast, songs that are overly energetic, highly speech-like, acoustic, or instrumental tend to perform worse. These traits may lack the rhythm or emotional punch needed for engaging content. Traits such as tempo, emotion, and release date showed little influence and can generally be deprioritized.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Can a Prediction Model Help Me Choose Better Music?
+      </h2>
+      <p>
+       Yes. While no model can guarantee virality—because social trends and timing matter—it can reliably highlight songs with stronger potential. The model was trained on a large sample and confirmed that loudness, danceability, and explicitness are statistically significant predictors of popularity. It's a helpful tool for filtering music that’s more likely to work.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Which Songs in My Collection Are Most Promising?
+      </h2>
+      <p>
+       When the model was applied to a full collection, the top 10 songs stood out for their strong loudness, rhythm, and expressive lyrics. While predicted probabilities stayed under 20%—which is common in creative spaces—these tracks represent the strongest options for content seeking attention and shares.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Do Extreme Traits Improve Popularity?
+      </h2>
+      <p>
+       Yes. Songs that are extremely loud, highly danceable, or very explicit show a significantly higher predicted chance of popularity. For example, songs at the top end of loudness or danceability reached probabilities as high as 2.85%, while those at the bottom approached zero. The data suggests that boldness and rhythm give songs a better chance of catching on.
+      </p>
+      <img alt="Chart showing impact of extreme traits" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/chart%205.png"/>
+     </section>
+     <section>
+      <h2>
+       Does Tweaking a Single Element Help?
+      </h2>
+      <p>
+       Only slightly. Changing one trait—like increasing loudness or explicitness—resulted in a minor bump in predicted popularity. This suggests no single trait is powerful enough to drive virality alone. The best results come from combining multiple strong traits.
+      </p>
+     </section>
+     <section>
+      <h2>
+       What If I Adjust Multiple Traits Together?
+      </h2>
+      <p>
+       Adjusting all three key traits—loudness, explicitness, and danceability—by 50% led to a noticeable increase in predicted popularity. Songs with all three reduced saw a drop in potential. This shows that combining strong elements amplifies a song’s viral potential more than any single adjustment.
+      </p>
+      <img alt="Chart on combining multiple traits" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/What-Makes-a-Song-Trend/chart%207.png"/>
+     </section>
+     <section>
+      <h2>
+       Can I Trust This Model When Choosing Music?
+      </h2>
+      <p>
+       The model performs well in narrowing down song choices, especially when combined with creative judgment. It achieved 88% accuracy—mainly by correctly identifying non-viral songs. When it predicts a song will trend, it's right about half the time. While imperfect, the model is useful for filtering and prioritizing high-potential tracks.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       Music selection can significantly influence a video’s ability to attract views, spark engagement, and drive conversions. Based on a robust analysis of 20,000 songs, certain traits—loudness, rhythm, and bold lyrics—consistently boost a song’s chances of becoming popular on TikTok. These traits help creators connect with trends, support choreography or transitions, and hook viewers in the first few seconds.
+      </p>
+      <p>
+       Conversely, soft, instrumental, or overly talky songs may reduce visibility. Understanding these dynamics helps creators make music choices that better align with platform behavior and audience expectations.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Prioritize Loud, Bold Tracks:
+        </strong>
+        Songs with high loudness grab attention fast—crucial in the first 1–2 seconds.
+       </li>
+       <li>
+        <strong>
+         Look for Strong Danceability:
+        </strong>
+        Tracks with steady beats are ideal for transitions, lip-syncs, and choreography.
+       </li>
+       <li>
+        <strong>
+         Use Explicit or Bold Lyrics Strategically:
+        </strong>
+        Bold lyrics boost emotional tone but should fit the video’s message and audience.
+       </li>
+       <li>
+        <strong>
+         Avoid Soft or Instrumental Tracks for High Engagement:
+        </strong>
+        These may suit calming content but underperform in driving reach and virality.
+       </li>
+       <li>
+        <strong>
+         Combine High-Impact Traits:
+        </strong>
+        Success comes from using songs that are loud, danceable, and expressive—together.
+       </li>
+       <li>
+        <strong>
+         Use the Model as a Filter, Not a Rule:
+        </strong>
+        Let the model shortlist high-potential songs, but trust your creative instincts and awareness of trends.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
   </div>
-
   <footer>
-    <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
   </footer>
-</body>
+ </body>
 </html>

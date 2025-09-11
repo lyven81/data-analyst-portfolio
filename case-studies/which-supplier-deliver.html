@@ -1,127 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Which Suppliers Deliver More Than Just Volume? | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/which-supplier-deliver-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-  <div class="right-column">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Which Suppliers Deliver More Than Just Volume? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/which-supplier-deliver-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <div class="right-column">
     <div class="case-study-content">
-      <header>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/cover%20image.png" alt="Cover Image">
-        <h1>Which Suppliers Deliver More Than Just Volume?</h1>
-        <p><em>A Case for Prioritizing Procurement Stability</em></p>
-      </header>
-
-      <section>
-        <h2>Understanding the Challenge</h2>
-        <p>Procurement teams often prioritize suppliers based on volume and cost. However, in environments where inventory planning, contract reliability, and cost predictability are key, stability in supplier performance becomes just as critical. This analysis addresses one central business question:</p>
-        <p><strong>Which suppliers consistently deliver predictable quantities—and which introduce variability that may disrupt operations?</strong></p>
-        <p>Our objective was to evaluate supplier performance through the lens of order quantity consistency, not just volume or spend. This case study supports strategic procurement decisions by identifying suppliers that combine volume contribution with reliability.</p>
-      </section>
-
-      <section>
-        <h2>Key Insights</h2>
-
-        <h3>What is the average quantity ordered per supplier, and how consistent is it?</h3>
-        <ul>
-          <li>Furniworks Ltd. has the highest average quantity ordered per transaction at 10.75 units, but also exhibits high variability (standard deviation = 6.29), making its order pattern less predictable. Techmart Inc. is similarly inconsistent, with the highest standard deviation at 6.57.</li>
-          <li>Officesupplies Co., despite having the lowest average quantity at 8.95 units, demonstrates one of the most stable ordering patterns (standard deviation = 5.86), making it a strong candidate for predictable, low-risk procurement.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%201%20-%20bar%20chart.png" alt="Chart 1 - Bar Chart">
-
-        <h3>What is the 95% confidence interval for mean quantity purchased from each supplier?</h3>
-        <ul>
-          <li>Furniworks Ltd., with the highest mean quantity of 10.75 units, also has the widest 95% confidence interval (9.48–12.03, width = 2.56), indicating greater uncertainty and variability in its order quantities. Techmart Inc. shows similar inconsistency with a CI width of 2.49.</li>
-          <li>Officesupplies Co. and Quickdeliver Ltd. demonstrate more predictable performance, with narrower confidence intervals (7.83–10.08 and 8.33–10.59 respectively), each with a width around 2.25–2.26, making them more reliable choices for stable procurement planning.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%202%20-%20error%20chart.png" alt="Chart 2 - Error Chart">
-
-        <h3>Which suppliers have the widest confidence intervals, indicating inconsistent performance?</h3>
-        <ul>
-          <li>Furniworks Ltd. (CI width = 2.56), Cloudsoft Corp. (2.55), and Techmart Inc. (2.49) have the widest 95% confidence intervals, indicating the least consistent ordering patterns and higher risk in procurement predictability.</li>
-          <li>In contrast, Officesupplies Co. (2.25) and Quickdeliver Ltd. (2.26) show the most stable performance, making them better suited for consistent inventory planning and lower operational risk.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%203%20-%20bar%20chart.png" alt="Chart 3 - Bar Chart">
-
-        <h3>How do suppliers compare in terms of total transaction count and total volume supplied?</h3>
-        <ul>
-          <li>Quickdeliver Ltd. is the top supplier in both transaction count (112) and total volume supplied (1,060 units), followed by Techmart Inc. with 107 transactions and 1,023 units. These figures highlight their strong operational contribution and engagement.</li>
-          <li>Cloudsoft Corp. ranks the lowest, with only 84 transactions and 806 units supplied, while Furniworks Ltd., despite fewer transactions (93), delivers nearly 1,000 units, suggesting a larger average order size but potentially less frequent engagement.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%204%20-%20bar%20chart.png" alt="Chart 4 - Bar Chart">
-
-        <h3>Are current top-spending suppliers also the most stable in terms of order quantity?</h3>
-        <ul>
-          <li>Techmart Inc., the highest spender at 328,762, has a CI width of 2.49, showing only moderate stability. Similarly, Furniworks Ltd. (202,811 spend, CI width = 2.56) and Cloudsoft Corp. (200,074 spend, CI width = 2.55) are top spenders with high variability, raising concerns about order predictability.</li>
-          <li>In contrast, Quickdeliver Ltd. (285,354 spend) and Officesupplies Co. (223,581 spend) offer a more favorable balance, combining high spend with greater consistency (CI widths of 2.26 and 2.25 respectively), making them more suitable for reliable procurement planning.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%205%20-%20scatter%20plot.png" alt="Chart 5 - Scatter Plot">
-      </section>
-
-      <section>
-        <h2>Why This Matters</h2>
-        <p>The goal of this analysis was to optimize procurement strategy by identifying which suppliers support reliable planning and which introduce risk. This directly supports several business priorities outlined in the problem statement:</p>
-        <ul>
-          <li>Improving procurement planning: Stable suppliers help forecast order volumes more accurately.</li>
-          <li>Cost efficiency: Reducing the impact of variability helps avoid overstocking or understocking costs.</li>
-          <li>Better negotiations: Data-backed performance metrics give procurement managers leverage in contract discussions.</li>
-        </ul>
-        <p>The findings support a segmentation strategy, where high-volume, stable suppliers are prioritized for long-term contracts, and less stable suppliers are re-evaluated or renegotiated.</p>
-      </section>
-
-      <section>
-        <h2>Recommendations</h2>
-        <h3>Prioritize These Suppliers</h3>
-        <ul>
-          <li><strong>Quickdeliver Ltd.</strong><br>High volume, high engagement, and reliable ordering patterns make this supplier a top strategic partner.<br><strong>Action:</strong> Increase order allocation and consider long-term contracts.</li>
-          <li><strong>Officesupplies Co.</strong><br>A model of consistency. While slightly lower in volume, this supplier supports forecasting and lean inventory strategies.<br><strong>Action:</strong> Maintain or modestly increase order share for stable categories.</li>
-        </ul>
-
-        <h3>Negotiate or Reduce Intake</h3>
-        <ul>
-          <li><strong>Furniworks Ltd.</strong><br>While attractive in average order size, variability is the highest.<br><strong>Action:</strong> Renegotiate for smaller, more frequent orders or introduce service-level penalties.</li>
-          <li><strong>Cloudsoft Corp.</strong><br>Low contribution and high inconsistency raise questions about its ongoing value.<br><strong>Action:</strong> Review necessity. Consolidate or replace unless critical to a specific niche.</li>
-        </ul>
-
-        <h3>Maintain With Adjustments</h3>
-        <ul>
-          <li><strong>Techmart Inc.</strong><br>A major contributor in spend and volume, but less consistent.<br><strong>Action:</strong> Continue ordering but negotiate more structured delivery terms.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Conclusion</h2>
-        <p>This analysis confirms that volume alone is not a sufficient measure of supplier performance. Procurement managers should use consistency metrics, such as confidence intervals, alongside spend and volume data to make more balanced decisions.</p>
-        <p>By identifying which suppliers deliver more than just volume, procurement leaders can build a more reliable, cost-effective, and strategic supplier base—empowering better inventory planning and stronger contract negotiations.</p>
-      </section>
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/cover%20image.png"/>
+      <h1>
+       Which Suppliers Deliver More Than Just Volume?
+      </h1>
+      <p>
+       <em>
+        A Case for Prioritizing Procurement Stability
+       </em>
+      </p>
+     </header>
+     <section>
+      <h2>
+       Understanding the Challenge
+      </h2>
+      <p>
+       Procurement teams often prioritize suppliers based on volume and cost. However, in environments where inventory planning, contract reliability, and cost predictability are key, stability in supplier performance becomes just as critical. This analysis addresses one central business question:
+      </p>
+      <p>
+       <strong>
+        Which suppliers consistently deliver predictable quantities—and which introduce variability that may disrupt operations?
+       </strong>
+      </p>
+      <p>
+       Our objective was to evaluate supplier performance through the lens of order quantity consistency, not just volume or spend. This case study supports strategic procurement decisions by identifying suppliers that combine volume contribution with reliability.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Insights
+      </h2>
+      <h3>
+       What is the average quantity ordered per supplier, and how consistent is it?
+      </h3>
+      <ul>
+       <li>
+        Furniworks Ltd. has the highest average quantity ordered per transaction at 10.75 units, but also exhibits high variability (standard deviation = 6.29), making its order pattern less predictable. Techmart Inc. is similarly inconsistent, with the highest standard deviation at 6.57.
+       </li>
+       <li>
+        Officesupplies Co., despite having the lowest average quantity at 8.95 units, demonstrates one of the most stable ordering patterns (standard deviation = 5.86), making it a strong candidate for predictable, low-risk procurement.
+       </li>
+      </ul>
+      <img alt="Chart 1 - Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%201%20-%20bar%20chart.png"/>
+      <h3>
+       What is the 95% confidence interval for mean quantity purchased from each supplier?
+      </h3>
+      <ul>
+       <li>
+        Furniworks Ltd., with the highest mean quantity of 10.75 units, also has the widest 95% confidence interval (9.48–12.03, width = 2.56), indicating greater uncertainty and variability in its order quantities. Techmart Inc. shows similar inconsistency with a CI width of 2.49.
+       </li>
+       <li>
+        Officesupplies Co. and Quickdeliver Ltd. demonstrate more predictable performance, with narrower confidence intervals (7.83–10.08 and 8.33–10.59 respectively), each with a width around 2.25–2.26, making them more reliable choices for stable procurement planning.
+       </li>
+      </ul>
+      <img alt="Chart 2 - Error Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%202%20-%20error%20chart.png"/>
+      <h3>
+       Which suppliers have the widest confidence intervals, indicating inconsistent performance?
+      </h3>
+      <ul>
+       <li>
+        Furniworks Ltd. (CI width = 2.56), Cloudsoft Corp. (2.55), and Techmart Inc. (2.49) have the widest 95% confidence intervals, indicating the least consistent ordering patterns and higher risk in procurement predictability.
+       </li>
+       <li>
+        In contrast, Officesupplies Co. (2.25) and Quickdeliver Ltd. (2.26) show the most stable performance, making them better suited for consistent inventory planning and lower operational risk.
+       </li>
+      </ul>
+      <img alt="Chart 3 - Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%203%20-%20bar%20chart.png"/>
+      <h3>
+       How do suppliers compare in terms of total transaction count and total volume supplied?
+      </h3>
+      <ul>
+       <li>
+        Quickdeliver Ltd. is the top supplier in both transaction count (112) and total volume supplied (1,060 units), followed by Techmart Inc. with 107 transactions and 1,023 units. These figures highlight their strong operational contribution and engagement.
+       </li>
+       <li>
+        Cloudsoft Corp. ranks the lowest, with only 84 transactions and 806 units supplied, while Furniworks Ltd., despite fewer transactions (93), delivers nearly 1,000 units, suggesting a larger average order size but potentially less frequent engagement.
+       </li>
+      </ul>
+      <img alt="Chart 4 - Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%204%20-%20bar%20chart.png"/>
+      <h3>
+       Are current top-spending suppliers also the most stable in terms of order quantity?
+      </h3>
+      <ul>
+       <li>
+        Techmart Inc., the highest spender at 328,762, has a CI width of 2.49, showing only moderate stability. Similarly, Furniworks Ltd. (202,811 spend, CI width = 2.56) and Cloudsoft Corp. (200,074 spend, CI width = 2.55) are top spenders with high variability, raising concerns about order predictability.
+       </li>
+       <li>
+        In contrast, Quickdeliver Ltd. (285,354 spend) and Officesupplies Co. (223,581 spend) offer a more favorable balance, combining high spend with greater consistency (CI widths of 2.26 and 2.25 respectively), making them more suitable for reliable procurement planning.
+       </li>
+      </ul>
+      <img alt="Chart 5 - Scatter Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%205%20-%20scatter%20plot.png"/>
+     </section>
+     <section>
+      <h2>
+       Why This Matters
+      </h2>
+      <p>
+       The goal of this analysis was to optimize procurement strategy by identifying which suppliers support reliable planning and which introduce risk. This directly supports several business priorities outlined in the problem statement:
+      </p>
+      <ul>
+       <li>
+        Improving procurement planning: Stable suppliers help forecast order volumes more accurately.
+       </li>
+       <li>
+        Cost efficiency: Reducing the impact of variability helps avoid overstocking or understocking costs.
+       </li>
+       <li>
+        Better negotiations: Data-backed performance metrics give procurement managers leverage in contract discussions.
+       </li>
+      </ul>
+      <p>
+       The findings support a segmentation strategy, where high-volume, stable suppliers are prioritized for long-term contracts, and less stable suppliers are re-evaluated or renegotiated.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <h3>
+       Prioritize These Suppliers
+      </h3>
+      <ul>
+       <li>
+        <strong>
+         Quickdeliver Ltd.
+        </strong>
+        <br/>
+        High volume, high engagement, and reliable ordering patterns make this supplier a top strategic partner.
+        <br/>
+        <strong>
+         Action:
+        </strong>
+        Increase order allocation and consider long-term contracts.
+       </li>
+       <li>
+        <strong>
+         Officesupplies Co.
+        </strong>
+        <br/>
+        A model of consistency. While slightly lower in volume, this supplier supports forecasting and lean inventory strategies.
+        <br/>
+        <strong>
+         Action:
+        </strong>
+        Maintain or modestly increase order share for stable categories.
+       </li>
+      </ul>
+      <h3>
+       Negotiate or Reduce Intake
+      </h3>
+      <ul>
+       <li>
+        <strong>
+         Furniworks Ltd.
+        </strong>
+        <br/>
+        While attractive in average order size, variability is the highest.
+        <br/>
+        <strong>
+         Action:
+        </strong>
+        Renegotiate for smaller, more frequent orders or introduce service-level penalties.
+       </li>
+       <li>
+        <strong>
+         Cloudsoft Corp.
+        </strong>
+        <br/>
+        Low contribution and high inconsistency raise questions about its ongoing value.
+        <br/>
+        <strong>
+         Action:
+        </strong>
+        Review necessity. Consolidate or replace unless critical to a specific niche.
+       </li>
+      </ul>
+      <h3>
+       Maintain With Adjustments
+      </h3>
+      <ul>
+       <li>
+        <strong>
+         Techmart Inc.
+        </strong>
+        <br/>
+        A major contributor in spend and volume, but less consistent.
+        <br/>
+        <strong>
+         Action:
+        </strong>
+        Continue ordering but negotiate more structured delivery terms.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       This analysis confirms that volume alone is not a sufficient measure of supplier performance. Procurement managers should use consistency metrics, such as confidence intervals, alongside spend and volume data to make more balanced decisions.
+      </p>
+      <p>
+       By identifying which suppliers deliver more than just volume, procurement leaders can build a more reliable, cost-effective, and strategic supplier base—empowering better inventory planning and stronger contract negotiations.
+      </p>
+     </section>
     </div>
+   </div>
   </div>
-</body>
+ </body>
 </html>

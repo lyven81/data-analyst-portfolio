@@ -1,133 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Are Tunics Truly the Top Seller? | Lee Yih Ven</title>
-  <link rel="stylesheet" href="/data-analyst-portfolio/style.css" />
-</head>
-<body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Are Tunics Truly the Top Seller? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
   <div class="container">
-    <aside class="left-column">
-      <header>
-        <h1>Lee Yih Ven</h1>
-        <h2>Data Analytics Portfolio</h2>
-      </header>
-      <section class="intro">
-        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-      </section>
-      <section class="contact">
-        <h2>Contact</h2>
-        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-        <ul>
-          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-          <li>Phone: +6014-9207099</li>
-        </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/are-tunics-best-sellers-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-    <main class="right-column">
-      <section class="case-study-content">
-        <header>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/cover%20image.png" alt="Cover Image">
-          <h1>Are Tunics Truly the Top Seller?</h1>
-          <p>Digging into the Data Behind Tunics, Trends, and Total Cart Value</p>
-        </header>
-
-        <section>
-          <h2>Study Context:</h2>
-          <p>This is a hypothesis testing analysis based on a dataset containing 3,400 records of simulated fashion retail sales data. The dataset captures key details about customer purchases, including item categories, purchase amounts, review ratings, and payment methods. The focus of the study is to determine whether tunics are genuinely positioned as a premium product by comparing their average purchase value against other apparel categories like pants, dresses, and jackets.</p>
-        </section>
-
-        <section>
-          <h2>Overview:</h2>
-          <p>The objective of this analysis is to evaluate whether tunics truly outperform other apparel categories in terms of average purchase value and customer satisfaction, while also considering whether seasonal demand or ratings influence their pricing. The results will provide actionable insights for businesses to make informed decisions on product positioning, pricing strategies, promotional efforts, and potential product bundling opportunities.</p>
-        </section>
-
-        <section>
-          <h2>1. Is there a statistically significant difference in average purchase value between tunics and other apparel?</h2>
-          <p>The analysis revealed that tunics have the highest average purchase value among all clothing categories at $319.91, followed by jeans at $272.25 and sweaters at $213.14. However, the statistical analysis (two-sample t-test) showed that the difference in average purchase values between tunics and other apparel categories is not statistically significant (p-value of 0.24). Despite tunics leading visually in price, this finding indicates that their position as a premium product may need further validation.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%201%20-%20bar%20chart.png" alt="Bar Chart 1">
-        </section>
-
-        <section>
-          <h2>2. Are tunics priced higher due to ratings or seasonal demand?</h2>
-          <p>While tunics are the highest-priced item category, their low average review rating of 2.53 indicates that customer satisfaction does not justify their premium price. However, seasonal demand seems to play a role, with tunics showing sales spikes in October 2022 and August 2023, likely driven by colder weather and festive periods. This suggests that tunics are priced higher due to seasonal appeal rather than customer approval.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%202%20-%20line%20chart.png" alt="Line Chart 2">
-        </section>
-
-        <section>
-          <h2>3. Should tunics continue to be positioned as high-value lead products, or are other apparel items catching up?</h2>
-          <p>Tunics currently lead in average purchase value at $319.91, but categories like jeans and sweaters are catching up with lower average prices of $272.25 and $213.14, respectively. Tunics have wider pricing variability, indicating that there are both premium and entry-level options available. Additionally, the sales trend suggests that tunics have seasonal peaks during specific months, which should be leveraged in marketing strategies.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%203%20-%20bar%20chart.png" alt="Bar Chart 3">
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%203%20-%20box%20charts.png" alt="Box Chart 3">
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%203%20-%20line%20charts.png" alt="Line Chart 3">
-        </section>
-
-        <section>
-          <h2>4. Could product bundling with tunics increase average cart value more effectively?</h2>
-          <p>Analysis of co-purchase data shows that pants are the most commonly purchased item alongside tunics, with an average purchase value of $197.82. Other strong pairings include jeans and sweaters, which also contribute to higher average transaction values. This suggests that bundling tunics with pants, jeans, or sweaters presents an opportunity to increase average cart value and drive higher sales.</p>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%204%20-%20bar%20chart.png" alt="Bar Chart 4">
-        </section>
-
-        <section>
-          <h2>Goals Alignment:</h2>
-          <ul>
-            <li><strong>Maximizing Revenue:</strong> By identifying high-value items such as tunics, jeans, and sweaters, businesses can strategically focus on these products to enhance revenue generation. Additionally, bundling tunics with pants and jeans can boost cart values.</li>
-            <li><strong>Cost Optimization:</strong> The analysis of product pricing and customer ratings helps to avoid over-investment in categories like tunics where the perceived value does not align with customer satisfaction.</li>
-            <li><strong>Improving Customer Retention:</strong> By adjusting product positioning, such as emphasizing seasonal trends for tunics, businesses can increase customer satisfaction and retention by catering to customer preferences at the right time.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Impact:</h2>
-          <ul>
-            <li><strong>Optimizing Marketing Efforts:</strong> Based on the insights from this study, the company can develop more targeted marketing campaigns focusing on seasonal appeals, such as promoting tunics during colder months or holiday seasons, while simultaneously improving product fit and quality to address customer satisfaction concerns.</li>
-            <li><strong>Strategic Content and Product Positioning:</strong> The findings provide actionable insights for product bundling and inventory planning. The business can leverage the data to ensure it stocks high-demand premium apparel and offers attractive bundles to maximize sales potential.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Data Interpretation:</h2>
-          <ul>
-            <li><strong>Statistical Analysis of Tunic Pricing:</strong> The t-test result (p-value of 0.24) suggests that while tunics appear to have a higher average purchase value, the difference is not statistically significant. This indicates that factors like pricing strategy or market trends rather than inherent quality differences are likely driving the higher prices of tunics. The seasonality factor also appears to influence demand spikes for tunics during certain months, such as April and December.</li>
-            <li><strong>Customer Satisfaction and Seasonal Demand:</strong> Despite tunics being priced higher, the low customer ratings point to a disconnect between price and perceived quality. The seasonal demand spikes support the theory that tunics have higher sales during specific times of the year, suggesting seasonal appeal drives their pricing strategy rather than customer approval.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Contextual Factors:</h2>
-          <ul>
-            <li><strong>Seasonal Trends:</strong> The spike in sales during April and December suggests weather-related demand or festive purchasing patterns for tunics. The business should consider targeted promotions and special collections for these periods to maximize sales.</li>
-            <li><strong>Product Development Needs:</strong> Given the lower customer ratings for tunics, there is an opportunity for product improvement, especially in terms of fit, design, or material quality, to align with higher pricing expectations.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Recommendation:</h2>
-          <p>Based on the findings, businesses should focus on seasonal campaigns and bundling tunics with complementary items like pants and sweaters to increase average cart value. However, businesses should be cautious about continuing to position tunics solely as premium products, given the lack of statistical significance in their price performance and customer ratings.</p>
-          <ul>
-            <li><strong>Leverage Seasonal Campaigns for Tunics:</strong> Promote tunics during key sales periods such as April and December, capitalizing on the seasonal demand for layering and holiday shopping.</li>
-            <li><strong>Bundle Tunics with Popular Apparel:</strong> Bundle tunics with items like pants, jeans, and sweaters to boost average cart value and create attractive cross-sell opportunities for customers.</li>
-            <li><strong>Improve Product Design and Quality:</strong> Address customer dissatisfaction with tunics by investing in design improvements, better fit, and higher-quality materials to align with their premium price and improve customer ratings.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Conclusion:</h2>
-          <p>This analysis demonstrates that while tunics command the highest average purchase value, the lack of statistical significance in their pricing and the lower customer ratings suggest that they may not truly be a premium product. Businesses should capitalize on seasonal trends for tunics, explore product bundling opportunities, and improve product quality to align their pricing strategies with customer expectations. By implementing these recommendations, companies can enhance revenue, improve customer satisfaction, and drive higher ROI in the fashion retail sector.</p>
-        </section>
-      </section>
-    </main>
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/are-tunics-best-sellers-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/cover%20image.png"/>
+      <h1>
+       Are Tunics Truly the Top Seller?
+      </h1>
+      <p>
+       Digging into the Data Behind Tunics, Trends, and Total Cart Value
+      </p>
+     </header>
+     <section>
+      <h2>
+       Study Context:
+      </h2>
+      <p>
+       This is a hypothesis testing analysis based on a dataset containing 3,400 records of simulated fashion retail sales data. The dataset captures key details about customer purchases, including item categories, purchase amounts, review ratings, and payment methods. The focus of the study is to determine whether tunics are genuinely positioned as a premium product by comparing their average purchase value against other apparel categories like pants, dresses, and jackets.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Overview:
+      </h2>
+      <p>
+       The objective of this analysis is to evaluate whether tunics truly outperform other apparel categories in terms of average purchase value and customer satisfaction, while also considering whether seasonal demand or ratings influence their pricing. The results will provide actionable insights for businesses to make informed decisions on product positioning, pricing strategies, promotional efforts, and potential product bundling opportunities.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. Is there a statistically significant difference in average purchase value between tunics and other apparel?
+      </h2>
+      <p>
+       The analysis revealed that tunics have the highest average purchase value among all clothing categories at $319.91, followed by jeans at $272.25 and sweaters at $213.14. However, the statistical analysis (two-sample t-test) showed that the difference in average purchase values between tunics and other apparel categories is not statistically significant (p-value of 0.24). Despite tunics leading visually in price, this finding indicates that their position as a premium product may need further validation.
+      </p>
+      <img alt="Bar Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%201%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       2. Are tunics priced higher due to ratings or seasonal demand?
+      </h2>
+      <p>
+       While tunics are the highest-priced item category, their low average review rating of 2.53 indicates that customer satisfaction does not justify their premium price. However, seasonal demand seems to play a role, with tunics showing sales spikes in October 2022 and August 2023, likely driven by colder weather and festive periods. This suggests that tunics are priced higher due to seasonal appeal rather than customer approval.
+      </p>
+      <img alt="Line Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%202%20-%20line%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       3. Should tunics continue to be positioned as high-value lead products, or are other apparel items catching up?
+      </h2>
+      <p>
+       Tunics currently lead in average purchase value at $319.91, but categories like jeans and sweaters are catching up with lower average prices of $272.25 and $213.14, respectively. Tunics have wider pricing variability, indicating that there are both premium and entry-level options available. Additionally, the sales trend suggests that tunics have seasonal peaks during specific months, which should be leveraged in marketing strategies.
+      </p>
+      <img alt="Bar Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%203%20-%20bar%20chart.png"/>
+      <img alt="Box Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%203%20-%20box%20charts.png"/>
+      <img alt="Line Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%203%20-%20line%20charts.png"/>
+     </section>
+     <section>
+      <h2>
+       4. Could product bundling with tunics increase average cart value more effectively?
+      </h2>
+      <p>
+       Analysis of co-purchase data shows that pants are the most commonly purchased item alongside tunics, with an average purchase value of $197.82. Other strong pairings include jeans and sweaters, which also contribute to higher average transaction values. This suggests that bundling tunics with pants, jeans, or sweaters presents an opportunity to increase average cart value and drive higher sales.
+      </p>
+      <img alt="Bar Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/are-tunics-best-sellers/chart%204%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Maximizing Revenue:
+        </strong>
+        By identifying high-value items such as tunics, jeans, and sweaters, businesses can strategically focus on these products to enhance revenue generation. Additionally, bundling tunics with pants and jeans can boost cart values.
+       </li>
+       <li>
+        <strong>
+         Cost Optimization:
+        </strong>
+        The analysis of product pricing and customer ratings helps to avoid over-investment in categories like tunics where the perceived value does not align with customer satisfaction.
+       </li>
+       <li>
+        <strong>
+         Improving Customer Retention:
+        </strong>
+        By adjusting product positioning, such as emphasizing seasonal trends for tunics, businesses can increase customer satisfaction and retention by catering to customer preferences at the right time.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Optimizing Marketing Efforts:
+        </strong>
+        Based on the insights from this study, the company can develop more targeted marketing campaigns focusing on seasonal appeals, such as promoting tunics during colder months or holiday seasons, while simultaneously improving product fit and quality to address customer satisfaction concerns.
+       </li>
+       <li>
+        <strong>
+         Strategic Content and Product Positioning:
+        </strong>
+        The findings provide actionable insights for product bundling and inventory planning. The business can leverage the data to ensure it stocks high-demand premium apparel and offers attractive bundles to maximize sales potential.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Statistical Analysis of Tunic Pricing:
+        </strong>
+        The t-test result (p-value of 0.24) suggests that while tunics appear to have a higher average purchase value, the difference is not statistically significant. This indicates that factors like pricing strategy or market trends rather than inherent quality differences are likely driving the higher prices of tunics. The seasonality factor also appears to influence demand spikes for tunics during certain months, such as April and December.
+       </li>
+       <li>
+        <strong>
+         Customer Satisfaction and Seasonal Demand:
+        </strong>
+        Despite tunics being priced higher, the low customer ratings point to a disconnect between price and perceived quality. The seasonal demand spikes support the theory that tunics have higher sales during specific times of the year, suggesting seasonal appeal drives their pricing strategy rather than customer approval.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Seasonal Trends:
+        </strong>
+        The spike in sales during April and December suggests weather-related demand or festive purchasing patterns for tunics. The business should consider targeted promotions and special collections for these periods to maximize sales.
+       </li>
+       <li>
+        <strong>
+         Product Development Needs:
+        </strong>
+        Given the lower customer ratings for tunics, there is an opportunity for product improvement, especially in terms of fit, design, or material quality, to align with higher pricing expectations.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendation:
+      </h2>
+      <p>
+       Based on the findings, businesses should focus on seasonal campaigns and bundling tunics with complementary items like pants and sweaters to increase average cart value. However, businesses should be cautious about continuing to position tunics solely as premium products, given the lack of statistical significance in their price performance and customer ratings.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Leverage Seasonal Campaigns for Tunics:
+        </strong>
+        Promote tunics during key sales periods such as April and December, capitalizing on the seasonal demand for layering and holiday shopping.
+       </li>
+       <li>
+        <strong>
+         Bundle Tunics with Popular Apparel:
+        </strong>
+        Bundle tunics with items like pants, jeans, and sweaters to boost average cart value and create attractive cross-sell opportunities for customers.
+       </li>
+       <li>
+        <strong>
+         Improve Product Design and Quality:
+        </strong>
+        Address customer dissatisfaction with tunics by investing in design improvements, better fit, and higher-quality materials to align with their premium price and improve customer ratings.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion:
+      </h2>
+      <p>
+       This analysis demonstrates that while tunics command the highest average purchase value, the lack of statistical significance in their pricing and the lower customer ratings suggest that they may not truly be a premium product. Businesses should capitalize on seasonal trends for tunics, explore product bundling opportunities, and improve product quality to align their pricing strategies with customer expectations. By implementing these recommendations, companies can enhance revenue, improve customer satisfaction, and drive higher ROI in the fashion retail sector.
+      </p>
+     </section>
+    </section>
+   </main>
   </div>
-
   <footer>
-    <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+   <p>
+    © 2025 Lee Yih Ven | Pinnacles Learning Solutions
+   </p>
   </footer>
-</body>
+ </body>
 </html>

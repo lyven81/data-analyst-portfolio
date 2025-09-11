@@ -1,118 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Can Money Buy Happiness? | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/can-money-buy-happiness-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/cover.png" alt="Cover Image">
-                    <h1>Can Money Buy Happiness?</h1>
-                    <p>What We Learned from the 2019 World Happiness Report</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This analysis explores how external conditions—particularly economic stability and personal autonomy—influence national happiness, offering practical insights for mental health professionals. As well-being is shaped by both personal and societal factors, understanding these broader drivers can help guide counseling priorities and support strategies.</p>
-                    <p>Using global data, the study focuses on GDP per capita and freedom to make life choices, two variables shown to be the most statistically reliable and least overlapping predictors of happiness. The goal is to help counselors align interventions with what most strongly contributes to psychological well-being: financial security and a sense of personal control.</p>
-                </section>
-
-                <section>
-                    <h2>1. What factors are most strongly linked to happiness, and do they overlap?</h2>
-                    <p>The analysis shows that GDP per capita, healthy life expectancy, and social support are the three strongest external factors linked to happiness. Countries with higher income, better health outcomes, and stronger support systems tend to report higher happiness levels. However, these three factors are also closely related to each other. Because they rise and fall together, including all of them in the same model may blur their individual effects. To avoid this confusion, it’s better to include just one or two of these variables in a predictive model. In this case, the model uses GDP per capita and freedom to make life choices, which helps keep the analysis clear and focused.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%201.png" alt="Chart 1">
-                </section>
-
-                <section>
-                    <h2>2. Which predictors are most reliable for guiding interventions?</h2>
-                    <p>Two predictors stand out as statistically reliable and meaningful: GDP per capita and freedom to make life choices. Both are strongly linked to higher happiness and have been confirmed as significant through regression testing. This means that when a country’s economy grows or when people feel more free to make decisions about their lives, happiness levels tend to rise. On the other hand, perceptions of corruption did not show a strong link and should not be prioritized in isolation when designing well-being interventions. For mental health professionals, this suggests focusing on economic empowerment and personal autonomy as core areas for support programs.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%202.png" alt="Chart 2">
-                </section>
-
-                <section>
-                    <h2>3. How do these factors combine to affect happiness?</h2>
-                    <p>The regression model shows that both GDP per capita and freedom to make life choices have a measurable impact on happiness. For each one-point increase in GDP, happiness scores rise by about 1.89 points. For every one-point increase in perceived freedom, happiness increases by about 2.41 points. These values help us understand the weight of each factor. In total, about 71% of the variation in happiness scores across countries can be explained by these two factors. This confirms that financial stability and personal freedom are powerful influences on how people feel about their lives and should be central in any well-being strategy.</p>
-                </section>
-
-                <section>
-                    <h2>4. What are the expected happiness scores based on GDP and freedom?</h2>
-                    <p>By using GDP per capita and freedom to make life choices, the model can predict a country’s happiness score. In most cases, the predictions come close to the actual reported scores. However, in some countries, actual happiness is higher than expected, which suggests that other cultural or social factors may play a role. These predictions offer a helpful baseline for understanding what happiness might look like under different national conditions and can be used to identify which countries are doing better or worse than expected based on these two variables.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%204.png" alt="Chart 4">
-                </section>
-
-                <section>
-                    <h2>5. How does the model perform for countries with extreme values?</h2>
-                    <p>When testing the model on countries with extreme values, the results were mixed. For example, the model overestimated happiness in Qatar, which has high GDP but may face social or cultural factors that affect well-being. In contrast, it underestimated happiness in countries like Uzbekistan and Somalia, suggesting that community strength or resilience may be boosting happiness despite economic challenges. The prediction for Afghanistan, which has low freedom, was relatively close. These examples show that while the model is useful, it doesn’t capture all the unique influences on happiness, especially in countries with unusual or extreme situations.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%205.png" alt="Chart 5">
-                </section>
-
-                <section>
-                    <h2>6. How would happiness change if GDP or freedom shifts by 50%?</h2>
-                    <p>If a country’s GDP increased by 50%, its predicted happiness score would rise by about 0.85 points. A 50% decrease would lower happiness by roughly the same amount. Similarly, increasing freedom by 50% would result in a 0.57-point increase, while a 50% drop in freedom would reduce happiness by about 0.38 points. This suggests that both economic growth and personal freedom have meaningful effects on happiness, with GDP showing a slightly stronger immediate impact. Still, both should be considered important targets for improving national and community well-being.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%206.png" alt="Chart 6">
-                </section>
-
-                <section>
-                    <h2>7. Is the model accurate and practical for real-world use?</h2>
-                    <p>The model is fairly accurate. It has a strong correlation of 0.84 between predicted and actual scores, and its predictions are, on average, within half a point of actual happiness levels. This makes it a useful tool for understanding general well-being trends at the population level. However, it’s less suitable for individual-level work. It doesn’t capture personal history, emotional experiences, or cultural context—factors that are essential in therapeutic settings. For counselors and mental health professionals, the model offers a reliable overview but should always be paired with personal assessments and community knowledge when working directly with people.</p>
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>The analysis across multiple models and visualizations confirms that economic stability and personal autonomy are the two most impactful external factors influencing a population’s psychological well-being and overall life satisfaction. Specifically:</p>
-                    <ul>
-                        <li>GDP per capita is strongly correlated with happiness (r = 0.79) and statistically significant in the regression model, indicating that financial security and access to economic resources play a major role in well-being.</li>
-                        <li>Freedom to make life choices has an even greater influence on predicted happiness (coefficient = 2.23), emphasizing the importance of autonomy, control, and self-determination in people's lives.</li>
-                        <li>Other factors such as healthy life expectancy and social support are also positively linked to happiness but show high correlation with GDP and may reflect overlapping influences.</li>
-                        <li>The model performs well in predicting happiness overall (R² = 0.713), but deviations in specific countries (e.g., Somalia, Qatar) show that cultural, emotional, or social resilience can moderate or amplify the impact of economic and political conditions.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <p>Based on the findings, mental health professionals—especially counselors and community practitioners—should focus on the following areas in their work:</p>
-                    <ul>
-                        <li><strong>Promote Personal Agency and Decision-Making Power:</strong> Support clients in regaining control over their lives. Encourage life planning, goal setting, and decision-making as therapeutic tools to strengthen autonomy.</li>
-                        <li><strong>Address Financial Stress and Economic Insecurity:</strong> While counselors do not directly solve financial problems, integrating discussions about financial well-being, stability, and job-related stress into sessions can improve psychological outcomes. Referrals to support services or financial literacy programs can be valuable.</li>
-                        <li><strong>Tailor Interventions to Context:</strong> In low-resource or high-stress environments (like Somalia or Afghanistan), build on community strengths and resilience rather than relying solely on economic metrics. Emotional connection, identity, and meaning-making should complement structural concerns.</li>
-                        <li><strong>Empower Clients with Low Freedom Perception:</strong> For those feeling trapped by circumstances (e.g., rigid family roles, institutional control), therapy should aim to uncover areas where freedom and choice can be reclaimed—even in small steps.</li>
-                        <li><strong>Advocate for Systemic Support:</strong> Encourage involvement in community or policy-level discussions that advocate for greater social freedom, equity, and access to resources, as these are long-term levers for population well-being.</li>
-                    </ul>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Can Money Buy Happiness? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/can-money-buy-happiness-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/cover.png"/>
+      <h1>
+       Can Money Buy Happiness?
+      </h1>
+      <p>
+       What We Learned from the 2019 World Happiness Report
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis explores how external conditions—particularly economic stability and personal autonomy—influence national happiness, offering practical insights for mental health professionals. As well-being is shaped by both personal and societal factors, understanding these broader drivers can help guide counseling priorities and support strategies.
+      </p>
+      <p>
+       Using global data, the study focuses on GDP per capita and freedom to make life choices, two variables shown to be the most statistically reliable and least overlapping predictors of happiness. The goal is to help counselors align interventions with what most strongly contributes to psychological well-being: financial security and a sense of personal control.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. What factors are most strongly linked to happiness, and do they overlap?
+      </h2>
+      <p>
+       The analysis shows that GDP per capita, healthy life expectancy, and social support are the three strongest external factors linked to happiness. Countries with higher income, better health outcomes, and stronger support systems tend to report higher happiness levels. However, these three factors are also closely related to each other. Because they rise and fall together, including all of them in the same model may blur their individual effects. To avoid this confusion, it’s better to include just one or two of these variables in a predictive model. In this case, the model uses GDP per capita and freedom to make life choices, which helps keep the analysis clear and focused.
+      </p>
+      <img alt="Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%201.png"/>
+     </section>
+     <section>
+      <h2>
+       2. Which predictors are most reliable for guiding interventions?
+      </h2>
+      <p>
+       Two predictors stand out as statistically reliable and meaningful: GDP per capita and freedom to make life choices. Both are strongly linked to higher happiness and have been confirmed as significant through regression testing. This means that when a country’s economy grows or when people feel more free to make decisions about their lives, happiness levels tend to rise. On the other hand, perceptions of corruption did not show a strong link and should not be prioritized in isolation when designing well-being interventions. For mental health professionals, this suggests focusing on economic empowerment and personal autonomy as core areas for support programs.
+      </p>
+      <img alt="Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%202.png"/>
+     </section>
+     <section>
+      <h2>
+       3. How do these factors combine to affect happiness?
+      </h2>
+      <p>
+       The regression model shows that both GDP per capita and freedom to make life choices have a measurable impact on happiness. For each one-point increase in GDP, happiness scores rise by about 1.89 points. For every one-point increase in perceived freedom, happiness increases by about 2.41 points. These values help us understand the weight of each factor. In total, about 71% of the variation in happiness scores across countries can be explained by these two factors. This confirms that financial stability and personal freedom are powerful influences on how people feel about their lives and should be central in any well-being strategy.
+      </p>
+     </section>
+     <section>
+      <h2>
+       4. What are the expected happiness scores based on GDP and freedom?
+      </h2>
+      <p>
+       By using GDP per capita and freedom to make life choices, the model can predict a country’s happiness score. In most cases, the predictions come close to the actual reported scores. However, in some countries, actual happiness is higher than expected, which suggests that other cultural or social factors may play a role. These predictions offer a helpful baseline for understanding what happiness might look like under different national conditions and can be used to identify which countries are doing better or worse than expected based on these two variables.
+      </p>
+      <img alt="Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%204.png"/>
+     </section>
+     <section>
+      <h2>
+       5. How does the model perform for countries with extreme values?
+      </h2>
+      <p>
+       When testing the model on countries with extreme values, the results were mixed. For example, the model overestimated happiness in Qatar, which has high GDP but may face social or cultural factors that affect well-being. In contrast, it underestimated happiness in countries like Uzbekistan and Somalia, suggesting that community strength or resilience may be boosting happiness despite economic challenges. The prediction for Afghanistan, which has low freedom, was relatively close. These examples show that while the model is useful, it doesn’t capture all the unique influences on happiness, especially in countries with unusual or extreme situations.
+      </p>
+      <img alt="Chart 5" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%205.png"/>
+     </section>
+     <section>
+      <h2>
+       6. How would happiness change if GDP or freedom shifts by 50%?
+      </h2>
+      <p>
+       If a country’s GDP increased by 50%, its predicted happiness score would rise by about 0.85 points. A 50% decrease would lower happiness by roughly the same amount. Similarly, increasing freedom by 50% would result in a 0.57-point increase, while a 50% drop in freedom would reduce happiness by about 0.38 points. This suggests that both economic growth and personal freedom have meaningful effects on happiness, with GDP showing a slightly stronger immediate impact. Still, both should be considered important targets for improving national and community well-being.
+      </p>
+      <img alt="Chart 6" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%206.png"/>
+     </section>
+     <section>
+      <h2>
+       7. Is the model accurate and practical for real-world use?
+      </h2>
+      <p>
+       The model is fairly accurate. It has a strong correlation of 0.84 between predicted and actual scores, and its predictions are, on average, within half a point of actual happiness levels. This makes it a useful tool for understanding general well-being trends at the population level. However, it’s less suitable for individual-level work. It doesn’t capture personal history, emotional experiences, or cultural context—factors that are essential in therapeutic settings. For counselors and mental health professionals, the model offers a reliable overview but should always be paired with personal assessments and community knowledge when working directly with people.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis across multiple models and visualizations confirms that economic stability and personal autonomy are the two most impactful external factors influencing a population’s psychological well-being and overall life satisfaction. Specifically:
+      </p>
+      <ul>
+       <li>
+        GDP per capita is strongly correlated with happiness (r = 0.79) and statistically significant in the regression model, indicating that financial security and access to economic resources play a major role in well-being.
+       </li>
+       <li>
+        Freedom to make life choices has an even greater influence on predicted happiness (coefficient = 2.23), emphasizing the importance of autonomy, control, and self-determination in people's lives.
+       </li>
+       <li>
+        Other factors such as healthy life expectancy and social support are also positively linked to happiness but show high correlation with GDP and may reflect overlapping influences.
+       </li>
+       <li>
+        The model performs well in predicting happiness overall (R² = 0.713), but deviations in specific countries (e.g., Somalia, Qatar) show that cultural, emotional, or social resilience can moderate or amplify the impact of economic and political conditions.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <p>
+       Based on the findings, mental health professionals—especially counselors and community practitioners—should focus on the following areas in their work:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Promote Personal Agency and Decision-Making Power:
+        </strong>
+        Support clients in regaining control over their lives. Encourage life planning, goal setting, and decision-making as therapeutic tools to strengthen autonomy.
+       </li>
+       <li>
+        <strong>
+         Address Financial Stress and Economic Insecurity:
+        </strong>
+        While counselors do not directly solve financial problems, integrating discussions about financial well-being, stability, and job-related stress into sessions can improve psychological outcomes. Referrals to support services or financial literacy programs can be valuable.
+       </li>
+       <li>
+        <strong>
+         Tailor Interventions to Context:
+        </strong>
+        In low-resource or high-stress environments (like Somalia or Afghanistan), build on community strengths and resilience rather than relying solely on economic metrics. Emotional connection, identity, and meaning-making should complement structural concerns.
+       </li>
+       <li>
+        <strong>
+         Empower Clients with Low Freedom Perception:
+        </strong>
+        For those feeling trapped by circumstances (e.g., rigid family roles, institutional control), therapy should aim to uncover areas where freedom and choice can be reclaimed—even in small steps.
+       </li>
+       <li>
+        <strong>
+         Advocate for Systemic Support:
+        </strong>
+        Encourage involvement in community or policy-level discussions that advocate for greater social freedom, equity, and access to resources, as these are long-term levers for population well-being.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

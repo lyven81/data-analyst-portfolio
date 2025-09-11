@@ -1,149 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RON95 at a Crossroads | Lee Yih Ven</title>
-  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   RON95 at a Crossroads | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
   <div class="container">
-    <aside class="left-column">
-      <header>
-        <h1>Lee Yih Ven</h1>
-        <h2>Data Analytics Portfolio</h2>
-      </header>
-      <section class="intro">
-        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-      </section>
-      <section class="contact">
-        <h2>Contact</h2>
-        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-        <ul>
-          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-          <li>Phone: +6014-9207099</li>
-        </ul>
-                        </section>
-
-            <!-- Dashboard Link Button -->
-            <section class="dashboard-link-section">
-                <a href="/data-analyst-portfolio/dashboards/ron95-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
-            </section>
-        </aside>
-
-    <main class="right-column">
-      <section class="case-study-content">
-        <header>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/cover%20image.png" alt="Cover image of fuel pump nozzle">
-          <h1>RON95 at a Crossroads</h1>
-          <p><em>What Happens When the Government Lets Go of the Wheel?</em></p>
-        </header>
-
-        <section>
-          <h2>Study Context</h2>
-          <p>This analysis examines the stability and volatility of fuel prices (RON95, RON97, and Diesel) in Malaysia from April 2017 to April 2025. The data, sourced from the Ministry of Finance, represents weekly retail prices for these fuel types. The Automatic Pricing Mechanism (APM), introduced in 2017, is used by the government to adjust retail fuel prices based on global crude oil prices. This dataset reflects both market-driven prices and government interventions, allowing for an evaluation of pricing behaviors and potential risks for businesses and policymakers.</p>
-        </section>
-
-        <section>
-          <h2>Overview</h2>
-          <p>The results of this study are crucial for investors, businesses, and policy-makers in the energy sector, as well as consumers seeking stable fuel prices. By analyzing the distribution and volatility of fuel prices, this report will offer actionable insights into the economic impact of price fluctuations, the risks associated with government interventions, and how consumer behavior might be influenced by changes in fuel pricing policies. The findings will be particularly relevant for energy traders, logistics firms, and government bodies involved in energy pricing and subsidy allocation.</p>
-        </section>
-
-        <section>
-          <h2>1. What is the overall distribution shape of fuel prices?</h2>
-          <ul>
-            <li>RON95 shows a bimodal distribution, indicating periods of government price control (subsidized pricing) and market-driven adjustments. This suggests stable pricing for certain periods, followed by sudden upward price changes.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%201%20-%20histogram%2095.png" alt="Histogram of RON95">
-            <li>RON97 shows a multi-modal distribution, with frequent price changes beyond RM4.00, reflecting global market exposure and fewer government controls.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%201%20-%20histogram%2097.png" alt="Histogram of RON97">
-            <li>Diesel displays a trimodal distribution, with occasional shifts due to government policies or external market factors.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%201%20-%20diesel.png" alt="Histogram of Diesel">
-            <li>Understanding these distribution patterns helps predict periods of price stability and price shocks. Businesses can model future costs more effectively, especially those in industries with fuel-dependent operations like logistics and transportation.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>2. Are Malaysian fuel prices historically stable or volatile?</h2>
-          <ul>
-            <li>RON97 has the highest volatility, with a standard deviation of 1.53 and significant price fluctuations, especially in 2022-2023 due to global oil price movements.</li>
-            <li>Diesel shows moderate volatility, with a standard deviation of 1.14, while RON95 remains the most stable, with the lowest volatility (1.02 standard deviation).</li>
-            <li>Businesses that rely on fuel for operations can use this insight to forecast cost volatility. For instance, RON97’s volatility may affect fuel budgeting and require hedging strategies, while RON95 offers predictable input costs for budgeting and long-term contracts.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%202%20-%20bar%20chart.png" alt="Fuel Price Volatility Comparison">
-          </ul>
-        </section>
-
-        <section>
-          <h2>3. Which fuel type shows the highest price volatility?</h2>
-          <ul>
-            <li>RON97 shows the most significant volatility, with a standard deviation of 1.54 and rolling standard deviations spiking above 2.5 in 2022-2023.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%203%20-%20bar%20chart.png" alt="Standard Deviation Bar Chart">
-            <li>Traders and energy investors can exploit RON97’s volatility for short-term investment opportunities. In contrast, businesses relying on fuel for operations can secure more stable pricing by favoring RON95.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%203%20-%20line%20chart.png" alt="Rolling Standard Deviation Line Chart">
-          </ul>
-        </section>
-
-        <section>
-          <h2>4. Have there been significant outliers in fuel prices?</h2>
-          <ul>
-            <li>RON97 had notable outliers in mid-2022, reflecting global market shocks like the Russia-Ukraine conflict and the post-COVID oil price rebound. The Z-score analysis showed prices exceeding +2.0, indicating rare deviations from normal price trends.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%204%20-%20outliner%20chart.png" alt="Outlier Bar Chart">
-            <li>RON95 and Diesel showed fewer outliers, maintaining relatively consistent pricing within a ±1.5 Z-score range.</li>
-            <li>The presence of outliers in RON97 signals vulnerability to external shocks. For businesses, price hedging or using RON95 as a more stable input can help minimize exposure to fuel price volatility.</li>
-            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%204%20-%20z%20score%20chart.png" alt="Z-Score Chart">
-          </ul>
-        </section>
-
-        <section>
-          <h2>Goals Alignment</h2>
-          <ul>
-            <li><strong>Revenue Growth:</strong> By understanding fuel price dynamics, businesses can optimize pricing strategies and supply chain costs. For energy companies, this analysis helps position for profit maximization during periods of price volatility.</li>
-            <li><strong>Cost Reduction:</strong> Recognizing price volatility allows businesses to develop cost-efficient models. For example, RON95 can be prioritized for cost stability, while hedging strategies can mitigate risks from RON97's volatility.</li>
-            <li><strong>Customer Retention:</strong> For transportation businesses and retailers with fuel-sensitive costs, this analysis helps to protect customers from sudden price increases by offering alternative solutions or predictable pricing models.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Impact</h2>
-          <p>These insights can help businesses forecast fuel costs more accurately, reduce operational risks, and align their long-term strategies with both consumer expectations and market conditions.</p>
-        </section>
-
-        <section>
-          <h2>Data Interpretation</h2>
-          <ul>
-            <li>RON97’s volatility can be attributed to its lack of government regulation and its direct exposure to global crude oil prices. This contrasts with RON95, which benefits from subsidies that stabilize its pricing, thus making it more predictable.</li>
-            <li>Price outliers in RON97 are tied to global oil market fluctuations and political disruptions (e.g., the Russia-Ukraine conflict), which have caused significant price surges.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Contextual Factors</h2>
-          <ul>
-            <li><strong>Government Policy:</strong> The subsidization of RON95 has been a major stabilizing force. Policy changes could lead to higher volatility, particularly in the middle-income sector, which benefits from the subsidy.</li>
-            <li><strong>Global Market Trends:</strong> International oil price movements have a direct impact on RON97 pricing, explaining the observed volatility.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Recommendation</h2>
-          <p>Based on these findings, businesses in fuel-dependent sectors should focus on risk mitigation strategies, including fuel price hedging and alternative energy sources, especially when dealing with RON97’s price fluctuations.</p>
-          <ul>
-            <li><strong>Optimize Fuel Price Strategy:</strong> Businesses relying on RON95 should prepare for future price fluctuations by investing in long-term pricing contracts. Those using RON97 should develop flexible pricing models to adapt to higher volatility.</li>
-            <li><strong>Increase Investment in Alternative Energy:</strong> Consider investments in electric vehicle (EV) infrastructure or renewable energy solutions to reduce dependency on volatile fuel prices.</li>
-            <li><strong>Adjust Consumer Pricing:</strong> Retailers and transportation companies should implement dynamic pricing strategies to offset higher fuel costs, ensuring long-term sustainability.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Conclusion</h2>
-          <p>The analysis highlights that RON97 shows the highest volatility, driven by global market factors, whereas RON95 remains stable due to government subsidies. If subsidies are removed or restructured, RON95 prices could experience greater fluctuations, potentially disrupting businesses that rely on fuel price stability. For businesses and consumers in Malaysia, this analysis provides valuable insights into future fuel pricing trends, enabling better risk management and more strategic investment decisions in energy and infrastructure. By considering these findings, businesses can prepare for potential disruptions and ensure they continue to meet consumer demand while mitigating the financial impact of fluctuating fuel prices.</p>
-        </section>
-
-      </section>
-    </main>
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/ron95-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover image of fuel pump nozzle" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/cover%20image.png"/>
+      <h1>
+       RON95 at a Crossroads
+      </h1>
+      <p>
+       <em>
+        What Happens When the Government Lets Go of the Wheel?
+       </em>
+      </p>
+     </header>
+     <section>
+      <h2>
+       Study Context
+      </h2>
+      <p>
+       This analysis examines the stability and volatility of fuel prices (RON95, RON97, and Diesel) in Malaysia from April 2017 to April 2025. The data, sourced from the Ministry of Finance, represents weekly retail prices for these fuel types. The Automatic Pricing Mechanism (APM), introduced in 2017, is used by the government to adjust retail fuel prices based on global crude oil prices. This dataset reflects both market-driven prices and government interventions, allowing for an evaluation of pricing behaviors and potential risks for businesses and policymakers.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       The results of this study are crucial for investors, businesses, and policy-makers in the energy sector, as well as consumers seeking stable fuel prices. By analyzing the distribution and volatility of fuel prices, this report will offer actionable insights into the economic impact of price fluctuations, the risks associated with government interventions, and how consumer behavior might be influenced by changes in fuel pricing policies. The findings will be particularly relevant for energy traders, logistics firms, and government bodies involved in energy pricing and subsidy allocation.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. What is the overall distribution shape of fuel prices?
+      </h2>
+      <ul>
+       <li>
+        RON95 shows a bimodal distribution, indicating periods of government price control (subsidized pricing) and market-driven adjustments. This suggests stable pricing for certain periods, followed by sudden upward price changes.
+       </li>
+       <img alt="Histogram of RON95" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%201%20-%20histogram%2095.png"/>
+       <li>
+        RON97 shows a multi-modal distribution, with frequent price changes beyond RM4.00, reflecting global market exposure and fewer government controls.
+       </li>
+       <img alt="Histogram of RON97" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%201%20-%20histogram%2097.png"/>
+       <li>
+        Diesel displays a trimodal distribution, with occasional shifts due to government policies or external market factors.
+       </li>
+       <img alt="Histogram of Diesel" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%201%20-%20diesel.png"/>
+       <li>
+        Understanding these distribution patterns helps predict periods of price stability and price shocks. Businesses can model future costs more effectively, especially those in industries with fuel-dependent operations like logistics and transportation.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       2. Are Malaysian fuel prices historically stable or volatile?
+      </h2>
+      <ul>
+       <li>
+        RON97 has the highest volatility, with a standard deviation of 1.53 and significant price fluctuations, especially in 2022-2023 due to global oil price movements.
+       </li>
+       <li>
+        Diesel shows moderate volatility, with a standard deviation of 1.14, while RON95 remains the most stable, with the lowest volatility (1.02 standard deviation).
+       </li>
+       <li>
+        Businesses that rely on fuel for operations can use this insight to forecast cost volatility. For instance, RON97’s volatility may affect fuel budgeting and require hedging strategies, while RON95 offers predictable input costs for budgeting and long-term contracts.
+       </li>
+       <img alt="Fuel Price Volatility Comparison" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%202%20-%20bar%20chart.png"/>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       3. Which fuel type shows the highest price volatility?
+      </h2>
+      <ul>
+       <li>
+        RON97 shows the most significant volatility, with a standard deviation of 1.54 and rolling standard deviations spiking above 2.5 in 2022-2023.
+       </li>
+       <img alt="Standard Deviation Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%203%20-%20bar%20chart.png"/>
+       <li>
+        Traders and energy investors can exploit RON97’s volatility for short-term investment opportunities. In contrast, businesses relying on fuel for operations can secure more stable pricing by favoring RON95.
+       </li>
+       <img alt="Rolling Standard Deviation Line Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%203%20-%20line%20chart.png"/>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       4. Have there been significant outliers in fuel prices?
+      </h2>
+      <ul>
+       <li>
+        RON97 had notable outliers in mid-2022, reflecting global market shocks like the Russia-Ukraine conflict and the post-COVID oil price rebound. The Z-score analysis showed prices exceeding +2.0, indicating rare deviations from normal price trends.
+       </li>
+       <img alt="Outlier Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%204%20-%20outliner%20chart.png"/>
+       <li>
+        RON95 and Diesel showed fewer outliers, maintaining relatively consistent pricing within a ±1.5 Z-score range.
+       </li>
+       <li>
+        The presence of outliers in RON97 signals vulnerability to external shocks. For businesses, price hedging or using RON95 as a more stable input can help minimize exposure to fuel price volatility.
+       </li>
+       <img alt="Z-Score Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/ron95/chart%204%20-%20z%20score%20chart.png"/>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Revenue Growth:
+        </strong>
+        By understanding fuel price dynamics, businesses can optimize pricing strategies and supply chain costs. For energy companies, this analysis helps position for profit maximization during periods of price volatility.
+       </li>
+       <li>
+        <strong>
+         Cost Reduction:
+        </strong>
+        Recognizing price volatility allows businesses to develop cost-efficient models. For example, RON95 can be prioritized for cost stability, while hedging strategies can mitigate risks from RON97's volatility.
+       </li>
+       <li>
+        <strong>
+         Customer Retention:
+        </strong>
+        For transportation businesses and retailers with fuel-sensitive costs, this analysis helps to protect customers from sudden price increases by offering alternative solutions or predictable pricing models.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact
+      </h2>
+      <p>
+       These insights can help businesses forecast fuel costs more accurately, reduce operational risks, and align their long-term strategies with both consumer expectations and market conditions.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation
+      </h2>
+      <ul>
+       <li>
+        RON97’s volatility can be attributed to its lack of government regulation and its direct exposure to global crude oil prices. This contrasts with RON95, which benefits from subsidies that stabilize its pricing, thus making it more predictable.
+       </li>
+       <li>
+        Price outliers in RON97 are tied to global oil market fluctuations and political disruptions (e.g., the Russia-Ukraine conflict), which have caused significant price surges.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Government Policy:
+        </strong>
+        The subsidization of RON95 has been a major stabilizing force. Policy changes could lead to higher volatility, particularly in the middle-income sector, which benefits from the subsidy.
+       </li>
+       <li>
+        <strong>
+         Global Market Trends:
+        </strong>
+        International oil price movements have a direct impact on RON97 pricing, explaining the observed volatility.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendation
+      </h2>
+      <p>
+       Based on these findings, businesses in fuel-dependent sectors should focus on risk mitigation strategies, including fuel price hedging and alternative energy sources, especially when dealing with RON97’s price fluctuations.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Optimize Fuel Price Strategy:
+        </strong>
+        Businesses relying on RON95 should prepare for future price fluctuations by investing in long-term pricing contracts. Those using RON97 should develop flexible pricing models to adapt to higher volatility.
+       </li>
+       <li>
+        <strong>
+         Increase Investment in Alternative Energy:
+        </strong>
+        Consider investments in electric vehicle (EV) infrastructure or renewable energy solutions to reduce dependency on volatile fuel prices.
+       </li>
+       <li>
+        <strong>
+         Adjust Consumer Pricing:
+        </strong>
+        Retailers and transportation companies should implement dynamic pricing strategies to offset higher fuel costs, ensuring long-term sustainability.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis highlights that RON97 shows the highest volatility, driven by global market factors, whereas RON95 remains stable due to government subsidies. If subsidies are removed or restructured, RON95 prices could experience greater fluctuations, potentially disrupting businesses that rely on fuel price stability. For businesses and consumers in Malaysia, this analysis provides valuable insights into future fuel pricing trends, enabling better risk management and more strategic investment decisions in energy and infrastructure. By considering these findings, businesses can prepare for potential disruptions and ensure they continue to meet consumer demand while mitigating the financial impact of fluctuating fuel prices.
+      </p>
+     </section>
+    </section>
+   </main>
   </div>
-
   <footer>
-    <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
+   <p>
+    © 2024 Lee Yih Ven | Data-Driven Solutions
+   </p>
   </footer>
-</body>
+ </body>
 </html>
