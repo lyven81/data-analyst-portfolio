@@ -151,6 +151,130 @@ img, .visualization {
     box-sizing: border-box;
 }
 
+/* Styles for Skill-based Category Pages */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+nav {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+nav a {
+    color: #007BFF;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.category-description {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border-left: 4px solid #007BFF;
+}
+
+.case-study {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.case-study:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.case-study h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.case-study p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.case-link {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.case-link:hover {
+    text-decoration: underline;
+}
+
+/* Category-specific styles */
+.category {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.category h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.category p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.category a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.category a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 40px;
+}
+
 /* Responsive Design for Mobile */
 @media (max-width: 768px) {
     .container {
@@ -172,5 +296,21 @@ img, .visualization {
 
     footer {
         margin-left: 0;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header p, nav a {
+        font-size: 1rem;
+    }
+    
+    .category h3 {
+        font-size: 1.2rem;
+    }
+    
+    .category p {
+        font-size: 0.95rem;
     }
 }
