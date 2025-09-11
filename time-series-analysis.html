@@ -79,6 +79,29 @@
         td a:hover {
             text-decoration: underline;
         }
+        .case-study-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .case-study-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f5f5dc;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .case-study-links a:hover {
+            background-color: #daa520;
+            color: white;
+            border-color: #daa520;
+            transform: translateY(-1px);
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -118,6 +141,13 @@
             .tagline {
                 font-size: 1rem;
             }
+            .case-study-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .case-study-links a {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -141,30 +171,54 @@
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/when-to-buy-google.html">When to Buy and Sell Google Stock</a></h3>
                     <p>Discover how seasonal patterns in Google stock can guide optimal investment timing through time series decomposition.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/when-to-buy-google.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/when-to-buy-google-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/pattern-behind-price.html">Patterns Behind the Price - Microsoft Stock</a></h3>
                     <p>Explore Microsoft's stock price growth patterns and crisis resilience through comprehensive time series analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/pattern-behind-price.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/pattern-behind-price-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/what-sells-best.html">What Sells Best and When - Pizza Sales</a></h3>
                     <p>A data-driven guide to improving pizza sales and operations through temporal sales pattern analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/what-sells-best.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/what-sells-best-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/ron95.html">RON95 Fuel Price Volatility Analysis</a></h3>
                     <p>Comprehensive analysis of Malaysian fuel price dynamics examining volatility and government policy impacts.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/ron95.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/ron95-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap? - Google Price Fluctuations</a></h3>
                     <p>Decode Google's price fluctuations using time series analysis to distinguish sustainable trends from market traps.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Forecasting Beverage Sales in Kota Kinabalu</a></h3>
                     <p>Sales forecasting analysis for beverage distribution using time series modeling and seasonal decomposition.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/forecasting-beverage-sales-kota-kinabalu-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
         </table>
