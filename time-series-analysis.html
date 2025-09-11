@@ -29,10 +29,18 @@
       font-size: 2.5rem;
       font-weight: 600;
       margin-bottom: 10px;
+      color: #333;
     }
-    header p {
-      font-size: 1.2rem;
-      color: #555;
+    .category-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .tagline {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #666;
     }
     nav {
       text-align: center;
@@ -93,31 +101,59 @@
       transition: all 0.3s ease;
     }
     .case-study-links a:hover {
-      background-color: #e8e8dc;
-      transform: translateY(-2px);
+      background-color: #daa520;
+      color: white;
+      border-color: #daa520;
+      transform: translateY(-1px);
     }
     .empty-cell {
       visibility: hidden;
     }
     footer {
       text-align: center;
-      margin-top: 40px;
       padding: 20px;
-      color: #777;
+      background-color: #333;
+      color: white;
+      margin-top: 20px;
     }
     @media (max-width: 768px) {
+      table {
+        display: block;
+      }
+      tr {
+        display: block;
+        margin-bottom: 20px;
+      }
+      td {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      td h3 {
+        font-size: 1.3rem;
+      }
+      td p {
+        font-size: 1rem;
+      }
+      nav a {
+        font-size: 1rem;
+      }
       header h1 {
         font-size: 2rem;
       }
-      td {
-        width: 100%;
-        display: block;
+      .category-title {
+        font-size: 1.5rem;
       }
-      table, tbody, tr {
-        display: block;
+      .tagline {
+        font-size: 1rem;
       }
       .case-study-links {
         flex-direction: column;
+        gap: 5px;
+      }
+      .case-study-links a {
+        text-align: center;
       }
     }
   </style>
@@ -125,12 +161,15 @@
 <body>
   <div class="container">
     <header>
-      <h1>Time Series Analysis</h1>
-      <p>Forecasting trends and patterns through temporal data analysis</p>
+      <h1>Lee Yih Ven</h1>
+      <p class="category-title">Time Series Analysis</p>
+      <p class="tagline">Forecasting trends and patterns through temporal data analysis</p>
     </header>
 
     <nav>
-      <a href="/data-analyst-portfolio/index.html">← Back to Portfolio</a>
+      <a href="/data-analyst-portfolio/index.html">Home</a>
+      <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+      <a href="/data-analyst-portfolio/contact.html">Contact</a>
     </nav>
 
     <table>
