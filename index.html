@@ -17,51 +17,35 @@
       color: #333;
     }
     .container {
-      max-width: 1200px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 20px;
     }
     header {
       text-align: center;
-      margin-bottom: 50px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 60px 20px;
-      margin: 0 0 50px 0;
+      margin-bottom: 40px;
     }
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
       font-weight: 600;
     }
     header p {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-    }
-    .problem-statement {
-      font-size: 1.5rem;
-      margin-top: 20px;
-      font-weight: 500;
-      opacity: 0.95;
+      font-size: 1.2rem;
+      color: #555;
     }
     nav {
       text-align: center;
-      margin-bottom: 40px;
-      background-color: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
     }
     nav a {
-      color: #667eea;
+      color: #007BFF;
       text-decoration: none;
-      margin: 0 20px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
+      margin: 0 15px;
+      font-size: 1.2rem;
     }
     nav a:hover {
-      color: #764ba2;
+      text-decoration: underline;
     }
     .skills-section {
       margin-bottom: 50px;
@@ -69,15 +53,9 @@
     .section-title {
       text-align: center;
       font-size: 2.2rem;
-      margin-bottom: 15px;
+      margin-bottom: 40px;
       color: #333;
       font-weight: 600;
-    }
-    .section-subtitle {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 40px;
     }
     .skills-grid {
       display: grid;
@@ -86,21 +64,21 @@
       margin-bottom: 40px;
     }
     .skill-card {
-      background: white;
+      background-color: #fff;
+      border: 1px solid #ddd;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-left: 4px solid #667eea;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
     .skill-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     }
     .skill-icon {
       font-size: 2.5rem;
       margin-bottom: 15px;
-      color: #667eea;
+      color: #007BFF;
     }
     .skill-title {
       font-size: 1.4rem;
@@ -118,7 +96,7 @@
       color: #888;
     }
     .related-studies a {
-      color: #667eea;
+      color: #007BFF;
       text-decoration: none;
       font-weight: 500;
     }
@@ -135,53 +113,45 @@
     }
     .case-study {
       background-color: #fff;
-      border: 1px solid #e0e0e0;
-      padding: 25px;
-      margin-bottom: 0;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
     .case-study:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
     .case-study h3 {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       margin-bottom: 10px;
-      color: #333;
-      font-weight: 600;
     }
     .case-study p {
       font-size: 1rem;
       color: #555;
-      margin-bottom: 15px;
     }
     .case-study a {
-      color: #667eea;
+      color: #007BFF;
       text-decoration: none;
       font-weight: 500;
-      font-size: 0.95rem;
     }
     .case-study a:hover {
       text-decoration: underline;
     }
     footer {
       text-align: center;
-      padding: 30px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      background-color: #333;
       color: white;
-      margin-top: 50px;
+      margin-top: 40px;
     }
     @media (max-width: 768px) {
       header h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
-      header p {
-        font-size: 1.1rem;
-      }
-      .problem-statement {
-        font-size: 1.2rem;
+      header p, nav a {
+        font-size: 1rem;
       }
       .section-title {
         font-size: 1.8rem;
@@ -192,9 +162,11 @@
       .case-studies-grid {
         grid-template-columns: 1fr;
       }
-      nav a {
-        margin: 0 10px;
-        font-size: 1rem;
+      .case-study h3 {
+        font-size: 1.2rem;
+      }
+      .case-study p {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -203,8 +175,7 @@
 
 <header>
   <h1>Lee Yih Ven</h1>
-  <p>Data Analyst</p>
-  <p class="problem-statement">I turn business questions into data-driven answers that guide smarter decisions</p>
+  <p>Data Analytics Portfolio</p>
 </header>
 
 <nav>
@@ -216,8 +187,7 @@
 <div class="container">
   
   <section class="skills-section">
-    <h2 class="section-title">What Problems I Solve</h2>
-    <p class="section-subtitle">I help businesses make better decisions by uncovering insights hidden in their data</p>
+    <h2 class="section-title">Data Analytics Skills Applied</h2>
     
     <div class="skills-grid">
       <div class="skill-card">
