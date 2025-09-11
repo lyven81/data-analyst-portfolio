@@ -17,79 +17,184 @@
       color: #333;
     }
     .container {
-      max-width: 960px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
     }
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 20px;
+      margin: 0 0 50px 0;
     }
     header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+      font-size: 3rem;
+      margin-bottom: 15px;
       font-weight: 600;
     }
     header p {
-      font-size: 1.2rem;
-      color: #555;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .problem-statement {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      font-weight: 500;
+      opacity: 0.95;
     }
     nav {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     nav a {
-      color: #007BFF;
+      color: #667eea;
       text-decoration: none;
-      margin: 0 15px;
-      font-size: 1.2rem;
+      margin: 0 20px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
     nav a:hover {
+      color: #764ba2;
+    }
+    .skills-section {
+      margin-bottom: 50px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: #333;
+      font-weight: 600;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 40px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    .skill-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid #667eea;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #667eea;
+    }
+    .skill-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    .skill-subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .related-studies {
+      font-size: 0.9rem;
+      color: #888;
+    }
+    .related-studies a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .related-studies a:hover {
       text-decoration: underline;
+    }
+    .case-studies-section {
+      margin-bottom: 50px;
+    }
+    .case-studies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
     }
     .case-study {
       background-color: #fff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e0e0e0;
+      padding: 25px;
+      margin-bottom: 0;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .case-study:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
     }
     .case-study h3 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       margin-bottom: 10px;
+      color: #333;
+      font-weight: 600;
     }
     .case-study p {
       font-size: 1rem;
       color: #555;
+      margin-bottom: 15px;
     }
     .case-study a {
-      color: #007BFF;
+      color: #667eea;
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.95rem;
     }
     .case-study a:hover {
       text-decoration: underline;
     }
     footer {
       text-align: center;
-      padding: 20px;
-      background-color: #333;
+      padding: 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      margin-top: 40px;
+      margin-top: 50px;
     }
     @media (max-width: 768px) {
       header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
-      header p, nav a {
-        font-size: 1rem;
+      header p {
+        font-size: 1.1rem;
       }
-      .case-study h3 {
+      .problem-statement {
         font-size: 1.2rem;
       }
-      .case-study p {
-        font-size: 0.95rem;
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .case-studies-grid {
+        grid-template-columns: 1fr;
+      }
+      nav a {
+        margin: 0 10px;
+        font-size: 1rem;
       }
     }
   </style>
@@ -98,8 +203,8 @@
 
 <header>
   <h1>Lee Yih Ven</h1>
-  <p>Data Analytics Portfolio</p>
-  <p>Discover how data empowers smarter decisions in your next big move.</p>
+  <p>Data Analyst</p>
+  <p class="problem-statement">I turn business questions into data-driven answers that guide smarter decisions</p>
 </header>
 
 <nav>
@@ -109,77 +214,134 @@
 </nav>
 
 <div class="container">
-  <div class="case-study">
-    <h3>Beyond the Buzzwords</h3>
-    <p>Discover which jewelry keywords actually deliver clicks and sales.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html">Read More</a>
-  </div>
+  
+  <section class="skills-section">
+    <h2 class="section-title">What Problems I Solve</h2>
+    <p class="section-subtitle">I help businesses make better decisions by uncovering insights hidden in their data</p>
+    
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <h3 class="skill-title">Revenue Optimization</h3>
+        <p class="skill-subtitle">Find what actually drives sales and profitability</p>
+        <p class="related-studies">See: <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html">Beyond the Buzzwords</a>, <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predict-product-sales.html">Predicting Product Sales</a></p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">💰</div>
+        <h3 class="skill-title">Investment Analysis</h3>
+        <p class="skill-subtitle">Know when to buy, sell, or hold based on data patterns</p>
+        <p class="related-studies">See: <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/is-the-price-right.html">Is the Price Right?</a>, <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/when-to-buy-google.html">When to Buy Google Stock</a></p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">👥</div>
+        <h3 class="skill-title">Customer Insights</h3>
+        <p class="skill-subtitle">Understand who buys what and why they stay or leave</p>
+        <p class="related-studies">See: <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">What Men and Women Buy</a>, <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-stays.html">Who Stays and Who Leaves?</a></p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <h3 class="skill-title">Operational Efficiency</h3>
+        <p class="skill-subtitle">Optimize timing, staffing, and resource allocation</p>
+        <p class="related-studies">See: <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-sells-best.html">What Sells Best and When</a>, <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/grow-smarter.html">Grow Smarter, Not Bigger</a></p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">🔮</div>
+        <h3 class="skill-title">Predictive Analytics</h3>
+        <p class="skill-subtitle">Forecast trends and identify risks before they happen</p>
+        <p class="related-studies">See: <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Who's Likely to Quit</a>, <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/pattern-behind-price.html">Patterns Behind the Price</a></p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">🎯</div>
+        <h3 class="skill-title">Market Analysis</h3>
+        <p class="skill-subtitle">Separate market noise from real opportunities</p>
+        <p class="related-studies">See: <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap?</a>, <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html">Overpriced or Undervalued?</a></p>
+      </div>
+    </div>
+  </section>
 
-  <div class="case-study">
-    <h3>Grow Smarter, Not Bigger</h3>
-    <p>Find out whether hiring more leads to higher revenue.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/grow-smarter.html">Read More</a>
-  </div>
+  <section class="case-studies-section">
+    <h2 class="section-title">Featured Case Studies</h2>
+    <p class="section-subtitle">Real problems solved with data analysis</p>
+    
+    <div class="case-studies-grid">
+      <div class="case-study">
+        <h3>Beyond the Buzzwords</h3>
+        <p>Discover which jewelry keywords actually deliver clicks and sales.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>Is the Price Right?</h3>
-    <p>Use fair value prediction to decide when to buy, hold, or wait on a stock.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/is-the-price-right.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>Grow Smarter, Not Bigger</h3>
+        <p>Find out whether hiring more leads to higher revenue.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/grow-smarter.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>Overpriced or Undervalued?</h3>
-    <p>Find out if gold is trading below or above fair value.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>Is the Price Right?</h3>
+        <p>Use fair value prediction to decide when to buy, hold, or wait on a stock.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/is-the-price-right.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>Patterns Behind the Price</h3>
-    <p>Learn how Microsoft’s stock price reveals long-term growth patterns and crisis resilience.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/pattern-behind-price.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>Overpriced or Undervalued?</h3>
+        <p>Find out if gold is trading below or above fair value.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>Predicting Product Sales</h3>
-    <p>Find out which advertising channels deliver the most sales per dollar spent.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predict-product-sales.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>Patterns Behind the Price</h3>
+        <p>Learn how Microsoft's stock price reveals long-term growth patterns and crisis resilience.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/pattern-behind-price.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>Trend or Trap?</h3>
-    <p>Decode Google’s sharp price swings to separate hype from trend.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>Predicting Product Sales</h3>
+        <p>Find out which advertising channels deliver the most sales per dollar spent.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predict-product-sales.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>What Men and Women Buy</h3>
-    <p>Explore how gender-specific category preferences can unlock new campaign strategies.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>Trend or Trap?</h3>
+        <p>Decode Google's sharp price swings to separate hype from trend.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>What Sells Best and When</h3>
-    <p>A data-driven guide to improve pizza sales and operations.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-sells-best.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>What Men and Women Buy</h3>
+        <p>Explore how gender-specific category preferences can unlock new campaign strategies.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>When to Buy and Sell Google Stock</h3>
-    <p>Discover how data reveals seasonal and earnings-related price patterns to guide buy/sell decisions.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/when-to-buy-google.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>What Sells Best and When</h3>
+        <p>A data-driven guide to improve pizza sales and operations.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-sells-best.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>Who Stays and Who Leaves?</h3>
-    <p>Discover which locations have the highest customer retention and where marketers should focus.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-stays.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>When to Buy and Sell Google Stock</h3>
+        <p>Discover how data reveals seasonal and earnings-related price patterns to guide buy/sell decisions.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/when-to-buy-google.html">Read More →</a>
+      </div>
 
-  <div class="case-study">
-    <h3>Who’s Likely to Quit</h3>
-    <p>Identify employees at risk of resigning with predictive analytics.</p>
-    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Read More</a>
-  </div>
+      <div class="case-study">
+        <h3>Who Stays and Who Leaves?</h3>
+        <p>Discover which locations have the highest customer retention and where marketers should focus.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-stays.html">Read More →</a>
+      </div>
+
+      <div class="case-study">
+        <h3>Who's Likely to Quit</h3>
+        <p>Identify employees at risk of resigning with predictive analytics.</p>
+        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Read More →</a>
+      </div>
+    </div>
+  </section>
 </div>
 
 <footer>
