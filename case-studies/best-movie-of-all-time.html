@@ -1,134 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Best Movie of All Time | Lee Yih Ven</title>
-  <link rel="stylesheet" href="/data-analyst-portfolio/style.css" />
-</head>
-<body>
-<div class="container">
-  <aside class="left-column">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   The Best Movie of All Time | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
     <header>
-      <h1>Lee Yih Ven</h1>
-      <h2>Data Analytics Portfolio</h2>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
     </header>
     <section class="intro">
-      <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
     </section>
     <section class="contact">
-      <h2>Contact</h2>
-      <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-      <ul>
-        <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-        <li>Phone: +6014-9207099</li>
-      </ul>
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
     </section>
-  </aside>
-
-  <main class="right-column">
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/best-movie-of-all-time-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
     <section class="case-study-content">
-      <header>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/cover%20image.png" alt="Cover Image" style="max-width: 100%; height: auto;" />
-        <h1>The Best Movie of All Time</h1>
-        <p>What the Data Says About the Greatest Movie Ever Made</p>
-      </header>
-
-      <section>
-        <h2>Study Context:</h2>
-        <p>This analysis uses a dataset of the 5,000 highest-rated movies on IMDb, providing details on titles, ratings, genres, directors, and other relevant information. The objective is to identify which genres consistently achieve high ratings, applying confidence interval analysis to assess the reliability of these ratings. The insights gained will help guide content investment, optimize streaming platforms, and enhance marketing strategies for content producers and studios.</p>
-      </section>
-
-      <section>
-        <h2>Overview:</h2>
-        <p>This report examines which movie genres perform consistently well on IMDb, using confidence intervals to measure the reliability of ratings. The analysis aims to provide actionable insights for businesses, enabling data-driven decisions in content production, curation, and marketing. By focusing on high-performing genres, companies can reduce investment risks, optimize catalogs, and align marketing efforts to improve audience satisfaction and ROI.</p>
-      </section>
-
-      <section>
-        <h2>Key Results:</h2>
-        <h3>Which Genres Have the Highest Average IMDb Ratings?</h3>
-        <ul>
-          <li>From the dataset, Western films lead with the highest average IMDb rating of 8.25, followed by Documentaries (7.84), Animation (7.62), and Musicals (7.55). These genres consistently show strong audience appreciation.</li>
-          <li>These genres should be prioritized for content creation and acquisition, as they are likely to resonate strongly with audiences and deliver high viewer engagement.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%201%20-%20mean%20movie%20rating.png" alt="Chart 1" style="max-width: 100%; height: auto;" />
-
-        <h3>Do These Differences Hold Up Statistically?</h3>
-        <ul>
-          <li>The analysis shows that many genres exhibit statistically significant differences in their average ratings. For example, Documentaries and Animation genres exhibit narrow confidence intervals, meaning their high ratings are reliable and consistent across samples. In contrast, genres like Western and Romance have wider confidence intervals, indicating greater variability in audience reception.</li>
-          <li>Genres with narrow, non-overlapping confidence intervals (such as Documentary, Drama, Biography) should be viewed as low-risk, high-reward investments. These genres provide stable returns and are safe bets for content creation and marketing.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%202.png" alt="Chart 2" style="max-width: 100%; height: auto;" />
-
-        <h3>Are There Genres with Narrow, High-Bound Confidence Intervals (Indicating Both High Rating and Consistency)?</h3>
-        <ul>
-          <li>The Documentary, Animation, Biography, Drama, and Crime genres exhibit narrow confidence intervals, indicating that they consistently receive high ratings from audiences. For instance, Documentary has an average rating of 7.84 with a 95% confidence interval of (7.694, 7.982).</li>
-          <li>These genres should be prioritized for long-term investments and strategic content decisions, as their high ratings and consistency ensure that they will continue to appeal to large, loyal audiences over time.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%203.png" alt="Chart 3" style="max-width: 100%; height: auto;" />
-
-        <h3>Are Any Genres Riskier Bets, Showing Wide Confidence Intervals or Inconsistent Ratings?</h3>
-        <ul>
-          <li>Romance and Western genres show wide confidence intervals, indicating greater variability in ratings. For example, Western films have a wide confidence interval of (5.073, 11.427), suggesting that their ratings can vary significantly depending on the movie. Similarly, Romance has an average rating of 7.30 with a confidence interval of (3.488, 11.112), reflecting inconsistent reception across different films.</li>
-          <li>These genres represent higher risk for content investment. While they can deliver strong results, the variability in their reception means they require more careful planning, smaller pilot releases, or further qualitative assessments before committing large resources.</li>
-        </ul>
-        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%204.png" alt="Chart 4" style="max-width: 100%; height: auto;" />
-      </section>
-
-      <section>
-        <h2>Goals Alignment:</h2>
-        <p>This analysis supports the following business objectives:</p>
-        <ul>
-          <li><strong>Maximizing Revenue:</strong> By identifying consistently high-rated genres, streaming platforms and production companies can focus on content that is more likely to achieve strong audience engagement, leading to higher subscription or viewership rates.</li>
-          <li><strong>Cost Reduction:</strong> By avoiding investment in high-risk genres with inconsistent ratings, businesses can minimize wasted resources and focus on genres that offer stable returns.</li>
-          <li><strong>Customer Retention:</strong> Offering a content mix that aligns with audience preferences (based on consistent ratings) will help retain subscribers and keep viewers engaged for longer periods.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Impact:</h2>
-        <ul>
-          <li><strong>Content Strategy Optimization:</strong> The identification of consistently high-rated genres provides a clear roadmap for platforms to build their content library. This will help in attracting and retaining customers.</li>
-          <li><strong>Marketing Strategy Alignment:</strong> Marketing teams can focus on genres with proven success, creating tailored promotional campaigns for high-performing genres, thereby increasing customer satisfaction and conversion.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Data Interpretation:</h2>
-        <ul>
-          <li><strong>Consistently High-Performing Genres:</strong> Documentary, Animation, and Drama consistently perform well because they address broad emotional needs (e.g., education, family entertainment, real-world issues) and cater to diverse audience segments. Their narrow confidence intervals indicate a high level of audience satisfaction that is replicable across different movies.</li>
-          <li><strong>Variability in Romance and Western:</strong> The Romance and Western genres exhibit high variability because they often appeal to more specific or niche audiences. Romance, in particular, may depend on seasonal trends and changing tastes, while Westerns typically attract a dedicated but smaller audience. Their wide confidence intervals suggest that while they can achieve high ratings, they also carry higher uncertainty.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Contextual Factors:</h2>
-        <ul>
-          <li><strong>Cultural Trends and Audience Demand:</strong> The growing popularity of Documentaries reflects an increasing demand for educational content, often aligned with current societal issues. Animation, traditionally appealing to children, has expanded its reach to include adult audiences through a variety of genres and styles, thus maintaining high ratings.</li>
-          <li><strong>Genre Preferences by Demographic:</strong> Romance films tend to be more popular among younger demographics or seasonal audiences, and their performance can fluctuate based on social trends or market conditions. Western films, while beloved by a niche group, are less popular in mainstream viewing, which results in a wider range of ratings.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Recommendation:</h2>
-        <p>Based on these findings, content producers, streaming platforms, and marketing teams should prioritize genres with consistently high ratings, such as Documentary, Animation, Biography, and Drama, while taking a more cautious approach to Romance and Western genres.</p>
-        <ul>
-          <li><strong>Focus on High-Rated Genres:</strong> Streaming services should allocate more resources to acquiring or producing Documentaries, Animation, and Drama. These genres have broad, consistent appeal, making them ideal for long-term content development and strategic positioning.</li>
-          <li><strong>Limit Investment in Riskier Genres:</strong> Romance and Western genres should be tested in smaller batches or pilot projects before committing to large-scale production. These genres have greater variability, so a more targeted investment approach is recommended.</li>
-          <li><strong>Refine Marketing Strategies:</strong> Marketing teams should tailor campaigns based on the genres that have proven successful in reaching large audiences. For example, Documentary and Drama films should be marketed for their educational and emotional appeal, while Romance films can be promoted for their seasonal and targeted audience engagement.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Conclusion:</h2>
-        <p>The analysis of the 5,000 highest-rated IMDb movies reveals that Documentary, Animation, and Drama are the most consistent high performers, with narrow confidence intervals indicating their reliability across different films. These genres should be prioritized for content development and marketing. In contrast, Romance and Western genres, though capable of achieving high ratings, are more inconsistent and present higher investment risks. By aligning content strategies with these insights, businesses can reduce risk, enhance viewer engagement, and maximize revenue.</p>
-      </section>
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/cover%20image.png" style="max-width: 100%; height: auto;"/>
+      <h1>
+       The Best Movie of All Time
+      </h1>
+      <p>
+       What the Data Says About the Greatest Movie Ever Made
+      </p>
+     </header>
+     <section>
+      <h2>
+       Study Context:
+      </h2>
+      <p>
+       This analysis uses a dataset of the 5,000 highest-rated movies on IMDb, providing details on titles, ratings, genres, directors, and other relevant information. The objective is to identify which genres consistently achieve high ratings, applying confidence interval analysis to assess the reliability of these ratings. The insights gained will help guide content investment, optimize streaming platforms, and enhance marketing strategies for content producers and studios.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Overview:
+      </h2>
+      <p>
+       This report examines which movie genres perform consistently well on IMDb, using confidence intervals to measure the reliability of ratings. The analysis aims to provide actionable insights for businesses, enabling data-driven decisions in content production, curation, and marketing. By focusing on high-performing genres, companies can reduce investment risks, optimize catalogs, and align marketing efforts to improve audience satisfaction and ROI.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Results:
+      </h2>
+      <h3>
+       Which Genres Have the Highest Average IMDb Ratings?
+      </h3>
+      <ul>
+       <li>
+        From the dataset, Western films lead with the highest average IMDb rating of 8.25, followed by Documentaries (7.84), Animation (7.62), and Musicals (7.55). These genres consistently show strong audience appreciation.
+       </li>
+       <li>
+        These genres should be prioritized for content creation and acquisition, as they are likely to resonate strongly with audiences and deliver high viewer engagement.
+       </li>
+      </ul>
+      <img alt="Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%201%20-%20mean%20movie%20rating.png" style="max-width: 100%; height: auto;"/>
+      <h3>
+       Do These Differences Hold Up Statistically?
+      </h3>
+      <ul>
+       <li>
+        The analysis shows that many genres exhibit statistically significant differences in their average ratings. For example, Documentaries and Animation genres exhibit narrow confidence intervals, meaning their high ratings are reliable and consistent across samples. In contrast, genres like Western and Romance have wider confidence intervals, indicating greater variability in audience reception.
+       </li>
+       <li>
+        Genres with narrow, non-overlapping confidence intervals (such as Documentary, Drama, Biography) should be viewed as low-risk, high-reward investments. These genres provide stable returns and are safe bets for content creation and marketing.
+       </li>
+      </ul>
+      <img alt="Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%202.png" style="max-width: 100%; height: auto;"/>
+      <h3>
+       Are There Genres with Narrow, High-Bound Confidence Intervals (Indicating Both High Rating and Consistency)?
+      </h3>
+      <ul>
+       <li>
+        The Documentary, Animation, Biography, Drama, and Crime genres exhibit narrow confidence intervals, indicating that they consistently receive high ratings from audiences. For instance, Documentary has an average rating of 7.84 with a 95% confidence interval of (7.694, 7.982).
+       </li>
+       <li>
+        These genres should be prioritized for long-term investments and strategic content decisions, as their high ratings and consistency ensure that they will continue to appeal to large, loyal audiences over time.
+       </li>
+      </ul>
+      <img alt="Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%203.png" style="max-width: 100%; height: auto;"/>
+      <h3>
+       Are Any Genres Riskier Bets, Showing Wide Confidence Intervals or Inconsistent Ratings?
+      </h3>
+      <ul>
+       <li>
+        Romance and Western genres show wide confidence intervals, indicating greater variability in ratings. For example, Western films have a wide confidence interval of (5.073, 11.427), suggesting that their ratings can vary significantly depending on the movie. Similarly, Romance has an average rating of 7.30 with a confidence interval of (3.488, 11.112), reflecting inconsistent reception across different films.
+       </li>
+       <li>
+        These genres represent higher risk for content investment. While they can deliver strong results, the variability in their reception means they require more careful planning, smaller pilot releases, or further qualitative assessments before committing large resources.
+       </li>
+      </ul>
+      <img alt="Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/best-movie-of-all-time/chart%204.png" style="max-width: 100%; height: auto;"/>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment:
+      </h2>
+      <p>
+       This analysis supports the following business objectives:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Maximizing Revenue:
+        </strong>
+        By identifying consistently high-rated genres, streaming platforms and production companies can focus on content that is more likely to achieve strong audience engagement, leading to higher subscription or viewership rates.
+       </li>
+       <li>
+        <strong>
+         Cost Reduction:
+        </strong>
+        By avoiding investment in high-risk genres with inconsistent ratings, businesses can minimize wasted resources and focus on genres that offer stable returns.
+       </li>
+       <li>
+        <strong>
+         Customer Retention:
+        </strong>
+        Offering a content mix that aligns with audience preferences (based on consistent ratings) will help retain subscribers and keep viewers engaged for longer periods.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Content Strategy Optimization:
+        </strong>
+        The identification of consistently high-rated genres provides a clear roadmap for platforms to build their content library. This will help in attracting and retaining customers.
+       </li>
+       <li>
+        <strong>
+         Marketing Strategy Alignment:
+        </strong>
+        Marketing teams can focus on genres with proven success, creating tailored promotional campaigns for high-performing genres, thereby increasing customer satisfaction and conversion.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Consistently High-Performing Genres:
+        </strong>
+        Documentary, Animation, and Drama consistently perform well because they address broad emotional needs (e.g., education, family entertainment, real-world issues) and cater to diverse audience segments. Their narrow confidence intervals indicate a high level of audience satisfaction that is replicable across different movies.
+       </li>
+       <li>
+        <strong>
+         Variability in Romance and Western:
+        </strong>
+        The Romance and Western genres exhibit high variability because they often appeal to more specific or niche audiences. Romance, in particular, may depend on seasonal trends and changing tastes, while Westerns typically attract a dedicated but smaller audience. Their wide confidence intervals suggest that while they can achieve high ratings, they also carry higher uncertainty.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Cultural Trends and Audience Demand:
+        </strong>
+        The growing popularity of Documentaries reflects an increasing demand for educational content, often aligned with current societal issues. Animation, traditionally appealing to children, has expanded its reach to include adult audiences through a variety of genres and styles, thus maintaining high ratings.
+       </li>
+       <li>
+        <strong>
+         Genre Preferences by Demographic:
+        </strong>
+        Romance films tend to be more popular among younger demographics or seasonal audiences, and their performance can fluctuate based on social trends or market conditions. Western films, while beloved by a niche group, are less popular in mainstream viewing, which results in a wider range of ratings.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendation:
+      </h2>
+      <p>
+       Based on these findings, content producers, streaming platforms, and marketing teams should prioritize genres with consistently high ratings, such as Documentary, Animation, Biography, and Drama, while taking a more cautious approach to Romance and Western genres.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Focus on High-Rated Genres:
+        </strong>
+        Streaming services should allocate more resources to acquiring or producing Documentaries, Animation, and Drama. These genres have broad, consistent appeal, making them ideal for long-term content development and strategic positioning.
+       </li>
+       <li>
+        <strong>
+         Limit Investment in Riskier Genres:
+        </strong>
+        Romance and Western genres should be tested in smaller batches or pilot projects before committing to large-scale production. These genres have greater variability, so a more targeted investment approach is recommended.
+       </li>
+       <li>
+        <strong>
+         Refine Marketing Strategies:
+        </strong>
+        Marketing teams should tailor campaigns based on the genres that have proven successful in reaching large audiences. For example, Documentary and Drama films should be marketed for their educational and emotional appeal, while Romance films can be promoted for their seasonal and targeted audience engagement.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion:
+      </h2>
+      <p>
+       The analysis of the 5,000 highest-rated IMDb movies reveals that Documentary, Animation, and Drama are the most consistent high performers, with narrow confidence intervals indicating their reliability across different films. These genres should be prioritized for content development and marketing. In contrast, Romance and Western genres, though capable of achieving high ratings, are more inconsistent and present higher investment risks. By aligning content strategies with these insights, businesses can reduce risk, enhance viewer engagement, and maximize revenue.
+      </p>
+     </section>
     </section>
-  </main>
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
-</body>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Pinnacles Learning Solutions
+   </p>
+  </footer>
+ </body>
 </html>

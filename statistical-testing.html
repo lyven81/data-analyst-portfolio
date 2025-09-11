@@ -79,6 +79,29 @@
         td a:hover {
             text-decoration: underline;
         }
+        .case-study-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .case-study-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f5f5dc;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .case-study-links a:hover {
+            background-color: #daa520;
+            color: white;
+            border-color: #daa520;
+            transform: translateY(-1px);
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -118,6 +141,13 @@
             .tagline {
                 font-size: 1rem;
             }
+            .case-study-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .case-study-links a {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -141,30 +171,126 @@
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Cash or Credit Card - Payment Method Impact</a></h3>
                     <p>Exploring how payment methods influence customer spending through hypothesis testing and statistical analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/cash-or-credit-card-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/why-every-class-counts.html">Why Every Class Counts - Attendance vs Performance</a></h3>
                     <p>Demonstrate correlation between attendance and academic performance using statistical hypothesis testing.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/why-every-class-counts.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/why-every-class-counts-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/connected-or-disconnected.html">Connected or Disconnected? - Social Media Impact</a></h3>
                     <p>Examine social media's effect on student relationships using statistical testing and behavioral analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/connected-or-disconnected.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/connected-or-disconnected-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/hotel-sleep-analysis.html">Did You Sleep Well Last Night? - Guest Satisfaction</a></h3>
                     <p>Evaluating guest sleep quality to improve satisfaction using statistical testing and hospitality metrics.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/hotel-sleep-analysis.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/hotel-sleep-analysis-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/east-coast-alert.html">East Coast Alert - Crime Probability Analysis</a></h3>
                     <p>Investigate sex crime probabilities across states using statistical analysis and risk assessment methodologies.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/east-coast-alert.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/east-coast-alert-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/best-movie-of-all-time.html">The Best Movie of All Time - Genre Analysis</a></h3>
                     <p>Analyzing top IMDb movie genres using statistical distribution analysis and ranking methodologies.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/best-movie-of-all-time.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/best-movie-of-all-time-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Analyzing Ads - Innerwear Campaign</a></h3>
+                    <p>A/B testing framework for intimate apparel advertising effectiveness using statistical significance testing.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/analyzing-ads-innerwear.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/analyzing-ads-innerwear-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Are Tunics Truly the Top Seller?</a></h3>
+                    <p>Fashion retail hypothesis testing using t-tests and ANOVA to validate product performance claims.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/are-tunics-best-sellers-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/evaluate-discount-voucher-women-lingerie.html">Evaluating Discount Vouchers - Women's Lingerie</a></h3>
+                    <p>Promotion effectiveness testing using chi-square and proportion tests for lingerie retail campaigns.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/evaluate-discount-voucher-women-lingerie.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/evaluate-discount-voucher-women-lingerie-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Nasi Lemak vs Kopi-O Preference Analysis</a></h3>
+                    <p>Malaysian food preference study using statistical testing to understand cultural dining patterns.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/nasi-lemak-kopi-o-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/sentiment-analysis-jewelry-product-reviews.html">Sentiment Analysis - Jewelry Product Reviews</a></h3>
+                    <p>Natural language processing with statistical validation for jewelry e-commerce review analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/sentiment-analysis-jewelry-product-reviews.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/sentiment-analysis-jewelry-product-reviews-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/video-game-sales-trend-analysis.html">Video Game Sales Trend Analysis</a></h3>
+                    <p>Gaming industry trend analysis using Mann-Whitney U tests and seasonal significance testing.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/video-game-sales-trend-analysis.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/video-game-sales-trend-analysis-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">What Makes a Song Go Viral?</a></h3>
+                    <p>Music industry analytics using correlation analysis and significance testing for viral content factors.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/what-makes-a-song-go-viral-dashboard.html">View Dashboard</a>
+                    </div>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Working Hours Analysis - Footwear Shop</a></h3>
+                    <p>Retail operations optimization using ANOVA and post-hoc testing for staff scheduling effectiveness.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/working-hours-analysis-footwear-shop.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/working-hours-analysis-footwear-shop-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
         </table>

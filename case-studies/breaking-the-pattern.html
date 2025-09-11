@@ -1,135 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Breaking the Pattern | Case Study</title>
-  <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Breaking the Pattern | Case Study
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
   <div class="container">
-
-    <aside class="left-column">
-      <header>
-        <h1>Lee Yih Ven</h1>
-        <h2>Data Analytics Portfolio</h2>
-      </header>
-
-      <section class="intro">
-        <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-      </section>
-
-      <section class="contact">
-        <h2>Contact</h2>
-        <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-        <ul>
-          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-          <li>Phone: +6014-9207099</li>
-        </ul>
-      </section>
-    </aside>
-
-    <main class="right-column">
-      <section class="case-study-content">
-        <header>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/cover%20images.png" alt="Cover Image">
-          <h1>Breaking the Pattern</h1>
-          <p>Investigating Airline On-Time Performance Declines in 2022</p>
-        </header>
-
-        <section>
-          <h2>Overview</h2>
-          <p>This analysis investigates airline on-time performance trends from 2004 to 2025, with a focus on identifying when and where punctuality faltered most. The primary challenge addressed is operational inefficiency in 2022, as measured by falling departure and arrival on-time rates. This study aims to help Airline Operations Managers detect systemic issues, anticipate performance dips, and better manage scheduling and resource planning.</p>
-        </section>
-
-        <section>
-          <h2>Key Results</h2>
-
-          <h3>1. Which year recorded the lowest average on-time departure and arrival rates?</h3>
-          <ul>
-            <li>2022 had the lowest airline punctuality on record, with a departure on-time rate of 66.96% and an arrival on-time rate of 68.03%, marking a clear deviation from historical norms between 2004 and 2025.</li>
-            <li>Visual analysis confirmed 2022 as the worst-performing year, with the year highlighted in red and positioned far left in bar charts, clearly below all other years in on-time performance.</li>
-          </ul>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20arrival%20on%20time%20rate.png" alt="Arrival On Time Rate Chart">
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20departure%20on%20time%20rate.png" alt="Departure On Time Rate Chart">
-
-          <h3>2. What are the monthly trends in on-time departures and arrivals in 2022?</h3>
-          <ul>
-            <li>On-time performance declined sharply in the first half of 2022, hitting a low in July with departure and arrival on-time rates of 51.46% and 53.04% respectively, reflecting peak operational strain.</li>
-            <li>Performance began recovering from August, ending the year in December with rates of 69.77% for departures and 70.30% for arrivals—still below the typical 80% industry benchmark.</li>
-          </ul>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%201.png" alt="Monthly Departure On-Time Rate Chart">
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%202.png" alt="Monthly Arrival On-Time Rate Chart">
-
-          <h3>3. Are there specific months associated with high delay rates in 2022?</h3>
-          <ul>
-            <li>July was the peak month for delays in 2022, with a departure delay rate of 48.54% and arrival delay rate of 46.96%, followed closely by June (41.49% and 39.76%) and August (37.24% and 35.06%).</li>
-            <li>A sustained rise in delays from March to July indicates a clear mid-year operational stress period, reinforcing the need for targeted planning during these high-risk months.</li>
-          </ul>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%201.png" alt="Delay Rates Chart 1">
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%202.png" alt="Delay Rates Chart 2">
-
-          <h3>4. Which routes or airports consistently experience delays?</h3>
-          <ul>
-            <li>The Melbourne–Sydney and Sydney–Melbourne routes had the lowest schedule fulfillment in 2022, both at 89.09%, while Canberra–Sydney and Sydney–Canberra followed at around 92.5%, indicating repeated delays on high-traffic corridors.</li>
-            <li>Sydney Airport appeared in 7 of the 10 most delayed routes, and Melbourne in 4, highlighting persistent congestion and scheduling inefficiencies at these major hubs.</li>
-          </ul>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%204%20-%20bar%20chart.png" alt="Schedule Fulfillment Chart">
-
-          <h3>5. Is there a mismatch between scheduled vs. actual sectors flown in 2022?</h3>
-          <ul>
-            <li>Schedule fulfillment remained consistently high in 2022, with most months exceeding 95% and the lowest at 90.86% in January—well above the common 90% alert threshold.</li>
-            <li>Even during peak delay periods from April to July, fulfillment rates stayed above 94.6%, indicating that delays were due to timing inefficiencies, not cancellations or missed operations.</li>
-          </ul>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%203%20-%20line%20chart.png" alt="Route Delay Chart">
-
-          <h3>6. Are there early warning signals of operational stress in 2022?</h3>
-          <ul>
-            <li>Between April and July 2022, departure delay rates surged from 38.53% to 48.54%, while on-time performance fell to a low of 51.46%, signaling a period of significant operational stress well below the 70% industry threshold.</li>
-            <li>Despite elevated delays through November, schedule fulfillment stayed above 94%, confirming that flights continued as scheduled but faced severe punctuality issues, highlighting the need for early detection and mitigation planning.</li>
-          </ul>
-          <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%205%20-%20bar%20chart.png" alt="Operational Stress Chart">
-        </section>
-
-        <section>
-          <h2>Goals Alignment</h2>
-          <p>The identified trends directly relate to the airline's goal of maximizing operational efficiency by maintaining high on-time performance. Discovering that 2022 saw such significant performance declines, especially on core high-traffic routes, underscores the need for strategic adjustments.</p>
-        </section>
-
-        <section>
-          <h2>Impact</h2>
-          <p>Understanding which months and routes are most susceptible to delays allows operations managers to proactively allocate resources, adjust staffing, and fine-tune fleet scheduling. The data also helps support compliance with industry benchmarks and enhances the passenger experience by minimizing disruptions.</p>
-        </section>
-
-        <section>
-          <h2>Data Interpretation</h2>
-          <p>The steep decline in performance from April to July 2022 suggests that internal operational stress coincided with external demand surges. Delay rates exceeded 48% in July, while on-time rates dipped below 60%, a signal of compounding inefficiencies. Despite these challenges, flights were still being flown as scheduled, confirming that core operations continued but with reduced efficiency.</p>
-        </section>
-
-        <section>
-          <h2>Contextual Factors</h2>
-          <p>This mid-year operational strain likely stems from a combination of seasonal peaks, staffing shortages, or airport congestion, particularly at major hubs like Sydney and Melbourne. Recovery trends from August to December suggest that mitigating actions may have been taken late in the year but were insufficient to fully restore historical performance levels.</p>
-        </section>
-
-        <section>
-          <h2>Recommendation</h2>
-          <p>The sharp dip and delayed recovery in punctuality highlight the importance of early detection and proactive mitigation. High-risk periods, particularly mid-year, require tighter scheduling control, more flexible staffing models, and better route-specific performance monitoring.</p>
-          <p>Operations teams should implement early warning systems that flag rising delay rates by route and month. Additional investment in crew management systems and AI-powered schedule optimizers may help preempt future performance dips. Focused efforts to decongest Sydney and Melbourne corridors—through schedule staggering or backup aircraft planning—could also alleviate peak-period stress.</p>
-        </section>
-
-        <section>
-          <h2>Conclusion</h2>
-          <p>The analysis confirms that 2022 represented a critical deviation from historical punctuality patterns, especially during the April–July window. While operational stress did not prevent flights from being fulfilled, it significantly affected timing reliability. Moving forward, the airline can make data-driven decisions to address route-specific bottlenecks, optimize peak-period performance, and restore service consistency across its network.</p>
-        </section>
-
-      </section>
-    </main>
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/breaking-the-pattern-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/cover%20images.png"/>
+      <h1>
+       Breaking the Pattern
+      </h1>
+      <p>
+       Investigating Airline On-Time Performance Declines in 2022
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis investigates airline on-time performance trends from 2004 to 2025, with a focus on identifying when and where punctuality faltered most. The primary challenge addressed is operational inefficiency in 2022, as measured by falling departure and arrival on-time rates. This study aims to help Airline Operations Managers detect systemic issues, anticipate performance dips, and better manage scheduling and resource planning.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Results
+      </h2>
+      <h3>
+       1. Which year recorded the lowest average on-time departure and arrival rates?
+      </h3>
+      <ul>
+       <li>
+        2022 had the lowest airline punctuality on record, with a departure on-time rate of 66.96% and an arrival on-time rate of 68.03%, marking a clear deviation from historical norms between 2004 and 2025.
+       </li>
+       <li>
+        Visual analysis confirmed 2022 as the worst-performing year, with the year highlighted in red and positioned far left in bar charts, clearly below all other years in on-time performance.
+       </li>
+      </ul>
+      <img alt="Arrival On Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20arrival%20on%20time%20rate.png"/>
+      <img alt="Departure On Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20departure%20on%20time%20rate.png"/>
+      <h3>
+       2. What are the monthly trends in on-time departures and arrivals in 2022?
+      </h3>
+      <ul>
+       <li>
+        On-time performance declined sharply in the first half of 2022, hitting a low in July with departure and arrival on-time rates of 51.46% and 53.04% respectively, reflecting peak operational strain.
+       </li>
+       <li>
+        Performance began recovering from August, ending the year in December with rates of 69.77% for departures and 70.30% for arrivals—still below the typical 80% industry benchmark.
+       </li>
+      </ul>
+      <img alt="Monthly Departure On-Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%201.png"/>
+      <img alt="Monthly Arrival On-Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%202.png"/>
+      <h3>
+       3. Are there specific months associated with high delay rates in 2022?
+      </h3>
+      <ul>
+       <li>
+        July was the peak month for delays in 2022, with a departure delay rate of 48.54% and arrival delay rate of 46.96%, followed closely by June (41.49% and 39.76%) and August (37.24% and 35.06%).
+       </li>
+       <li>
+        A sustained rise in delays from March to July indicates a clear mid-year operational stress period, reinforcing the need for targeted planning during these high-risk months.
+       </li>
+      </ul>
+      <img alt="Delay Rates Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%201.png"/>
+      <img alt="Delay Rates Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%202.png"/>
+      <h3>
+       4. Which routes or airports consistently experience delays?
+      </h3>
+      <ul>
+       <li>
+        The Melbourne–Sydney and Sydney–Melbourne routes had the lowest schedule fulfillment in 2022, both at 89.09%, while Canberra–Sydney and Sydney–Canberra followed at around 92.5%, indicating repeated delays on high-traffic corridors.
+       </li>
+       <li>
+        Sydney Airport appeared in 7 of the 10 most delayed routes, and Melbourne in 4, highlighting persistent congestion and scheduling inefficiencies at these major hubs.
+       </li>
+      </ul>
+      <img alt="Schedule Fulfillment Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%204%20-%20bar%20chart.png"/>
+      <h3>
+       5. Is there a mismatch between scheduled vs. actual sectors flown in 2022?
+      </h3>
+      <ul>
+       <li>
+        Schedule fulfillment remained consistently high in 2022, with most months exceeding 95% and the lowest at 90.86% in January—well above the common 90% alert threshold.
+       </li>
+       <li>
+        Even during peak delay periods from April to July, fulfillment rates stayed above 94.6%, indicating that delays were due to timing inefficiencies, not cancellations or missed operations.
+       </li>
+      </ul>
+      <img alt="Route Delay Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%203%20-%20line%20chart.png"/>
+      <h3>
+       6. Are there early warning signals of operational stress in 2022?
+      </h3>
+      <ul>
+       <li>
+        Between April and July 2022, departure delay rates surged from 38.53% to 48.54%, while on-time performance fell to a low of 51.46%, signaling a period of significant operational stress well below the 70% industry threshold.
+       </li>
+       <li>
+        Despite elevated delays through November, schedule fulfillment stayed above 94%, confirming that flights continued as scheduled but faced severe punctuality issues, highlighting the need for early detection and mitigation planning.
+       </li>
+      </ul>
+      <img alt="Operational Stress Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%205%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment
+      </h2>
+      <p>
+       The identified trends directly relate to the airline's goal of maximizing operational efficiency by maintaining high on-time performance. Discovering that 2022 saw such significant performance declines, especially on core high-traffic routes, underscores the need for strategic adjustments.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Impact
+      </h2>
+      <p>
+       Understanding which months and routes are most susceptible to delays allows operations managers to proactively allocate resources, adjust staffing, and fine-tune fleet scheduling. The data also helps support compliance with industry benchmarks and enhances the passenger experience by minimizing disruptions.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation
+      </h2>
+      <p>
+       The steep decline in performance from April to July 2022 suggests that internal operational stress coincided with external demand surges. Delay rates exceeded 48% in July, while on-time rates dipped below 60%, a signal of compounding inefficiencies. Despite these challenges, flights were still being flown as scheduled, confirming that core operations continued but with reduced efficiency.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors
+      </h2>
+      <p>
+       This mid-year operational strain likely stems from a combination of seasonal peaks, staffing shortages, or airport congestion, particularly at major hubs like Sydney and Melbourne. Recovery trends from August to December suggest that mitigating actions may have been taken late in the year but were insufficient to fully restore historical performance levels.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendation
+      </h2>
+      <p>
+       The sharp dip and delayed recovery in punctuality highlight the importance of early detection and proactive mitigation. High-risk periods, particularly mid-year, require tighter scheduling control, more flexible staffing models, and better route-specific performance monitoring.
+      </p>
+      <p>
+       Operations teams should implement early warning systems that flag rising delay rates by route and month. Additional investment in crew management systems and AI-powered schedule optimizers may help preempt future performance dips. Focused efforts to decongest Sydney and Melbourne corridors—through schedule staggering or backup aircraft planning—could also alleviate peak-period stress.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis confirms that 2022 represented a critical deviation from historical punctuality patterns, especially during the April–July window. While operational stress did not prevent flights from being fulfilled, it significantly affected timing reliability. Moving forward, the airline can make data-driven decisions to address route-specific bottlenecks, optimize peak-period performance, and restore service consistency across its network.
+      </p>
+     </section>
+    </section>
+   </main>
   </div>
-
   <footer>
-    <p>&copy; 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+   <p>
+    © 2025 Lee Yih Ven | Pinnacles Learning Solutions
+   </p>
   </footer>
-
-</body>
+ </body>
 </html>

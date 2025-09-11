@@ -67,6 +67,58 @@ body {
     text-overflow: ellipsis;
 }
 
+/* Home Link Button */
+.home-link-section {
+    margin: 20px 0;
+}
+
+.home-link-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f5f5dc;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.home-link-btn:hover {
+    background-color: #daa520;
+    color: white;
+    border-color: #daa520;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(218, 165, 32, 0.3);
+}
+
+/* Dashboard Link Button */
+.dashboard-link-section {
+    margin: 20px 0;
+}
+
+.dashboard-link-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f5f5dc;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.dashboard-link-btn:hover {
+    background-color: #daa520;
+    color: white;
+    border-color: #daa520;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(218, 165, 32, 0.3);
+}
+
 /* Case Study Section */
 .case-studies {
     margin-bottom: 30px;
@@ -263,6 +315,33 @@ nav a:hover {
 
 .case-link:hover {
     text-decoration: underline;
+}
+
+/* Home page dashboard links styling */
+.case-study-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.case-study-links a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f5f5dc;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.case-study-links a:hover {
+    background-color: #daa520;
+    color: white;
+    border-color: #daa520;
+    transform: translateY(-1px);
 }
 
 /* Category-specific styles */

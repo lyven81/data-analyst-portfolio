@@ -1,143 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>When Good Cars Lose Value | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/cover%20image.png" alt="Cover Image" style="max-width: 100%; height: auto;">
-                    <h1>When Good Cars Lose Value</h1>
-                    <p>Uncover the hidden risks of mileage and condition to prevent losses and make smarter vehicle pricing decisions.</p>
-                </header>
-
-                <section>
-                    <h2>Overview:</h2>
-                    <p>This analysis aims to identify the key factors contributing to vehicles being sold below their expected market price (MMR), focusing on the interplay between vehicle condition and mileage. The objective is to improve pricing strategies, optimize maintenance and inventory management, and reduce the financial loss associated with undervalued vehicles.</p>
-                </section>
-
-                <section>
-                    <h2>Key Results:</h2>
-                    <ul>
-                        <li><strong>Underperforming Combinations of Mileage and Condition:</strong>
-                            <ul>
-                                <li><strong>Medium Condition Vehicles:</strong> Across all mileage groups, medium condition vehicles are most likely to sell below MMR, with over 750 vehicles in the >100K mileage group underperforming in this category.</li>
-                                <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%201%20How%20Do%20Mileage%20and%20Condition%20Affect%20Cars%20Selling%20Below%20Market%20Value_.png" alt="Chart 1" style="max-width: 100%; height: auto;"></li>
-                                <li><strong>Mileage Threshold Impact:</strong>
-                                    <ul>
-                                        <li>>100K Mileage Group consistently shows the largest average price loss, highlighting that high mileage significantly depresses vehicle resale value.</li>
-                                        <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%202%20Impact%20of%20mileaege%20on%20car%20resale%20value.png" alt="Chart 2" style="max-width: 100%; height: auto;"></li>
-                                        <li>A threshold of 8,145 miles was identified as the point where resale values begin to drop, even for vehicles in good condition.</li>
-                                        <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%202.1%208%2C145%20Miles_%20The%20Threshold%20Above%20Which%20Vehicle%20Value%20Drops%2C%20Even%20in%20Good%20Condition.png" alt="Chart 2.1" style="max-width: 100%; height: auto;"></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><strong>Condition Overvaluation in the Market:</strong>
-                            <ul>
-                                <li>Surprisingly, vehicles in High Condition show the largest average price loss when sold below MMR, suggesting that buyers are not willing to pay a premium for high-condition vehicles or that sellers are overpricing them.</li>
-                                <li>Medium and Low Condition Vehicles appear to perform better relative to their MMR, indicating a potential market perception gap.</li>
-                                <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%203%20Impact%20of%20condition%20score%20on%20selling%20below%20market%20value.png" alt="Chart 3" style="max-width: 100%; height: auto;"></li>
-                            </ul>
-                        </li>
-                        <li><strong>Average Loss or Gain Across Segments:</strong>
-                            <ul>
-                                <li>High Condition + >100K Mileage Segment shows the largest loss (~$1,000), indicating that even well-maintained high-mileage vehicles are risky to sell at market value.</li>
-                                <li>Moderate Mileage Groups (25K-50K, 50K-100K) show smaller losses, suggesting these segments are more resilient to price drops.</li>
-                                <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%204%20How%20Mileage%20and%20Condition%20Affect%20Car%20Pricing_.png" alt="Chart 4" style="max-width: 100%; height: auto;"></li>
-                            </ul>
-                        </li>
-                        <li><strong>Make/Model Patterns in High-Risk Groups:</strong> Certain vehicle models consistently underperform in resale. For instance, Audi A4 has the highest average loss of $13,800 when sold below MMR, followed by other brands like Chevrolet, Ford, Nissan, and Land Rover. This indicates brand-specific risks and potential mismatches in market expectations.</li>
-                        <li><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%205%20Audi%20A4%20Is%20Most%20Likely%20to%20Sell%20Below%20Market%20Price.png" alt="Chart 5" style="max-width: 100%; height: auto;"></li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Goals Alignment:</h2>
-                    <p>The key business goals are to optimize pricing, minimize loss, and maximize resale value. The results from this analysis align with these goals by:</p>
-                    <ul>
-                        <li><strong>Identifying Risk Segments:</strong> The findings clearly highlight the combinations of mileage and condition that consistently lead to underperforming vehicles. By focusing on these segments, the company can refine pricing strategies and target vehicles at risk of underpricing.</li>
-                        <li><strong>Optimizing Pricing Decisions:</strong> Understanding the impact of mileage and condition on resale value will allow the company to set more accurate market prices and adjust pricing expectations for different vehicle conditions.</li>
-                        <li><strong>Improving Inventory Management and Maintenance:</strong> By identifying which vehicles are more likely to sell below MMR (e.g., high mileage, medium condition), the company can prioritize maintenance and reconditioning efforts on those vehicles to maximize resale value.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Impact:</h2>
-                    <ul>
-                        <li><strong>Revenue Maximization:</strong> The insights into risk segments and the mileage threshold will help in optimizing when to sell vehicles. This can prevent undervaluation and improve profit margins on each transaction.</li>
-                        <li><strong>Operational Efficiency:</strong> Understanding the relationship between mileage, condition, and pricing enables better planning for inventory and maintenance.</li>
-                        <li><strong>Customer Satisfaction:</strong> Accurate pricing aligned with market expectations will increase the likelihood of a successful sale and improve customer satisfaction.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Data Interpretation:</h2>
-                    <ul>
-                        <li><strong>Mileage and Condition Impact on Resale Value:</strong> Medium condition vehicles, especially those with >100K miles, face significant challenges in achieving their expected resale value.</li>
-                        <li><strong>Threshold for Value Decline:</strong> The 8,145-mile threshold is a critical finding indicating when resale value begins to dip for vehicles in good condition.</li>
-                        <li><strong>Overvaluation of High Condition Vehicles:</strong> High-condition vehicles appear to be overvalued relative to market demand.</li>
-                        <li><strong>Brand/Model Specific Risks:</strong> Certain brands and models, such as Audi A4, show consistent underperformance in terms of resale value.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Contextual Factors:</h2>
-                    <ul>
-                        <li><strong>Market Trends:</strong> High mileage continues to negatively impact resale value across the industry.</li>
-                        <li><strong>Economic Factors:</strong> Downturns or fuel price changes affect resale potential for high-mileage vehicles.</li>
-                        <li><strong>Consumer Preferences:</strong> Shifting buyer preferences can create pricing mismatches for certain makes and models.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Recommendations:</h2>
-                    <ul>
-                        <li><strong>Refine Pricing Strategy for High Mileage Vehicles:</strong> Price >100K mileage vehicles strategically before they pass the 8,145-mile threshold.</li>
-                        <li><strong>Targeted Reconditioning and Maintenance:</strong> Focus on improving medium-condition, high-mileage vehicles to increase their resale value.</li>
-                        <li><strong>Adjust Pricing for High-Condition Vehicles:</strong> Reassess pricing strategies and consider competitive offers to align with market expectations.</li>
-                        <li><strong>Brand/Model-Specific Strategy:</strong> Adjust acquisition and pricing decisions based on consistently underperforming models like the Audi A4.</li>
-                        <li><strong>Promote Vehicles Close to the Mileage Threshold:</strong> Use targeted campaigns to sell vehicles before passing the depreciation threshold.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Conclusion:</h2>
-                    <p>This analysis provides actionable insights that will help the company optimize its pricing, maintenance, and inventory strategies. By focusing on risk segments, understanding the critical mileage threshold, and adjusting pricing for overvalued high-condition vehicles, the business can improve profitability and reduce financial loss. Data-driven decisions based on these findings will ensure better inventory management and sales performance moving forward.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   When Good Cars Lose Value | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/when-good-cars-lose-value-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/cover%20image.png" style="max-width: 100%; height: auto;"/>
+      <h1>
+       When Good Cars Lose Value
+      </h1>
+      <p>
+       Uncover the hidden risks of mileage and condition to prevent losses and make smarter vehicle pricing decisions.
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview:
+      </h2>
+      <p>
+       This analysis aims to identify the key factors contributing to vehicles being sold below their expected market price (MMR), focusing on the interplay between vehicle condition and mileage. The objective is to improve pricing strategies, optimize maintenance and inventory management, and reduce the financial loss associated with undervalued vehicles.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Results:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Underperforming Combinations of Mileage and Condition:
+        </strong>
+        <ul>
+         <li>
+          <strong>
+           Medium Condition Vehicles:
+          </strong>
+          Across all mileage groups, medium condition vehicles are most likely to sell below MMR, with over 750 vehicles in the &gt;100K mileage group underperforming in this category.
+         </li>
+         <li>
+          <img alt="Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%201%20How%20Do%20Mileage%20and%20Condition%20Affect%20Cars%20Selling%20Below%20Market%20Value_.png" style="max-width: 100%; height: auto;"/>
+         </li>
+         <li>
+          <strong>
+           Mileage Threshold Impact:
+          </strong>
+          <ul>
+           <li>
+            &gt;100K Mileage Group consistently shows the largest average price loss, highlighting that high mileage significantly depresses vehicle resale value.
+           </li>
+           <li>
+            <img alt="Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%202%20Impact%20of%20mileaege%20on%20car%20resale%20value.png" style="max-width: 100%; height: auto;"/>
+           </li>
+           <li>
+            A threshold of 8,145 miles was identified as the point where resale values begin to drop, even for vehicles in good condition.
+           </li>
+           <li>
+            <img alt="Chart 2.1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%202.1%208%2C145%20Miles_%20The%20Threshold%20Above%20Which%20Vehicle%20Value%20Drops%2C%20Even%20in%20Good%20Condition.png" style="max-width: 100%; height: auto;"/>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Condition Overvaluation in the Market:
+        </strong>
+        <ul>
+         <li>
+          Surprisingly, vehicles in High Condition show the largest average price loss when sold below MMR, suggesting that buyers are not willing to pay a premium for high-condition vehicles or that sellers are overpricing them.
+         </li>
+         <li>
+          Medium and Low Condition Vehicles appear to perform better relative to their MMR, indicating a potential market perception gap.
+         </li>
+         <li>
+          <img alt="Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%203%20Impact%20of%20condition%20score%20on%20selling%20below%20market%20value.png" style="max-width: 100%; height: auto;"/>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Average Loss or Gain Across Segments:
+        </strong>
+        <ul>
+         <li>
+          High Condition + &gt;100K Mileage Segment shows the largest loss (~$1,000), indicating that even well-maintained high-mileage vehicles are risky to sell at market value.
+         </li>
+         <li>
+          Moderate Mileage Groups (25K-50K, 50K-100K) show smaller losses, suggesting these segments are more resilient to price drops.
+         </li>
+         <li>
+          <img alt="Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%204%20How%20Mileage%20and%20Condition%20Affect%20Car%20Pricing_.png" style="max-width: 100%; height: auto;"/>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         Make/Model Patterns in High-Risk Groups:
+        </strong>
+        Certain vehicle models consistently underperform in resale. For instance, Audi A4 has the highest average loss of $13,800 when sold below MMR, followed by other brands like Chevrolet, Ford, Nissan, and Land Rover. This indicates brand-specific risks and potential mismatches in market expectations.
+       </li>
+       <li>
+        <img alt="Chart 5" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-good-cars-lose-value/Chart%205%20Audi%20A4%20Is%20Most%20Likely%20to%20Sell%20Below%20Market%20Price.png" style="max-width: 100%; height: auto;"/>
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment:
+      </h2>
+      <p>
+       The key business goals are to optimize pricing, minimize loss, and maximize resale value. The results from this analysis align with these goals by:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Identifying Risk Segments:
+        </strong>
+        The findings clearly highlight the combinations of mileage and condition that consistently lead to underperforming vehicles. By focusing on these segments, the company can refine pricing strategies and target vehicles at risk of underpricing.
+       </li>
+       <li>
+        <strong>
+         Optimizing Pricing Decisions:
+        </strong>
+        Understanding the impact of mileage and condition on resale value will allow the company to set more accurate market prices and adjust pricing expectations for different vehicle conditions.
+       </li>
+       <li>
+        <strong>
+         Improving Inventory Management and Maintenance:
+        </strong>
+        By identifying which vehicles are more likely to sell below MMR (e.g., high mileage, medium condition), the company can prioritize maintenance and reconditioning efforts on those vehicles to maximize resale value.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Revenue Maximization:
+        </strong>
+        The insights into risk segments and the mileage threshold will help in optimizing when to sell vehicles. This can prevent undervaluation and improve profit margins on each transaction.
+       </li>
+       <li>
+        <strong>
+         Operational Efficiency:
+        </strong>
+        Understanding the relationship between mileage, condition, and pricing enables better planning for inventory and maintenance.
+       </li>
+       <li>
+        <strong>
+         Customer Satisfaction:
+        </strong>
+        Accurate pricing aligned with market expectations will increase the likelihood of a successful sale and improve customer satisfaction.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Mileage and Condition Impact on Resale Value:
+        </strong>
+        Medium condition vehicles, especially those with &gt;100K miles, face significant challenges in achieving their expected resale value.
+       </li>
+       <li>
+        <strong>
+         Threshold for Value Decline:
+        </strong>
+        The 8,145-mile threshold is a critical finding indicating when resale value begins to dip for vehicles in good condition.
+       </li>
+       <li>
+        <strong>
+         Overvaluation of High Condition Vehicles:
+        </strong>
+        High-condition vehicles appear to be overvalued relative to market demand.
+       </li>
+       <li>
+        <strong>
+         Brand/Model Specific Risks:
+        </strong>
+        Certain brands and models, such as Audi A4, show consistent underperformance in terms of resale value.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Market Trends:
+        </strong>
+        High mileage continues to negatively impact resale value across the industry.
+       </li>
+       <li>
+        <strong>
+         Economic Factors:
+        </strong>
+        Downturns or fuel price changes affect resale potential for high-mileage vehicles.
+       </li>
+       <li>
+        <strong>
+         Consumer Preferences:
+        </strong>
+        Shifting buyer preferences can create pricing mismatches for certain makes and models.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendations:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Refine Pricing Strategy for High Mileage Vehicles:
+        </strong>
+        Price &gt;100K mileage vehicles strategically before they pass the 8,145-mile threshold.
+       </li>
+       <li>
+        <strong>
+         Targeted Reconditioning and Maintenance:
+        </strong>
+        Focus on improving medium-condition, high-mileage vehicles to increase their resale value.
+       </li>
+       <li>
+        <strong>
+         Adjust Pricing for High-Condition Vehicles:
+        </strong>
+        Reassess pricing strategies and consider competitive offers to align with market expectations.
+       </li>
+       <li>
+        <strong>
+         Brand/Model-Specific Strategy:
+        </strong>
+        Adjust acquisition and pricing decisions based on consistently underperforming models like the Audi A4.
+       </li>
+       <li>
+        <strong>
+         Promote Vehicles Close to the Mileage Threshold:
+        </strong>
+        Use targeted campaigns to sell vehicles before passing the depreciation threshold.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion:
+      </h2>
+      <p>
+       This analysis provides actionable insights that will help the company optimize its pricing, maintenance, and inventory strategies. By focusing on risk segments, understanding the critical mileage threshold, and adjusting pricing for overvalued high-condition vehicles, the business can improve profitability and reduce financial loss. Data-driven decisions based on these findings will ensure better inventory management and sales performance moving forward.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2024 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

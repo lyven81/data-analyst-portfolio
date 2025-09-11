@@ -1,126 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Why Every Class Counts | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/why-every-class-counts/cover%20image.png" alt="Cover Image">
-                    <h1>Why Every Class Counts</h1>
-                    <p>The Link Between Attendance and Academic Success</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>Parents often look for practical ways to support their children's academic success. This analysis examines whether improving school attendance—a factor parents can directly influence—can lead to better exam performance. By analyzing student data, we explore the link between class attendance and exam scores to provide parents with clear, actionable insights.</p>
-                    <p>The results show a consistent, positive relationship: each 1% increase in attendance is linked to an average gain of 0.196 exam points. While attendance is not the only factor affecting performance, it plays a meaningful role. This case study highlights why helping children attend school regularly is a simple yet effective way to support their academic progress.</p>
-                </section>
-
-                <section>
-                    <h2>1. What is the relationship between the percentage of classes attended and exam scores?</h2>
-                    <p>There is a clear and positive relationship between class attendance and exam scores. The correlation coefficient between attendance and exam score is 0.581, indicating a moderately strong link. This suggests that students who attend more classes generally achieve better academic outcomes.</p>
-                    <p>To better understand this relationship, we used a simple linear regression model. The resulting equation is:</p>
-                    <p><em>Exam Score = 0.1958 × Attendance + 51.5786</em></p>
-                    <p>This means that for every 1% increase in attendance, a student's exam score is predicted to rise by approximately 0.196 points. Even small improvements in attendance can make a noticeable difference over time.</p>
-                </section>
-
-                <section>
-                    <h2>2. Can attendance percentage be used to reliably predict exam performance?</h2>
-                    <p>The regression model shows that attendance can moderately predict exam outcomes. The R-squared value is 0.338, which means approximately 33.8% of the variation in exam scores can be explained by differences in attendance. In addition, the p-value for attendance is 0.000, indicating that this relationship is statistically significant and not due to random chance.</p>
-                    <p>While attendance is clearly important, the R-squared value also reminds us that other factors—such as study habits, prior academic ability, and family support—play important roles in shaping exam performance. Attendance is one key piece of a larger picture.</p>
-                </section>
-
-                <section>
-                    <h2>3. How strong and consistent is the relationship between attendance and exam scores?</h2>
-                    <p>The strength of the relationship is reflected in both the correlation (0.581) and the regression slope (0.1958). These values indicate that increases in attendance tend to produce consistent, measurable gains in exam scores. The very low p-value (0.000) confirms this finding is statistically significant.</p>
-                    <p>Although student performance can vary, the overall trend is clear. A scatter plot of the data shows that as attendance increases, exam scores tend to rise as well. This consistent pattern reinforces the value of regular school attendance as a dependable strategy for improving academic performance.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/why-every-class-counts/chart%203%20-%20scatter%20plot.png" alt="Scatter Plot: Attendance vs Exam Score">
-                </section>
-
-                <section>
-                    <h2>4. How can parents use this model to predict and improve performance?</h2>
-                    <p>Using the regression model, we can estimate how much a student’s exam score might improve with better attendance:</p>
-                    <table border="1" cellpadding="8" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Attendance Increase</th>
-                                <th>Predicted Exam Score Increase</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>10%</td>
-                                <td>+1.96 points</td>
-                            </tr>
-                            <tr>
-                                <td>20%</td>
-                                <td>+3.92 points</td>
-                            </tr>
-                            <tr>
-                                <td>50%</td>
-                                <td>+9.79 points</td>
-                            </tr>
-                            <tr>
-                                <td>100%</td>
-                                <td>+19.58 points</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p>For example, a student who maintains 95% attendance is expected to score approximately:</p>
-                    <p><em>0.1958 × 95 + 51.5786 = 70.18 points</em></p>
-                    <p>These findings offer a practical way for parents to estimate and encourage progress through consistent attendance.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/why-every-class-counts/chart%204%20-%20bar%20chart.png" alt="Bar Chart: Predicted Exam Score Increases">
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>The analysis confirms that attendance has a meaningful impact on exam performance. Students who attend more of their scheduled classes tend to achieve higher scores, with each 1% improvement in attendance contributing nearly 0.2 additional points. Although many factors influence academic success, attendance stands out as a direct and actionable area where parents can make a difference. Supporting consistent attendance helps children stay connected to lessons, build understanding over time, and ultimately perform better in exams.</p>
-                </section>
-
-                <section>
-                    <h2>Recommendations for Parents</h2>
-                    <p>Based on these findings, here are six ways parents can take action to support their child’s school attendance and academic performance:</p>
-                    <ul>
-                        <li><strong>Prioritize Daily School Attendance:</strong> Encourage your child to attend school every day unless they are genuinely unwell. Even occasional absences can accumulate and affect learning.</li>
-                        <li><strong>Build Strong Morning and Evening Routines:</strong> Help your child develop regular sleep and wake schedules. Being well-rested supports better focus and punctuality.</li>
-                        <li><strong>Plan Appointments and Travel Carefully:</strong> Schedule medical visits and family trips outside school hours whenever possible to minimize missed class time.</li>
-                        <li><strong>Talk About the Importance of Showing Up:</strong> Help your child understand that attendance is not just a number—it’s a commitment to learning and staying engaged with school life.</li>
-                        <li><strong>Monitor and Support Their Attendance:</strong> Keep in touch with the school, review attendance reports, and address any concerning patterns early with encouragement and support.</li>
-                        <li><strong>Celebrate Good Attendance:</strong> Recognize your child’s efforts to attend consistently. Positive reinforcement can help build long-term habits.</li>
-                    </ul>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Why Every Class Counts | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/why-every-class-counts-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/why-every-class-counts/cover%20image.png"/>
+      <h1>
+       Why Every Class Counts
+      </h1>
+      <p>
+       The Link Between Attendance and Academic Success
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       Parents often look for practical ways to support their children's academic success. This analysis examines whether improving school attendance—a factor parents can directly influence—can lead to better exam performance. By analyzing student data, we explore the link between class attendance and exam scores to provide parents with clear, actionable insights.
+      </p>
+      <p>
+       The results show a consistent, positive relationship: each 1% increase in attendance is linked to an average gain of 0.196 exam points. While attendance is not the only factor affecting performance, it plays a meaningful role. This case study highlights why helping children attend school regularly is a simple yet effective way to support their academic progress.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. What is the relationship between the percentage of classes attended and exam scores?
+      </h2>
+      <p>
+       There is a clear and positive relationship between class attendance and exam scores. The correlation coefficient between attendance and exam score is 0.581, indicating a moderately strong link. This suggests that students who attend more classes generally achieve better academic outcomes.
+      </p>
+      <p>
+       To better understand this relationship, we used a simple linear regression model. The resulting equation is:
+      </p>
+      <p>
+       <em>
+        Exam Score = 0.1958 × Attendance + 51.5786
+       </em>
+      </p>
+      <p>
+       This means that for every 1% increase in attendance, a student's exam score is predicted to rise by approximately 0.196 points. Even small improvements in attendance can make a noticeable difference over time.
+      </p>
+     </section>
+     <section>
+      <h2>
+       2. Can attendance percentage be used to reliably predict exam performance?
+      </h2>
+      <p>
+       The regression model shows that attendance can moderately predict exam outcomes. The R-squared value is 0.338, which means approximately 33.8% of the variation in exam scores can be explained by differences in attendance. In addition, the p-value for attendance is 0.000, indicating that this relationship is statistically significant and not due to random chance.
+      </p>
+      <p>
+       While attendance is clearly important, the R-squared value also reminds us that other factors—such as study habits, prior academic ability, and family support—play important roles in shaping exam performance. Attendance is one key piece of a larger picture.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. How strong and consistent is the relationship between attendance and exam scores?
+      </h2>
+      <p>
+       The strength of the relationship is reflected in both the correlation (0.581) and the regression slope (0.1958). These values indicate that increases in attendance tend to produce consistent, measurable gains in exam scores. The very low p-value (0.000) confirms this finding is statistically significant.
+      </p>
+      <p>
+       Although student performance can vary, the overall trend is clear. A scatter plot of the data shows that as attendance increases, exam scores tend to rise as well. This consistent pattern reinforces the value of regular school attendance as a dependable strategy for improving academic performance.
+      </p>
+      <img alt="Scatter Plot: Attendance vs Exam Score" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/why-every-class-counts/chart%203%20-%20scatter%20plot.png"/>
+     </section>
+     <section>
+      <h2>
+       4. How can parents use this model to predict and improve performance?
+      </h2>
+      <p>
+       Using the regression model, we can estimate how much a student’s exam score might improve with better attendance:
+      </p>
+      <table border="1" cellpadding="8" cellspacing="0">
+       <thead>
+        <tr>
+         <th>
+          Attendance Increase
+         </th>
+         <th>
+          Predicted Exam Score Increase
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td>
+          10%
+         </td>
+         <td>
+          +1.96 points
+         </td>
+        </tr>
+        <tr>
+         <td>
+          20%
+         </td>
+         <td>
+          +3.92 points
+         </td>
+        </tr>
+        <tr>
+         <td>
+          50%
+         </td>
+         <td>
+          +9.79 points
+         </td>
+        </tr>
+        <tr>
+         <td>
+          100%
+         </td>
+         <td>
+          +19.58 points
+         </td>
+        </tr>
+       </tbody>
+      </table>
+      <p>
+       For example, a student who maintains 95% attendance is expected to score approximately:
+      </p>
+      <p>
+       <em>
+        0.1958 × 95 + 51.5786 = 70.18 points
+       </em>
+      </p>
+      <p>
+       These findings offer a practical way for parents to estimate and encourage progress through consistent attendance.
+      </p>
+      <img alt="Bar Chart: Predicted Exam Score Increases" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/why-every-class-counts/chart%204%20-%20bar%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis confirms that attendance has a meaningful impact on exam performance. Students who attend more of their scheduled classes tend to achieve higher scores, with each 1% improvement in attendance contributing nearly 0.2 additional points. Although many factors influence academic success, attendance stands out as a direct and actionable area where parents can make a difference. Supporting consistent attendance helps children stay connected to lessons, build understanding over time, and ultimately perform better in exams.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations for Parents
+      </h2>
+      <p>
+       Based on these findings, here are six ways parents can take action to support their child’s school attendance and academic performance:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Prioritize Daily School Attendance:
+        </strong>
+        Encourage your child to attend school every day unless they are genuinely unwell. Even occasional absences can accumulate and affect learning.
+       </li>
+       <li>
+        <strong>
+         Build Strong Morning and Evening Routines:
+        </strong>
+        Help your child develop regular sleep and wake schedules. Being well-rested supports better focus and punctuality.
+       </li>
+       <li>
+        <strong>
+         Plan Appointments and Travel Carefully:
+        </strong>
+        Schedule medical visits and family trips outside school hours whenever possible to minimize missed class time.
+       </li>
+       <li>
+        <strong>
+         Talk About the Importance of Showing Up:
+        </strong>
+        Help your child understand that attendance is not just a number—it’s a commitment to learning and staying engaged with school life.
+       </li>
+       <li>
+        <strong>
+         Monitor and Support Their Attendance:
+        </strong>
+        Keep in touch with the school, review attendance reports, and address any concerning patterns early with encouragement and support.
+       </li>
+       <li>
+        <strong>
+         Celebrate Good Attendance:
+        </strong>
+        Recognize your child’s efforts to attend consistently. Positive reinforcement can help build long-term habits.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

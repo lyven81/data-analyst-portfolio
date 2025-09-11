@@ -1,138 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What Makes a Song Go Viral? | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/cover%20image.png" alt="Cover Image">
-                    <h1>What Makes a Song Go Viral?</h1>
-                    <p>Uncovering the Traits of Popular Tracks</p>
-                </header>
-
-                <section>
-                    <h2>Overview:</h2>
-                    <p>This analysis aims to uncover the musical characteristics that contribute to a song's virality. The central business question is: What makes a song go viral, and how can we use this knowledge to discover talent, optimize production, and enhance promotional strategies? By analyzing key audio traits across top-performing tracks, the goal is to identify patterns that distinguish viral songs from others.</p>
-                </section>
-
-                <section>
-                    <h2>Key Results:</h2>
-                    <ul>
-                        <li><strong>High Energy and Danceability Are Core Traits:</strong> Viral songs often exhibit high energy and danceability, making them engaging, upbeat, and easily shareable.</li>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%201.1%20-%205%20histogram.png" alt="Chart 1.1">
-
-                        <li><strong>Vocal Presence Over Instrumentals:</strong> Low instrumentalness is a strong feature of popular tracks—viral hits typically include vocals rather than being purely instrumental.</li>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%201.2%20-%20box%20plot.png" alt="Chart 1.2">
-
-                        <li><strong>Emotional Positivity and Loudness:</strong> Tracks with moderate to high emotional positivity (valence) and consistent loudness are more likely to go viral. These traits contribute to a polished, appealing sound.</li>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%202.0%20-%20Heatmap.png" alt="Chart 2.0">
-
-                        <li><strong>Genre-Specific Formulas Exist:</strong>
-                            <ul>
-                                <li>Dance, house, and Latino genres rely on high rhythm and energy.</li>
-                                <li>Rock and electro songs favor more emotional or moody tones.</li>
-                                <li>Speechiness is generally low in viral hits, but pop and Latino genres tolerate higher levels.</li>
-                            </ul>
-                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%203.1%20-%20cluster%20bar%20chart.png" alt="Chart 3.1">
-                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%203.2%20-%20faceset%20histogram.png" alt="Chart 3.2">
-                        </li>
-
-                        <li><strong>Top-Performing Songs Are Shorter and Consistent:</strong> Viral songs are often concise and emotionally consistent, which helps retain listener engagement in short attention-span platforms like TikTok and Instagram Reels.</li>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%204%20-%20Box%20plot.png" alt="Chart 4 Box Plot">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%204%20-%20Radar%20chart.png" alt="Chart 4 Radar Chart">
-
-                        <li><strong>Outliers Still Matter:</strong> While viral songs tend to follow a formula, some successful tracks break norms—suggesting innovation and uniqueness can still win over niche audiences.</li>
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%205%20-%20Scatter%20plot.png" alt="Chart 5 Scatter Plot">
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Goals Alignment:</h2>
-                    <p>The company’s strategic objectives are closely supported by these findings:</p>
-                    <ul>
-                        <li><strong>Identifying Viral Talent:</strong> A&R teams can detect artists with viral potential by comparing their traits to those found in hit songs.</li>
-                        <li><strong>Optimizing Production for Virality:</strong> Producers can use these insights to craft tracks that are structurally and emotionally aligned with viral success.</li>
-                        <li><strong>Tailoring Marketing Campaigns:</strong> Marketing and streaming teams can use genre-based trait insights to create viral-ready playlists and promotions.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Impact:</h2>
-                    <ul>
-                        <li><strong>Viral Growth Enablement:</strong> These results provide a data-backed foundation for increasing the odds of a track going viral.</li>
-                        <li><strong>Smarter Investment Decisions:</strong> Resources can be more effectively allocated toward artists and tracks with viral potential.</li>
-                        <li><strong>Enhanced Consumer Targeting:</strong> Promotional strategies can focus on traits and genres with proven viral appeal, improving ROI and listener engagement.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Data Interpretation:</h2>
-                    <ul>
-                        <li>Viral songs generally strike a balance between energy, emotional tone, and loudness, suggesting that harmony across traits is more impactful than extremity.</li>
-                        <li>Low instrumentalness confirms that lyrical content and vocals are important in viral music, likely due to emotional connection and memorability.</li>
-                        <li>Correlation analysis shows no single trait guarantees virality, but rather a blend of engaging, emotionally resonant, and rhythmically strong features.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Contextual Factors:</h2>
-                    <ul>
-                        <li><strong>Platform Influence:</strong> The rise of short-form content on TikTok and Instagram increases the demand for high-energy, catchy tracks.</li>
-                        <li><strong>Production Trends:</strong> Advances in production have made it easier to achieve consistent loudness and clarity, which are now expected in viral content.</li>
-                        <li><strong>Audience Behavior:</strong> Today’s audiences gravitate toward emotionally uplifting, vocally expressive songs that are quick to hook and easy to share.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Recommendations:</h2>
-                    <p>To maximize a song’s viral potential, the company should standardize the use of viral traits across talent discovery, music production, and promotional planning.</p>
-                    <ul>
-                        <li><strong>Create a “Viral Trait Benchmark”:</strong> Develop a trait profile based on viral songs to screen new artists or tracks for potential.</li>
-                        <li><strong>Incorporate Viral Traits Into Production Briefs:</strong> Guide producers with templates that encourage optimal energy, loudness, and emotional tone for virality.</li>
-                        <li><strong>Launch Viral Playlists by Genre:</strong> Use the genre-specific findings to curate playlists with high potential to trend on social media platforms.</li>
-                        <li><strong>Support and Promote Unique Outliers Strategically:</strong> While most viral songs follow patterns, some succeed through innovation. Build niche marketing strategies for these outliers to explore untapped audience segments.</li>
-                        <li><strong>Collaborate with Influencers and Short-Form Platforms:</strong> Partner with content creators to test how songs with high viral potential perform in real-time content environments.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Conclusion:</h2>
-                    <p>This report reveals that viral songs are typically high-energy, vocally driven, emotionally resonant, and loud, with minor differences across genres. By identifying and replicating these traits, the company can better spot emerging viral hits, enhance production strategies, and fine-tune promotional efforts. The balance of formula and innovation offers a powerful strategy: lean into what works, while staying open to what’s next.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-
-    <footer>
-        <p>© 2024 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   What Makes a Song Go Viral? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/what-makes-a-song-go-viral-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/cover%20image.png"/>
+      <h1>
+       What Makes a Song Go Viral?
+      </h1>
+      <p>
+       Uncovering the Traits of Popular Tracks
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview:
+      </h2>
+      <p>
+       This analysis aims to uncover the musical characteristics that contribute to a song's virality. The central business question is: What makes a song go viral, and how can we use this knowledge to discover talent, optimize production, and enhance promotional strategies? By analyzing key audio traits across top-performing tracks, the goal is to identify patterns that distinguish viral songs from others.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Key Results:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         High Energy and Danceability Are Core Traits:
+        </strong>
+        Viral songs often exhibit high energy and danceability, making them engaging, upbeat, and easily shareable.
+       </li>
+       <img alt="Chart 1.1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%201.1%20-%205%20histogram.png"/>
+       <li>
+        <strong>
+         Vocal Presence Over Instrumentals:
+        </strong>
+        Low instrumentalness is a strong feature of popular tracks—viral hits typically include vocals rather than being purely instrumental.
+       </li>
+       <img alt="Chart 1.2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%201.2%20-%20box%20plot.png"/>
+       <li>
+        <strong>
+         Emotional Positivity and Loudness:
+        </strong>
+        Tracks with moderate to high emotional positivity (valence) and consistent loudness are more likely to go viral. These traits contribute to a polished, appealing sound.
+       </li>
+       <img alt="Chart 2.0" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%202.0%20-%20Heatmap.png"/>
+       <li>
+        <strong>
+         Genre-Specific Formulas Exist:
+        </strong>
+        <ul>
+         <li>
+          Dance, house, and Latino genres rely on high rhythm and energy.
+         </li>
+         <li>
+          Rock and electro songs favor more emotional or moody tones.
+         </li>
+         <li>
+          Speechiness is generally low in viral hits, but pop and Latino genres tolerate higher levels.
+         </li>
+        </ul>
+        <img alt="Chart 3.1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%203.1%20-%20cluster%20bar%20chart.png"/>
+        <img alt="Chart 3.2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%203.2%20-%20faceset%20histogram.png"/>
+       </li>
+       <li>
+        <strong>
+         Top-Performing Songs Are Shorter and Consistent:
+        </strong>
+        Viral songs are often concise and emotionally consistent, which helps retain listener engagement in short attention-span platforms like TikTok and Instagram Reels.
+       </li>
+       <img alt="Chart 4 Box Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%204%20-%20Box%20plot.png"/>
+       <img alt="Chart 4 Radar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%204%20-%20Radar%20chart.png"/>
+       <li>
+        <strong>
+         Outliers Still Matter:
+        </strong>
+        While viral songs tend to follow a formula, some successful tracks break norms—suggesting innovation and uniqueness can still win over niche audiences.
+       </li>
+       <img alt="Chart 5 Scatter Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-makes-a-song-go-viral/Chart%205%20-%20Scatter%20plot.png"/>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Goals Alignment:
+      </h2>
+      <p>
+       The company’s strategic objectives are closely supported by these findings:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Identifying Viral Talent:
+        </strong>
+        A&amp;R teams can detect artists with viral potential by comparing their traits to those found in hit songs.
+       </li>
+       <li>
+        <strong>
+         Optimizing Production for Virality:
+        </strong>
+        Producers can use these insights to craft tracks that are structurally and emotionally aligned with viral success.
+       </li>
+       <li>
+        <strong>
+         Tailoring Marketing Campaigns:
+        </strong>
+        Marketing and streaming teams can use genre-based trait insights to create viral-ready playlists and promotions.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Impact:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Viral Growth Enablement:
+        </strong>
+        These results provide a data-backed foundation for increasing the odds of a track going viral.
+       </li>
+       <li>
+        <strong>
+         Smarter Investment Decisions:
+        </strong>
+        Resources can be more effectively allocated toward artists and tracks with viral potential.
+       </li>
+       <li>
+        <strong>
+         Enhanced Consumer Targeting:
+        </strong>
+        Promotional strategies can focus on traits and genres with proven viral appeal, improving ROI and listener engagement.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Data Interpretation:
+      </h2>
+      <ul>
+       <li>
+        Viral songs generally strike a balance between energy, emotional tone, and loudness, suggesting that harmony across traits is more impactful than extremity.
+       </li>
+       <li>
+        Low instrumentalness confirms that lyrical content and vocals are important in viral music, likely due to emotional connection and memorability.
+       </li>
+       <li>
+        Correlation analysis shows no single trait guarantees virality, but rather a blend of engaging, emotionally resonant, and rhythmically strong features.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Contextual Factors:
+      </h2>
+      <ul>
+       <li>
+        <strong>
+         Platform Influence:
+        </strong>
+        The rise of short-form content on TikTok and Instagram increases the demand for high-energy, catchy tracks.
+       </li>
+       <li>
+        <strong>
+         Production Trends:
+        </strong>
+        Advances in production have made it easier to achieve consistent loudness and clarity, which are now expected in viral content.
+       </li>
+       <li>
+        <strong>
+         Audience Behavior:
+        </strong>
+        Today’s audiences gravitate toward emotionally uplifting, vocally expressive songs that are quick to hook and easy to share.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Recommendations:
+      </h2>
+      <p>
+       To maximize a song’s viral potential, the company should standardize the use of viral traits across talent discovery, music production, and promotional planning.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Create a “Viral Trait Benchmark”:
+        </strong>
+        Develop a trait profile based on viral songs to screen new artists or tracks for potential.
+       </li>
+       <li>
+        <strong>
+         Incorporate Viral Traits Into Production Briefs:
+        </strong>
+        Guide producers with templates that encourage optimal energy, loudness, and emotional tone for virality.
+       </li>
+       <li>
+        <strong>
+         Launch Viral Playlists by Genre:
+        </strong>
+        Use the genre-specific findings to curate playlists with high potential to trend on social media platforms.
+       </li>
+       <li>
+        <strong>
+         Support and Promote Unique Outliers Strategically:
+        </strong>
+        While most viral songs follow patterns, some succeed through innovation. Build niche marketing strategies for these outliers to explore untapped audience segments.
+       </li>
+       <li>
+        <strong>
+         Collaborate with Influencers and Short-Form Platforms:
+        </strong>
+        Partner with content creators to test how songs with high viral potential perform in real-time content environments.
+       </li>
+      </ul>
+     </section>
+     <section>
+      <h2>
+       Conclusion:
+      </h2>
+      <p>
+       This report reveals that viral songs are typically high-energy, vocally driven, emotionally resonant, and loud, with minor differences across genres. By identifying and replicating these traits, the company can better spot emerging viral hits, enhance production strategies, and fine-tune promotional efforts. The balance of formula and innovation offers a powerful strategy: lean into what works, while staying open to what’s next.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2024 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

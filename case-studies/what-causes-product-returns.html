@@ -1,81 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What Causes Product Returns | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-causes-product-returns/cover%20image.png" alt="Product Returns Cover Image">
-                    <h1>What Causes Product Returns</h1>
-                    <p>Why Pricing Matters More Than Perception</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This analysis helps warehouse managers figure out why some products get returned more often and what can be done to reduce those returns. It looks at whether returns are linked to things like product price, discounts, ratings, or whether an item was out of stock. By knowing what causes more returns, the warehouse team can take steps to pack and check those products more carefully before shipping.</p>
-                    <p>The study also tests if we can build a simple tool to warn us about products likely to be returned. This can help managers decide which products need extra attention, how to store returned items, and when to work with other teams to fix pricing or promotion issues. The goal is to cut down return costs and make warehouse work smoother and more efficient.</p>
-                </section>
-
-                <section>
-                    <h2>Are returns more related to price, discount, or product quality?</h2>
-                    <p>Returns are more related to discounts and price than to product reviews or ratings. The data shows that products with higher discounts are slightly more likely to be returned. Similarly, higher-priced items also have a slightly higher return rate. On the other hand, ratings and number of reviews don’t strongly affect return behavior. This means return problems may be more about how a product is priced or promoted rather than how customers rate it.</p>
-                </section>
-
-                <section>
-                    <h2>Are out-of-stock items returned more often?</h2>
-                    <p>No. Products that were out of stock are returned just as often as those that were in stock. The return rate for both groups is nearly the same, and the difference is so small it’s not meaningful. So, being out of stock doesn't seem to affect whether a product gets returned. There’s no need to worry about returns just because a product was low on inventory.</p>
-                </section>
-
-                <section>
-                    <h2>Can we use product rating, discount, and review count together to predict returns?</h2>
-                    <p>No. When we combine product rating, discount, and review count in a prediction model, it doesn’t work well. The model gives nearly the same predicted return rate for most products, and it can’t tell the difference between high-return and low-return items. This means we can't rely on these three factors alone to make return predictions. Other factors are likely influencing returns that we haven’t included yet.</p>
-                </section>
-
-                <section>
-                    <h2>Can we build a tool to flag high-return products before shipping?</h2>
-                    <p>Not with the current model. The tool we tested can accurately identify low-return items, but it completely misses high-return products. It treats nearly everything as low risk. This happens because the data has too few high-return cases and the model doesn't have the right information to detect them. To fix this, we’d need to add better signals (like past return history or customer complaints) and possibly use a different type of model that can handle this kind of problem better.</p>
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>Based on the analysis, returns are more closely linked to pricing and promotional factors than to product quality indicators like ratings or reviews. Products with higher discounts tend to have slightly higher return rates, possibly due to impulse purchases. Similarly, higher-priced items are a bit more likely to be returned, which may reflect unmet expectations. In contrast, customer reviews and ratings do not show strong links to return behavior.</p>
-                    <p>Operational factors like stock availability do not influence return rates, meaning warehouse stockouts don’t lead to more returns. Additionally, attempts to predict returns using basic product attributes like rating, discount, and review count were not effective, suggesting that returns are influenced by more complex or hidden factors not currently captured in the data.</p>
-                    <p>To reduce returns, the focus should be on:</p>
-                    <ul>
-                        <li>Reassessing discount strategies to avoid encouraging impulse buys.</li>
-                        <li>Providing clearer product information for high-priced items to manage customer expectations.</li>
-                        <li>Collecting better data such as past return history, reasons for return, or delivery issues, which can be used in more advanced prediction tools.</li>
-                    </ul>
-                    <p>Ultimately, reducing returns will require combining smarter pricing decisions with better customer experience and more informative product-level data.</p>
-                </section>
-            </section>
-        </main>
-    </div>
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   What Causes Product Returns | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/what-causes-product-returns-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Product Returns Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-causes-product-returns/cover%20image.png"/>
+      <h1>
+       What Causes Product Returns
+      </h1>
+      <p>
+       Why Pricing Matters More Than Perception
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis helps warehouse managers figure out why some products get returned more often and what can be done to reduce those returns. It looks at whether returns are linked to things like product price, discounts, ratings, or whether an item was out of stock. By knowing what causes more returns, the warehouse team can take steps to pack and check those products more carefully before shipping.
+      </p>
+      <p>
+       The study also tests if we can build a simple tool to warn us about products likely to be returned. This can help managers decide which products need extra attention, how to store returned items, and when to work with other teams to fix pricing or promotion issues. The goal is to cut down return costs and make warehouse work smoother and more efficient.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Are returns more related to price, discount, or product quality?
+      </h2>
+      <p>
+       Returns are more related to discounts and price than to product reviews or ratings. The data shows that products with higher discounts are slightly more likely to be returned. Similarly, higher-priced items also have a slightly higher return rate. On the other hand, ratings and number of reviews don’t strongly affect return behavior. This means return problems may be more about how a product is priced or promoted rather than how customers rate it.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Are out-of-stock items returned more often?
+      </h2>
+      <p>
+       No. Products that were out of stock are returned just as often as those that were in stock. The return rate for both groups is nearly the same, and the difference is so small it’s not meaningful. So, being out of stock doesn't seem to affect whether a product gets returned. There’s no need to worry about returns just because a product was low on inventory.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Can we use product rating, discount, and review count together to predict returns?
+      </h2>
+      <p>
+       No. When we combine product rating, discount, and review count in a prediction model, it doesn’t work well. The model gives nearly the same predicted return rate for most products, and it can’t tell the difference between high-return and low-return items. This means we can't rely on these three factors alone to make return predictions. Other factors are likely influencing returns that we haven’t included yet.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Can we build a tool to flag high-return products before shipping?
+      </h2>
+      <p>
+       Not with the current model. The tool we tested can accurately identify low-return items, but it completely misses high-return products. It treats nearly everything as low risk. This happens because the data has too few high-return cases and the model doesn't have the right information to detect them. To fix this, we’d need to add better signals (like past return history or customer complaints) and possibly use a different type of model that can handle this kind of problem better.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       Based on the analysis, returns are more closely linked to pricing and promotional factors than to product quality indicators like ratings or reviews. Products with higher discounts tend to have slightly higher return rates, possibly due to impulse purchases. Similarly, higher-priced items are a bit more likely to be returned, which may reflect unmet expectations. In contrast, customer reviews and ratings do not show strong links to return behavior.
+      </p>
+      <p>
+       Operational factors like stock availability do not influence return rates, meaning warehouse stockouts don’t lead to more returns. Additionally, attempts to predict returns using basic product attributes like rating, discount, and review count were not effective, suggesting that returns are influenced by more complex or hidden factors not currently captured in the data.
+      </p>
+      <p>
+       To reduce returns, the focus should be on:
+      </p>
+      <ul>
+       <li>
+        Reassessing discount strategies to avoid encouraging impulse buys.
+       </li>
+       <li>
+        Providing clearer product information for high-priced items to manage customer expectations.
+       </li>
+       <li>
+        Collecting better data such as past return history, reasons for return, or delivery issues, which can be used in more advanced prediction tools.
+       </li>
+      </ul>
+      <p>
+       Ultimately, reducing returns will require combining smarter pricing decisions with better customer experience and more informative product-level data.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>

@@ -1,140 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patterns Behind the Price | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
-<body>
-
-    <!-- Two-Column Layout Wrapper -->
-    <div class="container">
-
-        <!-- Left Column (Personal Info and Contact) -->
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
-
-        <!-- Right Column (Full Case Study Content) -->
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/cover%20image.png" alt="Cover Image">
-                    <h1>Patterns Behind the Price</h1>
-                    <p>What Microsoft’s Stock Can Teach You About Long-Term Investing</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This case study examines Microsoft’s adjusted closing price to help retail investors understand how the stock behaves over time and what factors influence its weekly movement. It focuses on identifying consistent price trends, the impact of market events like the Dot-com crash, the Global Financial Crisis, and COVID-19, and the role of predictors such as the stock’s opening price and time.</p>
-                    <p>By applying a multiple linear regression model, the study uncovers long-term growth patterns, short-term cycles, and the effect of economic shocks. The goal is to provide investors with practical insights to support buy, hold, or sell decisions—whether evaluating when to enter the market, estimating the potential impact of a downturn, or judging the strength of a recovery.</p>
-                </section>
-
-                <section>
-                    <h2>1. Has Microsoft’s stock price been rising steadily over time, or is it just random?</h2>
-                    <p>Microsoft’s stock price has shown a steady upward trend rather than random movement. The correlation between adjusted closing price and time index is 0.705, indicating a moderately strong relationship. This suggests the stock has generally grown in value over time.</p>
-                    <p><strong>What this means for investors:</strong><br>The long-term trend supports confidence in holding Microsoft stock. Investors can use price dips as potential buying opportunities, knowing that historical patterns show consistent recovery and growth.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%201.png" alt="Chart 1">
-                </section>
-
-                <section>
-                    <h2>2. Do Microsoft stock prices follow any repeating patterns, like cycles where it tends to go up or down?</h2>
-                    <p>Yes, Microsoft’s stock follows recognizable patterns. It has a clear long-term growth trend, especially post-2010. In addition, it experiences cyclical fluctuations every 1 to 2 years and reacts sharply to external shocks such as the Dot-com crash (2000–2002), Global Financial Crisis (2008–2009), and COVID-19 (2020).</p>
-                    <p><strong>What this means for investors:</strong><br>Those with a long-term strategy benefit from staying invested through growth cycles. For short-term investors, identifying 1–2 year waves offers timing opportunities. Recognizing these patterns also helps manage risk during periods of market uncertainty.</p>
-                </section>
-
-                <section>
-                    <h2>3. Can we measure how much crisis periods like COVID or Dot-com affected Microsoft’s price?</h2>
-                    <p>Yes. Long-term growth phases show a strong positive correlation with price (+0.622), while cyclical waves show a moderate negative correlation (–0.544). The COVID period had a weak positive effect (+0.253), and the Dot-com and GFC periods had small negative effects (–0.105 and –0.089, respectively).</p>
-                    <p><strong>What this means for investors:</strong><br>Microsoft’s price has dipped during crises but recovered quickly. This history suggests resilience and reinforces the case for holding through downturns, rather than reacting to short-term fear.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%203.png" alt="Chart 3">
-                </section>
-
-                <section>
-                    <h2>4. Which factors matter most when predicting Microsoft’s stock price?</h2>
-                    <p>The most important predictors are the Open price, time index, and market cycles. For instance, the Open price has a coefficient of 1.013 and a p-value of 0.000, making it the strongest daily indicator. Volume, with a p-value of 0.145, has no meaningful impact.</p>
-                    <p><strong>What this means for investors:</strong><br>Watch the Open price closely, as it’s a strong signal of where the stock may close. Time and known market cycles also influence price movement. Volume, however, can be ignored when making investment decisions.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%204.png" alt="Chart 4">
-                </section>
-
-                <section>
-                    <h2>5. Can this model explain past price movements and project future trends?</h2>
-                    <p>Yes. The model explains 98.9% of the variation in Microsoft’s adjusted close price (R-squared = 0.989). It effectively maps how the stock has responded to different inputs over time, including growth periods and market shocks.</p>
-                    <p><strong>What this means for investors:</strong><br>This analysis helps investors look both backward and forward. Understanding how the stock has reacted to past events can improve confidence in future decisions, especially when similar conditions arise.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%205.png" alt="Chart 5">
-                </section>
-
-                <section>
-                    <h2>6. What might happen if Microsoft faces another crisis or price shift?</h2>
-                    <p>The model provides scenario-based predictions:</p>
-                    <ul>
-                        <li>If the stock opens at $30, the expected close is $31.58</li>
-                        <li>If it opens at $10 during a crisis, the expected close is $9.40</li>
-                        <li>In March 2022, the model predicted $295.70, while the actual close averaged $296.15 (just $0.45 off)</li>
-                    </ul>
-                    <p><strong>What this means for investors:</strong><br>The model helps investors test future possibilities and assess risk. It's particularly useful for gauging the effects of price shocks or understanding recovery potential during economic events like COVID.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%206.png" alt="Chart 6">
-                </section>
-
-                <section>
-                    <h2>7. How accurate is the model in reflecting real market behavior?</h2>
-                    <p>The model is highly accurate. With an R-squared of 0.989, it closely mirrors actual price behavior. In backtesting, it consistently predicted prices within less than a dollar of actual values. All key variables are statistically significant, except for the GFC dummy.</p>
-                    <p><strong>What this means for investors:</strong><br>Investors can trust the model’s insights for guiding real decisions. While no model is perfect, this one captures the key factors that influence Microsoft’s price with strong reliability.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%207.png" alt="Chart 7">
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>Microsoft has been a consistent long-term performer. Its adjusted closing price is shaped mainly by the opening price, time, and broader economic cycles. Investors who understand these drivers—and who time their decisions based on dips within growth phases—can make more informed, evidence-backed choices.</p>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <ol>
-                        <li><strong>When to Buy</strong>
-                            <ul>
-                                <li>Look for temporary dips during long-term growth or post-crisis periods.</li>
-                                <li>A sharp drop in opening price—if not driven by fundamental weakness—may present a good entry point.</li>
-                            </ul>
-                        </li>
-                        <li><strong>When to Hold</strong>
-                            <ul>
-                                <li>Remain invested during stable growth phases, especially when volatility is low and market conditions are favorable.</li>
-                            </ul>
-                        </li>
-                        <li><strong>When to Be Cautious About Selling</strong>
-                            <ul>
-                                <li>Avoid selling during short-term market shocks like COVID. Historical data shows Microsoft tends to recover quickly.</li>
-                                <li>Consider selling only if the opening price is unusually high and not supported by long-term trends.</li>
-                            </ul>
-                        </li>
-                    </ol>
-                </section>
-            </section>
-        </main>
-
-    </div>
-
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Patterns Behind the Price | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- Two-Column Layout Wrapper -->
+  <div class="container">
+   <!-- Left Column (Personal Info and Contact) -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let’s work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/pattern-behind-price-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column (Full Case Study Content) -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/cover%20image.png"/>
+      <h1>
+       Patterns Behind the Price
+      </h1>
+      <p>
+       What Microsoft’s Stock Can Teach You About Long-Term Investing
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This case study examines Microsoft’s adjusted closing price to help retail investors understand how the stock behaves over time and what factors influence its weekly movement. It focuses on identifying consistent price trends, the impact of market events like the Dot-com crash, the Global Financial Crisis, and COVID-19, and the role of predictors such as the stock’s opening price and time.
+      </p>
+      <p>
+       By applying a multiple linear regression model, the study uncovers long-term growth patterns, short-term cycles, and the effect of economic shocks. The goal is to provide investors with practical insights to support buy, hold, or sell decisions—whether evaluating when to enter the market, estimating the potential impact of a downturn, or judging the strength of a recovery.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. Has Microsoft’s stock price been rising steadily over time, or is it just random?
+      </h2>
+      <p>
+       Microsoft’s stock price has shown a steady upward trend rather than random movement. The correlation between adjusted closing price and time index is 0.705, indicating a moderately strong relationship. This suggests the stock has generally grown in value over time.
+      </p>
+      <p>
+       <strong>
+        What this means for investors:
+       </strong>
+       <br/>
+       The long-term trend supports confidence in holding Microsoft stock. Investors can use price dips as potential buying opportunities, knowing that historical patterns show consistent recovery and growth.
+      </p>
+      <img alt="Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%201.png"/>
+     </section>
+     <section>
+      <h2>
+       2. Do Microsoft stock prices follow any repeating patterns, like cycles where it tends to go up or down?
+      </h2>
+      <p>
+       Yes, Microsoft’s stock follows recognizable patterns. It has a clear long-term growth trend, especially post-2010. In addition, it experiences cyclical fluctuations every 1 to 2 years and reacts sharply to external shocks such as the Dot-com crash (2000–2002), Global Financial Crisis (2008–2009), and COVID-19 (2020).
+      </p>
+      <p>
+       <strong>
+        What this means for investors:
+       </strong>
+       <br/>
+       Those with a long-term strategy benefit from staying invested through growth cycles. For short-term investors, identifying 1–2 year waves offers timing opportunities. Recognizing these patterns also helps manage risk during periods of market uncertainty.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. Can we measure how much crisis periods like COVID or Dot-com affected Microsoft’s price?
+      </h2>
+      <p>
+       Yes. Long-term growth phases show a strong positive correlation with price (+0.622), while cyclical waves show a moderate negative correlation (–0.544). The COVID period had a weak positive effect (+0.253), and the Dot-com and GFC periods had small negative effects (–0.105 and –0.089, respectively).
+      </p>
+      <p>
+       <strong>
+        What this means for investors:
+       </strong>
+       <br/>
+       Microsoft’s price has dipped during crises but recovered quickly. This history suggests resilience and reinforces the case for holding through downturns, rather than reacting to short-term fear.
+      </p>
+      <img alt="Chart 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%203.png"/>
+     </section>
+     <section>
+      <h2>
+       4. Which factors matter most when predicting Microsoft’s stock price?
+      </h2>
+      <p>
+       The most important predictors are the Open price, time index, and market cycles. For instance, the Open price has a coefficient of 1.013 and a p-value of 0.000, making it the strongest daily indicator. Volume, with a p-value of 0.145, has no meaningful impact.
+      </p>
+      <p>
+       <strong>
+        What this means for investors:
+       </strong>
+       <br/>
+       Watch the Open price closely, as it’s a strong signal of where the stock may close. Time and known market cycles also influence price movement. Volume, however, can be ignored when making investment decisions.
+      </p>
+      <img alt="Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%204.png"/>
+     </section>
+     <section>
+      <h2>
+       5. Can this model explain past price movements and project future trends?
+      </h2>
+      <p>
+       Yes. The model explains 98.9% of the variation in Microsoft’s adjusted close price (R-squared = 0.989). It effectively maps how the stock has responded to different inputs over time, including growth periods and market shocks.
+      </p>
+      <p>
+       <strong>
+        What this means for investors:
+       </strong>
+       <br/>
+       This analysis helps investors look both backward and forward. Understanding how the stock has reacted to past events can improve confidence in future decisions, especially when similar conditions arise.
+      </p>
+      <img alt="Chart 5" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%205.png"/>
+     </section>
+     <section>
+      <h2>
+       6. What might happen if Microsoft faces another crisis or price shift?
+      </h2>
+      <p>
+       The model provides scenario-based predictions:
+      </p>
+      <ul>
+       <li>
+        If the stock opens at $30, the expected close is $31.58
+       </li>
+       <li>
+        If it opens at $10 during a crisis, the expected close is $9.40
+       </li>
+       <li>
+        In March 2022, the model predicted $295.70, while the actual close averaged $296.15 (just $0.45 off)
+       </li>
+      </ul>
+      <p>
+       <strong>
+        What this means for investors:
+       </strong>
+       <br/>
+       The model helps investors test future possibilities and assess risk. It's particularly useful for gauging the effects of price shocks or understanding recovery potential during economic events like COVID.
+      </p>
+      <img alt="Chart 6" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%206.png"/>
+     </section>
+     <section>
+      <h2>
+       7. How accurate is the model in reflecting real market behavior?
+      </h2>
+      <p>
+       The model is highly accurate. With an R-squared of 0.989, it closely mirrors actual price behavior. In backtesting, it consistently predicted prices within less than a dollar of actual values. All key variables are statistically significant, except for the GFC dummy.
+      </p>
+      <p>
+       <strong>
+        What this means for investors:
+       </strong>
+       <br/>
+       Investors can trust the model’s insights for guiding real decisions. While no model is perfect, this one captures the key factors that influence Microsoft’s price with strong reliability.
+      </p>
+      <img alt="Chart 7" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/patterns-behind-price/chart%207.png"/>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       Microsoft has been a consistent long-term performer. Its adjusted closing price is shaped mainly by the opening price, time, and broader economic cycles. Investors who understand these drivers—and who time their decisions based on dips within growth phases—can make more informed, evidence-backed choices.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ol>
+       <li>
+        <strong>
+         When to Buy
+        </strong>
+        <ul>
+         <li>
+          Look for temporary dips during long-term growth or post-crisis periods.
+         </li>
+         <li>
+          A sharp drop in opening price—if not driven by fundamental weakness—may present a good entry point.
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         When to Hold
+        </strong>
+        <ul>
+         <li>
+          Remain invested during stable growth phases, especially when volatility is low and market conditions are favorable.
+         </li>
+        </ul>
+       </li>
+       <li>
+        <strong>
+         When to Be Cautious About Selling
+        </strong>
+        <ul>
+         <li>
+          Avoid selling during short-term market shocks like COVID. Historical data shows Microsoft tends to recover quickly.
+         </li>
+         <li>
+          Consider selling only if the opening price is unusually high and not supported by long-term trends.
+         </li>
+        </ul>
+       </li>
+      </ol>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>
