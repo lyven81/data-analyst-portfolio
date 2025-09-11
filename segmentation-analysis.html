@@ -79,6 +79,29 @@
         td a:hover {
             text-decoration: underline;
         }
+        .case-study-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .case-study-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f5f5dc;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .case-study-links a:hover {
+            background-color: #daa520;
+            color: white;
+            border-color: #daa520;
+            transform: translateY(-1px);
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -118,6 +141,13 @@
             .tagline {
                 font-size: 1rem;
             }
+            .case-study-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .case-study-links a {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -141,30 +171,54 @@
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">What Men and Women Buy - Gender Purchasing</a></h3>
                     <p>Explore how gender-specific category preferences can unlock new campaign strategies through demographic analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/what-men-and-women-buy-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/who-stays.html">Who Stays and Who Leaves? - Customer Retention</a></h3>
                     <p>Discover customer retention patterns by location using geographic segmentation and cohort analysis techniques.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/who-stays.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/who-stays-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/learning-path.html">Which Learning Paths Lead Where? - Career Goals</a></h3>
                     <p>Analyze how career goals influence student effort through educational segmentation and pathway analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/learning-path.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/learning-path-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/why-sarawak.html">Why You Should Consider Sarawak - Regional Investment</a></h3>
                     <p>Explore investment potential in different regions using comparative market analysis and regional segmentation.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/why-sarawak.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/why-sarawak-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/finding-the-sweet-spot.html">Finding the Sweet Spot - Investment Location</a></h3>
                     <p>Analyze mid-sized home investment locations and price points using geographic and demographic segmentation.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/finding-the-sweet-spot.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/finding-the-sweet-spot-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">What Makes a Song Trend? - Content Performance</a></h3>
                     <p>Analyze factors that boost content performance through music trend segmentation and viral content analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/what-makes-a-song-go-viral-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
         </table>

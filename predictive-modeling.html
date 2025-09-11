@@ -79,6 +79,29 @@
         td a:hover {
             text-decoration: underline;
         }
+        .case-study-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .case-study-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f5f5dc;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .case-study-links a:hover {
+            background-color: #daa520;
+            color: white;
+            border-color: #daa520;
+            transform: translateY(-1px);
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -118,6 +141,13 @@
             .tagline {
                 font-size: 1rem;
             }
+            .case-study-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .case-study-links a {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -141,30 +171,54 @@
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Who's Likely to Quit - Employee Turnover</a></h3>
                     <p>Using predictive analytics to identify employees at risk of resigning for proactive retention strategies.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/who-is-likely-to-quit-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/predicting-depression-risk-student.html">Predicting Depression Risk in Students</a></h3>
                     <p>Early intervention strategies using predictive modeling to identify students at risk of depression.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/predicting-depression-risk-student.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/predicting-depression-risk-student-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html">Flagging High-Risk Borrowers</a></h3>
                     <p>Demonstrate how underwriters predict loan default risks using machine learning classification techniques.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/flagging-high-risk-customer-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/identify-at-risk-student.html">Identifying At-Risk Students Early</a></h3>
                     <p>Predictive modeling to help teachers identify students who need additional academic support.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/identify-at-risk-student.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/identify-at-risk-student-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Saving the Silent Spenders</a></h3>
                     <p>Identifying at-risk high-value customers using predictive analytics to prevent customer churn.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/clv-churn-analysis-coffee-vending-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/predicting-member-retention-fitness-center.html">Predicting Member Retention - Fitness Center</a></h3>
                     <p>Machine learning models to predict fitness center member retention and reduce churn rates.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/predicting-member-retention-fitness-center.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/predicting-member-retention-fitness-center-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
         </table>

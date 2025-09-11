@@ -79,6 +79,29 @@
         td a:hover {
             text-decoration: underline;
         }
+        .case-study-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .case-study-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f5f5dc;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .case-study-links a:hover {
+            background-color: #daa520;
+            color: white;
+            border-color: #daa520;
+            transform: translateY(-1px);
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -118,6 +141,13 @@
             .tagline {
                 font-size: 1rem;
             }
+            .case-study-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .case-study-links a {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -141,30 +171,54 @@
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/is-the-price-right.html">Is the Price Right? - Stock Fair Value</a></h3>
                     <p>Using fair value prediction models to decide stock buying/holding strategies through regression analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/is-the-price-right.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/is-the-price-right-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/grow-smarter.html">Grow Smarter, Not Bigger - Revenue vs Hiring</a></h3>
                     <p>Analyzing whether hiring more employees leads to higher revenue through statistical correlation analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/grow-smarter.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/grow-smarter-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/experience-is-not-everthing.html">Experience Isn't Everything - Salary Growth</a></h3>
                     <p>Exploring why experience alone doesn't drive salary growth using regression analysis of compensation factors.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/experience-is-not-everthing.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/experience-is-not-everthing-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Do Dollars Drive Decisions? - Income Impact</a></h3>
                     <p>Examining income's impact on purchasing behavior through regression analysis and economic modeling.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/do-dollar-drive-decisions-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/can-money-buy-happiness.html">Can Money Buy Happiness? - Financial Well-being</a></h3>
                     <p>Explore financial stability's impact on national happiness through correlation and regression analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/can-money-buy-happiness.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/can-money-buy-happiness-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
                 <td>
                     <h3><a href="/data-analyst-portfolio/case-studies/what-causes-product-returns.html">What Causes Product Returns - Pricing Impact</a></h3>
                     <p>Investigating how pricing strategies can reduce return rates using logistic regression analysis.</p>
+                    <div class="case-study-links">
+                        <a href="/data-analyst-portfolio/case-studies/what-causes-product-returns.html">Read More →</a>
+                        <a href="/data-analyst-portfolio/dashboards/what-causes-product-returns-dashboard.html">View Dashboard</a>
+                    </div>
                 </td>
             </tr>
         </table>
