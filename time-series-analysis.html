@@ -29,21 +29,18 @@
             font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1.2rem;
-            color: #555;
-        }
-        .business-description {
-            background-color: #e8f4f8;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid #007BFF;
-            font-size: 1.1rem;
             color: #333;
-            line-height: 1.6;
-            text-align: center;
+        }
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #666;
         }
         nav {
             text-align: center;
@@ -115,9 +112,11 @@
             header h1 {
                 font-size: 2rem;
             }
-            .business-description {
+            .category-title {
+                font-size: 1.5rem;
+            }
+            .tagline {
                 font-size: 1rem;
-                padding: 15px;
             }
         }
     </style>
@@ -126,14 +125,9 @@
 
     <header>
         <h1>Lee Yih Ven</h1>
-        <p>Data Analytics Portfolio</p>
-        <p>Time Series Analysis & Forecasting</p>
-        <p>Spotting patterns in data to see what comes next.</p>
+        <p class="category-title">Time Series Analysis & Forecasting</p>
+        <p class="tagline">Spotting patterns in data to see what comes next.</p>
     </header>
-
-    <div class="business-description">
-        Transform historical data into future insights. These skills help businesses predict demand, optimize inventory, time investments, and identify seasonal opportunities—turning past patterns into competitive advantages for strategic planning and revenue optimization.
-    </div>
 
     <nav>
         <a href="/data-analyst-portfolio/index.html">Home</a>
