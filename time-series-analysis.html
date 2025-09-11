@@ -1,83 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Time Series Analysis & Forecasting | Lee Yih Ven</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Series Analysis & Forecasting | Lee Yih Ven's Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .business-description {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007BFF;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 20px;
+            vertical-align: top;
+            text-align: left;
+        }
+        td h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        td p {
+            font-size: 1rem;
+            color: #555;
+        }
+        td a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+            }
+            tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+            td {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            td h3 {
+                font-size: 1.3rem;
+            }
+            td p {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .business-description {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Lee Yih Ven</h1>
-  <p>Data Analytics Portfolio</p>
-  <p>Turning business questions into actionable insights with data-driven solutions.</p>
-</header>
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p>Data Analytics Portfolio</p>
+        <p>Time Series Analysis & Forecasting</p>
+    </header>
 
-<nav>
-  <a href="/data-analyst-portfolio/index.html">Home</a>
-  <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-  <a href="/data-analyst-portfolio/contact.html">Contact</a>
-</nav>
-
-<div class="container">
-  <h2>Time Series Analysis & Forecasting</h2>
-  
-  <div class="business-description">
-    Transform historical data into future insights. These skills help businesses predict demand, optimize inventory, time investments, and identify seasonal opportunities—turning past patterns into competitive advantages for strategic planning and revenue optimization.
-  </div>
-  
-  <p class="category-description">
-    <strong>Core Skills:</strong> Seasonal decomposition, trend analysis, demand forecasting, volatility analysis<br>
-    <strong>When to use:</strong> Analyzing data patterns over time, predicting future values, understanding seasonality and trends<br>
-    <strong>Tools:</strong> Python (pandas, matplotlib, statsmodels), Excel, Tableau
-  </p>
-
-  <div class="case-studies-grid">
-    <div class="case-study">
-      <h3>When to Buy and Sell Google Stock</h3>
-      <p><strong>Techniques:</strong> Seasonal decomposition, trading pattern analysis</p>
-      <p>Discover how seasonal patterns in Google stock can guide optimal investment timing. This analysis uses time series decomposition to identify recurring seasonal trends and market cycles.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
+    <div class="business-description">
+        Transform historical data into future insights. These skills help businesses predict demand, optimize inventory, time investments, and identify seasonal opportunities—turning past patterns into competitive advantages for strategic planning and revenue optimization.
     </div>
 
-    <div class="case-study">
-      <h3>Patterns Behind the Price - Microsoft Stock Analysis</h3>
-      <p><strong>Techniques:</strong> Trend analysis, pattern recognition, moving averages</p>
-      <p>Explore Microsoft's stock price growth patterns and crisis resilience through comprehensive time series analysis and technical indicators.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
+    <nav>
+        <a href="/data-analyst-portfolio/index.html">Home</a>
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/when-to-buy-google.html">When to Buy and Sell Google Stock</a></h3>
+                    <p>Discover how seasonal patterns in Google stock can guide optimal investment timing through time series decomposition.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/pattern-behind-price.html">Patterns Behind the Price - Microsoft Stock</a></h3>
+                    <p>Explore Microsoft's stock price growth patterns and crisis resilience through comprehensive time series analysis.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/what-sells-best.html">What Sells Best and When - Pizza Sales</a></h3>
+                    <p>A data-driven guide to improving pizza sales and operations through temporal sales pattern analysis.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/ron95.html">RON95 Fuel Price Volatility Analysis</a></h3>
+                    <p>Comprehensive analysis of Malaysian fuel price dynamics examining volatility and government policy impacts.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap? - Google Price Fluctuations</a></h3>
+                    <p>Decode Google's price fluctuations using time series analysis to distinguish sustainable trends from market traps.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/forecasting-beverage-sales-kota-kinabalu.html">Forecasting Beverage Sales in Kota Kinabalu</a></h3>
+                    <p>Sales forecasting analysis for beverage distribution using time series modeling and seasonal decomposition.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <div class="case-study">
-      <h3>What Sells Best and When - Pizza Sales Forecasting</h3>
-      <p><strong>Techniques:</strong> Demand forecasting, seasonal analysis</p>
-      <p>A data-driven guide to improving pizza sales and operations through temporal sales pattern analysis and demand prediction.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>RON95 Fuel Price Volatility Analysis</h3>
-      <p><strong>Techniques:</strong> Volatility analysis, distribution analysis, outlier detection</p>
-      <p>Comprehensive analysis of Malaysian fuel price dynamics from 2017-2025, examining price volatility, government policy impacts, and market fluctuations.</p>
-      <a href="/data-analyst-portfolio/ron95.html" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>Trend or Trap? - Google Price Fluctuations</h3>
-      <p><strong>Techniques:</strong> Trend analysis, market pattern recognition, volatility assessment</p>
-      <p>Decode Google's price fluctuations using advanced time series analysis to distinguish between sustainable trends and market traps.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+    </footer>
 
 </body>
 </html>

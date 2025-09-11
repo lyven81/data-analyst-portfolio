@@ -1,83 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Predictive Modeling & Classification | Lee Yih Ven</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Modeling & Classification | Lee Yih Ven's Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .business-description {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007BFF;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 20px;
+            vertical-align: top;
+            text-align: left;
+        }
+        td h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        td p {
+            font-size: 1rem;
+            color: #555;
+        }
+        td a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+            }
+            tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+            td {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            td h3 {
+                font-size: 1.3rem;
+            }
+            td p {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .business-description {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Lee Yih Ven</h1>
-  <p>Data Analytics Portfolio</p>
-  <p>Turning business questions into actionable insights with data-driven solutions.</p>
-</header>
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p>Data Analytics Portfolio</p>
+        <p>Predictive Modeling & Classification</p>
+    </header>
 
-<nav>
-  <a href="/data-analyst-portfolio/index.html">Home</a>
-  <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-  <a href="/data-analyst-portfolio/contact.html">Contact</a>
-</nav>
-
-<div class="container">
-  <h2>Predictive Modeling & Classification</h2>
-  
-  <div class="business-description">
-    Prevent problems before they happen. These machine learning skills help businesses identify at-risk customers, predict employee turnover, detect fraud, and automate decision-making—saving costs through early intervention and data-driven insights.
-  </div>
-  
-  <p class="category-description">
-    <strong>Core Skills:</strong> Machine learning algorithms, risk prediction, binary/multi-class classification, model validation<br>
-    <strong>When to use:</strong> Predicting outcomes, identifying high-risk individuals, classifying data into categories<br>
-    <strong>Tools:</strong> Python (scikit-learn, pandas), R, SQL, Streamlit for interactive dashboards
-  </p>
-
-  <div class="case-studies-grid">
-    <div class="case-study">
-      <h3>Who's Likely to Quit - Employee Turnover Prediction</h3>
-      <p><strong>Techniques:</strong> Classification algorithms, employee analytics, risk assessment</p>
-      <p>Using predictive analytics to identify employees at risk of resigning, helping HR departments implement proactive retention strategies.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
+    <div class="business-description">
+        Prevent problems before they happen. These machine learning skills help businesses identify at-risk customers, predict employee turnover, detect fraud, and automate decision-making—saving costs through early intervention and data-driven insights.
     </div>
 
-    <div class="case-study">
-      <h3>Predicting Depression Risk in Students</h3>
-      <p><strong>Techniques:</strong> Mental health risk modeling, predictive classification, early intervention</p>
-      <p>Interactive dashboard focusing on early intervention strategies using predictive modeling to identify students at risk of depression.</p>
-      <a href="/data-analyst-portfolio/interactive.html" target="_blank" class="case-link">View Interactive Dashboard →</a>
+    <nav>
+        <a href="/data-analyst-portfolio/index.html">Home</a>
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Who's Likely to Quit - Employee Turnover</a></h3>
+                    <p>Using predictive analytics to identify employees at risk of resigning for proactive retention strategies.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-depression-risk-student.html">Predicting Depression Risk in Students</a></h3>
+                    <p>Early intervention strategies using predictive modeling to identify students at risk of depression.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html">Flagging High-Risk Borrowers</a></h3>
+                    <p>Demonstrate how underwriters predict loan default risks using machine learning classification techniques.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/identify-at-risk-student.html">Identifying At-Risk Students Early</a></h3>
+                    <p>Predictive modeling to help teachers identify students who need additional academic support.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Saving the Silent Spenders</a></h3>
+                    <p>Identifying at-risk high-value customers using predictive analytics to prevent customer churn.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-member-retention-fitness-center.html">Predicting Member Retention - Fitness Center</a></h3>
+                    <p>Machine learning models to predict fitness center member retention and reduce churn rates.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <div class="case-study">
-      <h3>Flagging High-Risk Borrowers</h3>
-      <p><strong>Techniques:</strong> Credit risk modeling, binary classification, loan default prediction</p>
-      <p>Demonstrate how underwriters predict loan default risks using machine learning classification techniques and financial indicators.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>Identifying At-Risk Students Early</h3>
-      <p><strong>Techniques:</strong> Academic risk prediction, early warning systems, educational analytics</p>
-      <p>Uses predictive modeling to help teachers identify students who need additional support before they fall behind academically.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>Saving the Silent Spenders</h3>
-      <p><strong>Techniques:</strong> Customer churn prediction, value-based segmentation</p>
-      <p>Identifying at-risk high-value customers using predictive analytics to prevent customer churn and maximize retention efforts.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+    </footer>
 
 </body>
 </html>

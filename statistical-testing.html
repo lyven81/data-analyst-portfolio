@@ -1,90 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Statistical Testing & Distribution Analysis | Lee Yih Ven</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistical Testing & Distribution Analysis | Lee Yih Ven's Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .business-description {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007BFF;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 20px;
+            vertical-align: top;
+            text-align: left;
+        }
+        td h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        td p {
+            font-size: 1rem;
+            color: #555;
+        }
+        td a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+            }
+            tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+            td {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            td h3 {
+                font-size: 1.3rem;
+            }
+            td p {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .business-description {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Lee Yih Ven</h1>
-  <p>Data Analytics Portfolio</p>
-  <p>Turning business questions into actionable insights with data-driven solutions.</p>
-</header>
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p>Data Analytics Portfolio</p>
+        <p>Statistical Testing & Distribution Analysis</p>
+    </header>
 
-<nav>
-  <a href="/data-analyst-portfolio/index.html">Home</a>
-  <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-  <a href="/data-analyst-portfolio/contact.html">Contact</a>
-</nav>
-
-<div class="container">
-  <h2>Statistical Testing & Distribution Analysis</h2>
-  
-  <div class="business-description">
-    Validate decisions with statistical rigor. These skills help businesses test marketing campaigns, compare product performance, validate quality improvements, and make evidence-based decisions by distinguishing real effects from random variation.
-  </div>
-  
-  <p class="category-description">
-    <strong>Core Skills:</strong> Hypothesis testing, A/B testing, distribution analysis, significance testing, p-values<br>
-    <strong>When to use:</strong> Testing assumptions, comparing groups, validating hypotheses, quality control<br>
-    <strong>Tools:</strong> Python (scipy.stats), R, SPSS, Excel statistical functions
-  </p>
-
-  <div class="case-studies-grid">
-    <div class="case-study">
-      <h3>Cash or Credit Card - Payment Method Impact</h3>
-      <p><strong>Techniques:</strong> A/B testing, payment behavior analysis, statistical significance testing</p>
-      <p>Exploring how payment methods influence customer spending through hypothesis testing and comparative statistical analysis.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
+    <div class="business-description">
+        Validate decisions with statistical rigor. These skills help businesses test marketing campaigns, compare product performance, validate quality improvements, and make evidence-based decisions by distinguishing real effects from random variation.
     </div>
 
-    <div class="case-study">
-      <h3>Why Every Class Counts - Attendance vs Performance</h3>
-      <p><strong>Techniques:</strong> Correlation testing, academic performance analysis, statistical significance</p>
-      <p>Demonstrate correlation between attendance and academic performance using statistical hypothesis testing methods.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
+    <nav>
+        <a href="/data-analyst-portfolio/index.html">Home</a>
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Cash or Credit Card - Payment Method Impact</a></h3>
+                    <p>Exploring how payment methods influence customer spending through hypothesis testing and statistical analysis.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/why-every-class-counts.html">Why Every Class Counts - Attendance vs Performance</a></h3>
+                    <p>Demonstrate correlation between attendance and academic performance using statistical hypothesis testing.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/connected-or-disconnected.html">Connected or Disconnected? - Social Media Impact</a></h3>
+                    <p>Examine social media's effect on student relationships using statistical testing and behavioral analysis.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/hotel-sleep-analysis.html">Did You Sleep Well Last Night? - Guest Satisfaction</a></h3>
+                    <p>Evaluating guest sleep quality to improve satisfaction using statistical testing and hospitality metrics.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/east-coast-alert.html">East Coast Alert - Crime Probability Analysis</a></h3>
+                    <p>Investigate sex crime probabilities across states using statistical analysis and risk assessment methodologies.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/best-movie-of-all-time.html">The Best Movie of All Time - Genre Analysis</a></h3>
+                    <p>Analyzing top IMDb movie genres using statistical distribution analysis and ranking methodologies.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <div class="case-study">
-      <h3>Connected or Disconnected? - Social Media Impact Study</h3>
-      <p><strong>Techniques:</strong> Comparative analysis, social research methodology, hypothesis testing</p>
-      <p>Examine social media's effect on student relationships using statistical testing and behavioral analysis techniques.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>Did You Sleep Well Last Night? - Guest Satisfaction Analysis</h3>
-      <p><strong>Techniques:</strong> Quality assessment, satisfaction testing, hotel analytics</p>
-      <p>Evaluating guest sleep quality to improve satisfaction using statistical testing and hospitality performance metrics.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>East Coast Alert - Crime Probability Analysis</h3>
-      <p><strong>Techniques:</strong> Risk probability analysis, geographic statistical analysis</p>
-      <p>Investigate sex crime probabilities across states using statistical analysis and risk assessment methodologies.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>The Best Movie of All Time - Genre Analysis</h3>
-      <p><strong>Techniques:</strong> Distribution analysis, ranking methodology, entertainment analytics</p>
-      <p>Analyzing top IMDb movie genres using statistical distribution analysis and ranking methodologies.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+    </footer>
 
 </body>
 </html>

@@ -1,90 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Segmentation & Comparative Analysis | Lee Yih Ven</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segmentation & Comparative Analysis | Lee Yih Ven's Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .business-description {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007BFF;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 20px;
+            vertical-align: top;
+            text-align: left;
+        }
+        td h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        td p {
+            font-size: 1rem;
+            color: #555;
+        }
+        td a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+            }
+            tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+            td {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            td h3 {
+                font-size: 1.3rem;
+            }
+            td p {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .business-description {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Lee Yih Ven</h1>
-  <p>Data Analytics Portfolio</p>
-  <p>Turning business questions into actionable insights with data-driven solutions.</p>
-</header>
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p>Data Analytics Portfolio</p>
+        <p>Segmentation & Comparative Analysis</p>
+    </header>
 
-<nav>
-  <a href="/data-analyst-portfolio/index.html">Home</a>
-  <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-  <a href="/data-analyst-portfolio/contact.html">Contact</a>
-</nav>
-
-<div class="container">
-  <h2>Segmentation & Comparative Analysis</h2>
-  
-  <div class="business-description">
-    Understand your diverse audiences. These skills help businesses identify distinct customer groups, tailor marketing strategies, optimize product offerings, and discover new market opportunities through data-driven audience insights and targeted approaches.
-  </div>
-  
-  <p class="category-description">
-    <strong>Core Skills:</strong> Customer segmentation, demographic analysis, market comparison, cluster analysis<br>
-    <strong>When to use:</strong> Understanding different customer groups, market research, targeted marketing strategies<br>
-    <strong>Tools:</strong> Python (pandas, scikit-learn), R, Tableau, SQL for data segmentation
-  </p>
-
-  <div class="case-studies-grid">
-    <div class="case-study">
-      <h3>What Men and Women Buy - Gender-based Purchasing Analysis</h3>
-      <p><strong>Techniques:</strong> Demographic segmentation, gender-based analytics, preference mapping</p>
-      <p>Explore how gender-specific category preferences can unlock new campaign strategies through comprehensive demographic analysis.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
+    <div class="business-description">
+        Understand your diverse audiences. These skills help businesses identify distinct customer groups, tailor marketing strategies, optimize product offerings, and discover new market opportunities through data-driven audience insights and targeted approaches.
     </div>
 
-    <div class="case-study">
-      <h3>Who Stays and Who Leaves? - Customer Retention by Location</h3>
-      <p><strong>Techniques:</strong> Geographic segmentation, retention analysis, location-based analytics</p>
-      <p>Discover customer retention patterns by location using geographic segmentation and cohort analysis techniques.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
+    <nav>
+        <a href="/data-analyst-portfolio/index.html">Home</a>
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <table>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">What Men and Women Buy - Gender Purchasing</a></h3>
+                    <p>Explore how gender-specific category preferences can unlock new campaign strategies through demographic analysis.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/who-stays.html">Who Stays and Who Leaves? - Customer Retention</a></h3>
+                    <p>Discover customer retention patterns by location using geographic segmentation and cohort analysis techniques.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/learning-path.html">Which Learning Paths Lead Where? - Career Goals</a></h3>
+                    <p>Analyze how career goals influence student effort through educational segmentation and pathway analysis.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/why-sarawak.html">Why You Should Consider Sarawak - Regional Investment</a></h3>
+                    <p>Explore investment potential in different regions using comparative market analysis and regional segmentation.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/finding-the-sweet-spot.html">Finding the Sweet Spot - Investment Location</a></h3>
+                    <p>Analyze mid-sized home investment locations and price points using geographic and demographic segmentation.</p>
+                </td>
+                <td>
+                    <h3><a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">What Makes a Song Trend? - Content Performance</a></h3>
+                    <p>Analyze factors that boost content performance through music trend segmentation and viral content analysis.</p>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    <div class="case-study">
-      <h3>Which Learning Paths Lead Where? - Career Goal Segmentation</h3>
-      <p><strong>Techniques:</strong> Educational path analysis, career trajectory segmentation</p>
-      <p>Analyze how career goals influence student effort through educational segmentation and pathway analysis.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>Why You Should Consider Sarawak - Regional Investment Analysis</h3>
-      <p><strong>Techniques:</strong> Regional comparison, investment opportunity analysis, market segmentation</p>
-      <p>Explore investment potential in different regions using comparative market analysis and regional segmentation techniques.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>Finding the Sweet Spot - Investment Location Analysis</h3>
-      <p><strong>Techniques:</strong> Location-based segmentation, price point analysis, market comparison</p>
-      <p>Analyze mid-sized home investment locations and price points using geographic and demographic segmentation methods.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-
-    <div class="case-study">
-      <h3>What Makes a Song Trend? - Content Performance Segmentation</h3>
-      <p><strong>Techniques:</strong> Content categorization, trend analysis, performance segmentation</p>
-      <p>Analyze factors that boost content performance through music trend segmentation and viral content analysis.</p>
-      <a href="https://case-study-dashboard-b4682rwavzuwjvnsog2swn.streamlit.app/" target="_blank" class="case-link">View Analysis →</a>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-</footer>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+    </footer>
 
 </body>
 </html>
