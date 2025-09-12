@@ -55,53 +55,104 @@
         nav a:hover {
             text-decoration: underline;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .featured-section {
+            margin-bottom: 50px;
         }
-        td {
-            padding: 20px;
-            vertical-align: top;
-            text-align: left;
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
         }
-        td h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
         }
-        td p {
-            font-size: 1rem;
-            color: #555;
+        .case-study-card {
+            background: #f9f9f9;
+            border-radius: 6px;
+            padding: 30px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .case-study-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #007BFF;
+        }
+        .case-study-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .case-study-title {
+            font-size: 1.4em;
+            color: #007BFF;
             margin-bottom: 15px;
+            font-weight: bold;
         }
-        td a {
+        .case-study-title a {
             color: #007BFF;
             text-decoration: none;
         }
-        td a:hover {
+        .case-study-title a:hover {
             text-decoration: underline;
         }
-        .case-study-links {
+        .case-study-description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .all-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .all-studies-grid .case-study-card {
+            padding: 20px;
+        }
+        .all-studies-grid .case-study-title {
+            font-size: 1.2em;
+        }
+        .case-study-buttons {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
-        .case-study-links a {
+        .case-study-buttons a {
             display: inline-block;
-            padding: 8px 16px;
-            background-color: #f5f5dc;
-            color: #333;
+            padding: 10px 18px;
+            background-color: #007BFF;
+            color: white;
             text-decoration: none;
-            border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s ease;
+            border: 1px solid #007BFF;
         }
-        .case-study-links a:hover {
-            background-color: #daa520;
-            color: white;
-            border-color: #daa520;
+        .case-study-buttons a:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
             transform: translateY(-1px);
+        }
+        .case-study-buttons a.secondary {
+            background-color: transparent;
+            color: #007BFF;
+            border: 1px solid #007BFF;
+        }
+        .case-study-buttons a.secondary:hover {
+            background-color: #007BFF;
+            color: white;
         }
         footer {
             text-align: center;
@@ -111,24 +162,18 @@
             margin-top: 20px;
         }
         @media (max-width: 768px) {
-            table {
-                display: block;
+            .featured-grid,
+            .all-studies-grid {
+                grid-template-columns: 1fr;
             }
-            tr {
-                display: block;
-                margin-bottom: 20px;
+            .section-title {
+                font-size: 1.6rem;
             }
-            td {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                box-sizing: border-box;
+            .case-study-card {
+                padding: 20px;
             }
-            td h3 {
-                font-size: 1.3rem;
-            }
-            td p {
-                font-size: 1rem;
+            .case-study-title {
+                font-size: 1.2em;
             }
             nav a {
                 font-size: 1rem;
@@ -142,11 +187,11 @@
             .tagline {
                 font-size: 1rem;
             }
-            .case-study-links {
+            .case-study-buttons {
                 flex-direction: column;
-                gap: 5px;
+                gap: 8px;
             }
-            .case-study-links a {
+            .case-study-buttons a {
                 text-align: center;
             }
         }
@@ -167,80 +212,83 @@
     </nav>
 
     <div class="container">
-        <table>
-            <tr>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html">Beyond the Buzzwords</a></h3>
-                    <p>Discover which jewelry keywords actually deliver clicks and sales.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/beyond-the-buzzwords-dashboard.html">View Dashboard</a>
+        <!-- Featured Case Studies -->
+        <section class="featured-section">
+            <h2 class="section-title">Featured Case Studies</h2>
+            <div class="featured-grid">
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html">Beyond the Buzzwords</a></h3>
+                    <p class="case-study-description">Discover which jewelry keywords actually deliver clicks and sales through advanced keyword performance analysis.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html">Read Case Study</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/beyond-the-buzzwords-dashboard.html" class="secondary">View Dashboard</a>
                     </div>
-                </td>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/grow-smarter.html">Grow Smarter, Not Bigger</a></h3>
-                    <p>Find out whether hiring more leads to higher revenue.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/grow-smarter.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/grow-smarter-dashboard.html">View Dashboard</a>
+                </div>
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/is-the-price-right.html">Is the Price Right?</a></h3>
+                    <p class="case-study-description">Use predictive modeling and fair value analysis to make informed investment decisions on stock timing.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/is-the-price-right.html">Read Case Study</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/is-the-price-right-dashboard.html" class="secondary">View Dashboard</a>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/is-the-price-right.html">Is the Price Right?</a></h3>
-                    <p>Use fair value prediction to decide when to buy, hold, or wait on a stock.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/is-the-price-right.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/is-the-price-right-dashboard.html">View Dashboard</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Case Studies -->
+        <section>
+            <h2 class="section-title">All Case Studies</h2>
+            <div class="all-studies-grid">
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/grow-smarter.html">Grow Smarter, Not Bigger</a></h3>
+                    <p class="case-study-description">Find out whether hiring more leads to higher revenue.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/grow-smarter.html">Read More</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/grow-smarter-dashboard.html" class="secondary">Dashboard</a>
                     </div>
-                </td>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html">Overpriced or Undervalued?</a></h3>
-                    <p>Find out if gold is trading below or above fair value.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/overpriced-or-undervalued-dashboard.html">View Dashboard</a>
+                </div>
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html">Overpriced or Undervalued?</a></h3>
+                    <p class="case-study-description">Find out if gold is trading below or above fair value.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html">Read More</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/overpriced-or-undervalued-dashboard.html" class="secondary">Dashboard</a>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/pattern-behind-price.html">Patterns Behind the Price</a></h3>
-                    <p>Learn how Microsoft's stock price reveals long-term growth patterns and crisis resilience.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/pattern-behind-price.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/pattern-behind-price-dashboard.html">View Dashboard</a>
+                </div>
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/pattern-behind-price.html">Patterns Behind the Price</a></h3>
+                    <p class="case-study-description">Learn how Microsoft's stock price reveals long-term growth patterns and crisis resilience.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/pattern-behind-price.html">Read More</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/pattern-behind-price-dashboard.html" class="secondary">Dashboard</a>
                     </div>
-                </td>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predict-product-sales.html">Predicting Product Sales</a></h3>
-                    <p>Find out which advertising channels deliver the most sales per dollar spent.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predict-product-sales.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/predict-product-sales-dashboard.html">View Dashboard</a>
+                </div>
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predict-product-sales.html">Predicting Product Sales</a></h3>
+                    <p class="case-study-description">Find out which advertising channels deliver the most sales per dollar spent.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predict-product-sales.html">Read More</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/predict-product-sales-dashboard.html" class="secondary">Dashboard</a>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap?</a></h3>
-                    <p>Decode Google's sharp price swings to separate hype from trend.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html">View Dashboard</a>
+                </div>
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap?</a></h3>
+                    <p class="case-study-description">Decode Google's sharp price swings to separate hype from trend.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html" class="secondary">Dashboard</a>
                     </div>
-                </td>
-                <td>
-                    <h3><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">What Men and Women Buy</a></h3>
-                    <p>Explore how gender-specific category preferences can unlock new campaign strategies.</p>
-                    <div class="case-study-links">
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">Read More →</a>
-                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/what-men-and-women-buy-dashboard.html">View Dashboard</a>
+                </div>
+                <div class="case-study-card">
+                    <h3 class="case-study-title"><a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">What Men and Women Buy</a></h3>
+                    <p class="case-study-description">Explore how gender-specific category preferences can unlock new campaign strategies.</p>
+                    <div class="case-study-buttons">
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-men-and-women-buy.html">Read More</a>
+                        <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/what-men-and-women-buy-dashboard.html" class="secondary">Dashboard</a>
                     </div>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+        </section>
     </div>
 
     <footer>
