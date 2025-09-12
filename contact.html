@@ -7,14 +7,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Track Contact form submissions
+            const contactForm = document.querySelector('form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', () => {
+                    // Track form submission event
+                    console.log('Data Analytics Portfolio Contact form submitted');
+                    
+                    // You can add Google Analytics tracking here if needed:
+                    // gtag('event', 'contact_form_submit', {
+                    //   event_category: 'lead',
+                    //   event_label: 'Data Analytics Portfolio Contact Form'
+                    // });
+                });
+            }
+        });
+    </script>
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #ffffff;
+            color: #222;
         }
         .container {
             max-width: 900px;
@@ -23,7 +43,7 @@
         }
         header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
         header h1 {
             font-size: 2.5rem;
@@ -44,48 +64,140 @@
         }
         nav {
             text-align: center;
-            margin: 10px 0;
+            margin-bottom: 40px;
         }
         nav a {
             color: #007BFF;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 1rem;
+            margin: 0 15px;
+            font-size: 1.2rem;
         }
         nav a:hover {
             text-decoration: underline;
         }
-        .contact-section ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-            text-align: left;
+        .contact-section {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #007BFF;
+            margin-bottom: 30px;
         }
-        .contact-section ul li {
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .contact-info h3 {
+            color: #007BFF;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .contact-item {
+            text-align: center;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            min-width: 200px;
+        }
+        .contact-item strong {
+            display: block;
+            color: #007BFF;
             font-size: 0.9rem;
             margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .contact-section ul li a {
-            color: #007BFF;
+        .contact-item a {
+            color: #333;
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
-        .contact-section ul li a:hover {
-            text-decoration: underline;
+        .contact-item a:hover {
+            color: #007BFF;
         }
-        iframe {
-            width: 100%;
-            height: 500px;
-            border: none;
+        .form-section {
+            background-color: #f9f9f9;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #007BFF;
+        }
+        .form-section h3 {
+            color: #007BFF;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-section p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .contact-form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #222;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: all 0.2s ease;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #007BFF;
+            outline: none;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        .contact-form .submit-btn {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .contact-form .submit-btn:hover {
+            background-color: #0056b3;
         }
         footer {
             text-align: center;
-            padding: 15px;
-            background-color: #333;
+            padding: 20px;
+            background-color: #222;
             color: white;
-            margin-top: 20px;
-            font-size: 0.8rem;
+            margin-top: 40px;
+            font-size: 0.9rem;
         }
 
         /* Responsive styles for mobile */
@@ -104,6 +216,16 @@
             }
             .container {
                 padding: 15px;
+            }
+            .contact-section, .form-section {
+                padding: 20px;
+            }
+            .contact-details {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .contact-item {
+                min-width: auto;
             }
             iframe {
                 height: 450px;
@@ -127,14 +249,38 @@
 
     <div class="container">
         <section class="contact-section">
-            <ul>
-                <li>Email: <a href="mailto:director@pinnacleslearningsolution.com">director@pinnacleslearningsolution.com</a></li>
-                <li>Phone: +6014-9207099</li>
-            </ul>
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Phone</strong>
+                        <span>+6014-9207099</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf0rAjyuXJtl83q32filKrk-I1xtE3zGUP6K7VxBe1WuNx0RA/viewform?embedded=true">
-                Loading…
-            </iframe>
+        <section class="form-section">
+            <h3>Send a Message</h3>
+            <p>Have a data analytics project in mind? Fill out the form below and I'll get back to you within 24 hours.</p>
+            
+            <form action="https://formsubmit.co/director@pinnacleslearning.com" method="post" class="contact-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+
+                <label for="message">Tell Us About Your Data Challenge</label>
+                <textarea id="message" name="message" rows="6" placeholder="What data challenges are you facing? (e.g., forecasting, churn analysis, dashboard creation, statistical modeling)" required></textarea>
+
+                <button type="submit" class="submit-btn">Request Analytics Consultation</button>
+            </form>
         </section>
     </div>
 
