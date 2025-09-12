@@ -26,14 +26,21 @@
             margin-bottom: 20px;
         }
         header h1 {
-            font-size: 2rem;
-            color: #222;
+            font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 10px;
+            color: #333;
         }
-        header p {
-            font-size: 1rem;
-            color: #555;
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #666;
         }
         nav {
             text-align: center;
@@ -84,10 +91,16 @@
         /* Responsive styles for mobile */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
-            header p, nav a {
-                font-size: 0.9rem;
+            .category-title {
+                font-size: 1.5rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
             }
             .container {
                 padding: 15px;
@@ -102,8 +115,8 @@
 
     <header>
         <h1>Lee Yih Ven</h1>
-        <p>Data Analytics Portfolio</p>
-        <p>Let's unlock data's potential by turning insights into action together.</p>
+        <p class="category-title">Data Analytics Portfolio</p>
+        <p class="tagline">Let's unlock data's potential by turning insights into action together.</p>
     </header>
 
     <nav>
