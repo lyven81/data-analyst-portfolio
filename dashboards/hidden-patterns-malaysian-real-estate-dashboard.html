@@ -372,7 +372,26 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .viz-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+
             .hero h1 {
                 font-size: 2.2rem;
             }
@@ -386,29 +405,88 @@
                 align-items: center;
             }
 
+            .btn {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+
+            .main-content {
+                padding: 60px 0;
+            }
+
             .metrics-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                margin-bottom: 60px;
+            }
+
+            .metric-card {
+                padding: 30px 20px;
+            }
+
+            .metric-number {
+                font-size: 2.5rem;
             }
 
             .insights,
             .recommendations {
                 padding: 40px 20px;
+                margin-bottom: 60px;
+            }
+
+            .insights h2,
+            .recommendations h2,
+            .visualization h2 {
+                font-size: 2rem;
+                margin-bottom: 30px;
             }
 
             .insights-grid,
-            .recommendations-grid,
-            .viz-grid {
+            .recommendations-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 25px;
+            }
+
+            .insight-item,
+            .recommendation-item {
+                padding: 25px 20px;
             }
 
             .viz-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             .viz-card img {
                 height: 250px;
+            }
+
+            .viz-content {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .metric-number {
+                font-size: 2.2rem;
+            }
+
+            .insights h2,
+            .recommendations h2,
+            .visualization h2 {
+                font-size: 1.8rem;
+            }
+
+            .viz-card img {
+                height: 200px;
             }
         }
     </style>
@@ -418,7 +496,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>The Hidden Patterns in Malaysian Real Estate</h1>
-                <p>Strategic market segmentation analysis reveals how property type characteristics outperform geographic location for maximizing investment returns across Malaysia</p>
+                <p>Market segmentation analysis reveals property types outperform geographic location for maximizing Malaysian real estate returns</p>
                 <div class="cta-buttons">
                     <a href="/data-analyst-portfolio/case-studies/hidden-patterns-malaysian-real-estate.html" class="btn btn-primary">View Full Case Study</a>
                     <a href="/data-analyst-portfolio/segmentation-analysis.html" class="btn btn-secondary">More Analytics</a>
