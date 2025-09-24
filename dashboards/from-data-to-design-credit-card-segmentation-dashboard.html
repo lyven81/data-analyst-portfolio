@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flagging High-Risk Borrowers - Dashboard | Lee Yih Ven</title>
+    <title>From Data to Design - Credit Card Customer Segmentation - Dashboard | Lee Yih Ven</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -231,6 +231,71 @@
             line-height: 1.6;
         }
 
+        /* Visualization Section */
+        .visualization {
+            margin-bottom: 80px;
+        }
+
+        .visualization h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .visualization h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gold-gradient);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .viz-card {
+            background: var(--card-background);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .viz-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
+        }
+
+        .viz-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .viz-content {
+            padding: 30px;
+        }
+
+        .viz-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .viz-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
         /* Recommendations Section */
         .recommendations {
             background: var(--gradient);
@@ -362,7 +427,8 @@
             }
 
             .insights h2,
-            .recommendations h2 {
+            .recommendations h2,
+            .visualization h2 {
                 font-size: 2rem;
                 margin-bottom: 30px;
             }
@@ -375,6 +441,19 @@
 
             .insight-item,
             .recommendation-item {
+                padding: 25px 20px;
+            }
+
+            .viz-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .viz-card img {
+                height: 250px;
+            }
+
+            .viz-content {
                 padding: 25px 20px;
             }
         }
@@ -393,8 +472,13 @@
             }
 
             .insights h2,
-            .recommendations h2 {
+            .recommendations h2,
+            .visualization h2 {
                 font-size: 1.8rem;
+            }
+
+            .viz-card img {
+                height: 200px;
             }
         }
     </style>
@@ -403,11 +487,11 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Flagging High-Risk Borrowers</h1>
-                <p>Discover which borrower profiles signal default risk before approval</p>
+                <h1>From Data to Design - Credit Card Customer Segmentation</h1>
+                <p>Customer segmentation analysis reveals four distinct profiles that guide profitable credit card product development</p>
                 <div class="cta-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html" class="btn btn-primary">View Full Case Study</a>
-                    <a href="/data-analyst-portfolio/predictive-modeling.html" class="btn btn-secondary">More Analytics</a>
+                    <a href="/data-analyst-portfolio/case-studies/from-data-to-design-credit-card-segmentation.html" class="btn btn-primary">View Full Case Study</a>
+                    <a href="/data-analyst-portfolio/segmentation-analysis.html" class="btn btn-secondary">More Analytics</a>
                 </div>
             </div>
         </div>
@@ -417,45 +501,79 @@
         <section class="main-content">
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-number">15,000</div>
-                    <div class="metric-label">Loan Applications</div>
-                    <div class="metric-description">Historical loan data analyzed for risk pattern identification and model training</div>
+                    <div class="metric-number">4</div>
+                    <div class="metric-label">Customer Segments</div>
+                    <div class="metric-description">Distinct behavioral clusters identified through comprehensive credit usage pattern analysis</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">94%</div>
-                    <div class="metric-label">Risk Detection Accuracy</div>
-                    <div class="metric-description">High-precision AI model performance in identifying potential defaulters</div>
+                    <div class="metric-number">3.2x</div>
+                    <div class="metric-label">Higher Default Risk</div>
+                    <div class="metric-description">Cluster 3 customers show significantly elevated risk requiring specialized product features</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">40%</div>
-                    <div class="metric-label">Default Reduction</div>
-                    <div class="metric-description">Decrease in loan defaults through proactive risk assessment implementation</div>
+                    <div class="metric-number">2</div>
+                    <div class="metric-label">Underserved Segments</div>
+                    <div class="metric-description">Clusters 1 and 3 demonstrate higher dissatisfaction with current product offerings</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">$2M</div>
-                    <div class="metric-label">Annual Savings</div>
-                    <div class="metric-description">Cost avoidance achieved through early identification of high-risk borrowers</div>
+                    <div class="metric-number">85%</div>
+                    <div class="metric-label">Revenue Opportunity</div>
+                    <div class="metric-description">Clusters 0 and 3 represent the highest revenue potential through targeted product strategies</div>
                 </div>
             </div>
 
             <section class="insights">
-                <h2>Key Risk Assessment Insights</h2>
+                <h2>Key Segmentation Insights</h2>
                 <div class="insights-grid">
                     <div class="insight-item">
-                        <div class="insight-title">Income-to-Debt Ratio Impact</div>
-                        <div class="insight-text">Borrowers with debt-to-income ratios above 45% show 3.2x higher default probability, becoming the strongest single predictor of repayment risk.</div>
+                        <div class="insight-title">Reliable High-Limit Customers</div>
+                        <div class="insight-text">Cluster 0 customers are older, disciplined users with high credit limits who spend responsibly and repay on time. They represent the ideal Premium Lifestyle Card candidates with consistent revenue generation.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Employment History Patterns</div>
-                        <div class="insight-text">Job tenure less than 18 months combined with frequent employment changes indicates 65% higher default risk than stable employment patterns.</div>
+                        <div class="insight-title">Stretched but Disciplined Payers</div>
+                        <div class="insight-text">Cluster 1 customers rely heavily on credit but maintain timely repayments despite financial pressure. They need flexible Installment-Friendly Cards to manage cash flow effectively.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Credit Utilization Behaviors</div>
-                        <div class="insight-text">High credit card utilization (>80%) coupled with multiple recent inquiries creates compounding risk factors that increase default likelihood by 85%.</div>
+                        <div class="insight-title">Balanced Growth Segment</div>
+                        <div class="insight-text">Cluster 2 represents younger professionals with high credit limits but moderate spending patterns. They're building financial habits and suit Standard Cards with development potential.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Geographic Risk Clustering</div>
-                        <div class="insight-text">Certain geographic regions show systematic economic vulnerabilities that affect repayment capacity, requiring location-specific risk adjustments.</div>
+                        <div class="insight-title">High-Volume High-Risk Spenders</div>
+                        <div class="insight-text">Cluster 3 customers generate significant transaction volumes but carry higher debt with weaker repayment discipline. They require Premium Cards with enhanced risk controls.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="visualization">
+                <h2>Data Visualization Insights</h2>
+                <div class="viz-grid">
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%201%20elbow_plot.png" alt="Optimal Cluster Analysis">
+                        <div class="viz-content">
+                            <div class="viz-title">Optimal Segmentation Analysis</div>
+                            <div class="viz-description">Elbow method analysis confirms four as the optimal number of customer segments, providing the ideal balance between detail and practical implementation.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%202%20cluster_radar_chart.png" alt="Customer Profile Characteristics">
+                        <div class="viz-content">
+                            <div class="viz-title">Customer Profile Characteristics</div>
+                            <div class="viz-description">Radar chart reveals distinct behavioral patterns across segments, highlighting credit usage, spending habits, and repayment behaviors that drive product recommendations.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%203%20risk_flag_boxplot.png" alt="Risk Assessment by Segment">
+                        <div class="viz-content">
+                            <div class="viz-title">Risk Distribution Analysis</div>
+                            <div class="viz-description">Box plot analysis clearly identifies Cluster 3 as highest risk and Cluster 1 as lowest risk, enabling targeted risk management strategies.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%204%20cluster_vs_satisfaction.png" alt="Customer Satisfaction Analysis">
+                        <div class="viz-content">
+                            <div class="viz-title">Satisfaction Gap Identification</div>
+                            <div class="viz-description">Satisfaction analysis reveals underserved segments in Clusters 1 and 3, indicating significant opportunities for tailored product development.</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -465,23 +583,23 @@
     <section class="recommendations">
         <div class="container">
             <div class="recommendations-content">
-                <h2>Strategic Recommendations</h2>
+                <h2>Strategic Product Recommendations</h2>
                 <div class="recommendations-grid">
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Implement Tiered Risk Scoring</div>
-                        <div class="recommendation-text">Deploy multi-tier risk assessment with debt-to-income ratio as primary factor. Require additional documentation for ratios above 35% and enhanced verification above 45%.</div>
+                        <div class="recommendation-title">Premium Lifestyle Cards</div>
+                        <div class="recommendation-text">Deploy Premium Lifestyle Cards for Cluster 0 (reliable high-limit customers) and Cluster 3 (high-spending customers). Include enhanced risk monitoring for Cluster 3 while maintaining attractive rewards to capture transaction volumes.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Enhanced Employment Verification</div>
-                        <div class="recommendation-text">Strengthen employment verification processes for borrowers with job tenure under 2 years. Consider employment stability weighting in final risk scores.</div>
+                        <div class="recommendation-title">Installment-Friendly Products</div>
+                        <div class="recommendation-text">Develop specialized Installment-Friendly Cards for Cluster 1 customers who show strong repayment discipline but need flexibility. Focus on payment planning features and cash flow management tools.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Dynamic Interest Rate Pricing</div>
-                        <div class="recommendation-text">Adjust interest rates based on calculated risk scores to maintain profitability while offering competitive rates to low-risk borrowers.</div>
+                        <div class="recommendation-title">Standard Growth Cards</div>
+                        <div class="recommendation-text">Position Standard Cards for Cluster 2 young professionals with balanced financial behaviors. Design features that support financial growth while providing account development opportunities over time.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Early Warning Monitoring</div>
-                        <div class="recommendation-text">Establish ongoing monitoring system for approved loans to detect early warning signs of financial distress and enable proactive intervention strategies.</div>
+                        <div class="recommendation-title">Revenue Optimization Strategy</div>
+                        <div class="recommendation-text">Focus revenue generation on Clusters 0 and 3 which represent 85% of revenue potential. Balance Cluster 0's steady low-risk returns with Cluster 3's high-volume but elevated-risk transactions.</div>
                     </div>
                 </div>
             </div>

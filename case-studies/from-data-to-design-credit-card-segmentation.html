@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Data to Design: Credit Card Customer Segmentation | Lee Yih Ven</title>
+    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+            <!-- Home Link Button -->
+            <section class="home-link-section">
+                <a href="/data-analyst-portfolio/index.html" class="home-link-btn">Home</a>
+            </section>
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+            <!-- Dashboard Link Button -->
+            <section class="dashboard-link-section">
+                <a href="/data-analyst-portfolio/dashboards/from-data-to-design-credit-card-segmentation-dashboard.html" class="dashboard-link-btn">View Dashboard</a>
+            </section>
+        </aside>
+
+        <main class="content">
+            <article>
+                <h1 class="case-study-title">From Data to Design: How Four Customer Profiles Shape Better Credit Card Products</h1>
+
+                <section class="overview">
+                    <h2>Overview</h2>
+                    <div class="visualization">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/cover%20image.png" alt="Credit Card Customer Segmentation Overview" class="chart-image">
+                    </div>
+                    <p>This analysis helps the credit card product development team design card packages that fit real customer needs. Instead of treating all customers the same, we looked for meaningful groups based on how people spend, repay, and rely on credit. The goal is to understand these groups so products can be tailored more effectively.</p>
+
+                    <p>The purpose is to find clear customer segments, describe what makes them different, and suggest the right type of card for each group. The target audience is the product team, who need these insights to create a balanced range of cards — from entry-level student cards to premium lifestyle cards — that drive adoption, loyalty, and revenue while keeping risk under control.</p>
+                </section>
+
+                <section class="key-questions">
+                    <h2>Key Research Questions</h2>
+
+                    <div class="question-block">
+                        <h3>1. How many distinct customer segments exist?</h3>
+                        <div class="visualization">
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%201%20elbow_plot.png" alt="Elbow Plot - Optimal Number of Clusters" class="chart-image">
+                        </div>
+                        <p>The analysis shows that customers fall naturally into four groups. This number strikes the right balance: it is detailed enough to highlight meaningful differences, but still simple to work with when designing products. Having four groups allows the team to create clear customer profiles without overcomplicating product planning.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>2. What defines each segment?</h3>
+                        <div class="visualization">
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%202%20cluster_radar_chart.png" alt="Cluster Characteristics Radar Chart" class="chart-image">
+                        </div>
+                        <p>The four groups are shaped by how much credit they have, how they use it, and how they manage repayments.</p>
+                        <ul>
+                            <li><strong>Cluster 0:</strong> Older, disciplined customers with high credit limits. They use their cards responsibly, spend within their means, and repay on time.</li>
+                            <li><strong>Cluster 1:</strong> Medium-income customers who rely heavily on credit but still make timely repayments. They feel financial pressure, often stretching their limits, and need more flexibility to manage repayments.</li>
+                            <li><strong>Cluster 2:</strong> Younger professionals with high credit limits but moderate spending. They represent a balanced group — not overspending, not struggling, but still building their financial habits.</li>
+                            <li><strong>Cluster 3:</strong> Heavy spenders who rely strongly on credit and carry higher debt. They are often urban, middle-aged, and generate high transaction volumes, but their repayment discipline is weaker, making them a riskier segment.</li>
+                        </ul>
+                        <p>Together, these segments reflect a spectrum: from reliable high-limit customers (Cluster 0), to stretched but disciplined payers (Cluster 1), balanced younger professionals (Cluster 2), and high-spending but risk-prone customers (Cluster 3).</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>3. Which clusters pose higher credit risk?</h3>
+                        <div class="visualization">
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%203%20risk_flag_boxplot.png" alt="Risk Flag Distribution by Cluster" class="chart-image">
+                        </div>
+                        <p>Cluster 3 stands out as the riskiest group because they carry heavier debt and struggle more with repayments. Cluster 1 is the safest group, as they show low risk despite being under more financial pressure. Clusters 0 and 2 fall in between, with generally reliable repayment behavior but less consistency than Cluster 1. In short: Cluster 3 is the highest risk, Cluster 1 is the lowest risk, and the others sit in the middle.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>4. Which segments are underserved by current products?</h3>
+                        <div class="visualization">
+                            <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/from-data-to-design-credit-card-segmentation/question%204%20cluster_vs_satisfaction.png" alt="Customer Satisfaction by Cluster" class="chart-image">
+                        </div>
+                        <p>Satisfaction levels tell us that Clusters 1 and 3 feel least well served by current cards. These groups are mostly medium-income customers, and many in Cluster 3 live in rural or semi-urban areas. They are more likely to say they are dissatisfied with their cards compared to other groups. This suggests that the products available today do not match their needs well — for example, fees may feel too high or rewards may not be meaningful to them.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>5. What credit card product idea is suitable for each cluster, and why?</h3>
+                        <p>Each group connects naturally to a card type. Cluster 0 fits a Premium Lifestyle Card, as they are reliable, high-limit customers who value rewards. Cluster 1 would benefit from an Installment-Friendly Card, which gives flexibility to manage financial pressure. Cluster 2 is younger and balanced, making them a good fit for a Standard Card with broad appeal. Cluster 3 also suits a Premium Lifestyle Card, but it should include tighter controls to manage their higher risk while still rewarding their heavy spending.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>6. Which cluster and product pairing would generate higher revenue?</h3>
+                        <p>The biggest revenue opportunities lie in Cluster 0 and Cluster 3. Cluster 0 is dependable, with high credit limits and strong repayment, so their Premium Lifestyle Card would steadily generate fees and transaction revenue with low risk. Cluster 3 spends the most, so they could bring in even more transaction revenue, but they come with higher risk. Clusters 1 and 2 have more modest potential, with Cluster 2 offering room for growth over time. Overall, Cluster 0 offers the best mix of revenue and reliability, while Cluster 3 offers more short-term upside but with greater risk exposure.</p>
+                    </div>
+                </section>
+
+                <section class="findings">
+                    <h2>Key Findings & Insights</h2>
+
+                    <div class="insight-card">
+                        <h3>Four Distinct Customer Segments Identified</h3>
+                        <p>Customer segmentation analysis reveals four natural groupings based on credit behavior, spending patterns, and repayment discipline. This segmentation provides the optimal balance between actionable detail and practical implementation simplicity.</p>
+                    </div>
+
+                    <div class="insight-card">
+                        <h3>Risk-Revenue Spectrum Across Segments</h3>
+                        <p>Segments span from high-reliability low-risk (Cluster 1) to high-spending high-risk (Cluster 3), with clear risk-return profiles that enable targeted product positioning and pricing strategies.</p>
+                    </div>
+
+                    <div class="insight-card">
+                        <h3>Product Gap Identification</h3>
+                        <p>Clusters 1 and 3 show higher dissatisfaction with current offerings, indicating underserved market segments with significant opportunity for tailored product development and improved customer satisfaction.</p>
+                    </div>
+
+                    <div class="insight-card">
+                        <h3>Revenue Optimization Opportunities</h3>
+                        <p>Cluster 0 and Cluster 3 represent the highest revenue potential, with Cluster 0 offering steady, low-risk returns and Cluster 3 providing high-volume transaction revenue despite elevated risk profiles.</p>
+                    </div>
+                </section>
+
+                <section class="recommendations">
+                    <h2>Strategic Recommendations</h2>
+
+                    <div class="recommendation-card">
+                        <h3>Premium Lifestyle Cards for High-Value Segments</h3>
+                        <p>Deploy Premium Lifestyle Cards for both Cluster 0 (reliable, high-limit customers) and Cluster 3 (high-spending customers). For Cluster 3, incorporate enhanced risk controls and monitoring while maintaining attractive rewards to capture their high transaction volumes.</p>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <h3>Installment-Friendly Products for Financial Flexibility</h3>
+                        <p>Develop Installment-Friendly Cards specifically for Cluster 1 customers who show strong repayment discipline but need flexibility to manage financial pressure. Focus on features that help with cash flow management and payment planning.</p>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <h3>Standard Cards for Balanced Growth Segments</h3>
+                        <p>Position Standard Cards for Cluster 2 young professionals who exhibit balanced financial behaviors. Design features that support their growing financial sophistication while providing room for account development over time.</p>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <h3>Targeted Marketing and Product Positioning</h3>
+                        <p>Align marketing messages and product features with each segment's specific needs and preferences. Address satisfaction gaps in Clusters 1 and 3 through relevant rewards, appropriate fee structures, and meaningful benefits.</p>
+                    </div>
+                </section>
+
+                <section class="methodology">
+                    <h2>Methodology</h2>
+                    <p>This analysis employed customer segmentation techniques to identify natural groupings within the credit card customer base. The segmentation was based on multiple behavioral and demographic factors including:</p>
+                    <ul>
+                        <li>Credit limit utilization patterns</li>
+                        <li>Spending behaviors and transaction volumes</li>
+                        <li>Repayment history and discipline</li>
+                        <li>Demographic characteristics</li>
+                        <li>Geographic distribution</li>
+                        <li>Customer satisfaction metrics</li>
+                    </ul>
+                    <p>Statistical clustering algorithms were applied to identify four distinct customer segments that exhibit meaningful differences in their credit card usage patterns and financial behaviors.</p>
+                </section>
+
+                <section class="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>There are four clear customer groups, each with unique behaviors and needs. By linking products to these groups — Premium Lifestyle Cards for Clusters 0 and 3, an Installment-Friendly Card for Cluster 1, and a Standard Card for Cluster 2 — the product team can create a portfolio that better serves customers, fills current gaps, and increases both revenue and satisfaction.</p>
+
+                    <p>This segmentation-driven approach enables the development of targeted credit card products that align with customer needs while optimizing revenue potential and managing risk exposure across the customer portfolio.</p>
+                </section>
+            </article>
+        </main>
+    </div>
+</body>
+</html>
