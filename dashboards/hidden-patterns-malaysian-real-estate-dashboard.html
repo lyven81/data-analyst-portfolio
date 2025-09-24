@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hidden Patterns in Malaysian Real Estate - Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #403B36;
+            --secondary-color: #CBA135;
+            --background-color: #FCF9F2;
+            --text-color: #2C2C2C;
+            --card-background: #FFFFFF;
+            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,100 1000,0"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: var(--gold-gradient);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .metric-card {
+            background: var(--card-background);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gold-gradient);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .metric-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Insights Section */
+        .insights {
+            background: var(--card-background);
+            padding: 60px 40px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 80px;
+        }
+
+        .insights h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .insights h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gold-gradient);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .insight-item {
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
+            border-radius: 15px;
+            border-left: 5px solid var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+
+        .insight-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .insight-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Visualization Section */
+        .visualization {
+            margin-bottom: 80px;
+        }
+
+        .visualization h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .visualization h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gold-gradient);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .viz-card {
+            background: var(--card-background);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .viz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
+        }
+
+        .viz-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .viz-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .viz-content {
+            padding: 30px;
+        }
+
+        .viz-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .viz-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Recommendations Section */
+        .recommendations {
+            background: var(--gradient);
+            padding: 80px 40px;
+            border-radius: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recommendations::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .recommendations-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .recommendations h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .recommendation-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .recommendation-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .recommendation-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .recommendation-text {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+            background: var(--card-background);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .insights,
+            .recommendations {
+                padding: 40px 20px;
+            }
+
+            .insights-grid,
+            .recommendations-grid,
+            .viz-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .viz-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .viz-card img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>The Hidden Patterns in Malaysian Real Estate</h1>
+                <p>Strategic market segmentation analysis reveals how property type characteristics outperform geographic location for maximizing investment returns across Malaysia</p>
+                <div class="cta-buttons">
+                    <a href="/data-analyst-portfolio/case-studies/hidden-patterns-malaysian-real-estate.html" class="btn btn-primary">View Full Case Study</a>
+                    <a href="/data-analyst-portfolio/segmentation-analysis.html" class="btn btn-secondary">More Analytics</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="main-content">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">2,000</div>
+                    <div class="metric-label">Properties Analyzed</div>
+                    <div class="metric-description">Comprehensive dataset spanning 16 Malaysian states for robust market analysis</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">4</div>
+                    <div class="metric-label">Market Types Identified</div>
+                    <div class="metric-description">Distinct property segments with unique risk-return characteristics</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">1.748</div>
+                    <div class="metric-label">Best Risk-Adjusted Return</div>
+                    <div class="metric-description">Premium Low-Risk Markets deliver superior performance with minimal volatility</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">234</div>
+                    <div class="metric-label">Undervalued Opportunities</div>
+                    <div class="metric-description">Properties priced below market segment average in high-performing clusters</div>
+                </div>
+            </div>
+
+            <section class="insights">
+                <h2>Key Investment Insights</h2>
+                <div class="insights-grid">
+                    <div class="insight-item">
+                        <div class="insight-title">Market Type Beats Geography</div>
+                        <div class="insight-text">Properties of the same type perform consistently across different states. Premium properties in Johor behave similarly to premium properties in Penang, enabling strategic replication of successful investment strategies.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Premium Markets Outperform</div>
+                        <div class="insight-text">Despite 65% higher initial costs, Premium Low-Risk Markets earn "STRONG BUY" ratings with 64.8% average price premiums and the lowest risk scores.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Natural Diversification Benefits</div>
+                        <div class="insight-text">Market types move independently with negative correlations (-0.104 to -0.253), providing automatic portfolio risk reduction when spread across different segments.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Systematic Expansion Possible</div>
+                        <div class="insight-text">Similarity-based system identifies 4 comparable opportunities for every successful property with 95%+ similarity scores for strategic geographic expansion.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="visualization">
+                <h2>Data Visualization Insights</h2>
+                <div class="viz-grid">
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q1%20Visualization%20-%20Elbow_Method_Analysis.png" alt="Market Segmentation Analysis">
+                        <div class="viz-content">
+                            <div class="viz-title">Market Segmentation Analysis</div>
+                            <div class="viz-description">Elbow method reveals optimal 4-cluster solution with clear inflection point, validating distinct market type identification.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q2%20Visualization%20-%20Geographic_Cluster_Map.png" alt="Geographic Distribution">
+                        <div class="viz-content">
+                            <div class="viz-title">Cross-State Market Patterns</div>
+                            <div class="viz-description">Geographic mapping shows consistent market type behavior across state boundaries, enabling strategic diversification.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q3%20Visualization%20-%20Risk_Return_Scatter_Plot.png" alt="Risk-Return Analysis">
+                        <div class="viz-content">
+                            <div class="viz-title">Risk-Return Optimization</div>
+                            <div class="viz-description">Scatter plot analysis clearly identifies Premium Low-Risk Markets as the superior investment choice for optimal portfolio performance.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q4%20Visualization%20-%20Opportunity_Matrix.png" alt="Investment Opportunities">
+                        <div class="viz-content">
+                            <div class="viz-title">Undervalued Property Matrix</div>
+                            <div class="viz-description">Opportunity analysis reveals 234 properties with significant upside potential in proven high-performing market segments.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q5%20Visualization%20-%20Cluster_Correlation_Heatmap.png" alt="Diversification Benefits">
+                        <div class="viz-content">
+                            <div class="viz-title">Portfolio Diversification</div>
+                            <div class="viz-description">Correlation heatmap demonstrates independent market movements, providing natural risk reduction across different property types.</div>
+                        </div>
+                    </div>
+                    <div class="viz-card">
+                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q6%20Visualization%20-%20Investment_Roadmap_Map.png" alt="Expansion Strategy">
+                        <div class="viz-content">
+                            <div class="viz-title">Strategic Expansion Roadmap</div>
+                            <div class="viz-description">Investment roadmap provides clear next-step recommendations based on similarity analysis for systematic portfolio growth.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    <section class="recommendations">
+        <div class="container">
+            <div class="recommendations-content">
+                <h2>Strategic Recommendations</h2>
+                <div class="recommendations-grid">
+                    <div class="recommendation-item">
+                        <div class="recommendation-title">Focus on Premium Markets</div>
+                        <div class="recommendation-text">Allocate 60-70% of investment capital to Premium Low-Risk Markets across multiple states. With 408 locations spanning 12 states, these markets offer sufficient diversification while maintaining optimal 1.748 risk-adjusted returns.</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-title">Target Undervalued Opportunities</div>
+                        <div class="recommendation-text">Dedicate 20-30% to identified undervalued properties within high-performing clusters. These 234 opportunities offer 75.4% premium gaps compared to cluster medians with significant upside potential.</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-title">Implement Systematic Expansion</div>
+                        <div class="recommendation-text">Use similarity-based recommendations for strategic geographic expansion. Each successful property identifies 4 comparable opportunities with 95%+ similarity scores across different states.</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-title">Achieve Geographic Diversification</div>
+                        <div class="recommendation-text">Spread investments across 6-8 different states to minimize regional economic exposure while maintaining investment quality through market type consistency rather than geographic concentration.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
+        </div>
+    </footer>
+</body>
+</html>
