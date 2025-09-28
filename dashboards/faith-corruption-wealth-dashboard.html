@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faith, Corruption, and Wealth - Analysis Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,600,700" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c1810;
+            --secondary-color: #8b4513;
+            --accent-color: #daa520;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --gradient-primary: linear-gradient(135deg, #2c1810 0%, #8b4513 100%);
+            --gradient-secondary: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(139, 69, 19, 0.1) 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: #b8860b;
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Metrics Section */
+        .metrics {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .metric-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Insights Section */
+        .insights {
+            padding: 80px 0;
+            background: var(--gradient-secondary);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .insight-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .insight-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .insight-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Recommendations Section */
+        .recommendations {
+            padding: 80px 0;
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+        }
+
+        .recommendations::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M20 20c0 11.046-8.954 20-20 20v-20h20z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        .recommendations .section-header h2,
+        .recommendations .section-header p {
+            color: white;
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .recommendation-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .recommendation-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .recommendation-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .recommendation-card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .metrics,
+            .insights,
+            .recommendations {
+                padding: 60px 0;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .metric-value {
+                font-size: 2.5rem;
+            }
+
+            .metrics-grid,
+            .insights-grid,
+            .recommendations-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .metric-card,
+            .insight-card,
+            .recommendation-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Faith, Corruption, and Wealth</h1>
+                <p>Cross-country analysis reveals whether religious societies build stronger economies or face institutional challenges</p>
+                <div class="cta-buttons">
+                    <a href="/data-analyst-portfolio/case-studies/faith-corruption-wealth.html" class="btn btn-primary">View Full Case Study</a>
+                    <a href="/data-analyst-portfolio/case-studies.html" class="btn btn-secondary">More Analytics</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="metrics">
+            <div class="section-header">
+                <h2>Key Findings</h2>
+                <p>Critical insights from analyzing 15 countries across multiple dimensions</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-value">15</span>
+                    <div class="metric-label">Countries Analyzed</div>
+                    <p class="metric-description">From Sweden & Japan (<25% religious) to Nigeria, Egypt & Cambodia (>90% religious)</p>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">Strong</span>
+                    <div class="metric-label">Corruption Link</div>
+                    <p class="metric-description">Negative correlation between religiosity and governance quality across nations</p>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">Corruption</span>
+                    <div class="metric-label">Drives Poverty</div>
+                    <p class="metric-description">Not religion itself - governance quality determines economic prosperity</p>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">No Effect</span>
+                    <div class="metric-label">On Crime Rates</div>
+                    <p class="metric-description">Religion shows no significant impact on violence when controlling for other factors</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="insights">
+            <div class="section-header">
+                <h2>Research Insights</h2>
+                <p>Evidence-based findings from comprehensive cross-country analysis</p>
+            </div>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3>Personal Belief Measurement</h3>
+                    <p>Based on "very important" responses from Pew Research and Gallup data, measuring personal belief rather than institutional rules across diverse global contexts.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Consistent Pattern Emerges</h3>
+                    <p>More religious countries consistently show higher perceived corruption levels, with secular Nordic and Asian countries demonstrating better governance scores.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Singapore Proves the Point</h3>
+                    <p>Religious yet prosperous, Singapore demonstrates that strong governance institutions can override typical patterns between faith and economic outcomes.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Mixed Crime Results</h3>
+                    <p>Religious countries show varied violence levels - Mexico and Brazil high, Indonesia and Cambodia low - proving religion itself doesn't predict social problems.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Religiosity Isn't Destiny</h3>
+                    <p>Exceptions like Singapore, US, and Mexico prove patterns can be broken when countries prioritize institutional quality over demographic characteristics.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Religion as Response</h3>
+                    <p>People turn to faith in unstable societies with weak institutions, not the reverse - higher religiosity appears to be a response to instability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="recommendations">
+            <div class="section-header">
+                <h2>Strategic Implications</h2>
+                <p>Evidence-based recommendations for policy makers and development organizations</p>
+            </div>
+            <div class="recommendations-grid">
+                <div class="recommendation-card">
+                    <h3>Prioritize Institution Building</h3>
+                    <p>Focus resources on strengthening governance systems, rule of law, and transparent institutions rather than targeting cultural or religious factors for development outcomes.</p>
+                </div>
+                <div class="recommendation-card">
+                    <h3>Target Anti-Corruption Measures</h3>
+                    <p>Address corruption as the primary driver of economic challenges and social problems, implementing robust oversight and accountability mechanisms.</p>
+                </div>
+                <div class="recommendation-card">
+                    <h3>Study Exception Cases</h3>
+                    <p>Learn from Singapore's model of combining religious society with strong institutions, and apply successful governance strategies from outlier countries.</p>
+                </div>
+                <div class="recommendation-card">
+                    <h3>Avoid Demographic-Based Policy</h3>
+                    <p>Separate correlation from causation - avoid making policy decisions based on religious demographics alone, focusing instead on measurable institutional outcomes.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
