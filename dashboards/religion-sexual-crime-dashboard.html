@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Religion and Sexual Crime Analysis Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #403B36;
+            --secondary-color: #CBA135;
+            --background-color: #FCF9F2;
+            --text-color: #2C2C2C;
+            --card-background: #FFFFFF;
+            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gold-gradient);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .metrics {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .metric-card {
+            background: var(--card-background);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .insight-card {
+            background: var(--card-background);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .insight-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .insight-card p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .methodology-section {
+            background: var(--background-color);
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .definition-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .visualization {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .profile-card {
+            background: var(--card-background);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .profile-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .profile-examples {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .methodology-grid,
+            .definition-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .metric-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Religion and Sexual Crime Analysis</h1>
+            <p>Testing the claim that religious societies have higher sexual crimes</p>
+            <div class="cta-buttons">
+                <a href="/data-analyst-portfolio/case-studies/religion-sexual-crime.html" class="btn btn-primary">Read Full Case Study</a>
+                <a href="/data-analyst-portfolio/contact.html" class="btn btn-secondary">Contact Analyst</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="metrics">
+        <div class="container">
+            <h2>Key Study Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">13</div>
+                    <div class="metric-label">Countries Analyzed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">0-1</div>
+                    <div class="metric-label">Religiosity Scale</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">675</div>
+                    <div class="metric-label">High Crime Threshold</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">Weak</div>
+                    <div class="metric-label">Correlation Found</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="section methodology-section">
+        <div class="container">
+            <h2>Methodology</h2>
+            <div class="methodology-grid">
+                <div class="insight-card">
+                    <h3>Data Sources & Sample</h3>
+                    <p><strong>World Values Survey (WVS)</strong> for religiosity data measuring importance of religion, service attendance, and prayer frequency.</p>
+                    <p><strong>UN Office on Drugs and Crime (UNODC)</strong> for sexual crime statistics per 100,000 people.</p>
+                    <p><strong>Sample:</strong> 13 countries with matching data including Australia, Germany, Mexico, and Myanmar.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Key Limitations</h3>
+                    <p><strong>Small sample size:</strong> Only 13 countries with complete data available.</p>
+                    <p><strong>Underreporting:</strong> Sexual crimes often underreported, especially in conservative societies.</p>
+                    <p><strong>Correlation vs Causation:</strong> Analysis shows relationships, not causal effects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Definitions -->
+    <section class="section">
+        <div class="container">
+            <h2>How Variables are Defined</h2>
+            <div class="definition-grid">
+                <div class="insight-card">
+                    <h3>Religiosity Measurement</h3>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q1%20religiosity_histogram.png" alt="Religiosity Distribution" class="visualization">
+                    <p><strong>Index Scale:</strong> 0 (least religious) to 1 (most religious)</p>
+                    <p><strong>Three Components:</strong> Importance of religion, service attendance, and prayer frequency</p>
+                    <p><strong>Distribution:</strong> Most countries score between 0.55-0.75</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Sexual Crime Definition</h3>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q2%20sex_crime_rate_boxplot.png" alt="Sexual Crime Distribution" class="visualization">
+                    <p><strong>Measurement:</strong> UNODC rates per 100,000 people</p>
+                    <p><strong>High Crime Threshold:</strong> 75th percentile (675 cases per 100,000)</p>
+                    <p><strong>Caveat:</strong> Reporting and legal definitions vary by country</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Questions -->
+    <section class="section methodology-section">
+        <div class="container">
+            <h2>Key Analysis Questions</h2>
+            <div class="questions-grid">
+                <div class="insight-card">
+                    <h3>Question 1: Religiosity Patterns</h3>
+                    <p><strong>Finding:</strong> Most countries show moderate to high religiosity (0.55-0.75 range)</p>
+                    <p><strong>Regional Patterns:</strong> Latin America and Asia score higher, Western Europe lower</p>
+                    <p><strong>Implication:</strong> Clear differences exist for comparison</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Question 2: Crime Rate Variations</h3>
+                    <p><strong>Finding:</strong> Wide variation in reported sexual crime rates across countries</p>
+                    <p><strong>Data-Driven Threshold:</strong> 675 cases per 100,000 as "high crime"</p>
+                    <p><strong>Challenge:</strong> Reporting gaps affect results</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Question 3: Correlation Analysis</h3>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q3%20scatter_religiosity_vs_crime.png" alt="Religiosity vs Crime Scatterplot" class="visualization">
+                    <p><strong>Key Finding:</strong> No clear relationship between religiosity and sexual crime</p>
+                    <p><strong>Pattern:</strong> Countries spread across all quadrants</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Question 4: Country Profiles</h3>
+                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q4%20quadrant_country_profiles.png" alt="Country Quadrant Profiles" class="visualization">
+                    <p><strong>Finding:</strong> All four combinations exist - no dominant pattern</p>
+                    <div class="profiles-grid">
+                        <div class="profile-card">
+                            <div class="profile-title">High Religious + High Crime</div>
+                            <div class="profile-examples">Mexico, Colombia</div>
+                        </div>
+                        <div class="profile-card">
+                            <div class="profile-title">High Religious + Low Crime</div>
+                            <div class="profile-examples">Myanmar, Slovakia</div>
+                        </div>
+                        <div class="profile-card">
+                            <div class="profile-title">Low Religious + High Crime</div>
+                            <div class="profile-examples">Germany, Australia</div>
+                        </div>
+                        <div class="profile-card">
+                            <div class="profile-title">Low Religious + Low Crime</div>
+                            <div class="profile-examples">Romania, Kyrgyzstan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusions -->
+    <section class="section">
+        <div class="container">
+            <h2>Key Conclusions</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3>Main Finding</h3>
+                    <p>The claim that more religious countries have more sexual crimes is <strong>not supported</strong> by the data.</p>
+                    <p>Religious countries show both high and low crime rates, as do less religious countries.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Study Limitations</h3>
+                    <p><strong>Small Sample:</strong> Only 13 countries with complete data</p>
+                    <p><strong>Underreporting:</strong> Systematic bias in religious/conservative settings</p>
+                    <p><strong>Complex Reality:</strong> Multiple factors beyond religion influence crime rates</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Future Research</h3>
+                    <p><strong>Broader Data:</strong> More countries and longer time periods needed</p>
+                    <p><strong>Additional Variables:</strong> Governance, culture, and institutions matter</p>
+                    <p><strong>Better Reporting:</strong> Standardized crime definitions and reporting methods</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+        </div>
+    </footer>
+</body>
+</html>
