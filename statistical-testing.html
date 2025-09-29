@@ -220,6 +220,52 @@
             border-color: #daa520;
             transform: translateY(-1px);
         }
+        .sort-controls {
+            margin-bottom: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+        .sort-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+        .sort-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sort-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .sort-btn.active {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .case-study-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -266,6 +312,20 @@
             .case-study-links a {
                 text-align: center;
             }
+            .sort-controls {
+                margin-bottom: 0;
+                padding: 0;
+            }
+            .sort-label {
+                font-size: 0.85rem;
+            }
+            .sort-buttons {
+                gap: 6px;
+            }
+            .sort-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -292,115 +352,8 @@
     <div class="search-overlay" id="searchOverlay"></div>
 
     <div class="container">
-        <table>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Are Tunics Truly the Top Seller?</a></h3>
-                    <p>Find out if tunics really are the store's best-selling items.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/are-tunics-best-sellers-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Cash or Credit Card</a></h3>
-                    <p>Discover whether cash or credit card users spend more.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/cash-or-credit-card-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/connected-or-disconnected.html">Connected or Disconnected?</a></h3>
-                    <p>Learn if social media usage strengthens or weakens relationships.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/connected-or-disconnected.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/connected-or-disconnected-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/hotel-sleep-analysis.html">Did You Sleep Well Last Night?</a></h3>
-                    <p>Explore what hotel factors contribute to better guest sleep quality.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/hotel-sleep-analysis.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/hotel-sleep-analysis-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/east-coast-alert.html">East Coast Alert</a></h3>
-                    <p>Predict which East Coast areas face the highest crime probability.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/east-coast-alert.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/east-coast-alert-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Nasi Lemak vs Kopi-O Preference Analysis</a></h3>
-                    <p>Discover cultural preferences between nasi lemak and kopi-o choices.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/nasi-lemak-kopi-o-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/religion-sexual-crime.html">Religion and Sexual Crime</a></h3>
-                    <p>Test whether religious societies have higher sexual crimes.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/religion-sexual-crime.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/religion-sexual-crime-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/best-movie-of-all-time.html">The Best Movie of All Time</a></h3>
-                    <p>Find out which movie genres consistently deliver the best ratings.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/best-movie-of-all-time.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/best-movie-of-all-time-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/video-game-sales-trend-analysis.html">Video Game Sales Trend Analysis</a></h3>
-                    <p>Learn which seasonal trends drive video game sales peaks.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/video-game-sales-trend-analysis.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/video-game-sales-trend-analysis-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">What Makes a Song Go Viral?</a></h3>
-                    <p>Discover what musical elements make songs go viral online.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/what-makes-a-song-go-viral-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">What Makes a Song Go Viral?</a></h3>
-                    <p>Discover what musical elements make songs go viral online.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/what-makes-a-song-go-viral.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/what-makes-a-song-go-viral-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/why-every-class-counts.html">Why Every Class Counts</a></h3>
-                    <p>Explore how class attendance directly impacts student performance.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/why-every-class-counts.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/why-every-class-counts-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
+        <table id="caseStudiesTable">
+            <!-- Dynamic content will be rendered here -->
         </table>
     </div>
 
@@ -790,6 +743,14 @@ const caseStudies = [
     }
 ];
 
+// Dynamic extraction of Statistical Testing case studies from main database
+function getStatisticalTestingCaseStudies() {
+    return caseStudies.filter(study => study.category === "Statistical Testing");
+}
+
+// Sorting state
+let currentSort = 'alphabetical'; // default to alphabetical as requested
+
 // Search functionality
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -868,6 +829,113 @@ document.addEventListener('keydown', (e) => {
         hideResults();
         searchInput.blur();
     }
+});
+
+// Sorting functions
+function sortCaseStudies(studies, sortType) {
+    const sorted = [...studies];
+
+    if (sortType === 'alphabetical') {
+        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortType === 'latest') {
+        return sorted.sort((a, b) => {
+            // Studies with dates (new) come first, sorted newest to oldest
+            // Studies without dates (existing) maintain their order after dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return 1; // existing studies go to bottom
+            if (!b.date) return -1; // new studies stay at top
+            return new Date(b.date) - new Date(a.date); // newest first among dated studies
+        });
+    } else if (sortType === 'oldest') {
+        return sorted.sort((a, b) => {
+            // Studies with dates (new) come last, sorted oldest to newest
+            // Studies without dates (existing) maintain their order before dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return -1; // existing studies stay at top
+            if (!b.date) return 1; // new studies go to bottom
+            return new Date(a.date) - new Date(b.date); // oldest first among dated studies
+        });
+    }
+
+    return sorted;
+}
+
+function renderTable(studies) {
+    const table = document.getElementById('caseStudiesTable');
+    const sortedStudies = sortCaseStudies(studies, currentSort);
+
+    // Start with dedicated sorting controls row
+    let html = `
+        <tr>
+            <td colspan="2" style="padding: 20px; border-bottom: 1px solid #e9ecef;">
+                <div class="sort-controls">
+                    <span class="sort-label">Sort by:</span>
+                    <div class="sort-buttons">
+                        <button class="sort-btn ${currentSort === 'alphabetical' ? 'active' : ''}" onclick="changeSortType('alphabetical')">
+                            A-Z
+                        </button>
+                        <button class="sort-btn ${currentSort === 'latest' ? 'active' : ''}" onclick="changeSortType('latest')">
+                            Latest
+                        </button>
+                        <button class="sort-btn ${currentSort === 'oldest' ? 'active' : ''}" onclick="changeSortType('oldest')">
+                            Oldest
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    // Add case study rows
+    for (let i = 0; i < sortedStudies.length; i += 2) {
+        html += '<tr>';
+
+        // Left column
+        const leftStudy = sortedStudies[i];
+        html += `
+            <td>
+                ${leftStudy.dateDisplay ? `<div class="case-study-date">${leftStudy.dateDisplay}</div>` : ''}
+                <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
+                <p>${leftStudy.description}</p>
+                <div class="case-study-links">
+                    <a href="${leftStudy.caseStudyUrl}">Read More →</a>
+                    <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
+                </div>
+            </td>
+        `;
+
+        // Right column (if exists)
+        if (i + 1 < sortedStudies.length) {
+            const rightStudy = sortedStudies[i + 1];
+            html += `
+                <td>
+                    ${rightStudy.dateDisplay ? `<div class="case-study-date">${rightStudy.dateDisplay}</div>` : ''}
+                    <h3><a href="${rightStudy.caseStudyUrl}">${rightStudy.title}</a></h3>
+                    <p>${rightStudy.description}</p>
+                    <div class="case-study-links">
+                        <a href="${rightStudy.caseStudyUrl}">Read More →</a>
+                        <a href="${rightStudy.dashboardUrl}">View Dashboard</a>
+                    </div>
+                </td>
+            `;
+        } else {
+            html += '<td></td>'; // Empty cell if odd number of studies
+        }
+
+        html += '</tr>';
+    }
+
+    table.innerHTML = html;
+}
+
+function changeSortType(sortType) {
+    currentSort = sortType;
+    renderTable(getStatisticalTestingCaseStudies());
+}
+
+// Initialize page with default alphabetical sorting
+document.addEventListener('DOMContentLoaded', function() {
+    renderTable(getStatisticalTestingCaseStudies());
 });
 </script>
 

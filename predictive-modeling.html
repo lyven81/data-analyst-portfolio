@@ -220,6 +220,52 @@
             border-color: #daa520;
             transform: translateY(-1px);
         }
+        .sort-controls {
+            margin-bottom: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+        .sort-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+        .sort-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sort-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .sort-btn.active {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .case-study-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -266,6 +312,20 @@
             .case-study-links a {
                 text-align: center;
             }
+            .sort-controls {
+                margin-bottom: 0;
+                padding: 0;
+            }
+            .sort-label {
+                font-size: 0.85rem;
+            }
+            .sort-buttons {
+                gap: 6px;
+            }
+            .sort-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -292,73 +352,8 @@
     <div class="search-overlay" id="searchOverlay"></div>
 
     <div class="container">
-        <table>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html">Flagging High-Risk Borrowers</a></h3>
-                    <p>Discover which borrower profiles signal default risk.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/flagging-high-risk-customer-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/identify-at-risk-student.html">Identifying At-Risk Students Early</a></h3>
-                    <p>Learn how student behavior patterns predict academic success.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/identify-at-risk-student.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/identify-at-risk-student-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-customer-response-discounts.html">Predicting Customer Response to Discounts</a></h3>
-                    <p>Find out which customers respond to discount campaigns.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/predicting-customer-response-discounts.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/predicting-customer-response-discounts-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/predicting-depression-risk-student.html">Predicting Depression Risk in Students</a></h3>
-                    <p>Explore early warning signs that predict student depression risk.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/predicting-depression-risk-student.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/predicting-depression-risk-student-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Saving the Silent Spenders</a></h3>
-                    <p>Identify which VIP coffee customers are about to stop buying.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/clv-churn-analysis-coffee-vending-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/bank-customer-churn-prediction.html">Who Is Most at Risk of Leaving the Bank</a></h3>
-                    <p>Identify which bank customers are most likely to churn before they leave.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/bank-customer-churn-prediction.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/bank-customer-churn-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Who's Likely to Quit</a></h3>
-                    <p>Predict which employees are likely to quit before they resign.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/who-is-likely-to-quit.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/who-is-likely-to-quit-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                </td>
-            </tr>
+        <table id="caseStudiesTable">
+            <!-- Dynamic content will be rendered here -->
         </table>
     </div>
 
@@ -748,6 +743,14 @@ const caseStudies = [
     }
 ];
 
+// Dynamic extraction of Predictive Modeling case studies from main database
+function getPredictiveModelingCaseStudies() {
+    return caseStudies.filter(study => study.category === "Predictive Modeling");
+}
+
+// Sorting state
+let currentSort = 'alphabetical'; // default to alphabetical as requested
+
 // Search functionality
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -826,6 +829,113 @@ document.addEventListener('keydown', (e) => {
         hideResults();
         searchInput.blur();
     }
+});
+
+// Sorting functions
+function sortCaseStudies(studies, sortType) {
+    const sorted = [...studies];
+
+    if (sortType === 'alphabetical') {
+        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortType === 'latest') {
+        return sorted.sort((a, b) => {
+            // Studies with dates (new) come first, sorted newest to oldest
+            // Studies without dates (existing) maintain their order after dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return 1; // existing studies go to bottom
+            if (!b.date) return -1; // new studies stay at top
+            return new Date(b.date) - new Date(a.date); // newest first among dated studies
+        });
+    } else if (sortType === 'oldest') {
+        return sorted.sort((a, b) => {
+            // Studies with dates (new) come last, sorted oldest to newest
+            // Studies without dates (existing) maintain their order before dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return -1; // existing studies stay at top
+            if (!b.date) return 1; // new studies go to bottom
+            return new Date(a.date) - new Date(b.date); // oldest first among dated studies
+        });
+    }
+
+    return sorted;
+}
+
+function renderTable(studies) {
+    const table = document.getElementById('caseStudiesTable');
+    const sortedStudies = sortCaseStudies(studies, currentSort);
+
+    // Start with dedicated sorting controls row
+    let html = `
+        <tr>
+            <td colspan="2" style="padding: 20px; border-bottom: 1px solid #e9ecef;">
+                <div class="sort-controls">
+                    <span class="sort-label">Sort by:</span>
+                    <div class="sort-buttons">
+                        <button class="sort-btn ${currentSort === 'alphabetical' ? 'active' : ''}" onclick="changeSortType('alphabetical')">
+                            A-Z
+                        </button>
+                        <button class="sort-btn ${currentSort === 'latest' ? 'active' : ''}" onclick="changeSortType('latest')">
+                            Latest
+                        </button>
+                        <button class="sort-btn ${currentSort === 'oldest' ? 'active' : ''}" onclick="changeSortType('oldest')">
+                            Oldest
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    // Add case study rows
+    for (let i = 0; i < sortedStudies.length; i += 2) {
+        html += '<tr>';
+
+        // Left column
+        const leftStudy = sortedStudies[i];
+        html += `
+            <td>
+                ${leftStudy.dateDisplay ? `<div class="case-study-date">${leftStudy.dateDisplay}</div>` : ''}
+                <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
+                <p>${leftStudy.description}</p>
+                <div class="case-study-links">
+                    <a href="${leftStudy.caseStudyUrl}">Read More →</a>
+                    <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
+                </div>
+            </td>
+        `;
+
+        // Right column (if exists)
+        if (i + 1 < sortedStudies.length) {
+            const rightStudy = sortedStudies[i + 1];
+            html += `
+                <td>
+                    ${rightStudy.dateDisplay ? `<div class="case-study-date">${rightStudy.dateDisplay}</div>` : ''}
+                    <h3><a href="${rightStudy.caseStudyUrl}">${rightStudy.title}</a></h3>
+                    <p>${rightStudy.description}</p>
+                    <div class="case-study-links">
+                        <a href="${rightStudy.caseStudyUrl}">Read More →</a>
+                        <a href="${rightStudy.dashboardUrl}">View Dashboard</a>
+                    </div>
+                </td>
+            `;
+        } else {
+            html += '<td></td>'; // Empty cell if odd number of studies
+        }
+
+        html += '</tr>';
+    }
+
+    table.innerHTML = html;
+}
+
+function changeSortType(sortType) {
+    currentSort = sortType;
+    renderTable(getPredictiveModelingCaseStudies());
+}
+
+// Initialize page with default alphabetical sorting
+document.addEventListener('DOMContentLoaded', function() {
+    renderTable(getPredictiveModelingCaseStudies());
 });
 </script>
 

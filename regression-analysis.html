@@ -220,6 +220,52 @@
             border-color: #daa520;
             transform: translateY(-1px);
         }
+        .sort-controls {
+            margin-bottom: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+        .sort-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+        .sort-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sort-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .sort-btn.active {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .case-study-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -266,6 +312,20 @@
             .case-study-links a {
                 text-align: center;
             }
+            .sort-controls {
+                margin-bottom: 0;
+                padding: 0;
+            }
+            .sort-label {
+                font-size: 0.85rem;
+            }
+            .sort-buttons {
+                gap: 6px;
+            }
+            .sort-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -292,128 +352,8 @@
     <div class="search-overlay" id="searchOverlay"></div>
 
     <div class="container">
-        <table>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/are-long-movies-better.html">Are Long Movies Better Movies?</a></h3>
-                    <p>Find out if longer movies actually get better ratings.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/are-long-movies-better.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/are-long-movies-better-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/can-money-buy-happiness.html">Can Money Buy Happiness?</a></h3>
-                    <p>Explore whether higher income truly leads to greater happiness.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/can-money-buy-happiness.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/can-money-buy-happiness-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Do Dollars Drive Decisions?</a></h3>
-                    <p>Discover how income levels influence customer buying decisions.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/do-dollar-drive-decisions-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/experience-is-not-everthing.html">Experience Isn't Everything</a></h3>
-                    <p>Learn what really drives salary growth beyond years of experience.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/experience-is-not-everthing.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/experience-is-not-everthing-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/faith-corruption-wealth.html">Faith, Corruption, and Wealth</a></h3>
-                    <p>Does Religion Build Stronger Societies or Hold Them Back?</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/faith-corruption-wealth.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/faith-corruption-wealth-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/grow-smarter.html">Grow Smarter, Not Bigger</a></h3>
-                    <p>Find out if hiring more employees actually increases revenue.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/grow-smarter.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/grow-smarter-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/is-the-price-right.html">Is the Price Right?</a></h3>
-                    <p>Determine if stock prices reflect their true fair value.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/is-the-price-right.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/is-the-price-right-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/motorcyclist-accident.html">Motorcyclist Accident Risk Analysis</a></h3>
-                    <p>Predict which factors increase motorcyclist accident risk most.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/motorcyclist-accident.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/motorcyclist-accident-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/pattern-behind-price.html">Patterns Behind the Price</a></h3>
-                    <p>Discover Microsoft's stock growth and investment strategies.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/pattern-behind-price.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/pattern-behind-price-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/undervalued-and-overlooked.html">Undervalued and Overlooked Asset Analysis</a></h3>
-                    <p>Identify which assets are trading below their fair value.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/undervalued-and-overlooked.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/undervalued-and-overlooked-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/what-causes-product-returns.html">What Causes Product Returns</a></h3>
-                    <p>Discover what price factors trigger the most product returns.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/what-causes-product-returns.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/what-causes-product-returns-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/when-good-cars-lose-value.html">When Good Cars Lose Value</a></h3>
-                    <p>Learn which car features hold value best over time.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/when-good-cars-lose-value.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/when-good-cars-lose-value-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/when-good-cars-lose-value.html">When Good Cars Lose Value</a></h3>
-                    <p>Learn which car features hold value best over time.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/when-good-cars-lose-value.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/when-good-cars-lose-value-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <!-- Empty cell for layout -->
-                </td>
-            </tr>
+        <table id="caseStudiesTable">
+            <!-- Dynamic content will be rendered here -->
         </table>
     </div>
 
@@ -803,6 +743,14 @@ const caseStudies = [
     }
 ];
 
+// Dynamic extraction of Regression Analysis case studies from main database
+function getRegressionAnalysisCaseStudies() {
+    return caseStudies.filter(study => study.category === "Regression Analysis");
+}
+
+// Sorting state
+let currentSort = 'alphabetical'; // default to alphabetical as requested
+
 // Search functionality
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -881,6 +829,113 @@ document.addEventListener('keydown', (e) => {
         hideResults();
         searchInput.blur();
     }
+});
+
+// Sorting functions
+function sortCaseStudies(studies, sortType) {
+    const sorted = [...studies];
+
+    if (sortType === 'alphabetical') {
+        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortType === 'latest') {
+        return sorted.sort((a, b) => {
+            // Studies with dates (new) come first, sorted newest to oldest
+            // Studies without dates (existing) maintain their order after dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return 1; // existing studies go to bottom
+            if (!b.date) return -1; // new studies stay at top
+            return new Date(b.date) - new Date(a.date); // newest first among dated studies
+        });
+    } else if (sortType === 'oldest') {
+        return sorted.sort((a, b) => {
+            // Studies with dates (new) come last, sorted oldest to newest
+            // Studies without dates (existing) maintain their order before dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return -1; // existing studies stay at top
+            if (!b.date) return 1; // new studies go to bottom
+            return new Date(a.date) - new Date(b.date); // oldest first among dated studies
+        });
+    }
+
+    return sorted;
+}
+
+function renderTable(studies) {
+    const table = document.getElementById('caseStudiesTable');
+    const sortedStudies = sortCaseStudies(studies, currentSort);
+
+    // Start with dedicated sorting controls row
+    let html = `
+        <tr>
+            <td colspan="2" style="padding: 20px; border-bottom: 1px solid #e9ecef;">
+                <div class="sort-controls">
+                    <span class="sort-label">Sort by:</span>
+                    <div class="sort-buttons">
+                        <button class="sort-btn ${currentSort === 'alphabetical' ? 'active' : ''}" onclick="changeSortType('alphabetical')">
+                            A-Z
+                        </button>
+                        <button class="sort-btn ${currentSort === 'latest' ? 'active' : ''}" onclick="changeSortType('latest')">
+                            Latest
+                        </button>
+                        <button class="sort-btn ${currentSort === 'oldest' ? 'active' : ''}" onclick="changeSortType('oldest')">
+                            Oldest
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    // Add case study rows
+    for (let i = 0; i < sortedStudies.length; i += 2) {
+        html += '<tr>';
+
+        // Left column
+        const leftStudy = sortedStudies[i];
+        html += `
+            <td>
+                ${leftStudy.dateDisplay ? `<div class="case-study-date">${leftStudy.dateDisplay}</div>` : ''}
+                <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
+                <p>${leftStudy.description}</p>
+                <div class="case-study-links">
+                    <a href="${leftStudy.caseStudyUrl}">Read More →</a>
+                    <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
+                </div>
+            </td>
+        `;
+
+        // Right column (if exists)
+        if (i + 1 < sortedStudies.length) {
+            const rightStudy = sortedStudies[i + 1];
+            html += `
+                <td>
+                    ${rightStudy.dateDisplay ? `<div class="case-study-date">${rightStudy.dateDisplay}</div>` : ''}
+                    <h3><a href="${rightStudy.caseStudyUrl}">${rightStudy.title}</a></h3>
+                    <p>${rightStudy.description}</p>
+                    <div class="case-study-links">
+                        <a href="${rightStudy.caseStudyUrl}">Read More →</a>
+                        <a href="${rightStudy.dashboardUrl}">View Dashboard</a>
+                    </div>
+                </td>
+            `;
+        } else {
+            html += '<td></td>'; // Empty cell if odd number of studies
+        }
+
+        html += '</tr>';
+    }
+
+    table.innerHTML = html;
+}
+
+function changeSortType(sortType) {
+    currentSort = sortType;
+    renderTable(getRegressionAnalysisCaseStudies());
+}
+
+// Initialize page with default alphabetical sorting
+document.addEventListener('DOMContentLoaded', function() {
+    renderTable(getRegressionAnalysisCaseStudies());
 });
 </script>
 
