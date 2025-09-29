@@ -220,6 +220,52 @@
             border-color: #daa520;
             transform: translateY(-1px);
         }
+        .sort-controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        .sort-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+        .sort-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sort-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .sort-btn.active {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .case-study-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -266,6 +312,38 @@
             .case-study-links a {
                 text-align: center;
             }
+            .sort-controls {
+                margin-bottom: 15px;
+                padding: 12px;
+            }
+            .sort-label {
+                font-size: 0.85rem;
+            }
+            .sort-buttons {
+                gap: 6px;
+            }
+            .sort-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-container {
+                margin-left: 0;
+                width: 100%;
+                max-width: 300px;
+            }
+            .search-input {
+                width: 100%;
+            }
+            .nav-links {
+                order: 2;
+            }
+            .search-container {
+                order: 1;
+            }
         }
     </style>
 </head>
@@ -292,43 +370,8 @@
     <div class="search-overlay" id="searchOverlay"></div>
 
     <div class="container">
-        <table>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Fruit Sales Forecast - October 2024</a></h3>
-                    <p>Predict seasonal fruit demand to maximize sales.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/fruit-sales-forecast-october-2024-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/ron95.html">RON95 Fuel Price Volatility Analysis</a></h3>
-                    <p>Forecast RON95 fuel prices to anticipate market volatility and costs.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/ron95.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/ron95-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/too-hot-to-harvest.html">Too Hot to Harvest</a></h3>
-                    <p>Discover how climate patterns impact crop yields.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/too-hot-to-harvest.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/too-hot-to-harvest-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-                <td>
-                    <h3><a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap?</a></h3>
-                    <p>Decode Google’s price moves to spot real trends.</p>
-                    <div class="case-study-links">
-                        <a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More →</a>
-                        <a href="/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html">View Dashboard</a>
-                    </div>
-                </td>
-            </tr>
+        <table id="caseStudiesTable">
+            <!-- Dynamic content will be rendered here -->
         </table>
     </div>
 
@@ -718,6 +761,49 @@ const caseStudies = [
     }
 ];
 
+// Time Series specific case studies with dates
+const timeSeriesCaseStudies = [
+    {
+        title: "Fruit Sales Forecast - October 2024",
+        description: "Predict seasonal fruit demand to maximize sales.",
+        caseStudyUrl: "/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html",
+        dashboardUrl: "/data-analyst-portfolio/dashboards/fruit-sales-forecast-october-2024-dashboard.html",
+        category: "Time Series Analysis",
+        date: "2024-10-15",
+        dateDisplay: "October 2024"
+    },
+    {
+        title: "RON95 Fuel Price Volatility Analysis",
+        description: "Forecast RON95 fuel prices to anticipate market volatility and costs.",
+        caseStudyUrl: "/data-analyst-portfolio/case-studies/ron95.html",
+        dashboardUrl: "/data-analyst-portfolio/dashboards/ron95-dashboard.html",
+        category: "Time Series Analysis",
+        date: "2024-09-20",
+        dateDisplay: "September 2024"
+    },
+    {
+        title: "Too Hot to Harvest",
+        description: "Discover how climate patterns impact crop yields.",
+        caseStudyUrl: "/data-analyst-portfolio/case-studies/too-hot-to-harvest.html",
+        dashboardUrl: "/data-analyst-portfolio/dashboards/too-hot-to-harvest-dashboard.html",
+        category: "Time Series Analysis",
+        date: "2024-08-10",
+        dateDisplay: "August 2024"
+    },
+    {
+        title: "Trend or Trap?",
+        description: "Decode Google's price moves to spot real trends.",
+        caseStudyUrl: "/data-analyst-portfolio/case-studies/trend-or-trap.html",
+        dashboardUrl: "/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html",
+        category: "Time Series Analysis",
+        date: "2024-07-05",
+        dateDisplay: "July 2024"
+    }
+];
+
+// Sorting state
+let currentSort = 'alphabetical'; // default to alphabetical as requested
+
 // Search functionality
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -796,6 +882,95 @@ document.addEventListener('keydown', (e) => {
         hideResults();
         searchInput.blur();
     }
+});
+
+// Sorting functions
+function sortCaseStudies(studies, sortType) {
+    const sorted = [...studies];
+
+    if (sortType === 'alphabetical') {
+        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortType === 'date') {
+        return sorted.sort((a, b) => new Date(b.date) - new Date(a.date)); // newest first
+    }
+
+    return sorted;
+}
+
+function renderTable(studies) {
+    const table = document.getElementById('caseStudiesTable');
+    const sortedStudies = sortCaseStudies(studies, currentSort);
+
+    // Create table content with sorting controls in first cell
+    let html = '';
+
+    for (let i = 0; i < sortedStudies.length; i += 2) {
+        html += '<tr>';
+
+        // Left column
+        const leftStudy = sortedStudies[i];
+        html += '<td>';
+
+        // Add sorting controls only to the first cell
+        if (i === 0) {
+            html += `
+                <div class="sort-controls">
+                    <span class="sort-label">Sort by:</span>
+                    <div class="sort-buttons">
+                        <button class="sort-btn ${currentSort === 'alphabetical' ? 'active' : ''}" onclick="changeSortType('alphabetical')">
+                            A-Z
+                        </button>
+                        <button class="sort-btn ${currentSort === 'date' ? 'active' : ''}" onclick="changeSortType('date')">
+                            Date
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        html += `
+            <div class="case-study-date">${leftStudy.dateDisplay}</div>
+            <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
+            <p>${leftStudy.description}</p>
+            <div class="case-study-links">
+                <a href="${leftStudy.caseStudyUrl}">Read More →</a>
+                <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
+            </div>
+        `;
+        html += '</td>';
+
+        // Right column (if exists)
+        if (i + 1 < sortedStudies.length) {
+            const rightStudy = sortedStudies[i + 1];
+            html += `
+                <td>
+                    <div class="case-study-date">${rightStudy.dateDisplay}</div>
+                    <h3><a href="${rightStudy.caseStudyUrl}">${rightStudy.title}</a></h3>
+                    <p>${rightStudy.description}</p>
+                    <div class="case-study-links">
+                        <a href="${rightStudy.caseStudyUrl}">Read More →</a>
+                        <a href="${rightStudy.dashboardUrl}">View Dashboard</a>
+                    </div>
+                </td>
+            `;
+        } else {
+            html += '<td></td>'; // Empty cell if odd number of studies
+        }
+
+        html += '</tr>';
+    }
+
+    table.innerHTML = html;
+}
+
+function changeSortType(sortType) {
+    currentSort = sortType;
+    renderTable(timeSeriesCaseStudies);
+}
+
+// Initialize page with default alphabetical sorting
+document.addEventListener('DOMContentLoaded', function() {
+    renderTable(timeSeriesCaseStudies);
 });
 </script>
 
