@@ -8,92 +8,551 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
             background-color: #f9f9f9;
             color: #333;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
+
+        /* Header Styles */
         header {
             text-align: center;
             margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            margin: -20px -20px 40px -20px;
         }
+
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .portfolio-title {
+            font-size: 2rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #333;
+            color: #f0f0f0;
         }
-        .category-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
+
         .tagline {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 400;
-            color: #666;
+            color: #e0e0e0;
+            max-width: 600px;
+            margin: 0 auto;
         }
+
+        /* Navigation */
         nav {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
             gap: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
+
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 30px;
             align-items: center;
         }
+
         nav a {
             color: #007BFF;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
+
         nav a:hover {
-            text-decoration: underline;
+            color: #0056b3;
+            transform: translateY(-2px);
         }
+
         .search-container {
             position: relative;
             margin-left: 20px;
         }
+
         .search-input {
-            padding: 8px 40px 8px 12px;
+            padding: 10px 40px 10px 15px;
             border: 2px solid #ddd;
             border-radius: 25px;
             font-size: 0.9rem;
-            width: 200px;
+            width: 250px;
             transition: all 0.3s ease;
-            background: white;
+            background: #f8f9fa;
         }
+
         .search-input:focus {
             outline: none;
             border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+            background: white;
         }
-        .search-input::placeholder {
-            color: #999;
+
+        /* Magazine Layout Styles */
+        .magazine-container {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 50px;
         }
-        .search-icon {
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .hero-background {
             position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/trend-or-trap/cover image.png');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4);
         }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 40px;
+            color: white;
+        }
+
+        .hero-category {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-btn {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .hero-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Grid Section */
+        .grid-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .grid-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .grid-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.5);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 25px;
+            color: white;
+        }
+
+        .grid-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .grid-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .grid-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .grid-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .grid-btn {
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .grid-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Category Colors */
+        .predictive .grid-category {
+            color: #2196F3;
+        }
+        .regression .grid-category {
+            color: #FF9800;
+        }
+        .segmentation .grid-category {
+            color: #E91E63;
+        }
+        .optimization .grid-category {
+            color: #FFC107;
+        }
+
+        /* Banner Section */
+        .banner-section {
+            position: relative;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .banner-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/hidden-power-of-affliate/chart 1 - scatter plot.png');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+            color: white;
+            max-width: 50%;
+        }
+
+        .banner-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FFC107;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .banner-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .banner-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .banner-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .banner-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .banner-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 50px -20px -20px -20px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        /* Mobile-Friendly Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                padding: 30px 15px;
+                margin: -10px -10px 30px -10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .portfolio-title {
+                font-size: 1.5rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            nav {
+                flex-direction: column;
+                padding: 20px 15px;
+                border-radius: 25px;
+                margin-bottom: 30px;
+            }
+
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-container {
+                margin-left: 0;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .search-input {
+                width: 100%;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .magazine-container {
+                gap: 20px;
+            }
+
+            .hero-section {
+                height: 350px;
+            }
+
+            .hero-overlay {
+                padding: 25px 20px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .hero-buttons {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .hero-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .grid-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .grid-card {
+                height: 250px;
+            }
+
+            .grid-overlay {
+                padding: 20px;
+            }
+
+            .grid-title {
+                font-size: 1.1rem;
+            }
+
+            .grid-description {
+                font-size: 0.85rem;
+            }
+
+            .grid-buttons {
+                flex-wrap: wrap;
+            }
+
+            .banner-section {
+                height: auto;
+                min-height: 180px;
+            }
+
+            .banner-overlay {
+                position: static;
+                transform: none;
+                max-width: 100%;
+                padding: 25px 20px;
+                text-align: center;
+            }
+
+            .banner-title {
+                font-size: 1.4rem;
+            }
+
+            .banner-description {
+                font-size: 0.9rem;
+            }
+
+            .banner-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            footer {
+                margin: 30px -10px -10px -10px;
+                padding: 30px 15px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .portfolio-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+
+            .grid-title {
+                font-size: 1rem;
+            }
+
+            .banner-title {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+        }
+
+        /* Search Results Styles */
         .search-results {
             position: absolute;
             top: 100%;
@@ -109,30 +568,36 @@
             display: none;
             margin-top: 5px;
         }
+
         .search-result-item {
             padding: 15px;
             border-bottom: 1px solid #f0f0f0;
             cursor: pointer;
             transition: background-color 0.2s ease;
         }
+
         .search-result-item:hover {
             background-color: #f8f9fa;
         }
+
         .search-result-item:last-child {
             border-bottom: none;
         }
+
         .search-result-title {
             font-weight: 600;
             color: #007BFF;
             margin-bottom: 5px;
             font-size: 0.95rem;
         }
+
         .search-result-description {
             color: #666;
             font-size: 0.85rem;
             margin-bottom: 8px;
             line-height: 1.4;
         }
+
         .search-result-category {
             font-size: 0.75rem;
             color: #888;
@@ -140,10 +605,12 @@
             font-weight: 500;
             margin-bottom: 8px;
         }
+
         .search-result-buttons {
             display: flex;
             gap: 8px;
         }
+
         .search-result-btn {
             padding: 4px 12px;
             border: 1px solid #ddd;
@@ -154,17 +621,20 @@
             font-size: 0.75rem;
             transition: all 0.2s ease;
         }
+
         .search-result-btn:hover {
             background: #007BFF;
             color: white;
             border-color: #007BFF;
         }
+
         .no-results {
             padding: 20px;
             text-align: center;
             color: #666;
             font-style: italic;
         }
+
         .search-overlay {
             position: fixed;
             top: 0;
@@ -175,185 +645,35 @@
             z-index: 999;
             display: none;
         }
-        .case-studies-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            padding: 20px 0;
-        }
-        .case-study-card {
-            background: #f9f9f9;
-            border-radius: 6px;
-            padding: 30px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .case-study-card.forecasting {
-            border-left: 4px solid #4CAF50;
-        }
-        .case-study-card.forecasting::before {
-            background: #4CAF50;
-        }
-        .case-study-card.predictive {
-            border-left: 4px solid #2196F3;
-        }
-        .case-study-card.predictive::before {
-            background: #2196F3;
-        }
-        .case-study-card.regression {
-            border-left: 4px solid #FF9800;
-        }
-        .case-study-card.regression::before {
-            background: #FF9800;
-        }
-        .case-study-card.statistical {
-            border-left: 4px solid #9C27B0;
-        }
-        .case-study-card.statistical::before {
-            background: #9C27B0;
-        }
-        .case-study-card.segmentation {
-            border-left: 4px solid #E91E63;
-        }
-        .case-study-card.segmentation::before {
-            background: #E91E63;
-        }
-        .case-study-card.optimization {
-            border-left: 4px solid #FFC107;
-        }
-        .case-study-card.optimization::before {
-            background: #FFC107;
-        }
-        .case-study-card::before {
-            content: '';
+
+        .search-icon {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #007BFF;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
         }
-        .case-study-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .case-study-title {
-            font-size: 1.4em;
-            color: #007BFF;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .case-study-title a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        .case-study-title a:hover {
-            text-decoration: underline;
-        }
-        .case-study-description {
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .case-study-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .case-study-buttons a {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #f5f5dc;
-            color: #333;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .case-study-buttons a:hover {
-            background-color: #daa520;
-            color: white;
-            border-color: #daa520;
-            transform: translateY(-1px);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 20px;
-        }
+
+        /* Mobile search improvements */
         @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .search-container {
-                margin-left: 0;
-                width: 100%;
-                max-width: 300px;
-            }
-            .search-input {
-                width: 100%;
-            }
-            .nav-links {
-                order: 2;
-            }
-            .search-container {
-                order: 1;
-            }
-            .case-studies-grid {
-                grid-template-columns: 1fr;
-            }
-            .case-study-card {
-                padding: 20px;
-            }
-            .case-study-title {
-                font-size: 1.3rem;
-            }
-            .case-study-description {
-                font-size: 1rem;
-            }
-            nav a {
-                font-size: 1rem;
-            }
-            header h1 {
-                font-size: 2rem;
-            }
-            .category-title {
-                font-size: 1.5rem;
-            }
-            .tagline {
-                font-size: 1rem;
-            }
-            .case-study-buttons {
-                flex-direction: column;
-                gap: 5px;
-            }
-            .case-study-buttons a {
-                text-align: center;
-            }
             .search-result-buttons {
                 flex-direction: column;
                 gap: 5px;
             }
+
             .search-result-btn {
                 text-align: center;
+                padding: 8px 12px;
             }
         }
     </style>
 </head>
 <body>
-
     <header>
         <h1>Lee Yih Ven</h1>
-        <p class="category-title">Data Analytics Portfolio</p>
-        <p class="tagline">Data-driven insights to unlock business growth and innovation.</p>
+        <p class="portfolio-title">Data Analytics Portfolio</p>
+        <p class="tagline">Data-driven insights to unlock business growth</p>
     </header>
 
     <nav>
@@ -371,60 +691,98 @@
     <div class="search-overlay" id="searchOverlay"></div>
 
     <div class="container">
-        <div class="case-studies-grid">
-            <div class="case-study-card forecasting">
-                <h3 class="case-study-title"><a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Trend or Trap?</a></h3>
-                <p class="case-study-description">Spot real trends versus short-term noise.</p>
-                <div class="case-study-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/trend-or-trap.html">Read More →</a>
-                    <a href="/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html">View Dashboard</a>
+        <div class="magazine-container">
+            <!-- Hero Section: Trend or Trap -->
+            <div class="hero-section">
+                <div class="hero-background"></div>
+                <div class="hero-overlay">
+                    <div class="hero-category">Forecasting</div>
+                    <h2 class="hero-title">Trend or Trap?</h2>
+                    <p class="hero-description">Spot real trends versus short-term noise. Decode Google's price moves to discover what separates lasting trends from temporary market traps.</p>
+                    <div class="hero-buttons">
+                        <a href="/data-analyst-portfolio/case-studies/trend-or-trap.html" class="hero-btn">Read Full Analysis →</a>
+                        <a href="/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html" class="hero-btn">View Dashboard</a>
+                    </div>
                 </div>
             </div>
-            <div class="case-study-card predictive">
-                <h3 class="case-study-title"><a href="/data-analyst-portfolio/case-studies/who-is-most-at-risk-of-leaving-the-bank.html">Who Is Most at Risk of Leaving the Bank</a></h3>
-                <p class="case-study-description">Identify which bank customers are most likely to churn.</p>
-                <div class="case-study-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/who-is-most-at-risk-of-leaving-the-bank.html">Read More →</a>
-                    <a href="/data-analyst-portfolio/dashboards/who-is-most-at-risk-of-leaving-the-bank-dashboard.html">View Dashboard</a>
+
+            <!-- Grid Section: 4 Case Studies -->
+            <div class="grid-section">
+                <!-- Bank Customer Churn -->
+                <div class="grid-card predictive">
+                    <div class="grid-background" style="background-image: url('images/who-is-most-at-risk-of-leaving-the-bank/chart 1 - bar chart.png');"></div>
+                    <div class="grid-overlay">
+                        <div class="grid-category">Predictive Modeling</div>
+                        <h3 class="grid-title">Who Is Most at Risk of Leaving the Bank</h3>
+                        <p class="grid-description">Identify which bank customers are most likely to churn.</p>
+                        <div class="grid-buttons">
+                            <a href="/data-analyst-portfolio/case-studies/who-is-most-at-risk-of-leaving-the-bank.html" class="grid-btn">Read More</a>
+                            <a href="/data-analyst-portfolio/dashboards/who-is-most-at-risk-of-leaving-the-bank-dashboard.html" class="grid-btn">Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faith, Corruption, and Wealth -->
+                <div class="grid-card regression">
+                    <div class="grid-background" style="background-image: url('images/faith-corruption-wealth/cover image.png');"></div>
+                    <div class="grid-overlay">
+                        <div class="grid-category">Regression Analysis</div>
+                        <h3 class="grid-title">Faith, Corruption, and Wealth</h3>
+                        <p class="grid-description">Does religion build stronger societies or hold them back?</p>
+                        <div class="grid-buttons">
+                            <a href="/data-analyst-portfolio/case-studies/faith-corruption-wealth.html" class="grid-btn">Read More</a>
+                            <a href="/data-analyst-portfolio/dashboards/faith-corruption-wealth-dashboard.html" class="grid-btn">Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- From Clicks to Check-Ins -->
+                <div class="grid-card segmentation">
+                    <div class="grid-background" style="background-image: url('images/from-clicks-to-check-ins/cover image.png');"></div>
+                    <div class="grid-overlay">
+                        <div class="grid-category">Segmentation Analysis</div>
+                        <h3 class="grid-title">From Clicks to Check-Ins</h3>
+                        <p class="grid-description">Transform hotel search traffic into confirmed bookings.</p>
+                        <div class="grid-buttons">
+                            <a href="/data-analyst-portfolio/case-studies/from-clicks-to-check-ins.html" class="grid-btn">Read More</a>
+                            <a href="/data-analyst-portfolio/dashboards/from-clicks-to-check-ins-dashboard.html" class="grid-btn">Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Malaysian Real Estate -->
+                <div class="grid-card segmentation">
+                    <div class="grid-background" style="background-image: url('images/hidden-patterns-malaysian-real-estate/cover image.png');"></div>
+                    <div class="grid-overlay">
+                        <div class="grid-category">Segmentation Analysis</div>
+                        <h3 class="grid-title">The Hidden Patterns in Malaysian Real Estate</h3>
+                        <p class="grid-description">Why market types drive more returns than locations.</p>
+                        <div class="grid-buttons">
+                            <a href="/data-analyst-portfolio/case-studies/hidden-patterns-malaysian-real-estate.html" class="grid-btn">Read More</a>
+                            <a href="/data-analyst-portfolio/dashboards/hidden-patterns-malaysian-real-estate-dashboard.html" class="grid-btn">Dashboard</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="case-study-card regression">
-                <h3 class="case-study-title"><a href="/data-analyst-portfolio/case-studies/faith-corruption-wealth.html">Faith, Corruption, and Wealth</a></h3>
-                <p class="case-study-description">Does religion build stronger societies or hold them back?</p>
-                <div class="case-study-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/faith-corruption-wealth.html">Read More →</a>
-                    <a href="/data-analyst-portfolio/dashboards/faith-corruption-wealth-dashboard.html">View Dashboard</a>
-                </div>
-            </div>
-            <div class="case-study-card segmentation">
-                <h3 class="case-study-title"><a href="/data-analyst-portfolio/case-studies/from-clicks-to-check-ins.html">From Clicks to Check-Ins</a></h3>
-                <p class="case-study-description">Transform hotel search traffic into confirmed bookings.</p>
-                <div class="case-study-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/from-clicks-to-check-ins.html">Read More →</a>
-                    <a href="/data-analyst-portfolio/dashboards/from-clicks-to-check-ins-dashboard.html">View Dashboard</a>
-                </div>
-            </div>
-            <div class="case-study-card segmentation">
-                <h3 class="case-study-title"><a href="/data-analyst-portfolio/case-studies/hidden-patterns-malaysian-real-estate.html">The Hidden Patterns in Malaysian Real Estate</a></h3>
-                <p class="case-study-description">Why market types drive more returns than locations.</p>
-                <div class="case-study-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/hidden-patterns-malaysian-real-estate.html">Read More →</a>
-                    <a href="/data-analyst-portfolio/dashboards/hidden-patterns-malaysian-real-estate-dashboard.html">View Dashboard</a>
-                </div>
-            </div>
-            <div class="case-study-card optimization">
-                <h3 class="case-study-title"><a href="/data-analyst-portfolio/case-studies/hidden-power-of-affliate.html">The Hidden Power of Affiliates</a></h3>
-                <p class="case-study-description">Uncover the hidden power of affiliate marketing partnerships.</p>
-                <div class="case-study-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/hidden-power-of-affliate.html">Read More →</a>
-                    <a href="/data-analyst-portfolio/dashboards/hidden-power-of-affliate-dashboard.html">View Dashboard</a>
+
+            <!-- Banner Section: Hidden Power of Affiliates -->
+            <div class="banner-section">
+                <div class="banner-background"></div>
+                <div class="banner-overlay">
+                    <div class="banner-category">Optimization Analysis</div>
+                    <h3 class="banner-title">The Hidden Power of Affiliates</h3>
+                    <p class="banner-description">Uncover the hidden power of affiliate marketing partnerships.</p>
+                    <div class="banner-buttons">
+                        <a href="/data-analyst-portfolio/case-studies/hidden-power-of-affliate.html" class="banner-btn">Read Analysis →</a>
+                        <a href="/data-analyst-portfolio/dashboards/hidden-power-of-affliate-dashboard.html" class="banner-btn">View Dashboard</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
+        <p>© 2025 Lee Yih Ven | Data Analytics Portfolio | Pinnacles Learning Solutions</p>
     </footer>
 
     <script>
@@ -855,9 +1213,5 @@
             }
         });
     </script>
-
 </body>
-
 </html>
-
-
