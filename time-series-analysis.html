@@ -388,28 +388,36 @@ const caseStudies = [
         description: "Predict seasonal fruit demand to maximize sales.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/fruit-sales-forecast-october-2024-dashboard.html",
-        category: "Time Series Analysis"
+        category: "Time Series Analysis",
+        date: "2024-10-15",
+        dateDisplay: "October 2024"
     },
     {
         title: "RON95 Fuel Price Volatility Analysis",
         description: "Forecast RON95 fuel prices to anticipate market volatility and costs.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/ron95.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/ron95-dashboard.html",
-        category: "Time Series Analysis"
+        category: "Time Series Analysis",
+        date: "2024-09-20",
+        dateDisplay: "September 2024"
     },
     {
         title: "Too Hot to Harvest",
         description: "Discover how climate patterns impact crop yields.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/too-hot-to-harvest.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/too-hot-to-harvest-dashboard.html",
-        category: "Time Series Analysis"
+        category: "Time Series Analysis",
+        date: "2024-08-10",
+        dateDisplay: "August 2024"
     },
     {
         title: "Trend or Trap?",
         description: "Decode Google's price moves to spot real trends.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/trend-or-trap.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html",
-        category: "Time Series Analysis"
+        category: "Time Series Analysis",
+        date: "2024-07-05",
+        dateDisplay: "July 2024"
     },
     // Predictive Modeling
     {
@@ -761,45 +769,10 @@ const caseStudies = [
     }
 ];
 
-// Time Series specific case studies with dates
-const timeSeriesCaseStudies = [
-    {
-        title: "Fruit Sales Forecast - October 2024",
-        description: "Predict seasonal fruit demand to maximize sales.",
-        caseStudyUrl: "/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html",
-        dashboardUrl: "/data-analyst-portfolio/dashboards/fruit-sales-forecast-october-2024-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-10-15",
-        dateDisplay: "October 2024"
-    },
-    {
-        title: "RON95 Fuel Price Volatility Analysis",
-        description: "Forecast RON95 fuel prices to anticipate market volatility and costs.",
-        caseStudyUrl: "/data-analyst-portfolio/case-studies/ron95.html",
-        dashboardUrl: "/data-analyst-portfolio/dashboards/ron95-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-09-20",
-        dateDisplay: "September 2024"
-    },
-    {
-        title: "Too Hot to Harvest",
-        description: "Discover how climate patterns impact crop yields.",
-        caseStudyUrl: "/data-analyst-portfolio/case-studies/too-hot-to-harvest.html",
-        dashboardUrl: "/data-analyst-portfolio/dashboards/too-hot-to-harvest-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-08-10",
-        dateDisplay: "August 2024"
-    },
-    {
-        title: "Trend or Trap?",
-        description: "Decode Google's price moves to spot real trends.",
-        caseStudyUrl: "/data-analyst-portfolio/case-studies/trend-or-trap.html",
-        dashboardUrl: "/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-07-05",
-        dateDisplay: "July 2024"
-    }
-];
+// Dynamic extraction of Time Series case studies from main database
+function getTimeSeriesCaseStudies() {
+    return caseStudies.filter(study => study.category === "Time Series Analysis");
+}
 
 // Sorting state
 let currentSort = 'alphabetical'; // default to alphabetical as requested
@@ -891,7 +864,13 @@ function sortCaseStudies(studies, sortType) {
     if (sortType === 'alphabetical') {
         return sorted.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortType === 'date') {
-        return sorted.sort((a, b) => new Date(b.date) - new Date(a.date)); // newest first
+        return sorted.sort((a, b) => {
+            // Handle missing dates by putting them at the end
+            if (!a.date && !b.date) return 0;
+            if (!a.date) return 1;
+            if (!b.date) return -1;
+            return new Date(b.date) - new Date(a.date); // newest first
+        });
     }
 
     return sorted;
@@ -928,7 +907,7 @@ function renderTable(studies) {
         const leftStudy = sortedStudies[i];
         html += `
             <td>
-                <div class="case-study-date">${leftStudy.dateDisplay}</div>
+                ${leftStudy.dateDisplay ? `<div class="case-study-date">${leftStudy.dateDisplay}</div>` : ''}
                 <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
                 <p>${leftStudy.description}</p>
                 <div class="case-study-links">
@@ -943,7 +922,7 @@ function renderTable(studies) {
             const rightStudy = sortedStudies[i + 1];
             html += `
                 <td>
-                    <div class="case-study-date">${rightStudy.dateDisplay}</div>
+                    ${rightStudy.dateDisplay ? `<div class="case-study-date">${rightStudy.dateDisplay}</div>` : ''}
                     <h3><a href="${rightStudy.caseStudyUrl}">${rightStudy.title}</a></h3>
                     <p>${rightStudy.description}</p>
                     <div class="case-study-links">
@@ -964,12 +943,12 @@ function renderTable(studies) {
 
 function changeSortType(sortType) {
     currentSort = sortType;
-    renderTable(timeSeriesCaseStudies);
+    renderTable(getTimeSeriesCaseStudies());
 }
 
 // Initialize page with default alphabetical sorting
 document.addEventListener('DOMContentLoaded', function() {
-    renderTable(timeSeriesCaseStudies);
+    renderTable(getTimeSeriesCaseStudies());
 });
 </script>
 
