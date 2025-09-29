@@ -45,17 +45,135 @@
             color: #666;
         }
         nav {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
         nav a {
             color: #007BFF;
             text-decoration: none;
-            margin: 0 15px;
             font-size: 1.2rem;
         }
         nav a:hover {
             text-decoration: underline;
+        }
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+        .search-input {
+            padding: 8px 40px 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            width: 200px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+        .search-input::placeholder {
+            color: #999;
+        }
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            margin-top: 5px;
+        }
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-title {
+            font-weight: 600;
+            color: #007BFF;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        .search-result-description {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .search-result-category {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .search-result-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .search-result-btn {
+            padding: 4px 12px;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+            color: #666;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        .search-result-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            display: none;
         }
         .case-studies-grid {
             display: grid;
@@ -171,6 +289,24 @@
             margin-top: 20px;
         }
         @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-container {
+                margin-left: 0;
+                width: 100%;
+                max-width: 300px;
+            }
+            .search-input {
+                width: 100%;
+            }
+            .nav-links {
+                order: 2;
+            }
+            .search-container {
+                order: 1;
+            }
             .case-studies-grid {
                 grid-template-columns: 1fr;
             }
@@ -202,6 +338,13 @@
             .case-study-buttons a {
                 text-align: center;
             }
+            .search-result-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .search-result-btn {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -214,10 +357,18 @@
     </header>
 
     <nav>
-        <a href="/data-analyst-portfolio/index.html">Home</a>
-        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+        <div class="nav-links">
+            <a href="/data-analyst-portfolio/index.html">Home</a>
+            <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+            <a href="/data-analyst-portfolio/contact.html">Contact</a>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search case studies..." id="searchInput">
+            <span class="search-icon">🔍</span>
+            <div class="search-results" id="searchResults"></div>
+        </div>
     </nav>
+    <div class="search-overlay" id="searchOverlay"></div>
 
     <div class="container">
         <div class="case-studies-grid">
@@ -275,6 +426,302 @@
     <footer>
         <p>© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
     </footer>
+
+    <script>
+        // Case studies data
+        const caseStudies = [
+            // Time Series Analysis
+            {
+                title: "Fruit Sales Forecast - October 2024",
+                description: "Predict seasonal fruit demand to maximize sales.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/fruit-sales-forecast-october-2024-dashboard.html",
+                category: "Time Series Analysis"
+            },
+            {
+                title: "RON95 Fuel Price Volatility Analysis",
+                description: "Forecast RON95 fuel prices to anticipate market volatility and costs.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/ron95.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/ron95-dashboard.html",
+                category: "Time Series Analysis"
+            },
+            {
+                title: "Too Hot to Harvest",
+                description: "Discover how climate patterns impact crop yields.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/too-hot-to-harvest.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/too-hot-to-harvest-dashboard.html",
+                category: "Time Series Analysis"
+            },
+            {
+                title: "Trend or Trap?",
+                description: "Decode Google's price moves to spot real trends.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/trend-or-trap.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html",
+                category: "Time Series Analysis"
+            },
+            // Predictive Modeling
+            {
+                title: "Flagging High-Risk Borrowers",
+                description: "Discover which borrower profiles signal default risk.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/flagging-high-risk-customer-dashboard.html",
+                category: "Predictive Modeling"
+            },
+            {
+                title: "Identifying At-Risk Students Early",
+                description: "Learn how student behavior patterns predict academic success.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/identify-at-risk-student.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/identify-at-risk-student-dashboard.html",
+                category: "Predictive Modeling"
+            },
+            {
+                title: "Predicting Customer Response to Discounts",
+                description: "Find out which customers respond to discount campaigns.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-customer-response-discounts.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/predicting-customer-response-discounts-dashboard.html",
+                category: "Predictive Modeling"
+            },
+            {
+                title: "Predicting Depression Risk in Students",
+                description: "Explore early warning signs that predict student depression risk.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-depression-risk-student.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/predicting-depression-risk-student-dashboard.html",
+                category: "Predictive Modeling"
+            },
+            {
+                title: "Saving the Silent Spenders",
+                description: "Identify which VIP coffee customers are about to stop buying.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/clv-churn-analysis-coffee-vending.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/clv-churn-analysis-coffee-vending-dashboard.html",
+                category: "Predictive Modeling"
+            },
+            {
+                title: "Who Is Most at Risk of Leaving the Bank",
+                description: "Identify which bank customers are most likely to churn.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/who-is-most-at-risk-of-leaving-the-bank.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/who-is-most-at-risk-of-leaving-the-bank-dashboard.html",
+                category: "Predictive Modeling"
+            },
+            // Regression Analysis
+            {
+                title: "Are Long Movies Better Movies?",
+                description: "Find out if longer movies actually get better ratings.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/are-long-movies-better.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/are-long-movies-better-dashboard.html",
+                category: "Regression Analysis"
+            },
+            {
+                title: "Can Money Buy Happiness?",
+                description: "Explore whether higher income truly leads to greater happiness.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/can-money-buy-happiness.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/can-money-buy-happiness-dashboard.html",
+                category: "Regression Analysis"
+            },
+            {
+                title: "Do Dollars Drive Decisions?",
+                description: "Discover how income levels influence customer buying decisions.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/do-dollar-drive-decisions-dashboard.html",
+                category: "Regression Analysis"
+            },
+            // Statistical Testing
+            {
+                title: "Are Tunics Truly the Top Seller?",
+                description: "Find out if tunics really are the store's best-selling items.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/are-tunics-best-sellers.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/are-tunics-best-sellers-dashboard.html",
+                category: "Statistical Testing"
+            },
+            {
+                title: "Cash or Credit Card",
+                description: "Discover whether cash or credit card users spend more.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/cash-or-credit-card.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/cash-or-credit-card-dashboard.html",
+                category: "Statistical Testing"
+            },
+            {
+                title: "Connected or Disconnected?",
+                description: "Learn if social media usage strengthens or weakens relationships.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/connected-or-disconnected.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/connected-or-disconnected-dashboard.html",
+                category: "Statistical Testing"
+            },
+            {
+                title: "Did You Sleep Well Last Night?",
+                description: "Explore what hotel factors contribute to better guest sleep quality.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/hotel-sleep-analysis.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/hotel-sleep-analysis-dashboard.html",
+                category: "Statistical Testing"
+            },
+            {
+                title: "East Coast Alert",
+                description: "Predict which East Coast areas face the highest crime probability.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/east-coast-alert.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/east-coast-alert-dashboard.html",
+                category: "Statistical Testing"
+            },
+            {
+                title: "Nasi Lemak vs Kopi-O Preference Analysis",
+                description: "Discover cultural preferences between nasi lemak and kopi-o choices.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/nasi-lemak-kopi-o.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/nasi-lemak-kopi-o-dashboard.html",
+                category: "Statistical Testing"
+            },
+            {
+                title: "Religion and Sexual Crime",
+                description: "Test whether religious societies have higher sexual crimes.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/religion-sexual-crime.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/religion-sexual-crime-dashboard.html",
+                category: "Statistical Testing"
+            },
+            // Segmentation Analysis
+            {
+                title: "From Clicks to Check-Ins",
+                description: "Transform hotel search traffic into confirmed bookings.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/from-clicks-to-check-ins.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/from-clicks-to-check-ins-dashboard.html",
+                category: "Segmentation Analysis"
+            },
+            {
+                title: "From Data to Design",
+                description: "Discover which customer profiles influence credit card product designs.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/from-data-to-design-credit-card-segmentation.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/from-data-to-design-credit-card-segmentation-dashboard.html",
+                category: "Segmentation Analysis"
+            },
+            {
+                title: "Not All Shoppers Are Equal",
+                description: "Learn what customer spending patterns reveal.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/not-all-shoppers-are-equal.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/not-all-shoppers-are-equal-dashboard.html",
+                category: "Segmentation Analysis"
+            },
+            {
+                title: "The Hidden Patterns in Malaysian Real Estate",
+                description: "Uncover hidden patterns that drive Malaysian real estate success.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/hidden-patterns-malaysian-real-estate.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/hidden-patterns-malaysian-real-estate-dashboard.html",
+                category: "Segmentation Analysis"
+            },
+            {
+                title: "Turning Likes into ROI",
+                description: "Find out how to turn social media likes into actual sales.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/turning-like-into-roi.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/turning-like-into-roi-dashboard.html",
+                category: "Segmentation Analysis"
+            },
+            // Optimization Analysis
+            {
+                title: "Beyond the Buzzwords",
+                description: "Discover which jewelry keywords actually deliver clicks and sales.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/beyond-the-buzzwords.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/beyond-the-buzzwords-dashboard.html",
+                category: "Optimization Analysis"
+            },
+            {
+                title: "Boost Sales and Restocking Efficiency",
+                description: "Learn the best times to restock vending machines for maximum sales.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/maximizing-vending-machine-sales-by-time.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/maximizing-vending-machine-sales-by-time-dashboard.html",
+                category: "Optimization Analysis"
+            },
+            {
+                title: "Breaking the Pattern",
+                description: "Find out what breaks airline performance patterns most often.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/breaking-the-pattern.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/breaking-the-pattern-dashboard.html",
+                category: "Optimization Analysis"
+            },
+            {
+                title: "Overpriced or Undervalued?",
+                description: "Determine if gold is overpriced or undervalued right now.",
+                caseStudyUrl: "/data-analyst-portfolio/case-studies/overpriced-or-undervalued.html",
+                dashboardUrl: "/data-analyst-portfolio/dashboards/overpriced-or-undervalued-dashboard.html",
+                category: "Optimization Analysis"
+            }
+        ];
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const searchOverlay = document.getElementById('searchOverlay');
+
+        // Search functionality
+        function performSearch(query) {
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                searchOverlay.style.display = 'none';
+                return;
+            }
+
+            const filteredResults = caseStudies.filter(study =>
+                study.title.toLowerCase().includes(query.toLowerCase()) ||
+                study.description.toLowerCase().includes(query.toLowerCase()) ||
+                study.category.toLowerCase().includes(query.toLowerCase())
+            );
+
+            displayResults(filteredResults);
+        }
+
+        function displayResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">No case studies found. Try different keywords.</div>';
+            } else {
+                searchResults.innerHTML = results.map(study => `
+                    <div class="search-result-item">
+                        <div class="search-result-category">${study.category}</div>
+                        <div class="search-result-title">${study.title}</div>
+                        <div class="search-result-description">${study.description}</div>
+                        <div class="search-result-buttons">
+                            <a href="${study.caseStudyUrl}" class="search-result-btn">Read More</a>
+                            <a href="${study.dashboardUrl}" class="search-result-btn">View Dashboard</a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            searchResults.style.display = 'block';
+            searchOverlay.style.display = 'block';
+        }
+
+        function hideResults() {
+            searchResults.style.display = 'none';
+            searchOverlay.style.display = 'none';
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.length >= 2) {
+                performSearch(searchInput.value);
+            }
+        });
+
+        // Hide results when clicking outside
+        searchOverlay.addEventListener('click', hideResults);
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                hideResults();
+            }
+        });
+
+        // Prevent search results from closing when clicked
+        searchResults.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideResults();
+                searchInput.blur();
+            }
+        });
+    </script>
 
 </body>
 </html>
