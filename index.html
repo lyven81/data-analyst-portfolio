@@ -33,32 +33,26 @@
         header {
             text-align: center;
             margin-bottom: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
-            margin: -20px -20px 40px -20px;
         }
 
         header h1 {
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 600;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #333;
         }
 
         .portfolio-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #f0f0f0;
+            color: #333;
+            margin-bottom: 5px;
         }
 
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 400;
-            color: #e0e0e0;
-            max-width: 600px;
-            margin: 0 auto;
+            color: #666;
         }
 
         /* Navigation */
@@ -66,13 +60,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
             gap: 15px;
-            background: white;
-            padding: 15px;
-            border-radius: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         .nav-links {
@@ -84,14 +74,11 @@
         nav a {
             color: #007BFF;
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
 
         nav a:hover {
-            color: #0056b3;
-            transform: translateY(-2px);
+            text-decoration: underline;
         }
 
         .search-container {
@@ -100,20 +87,19 @@
         }
 
         .search-input {
-            padding: 10px 40px 10px 15px;
+            padding: 8px 40px 8px 12px;
             border: 2px solid #ddd;
             border-radius: 25px;
             font-size: 0.9rem;
-            width: 250px;
+            width: 200px;
             transition: all 0.3s ease;
-            background: #f8f9fa;
+            background: white;
         }
 
         .search-input:focus {
             outline: none;
             border-color: #007BFF;
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-            background: white;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
         }
 
         /* Magazine Layout Styles */
@@ -374,22 +360,16 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            background-color: #333;
             color: white;
-            margin: 50px -20px -20px -20px;
-            border-radius: 15px 15px 0 0;
+            margin-top: 20px;
         }
 
         /* Mobile-Friendly Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
-            }
-
-            header {
-                padding: 30px 15px;
-                margin: -10px -10px 30px -10px;
             }
 
             header h1 {
@@ -402,31 +382,26 @@
 
             .tagline {
                 font-size: 1rem;
-                padding: 0 10px;
             }
 
             nav {
                 flex-direction: column;
-                padding: 20px 15px;
-                border-radius: 25px;
-                margin-bottom: 30px;
+                gap: 15px;
             }
 
             .nav-links {
-                gap: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
+                order: 2;
             }
 
             .search-container {
+                order: 1;
                 margin-left: 0;
                 width: 100%;
-                max-width: 280px;
+                max-width: 300px;
             }
 
             .search-input {
                 width: 100%;
-                font-size: 16px; /* Prevents zoom on iOS */
             }
 
             .magazine-container {
@@ -512,8 +487,8 @@
             }
 
             footer {
-                margin: 30px -10px -10px -10px;
-                padding: 30px 15px;
+                margin-top: 20px;
+                padding: 20px 15px;
             }
         }
 
