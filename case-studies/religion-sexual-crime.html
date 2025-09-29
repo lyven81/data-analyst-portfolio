@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Religion and Sexual Crime Analysis | Lee Yih Ven</title>
+    <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation.</p>
+            </section>
+
+            <section class="home-link-section">
+                <a class="home-link-btn" href="/data-analyst-portfolio/index.html">Home</a>
+            </section>
+
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <main class="right-column">
+            <section class="case-study-content">
+                <h1>Religion and Sexual Crime</h1>
+                <h2>Do More Religious Countries Really Have More Sexual Crimes?</h2>
+
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/cover%20image.png" alt="Religion and Sexual Crime Analysis Cover" style="width: 100%; max-width: 800px; height: auto; margin: 20px 0;">
+
+                <h3>Overview</h3>
+                <p>This study looks at the claim that "more religious places have more sexual crimes." We use survey data on religiosity and international crime reports to see if the claim holds or if it is misleading.</p>
+                <p>The aim is to explain the findings in plain language. We show where the claim seems to fit, where it does not, and why the truth is more complex. Limits such as underreporting of crimes in some countries are also considered.</p>
+
+                <h3>Methodology</h3>
+                <p>We use two main sources: the World Values Survey (WVS) for religiosity and the UN Office on Drugs and Crime (UNODC) for sexual crime data. Religiosity combines three factors—importance of religion, service attendance, and prayer frequency—into an index from 0 to 1. Sexual crime is measured as reported cases per 100,000 people, with "high crime" defined as above the 75th percentile (675 cases).</p>
+                <p>Only 13 countries with matching data were included, such as Australia, Germany, Mexico, and Myanmar. While this gives a first look, the small sample, underreporting, and timing differences between surveys and crime reports limit the strength of conclusions. The analysis shows correlation, not causation.</p>
+
+                <h3>1. How is religiosity measured?</h3>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q1%20religiosity_histogram.png" alt="Religiosity Distribution Histogram" style="width: 100%; max-width: 800px; height: auto; margin: 20px 0;">
+                <p>Religiosity is scored using WVS responses on religion's importance, attendance, and prayer. These are standardized and averaged to form an index from 0 (least religious) to 1 (most religious).</p>
+                <p>Most countries in the sample score between 0.55 and 0.75, showing moderate to high religiosity. Latin America and Asia tend to score higher, while Western Europe scores lower. This creates clear differences to compare.</p>
+
+                <h3>2. How is sexual crime and "high crime" defined?</h3>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q2%20sex_crime_rate_boxplot.png" alt="Sexual Crime Rate Distribution" style="width: 100%; max-width: 800px; height: auto; margin: 20px 0;">
+                <p>Sexual crime uses UNODC rates per 100,000 people. This helps compare countries, though reporting and legal definitions vary widely. Underreporting is common in religious or conservative societies.</p>
+                <p>"High sexual crime" is set at the 75th percentile cut-off of 675 cases per 100,000. This makes the definition data-driven, though reporting gaps still affect results.</p>
+
+                <h3>3. Do more religious countries show higher crime rates?</h3>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q3%20scatter_religiosity_vs_crime.png" alt="Religiosity vs Sexual Crime Scatterplot" style="width: 100%; max-width: 800px; height: auto; margin: 20px 0;">
+                <p>The scatterplot shows no clear link between religiosity and sexual crime. Countries are spread out, and the correlation is weak.</p>
+                <p>Quadrant analysis supports this. Some religious countries (Mexico, Colombia) report high crime, while others (Myanmar, Slovakia) report low. The same is true for less religious ones. Religion alone does not predict outcomes.</p>
+
+                <h3>4. Do country profiles emerge?</h3>
+                <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/Religion-and-Sexual-Crime/Q4%20quadrant_country_profiles.png" alt="Country Profiles by Religiosity and Crime Quadrants" style="width: 100%; max-width: 800px; height: auto; margin: 20px 0;">
+                <p>Grouping countries by high/low religiosity and crime shows all four patterns exist. Colombia and Mexico are high-religiosity/high-crime, while Slovakia and Mongolia are high-religiosity/low-crime. Germany and Australia are less religious but high-crime, while Romania and Kyrgyzstan are less religious and low-crime.</p>
+                <p>No group dominates. This spread shows that factors beyond religion—like governance, culture, and institutions—likely explain the differences.</p>
+
+                <h3>Conclusion</h3>
+                <p>The claim that more religious countries have more sexual crimes is not supported. Some religious countries report high rates, some low, and the same is true for less religious ones. There is no simple "more religion = more crime" pattern.</p>
+                <p>The study has limits: only 13 countries, underreporting in religious settings, and different definitions across legal systems. In short, the relationship is complex and context-specific. Broader data is needed for stronger conclusions.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+</body>
+</html>
