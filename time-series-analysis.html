@@ -221,11 +221,11 @@
             transform: translateY(-1px);
         }
         .sort-controls {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
+            margin-bottom: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
         }
         .sort-label {
             font-size: 0.9rem;
@@ -313,8 +313,8 @@
                 text-align: center;
             }
             .sort-controls {
-                margin-bottom: 15px;
-                padding: 12px;
+                margin-bottom: 0;
+                padding: 0;
             }
             .sort-label {
                 font-size: 0.85rem;
@@ -901,19 +901,10 @@ function renderTable(studies) {
     const table = document.getElementById('caseStudiesTable');
     const sortedStudies = sortCaseStudies(studies, currentSort);
 
-    // Create table content with sorting controls in first cell
-    let html = '';
-
-    for (let i = 0; i < sortedStudies.length; i += 2) {
-        html += '<tr>';
-
-        // Left column
-        const leftStudy = sortedStudies[i];
-        html += '<td>';
-
-        // Add sorting controls only to the first cell
-        if (i === 0) {
-            html += `
+    // Start with dedicated sorting controls row
+    let html = `
+        <tr>
+            <td colspan="2" style="padding: 20px; border-bottom: 1px solid #e9ecef;">
                 <div class="sort-controls">
                     <span class="sort-label">Sort by:</span>
                     <div class="sort-buttons">
@@ -925,19 +916,27 @@ function renderTable(studies) {
                         </button>
                     </div>
                 </div>
-            `;
-        }
+            </td>
+        </tr>
+    `;
 
+    // Add case study rows
+    for (let i = 0; i < sortedStudies.length; i += 2) {
+        html += '<tr>';
+
+        // Left column
+        const leftStudy = sortedStudies[i];
         html += `
-            <div class="case-study-date">${leftStudy.dateDisplay}</div>
-            <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
-            <p>${leftStudy.description}</p>
-            <div class="case-study-links">
-                <a href="${leftStudy.caseStudyUrl}">Read More →</a>
-                <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
-            </div>
+            <td>
+                <div class="case-study-date">${leftStudy.dateDisplay}</div>
+                <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
+                <p>${leftStudy.description}</p>
+                <div class="case-study-links">
+                    <a href="${leftStudy.caseStudyUrl}">Read More →</a>
+                    <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
+                </div>
+            </td>
         `;
-        html += '</td>';
 
         // Right column (if exists)
         if (i + 1 < sortedStudies.length) {
