@@ -388,36 +388,28 @@ const caseStudies = [
         description: "Predict seasonal fruit demand to maximize sales.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/fruit-sales-forecast-october-2024.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/fruit-sales-forecast-october-2024-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-10-15",
-        dateDisplay: "October 2024"
+        category: "Time Series Analysis"
     },
     {
         title: "RON95 Fuel Price Volatility Analysis",
         description: "Forecast RON95 fuel prices to anticipate market volatility and costs.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/ron95.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/ron95-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-09-20",
-        dateDisplay: "September 2024"
+        category: "Time Series Analysis"
     },
     {
         title: "Too Hot to Harvest",
         description: "Discover how climate patterns impact crop yields.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/too-hot-to-harvest.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/too-hot-to-harvest-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-08-10",
-        dateDisplay: "August 2024"
+        category: "Time Series Analysis"
     },
     {
         title: "Trend or Trap?",
         description: "Decode Google's price moves to spot real trends.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/trend-or-trap.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/trend-or-trap-dashboard.html",
-        category: "Time Series Analysis",
-        date: "2024-07-05",
-        dateDisplay: "July 2024"
+        category: "Time Series Analysis"
     },
     // Predictive Modeling
     {
@@ -863,13 +855,23 @@ function sortCaseStudies(studies, sortType) {
 
     if (sortType === 'alphabetical') {
         return sorted.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortType === 'date') {
+    } else if (sortType === 'latest') {
         return sorted.sort((a, b) => {
-            // Handle missing dates by putting them at the end
-            if (!a.date && !b.date) return 0;
-            if (!a.date) return 1;
-            if (!b.date) return -1;
-            return new Date(b.date) - new Date(a.date); // newest first
+            // Studies with dates (new) come first, sorted newest to oldest
+            // Studies without dates (existing) maintain their order after dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return 1; // existing studies go to bottom
+            if (!b.date) return -1; // new studies stay at top
+            return new Date(b.date) - new Date(a.date); // newest first among dated studies
+        });
+    } else if (sortType === 'oldest') {
+        return sorted.sort((a, b) => {
+            // Studies with dates (new) come last, sorted oldest to newest
+            // Studies without dates (existing) maintain their order before dated ones
+            if (!a.date && !b.date) return 0; // maintain original order for existing studies
+            if (!a.date) return -1; // existing studies stay at top
+            if (!b.date) return 1; // new studies go to bottom
+            return new Date(a.date) - new Date(b.date); // oldest first among dated studies
         });
     }
 
@@ -890,8 +892,11 @@ function renderTable(studies) {
                         <button class="sort-btn ${currentSort === 'alphabetical' ? 'active' : ''}" onclick="changeSortType('alphabetical')">
                             A-Z
                         </button>
-                        <button class="sort-btn ${currentSort === 'date' ? 'active' : ''}" onclick="changeSortType('date')">
-                            Date
+                        <button class="sort-btn ${currentSort === 'latest' ? 'active' : ''}" onclick="changeSortType('latest')">
+                            Latest
+                        </button>
+                        <button class="sort-btn ${currentSort === 'oldest' ? 'active' : ''}" onclick="changeSortType('oldest')">
+                            Oldest
                         </button>
                     </div>
                 </div>
