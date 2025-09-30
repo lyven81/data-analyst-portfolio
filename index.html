@@ -308,11 +308,12 @@
 
         .banner-overlay {
             position: absolute;
-            top: 50%;
-            left: 40px;
-            transform: translateY(-50%);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 25px;
             color: white;
-            max-width: 50%;
         }
 
         .banner-category {
@@ -325,14 +326,14 @@
         }
 
         .banner-title {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .banner-description {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.9;
             margin-bottom: 15px;
         }
@@ -343,13 +344,14 @@
         }
 
         .banner-btn {
-            padding: 10px 20px;
+            padding: 8px 15px;
             background: rgba(255,255,255,0.2);
             color: white;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 500;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
             transition: all 0.3s ease;
         }
 
@@ -461,15 +463,19 @@
             }
 
             .banner-section {
-                height: 200px;
+                height: 250px;
+            }
+
+            .banner-overlay {
+                padding: 20px;
             }
 
             .banner-title {
-                font-size: 1.4rem;
+                font-size: 1.1rem;
             }
 
             .banner-description {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             .banner-buttons {
