@@ -93,6 +93,16 @@ body {
     text-overflow: ellipsis;
 }
 
+/* Profile Image */
+.profile-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Home Link Button */
 .home-link-section {
     margin: 20px 0;
