@@ -109,6 +109,44 @@
       <h2>
        Evaluation of the Regression Model
       </h2>
+      <pre style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.4;">
+                            OLS Regression Results
+==============================================================================
+Dep. Variable:                Revenue   R-squared:                       0.995
+Model:                            OLS   Adj. R-squared:                  0.995
+Method:                 Least Squares   F-statistic:                     1592.
+Date:                Wed, 01 Oct 2025   Prob (F-statistic):           4.07e-82
+Time:                        09:01:31   Log-Likelihood:                -1020.5
+No. Observations:                  85   AIC:                             2063.
+Df Residuals:                      74   BIC:                             2090.
+Df Model:                          10
+Covariance Type:            nonrobust
+===============================================================================
+                  coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------
+const        7417.5617   1.34e+04      0.555      0.581   -1.92e+04    3.41e+04
+Time_Index    114.8134    193.893      0.592      0.556    -271.528     501.154
+Revenue_1.1     2.1745      0.785      2.771      0.007       0.611       3.738
+Revenue_1.2     3.2487      0.808      4.020      0.000       1.638       4.859
+Revenue_1.4     1.8244      0.949      1.921      0.059      -0.068       3.716
+Revenue_1.5     2.3832      0.882      2.701      0.009       0.625       4.141
+Revenue_2.1     6.7305      1.428      4.712      0.000       3.884       9.576
+Revenue_2.3     1.5945      0.488      3.265      0.002       0.621       2.568
+Revenue_2.4     1.2941      0.539      2.403      0.019       0.221       2.367
+Revenue_2.5     1.8399      0.323      5.697      0.000       1.196       2.483
+Revenue_3.4     2.6327      0.604      4.356      0.000       1.429       3.837
+==============================================================================
+Omnibus:                        2.044   Durbin-Watson:                   2.003
+Prob(Omnibus):                  0.360   Jarque-Bera (JB):                1.403
+Skew:                          -0.202   Prob(JB):                        0.496
+Kurtosis:                       3.482   Cond. No.                     5.93e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 5.93e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+      </pre>
       <p>
        The regression model performed very strongly, with an R² of 0.995, meaning it explains about 99.5% of the variation in weekly revenue. This gives high confidence that the selected subcategories are the true drivers of performance.
       </p>
