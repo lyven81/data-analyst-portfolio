@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   What Really Drives Store Revenue? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/what-really-drives-store-revenue-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/cover%20image.png"/>
+      <h1>
+       What Really Drives Store Revenue?
+      </h1>
+      <p>
+       Uncovering the Subcategories That Shape Growth
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis helps merchandising managers see which product subcategories matter most for overall revenue. Not all categories contribute equally, so the challenge is knowing where to give more space, promotions, and budget to get the best return.
+      </p>
+      <p>
+       The goal is to identify the top drivers of sales, understand their seasonal patterns, and forecast how changes in subcategory sales affect total revenue. With these insights, managers can plan space, promotions, and inventory with confidence, focusing on the areas that truly grow the business.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Selection of Dependent Variable
+      </h2>
+      <p>
+       The dependent variable for this analysis is Total_Revenue, calculated on a weekly basis across all products. Weekly aggregation was chosen because it smooths out daily ups and downs and makes it easier to see longer-term patterns.
+      </p>
+      <p>
+       The goal was to understand what drives overall revenue growth and how changes in product mix or time affect sales performance. Weekly data also allows us to capture both seasonality and subcategory trends, making the insights more relevant for merchandising decisions.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Selection of Independent Variables
+      </h2>
+      <p>
+       Independent variables were chosen by looking at how strongly each subcategory correlated with total revenue. Subcategories with the highest correlation (above 0.97) were selected, while broader categories were excluded to avoid double-counting effects.
+      </p>
+      <p>
+       The final set includes Footwear, Sportswear, Kids Wear, Women's Wear, Wearable Accessories, Home Appliances, TVs & Audio, Laptops, and Storage, along with a Time_Index to capture trend effects. This ensures the analysis highlights where merchandising actions—like pricing, promotions, and space allocation—can have the most impact.
+      </p>
+      <p>
+       By narrowing the focus to subcategories instead of broad categories, the model balances statistical strength with practical business relevance, giving managers actionable insights rather than generic signals.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Evaluation of the Regression Model
+      </h2>
+      <p>
+       The regression model performed very strongly, with an R² of 0.995, meaning it explains about 99.5% of the variation in weekly revenue. This gives high confidence that the selected subcategories are the true drivers of performance.
+      </p>
+      <p>
+       Most subcategories are statistically significant, including Sportswear, Women's Wear, Accessories, Home Appliances, Laptops, Storage, TVs & Audio, and Footwear. Two areas—Kids Wear and the Time Index—were not significant, showing that subcategory sales explain revenue better than simple time trends.
+      </p>
+      <p>
+       The coefficients also show how much each subcategory influences revenue. For example, Wearable Accessories has a very strong effect, amplifying total revenue by more than 6x for each unit increase, while Sportswear and Laptops also play powerful roles. Seasonal dummies such as holidays did not add much explanatory power, confirming that product mix and promotions matter more than calendar effects alone.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Q1. Which subcategories are the strongest drivers of total revenue, and how do they compare?
+      </h2>
+      <p>
+       The analysis shows that Wearable Accessories (Revenue_2.1) is the strongest driver of overall revenue, accounting for about 37% of the influence. This makes it the single most critical subcategory to focus on.
+      </p>
+      <p>
+       The next strongest contributors are Sportswear (Revenue_1.2) and Footwear (Revenue_1.1), together explaining nearly 30% of total impact. These categories consistently influence overall performance, though not at the same scale as Accessories.
+      </p>
+      <p>
+       Other subcategories, including Home Appliances, Kids Wear, and Women's Wear, contribute moderately, while Laptops, TVs & Audio, and Storage have the smallest effects. These smaller drivers may play supporting roles rather than acting as key growth levers.
+      </p>
+      <img alt="Subcategory Influence on Total Revenue" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q1%20subcategory_influence.png"/>
+     </section>
+     <section>
+      <h2>
+       Q2. If sales in a subcategory increase, how much would overall revenue rise?
+      </h2>
+      <p>
+       The impact of a +10% increase in sales varies across subcategories. Wearable Accessories again stand out, with a 10% rise generating an additional +0.52 units of total revenue.
+      </p>
+      <p>
+       The next strongest lifts come from Sportswear (+0.21 units) and Home Appliances (+0.12 units). Smaller but positive effects are seen in Women's Wear, Laptops, TVs & Audio, and Storage, each contributing modest gains between +0.05 and +0.09 units.
+      </p>
+      <p>
+       Interestingly, Footwear shows a negative effect (–0.20), suggesting possible cannibalization of revenue from other categories. Kids Wear shows almost no measurable impact, indicating limited ability to drive overall growth.
+      </p>
+      <img alt="Marginal Impact of Subcategory Sales on Total Revenue" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q2%20subcategory_marginal_impact.png"/>
+     </section>
+     <section>
+      <h2>
+       Q3. How is total revenue trending over time, and do subcategories amplify or smooth out this growth?
+      </h2>
+      <p>
+       Total revenue shows clear seasonal peaks in Q4, driven by holiday shopping, followed by declines in Q1. This pattern repeats across the two years in the dataset.
+      </p>
+      <p>
+       Subcategories such as Laptops (Revenue_2.5) and Women's Wear (Revenue_1.5) rise strongly during these same holiday peaks, amplifying total revenue growth. In contrast, Sportswear (Revenue_1.2) contributes more steadily, showing smaller fluctuations and acting as a stabilizer throughout the year.
+      </p>
+      <p>
+       This balance between seasonal amplifiers and steady performers helps merchandising managers plan inventory—relying on Sportswear for predictable sales, while maximizing peak demand with categories like Laptops and Women's Wear.
+      </p>
+      <img alt="Trend of Total Revenue vs. Key Subcategories" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q3%20trend_subcategories.png"/>
+     </section>
+     <section>
+      <h2>
+       Q4. What does the revenue outlook look like for the next season or year if trends continue?
+      </h2>
+      <p>
+       The forecast suggests stable revenue of about 1.35M per week on average in the coming year. The projection line is almost flat, with a narrow confidence band, showing little expected variation.
+      </p>
+      <p>
+       This contrasts with past data, where strong seasonal spikes occurred. The difference arises because the regression model captures average subcategory effects but does not fully reproduce holiday cycles.
+      </p>
+      <p>
+       For managers, this provides a baseline outlook for planning. Actual results are likely to exceed this flat forecast during holidays, promotions, or new launches. To capture seasonality more accurately, managers may consider pairing this baseline with a seasonal model such as ARIMA.
+      </p>
+      <img alt="Revenue Outlook Forecast" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q4%20revenue_forecast.png"/>
+     </section>
+     <section>
+      <h2>
+       Q5. What happens if we boost or cut sales in specific subcategories?
+      </h2>
+      <p>
+       The scenario simulation tested ±10% changes in subcategory sales. Boosting Wearable Accessories had the strongest positive impact, while categories such as Kids Wear and Laptops produced smaller shifts.
+      </p>
+      <p>
+       No single category dominates overall performance completely. The largest gains came when all subcategories were boosted together by 10%, showing that broad-based promotions or supplier negotiations are more effective than focusing on one subcategory alone.
+      </p>
+      <p>
+       This means merchandising managers should continue to prioritize top drivers like Accessories and Sportswear but also consider coordinated actions across multiple subcategories to maximize revenue growth.
+      </p>
+      <img alt="Scenario Simulation" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q5%20scenario_simulation.png"/>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis shows that Wearable Accessories, Sportswear, and Footwear are the subcategories with the strongest influence on overall revenue. Among these, Wearable Accessories is the clear leader and should be prioritized for shelf space, online visibility, and supplier negotiations. Sportswear provides reliable, year-round sales, making it ideal for steady promotions and inventory planning, while Footwear needs careful positioning to avoid taking sales away from other categories.
+      </p>
+      <p>
+       Seasonality also plays a major role. Laptops and Women's Wear drive sharp increases during holiday seasons, especially in Q4, while Sportswear delivers consistent revenue across the year. This means that promotions and discounts should be timed strategically—holiday-sensitive subcategories should get heavier marketing support during peak shopping periods, while steady performers like Sportswear should be supported with ongoing campaigns to sustain baseline revenue.
+      </p>
+      <p>
+       To maximize growth, merchandising managers should weight budgets toward the top-performing subcategories and coordinate across multiple areas to achieve a broader lift. Inventory and supplier planning should ensure that leading subcategories, especially Wearable Accessories and Sportswear, are never understocked during high demand. Aligning promotions, space allocation, and supplier partnerships with these insights will help secure consistent revenue while capturing seasonal surges more effectively.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
