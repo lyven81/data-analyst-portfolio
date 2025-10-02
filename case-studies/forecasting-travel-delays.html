@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Forecasting Travel Delays | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/forecasting-travel-delays-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/cover%20image.png"/>
+      <h1>
+       Forecasting Travel Delays
+      </h1>
+      <p>
+       How Holidays, Weekends, and Events Shape Daily Operations
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis looks at what causes travel delays and how they can be managed. Delays affect daily operations, disrupt schedules, and create frustration for passengers, especially on busy days like holidays, weekends, and big events.
+      </p>
+      <p>
+       The goal is to give operations managers practical insights they can use. By looking at past delay patterns, the analysis shows when and why delays happen, how big the impact is, and what to expect in the future. This helps managers plan resources, set realistic schedules, and keep passengers better informed.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. Are delays getting worse or better over time?
+      </h2>
+      <p>
+       Analysis shows a weak upward trend in delays over time. In practical terms, delays have been increasing slightly, but not strongly. The statistical measure (correlation of +0.30) confirms this as a weak positive trend.
+      </p>
+      <p>
+       The real story is that delays are mostly driven by holidays (+0.73 correlation) and events (+0.59 correlation), which have far stronger effects than the passing of time itself. So, while delays are slowly worsening, the main risks come from predictable seasonal and event-based pressures.
+      </p>
+      <img alt="Chart Q1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q1%20-%20Chart.png"/>
+     </section>
+     <section>
+      <h2>
+       2. Which days of the week are worst for delays?
+      </h2>
+      <p>
+       Delays are not evenly spread across the week. They are lowest midweek, averaging 12–13 minutes on Tuesday through Thursday, and peak on Fridays and Sundays at around 14.3–14.4 minutes.
+      </p>
+      <p>
+       This reflects both end-of-week commuting and weekend travel demand. For operations managers, this means Fridays and Sundays are the most critical days to watch, requiring more buffer time, extra staff, or added vehicles to keep services on track.
+      </p>
+      <img alt="Chart Q2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q2%20-%20Chart.png"/>
+     </section>
+     <section>
+      <h2>
+       3. Do holidays create a significant spike in delays?
+      </h2>
+      <p>
+       Yes. Holidays stand out as the single largest source of delay. Average delays rise to about 19.5 minutes, compared with 12–13 minutes on normal days.
+      </p>
+      <p>
+       This is a consistent and predictable effect. For managers, this means holiday timetables should always include larger buffers, more staff on duty, and early communication to passengers to manage expectations.
+      </p>
+      <img alt="Chart Q3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q3%20-%20Chart.png"/>
+     </section>
+     <section>
+      <h2>
+       4. How much do big events affect delays?
+      </h2>
+      <p>
+       Large events, such as concerts or sports matches, are moderately linked with delays, showing a correlation of +0.59. Bigger crowds generally mean longer delays, though the effect is less consistent than holidays.
+      </p>
+      <p>
+       Even so, events can create sudden spikes that disrupt normal schedules. Managers should monitor event calendars closely and adjust resources in advance when high attendance is expected.
+      </p>
+      <img alt="Chart Q4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q4%20-%20Chart.png"/>
+     </section>
+     <section>
+      <h2>
+       5. Which factors are truly significant after controlling for everything else?
+      </h2>
+      <p>
+       Regression analysis shows that holidays are the strongest driver of delays, adding almost half an hour compared to non-holidays. The statistical test (p = 0.007) confirms this effect is highly reliable.
+      </p>
+      <p>
+       Other factors, including events and the general time trend, were not statistically significant after controlling for weekday and holiday effects. This means holidays should remain the main planning priority.
+      </p>
+      <img alt="Chart Q5" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q5%20-%20Chart.png"/>
+     </section>
+     <section>
+      <h2>
+       6. Which type of model explains delays best?
+      </h2>
+      <p>
+       Linear regression performs best. It explains roughly one-tenth of the variation in delays, and although not perfect, it produces realistic forecasts in minutes. The statistical measure (R² = 0.095) supports this.
+      </p>
+      <p>
+       For operations managers, linear regression is far more practical. It translates into clear actions, such as "expect an extra 28 minutes on holidays," which can be used for planning and scheduling.
+      </p>
+      <img alt="Chart Q6" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q6%20-%20Chart.png"/>
+     </section>
+     <section>
+      <h2>
+       7. How accurate is the model in predicting delays?
+      </h2>
+      <p>
+       Linear regression is not highly accurate on its own, explaining only about 9.5% of variation. However, it does capture the baseline delay of 12–14 minutes and tracks average trends moderately well.
+      </p>
+      <p>
+       Logistic regression, on the other hand, failed to provide meaningful results and is not suitable here. Managers can use linear regression as a working tool, knowing it is most reliable when seasonality and holidays are factored in.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Prediction 1: Forecasting Future Periods
+      </h2>
+      <p>
+       Looking ahead, the model forecasts daily average delays of 12–14 minutes over the next two weeks under normal conditions. Unlike the past, where delays swung between 0 and 30 minutes, the projection is stable and moderate.
+      </p>
+      <p>
+       This gives managers a baseline to plan around. Schedules should include a buffer of 12–14 minutes, with adjustments only if holidays or special events are expected.
+      </p>
+      <img alt="Prediction 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%201%20-%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Prediction 2: What-If Scenario Simulation
+      </h2>
+      <p>
+       If a 10,000-attendee event falls on a holiday, the model predicts average delays will rise from 13.4 minutes on a normal day to 14.7 minutes. This is a 1.3 minute increase, or about 10%.
+      </p>
+      <p>
+       While the increase seems small per trip, the cumulative effect across hundreds of services is significant. Managers should prepare for longer delays when events and holidays overlap.
+      </p>
+      <img alt="Prediction 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%202%20-%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Prediction 3: In-Sample Fit Evaluation
+      </h2>
+      <p>
+       For the first three weeks of January, the model predicted average delays of 12–15 minutes, while actual delays ranged widely from 0 to 30 minutes. The correlation between actual and predicted was about 0.70, with an average error of 2.4 minutes.
+      </p>
+      <p>
+       The model captures normal conditions but misses extreme spikes. Managers can rely on it for everyday scheduling but should add buffers on holidays and unusual disruption days.
+      </p>
+      <img alt="Prediction 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%203%20-%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Prediction 4: Intervention Analysis
+      </h2>
+      <p>
+       During the fuel price increase week, delays were actually slightly shorter (–0.9 minutes) than in normal weeks. This effect was weak and not statistically significant (p = 0.056).
+      </p>
+      <p>
+       This suggests fuel policy changes do not strongly affect delays. In practice, managers should continue to prioritize holidays and events, which have much larger and more reliable impacts.
+      </p>
+      <img alt="Prediction 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%204%20-%20chart.png"/>
+     </section>
+     <section>
+      <h2>
+       Conclusion for Operations Managers
+      </h2>
+      <p>
+       The analysis confirms that Multiple Linear Regression is the best method for explaining and forecasting delays. It gives managers the ability to forecast in minutes, test what-if scenarios, evaluate accuracy, and measure policy or event impacts.
+      </p>
+      <p>
+       The findings are clear: holidays and weekends are the strongest drivers of delays, with holidays adding almost half an hour. Events also create significant spikes, though less consistently, while fuel price changes have little effect. This model provides a decision-support tool to guide staffing, timetable design, and passenger communication.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <p>
+       The regression model provides a practical tool to help managers plan and allocate resources more effectively. It allows delays to be forecast for upcoming days, what-if scenarios to be tested, model accuracy to be checked, and the impact of interventions or policy changes to be measured. This gives operations teams a structured way to anticipate challenges rather than only reacting to them.
+      </p>
+      <p>
+       The findings show that certain days and conditions consistently create more pressure on the system. Fridays, Sundays, and especially holidays see the highest delays, with holidays alone adding almost half an hour. Managers should use this insight to plan extra staff, vehicles, or buffer time into schedules. While events are not as predictable as holidays, high-attendance occasions still disrupt operations and should be monitored closely with contingency plans in place.
+      </p>
+      <p>
+       Equally important is how delay risks are communicated to passengers. Forecasts should be translated into simple categories such as "low," "moderate," or "high" risk, making them easy to understand. Advance warnings should be shared at least a week before holidays or major events, while real-time updates can help passengers make informed choices on the day of travel. Together, these steps will improve operational efficiency and strengthen passenger trust in the service.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
