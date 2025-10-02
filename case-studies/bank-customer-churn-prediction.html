@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Who Is Most at Risk of Leaving the Bank | Lee Yih Ven</title>
+    <link href="../style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+
+            <section class="intro">
+                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+            </section>
+
+            <section class="home-link-section">
+                <a class="home-link-btn" href="../index.html">Home</a>
+            </section>
+
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:leeyihven@gmail.com">leeyihven@gmail.com</a></li>
+                    <li>LinkedIn: <a href="https://linkedin.com/in/leeyihven" target="_blank">linkedin.com/in/leeyihven</a></li>
+                </ul>
+            </section>
+
+            <section class="dashboard-link-section">
+                <a class="dashboard-link-btn" href="../dashboards/bank-customer-churn-dashboard.html">View Dashboard</a>
+            </section>
+        </aside>
+
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img alt="Bank Customer Churn Prediction Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/bank-churn-analysis/cover%20image.png"/>
+                    <h1>Who Is Most at Risk of Leaving the Bank</h1>
+                    <p class="case-study-subtitle">And How Relationship Managers Can Keep Them</p>
+                </header>
+
+                <section class="overview">
+                    <h2>Overview</h2>
+                    <p>Keeping customers is just as important as finding new ones. When customers leave, the bank loses both revenue and relationships that take years to build. This analysis looks at why customers leave and which groups are most at risk.</p>
+                    <p>The goal is to give Relationship Managers a clear picture of who to focus on first and how to keep them engaged. By knowing who is most likely to leave, managers can spend their time wisely, build stronger connections, and reduce customer losses.</p>
+                </section>
+
+                <section class="analysis-questions">
+                    <h2>Analysis Questions</h2>
+
+                    <div class="question-block">
+                        <h3>Q1: Which customer factors are linked to customers leaving?</h3>
+                        <img alt="Customer Factors Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/bank-churn-analysis/chart%201%20-%20bar%20chart.png" style="width: 100%; margin: 20px 0;"/>
+                        <p>The analysis shows that age, country of residence (Germany), balance, activity status, and gender are the most important factors linked to customers leaving. Older customers, Germans, and those with higher balances are more likely to leave. On the other hand, active members and male customers are less likely to leave.</p>
+                        <p>Other factors, such as credit score, tenure, number of products, credit card ownership, estimated salary, and Spanish customers, do not show a meaningful link. When checking if any of these variables overlap too much with each other, no strong duplication was found. Balance and number of products have a mild relationship, but not enough to cause issues.</p>
+                        <p class="answer"><strong>Answer:</strong> Customer loss is mainly influenced by age, geography (Germany), balance, activity status, and gender. Other variables add little value, and there are no serious overlaps between predictors.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>Q2: From all the possible customer factors, which ones should we focus on?</h3>
+                        <img alt="Statistical Significance Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/bank-churn-analysis/chart%202%20-%20p%20value.png" style="width: 100%; margin: 20px 0;"/>
+                        <p>The regression model confirms that age, activity status, Germany, gender, balance, credit score, and number of products are statistically significant. Older customers are more likely to leave, while being active, being male, and having more products reduce the chance of leaving. German customers and those with higher balances or lower credit scores face higher risk.</p>
+                        <p>In contrast, tenure, having a credit card, estimated salary, and Spanish customers do not show reliable effects and can be excluded from focus.</p>
+                        <p class="answer"><strong>Answer:</strong> Relationship Managers should focus on age, activity status, geography (Germany), gender, balance, credit score, and number of products. Other factors are not reliable indicators of customer loss.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>Q3: Can we build a reliable model that predicts which customers are most likely to leave?</h3>
+                        <img alt="Model Reliability Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/bank-churn-analysis/chart%203.png" style="width: 100%; margin: 20px 0;"/>
+                        <p>Yes. The logistic regression model is stable and provides a moderate level of explanatory power, which is acceptable for this type of prediction. The model clearly identifies strong risk factors such as age, Germany, high balances, and fewer products. It also highlights protective factors like being active, being male, and holding more products.</p>
+                        <p>Weak predictors, such as tenure, having a credit card, salary, and Spain, add little and can be ignored.</p>
+                        <p class="answer"><strong>Answer:</strong> The model is reliable enough to guide retention strategies. It helps managers prioritize older German customers with high balances, while also showing the value of encouraging activity and promoting additional products.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>Q4: What is the predicted probability of leaving for each customer in my portfolio?</h3>
+                        <img alt="Customer Probability Distribution" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/bank-churn-analysis/chart%204%20-%20histogram.png" style="width: 100%; margin: 20px 0;"/>
+                        <p>The model assigns every customer a probability score between 0 and 1. Low scores indicate low risk, while higher scores show greater risk. In the sample, customers with probabilities above 30% stand out as higher risk, such as customer 1003 (34%), customer 1008 (29%), and customer 1006 (25%).</p>
+                        <p class="answer"><strong>Answer:</strong> Each customer now has a probability score for leaving. Managers can rank customers by this score and focus efforts on the top 10–20% most likely to leave.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>Q5: Can I check the risk score for a specific customer?</h3>
+                        <p>Yes. The model provides probability scores for individual customers. For example, customer 2840 has the highest risk among the checked group, with a 19.3% chance of leaving. Customers 1013 and 5320 also show moderate risk due to inactivity. Customers 2475 and 10655 show low risk, but 10655 is inactive and still worth monitoring.</p>
+                        <p class="answer"><strong>Answer:</strong> Managers can use customer-specific scores to prioritize outreach, re-engage inactive customers, and monitor those at moderate risk.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>Q6: If a customer's activity status changes from active to inactive, or if their age/product holdings change, how does that affect their probability of leaving?</h3>
+                        <img alt="Risk Factor Impact Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/bank-churn-analysis/chart%205%20-%20bar%20chart.png" style="width: 100%; margin: 20px 0;"/>
+                        <p>The model shows that changes in customer profiles directly affect the probability of leaving. Activity status is the strongest lever: becoming inactive raises risk sharply, while becoming active again lowers it. Geography also matters, with German customers being more than twice as likely to leave compared to French customers. Product holdings also play a role: adding products lowers risk, while losing products raises it.</p>
+                        <p>Credit card ownership, however, does not meaningfully affect whether a customer stays or leaves.</p>
+                        <p class="answer"><strong>Answer:</strong> Managers should focus on keeping customers active, encouraging more product holdings, and paying close attention to German customers. Credit card ownership can be ignored as a predictor.</p>
+                    </div>
+
+                    <div class="question-block">
+                        <h3>Q7: How accurate is this model in predicting actual customer loss?</h3>
+                        <img alt="Model Performance Metrics" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/bank-churn-analysis/chart%206%20-%20performance%20metrics.png" style="width: 100%; margin: 20px 0;"/>
+                        <p>The model correctly predicts about 86% of customers, which means it gets about 8 to 9 out of 10 predictions right. It is strong at confirming customers who will stay and usually correct when it predicts a customer will leave. However, it does miss some customers who leave, as shown by its recall rate of 54%.</p>
+                        <p class="answer"><strong>Answer:</strong> The model is accurate enough to guide retention work. Managers can trust its predictions, especially for identifying high-risk customers. However, since it may miss some who leave, it should be used alongside Relationship Managers' own knowledge and judgment.</p>
+                    </div>
+                </section>
+
+                <section class="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>The model makes clear which customers deserve the most immediate attention. Those at highest risk of leaving are older customers, German customers, inactive members, and those with high balances but fewer products. These groups should be the first priority for calls or in-person meetings, as they represent the greatest risk of leaving.</p>
+
+                    <p>For these customers, the focus should be on building stronger relationships rather than relying mainly on discounts. Encouraging activity, offering additional products that fit their needs, and showing personal attention will be more effective in keeping them. Customers with high balances in particular should receive tailored conversations that highlight their value to the bank and how the bank can support their financial goals.</p>
+
+                    <p>Because time and resources are limited, managers should follow a tiered strategy. High-risk customers (above 30% probability) should get direct outreach. Moderate-risk customers (15–30%) should receive personalized messages or targeted offers. Low-risk customers can stay in regular communication but do not require special attention. This approach ensures that managers act first where the risk is greatest while still maintaining engagement across the full customer base.</p>
+                </section>
+
+                <section class="methodology">
+                    <h2>Methodology</h2>
+                    <ul>
+                        <li><strong>Analysis Type:</strong> Logistic Regression for Binary Classification</li>
+                        <li><strong>Data Processing:</strong> Feature selection, correlation analysis, multicollinearity testing</li>
+                        <li><strong>Model Evaluation:</strong> Accuracy metrics, precision, recall, and explanatory power assessment</li>
+                        <li><strong>Tools Used:</strong> Statistical modeling, probability scoring, scenario analysis</li>
+                    </ul>
+                </section>
+
+                <section class="key-insights">
+                    <h2>Key Insights</h2>
+                    <ul>
+                        <li>Activity status is the strongest predictor of customer churn</li>
+                        <li>German customers are more than twice as likely to leave compared to French customers</li>
+                        <li>Older customers with high balances represent the highest risk segment</li>
+                        <li>Adding products significantly reduces churn probability</li>
+                        <li>Model achieves 86% accuracy with practical business applicability</li>
+                    </ul>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; background-color: #333; color: white; margin-top: 40px;">
+        <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+</body>
+</html>

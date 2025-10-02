@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   The Hidden Patterns in Malaysian Real Estate | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/hidden-patterns-malaysian-real-estate-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Malaysian Real Estate Analysis Cover" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/cover%20image.png"/>
+      <h1>
+       The Hidden Patterns in Malaysian Real Estate
+      </h1>
+      <p>
+       Why Market Type Beats Geography for Investment Success
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       Real estate investors struggle to build profitable portfolios while managing geographic risk, often concentrating investments in single locations or missing opportunities in similar markets across different regions. This analysis addresses how to maximize portfolio returns while minimizing geographic risk through strategic location diversification.
+      </p>
+      <p>
+       Using data from 2,000 Malaysian properties across 16 states, we developed a systematic framework to identify distinct market types, uncover undervalued opportunities, and create replicable investment strategies. The goal is to help investors understand which locations behave similarly despite geographic separation, enabling strategic expansion while maintaining consistent risk-return profiles across their property investments.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 1: How many different property market types exist?
+      </h2>
+      <img alt="Elbow Method Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q1%20Visualization%20-%20Elbow_Method_Analysis.png" style="max-width: 100%; height: auto; margin: 20px 0;"/>
+      <p>
+       The Malaysian property market contains <strong>4 distinct geographic market types</strong> based on statistical analysis. The elbow method analysis revealed a clear inflection point at k=4, where clustering effectiveness peaked as shown by the WCSS dropping from 6,611 at k=2 to 3,350 at k=4.
+      </p>
+      <p>
+       <strong>Premium Low-Risk Markets</strong> include 408 high-end properties across 12 states where properties cost about 65% more than market average but deliver the most stable returns with lowest risk. <strong>Balanced High-Risk Markets</strong> contain 371 middle-tier properties across 12 states with unpredictable performance patterns and pricing slightly below average. <strong>Budget High-Risk Markets</strong> form the largest segment with 1,221 affordable properties across 16 states, priced about 21% below market average but consistently delivering poor returns and high risk.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 2: Which areas perform similarly despite being in different states?
+      </h2>
+      <img alt="Geographic Cluster Map" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q2%20Visualization%20-%20Geographic_Cluster_Map.png" style="max-width: 100%; height: auto; margin: 20px 0;"/>
+      <p>
+       Properties within the same market type demonstrate remarkably consistent behavior regardless of geographic boundaries. <strong>Premium properties in Johor perform similarly to premium properties in Penang or Kedah</strong>, maintaining comparable pricing patterns, transaction volumes, and market dynamics.
+      </p>
+      <p>
+       This means successful investment strategies can be replicated across states by focusing on property characteristics rather than just location. Budget market segments also show cross-state consistency, with affordable townships in different states maintaining similar performance patterns despite geographic separation.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 3: Which market type offers the best investment returns?
+      </h2>
+      <img alt="Risk Return Scatter Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q3%20Visualization%20-%20Risk_Return_Scatter_Plot.png" style="max-width: 100%; height: auto; margin: 20px 0;"/>
+      <p>
+       <strong>Premium Low-Risk Markets deliver optimal results</strong> with a risk-adjusted return of 1.748 and only 0.305 risk score, earning a "STRONG BUY" recommendation while delivering 64.8% average price premiums. Although initial costs are higher, the superior long-term returns and stability far outweigh the premium pricing.
+      </p>
+      <p>
+       Budget High-Risk Markets and Balanced High-Risk Markets should be avoided completely. Despite offering 1,221 affordable options, budget markets produce negative returns of -21.3% with high volatility. Balanced markets also disappoint with negative risk-adjusted returns of -0.029 despite seeming reasonably priced.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 4: Can you find bargains in good market areas?
+      </h2>
+      <img alt="Opportunity Matrix" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q4%20Visualization%20-%20Opportunity_Matrix.png" style="max-width: 100%; height: auto; margin: 20px 0;"/>
+      <p>
+       The analysis identified <strong>234 undervalued properties</strong> within better-performing market clusters, representing genuine opportunities where properties are priced below their market segment average while maintaining strong fundamentals. Top opportunities include Taman Penawar Harmoni in Johor with an opportunity score of 0.818, where current premiums of -83.0% compare to cluster median of -7.6%.
+      </p>
+      <p>
+       This 63% opportunity rate within high-performing clusters proves that substantial value exists even in proven successful market segments across multiple states.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 5: How should you spread your investment risk?
+      </h2>
+      <img alt="Cluster Correlation Heatmap" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q5%20Visualization%20-%20Cluster_Correlation_Heatmap.png" style="max-width: 100%; height: auto; margin: 20px 0;"/>
+      <p>
+       The three market types move independently with <strong>negative correlations ranging from -0.104 to -0.253</strong>, providing natural diversification benefits. When one market type underperforms, others typically maintain or improve performance, effectively reducing overall portfolio risk.
+      </p>
+      <p>
+       Clusters 0 and 2 offer the strongest diversification pairing with -0.253 correlation, making them ideal complementary investments for risk management. This independent movement pattern allows investors to reduce portfolio volatility by spreading investments across different market types and geographic regions.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Question 6: If you succeed in one area, where should you invest next?
+      </h2>
+      <img alt="Investment Roadmap Map" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/hidden-patterns-malaysian-real-estate/Q6%20Visualization%20-%20Investment_Roadmap_Map.png" style="max-width: 100%; height: auto; margin: 20px 0;"/>
+      <p>
+       The similarity-based system identifies <strong>4 comparable investment opportunities for every successful property</strong>, with similarity scores typically exceeding 95%. For moderate-budget investors, success in Ipoh, Perak ($298,800) should lead to investments in Sungai Petani, Kedah ($275,000, similarity 0.966) or Kulim, Kedah ($275,000, similarity 0.963).
+      </p>
+      <p>
+       For premium investors, success in Johor Bahru ($980,000) should target Bangi, Selangor ($1,028,825, similarity 0.968) or Petaling Jaya, Selangor ($1,028,825, similarity 0.952). These recommendations enable systematic geographic expansion while maintaining consistent risk-return profiles.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The analysis reveals a clear path to maximizing portfolio returns while minimizing geographic risk through strategic market type selection and geographic diversification. The data demonstrates that focusing on Premium Low-Risk Markets while leveraging geographic spread and similarity-based expansion provides the optimal risk-return profile for real estate investors.
+      </p>
+      <p>
+       Market type characteristics matter more than specific geographic locations. Premium markets in different states behave similarly, as do budget markets across regions. This allows investors to achieve both superior returns and geographic diversification without sacrificing performance quality.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ul>
+       <li>
+        <strong>Concentrate 60-70% of investment capital</strong> in Premium Low-Risk Markets across multiple states. With 408 locations spanning 12 states, these markets offer sufficient diversification opportunities while maintaining the 1.748 risk-adjusted return and 64.8% average premium.
+       </li>
+       <li>
+        <strong>Allocate 20-30% to undervalued properties</strong> within high-performing clusters, particularly the 234 identified opportunities in Cluster 0. These properties offer 75.4% premium gaps compared to cluster medians, providing significant upside potential while maintaining exposure to proven market segments.
+       </li>
+       <li>
+        <strong>Use the similarity system for systematic expansion</strong> once initial investments prove successful. For every successful property, the system identifies 4 comparable opportunities in different states with 95%+ similarity scores. Spread investments across at least 6-8 different states to minimize exposure to regional economic downturns while maintaining investment quality.
+       </li>
+      </ul>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
