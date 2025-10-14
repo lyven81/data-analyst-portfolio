@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turning Likes into ROI - Social Media Monetization - Dashboard | Lee Yih Ven</title>
+    <title>Turning Likes into ROI - Social Media Engagement Analysis - Dashboard | Lee Yih Ven</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -273,17 +273,6 @@
             box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
         }
 
-        .viz-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-
-        .viz-card:hover img {
-            transform: scale(1.05);
-        }
-
         .viz-content {
             padding: 30px;
         }
@@ -298,6 +287,18 @@
         .viz-description {
             color: #666;
             line-height: 1.6;
+        }
+
+        .data-visual {
+            background: var(--gold-gradient);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(203, 161, 53, 0.3);
         }
 
         /* Recommendations Section */
@@ -453,10 +454,6 @@
                 gap: 25px;
             }
 
-            .viz-card img {
-                height: 250px;
-            }
-
             .viz-content {
                 padding: 25px 20px;
             }
@@ -480,10 +477,6 @@
             .visualization h2 {
                 font-size: 1.8rem;
             }
-
-            .viz-card img {
-                height: 200px;
-            }
         }
     </style>
 </head>
@@ -492,7 +485,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Turning Likes into ROI</h1>
-                <p>Social media monetization analysis converting engagement into measurable business returns and revenue growth</p>
+                <p>Using Engagement Scores to Drive Ad Performance</p>
                 <div class="cta-buttons">
                     <a href="/data-analyst-portfolio/case-studies/turning-like-into-roi.html" class="btn btn-primary">View Full Case Study</a>
                     <a href="/data-analyst-portfolio/index.html" class="btn btn-secondary">More Analytics</a>
@@ -505,55 +498,68 @@
         <section class="main-content">
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-number">4.7%</div>
-                    <div class="metric-label">Engagement to Sale Rate</div>
-                    <div class="metric-description">Strong conversion rate demonstrating effective social commerce strategy execution</div>
+                    <div class="metric-number">+0.355</div>
+                    <div class="metric-label">Correlation Coefficient</div>
+                    <div class="metric-description">Positive relationship between engagement score and ROI showing upward trend</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">€8.23</div>
-                    <div class="metric-label">Cost Per Conversion</div>
-                    <div class="metric-description">Efficient customer acquisition through social media channels beating traditional advertising</div>
+                    <div class="metric-number">12.6%</div>
+                    <div class="metric-label">R-Squared Value</div>
+                    <div class="metric-description">Engagement explains 12.6% of ROI variation, meaningful in marketing context</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">287%</div>
-                    <div class="metric-label">Social Media ROI</div>
-                    <div class="metric-description">Exceptional return on social media investment validating engagement-focused marketing approach</div>
+                    <div class="metric-number">+0.28</div>
+                    <div class="metric-label">ROI Gain Per Point</div>
+                    <div class="metric-description">Each 1-point engagement increase yields 0.28 ROI improvement</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">0.000</div>
+                    <div class="metric-label">P-Value</div>
+                    <div class="metric-description">Statistically significant relationship confirms engagement reliability</div>
                 </div>
             </div>
 
             <section class="insights">
-                <h2>Social Media Monetization Insights</h2>
+                <h2>Engagement ROI Analysis Insights</h2>
                 <div class="insights-grid">
                     <div class="insight-item">
-                        <div class="insight-title">Strong Conversion Performance</div>
-                        <div class="insight-text">4.7% engagement to sale conversion rate demonstrates effective social commerce strategy, significantly outperforming industry average conversion rates and proving the value of audience engagement in driving sales.</div>
+                        <div class="insight-title">Moderate Reliable Relationship</div>
+                        <div class="insight-text">Correlation of +0.355 demonstrates a moderate and consistent relationship between engagement score and ROI. While not extremely strong, this relationship is stable enough to justify using engagement as a predictive factor. Scatter plot analysis confirms a clear upward trend, indicating that as engagement scores increase, return on investment also tends to rise.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Efficient Customer Acquisition</div>
-                        <div class="insight-text">€8.23 cost per conversion through social media channels beats traditional advertising methods, showing that targeted social media campaigns provide better value for money and more efficient customer acquisition.</div>
+                        <div class="insight-title">Statistically Significant Prediction Power</div>
+                        <div class="insight-text">R-squared value of 0.126 indicates engagement explains 12.6% of ROI variation. While modest, this is meaningful in marketing where many variables influence results. P-value of 0.000 confirms the relationship is statistically significant. Engagement is not the sole driver of ROI, but it is a dependable factor that merits attention and investment.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Exceptional Return on Investment</div>
-                        <div class="insight-text">287% return on social media investment validates the engagement-focused marketing approach and demonstrates that investing in social media presence and community building generates substantial business returns.</div>
+                        <div class="insight-title">Practical ROI Prediction Formula</div>
+                        <div class="insight-text">Regression model provides actionable formula: Predicted ROI = 0.2766 × Engagement Score + 1.9692. This enables setting practical goals and estimating outcomes. Each one-point increase in engagement score yields approximately 0.28 ROI gain, providing clear targets for marketing teams to optimize their engagement strategies.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Scalable Impact on Performance</div>
+                        <div class="insight-text">Analysis shows incremental improvements compound at scale. Raising engagement from score 3 to 7 increases ROI from 2.80 to 3.91—a 40% improvement. When applied across campaigns, these incremental gains translate to meaningful financial returns, justifying investment in engagement-focused strategies and content optimization.</div>
                     </div>
                 </div>
             </section>
 
             <section class="visualization">
-                <h2>Data Visualization Insights</h2>
+                <h2>Regression Analysis Visualization</h2>
                 <div class="viz-grid">
                     <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-like-into-roi/social-media-conversion-funnel.png" alt="Social Media Conversion Funnel">
                         <div class="viz-content">
-                            <div class="viz-title">Social Media Conversion Funnel</div>
-                            <div class="viz-description">Visual representation of the customer journey from social engagement to final purchase, highlighting conversion rates at each stage.</div>
+                            <div class="viz-title">Engagement Score vs ROI Scatter Plot</div>
+                            <div class="viz-description">Linear regression analysis reveals the positive correlation between engagement scores and return on investment. The scatter plot demonstrates a clear upward trend with moderate clustering around the regression line, confirming that higher engagement consistently correlates with better ROI outcomes across social media campaigns.</div>
+                            <div class="data-visual">
+                                📊 Correlation: +0.355 | R²: 12.6% | P-value: 0.000 | Statistically Significant
+                            </div>
                         </div>
                     </div>
                     <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/turning-like-into-roi/roi-comparison-chart.png" alt="ROI Comparison Analysis">
                         <div class="viz-content">
-                            <div class="viz-title">ROI Comparison Analysis</div>
-                            <div class="viz-description">Comprehensive comparison of social media ROI versus traditional marketing channels, demonstrating superior performance and efficiency.</div>
+                            <div class="viz-title">Predicted ROI by Engagement Level</div>
+                            <div class="viz-description">Using the regression formula (Predicted ROI = 0.2766 × Engagement + 1.9692), this visualization projects ROI at various engagement thresholds. The analysis enables practical goal-setting, showing that achieving engagement score improvements from baseline levels to targets of 7-10 can deliver ROI gains of 40-75%, providing clear benchmarks for campaign optimization.</div>
+                            <div class="data-visual">
+                                💰 Score 1 → ROI 2.25 | Score 7 → ROI 3.91 | Score 10 → ROI 4.74
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -567,20 +573,20 @@
                 <h2>Strategic Recommendations</h2>
                 <div class="recommendations-grid">
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Scale Successful Campaigns</div>
-                        <div class="recommendation-text">Increase investment in high-performing social media campaigns that deliver 287% ROI, expanding budget allocation to maximize the 4.7% conversion rate across broader audiences.</div>
+                        <div class="recommendation-title">Content Optimization Strategy</div>
+                        <div class="recommendation-text">Tailor content to audience interests using data insights to increase personalization. Use eye-catching visuals and short videos that perform better on social media platforms. Visual content attracts more attention and drives higher engagement scores, directly contributing to the 0.28 ROI gain per engagement point increase.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Optimize Conversion Costs</div>
-                        <div class="recommendation-text">Leverage the €8.23 cost per conversion efficiency by testing additional social platforms and audience segments to further reduce acquisition costs while maintaining quality.</div>
+                        <div class="recommendation-title">Strategic Engagement Tactics</div>
+                        <div class="recommendation-text">Craft compelling calls to action (CTAs) using questions or polls to invite participation. Post at optimal times when target audience is most active to maximize visibility. Incorporate trending or timely topics to boost relevance and engagement. These tactics leverage the proven correlation between engagement and ROI performance.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Enhance Engagement Strategy</div>
-                        <div class="recommendation-text">Build on the strong engagement-to-sale conversion rate by developing more interactive content, user-generated campaigns, and community-building initiatives to increase overall engagement volume.</div>
+                        <div class="recommendation-title">Testing & Validation Approach</div>
+                        <div class="recommendation-text">A/B test different creative variations including headlines, visuals, and messaging to identify what drives the most response. Use the regression model to set engagement score targets and measure performance against predicted ROI outcomes. Continuous testing enables data-driven optimization of engagement strategies at scale.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Implement Attribution Tracking</div>
-                        <div class="recommendation-text">Establish comprehensive attribution models to track the full customer journey and identify which social media touchpoints contribute most to the 287% ROI performance.</div>
+                        <div class="recommendation-title">Authenticity & Credibility Focus</div>
+                        <div class="recommendation-text">Leverage influencer or user-generated content to increase engagement and build credibility. Focus on value and authenticity—content that informs, entertains, or builds trust performs better than purely promotional messaging. Real voices and trusted endorsements drive meaningful engagement that translates to measurable ROI improvements.</div>
                     </div>
                 </div>
             </div>
