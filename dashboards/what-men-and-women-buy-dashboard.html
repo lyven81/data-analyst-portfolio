@@ -273,17 +273,6 @@
             box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
         }
 
-        .viz-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-
-        .viz-card:hover img {
-            transform: scale(1.05);
-        }
-
         .viz-content {
             padding: 30px;
         }
@@ -298,6 +287,18 @@
         .viz-description {
             color: #666;
             line-height: 1.6;
+        }
+
+        .data-visual {
+            background: var(--gold-gradient);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(203, 161, 53, 0.3);
         }
 
         /* Recommendations Section */
@@ -453,10 +454,6 @@
                 gap: 25px;
             }
 
-            .viz-card img {
-                height: 250px;
-            }
-
             .viz-content {
                 padding: 25px 20px;
             }
@@ -480,10 +477,6 @@
             .visualization h2 {
                 font-size: 1.8rem;
             }
-
-            .viz-card img {
-                height: 200px;
-            }
         }
     </style>
 </head>
@@ -492,7 +485,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>What Men and Women Buy</h1>
-                <p>Gender purchase pattern analysis revealing distinct shopping behaviors and preferences to optimize targeted marketing strategies</p>
+                <p>Uncovering Category Preferences to Drive Targeted Marketing</p>
                 <div class="cta-buttons">
                     <a href="/data-analyst-portfolio/case-studies/what-men-and-women-buy.html" class="btn btn-primary">View Full Case Study</a>
                     <a href="/data-analyst-portfolio/index.html" class="btn btn-secondary">More Analytics</a>
@@ -505,55 +498,76 @@
         <section class="main-content">
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-number">68%</div>
-                    <div class="metric-label">Women's Electronics Share</div>
-                    <div class="metric-description">Women account for majority of electronics purchases, contrary to traditional market assumptions</div>
+                    <div class="metric-number">51.11%</div>
+                    <div class="metric-label">Female Customer Share</div>
+                    <div class="metric-description">69 female vs 66 male customers, balanced distribution for reliable comparison</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">3.2x</div>
-                    <div class="metric-label">Men's Sports Spending</div>
-                    <div class="metric-description">Men spend significantly more on sports equipment and recreation with higher average order values</div>
+                    <div class="metric-number">$15.81</div>
+                    <div class="metric-label">Spending Difference</div>
+                    <div class="metric-description">Female $290.45 vs Male $274.64, not statistically significant (p=0.497)</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">€45</div>
-                    <div class="metric-label">Average Order Difference</div>
-                    <div class="metric-description">Women show higher cart values but men demonstrate higher overall purchase frequency</div>
+                    <div class="metric-number">0.018</div>
+                    <div class="metric-label">Snacks P-Value</div>
+                    <div class="metric-description">Only statistically significant category difference, women spend more on snacks</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">23.90%</div>
+                    <div class="metric-label">Female Snack Share</div>
+                    <div class="metric-description">Highest spending category for women at $4,788.91 total</div>
                 </div>
             </div>
 
             <section class="insights">
-                <h2>Gender Shopping Pattern Insights</h2>
+                <h2>Gender Purchase Pattern Insights</h2>
                 <div class="insights-grid">
                     <div class="insight-item">
-                        <div class="insight-title">Electronics Purchasing Surprise</div>
-                        <div class="insight-text">Women account for 68% of electronics purchases, completely contrary to traditional market assumptions about technology consumption patterns. This challenges stereotypical marketing approaches and opens opportunities for gender-neutral electronics campaigns.</div>
+                        <div class="insight-title">Balanced Customer Distribution</div>
+                        <div class="insight-text">Dataset reveals nearly even split with 69 female customers (51.11%) and 66 male customers (48.89%). This balanced distribution ensures findings reflect representative customer behavior and are not skewed by unequal sample sizes, providing a reliable foundation for comparing purchasing patterns across genders.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Sports & Recreation Dominance</div>
-                        <div class="insight-text">Men spend 3.2x more on sports equipment and recreation, with average orders 40% higher than women. This suggests sports and fitness represent a key market segment for targeting male consumers with higher-value product offerings.</div>
+                        <div class="insight-title">No Overall Spending Difference</div>
+                        <div class="insight-text">Female customers spend average of $290.45 while male customers spend $274.64. The difference of $15.81 is not statistically significant (p=0.497). Confidence intervals overlap substantially, confirming no meaningful difference in total spending behavior. Marketers should look beyond overall spending when developing targeted strategies.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Shopping Behavior Patterns</div>
-                        <div class="insight-text">Women show higher cart values (€127 vs €82) but men demonstrate 15% higher purchase frequency overall. This indicates different shopping strategies: women prefer fewer, larger purchases while men make more frequent, smaller transactions.</div>
+                        <div class="insight-title">Similar Purchase Quantities</div>
+                        <div class="insight-text">Quantity of products purchased per transaction is nearly identical between genders. Female customers average 5.51 items while male customers average 5.48. P-value of 0.963 confirms this difference is statistically insignificant. Both genders tend to purchase similar number of items, indicating comparable transaction sizes.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Snacks Category Shows Significant Difference</div>
+                        <div class="insight-text">Among all categories, only snacks show statistically significant difference in spending (p=0.018). Female customers spend significantly more on snacks ($4,788.91, 23.90% of total), making this category prime candidate for gender-targeted promotions emphasizing indulgence, convenience, and lifestyle appeal.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Distinct Category Preferences Emerge</div>
+                        <div class="insight-text">Women allocate highest spending to snacks, followed by dairy and vegetables. Men allocate largest share to vegetables ($4,386.05, 23.36%), beverages, and fruits. These patterns suggest women are more inclined toward snacks while men show stronger preference for beverages and vegetables. Dairy and vegetables remain popular among both genders.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Overlapping Confidence Intervals Confirm Similarity</div>
+                        <div class="insight-text">95% confidence intervals reinforce that overall spending and quantities are similar. Male spending ranges from $242.36 to $306.92, female from $257.19 to $323.72 (substantial overlap, p=0.497). Quantity intervals overlap for males (4.84-6.13) and females (4.80-6.21, p=0.963). Focus shifts to category-level insights for actionable opportunities.</div>
                     </div>
                 </div>
             </section>
 
             <section class="visualization">
-                <h2>Data Visualization Insights</h2>
+                <h2>Category Analysis Visualization</h2>
                 <div class="viz-grid">
                     <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-men-and-women-buy/gender-category-breakdown.png" alt="Gender Purchase Category Analysis">
                         <div class="viz-content">
-                            <div class="viz-title">Purchase Category Distribution</div>
-                            <div class="viz-description">Visual breakdown of purchase categories by gender showing Electronics (Women 68%), Sports (Men 76%), Fashion (Women 82%), and Home goods (Even 50/50).</div>
+                            <div class="viz-title">Category Spending Breakdown by Gender</div>
+                            <div class="viz-description">Detailed breakdown of spending patterns reveals clear category preferences. Female customers show highest spending on snacks (23.90%), while male customers lead in vegetables (23.36%). Dairy and vegetables show popularity across both genders, making them suitable for broad-based marketing efforts. Statistical analysis confirms only snacks show significant gender-based difference.</div>
+                            <div class="data-visual">
+                                🛒 Female: Snacks 23.90% | Male: Vegetables 23.36% | Both: Dairy Popular
+                            </div>
                         </div>
                     </div>
                     <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-men-and-women-buy/spending-pattern-comparison.png" alt="Gender Spending Pattern Comparison">
                         <div class="viz-content">
-                            <div class="viz-title">Shopping Behavior Comparison</div>
-                            <div class="viz-description">Comprehensive comparison of cart values, purchase frequency, and spending patterns between male and female customers across different product categories.</div>
+                            <div class="viz-title">Statistical Significance Analysis</div>
+                            <div class="viz-description">Statistical testing reveals that most category-level spending differences are not significant. Bakery, beverages, dairy, fruits, and vegetables all have p-values greater than 0.05, indicating no meaningful gender-based variation. Exception is snacks with p=0.018, showing statistically significant difference and making it the prime target for gender-specific campaigns.</div>
+                            <div class="data-visual">
+                                📊 Snacks: p=0.018 (Significant) | Other Categories: p>0.05 (Not Significant)
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -564,23 +578,23 @@
     <section class="recommendations">
         <div class="container">
             <div class="recommendations-content">
-                <h2>Strategic Recommendations</h2>
+                <h2>Strategic Marketing Recommendations</h2>
                 <div class="recommendations-grid">
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Reframe Electronics Marketing</div>
-                        <div class="recommendation-text">Challenge traditional gender assumptions in electronics marketing. With women representing 68% of electronics purchases, develop female-focused campaigns and product positioning to capture this dominant market segment.</div>
+                        <div class="recommendation-title">Target Female Customers with Snacks</div>
+                        <div class="recommendation-text">Female customers spend significantly more on snacks (p=0.018), making this a strong candidate for targeted campaigns. Emphasize indulgence, convenience, and lifestyle appeal in marketing messages. Place snack promotions in lifestyle-themed areas and use visually appealing packaging to enhance engagement and drive targeted sales growth in this category.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Maximize Sports Category Revenue</div>
-                        <div class="recommendation-text">Leverage men's 3.2x higher sports spending by expanding premium sports product lines, developing loyalty programs, and creating targeted campaigns that emphasize performance and competition.</div>
+                        <div class="recommendation-title">Target Male Customers with Beverages</div>
+                        <div class="recommendation-text">Male customers show greater interest in beverages category. Focus marketing efforts on highlighting performance, value, and health benefits. Implement beverage promotions featuring multi-pack deals and placement near ready meals or fitness products to capitalize on male shopping patterns and increase category penetration.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Optimize Shopping Experience by Gender</div>
-                        <div class="recommendation-text">Design differentiated user experiences: streamlined, efficient checkout for men's frequent smaller purchases, and enhanced product discovery for women's larger, less frequent shopping sessions.</div>
+                        <div class="recommendation-title">Target Male Customers with Vegetables</div>
+                        <div class="recommendation-text">Vegetables represent highest spending category for men (23.36%). Marketing should feature recipe kits, pre-cut options, and simple health messaging. Emphasize convenience and nutritional value to align with male customer preferences and drive increased vegetable category sales through targeted positioning and promotions.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Implement Gender-Smart Pricing</div>
-                        <div class="recommendation-text">Use the €45 average order difference to create targeted promotions: volume discounts to increase men's cart values, and frequency incentives to encourage more regular purchases from women.</div>
+                        <div class="recommendation-title">Broad-Based Marketing for Dairy & Vegetables</div>
+                        <div class="recommendation-text">Dairy and vegetables remain popular among both genders with no significant statistical differences (p>0.05). These categories are suitable for broad-based marketing campaigns that appeal to all customers. Focus on quality, freshness, and value propositions that resonate universally rather than gender-specific messaging for optimal reach and efficiency.</div>
                     </div>
                 </div>
             </div>
