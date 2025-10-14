@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finding the Sweet Spot - Investment Location Optimization - Dashboard | Lee Yih Ven</title>
+    <title>Finding the Sweet Spot - Real Estate Investment Analysis - Dashboard | Lee Yih Ven</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -273,17 +273,6 @@
             box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
         }
 
-        .viz-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-
-        .viz-card:hover img {
-            transform: scale(1.05);
-        }
-
         .viz-content {
             padding: 30px;
         }
@@ -298,6 +287,18 @@
         .viz-description {
             color: #666;
             line-height: 1.6;
+        }
+
+        .data-visual {
+            background: var(--gold-gradient);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(203, 161, 53, 0.3);
         }
 
         /* Recommendations Section */
@@ -431,7 +432,8 @@
             }
 
             .insights h2,
-            .recommendations h2 {
+            .recommendations h2,
+            .visualization h2 {
                 font-size: 2rem;
                 margin-bottom: 30px;
             }
@@ -442,21 +444,17 @@
                 gap: 25px;
             }
 
+            .insight-item,
+            .recommendation-item {
+                padding: 25px 20px;
+            }
+
             .viz-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
             }
 
-            .viz-card img {
-                height: 250px;
-            }
-
             .viz-content {
-                padding: 25px 20px;
-            }
-
-            .insight-item,
-            .recommendation-item {
                 padding: 25px 20px;
             }
         }
@@ -479,10 +477,6 @@
             .visualization h2 {
                 font-size: 1.8rem;
             }
-
-            .viz-card img {
-                height: 200px;
-            }
         }
     </style>
 </head>
@@ -491,7 +485,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Finding the Sweet Spot</h1>
-                <p>Optimal location analysis for property investment and business expansion to maximize returns and minimize risks</p>
+                <p>Uncovering the Best Locations and Price Points for Mid-Sized Home Investments</p>
                 <div class="cta-buttons">
                     <a href="/data-analyst-portfolio/case-studies/finding-the-sweet-spot.html" class="btn btn-primary">View Full Case Study</a>
                     <a href="/data-analyst-portfolio/index.html" class="btn btn-secondary">More Analytics</a>
@@ -504,55 +498,63 @@
         <section class="main-content">
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-number">$450K</div>
-                    <div class="metric-label">Optimal Price Range</div>
-                    <div class="metric-description">Sweet spot price point balancing affordability with growth potential</div>
+                    <div class="metric-number">RM 529K</div>
+                    <div class="metric-label">Average Price</div>
+                    <div class="metric-description">Mean price for homes between 2,000–2,500 sqft, with median at RM 497K</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">89%</div>
-                    <div class="metric-label">Location Score Accuracy</div>
-                    <div class="metric-description">Precision rate of location scoring model for investment predictions</div>
+                    <div class="metric-number">RM 320K-740K</div>
+                    <div class="metric-label">Expected Range (±1σ)</div>
+                    <div class="metric-description">One standard deviation from mean, capturing most market transactions</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">23%</div>
-                    <div class="metric-label">Expected ROI</div>
-                    <div class="metric-description">Projected return on investment from optimal location selections</div>
+                    <div class="metric-number">72.6%</div>
+                    <div class="metric-label">Properties Within Range</div>
+                    <div class="metric-description">Homes falling within ±1σ, showing strong price clustering</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">RM 450K-600K</div>
+                    <div class="metric-label">Ideal Buy Range</div>
+                    <div class="metric-description">Optimal price range balancing affordability and resale potential</div>
                 </div>
             </div>
 
             <section class="insights">
-                <h2>Investment Location Insights</h2>
+                <h2>Price Analysis Insights</h2>
                 <div class="insights-grid">
                     <div class="insight-item">
-                        <div class="insight-title">Price Sweet Spot Identified</div>
-                        <div class="insight-text">$450K price range represents the optimal balance between affordability and growth potential, maximizing market accessibility and appreciation prospects.</div>
+                        <div class="insight-title">Moderate Price Variability</div>
+                        <div class="insight-text">Price variability in the 2,000–2,500 sqft segment is moderate with a standard deviation of RM 208,869 and coefficient of variation of 0.394. Cities like Cyberjaya and Kuala Lumpur show consistent median values between RM 450K-550K, while Subang Jaya and Cheras exhibit wider spreads, indicating predictable pricing in most areas.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">High-Accuracy Location Intelligence</div>
-                        <div class="insight-text">89% accuracy in location scoring model enables confident investment decisions backed by data-driven location assessment methodology.</div>
+                        <div class="insight-title">Predictable Price Distribution</div>
+                        <div class="insight-text">Approximately 72.6% of homes are priced within one standard deviation (RM 320K–RM 738K), and 95.84% fall within two standard deviations. This tight clustering provides investors with highly reliable pricing benchmarks and confidence when estimating property values in this segment.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Superior Return Potential</div>
-                        <div class="insight-text">23% expected ROI from sweet spot locations significantly exceeds market average, demonstrating the value of strategic location optimization.</div>
+                        <div class="insight-title">Low Overpayment Risk</div>
+                        <div class="insight-text">Only 7.04% of homes sold above RM 842,883 (the overpayment threshold at 1.5σ above mean). Serdang, Subang Jaya, and Petaling Jaya show the highest overpayment rates (>8%), while Kuala Lumpur and Cyberjaya exhibit lower risk (<6%). Grade 11 homes show 100% overpayment rate, while Grade 7 or lower show minimal risk.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Scalable Investment Strategy</div>
+                        <div class="insight-text">Targeting 2,000–2,500 sqft homes is a repeatable strategy, especially in Cyberjaya and Kuala Lumpur which show moderate prices (~RM 510K-520K), low standard deviations (<RM 200K), and consistent market behavior. These cities offer the best conditions for stable, repeatable investments.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Key Value Drivers</div>
+                        <div class="insight-text">Renovated homes command a RM 140K premium over non-renovated properties. Build quality (grade) is the strongest price determinant—Grade 11 homes average RM 1.23M (4x Grade 5 at RM 300K). Basements add modest RM 30K value. Grade 8-10 renovated homes offer the best return potential while minimizing pricing risk.</div>
                     </div>
                 </div>
             </section>
 
             <section class="visualization">
-                <h2>Data Visualization Insights</h2>
+                <h2>Target Property Analysis</h2>
                 <div class="viz-grid">
                     <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/finding-the-sweet-spot-analysis.png" alt="Location Optimization Analysis">
                         <div class="viz-content">
-                            <div class="viz-title">Location Optimization Framework</div>
-                            <div class="viz-description">Comprehensive location scoring model combining price sensitivity, growth potential, and market accessibility factors.</div>
-                        </div>
-                    </div>
-                    <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/sweet-spot-price-analysis.png" alt="Sweet Spot Price Analysis">
-                        <div class="viz-content">
-                            <div class="viz-title">Sweet Spot Price Discovery</div>
-                            <div class="viz-description">Visual analysis revealing the $450K optimal price range for maximum ROI and market penetration potential.</div>
+                            <div class="viz-title">Sample Property Position: RM 640,000</div>
+                            <div class="viz-description">A property priced at RM 640,000 sits slightly above market average with a z-score of 0.53, placing it at the 70th percentile—more expensive than 70% of similar properties. It remains within the expected price band (below RM 738K) and aligns with the densest part of distribution. This pricing carries a slight premium but could be justified by renovations, location advantages, or premium features.</div>
+                            <div class="data-visual">
+                                📊 Target: RM 640K | Z-Score: 0.53 | Percentile: 70th | Status: Slight Premium
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -563,19 +565,23 @@
     <section class="recommendations">
         <div class="container">
             <div class="recommendations-content">
-                <h2>Strategic Investment Optimization</h2>
+                <h2>Investment Recommendations</h2>
                 <div class="recommendations-grid">
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Target Sweet Spot Pricing</div>
-                        <div class="recommendation-text">Focus investment activities within the $450K price range to optimize the balance between market accessibility and growth potential.</div>
+                        <div class="recommendation-title">Target Prime Locations</div>
+                        <div class="recommendation-text">Focus on Cyberjaya and Kuala Lumpur for best rental yield and resale consistency. These cities offer moderate average prices (~RM 510K–520K), lowest price variability (standard deviation <RM 200K), and lowest overpayment rates (<6%). Cyberjaya particularly stands out for rental income due to large student and tech worker population with strong rental demand.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Leverage Location Intelligence</div>
-                        <div class="recommendation-text">Utilize the 89% accurate location scoring model to guide investment decisions and minimize location-related investment risks.</div>
+                        <div class="recommendation-title">Optimal Price Range Strategy</div>
+                        <div class="recommendation-text">Purchase properties between RM 450,000 and RM 600,000 for the best balance between affordability and resale potential. This range falls within the densest part of the distribution curve, avoids the overpayment zone, and secures properties above entry-level stock while maintaining strong market positioning.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Maximize ROI Opportunities</div>
-                        <div class="recommendation-text">Prioritize locations with 23% expected ROI potential to achieve superior returns compared to traditional investment approaches.</div>
+                        <div class="recommendation-title">Feature-Based Selection</div>
+                        <div class="recommendation-text">Target Grade 8–10 homes with renovations for maximum returns. Renovations add clear value (RM 140K premium), while Grade 8-10 properties offer the sweet spot between quality and price. Combining these features in cities with controlled overpayment and moderate price variability maximizes return while reducing pricing risk.</div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-title">Risk Management Threshold</div>
+                        <div class="recommendation-text">Use RM 842,883 as a ceiling for fair pricing to avoid overpaying unless there is clear justification. Be especially cautious when buying high-grade homes (Grade 10-11) or investing in high-demand areas like Serdang, Subang Jaya, and Petaling Jaya where overpayment rates exceed 8%.</div>
                     </div>
                 </div>
             </div>
