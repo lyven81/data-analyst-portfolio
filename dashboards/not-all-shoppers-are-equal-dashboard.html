@@ -273,17 +273,6 @@
             box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
         }
 
-        .viz-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-
-        .viz-card:hover img {
-            transform: scale(1.05);
-        }
-
         .viz-content {
             padding: 30px;
         }
@@ -298,6 +287,18 @@
         .viz-description {
             color: #666;
             line-height: 1.6;
+        }
+
+        .data-visual {
+            background: var(--gold-gradient);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(203, 161, 53, 0.3);
         }
 
         /* Recommendations Section */
@@ -453,10 +454,6 @@
                 gap: 25px;
             }
 
-            .viz-card img {
-                height: 250px;
-            }
-
             .viz-content {
                 padding: 25px 20px;
             }
@@ -480,10 +477,6 @@
             .visualization h2 {
                 font-size: 1.8rem;
             }
-
-            .viz-card img {
-                height: 200px;
-            }
         }
     </style>
 </head>
@@ -492,7 +485,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Not All Shoppers Are Equal</h1>
-                <p>Customer segmentation analysis revealing different shopping behaviors and value patterns to maximize revenue potential</p>
+                <p>Identifying High-Growth and High-Risk Customer Segments</p>
                 <div class="cta-buttons">
                     <a href="/data-analyst-portfolio/case-studies/not-all-shoppers-are-equal.html" class="btn btn-primary">View Full Case Study</a>
                     <a href="/data-analyst-portfolio/index.html" class="btn btn-secondary">More Analytics</a>
@@ -505,19 +498,24 @@
         <section class="main-content">
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-number">5.7x</div>
-                    <div class="metric-label">Value Difference Premium vs Basic</div>
-                    <div class="metric-description">Dramatic variance in customer lifetime value between premium and basic shopper segments</div>
+                    <div class="metric-number">3</div>
+                    <div class="metric-label">Customer Segments</div>
+                    <div class="metric-description">K-Means clustering identifies optimal number of segments for actionable targeting</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">23%</div>
-                    <div class="metric-label">Premium Customer Share</div>
-                    <div class="metric-description">Minority of customers classified as premium shoppers driving majority of revenue</div>
+                    <div class="metric-number">Cluster 2</div>
+                    <div class="metric-label">Highest Potential</div>
+                    <div class="metric-description">Loyal High Spenders with high engagement and frequent purchases</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-number">€247</div>
-                    <div class="metric-label">Average Premium Spend</div>
-                    <div class="metric-description">High-value spending per premium customer justifying targeted service investments</div>
+                    <div class="metric-number">Cluster 1</div>
+                    <div class="metric-label">Highest Churn Risk</div>
+                    <div class="metric-description">Low-Value Inactives requiring reactivation campaigns</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">↑ CLV</div>
+                    <div class="metric-label">CLV Growth Trend</div>
+                    <div class="metric-description">Customer lifetime value increases steadily with membership duration</div>
                 </div>
             </div>
 
@@ -525,35 +523,47 @@
                 <h2>Customer Segmentation Insights</h2>
                 <div class="insights-grid">
                     <div class="insight-item">
-                        <div class="insight-title">Dramatic Value Variation</div>
-                        <div class="insight-text">5.7x difference in customer value between premium and basic shopper segments demonstrates the critical importance of targeted marketing strategies and resource allocation based on customer worth.</div>
+                        <div class="insight-title">Three Meaningful Segments Identified</div>
+                        <div class="insight-text">The elbow method reveals k=3 as the optimal number of customer segments, balancing accuracy and simplicity. This segmentation enables targeted marketing, improved customer engagement, and optimized resource allocation across distinct behavioral groups.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">Premium Minority Drives Revenue</div>
-                        <div class="insight-text">23% of customers classified as premium shoppers are driving the majority of revenue, indicating that business success relies heavily on identifying and retaining this valuable customer segment.</div>
+                        <div class="insight-title">Cluster 0: Silent High-Value</div>
+                        <div class="insight-text">High Customer Lifetime Value (CLV) but low engagement and spending scores. Represents infrequent but high-value customers, likely acquired through large transactions but not consistently engaged. These customers can be targeted with special offers or re-engagement strategies to boost activity without over-relying on frequent transactions.</div>
                     </div>
                     <div class="insight-item">
-                        <div class="insight-title">High-Value Investment Justification</div>
-                        <div class="insight-text">€247 average spend per premium customer provides clear justification for targeted service investments, personalized experiences, and dedicated relationship management programs.</div>
+                        <div class="insight-title">Cluster 1: Low-Value Inactives</div>
+                        <div class="insight-text">Very low scores across all metrics (CLV, engagement, spending score, frequency). This segment represents low-value, low-engagement customers at risk of churn. Long-term customers showing declining activity need tailored promotions or loyalty incentives to reactivate their engagement and prevent complete disengagement.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Cluster 2: Loyal High Spenders</div>
+                        <div class="insight-text">High engagement, moderate-to-high CLV, high spending score, and frequent purchases. Represents loyal, consistent spenders with high potential for retention and upsell opportunities. Ideal targets for focused loyalty programs, personalized promotions, and cross-selling initiatives to maximize customer lifetime value.</div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-title">Membership Duration Impact</div>
+                        <div class="insight-text">Customer CLV increases steadily with membership duration, suggesting that retaining customers over time significantly increases their value to the business. Purchase frequency remains relatively stable across membership years, indicating that customers' spending amount (or basket size) may increase, but their frequency of purchases does not.</div>
                     </div>
                 </div>
             </section>
 
             <section class="visualization">
-                <h2>Data Visualization Insights</h2>
+                <h2>Cluster Analysis Visualization</h2>
                 <div class="viz-grid">
                     <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/customer-segmentation-analysis.png" alt="Customer Segmentation Analysis">
                         <div class="viz-content">
-                            <div class="viz-title">Customer Segmentation Distribution</div>
-                            <div class="viz-description">Visual breakdown of customer segments showing the distribution and characteristics of premium versus basic shoppers.</div>
+                            <div class="viz-title">Customer Clusters: CLV vs Engagement</div>
+                            <div class="viz-description">Scatter plot analysis reveals three distinct customer segments based on customer lifetime value and engagement levels. Cluster 2 (Loyal High Spenders) demonstrates both high CLV and engagement, while Cluster 0 (Silent High-Value) shows high CLV with low engagement, and Cluster 1 (Low-Value Inactives) exhibits low performance across both dimensions.</div>
+                            <div class="data-visual">
+                                📊 3 Clusters | Cluster 2: High Growth Potential | Cluster 1: At Risk of Churn
+                            </div>
                         </div>
                     </div>
                     <div class="viz-card">
-                        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-shoppers-are-equal/value-comparison-chart.png" alt="Customer Value Comparison">
                         <div class="viz-content">
-                            <div class="viz-title">Customer Value Comparison</div>
-                            <div class="viz-description">Clear visualization of the 5.7x value difference between premium and basic customers, highlighting revenue concentration patterns.</div>
+                            <div class="viz-title">Spending Score Distribution by Cluster</div>
+                            <div class="viz-description">Analysis of spending patterns across customer segments highlights the dramatic differences in customer value. Cluster 2 customers demonstrate consistently high spending scores and frequency, while Cluster 0 shows sporadic high-value transactions. Cluster 1 requires immediate attention with low activity and declining engagement metrics.</div>
+                            <div class="data-visual">
+                                💰 Cluster 2: High Spenders | Cluster 0: Silent Value | Cluster 1: Low Activity
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -567,20 +577,20 @@
                 <h2>Strategic Recommendations</h2>
                 <div class="recommendations-grid">
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Focus on Premium Retention</div>
-                        <div class="recommendation-text">Implement dedicated loyalty programs and personalized service experiences for the 23% premium customer segment to maximize the 5.7x value differential and prevent churn.</div>
+                        <div class="recommendation-title">Focus on High-Potential Segments</div>
+                        <div class="recommendation-text">Develop targeted loyalty programs, special offers, and upselling campaigns for Cluster 2 (Loyal High Spenders). These customers have high engagement and are likely to respond well to personalized promotions. Invest in long-term retention strategies as CLV increases with tenure, maximizing revenue from the most valuable customer segment.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Upgrade Basic to Premium</div>
-                        <div class="recommendation-text">Develop targeted marketing campaigns to identify basic customers with premium potential and create pathways for segment migration through value-added services.</div>
+                        <div class="recommendation-title">Reactivation Campaigns for At-Risk Customers</div>
+                        <div class="recommendation-text">For Cluster 1 (Low-Value Inactives), launch reactivation campaigns focused on re-engaging these customers. Consider offering incentives or tailored promotions to bring them back into the fold, as they show moderate engagement and tenure but need renewed attention. Address churn risk proactively to prevent revenue loss.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Optimize Resource Allocation</div>
-                        <div class="recommendation-text">Allocate customer service resources proportionally to customer value, ensuring premium customers receive priority support while maintaining cost-effective service for basic segments.</div>
+                        <div class="recommendation-title">Re-engagement Strategies for Silent High-Value</div>
+                        <div class="recommendation-text">For Cluster 0 (Silent High-Value) customers, implement targeted re-engagement efforts such as exclusive offers or high-value product recommendations to bring them back into regular purchasing activity. Capitalize on their high CLV potential without expecting consistent frequent engagement.</div>
                     </div>
                     <div class="recommendation-item">
-                        <div class="recommendation-title">Implement Value-Based Pricing</div>
-                        <div class="recommendation-text">Use customer segmentation data to create tiered pricing strategies that capture maximum value from premium customers while maintaining accessibility for basic segments.</div>
+                        <div class="recommendation-title">Long-Term Retention Investment</div>
+                        <div class="recommendation-text">Invest in long-term retention strategies, as data shows CLV increases steadily with membership duration. Focus on retaining customers from Cluster 2 while implementing targeted campaigns to increase engagement for other segments. Optimize resource allocation by focusing efforts on high-value, high-potential customers.</div>
                     </div>
                 </div>
             </div>
