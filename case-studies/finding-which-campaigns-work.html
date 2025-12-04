@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Finding Which Campaigns Work | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/cover%20image.jpg"/>
+      <h1>
+       Finding Which Campaigns Work
+      </h1>
+      <p>
+       How Display, Paid Search, and Cross-Sell Strategies Convert New Customers
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis looks at how our past marketing campaigns performed so we can understand what actually works. We focus on expected uplift—the main signal of whether a campaign is effective—and compare performance across channels, customer segments, objectives, and timing. The goal is simple: help Marketing Managers see which campaign choices lead to stronger results and which ones do not.
+      </p>
+      <p>
+       The purpose of this report is to give Marketing Managers clear guidance for future planning. By identifying the channels to invest in, the segments most worth targeting, the objectives that perform best, and the months with higher response, this analysis supports smarter budgeting, better campaign design, and more confident decision-making.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <p>
+       We analyzed a dataset of 50 marketing campaigns covering different channels, customer segments, campaign objectives, and timing factors. The data included both new-customer campaigns and those aimed at existing users, and we used expected uplift as the main measure of effectiveness. To prepare the dataset for analysis, we cleaned and standardized all fields, created additional features such as campaign duration and launch month, and converted categorical variables like channel, segment, and objective into formats suitable for comparison.
+      </p>
+      <p>
+       Using this prepared dataset, we ran descriptive analyses to understand how uplift varies across channels, segments, objectives, and seasonal patterns. We also examined the impact of campaign duration and identified high-performing combinations of channel, segment, and objective. The goal of this methodology was to pinpoint the factors that most influence campaign performance and generate insights that Marketing Managers can directly apply to improve planning and decision-making.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. Are performance differences between channels statistically meaningful?
+      </h2>
+      <img alt="Chart 1 - Channel Performance Distribution" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%201.png"/>
+      <p>
+       Yes, the differences in uplift across channels are meaningful. Display (0.09435), Paid Search (0.09355), and Other channels (0.09864) perform clearly better than Social (0.07413) and Email (0.07491). These gaps are too big and consistent to be random, which means channel choice genuinely affects campaign results.
+      </p>
+      <p>
+       Even without running a formal statistical test, the pattern is strong enough to rely on. The top channels consistently sit well above the lower-performing ones, giving a solid basis for rethinking where budget and effort should go.
+      </p>
+      <p>
+       Because these differences appear throughout the dataset, channel selection should be treated as a major driver of performance and one of the first decisions considered when planning future campaigns.
+      </p>
+     </section>
+     <section>
+      <h2>
+       2. Which channels deliver the highest uplift, and what does this mean for budget allocation?
+      </h2>
+      <img alt="Chart 2 - Channel Uplift Comparison" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%202.png"/>
+      <p>
+       Display delivers the highest uplift at 0.09435, followed closely by Paid Search at 0.09355. Social performs moderately well at 0.08657, while Email is the weakest at 0.07491. This creates a clear ranking where Display and Paid Search lead, Social is in the middle, and Email consistently underperforms.
+      </p>
+      <p>
+       For Marketing Managers, this ranking provides a simple direction for budget decisions. Shifting more investment toward Display and Paid Search is likely to increase overall campaign impact because these channels have a proven record of delivering higher uplift.
+      </p>
+      <p>
+       Email can still be useful, but it should not carry the main load given its lower performance. Treating it as a supporting channel rather than a primary one will help raise average campaign effectiveness.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. Which customer segments are the most responsive?
+      </h2>
+      <img alt="Chart 3 - Customer Segment Response" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%203.png"/>
+      <p>
+       High Value customers respond the best, with an average uplift of 0.0913, followed closely by New Customers at 0.0904. These two groups deliver the strongest results and offer the highest return for each campaign run.
+      </p>
+      <p>
+       In comparison, Churn Risk customers average 0.0751 uplift, and Deal Seekers average 0.0714, making them more challenging to influence. These segments may require different messaging or more precise targeting to deliver stronger outcomes.
+      </p>
+      <p>
+       Given the clear difference in responsiveness, focusing more campaigns on High Value and New Customer groups is likely to improve returns without increasing budget.
+      </p>
+     </section>
+     <section>
+      <h2>
+       4. Which campaign objectives deliver the strongest results?
+      </h2>
+      <img alt="Chart 4 - Campaign Objective Performance" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%204.png"/>
+      <p>
+       Cross-sell and Retention are the strongest objectives, with uplift values of 0.09267 and 0.09233. They produce reliable results by encouraging additional purchases or strengthening relationships with active customers.
+      </p>
+      <p>
+       Reactivation performs lower at 0.08367, suggesting that bringing back inactive users requires more effort and delivers less uplift. This objective may still be important but should be used more selectively.
+      </p>
+      <p>
+       Directing more campaigns toward Cross-sell and Retention will likely generate stronger outcomes, especially when paired with highly responsive segments like High Value and New Customers.
+      </p>
+     </section>
+     <section>
+      <h2>
+       5. Do seasonal or timing patterns affect campaign performance?
+      </h2>
+      <img alt="Chart 5 - Seasonal Performance Patterns" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%205.png"/>
+      <p>
+       Yes, campaign performance changes across the year. February (0.10600) and November (0.11350) are the strongest months, while September (0.06200) is the weakest. This shows that customer responsiveness rises and falls in clear seasonal patterns.
+      </p>
+      <p>
+       These patterns matter for planning. High-impact campaigns should be scheduled in February and November, when customers are naturally more responsive. This allows stronger outcomes without increasing spend.
+      </p>
+      <p>
+       September is better suited for low-risk tests or brand-building activities. Using seasonal insights helps avoid spending heavily during low-response periods and maximizes results during peak months.
+      </p>
+     </section>
+     <section>
+      <h2>
+       6. Does campaign duration influence uplift?
+      </h2>
+      <img alt="Chart 6 - Duration vs Uplift Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%206.png"/>
+      <p>
+       No, campaign duration does not meaningfully influence uplift. High- and low-performing campaigns appear across all duration ranges, from very short to very long.
+      </p>
+      <p>
+       This means duration should not be treated as a performance lever. Marketing Managers can choose campaign length based on operational needs, creative cycles, or channel norms rather than expecting duration to improve results.
+      </p>
+      <p>
+       The factors that truly matter are channel, segment, and objective. Time is better spent optimizing those areas instead of adjusting campaign length.
+      </p>
+     </section>
+     <section>
+      <h2>
+       7. Are we investing in the right channels based on performance?
+      </h2>
+      <img alt="Chart 7 - Investment vs Performance Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%207.png"/>
+      <p>
+       Current investment does not match performance. Email has the highest number of campaigns (14) but delivers the lowest uplift (0.07491). Social has 12 campaigns but only mid-tier uplift (0.08300). Meanwhile, Display and Paid Search—two of the best-performing channels—have fewer campaigns at 11 and 10.
+      </p>
+      <p>
+       This shows a clear imbalance: too much effort is going into channels that deliver less impact, while the strongest ones are underused. Adjusting this mix would likely improve results without increasing budget.
+      </p>
+      <p>
+       Marketing Managers should reduce dependency on Email and expand the use of Display and Paid Search to better align effort with performance.
+      </p>
+     </section>
+     <section>
+      <h2>
+       8. What combinations of channel, objective, and segment produce the strongest results?
+      </h2>
+      <img alt="Chart 8 - High-Performing Combinations Heatmap" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%208.png"/>
+      <p>
+       The strongest results come from combinations that align a strong channel with a highly responsive audience. Social with Cross-sell for New Customers delivers the highest uplift at 0.144. Display with Retention for High Value customers also performs extremely well at 0.140.
+      </p>
+      <p>
+       Surprisingly, Email performs strongly when paired with Retention for New Customers (0.140), even though Email is weak on average. Paid Search also delivers high uplift (0.1275) when used for Cross-sell targeting High Value customers.
+      </p>
+      <p>
+       These combinations show that context matters. Matching the right channel with the right segment and objective can significantly lift performance and should be used as templates for future campaigns.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       This analysis shows that some channels, segments, and objectives consistently deliver stronger uplift than others. Display and Paid Search perform the best, while High Value and New Customer segments respond most strongly. Cross-sell and Retention also stand out as the most effective objectives. These patterns give Marketing Managers a reliable view of what works and provide clear direction for improving future campaigns.
+      </p>
+      <p>
+       To make the most of these insights, Marketing Managers should shift more budget toward high-performing channels, focus on the segments that offer the strongest response, and prioritize objectives with proven impact. Timing also matters: months like February and November are ideal for major campaigns, while September is better suited for testing. By aligning budget, targeting, objectives, and timing with the data, teams can run campaigns that deliver higher uplift and better overall returns.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
