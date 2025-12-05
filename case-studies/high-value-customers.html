@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Where Are Your High-Value Customers? | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/cover%20image.png"/>
+      <h1>
+       Where Are Your High-Value Customers?
+      </h1>
+      <p>
+       Finding the Channels That Drive Long Term Loyal Customers
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This analysis shows marketing managers which types of customers bring the most long-term value and which acquisition channels attract them. Instead of relying on assumptions, we use data to identify meaningful customer groups and pinpoint the channels that consistently bring in loyal, high-quality users. The goal is to improve acquisition efficiency, reduce wasted spend, and focus on customers who are most likely to convert, stay longer, or upgrade.
+      </p>
+      <p>
+       The insights help managers decide which segments to target, where to invest their budget, and how to tailor messages for different audiences. They also support better funnel management and smoother collaboration with product and CRM teams. Overall, this gives marketing a clear and practical view of who to prioritise and how to reach them effectively.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <img alt="Elbow Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q1%20elbow_chart.png"/>
+      <p>
+       We analysed 100,000 customers to understand how acquisition channels affect long-term value. The dataset included age, gender, country, loyalty tier, tenure, and the channel each customer came from. Before running the analysis, we cleaned the data and created useful features such as tenure, age groups, loyalty scores, and channel indicators.
+      </p>
+      <p>
+       To uncover customer segments, we used K-Means clustering based on age, loyalty, and acquisition channel. We validated the segments with statistical tests and reviewed their differences through summary tables and simple visualisations. This helped us see how the groups varied in loyalty, size, and channel composition.
+      </p>
+      <p>
+       The purpose of this approach was to identify which channels attract the strongest customers and how these groups behave over time. By linking customer value back to acquisition source, the analysis gives marketing a strong foundation for improving targeting, channel strategy, messaging, and retention efforts.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. What are the core customer segments?
+      </h2>
+      <img alt="Channel Composition by Segment" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q2%20channel_composition_segment.png"/>
+      <p>
+       The data shows that customers differ mainly by how they first discover the brand, not by who they are. Four clear segments emerge based on acquisition channel: Paid Search Specialists, Organic & Email Audience, Social Media Cohort, and Referral Advocates. These groups behave differently because each channel attracts customers with different levels of intent and trust.
+      </p>
+      <p>
+       This channel-driven segmentation gives marketing a reliable way to target, invest, and personalise engagement. Paid Search brings high-intent users, Organic and Email attract trust-based audiences, Social captures trend-driven users, and Referral brings in customers influenced by strong social proof.
+      </p>
+     </section>
+     <section>
+      <h2>
+       2. What characteristics define these segments?
+      </h2>
+      <img alt="Loyalty by Channel" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q3%20loyalty_by_channel.png"/>
+      <p>
+       Customer age and tenure are similar across all segments, confirming they are not useful for differentiation. The biggest differences lie in loyalty. Paid Search customers show the highest loyalty score at 1.582, followed closely by Referral at 1.579. Organic & Email performs slightly lower at 1.573, while Social Media has the lowest score at 1.566.
+      </p>
+      <p>
+       These loyalty patterns make it clear that the acquisition channel strongly predicts long-term value. Channels with higher intent or higher trust consistently deliver stronger customers.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. Which channels deliver the highest-value customers?
+      </h2>
+      <p>
+       Paid Search and Referral stand out as the most effective channels, both producing customers with the highest loyalty scores. Organic and Email perform moderately well, while Social Media attracts the least committed customers.
+      </p>
+      <p>
+       This ranking highlights the importance of focusing on channels where customers arrive with intent or trust. Paid Search users come with a defined need, and Referral users come with confidence built from another person's recommendation.
+      </p>
+     </section>
+     <section>
+      <h2>
+       4. How large and reachable is each segment?
+      </h2>
+      <img alt="Segment Sizes" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q4%20segment_sizes.png"/>
+      <p>
+       The Organic & Email Audience is the largest group at 45,103 customers, followed by Paid Search with 29,950. Social Media includes 14,979 customers, and Referral accounts for 9,968. This means the company must balance scale with value: organic and email grow efficiently at low cost, while paid search brings fewer but higher-value users.
+      </p>
+      <p>
+       Reachability varies by channel. Paid Search can be targeted directly with performance ads, Organic & Email scale through SEO and owned content, and Social and Referral require dedicated platform or advocacy strategies. Understanding both size and reach helps determine which segments offer the best growth potential.
+      </p>
+     </section>
+     <section>
+      <h2>
+       5. What messaging resonates with each segment?
+      </h2>
+      <p>
+       Paid Search customers respond best to direct, solution-focused messaging that aligns with their high-intent search behaviour. Organic & Email customers prefer educational, trust-building content that supports thoughtful decision-making. Social Media customers engage more with community-driven, conversational messaging shaped by trends and relatable content.
+      </p>
+      <p>
+       Referral customers value trust and shared experience, making testimonials, proof points, and dual-reward offers effective. These themes translate each segment's behaviour into practical communication strategies.
+      </p>
+     </section>
+     <section>
+      <h2>
+       6. What strategic actions should the company take?
+      </h2>
+      <p>
+       The strongest path to growth is investing more in Paid Search and Referral, both of which consistently bring the highest-value customers. Enhancing visibility, incentives, and conversion paths in these channels will deliver efficient, long-term gains.
+      </p>
+      <p>
+       Organic & Email should be scaled further because they provide large, low-cost reach. Improving SEO and refining email flows will increase their contribution to customer value. Social Media should be repositioned as a brand and engagement tool rather than a primary acquisition driver. Together, these actions shift resources toward the channels that reliably deliver loyal, high-quality customers.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       This analysis shows that acquisition channel is the main factor driving customer value, giving marketing a clear direction on where to focus. Paid Search and Referral consistently deliver the most loyal customers, while Organic and Email offer the largest and most cost-efficient base for long-term growth. Social Media remains useful for awareness but brings in lower-value customers and should be positioned accordingly. These insights help managers invest in the channels that reliably produce strong customers and reduce spend on those that do not.
+      </p>
+      <p>
+       With these segments clearly defined, campaign targeting becomes more effective. High-intent customers from Paid Search respond best to direct, solution-focused messages, while Organic and Email audiences engage with educational, trust-building content. Social Media users require community-driven communication, and Referral customers respond to messaging that reinforces trust and shared experience. Together, these findings support better funnel management and stronger collaboration with product and CRM teams, enabling marketing to refine strategies, strengthen retention, and build a more efficient, higher-value growth engine.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
