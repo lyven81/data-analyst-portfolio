@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Where Revenue Comes From | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/where-revenue-comes-from-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-revenue-comes-from/cover%20image.png"/>
+      <h1>
+       Where Revenue Comes From
+      </h1>
+      <p>
+       Predict how products, campaigns, and customers contribute to revenue.
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This report helps retail business owners understand what drives their sales and where their revenue really comes from. It looks at how products, discounts, campaigns, and customer behaviour affect daily performance in a household and lifestyle retail environment, where many small items sell steadily but in low volumes.
+      </p>
+      <p>
+       The purpose of the analysis is to give owners practical answers they can act on: which products to focus on, when discounts make sense, which campaigns are worth repeating, how much stock to hold, and which customers are most likely to return. By highlighting the patterns that matter and removing the noise, this report supports clearer decisions that improve revenue, reduce waste, and strengthen long-term customer value.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <p>
+       We used one year of sales, campaign, product, and customer data from a household and lifestyle retail business. This included daily transactions, campaign results, product movement, and customer buying patterns. Together, these datasets showed how people shop, which campaigns work, and how different products perform over time.
+      </p>
+      <p>
+       Our analysis focused on the measures that matter most to business owners: revenue, refunds, product demand, campaign performance, and customer loyalty. We added simple indicators such as month, week, discount level, product mix, and purchase frequency to make the patterns clearer. This allowed us to build models that predict revenue, campaign outcomes, product demand, and long-term customer value. The goal is to help owners make better decisions about pricing, marketing, stock levels, and customer retention using real data instead of guesswork.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Prediction A: Revenue Prediction
+      </h2>
+      <h3>
+       1. Which factors influence revenue the most?
+      </h3>
+      <img alt="Prediction A Q1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-revenue-comes-from/Prediction%20A%20Q1.png"/>
+      <p>
+       Revenue is driven mainly by the products customers choose and how many items they buy. Some products naturally bring in more money, either because they cost more or sell more often, and larger basket sizes quickly raise revenue. Campaigns and timing do have some influence, but their impact is much smaller. Discounts matter the least and do not meaningfully increase revenue per transaction.
+      </p>
+      <p>
+       Overall, the data shows that the most effective way to grow revenue is to promote strong products and encourage customers to buy more items—not to rely on heavy discounting. Campaigns work best when they highlight the right products rather than when they offer deeper price cuts.
+      </p>
+      <h3>
+       2. How do revenue levels change across seasons and weeks?
+      </h3>
+      <img alt="Prediction A Q2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-revenue-comes-from/Prediction%20A%20Q2.png"/>
+      <p>
+       Revenue stays steady for most of the year, with consistent monthly averages. February is the only clear dip, likely due to shorter shopping periods or the post-holiday slowdown. The biggest jump happens at the end of the year, where November and December contribute the highest revenue and show strong seasonal demand linked to holidays and bonuses.
+      </p>
+      <p>
+       These patterns make planning easier. The business can prepare for higher demand at year-end with more stock, more staff, and stronger marketing, while using targeted promotions to support weaker periods like February.
+      </p>
+      <h3>
+       3. Does discounting improve revenue once refunds and low-value purchases are considered?
+      </h3>
+      <p>
+       Net revenue is highest when no discount is offered. Full-price purchases bring in more valuable customers and larger transaction amounts compared with discounted sales. Low and medium discounts do not outperform full price, and they often attract customers who spend less or are more likely to request refunds.
+      </p>
+      <p>
+       This means discounting should be used carefully. Broad discounts reduce revenue quality and do not create long-term value. A targeted approach—where discounts are used only for specific goals or customer groups—delivers far better results.
+      </p>
+      <h3>
+       4. How accurately can we forecast future revenue?
+      </h3>
+      <p>
+       The forecast captures the general average level of revenue but cannot follow the daily ups and downs seen in real sales. Because the model uses simple inputs, it does not adjust well to changes caused by campaigns, product mix, or weekday shopping patterns. This makes daily forecasts unreliable for scheduling or inventory decisions.
+      </p>
+      <p>
+       The forecasts are still useful for understanding long-term direction, such as whether revenue is growing or stabilising. However, accuracy would improve greatly by adding more detailed information, such as campaign timing, product demand patterns, and seasonal effects.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Prediction B: Campaign Success Prediction
+      </h2>
+      <h3>
+       1. Which campaign characteristics statistically affect performance?
+      </h3>
+      <img alt="Prediction B Q1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-revenue-comes-from/Prediction%20B%20Q1.png"/>
+      <p>
+       Campaigns perform best when they offer a wide range of products. Customers respond well when they have more options, and campaigns with stronger product variety consistently generate higher sales. Longer campaigns also help, but their impact is smaller compared with product mix. Discounts and refund rates show almost no meaningful effect on overall performance.
+      </p>
+      <p>
+       In simple terms, strong campaigns come from choosing the right products, not cutting prices. A diverse assortment attracts more buyers and produces better results than aggressive discounting.
+      </p>
+      <h3>
+       2. Do certain campaigns attract higher-spending or refund-prone customers?
+      </h3>
+      <p>
+       Customer spending stays almost the same across all campaigns, with average transaction values sitting between RM88 and RM96. This shows that campaign design does not meaningfully change how much customers spend. Refund rates also vary only slightly, and there is no link between high spending and higher refund risk.
+      </p>
+      <p>
+       This means campaigns do not change the quality of customers you attract. Most campaigns will bring in similar types of buyers, so owners can focus on growing reach and volume without worrying about attracting refund-heavy or low-value customers.
+      </p>
+      <h3>
+       3. Which campaigns generate the highest net revenue after discounts and refunds?
+      </h3>
+      <p>
+       Only a few campaigns contribute most of the net revenue. One campaign in particular clearly outperforms the rest, while several others offer moderate results, and many contribute only a small amount. This shows that a small number of well-designed campaigns drive the bulk of financial impact.
+      </p>
+      <p>
+       The best way forward is to learn from the top performers—look at the products they featured, how long they ran, and how they were positioned—and repeat what works. Investing more in strong campaign types and phasing out weaker ones will give owners a higher return on their marketing budget.
+      </p>
+      <h3>
+       4. Can we reliably predict campaign success before launching it?
+      </h3>
+      <p>
+       The model can identify which campaigns are likely to succeed or fail, often giving very clear yes-or-no signals. This shows that basic features such as product mix and duration already reveal simple patterns. However, the model lacks deeper information—like audience, timing, or price positioning—so the predictions should be treated as early guidance rather than final decisions.
+      </p>
+      <p>
+       In practice, this means the model is useful for screening new campaign ideas. If a planned campaign receives a low predicted score, it likely needs to be redesigned. More accurate forecasting will require richer business inputs that better reflect how customers actually respond.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Prediction C: Product Demand Prediction
+      </h2>
+      <h3>
+       1. Which products show clear statistical demand patterns?
+      </h3>
+      <p>
+       Most products sell at almost the same pace, with daily sales sitting between one and two units. There is very little difference in how products behave—no major best sellers and no items with extreme ups and downs. This creates a stable and predictable sales pattern across the entire range.
+      </p>
+      <p>
+       Because demand is so uniform, growth will not come from relying on a few standout products. Instead, improvements will depend on expanding or refining the product mix as a whole, since no single item is likely to drive large jumps in revenue on its own.
+      </p>
+      <h3>
+       2. How do product sales change across days, weeks, and seasons?
+      </h3>
+      <p>
+       Demand stays low and steady for most of the year, with the occasional spike when certain items sell slightly more than usual. These increases do not follow a repeated seasonal pattern, and there are no consistent peaks tied to particular months or holidays.
+      </p>
+      <p>
+       This means sales movements are more likely influenced by promotions or short-term campaigns rather than the time of year. For planning purposes, inventory adjustments should be linked to campaign timing, not to a seasonal calendar.
+      </p>
+      <h3>
+       3. Which products reliably sell through inventory, and which underperform or overstock?
+      </h3>
+      <p>
+       Sales and revenue are spread evenly across many products. No single item dominates performance, but no item consistently fails either. Products move slowly but steadily, lowering the risk of both stockouts and excess stock piling up.
+      </p>
+      <p>
+       This creates a balanced inventory environment where lean stock levels are practical. Since no product experiences dramatic swings, growth comes from offering more variety or improving margins, rather than relying on a small group of best sellers.
+      </p>
+      <h3>
+       4. How accurately can we forecast future demand?
+      </h3>
+      <p>
+       The forecast captures the general daily average but cannot predict sudden increases in sales. Most products sell one or two units per day, so the model learns a flat pattern and misses spikes that are often caused by promotions or price changes.
+      </p>
+      <p>
+       The forecast is reliable for routine stocking decisions but not for anticipating peaks linked to campaigns. For higher accuracy during promotional periods, manual adjustments or additional campaign information should be included in planning.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Prediction D: Customer Lifetime Value Prediction
+      </h2>
+      <h3>
+       1. What customer behaviours statistically predict long-term value?
+      </h3>
+      <img alt="Prediction D Q1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-revenue-comes-from/Prediction%20D%20Q1.png"/>
+      <p>
+       Customers who stay active for a longer time are the ones who bring in the most value. They keep coming back, make more purchases over time, and rarely refund items. Refund behaviour also matters—customers who frequently return products tend to be low-value, while those who keep their purchases contribute more steadily.
+      </p>
+      <p>
+       Repeat buying is another strong sign of future value. Customers who make several purchases early on are far more likely to become loyal. On the other hand, discounts and the number of different products a customer buys have little impact on long-term value. Loyalty grows from consistent, positive buying experiences, not from promotions.
+      </p>
+      <h3>
+       2. Which customer groups show strong patterns of repeat purchasing or early disengagement?
+      </h3>
+      <p>
+       The data shows three clear groups. A large portion of customers buy once or twice and then stop, which means they disengage early unless the business encourages them to return. A second group makes a few more purchases but does not reach high-value status. The third group is the most important—they stay longer, buy more often, and become your most profitable customers.
+      </p>
+      <p>
+       To grow this high-value group, the business needs to create reasons for customers to come back early in their journey. Encouraging that second or third purchase is key to shifting customers from disengaged to loyal.
+      </p>
+      <h3>
+       3. How do campaigns influence the type of customers acquired?
+      </h3>
+      <p>
+       Different campaigns attract different types of customers. Some bring in shoppers who later become long-term buyers, while others bring in mainly one-time purchasers. Campaigns with a broader mix of products tend to attract customers who stay longer and spend more over time.
+      </p>
+      <p>
+       Because of this, marketing resources should go toward campaigns that consistently pull in higher-value customers. Campaigns that only create short bursts of sales without building long-term value should be redesigned or replaced so that spending goes to strategies that strengthen customer loyalty.
+      </p>
+      <h3>
+       4. Can we predict which customers will become long-term, profitable buyers?
+      </h3>
+      <img alt="Prediction D Q4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-revenue-comes-from/Prediction%20D%20Q4.png"/>
+      <p>
+       Yes. The model separates customers into three groups: those unlikely to return, those with moderate potential, and those with a high chance of becoming long-term buyers. Most customers fall into the first group, a smaller portion shows some potential, and a small but important group is highly likely to become loyal "VIP" customers.
+      </p>
+      <p>
+       These predictions allow the business to focus its retention efforts where they will have the greatest impact. Medium-potential customers benefit from early engagement offers, while high-potential customers should receive consistent loyalty attention. Low-potential customers require minimal intervention, helping save time and marketing spend.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       This analysis gives business owners a practical foundation for making better decisions across revenue, campaigns, products, and customers. The revenue findings show which products reliably drive sales, how much volume the business can expect in different seasons, and why broad discounts do not improve net revenue. With this clarity, owners can set more realistic sales targets, decide when discounts are worth using, and choose which products deserve the most attention.
+      </p>
+      <p>
+       The campaign insights make it easier to decide which campaigns to repeat, improve, or stop entirely. By seeing which designs bring in long-term buyers—and which only create short-lived spikes—business owners can direct marketing budgets to where they produce the strongest return. Understanding when campaigns perform best also helps with planning year-end pushes or quieter-month promotions.
+      </p>
+      <p>
+       The product and customer analysis supports day-to-day operational decisions. Stable product demand means inventory can be kept lean without risking stockouts, and knowing which customers are likely to become loyal helps businesses focus retention resources where they matter most. Clear visuals highlight the campaigns, products, and customer groups that deserve attention, while also revealing risks such as high refund behaviour. Taken together, these insights help the business grow in a more predictable and customer-focused way.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
