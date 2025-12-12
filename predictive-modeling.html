@@ -434,6 +434,7 @@ const caseStudies = [
         description: "Identify which gym members will lose motivation before they quit.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-gym-member-dropout.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/predicting-gym-member-dropout-dashboard.html",
+        agenticUrl: "/data-analyst-portfolio/agentic_workflow/predicting-gym-member-dropout.html",
         category: "Predictive Modeling"
     },
     {
@@ -805,6 +806,7 @@ function displayResults(results) {
                 <div class="search-result-buttons">
                     <a href="${study.caseStudyUrl}" class="search-result-btn">Read More</a>
                     <a href="${study.dashboardUrl}" class="search-result-btn">View Dashboard</a>
+                    ${study.agenticUrl ? `<a href="${study.agenticUrl}" class="search-result-btn">AI Assistant</a>` : ''}
                 </div>
             </div>
         `).join('');
@@ -921,6 +923,7 @@ function renderTable(studies) {
                 <div class="case-study-links">
                     <a href="${leftStudy.caseStudyUrl}">Read More →</a>
                     <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
+                    ${leftStudy.agenticUrl ? `<a href="${leftStudy.agenticUrl}">AI Assistant</a>` : ''}
                 </div>
             </td>
         `;
@@ -936,6 +939,7 @@ function renderTable(studies) {
                     <div class="case-study-links">
                         <a href="${rightStudy.caseStudyUrl}">Read More →</a>
                         <a href="${rightStudy.dashboardUrl}">View Dashboard</a>
+                        ${rightStudy.agenticUrl ? `<a href="${rightStudy.agenticUrl}">AI Assistant</a>` : ''}
                     </div>
                 </td>
             `;
