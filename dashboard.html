@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Case Studies | Lee Yih Ven's Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #666;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #f9f9f9;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+        .search-input {
+            padding: 8px 40px 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            width: 200px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+        .search-input::placeholder {
+            color: #999;
+        }
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            margin-top: 5px;
+        }
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-title {
+            font-weight: 600;
+            color: #007BFF;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        .search-result-description {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .search-result-category {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .search-result-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .search-result-btn {
+            padding: 4px 12px;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+            color: #666;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        .search-result-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 20px;
+            vertical-align: top;
+            text-align: left;
+        }
+        td h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        td p {
+            font-size: 1rem;
+            color: #555;
+        }
+        td a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        .case-study-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .case-study-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f5f5dc;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .case-study-links a:hover {
+            background-color: #daa520;
+            color: white;
+            border-color: #daa520;
+            transform: translateY(-1px);
+        }
+        .sort-controls {
+            margin-bottom: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+        .sort-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+        .sort-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .sort-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sort-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .sort-btn.active {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .case-study-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            table {
+                display: block;
+            }
+            tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+            td {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            td h3 {
+                font-size: 1.3rem;
+            }
+            td p {
+                font-size: 1rem;
+            }
+            nav a {
+                font-size: 1rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .category-title {
+                font-size: 1.5rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+            .case-study-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .case-study-links a {
+                text-align: center;
+            }
+            .sort-controls {
+                margin-bottom: 0;
+                padding: 0;
+            }
+            .sort-label {
+                font-size: 0.85rem;
+            }
+            .sort-buttons {
+                gap: 6px;
+            }
+            .sort-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-container {
+                margin-left: 0;
+                width: 100%;
+                max-width: 300px;
+            }
+            .search-input {
+                width: 100%;
+            }
+            .nav-links {
+                order: 2;
+            }
+            .search-container {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p class="category-title">Dashboard Case Studies</p>
+        <p class="tagline">Interactive data visualizations that transform complex data into actionable insights</p>
+    </header>
+
+    <nav>
+        <div class="nav-links">
+            <a href="/data-analyst-portfolio/index.html">Home</a>
+            <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+            <a href="/data-analyst-portfolio/about-this-work.html">About This Work</a>
+            <a href="/data-analyst-portfolio/contact.html">Contact</a>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search dashboards..." id="searchInput">
+            <span class="search-icon">🔍</span>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </nav>
+    <div class="search-overlay" id="searchOverlay"></div>
+
+    <div class="container">
+        <table id="caseStudiesTable">
+            <!-- Dynamic content will be rendered here -->
+        </table>
+    </div>
+
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+<script>
+// Dashboard case studies database
+const dashboardCaseStudies = [
+    {
+        title: "Plumbing Productivity Dashboard",
+        description: "Complete analytics system identifying $30K+ annual improvement opportunities through utilization tracking, callback analysis, and technician performance monitoring.",
+        caseStudyUrl: "/data-analyst-portfolio/dashboards/plumbing-service-business-dashboard.html",
+        dashboardUrl: "https://lookerstudio.google.com/s/iviDUAzCFEc",
+        category: "Dashboard",
+        date: "2024-12-19",
+        dateDisplay: "December 19, 2024"
+    }
+];
+
+// Sorting state
+let currentSort = 'alphabetical'; // default to alphabetical
+
+// Search functionality
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const searchOverlay = document.getElementById('searchOverlay');
+
+function performSearch(query) {
+    if (query.length < 2) {
+        searchResults.style.display = 'none';
+        searchOverlay.style.display = 'none';
+        return;
+    }
+
+    const filteredResults = dashboardCaseStudies.filter(study =>
+        study.title.toLowerCase().includes(query.toLowerCase()) ||
+        study.description.toLowerCase().includes(query.toLowerCase())
+    );
+
+    displayResults(filteredResults);
+}
+
+function displayResults(results) {
+    if (results.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">No dashboards found. Try different keywords.</div>';
+    } else {
+        searchResults.innerHTML = results.map(study => `
+            <div class="search-result-item">
+                <div class="search-result-category">${study.category}</div>
+                <div class="search-result-title">${study.title}</div>
+                <div class="search-result-description">${study.description}</div>
+                <div class="search-result-buttons">
+                    <a href="${study.caseStudyUrl}" class="search-result-btn">Read More</a>
+                    <a href="${study.dashboardUrl}" class="search-result-btn" target="_blank">View Dashboard</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    searchResults.style.display = 'block';
+    searchOverlay.style.display = 'block';
+}
+
+function hideResults() {
+    searchResults.style.display = 'none';
+    searchOverlay.style.display = 'none';
+}
+
+// Event listeners
+searchInput.addEventListener('input', (e) => {
+    performSearch(e.target.value);
+});
+
+searchInput.addEventListener('focus', () => {
+    if (searchInput.value.length >= 2) {
+        performSearch(searchInput.value);
+    }
+});
+
+// Hide results when clicking outside
+searchOverlay.addEventListener('click', hideResults);
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-container')) {
+        hideResults();
+    }
+});
+
+// Prevent search results from closing when clicked
+searchResults.addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+
+// Handle escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        hideResults();
+        searchInput.blur();
+    }
+});
+
+// Sorting functions
+function sortCaseStudies(studies, sortType) {
+    const sorted = [...studies];
+
+    if (sortType === 'alphabetical') {
+        return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortType === 'latest') {
+        return sorted.sort((a, b) => {
+            if (!a.date && !b.date) return 0;
+            if (!a.date) return 1;
+            if (!b.date) return -1;
+            return new Date(b.date) - new Date(a.date);
+        });
+    } else if (sortType === 'oldest') {
+        return sorted.sort((a, b) => {
+            if (!a.date && !b.date) return 0;
+            if (!a.date) return -1;
+            if (!b.date) return 1;
+            return new Date(a.date) - new Date(b.date);
+        });
+    }
+
+    return sorted;
+}
+
+function renderTable(studies) {
+    const table = document.getElementById('caseStudiesTable');
+    const sortedStudies = sortCaseStudies(studies, currentSort);
+
+    // Start with dedicated sorting controls row
+    let html = `
+        <tr>
+            <td colspan="2" style="padding: 20px; border-bottom: 1px solid #e9ecef;">
+                <div class="sort-controls">
+                    <span class="sort-label">Sort by:</span>
+                    <div class="sort-buttons">
+                        <button class="sort-btn ${currentSort === 'alphabetical' ? 'active' : ''}" onclick="changeSortType('alphabetical')">
+                            A-Z
+                        </button>
+                        <button class="sort-btn ${currentSort === 'latest' ? 'active' : ''}" onclick="changeSortType('latest')">
+                            Latest
+                        </button>
+                        <button class="sort-btn ${currentSort === 'oldest' ? 'active' : ''}" onclick="changeSortType('oldest')">
+                            Oldest
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    // Add case study rows
+    for (let i = 0; i < sortedStudies.length; i += 2) {
+        html += '<tr>';
+
+        // Left column
+        const leftStudy = sortedStudies[i];
+        html += `
+            <td>
+                ${leftStudy.dateDisplay ? `<div class="case-study-date">${leftStudy.dateDisplay}</div>` : ''}
+                <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
+                <p>${leftStudy.description}</p>
+                <div class="case-study-links">
+                    <a href="${leftStudy.caseStudyUrl}">Read More →</a>
+                    <a href="${leftStudy.dashboardUrl}" target="_blank">View Dashboard</a>
+                </div>
+            </td>
+        `;
+
+        // Right column (if exists)
+        if (i + 1 < sortedStudies.length) {
+            const rightStudy = sortedStudies[i + 1];
+            html += `
+                <td>
+                    ${rightStudy.dateDisplay ? `<div class="case-study-date">${rightStudy.dateDisplay}</div>` : ''}
+                    <h3><a href="${rightStudy.caseStudyUrl}">${rightStudy.title}</a></h3>
+                    <p>${rightStudy.description}</p>
+                    <div class="case-study-links">
+                        <a href="${rightStudy.caseStudyUrl}">Read More →</a>
+                        <a href="${rightStudy.dashboardUrl}" target="_blank">View Dashboard</a>
+                    </div>
+                </td>
+            `;
+        } else {
+            html += '<td></td>'; // Empty cell if odd number of studies
+        }
+
+        html += '</tr>';
+    }
+
+    table.innerHTML = html;
+}
+
+function changeSortType(sortType) {
+    currentSort = sortType;
+    renderTable(dashboardCaseStudies);
+}
+
+// Initialize page with default alphabetical sorting
+document.addEventListener('DOMContentLoaded', function() {
+    renderTable(dashboardCaseStudies);
+});
+</script>
+
+</body>
+</html>
