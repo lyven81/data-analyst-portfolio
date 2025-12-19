@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Plumbing Productivity Dashboard | Lee Yih Ven</title>
+    <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Column -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>
+                    Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+                </p>
+            </section>
+            <!-- Home Link Button -->
+            <section class="home-link-section">
+                <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+                    Home
+                </a>
+            </section>
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>
+                    Have a project in mind? Let's work together to transform your data into actionable insights.
+                </p>
+                <ul>
+                    <li>
+                        Email:
+                        <a href="mailto:director@pinnacleslearning.com">
+                            director@pinnacleslearning.com
+                        </a>
+                    </li>
+                    <li>
+                        Phone: +6014-9207099
+                    </li>
+                </ul>
+            </section>
+            <!-- Interactive Dashboard Link Button -->
+            <section class="dashboard-link-section">
+                <a class="dashboard-link-btn" href="https://lookerstudio.google.com/s/iviDUAzCFEc" target="_blank">
+                    Open Full Dashboard
+                </a>
+            </section>
+            <!-- Documentation Link Button -->
+            <section class="agentic-link-section">
+                <a class="agentic-link-btn" href="https://github.com/lyven81/data-analyst-portfolio/tree/main/plumbing-dashboard-docs" target="_blank">
+                    View Documentation
+                </a>
+            </section>
+        </aside>
+
+        <!-- Right Column -->
+        <main class="right-column">
+            <section class="case-study-content">
+                <header>
+                    <img alt="Plumbing Dashboard Cover" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/plumbing-dashboard/cover-image.png"/>
+                    <h1>Plumbing Productivity Dashboard: From Gut Decisions to Data-Driven Growth</h1>
+                    <p>Building an end-to-end analytics system that identified $30K+ annual improvement opportunities</p>
+                </header>
+
+                <section>
+                    <h2>Overview</h2>
+                    <p>
+                        A plumbing services company with 10 technicians had no visibility into performance metrics, callback issues, or utilization rates. Managing 225+ monthly jobs without data-driven insights meant decisions were based on gut feel rather than facts. The business was losing money to callbacks, inefficient scheduling, and undetected performance gaps between technicians.
+                    </p>
+                    <p>
+                        This project delivered a complete, production-ready analytics system that transforms raw CRM data into actionable business intelligence. The solution includes automated data processing, three structured datasets, comprehensive documentation, and a four-page interactive dashboard that reveals exactly where the business can improve profitability.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Data Sources and Methodology</h2>
+                    <p>
+                        The analysis used four CSV files exported from the company's CRM system covering June 2024: jobs (300 work orders), invoices (225 billing records), technicians (10 profiles), and time logs (detailed tracking). We processed 225 completed jobs, excluding 75 cancelled orders to focus only on delivered work.
+                    </p>
+                    <p>
+                        The approach followed a six-phase professional methodology: (1) understanding the data structure and quality, (2) designing business logic and metric definitions, (3) building a Python ETL pipeline for automated processing, (4) creating three aggregated datasets (job-level, technician-level, weekly-level), (5) developing 112 pages of comprehensive documentation, and (6) delivering a complete showcase package ready for production deployment.
+                    </p>
+                    <p>
+                        Key metrics were carefully defined: Utilization (billable hours ÷ paid hours × 100), Callback Rate (repeat visits ÷ total jobs × 100), and Revenue per Hour (invoice amount ÷ billable hours). Custom callback detection logic was implemented using a 30-day window and pattern matching in job notes to automatically flag quality issues.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>1. What's Our Company Performance Baseline?</h2>
+                    <img alt="Company Overview Dashboard" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/plumbing-dashboard/page-1.png"/>
+                    <p>
+                        The company generated $89,192 in revenue from 225 completed jobs in June 2024, with an average utilization of 71.6% and a callback rate of 6.7%. Revenue distribution shows balance between service work (38.1%), repairs (38.0%), and installations (23.9%).
+                    </p>
+                    <p>
+                        Time allocation analysis reveals that technicians spend 69.2% of their time on actual work, 20.3% on travel, and 10.5% idle. While utilization is within the healthy 70-85% target range, the callback rate exceeds the industry standard of 5%, and idle time presents an immediate improvement opportunity. Reducing idle time from 10.5% to 8% could generate approximately $5,000 in additional annual revenue.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>2. Who Are the Top vs. Struggling Performers?</h2>
+                    <img alt="Technician Comparison Dashboard" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/plumbing-dashboard/page-2.png"/>
+                    <p>
+                        Performance varies dramatically across the team. Technician 4 leads with 91.6% utilization but has the highest callback rate at 14.3%. Technician 10 shows the best balance: $13,543 in revenue, 84.4% utilization, and zero callbacks. At the other end, Technician 2 struggles with only 60.8% utilization and a 7.7% callback rate.
+                    </p>
+                    <p>
+                        The 24-percentage-point gap between highest and lowest utilization represents significant lost revenue. If lower-performing technicians could be coached to match the company average of 71.6%, it would add approximately $10,000 in annual revenue. The callback pattern suggests some technicians may need additional training or quality control support.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>3. Are We Improving Over Time?</h2>
+                    <img alt="Weekly Trends Dashboard" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/plumbing-dashboard/page-3.png"/>
+                    <p>
+                        Revenue showed steady growth through June, climbing from approximately $10,000 in the first week to over $75,000 cumulative by month-end. Utilization fluctuated between 80-100% across different weeks, while callback rates varied significantly from 0% to 15% week-over-week.
+                    </p>
+                    <p>
+                        The job mix remained relatively stable with service work dominating most weeks (28-30 jobs), followed by repairs (12-24 jobs) and installations (7-10 jobs). The trend data reveals opportunities to smooth out callback rate spikes and maintain more consistent utilization levels across all weeks.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>4. What's Driving Our Quality Issues?</h2>
+                    <img alt="Callback Analysis Dashboard" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/plumbing-dashboard/page-4.png"/>
+                    <p>
+                        Fifteen callbacks were detected in June (6.7% rate), concentrated in just two technicians who each had 3 callbacks. All callbacks occurred within 2-25 days of the original visit, with job notes indicating "same issue again" patterns. Service jobs generated the most callbacks (affecting multiple service visits), followed by repairs and installations.
+                    </p>
+                    <p>
+                        Callback analysis shows clear patterns: certain technicians account for most quality issues, specific job types are more prone to callbacks, and return visits typically happen within two weeks of the original service. Reducing the callback rate from 6.7% to the 4.0% industry target would save approximately $18,000 annually by eliminating unprofitable rework.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>5. What's the Business Impact?</h2>
+                    <p>
+                        Three major improvement opportunities were identified with quantified financial impact:
+                    </p>
+                    <ul>
+                        <li><strong>Callback Reduction:</strong> Lowering callback rate from 6.7% to 4.5% = $18,000 annual savings</li>
+                        <li><strong>Utilization Improvement:</strong> Increasing from 71.6% to 75% = $8,000 additional annual revenue</li>
+                        <li><strong>Idle Time Reduction:</strong> Decreasing from 10.5% to 8% = $5,000 additional annual revenue</li>
+                    </ul>
+                    <p>
+                        Combined improvement potential totals over $31,000 annually. Against a system investment of $5,300 (setup + first year hosting), this represents a 520% first-year ROI with payback in 2-4 months. The dashboard enables data-driven coaching conversations, eliminates 5+ hours of weekly manual reporting, and provides objective performance metrics for the entire team.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Technical Approach</h2>
+                    <p>
+                        The solution demonstrates end-to-end analytics capabilities: a Python script processes four CSV files in under 5 seconds, performing data cleaning, merging, metric calculation, and callback detection automatically. The callback detection logic uses a 30-day window with pattern matching in job notes, excluding routine maintenance to avoid false positives.
+                    </p>
+                    <p>
+                        The three-dataset architecture optimizes for different analytical needs: job-level data (225 rows) for drill-down investigation, technician aggregates (10 rows) for performance comparison, and weekly aggregates (30 rows) for trend analysis. This structure ensures fast dashboard loading while maintaining full audit trails back to original CRM data.
+                    </p>
+                    <p>
+                        All calculations are fully documented with transparent business logic, edge case handling, and validation checks. The system is designed to scale from 10 to 100+ technicians without architectural changes, and the weekly processing can run automatically via scheduled tasks or CRM integration.
+                    </p>
+                </section>
+
+                <section id="interactive-dashboard">
+                    <h2>Explore the Interactive Dashboard</h2>
+                    <p>
+                        The dashboard below is built in Looker Studio with live filters. Try exploring different technician performance, time periods, and callback patterns. Use the filters at the top to focus on specific technicians or date ranges, and navigate between the 4 pages to see different analytical views.
+                    </p>
+
+                    <div class="dashboard-embed" style="margin: 30px 0;">
+                        <iframe
+                            width="100%"
+                            height="1400"
+                            src="https://lookerstudio.google.com/embed/reporting/1RM0fz6E7b7uFdQD8xAjZvCYZN2TnTf7T/page/p_g4q0o0cxmd"
+                            frameborder="0"
+                            style="border:0"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <p style="margin-top: 20px;">
+                        <strong>Pro tip:</strong> Navigate through all 4 pages (Company Overview, Technician Comparison, Weekly Trends, Callback Drill-Down) to see the complete analytical picture. Filter by specific technicians to compare individual performance against company averages.
+                    </p>
+
+                    <a href="https://lookerstudio.google.com/s/iviDUAzCFEc" target="_blank" class="dashboard-link-btn" style="display: inline-block; margin-top: 15px;">
+                        Open Dashboard in Full Screen →
+                    </a>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>
+                        This project delivered a complete, production-ready analytics system that transforms raw CRM data into actionable business intelligence. The analysis identified over $31,000 in annual improvement potential through three key opportunities: reducing callbacks, improving utilization, and minimizing idle time.
+                    </p>
+                    <p>
+                        Key insights include a 24-percentage-point performance gap between top and bottom performers, callbacks concentrated in specific technicians requiring targeted coaching, and idle time presenting an immediate optimization opportunity. The deliverables include three clean datasets ready for dashboarding, four-page interactive Looker Studio dashboard, 112 pages of comprehensive documentation covering business logic and implementation guides, and a Python automation script for repeatable weekly processing.
+                    </p>
+                    <p>
+                        Next steps for production deployment include CRM integration for automatic daily updates (API or database connection), training sessions for weekly dashboard reviews, and establishment of performance improvement initiatives based on data insights. The system is designed to scale with business growth and can be customized with additional metrics as needed.
+                    </p>
+                </section>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+</body>
+</html>
