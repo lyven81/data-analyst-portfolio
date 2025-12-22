@@ -1,0 +1,4 @@
+device_type,total_sessions,total_purchases,total_bounces,avg_session_duration,conversion_rate,bounce_rate
+desktop,221403,33632,57707,217.4996043414046,15.19,26.06
+mobile,378406,56931,98977,218.09124776034207,15.04,26.16
+tablet,31649,4871,8369,219.91806060223072,15.39,26.44

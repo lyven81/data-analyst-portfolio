@@ -1,0 +1,31 @@
+traffic_source,device_type,sessions,bounces,bounce_rate
+DIRECT,desktop,679,188,27.69
+DIRECT,mobile,1108,282,25.45
+DIRECT,tablet,89,24,26.97
+Direct,desktop,21637,5773,26.68
+Direct,mobile,36758,9631,26.2
+Direct,tablet,3047,793,26.03
+EMAIL,desktop,1000,281,28.1
+EMAIL,mobile,1679,454,27.04
+EMAIL,tablet,136,33,24.26
+Email,desktop,32366,8284,25.59
+Email,mobile,54955,14260,25.95
+Email,tablet,4577,1208,26.39
+ORGANIC,desktop,2661,700,26.31
+ORGANIC,mobile,4443,1168,26.29
+ORGANIC,tablet,397,104,26.2
+Organic,desktop,86080,22711,26.38
+Organic,mobile,146933,38817,26.42
+Organic,tablet,12180,3252,26.7
+PAID SEARCH,desktop,1346,328,24.37
+PAID SEARCH,mobile,2281,631,27.66
+PAID SEARCH,tablet,214,51,23.83
+Paid Search,desktop,42828,11062,25.83
+Paid Search,mobile,73214,18894,25.81
+Paid Search,tablet,6330,1638,25.88
+SOCIAL,desktop,999,275,27.53
+SOCIAL,mobile,1724,428,24.83
+SOCIAL,tablet,151,40,26.49
+Social,desktop,31807,8105,25.48
+Social,mobile,55311,14412,26.06
+Social,tablet,4528,1226,27.08

@@ -1,0 +1,4 @@
+experiment_group,total_sessions,total_purchases,total_bounces,avg_session_duration,conversion_rate,bounce_rate
+Control,379714,55882,99486,217.46852025471804,14.72,26.2
+Variant_A,127051,19307,32937,218.331557406081,15.2,25.92
+Variant_B,126697,20350,32841,217.7624032139672,16.06,25.92
