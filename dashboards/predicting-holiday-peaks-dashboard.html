@@ -6958,7 +6958,7 @@
                     datasets: [{
                         label: 'Total Streams',
                         data: topTracks.map(t => t[1]),
-                        backgroundColor: '#CBA135'
+                        backgroundColor: ['#CBA135', '#E67E22', '#3498DB', '#9B59B6', '#1ABC9C']
                     }]
                 },
                 options: {
@@ -7030,7 +7030,10 @@
                     datasets: [{
                         label: 'Avg WoW Growth %',
                         data: growthRates,
-                        backgroundColor: '#CBA135'
+                        backgroundColor: weeks.map((w, i) => {
+                            const colors = ['#CBA135', '#E67E22', '#3498DB', '#9B59B6', '#1ABC9C', '#F39C12', '#2ECC71'];
+                            return colors[i % colors.length];
+                        })
                     }]
                 },
                 options: {
@@ -7066,8 +7069,8 @@
                     datasets: [{
                         label: 'Market Readiness Score',
                         data: readinessValues,
-                        borderColor: '#B8903A',
-                        backgroundColor: 'rgba(184, 144, 58, 0.1)',
+                        borderColor: '#1ABC9C',
+                        backgroundColor: 'rgba(26, 188, 156, 0.1)',
                         fill: true,
                         tension: 0.4,
                         borderWidth: 3
@@ -7100,14 +7103,14 @@
             const allWeeks = [46, 47, 48, 49, 50, 51, 52];
 
             const datasets = years.map((year, i) => {
-                const colors = ['#CBA135', '#B8903A', '#A5802E', '#927022', '#7F6116'];
+                const colors = ['#CBA135', '#E67E22', '#3498DB', '#9B59B6', '#1ABC9C', '#F39C12', '#2ECC71', '#E74C3C', '#34495E'];
                 return {
                     label: year,
                     data: allWeeks.map(w => yearWeekData[year][w] || 0),
                     borderColor: colors[i % colors.length],
                     backgroundColor: colors[i % colors.length],
                     tension: 0.4,
-                    borderWidth: 2,
+                    borderWidth: 3,
                     fill: false
                 };
             });
@@ -7132,7 +7135,7 @@
                 data: {
                     labels: allWeeks.map(w => `Week ${w}`),
                     datasets: years.map((year, i) => {
-                        const colors = ['#CBA135', '#B8903A', '#A5802E', '#927022', '#7F6116'];
+                        const colors = ['#CBA135', '#E67E22', '#3498DB', '#9B59B6', '#1ABC9C', '#F39C12', '#2ECC71', '#E74C3C', '#34495E'];
                         return {
                             label: year,
                             data: allWeeks.map(w => yearWeekData[year][w] || 0),
@@ -7164,14 +7167,14 @@
             }).sort((a, b) => b[1] - a[1]).slice(0, 3);
 
             const top3Datasets = trackTotals.map(([track, total], i) => {
-                const colors = ['#CBA135', '#B8903A', '#A5802E'];
+                const colors = ['#E74C3C', '#3498DB', '#2ECC71'];
                 return {
                     label: track.substring(0, 25) + '...',
                     data: allWeeks.map(w => trackWeekData[track][w] || 0),
                     borderColor: colors[i],
                     backgroundColor: colors[i],
                     tension: 0.4,
-                    borderWidth: 2,
+                    borderWidth: 3,
                     fill: false
                 };
             });
@@ -7272,7 +7275,10 @@
                     datasets: [{
                         label: 'Avg Stream Volume',
                         data: avgStreams,
-                        backgroundColor: ['#CBA135', '#B8903A', '#A5802E', '#927022']
+                        backgroundColor: phases.map((p, i) => {
+                            const colors = ['#3498DB', '#F39C12', '#E74C3C', '#95A5A6'];
+                            return colors[i % colors.length];
+                        })
                     }]
                 },
                 options: {
@@ -7298,7 +7304,10 @@
                     datasets: [{
                         label: 'Total Streams',
                         data: Object.values(windowData),
-                        backgroundColor: '#CBA135'
+                        backgroundColor: Object.keys(windowData).map((w, i) => {
+                            const colors = ['#CBA135', '#E67E22', '#3498DB', '#9B59B6', '#1ABC9C', '#F39C12', '#2ECC71', '#E74C3C'];
+                            return colors[i % colors.length];
+                        })
                     }]
                 },
                 options: {
@@ -7329,8 +7338,8 @@
                     datasets: [{
                         label: 'Total Streams',
                         data: daysStreams,
-                        borderColor: '#CBA135',
-                        backgroundColor: 'rgba(203, 161, 53, 0.1)',
+                        borderColor: '#9B59B6',
+                        backgroundColor: 'rgba(155, 89, 182, 0.1)',
                         fill: true,
                         tension: 0.4,
                         borderWidth: 3
