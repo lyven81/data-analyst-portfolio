@@ -39,67 +39,62 @@
             padding: 0 20px;
         }
 
-        /* Hero Section */
-        .hero {
-            background: var(--gradient);
-            padding: 60px 0 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #403B36 0%, #2C2822 100%);
+            color: #FCF9F2;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
-        .hero h1 {
+        .header h1 {
             font-size: 2.5rem;
             font-weight: 700;
-            color: white;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
         }
 
-        .hero p {
+        .header p {
             font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 800px;
-            margin: 0 auto 30px;
+            opacity: 0.9;
         }
 
+        /* CTA Buttons */
         .cta-buttons {
             display: flex;
             gap: 15px;
-            justify-content: center;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
 
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
+        .cta-button {
+            padding: 12px 30px;
+            border-radius: 8px;
             text-decoration: none;
-            display: inline-block;
+            font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 1rem;
-            cursor: pointer;
+            display: inline-block;
         }
 
-        .btn-primary {
-            background: var(--gold-gradient);
-            color: var(--primary-color);
+        .cta-primary {
+            background: linear-gradient(135deg, #CBA135 0%, #B8903A 100%);
+            color: #403B36;
         }
 
-        .btn-primary:hover {
+        .cta-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(203, 161, 53, 0.4);
         }
 
-        .btn-secondary {
-            background: white;
-            color: var(--primary-color);
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid #CBA135;
+            color: #FCF9F2;
         }
 
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.9);
-            transform: translateY(-2px);
+        .cta-secondary:hover {
+            background: rgba(203, 161, 53, 0.1);
         }
 
         .dashboard-container {
@@ -297,21 +292,18 @@
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Fixing the Sales Leaks</h1>
-                <p>Identify drop-off points and optimize the customer purchase journey | Data: 633,462 sessions (2021-2023)</p>
-                <div class="cta-buttons">
-                    <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/fixing-the-sales-leaks.html" class="btn btn-primary">View Full Case Study</a>
-                    <a href="https://lyven81.github.io/data-analyst-portfolio/segmentation-analysis.html" class="btn btn-secondary">More Case Studies</a>
-                </div>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Fixing the Sales Leaks</h1>
+            <p>Conversion Funnel Analysis Dashboard - Identify Drop-Off Points and Optimize the Customer Purchase Journey</p>
+            <div class="cta-buttons">
+                <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/fixing-the-sales-leaks.html" class="cta-button cta-primary">View Full Case Study</a>
+                <a href="https://lyven81.github.io/data-analyst-portfolio/segmentation-analysis.html" class="cta-button cta-secondary">More Case Studies</a>
             </div>
         </div>
-    </div>
 
-    <div class="dashboard-container">
+
         <div class="page-nav">
             <button class="page-btn active" onclick="showPage(1)">Funnel Overview</button>
             <button class="page-btn" onclick="showPage(2)">Segment Performance</button>
