@@ -441,7 +441,7 @@
                     <canvas id="topCampaignsChart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <div class="chart-title">Campaign vs Organic Revenue</div>
+                    <div class="chart-title">Campaign Revenue Trend Over Time</div>
                     <canvas id="campaignOrganicChart"></canvas>
                 </div>
                 <div class="chart-container full-width">
@@ -854,31 +854,84 @@
                 }
             });
 
-            // Campaign vs Organic (Pie)
+            // Campaign Revenue Trend Over Time (Multi-Line)
+            // Calculate revenue by time period
+            const timeRevenueByCampaignType = {};
+            data.forEach(r => {
+                const key = `${r.year}-${String(r.month).padStart(2, '0')}`;
+                if (!timeRevenueByCampaignType[key]) {
+                    timeRevenueByCampaignType[key] = { campaign: 0, organic: 0 };
+                }
+                const revenue = parseFloat(r.net_revenue) || 0;
+                if (r.campaign_type === 'Campaign') {
+                    timeRevenueByCampaignType[key].campaign += revenue;
+                } else {
+                    timeRevenueByCampaignType[key].organic += revenue;
+                }
+            });
+
+            const sortedTimePeriods = Object.keys(timeRevenueByCampaignType).sort();
+            const campaignTrendData = sortedTimePeriods.map(period => timeRevenueByCampaignType[period].campaign);
+            const organicTrendData = sortedTimePeriods.map(period => timeRevenueByCampaignType[period].organic);
+
             destroyChart('campaignOrganic');
             charts.campaignOrganic = new Chart(document.getElementById('campaignOrganicChart'), {
-                type: 'pie',
+                type: 'line',
                 data: {
-                    labels: ['Campaign', 'Organic'],
-                    datasets: [{
-                        data: [campaignRev, organicRev],
-                        backgroundColor: ['#CBA135', '#403B36']
-                    }]
+                    labels: sortedTimePeriods,
+                    datasets: [
+                        {
+                            label: 'Campaign Revenue',
+                            data: campaignTrendData,
+                            borderColor: '#CBA135',
+                            backgroundColor: 'rgba(203, 161, 53, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Organic Revenue',
+                            data: organicTrendData,
+                            borderColor: '#3498DB',
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
                     plugins: {
-                        legend: { position: 'bottom' },
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 15
+                            }
+                        },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    const label = context.label || '';
-                                    const value = context.parsed;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = ((value / total) * 100).toFixed(1);
-                                    return label + ': ' + formatCurrency(value) + ' (' + percentage + '%)';
+                                    return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
                                 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000).toFixed(0) + 'K';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45
                             }
                         }
                     }
