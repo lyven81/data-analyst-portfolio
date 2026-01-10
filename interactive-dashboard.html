@@ -969,29 +969,10 @@ function sortCaseStudies(studies, sortType) {
 
 function renderTable(studies) {
     const table = document.getElementById('caseStudiesTable');
-    const sortedStudies = sortCaseStudies(studies, currentSort);
+    // Sort alphabetically
+    const sortedStudies = [...studies].sort((a, b) => a.title.localeCompare(b.title));
 
-    // Start with dedicated sorting controls row
-    let html = `
-        <tr>
-            <td colspan="2" style="padding: 20px; border-bottom: 1px solid #e9ecef;">
-                <div class="sort-controls">
-                    <span class="sort-label">Sort by:</span>
-                    <div class="sort-buttons">
-                        <button class="sort-btn ${currentSort === 'alphabetical' ? 'active' : ''}" onclick="changeSortType('alphabetical')">
-                            A-Z
-                        </button>
-                        <button class="sort-btn ${currentSort === 'latest' ? 'active' : ''}" onclick="changeSortType('latest')">
-                            Latest
-                        </button>
-                        <button class="sort-btn ${currentSort === 'oldest' ? 'active' : ''}" onclick="changeSortType('oldest')">
-                            Oldest
-                        </button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    `;
+    let html = '';
 
     // Add case study rows
     for (let i = 0; i < sortedStudies.length; i += 2) {
