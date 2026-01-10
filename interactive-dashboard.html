@@ -365,6 +365,7 @@
         <div class="nav-links">
             <a href="/data-analyst-portfolio/index.html">Home</a>
             <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+            <a href="/data-analyst-portfolio/interactive-dashboard.html">Interactive Dashboards</a>
             <a href="/data-analyst-portfolio/about-this-work.html">About This Work</a>
             <a href="/data-analyst-portfolio/contact.html">Contact</a>
         </div>
@@ -806,42 +807,42 @@ const caseStudies = [
     // Interactive Dashboards
     {
         title: "Finding Which Campaigns Work",
-        description: "Identify which channels, objectives, and segments deliver the highest marketing uplift.",
+        description: "See which marketing campaigns drive the best results",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/finding-which-campaigns-work.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/finding-which-campaigns-work-dashboard.html",
         category: "Interactive Dashboards"
     },
     {
         title: "Predicting Gym Member Dropout",
-        description: "Identify at-risk members and prevent churn through data-driven retention strategies.",
+        description: "Find members who might quit and keep them",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-gym-member-dropout.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/predicting-gym-member-dropout-dashboard.html",
         category: "Interactive Dashboards"
     },
     {
         title: "Predicting Holiday Peaks",
-        description: "Forecast holiday streaming peaks to optimize campaign timing and spending.",
+        description: "Plan when to launch your holiday marketing campaigns",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-holiday-peaks.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/predicting-holiday-peaks-dashboard.html",
         category: "Interactive Dashboards"
     },
     {
         title: "Fixing the Sales Leaks",
-        description: "Identify drop-off points and optimize the customer purchase journey.",
+        description: "Find where customers leave and fix those leaks",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/fixing-the-sales-leaks.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/fixing-the-sales-leaks-dashboard.html",
         category: "Interactive Dashboards"
     },
     {
         title: "High-Value Customers",
-        description: "Identify demographic, geographic, and behavioral patterns to optimize targeting.",
+        description: "Find your best customers and get more",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/high-value-customers.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/high-value-customers-dashboard.html",
         category: "Interactive Dashboards"
     },
     {
         title: "Where Revenue Comes From",
-        description: "Predict which products, campaigns, and customers drive revenue growth.",
+        description: "See what's making you money and why",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/where-revenue-comes-from.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/where-revenue-comes-from-dashboard.html",
         category: "Interactive Dashboards"
@@ -1004,7 +1005,6 @@ function renderTable(studies) {
                 <h3><a href="${leftStudy.caseStudyUrl}">${leftStudy.title}</a></h3>
                 <p>${leftStudy.description}</p>
                 <div class="case-study-links">
-                    <a href="${leftStudy.caseStudyUrl}">Read More →</a>
                     <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
                     ${leftStudy.agenticUrl ? `<a href="${leftStudy.agenticUrl}">AI Assistant</a>` : ''}
                 </div>
@@ -1020,7 +1020,6 @@ function renderTable(studies) {
                     <h3><a href="${rightStudy.caseStudyUrl}">${rightStudy.title}</a></h3>
                     <p>${rightStudy.description}</p>
                     <div class="case-study-links">
-                        <a href="${rightStudy.caseStudyUrl}">Read More →</a>
                         <a href="${rightStudy.dashboardUrl}">View Dashboard</a>
                         ${rightStudy.agenticUrl ? `<a href="${rightStudy.agenticUrl}">AI Assistant</a>` : ''}
                     </div>
