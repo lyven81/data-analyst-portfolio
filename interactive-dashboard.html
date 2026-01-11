@@ -401,6 +401,52 @@
             .search-container {
                 order: 1;
             }
+
+            nav {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 10px 15px;
+            }
+
+            .hamburger-menu {
+                display: flex;
+                order: 1;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                gap: 20px;
+                z-index: 1000;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s ease;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.3rem;
+                padding: 15px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .search-container {
+                order: 2;
+                margin-left: auto;
+            }
+
+            .search-input {
+                width: 180px;
+            }
         }
     </style>
 </head>
