@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Risk Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #403B36;
+            --secondary-color: #CBA135;
+            --background-color: #FCF9F2;
+            --text-color: #2C2C2C;
+            --card-background: #FFFFFF;
+            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
+            --high-risk: #C62828;
+            --medium-risk: #F57C00;
+            --low-risk: #2E7D32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #403B36 0%, #2C2822 100%);
+            color: #FCF9F2;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #CBA135 0%, #B8903A 100%);
+            color: #403B36;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(203, 161, 53, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid #CBA135;
+            color: #FCF9F2;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(203, 161, 53, 0.1);
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: white;
+            padding: 30px;
+            margin: 30px auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .filter-group select {
+            padding: 12px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        /* Page Navigation */
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn.active {
+            background: var(--gold-gradient);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .page-btn:hover:not(.active) {
+            background: rgba(203, 161, 53, 0.1);
+        }
+
+        /* Dashboard Page */
+        .dashboard-page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .dashboard-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px auto;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(64, 59, 54, 0.15);
+        }
+
+        .kpi-card h3 {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .kpi-card.high-risk {
+            border-top-color: var(--high-risk);
+        }
+
+        .kpi-card.high-risk .kpi-value {
+            color: var(--high-risk);
+        }
+
+        /* Chart Grid */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin: 30px auto;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .chart-container h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .chart-container.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Table Styles */
+        .table-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin: 30px auto;
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table thead {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: rgba(203, 161, 53, 0.1);
+        }
+
+        .risk-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        .risk-high {
+            background: #FFEBEE;
+            color: var(--high-risk);
+        }
+
+        .risk-medium {
+            background: #FFF3E0;
+            color: var(--medium-risk);
+        }
+
+        .risk-low {
+            background: #E8F5E9;
+            color: var(--low-risk);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Customer Churn Risk Dashboard</h1>
+            <p>Identify At-Risk Customers and Reduce Churn Through Data-Driven Insights</p>
+            <div class="cta-buttons">
+                <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+                <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
+            </div>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="container">
+            <div class="filters-section">
+                <h2 style="color: var(--primary-color); margin-bottom: 10px;">Dashboard Filters</h2>
+                <p style="color: #666; margin-bottom: 20px;">Filter customers to explore specific segments and risk profiles</p>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="countryFilter">Geography</label>
+                        <select id="countryFilter">
+                            <option value="all">All Countries</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="ageFilter">Age Group</label>
+                        <select id="ageFilter">
+                            <option value="all">All Age Groups</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="productFilter">Product Depth</label>
+                        <select id="productFilter">
+                            <option value="all">All Product Counts</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="riskFilter">Risk Level</label>
+                        <select id="riskFilter">
+                            <option value="all">All Risk Levels</option>
+                            <option value="High">High Risk (Exit Rate ≥30%)</option>
+                            <option value="Medium">Medium Risk (20-30%)</option>
+                            <option value="Low">Low Risk (<20%)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Navigation -->
+            <div class="page-navigation">
+                <button class="page-btn active" onclick="showPage(1)">Overview</button>
+                <button class="page-btn" onclick="showPage(2)">Demographics Analysis</button>
+                <button class="page-btn" onclick="showPage(3)">Engagement & Behavior</button>
+                <button class="page-btn" onclick="showPage(4)">Risk Segmentation</button>
+            </div>
+
+            <!-- Page 1: Overview -->
+            <div id="page1" class="dashboard-page active">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <h3>Total Customers</h3>
+                        <div class="kpi-value" id="kpi-total">0</div>
+                        <div class="kpi-subtitle">Customer Base</div>
+                    </div>
+                    <div class="kpi-card">
+                        <h3>Active Customers</h3>
+                        <div class="kpi-value" id="kpi-active">0</div>
+                        <div class="kpi-subtitle">Retained</div>
+                    </div>
+                    <div class="kpi-card high-risk">
+                        <h3>Exited Customers</h3>
+                        <div class="kpi-value" id="kpi-exited">0</div>
+                        <div class="kpi-subtitle">Churned</div>
+                    </div>
+                    <div class="kpi-card high-risk">
+                        <h3>Exit Rate</h3>
+                        <div class="kpi-value" id="kpi-exit-rate">0%</div>
+                        <div class="kpi-subtitle">Overall Churn</div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-container">
+                        <h3>Exit Rate by Age Group</h3>
+                        <canvas id="ageExitChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Customer Distribution by Geography</h3>
+                        <canvas id="geographyChart"></canvas>
+                    </div>
+                    <div class="chart-container full-width">
+                        <h3>Exit Share by Geography</h3>
+                        <canvas id="geographyExitChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 2: Demographics Analysis -->
+            <div id="page2" class="dashboard-page">
+                <div class="chart-grid">
+                    <div class="chart-container">
+                        <h3>Exit Rate by Tenure</h3>
+                        <canvas id="tenureChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Exit Rate by Credit Score</h3>
+                        <canvas id="creditScoreChart"></canvas>
+                    </div>
+                    <div class="chart-container full-width">
+                        <h3>High-Risk Profile Breakdown by Age & Product Depth</h3>
+                        <canvas id="riskProfileChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.3rem; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px;">Top Risk Segments</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Age Band</th>
+                                <th>Balance Band</th>
+                                <th>Exit Rate</th>
+                                <th>Total Customers</th>
+                                <th>Risk Level</th>
+                            </tr>
+                        </thead>
+                        <tbody id="riskSegmentsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Page 3: Engagement & Behavior -->
+            <div id="page3" class="dashboard-page">
+                <div class="chart-grid">
+                    <div class="chart-container">
+                        <h3>Retention vs Product Count</h3>
+                        <canvas id="productRetentionChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Exit Rate by Balance Category</h3>
+                        <canvas id="balanceExitChart"></canvas>
+                    </div>
+                    <div class="chart-container full-width">
+                        <h3>Engagement Score vs Exit Rate</h3>
+                        <canvas id="engagementExitChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 4: Risk Segmentation -->
+            <div id="page4" class="dashboard-page">
+                <div class="kpi-grid">
+                    <div class="kpi-card high-risk">
+                        <h3>High Value Exits</h3>
+                        <div class="kpi-value" id="kpi-high-value-exit">0</div>
+                        <div class="kpi-subtitle">Premium Customers Lost</div>
+                    </div>
+                    <div class="kpi-card">
+                        <h3>Avg Engagement Before Exit</h3>
+                        <div class="kpi-value" id="kpi-avg-engagement">0</div>
+                        <div class="kpi-subtitle">Engagement Score</div>
+                    </div>
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-container">
+                        <h3>Exited Customers by Value Band</h3>
+                        <canvas id="valueBandChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Average Value At Risk by Credit Card Status</h3>
+                        <canvas id="creditCardRiskChart"></canvas>
+                    </div>
+                    <div class="chart-container full-width">
+                        <h3>Risk vs Value Analysis</h3>
+                        <canvas id="riskValueScatterChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
+        </div>
+    </div>
+
+    <script>
+        // Customer Churn Data (Sample data based on dashboard PDF)
+        const customerData = [];
+
+        // Generate sample data based on the PDF statistics
+        function generateCustomerData() {
+            const countries = ['France', 'Germany', 'Spain'];
+            const ageGroups = ['Under 30', '30-39', '40-49', '50+'];
+            const productCounts = [1, 2, 3, 4];
+            const balanceBands = ['Zero Balance', 'Low Balance', 'Medium Balance', 'High Balance'];
+            const valueBands = ['Low Value', 'Medium Value', 'High Value'];
+            const tenureBands = ['0-1 years', '2-4 years', '5-7 years', '8+ years'];
+            const creditScores = ['Low', 'Medium', 'High'];
+            const engagementBands = ['Very Low Engagement', 'Low Engagement', 'Medium Engagement', 'High Engagement'];
+
+            let id = 1;
+
+            // France: 4200 active, 800 exited (total 5000)
+            for (let i = 0; i < 5000; i++) {
+                customerData.push(generateCustomer(id++, 'France', i < 800));
+            }
+
+            // Germany: 1700 active, 800 exited (total 2500)
+            for (let i = 0; i < 2500; i++) {
+                customerData.push(generateCustomer(id++, 'Germany', i < 800));
+            }
+
+            // Spain: 2100 active, 400 exited (total 2500)
+            for (let i = 0; i < 2500; i++) {
+                customerData.push(generateCustomer(id++, 'Spain', i < 400));
+            }
+        }
+
+        function generateCustomer(id, country, exited) {
+            const ageGroups = ['Under 30', '30-39', '40-49', '50+'];
+            const ageWeights = exited ? [0.08, 0.11, 0.31, 0.50] : [0.25, 0.30, 0.25, 0.20];
+            const ageGroup = weightedRandom(ageGroups, ageWeights);
+
+            const productCount = Math.floor(Math.random() * 4) + 1;
+            const balanceBands = ['Zero Balance', 'Low Balance', 'Medium Balance', 'High Balance'];
+            const balanceBand = balanceBands[Math.floor(Math.random() * balanceBands.length)];
+
+            const valueBands = ['Low Value', 'Medium Value', 'High Value'];
+            const valueBand = valueBands[Math.floor(Math.random() * valueBands.length)];
+
+            const tenureBands = ['0-1 years', '2-4 years', '5-7 years', '8+ years'];
+            const tenureBand = tenureBands[Math.floor(Math.random() * tenureBands.length)];
+
+            const creditScores = ['Low', 'Medium', 'High'];
+            const creditScore = creditScores[Math.floor(Math.random() * creditScores.length)];
+
+            const engagementScore = Math.floor(Math.random() * 15000) + 1000;
+            const engagementBand = engagementScore > 12000 ? 'High Engagement' :
+                                   engagementScore > 8000 ? 'Medium Engagement' :
+                                   engagementScore > 4000 ? 'Low Engagement' : 'Very Low Engagement';
+
+            const hasCard = Math.random() > 0.5;
+
+            // Calculate risk level
+            let exitRate = 0.20; // base rate
+            if (ageGroup === '50+') exitRate += 0.25;
+            else if (ageGroup === '40-49') exitRate += 0.11;
+            else if (ageGroup === '30-39') exitRate -= 0.09;
+            else exitRate -= 0.12;
+
+            if (productCount === 1) exitRate += 0.05;
+            else if (productCount >= 3) exitRate -= 0.15;
+
+            const riskLevel = exitRate >= 0.30 ? 'High' : exitRate >= 0.20 ? 'Medium' : 'Low';
+
+            return {
+                id,
+                country,
+                ageGroup,
+                productCount,
+                balanceBand,
+                valueBand,
+                tenureBand,
+                creditScore,
+                engagementScore,
+                engagementBand,
+                hasCard,
+                exited: exited ? 1 : 0,
+                exitRate,
+                riskLevel
+            };
+        }
+
+        function weightedRandom(items, weights) {
+            const total = weights.reduce((a, b) => a + b, 0);
+            let random = Math.random() * total;
+            for (let i = 0; i < items.length; i++) {
+                if (random < weights[i]) return items[i];
+                random -= weights[i];
+            }
+            return items[items.length - 1];
+        }
+
+        let filteredData = [];
+        let charts = {};
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCustomerData();
+            filteredData = [...customerData];
+            populateFilters();
+            attachFilterListeners();
+            updateDashboard();
+        });
+
+        function populateFilters() {
+            const countries = [...new Set(customerData.map(c => c.country))].sort();
+            const ageGroups = ['Under 30', '30-39', '40-49', '50+'];
+            const productCounts = [1, 2, 3, 4];
+
+            const countryFilter = document.getElementById('countryFilter');
+            const ageFilter = document.getElementById('ageFilter');
+            const productFilter = document.getElementById('productFilter');
+
+            countries.forEach(country => {
+                countryFilter.innerHTML += `<option value="${country}">${country}</option>`;
+            });
+
+            ageGroups.forEach(age => {
+                ageFilter.innerHTML += `<option value="${age}">${age}</option>`;
+            });
+
+            productCounts.forEach(count => {
+                productFilter.innerHTML += `<option value="${count}">${count} Product${count > 1 ? 's' : ''}</option>`;
+            });
+        }
+
+        function attachFilterListeners() {
+            ['countryFilter', 'ageFilter', 'productFilter', 'riskFilter'].forEach(id => {
+                document.getElementById(id).addEventListener('change', applyFilters);
+            });
+        }
+
+        function applyFilters() {
+            const country = document.getElementById('countryFilter').value;
+            const ageGroup = document.getElementById('ageFilter').value;
+            const productCount = document.getElementById('productFilter').value;
+            const risk = document.getElementById('riskFilter').value;
+
+            filteredData = customerData.filter(c => {
+                return (country === 'all' || c.country === country) &&
+                       (ageGroup === 'all' || c.ageGroup === ageGroup) &&
+                       (productCount === 'all' || c.productCount === parseInt(productCount)) &&
+                       (risk === 'all' || c.riskLevel === risk);
+            });
+
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            updateKPIs();
+            updatePage1Charts();
+            updatePage2Charts();
+            updatePage3Charts();
+            updatePage4Charts();
+        }
+
+        function updateKPIs() {
+            const total = filteredData.length;
+            const exited = filteredData.filter(c => c.exited === 1).length;
+            const active = total - exited;
+            const exitRate = total > 0 ? (exited / total * 100) : 0;
+
+            document.getElementById('kpi-total').textContent = formatNumber(total);
+            document.getElementById('kpi-active').textContent = formatNumber(active);
+            document.getElementById('kpi-exited').textContent = formatNumber(exited);
+            document.getElementById('kpi-exit-rate').textContent = exitRate.toFixed(1) + '%';
+
+            // Page 4 KPIs
+            const highValueExits = filteredData.filter(c => c.exited === 1 && c.valueBand === 'High Value').length;
+            const avgEngagement = filteredData.filter(c => c.exited === 1).reduce((sum, c) => sum + c.engagementScore, 0) /
+                                  (filteredData.filter(c => c.exited === 1).length || 1);
+
+            document.getElementById('kpi-high-value-exit').textContent = formatNumber(highValueExits);
+            document.getElementById('kpi-avg-engagement').textContent = (avgEngagement / 1000).toFixed(2) + 'K';
+        }
+
+        function updatePage1Charts() {
+            // Exit Rate by Age Group
+            const ageGroups = ['Under 30', '30-39', '40-49', '50+'];
+            const ageExitRates = ageGroups.map(age => {
+                const ageData = filteredData.filter(c => c.ageGroup === age);
+                const exited = ageData.filter(c => c.exited === 1).length;
+                return ageData.length > 0 ? (exited / ageData.length * 100) : 0;
+            });
+
+            destroyChart('ageExitChart');
+            charts.ageExit = new Chart(document.getElementById('ageExitChart'), {
+                type: 'bar',
+                data: {
+                    labels: ageGroups,
+                    datasets: [{
+                        label: 'Exit Rate (%)',
+                        data: ageExitRates,
+                        backgroundColor: '#3B82F6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            title: { display: true, text: 'Exit Rate (%)' }
+                        }
+                    }
+                }
+            });
+
+            // Geography Pie Chart
+            const countries = [...new Set(filteredData.map(c => c.country))];
+            const countryCounts = countries.map(country =>
+                filteredData.filter(c => c.country === country).length
+            );
+
+            destroyChart('geographyChart');
+            charts.geography = new Chart(document.getElementById('geographyChart'), {
+                type: 'pie',
+                data: {
+                    labels: countries,
+                    datasets: [{
+                        data: countryCounts,
+                        backgroundColor: ['#3B82F6', '#EF4444', '#10B981']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Geography Exit Chart (Stacked Bar)
+            const countryActiveExited = countries.map(country => {
+                const countryData = filteredData.filter(c => c.country === country);
+                return {
+                    active: countryData.filter(c => c.exited === 0).length,
+                    exited: countryData.filter(c => c.exited === 1).length
+                };
+            });
+
+            destroyChart('geographyExitChart');
+            charts.geographyExit = new Chart(document.getElementById('geographyExitChart'), {
+                type: 'bar',
+                data: {
+                    labels: countries,
+                    datasets: [
+                        {
+                            label: 'Active',
+                            data: countryActiveExited.map(d => d.active),
+                            backgroundColor: '#EF4444'
+                        },
+                        {
+                            label: 'Exited',
+                            data: countryActiveExited.map(d => d.exited),
+                            backgroundColor: '#FBBF24'
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    scales: {
+                        x: { stacked: true },
+                        y: { stacked: true }
+                    }
+                }
+            });
+        }
+
+        function updatePage2Charts() {
+            // Tenure Chart
+            const tenureBands = ['0-1 years', '2-4 years', '5-7 years', '8+ years'];
+            const tenureExitRates = tenureBands.map(tenure => {
+                const tenureData = filteredData.filter(c => c.tenureBand === tenure);
+                const exited = tenureData.filter(c => c.exited === 1).length;
+                return tenureData.length > 0 ? (exited / tenureData.length * 100) : 0;
+            });
+
+            destroyChart('tenureChart');
+            charts.tenure = new Chart(document.getElementById('tenureChart'), {
+                type: 'line',
+                data: {
+                    labels: tenureBands,
+                    datasets: [{
+                        label: 'Exit Rate (%)',
+                        data: tenureExitRates,
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, max: 30 }
+                    }
+                }
+            });
+
+            // Credit Score Chart
+            const creditScores = ['Low', 'Medium', 'High'];
+            const creditExitRates = creditScores.map(score => {
+                const scoreData = filteredData.filter(c => c.creditScore === score);
+                const exited = scoreData.filter(c => c.exited === 1).length;
+                return scoreData.length > 0 ? (exited / scoreData.length * 100) : 0;
+            });
+
+            destroyChart('creditScoreChart');
+            charts.creditScore = new Chart(document.getElementById('creditScoreChart'), {
+                type: 'bar',
+                data: {
+                    labels: creditScores,
+                    datasets: [{
+                        label: 'Exit Rate (%)',
+                        data: creditExitRates,
+                        backgroundColor: '#EF4444'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 30 }
+                    }
+                }
+            });
+
+            // Risk Profile Breakdown
+            const ageGroups = ['Under 30', '30-39', '40-49', '50+'];
+            const productDepths = ['Single Product', 'Multi Product', 'Heavy User'];
+
+            const datasets = productDepths.map((depth, idx) => {
+                const data = ageGroups.map(age => {
+                    let productFilter;
+                    if (depth === 'Single Product') productFilter = 1;
+                    else if (depth === 'Multi Product') productFilter = 2;
+                    else productFilter = 3;
+
+                    const segment = filteredData.filter(c => c.ageGroup === age && c.productCount >= productFilter);
+                    const exited = segment.filter(c => c.exited === 1).length;
+                    return segment.length > 0 ? (exited / segment.length * 100) : 0;
+                });
+
+                return {
+                    label: depth,
+                    data: data,
+                    backgroundColor: ['#3B82F6', '#1E3A8A', '#F97316'][idx]
+                };
+            });
+
+            destroyChart('riskProfileChart');
+            charts.riskProfile = new Chart(document.getElementById('riskProfileChart'), {
+                type: 'bar',
+                data: {
+                    labels: ageGroups,
+                    datasets: datasets
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    scales: {
+                        x: { stacked: true },
+                        y: { stacked: true }
+                    }
+                }
+            });
+
+            // Risk Segments Table
+            const riskSegments = [
+                { age: '50+', balance: 'Low Balance', exitRate: 0.58, customers: 12 },
+                { age: '50+', balance: 'High Balance', exitRate: 0.51, customers: 129 },
+                { age: '50+', balance: 'Medium Balance', exitRate: 0.50, customers: 799 },
+                { age: '40-49', balance: 'Low Balance', exitRate: 0.43, customers: 28 },
+                { age: '40-49', balance: 'Medium Balance', exitRate: 0.36, customers: 1423 },
+                { age: '50+', balance: 'Zero Balance', exitRate: 0.35, customers: 455 },
+                { age: '40-49', balance: 'High Balance', exitRate: 0.32, customers: 269 }
+            ];
+
+            const tbody = document.getElementById('riskSegmentsTableBody');
+            tbody.innerHTML = '';
+            riskSegments.forEach(seg => {
+                const riskClass = seg.exitRate >= 0.40 ? 'risk-high' : seg.exitRate >= 0.30 ? 'risk-medium' : 'risk-low';
+                const riskLabel = seg.exitRate >= 0.40 ? 'High' : seg.exitRate >= 0.30 ? 'Medium' : 'Low';
+                const row = `<tr>
+                    <td>${seg.age}</td>
+                    <td>${seg.balance}</td>
+                    <td>${(seg.exitRate * 100).toFixed(0)}%</td>
+                    <td>${seg.customers}</td>
+                    <td><span class="risk-badge ${riskClass}">${riskLabel}</span></td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function updatePage3Charts() {
+            // Product Retention Chart
+            const productCounts = [1, 2, 3, 4];
+            const productExitRates = productCounts.map(count => {
+                const productData = filteredData.filter(c => c.productCount === count);
+                const exited = productData.filter(c => c.exited === 1).length;
+                return productData.length > 0 ? (exited / productData.length * 100) : 0;
+            });
+
+            destroyChart('productRetentionChart');
+            charts.productRetention = new Chart(document.getElementById('productRetentionChart'), {
+                type: 'line',
+                data: {
+                    labels: productCounts.map(c => `${c} Product${c > 1 ? 's' : ''}`),
+                    datasets: [{
+                        label: 'Exit Rate (%)',
+                        data: productExitRates,
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, max: 40 }
+                    }
+                }
+            });
+
+            // Balance Exit Chart
+            const balanceBands = ['Low Balance', 'Medium Balance', 'High Balance', 'Zero Balance'];
+            const balanceExitRates = balanceBands.map(balance => {
+                const balanceData = filteredData.filter(c => c.balanceBand === balance);
+                const exited = balanceData.filter(c => c.exited === 1).length;
+                return balanceData.length > 0 ? (exited / balanceData.length * 100) : 0;
+            });
+
+            destroyChart('balanceExitChart');
+            charts.balanceExit = new Chart(document.getElementById('balanceExitChart'), {
+                type: 'bar',
+                data: {
+                    labels: balanceBands,
+                    datasets: [{
+                        label: 'Exit Rate (%)',
+                        data: balanceExitRates,
+                        backgroundColor: '#EF4444'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 40 }
+                    }
+                }
+            });
+
+            // Engagement Exit Chart
+            const engagementBands = ['High Engagement', 'Very Low Engagement', 'Low Engagement', 'Medium Engagement'];
+            const engagementExitRates = engagementBands.map(engagement => {
+                const engagementData = filteredData.filter(c => c.engagementBand === engagement);
+                const exited = engagementData.filter(c => c.exited === 1).length;
+                return engagementData.length > 0 ? (exited / engagementData.length * 100) : 0;
+            });
+
+            destroyChart('engagementExitChart');
+            charts.engagementExit = new Chart(document.getElementById('engagementExitChart'), {
+                type: 'bar',
+                data: {
+                    labels: engagementBands,
+                    datasets: [{
+                        label: 'Exit Rate (%)',
+                        data: engagementExitRates,
+                        backgroundColor: '#3B82F6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 60 }
+                    }
+                }
+            });
+        }
+
+        function updatePage4Charts() {
+            // Value Band Chart
+            const valueBands = ['High Value', 'Low Value', 'Medium Value'];
+            const valueCounts = valueBands.map(value =>
+                filteredData.filter(c => c.exited === 1 && c.valueBand === value).length
+            );
+
+            destroyChart('valueBandChart');
+            charts.valueBand = new Chart(document.getElementById('valueBandChart'), {
+                type: 'bar',
+                data: {
+                    labels: valueBands,
+                    datasets: [{
+                        label: 'Exited Customers',
+                        data: valueCounts,
+                        backgroundColor: '#3B82F6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Credit Card Risk Chart
+            const cardData = [
+                {
+                    label: 'No Card',
+                    value: filteredData.filter(c => !c.hasCard).reduce((sum, c) => sum + (c.exited * 0.03), 0) /
+                           (filteredData.filter(c => !c.hasCard).length || 1)
+                },
+                {
+                    label: 'Has Card',
+                    value: filteredData.filter(c => c.hasCard).reduce((sum, c) => sum + (c.exited * 0.02), 0) /
+                           (filteredData.filter(c => c.hasCard).length || 1)
+                }
+            ];
+
+            destroyChart('creditCardRiskChart');
+            charts.creditCardRisk = new Chart(document.getElementById('creditCardRiskChart'), {
+                type: 'bar',
+                data: {
+                    labels: cardData.map(d => d.label),
+                    datasets: [{
+                        label: 'Average Value At Risk',
+                        data: cardData.map(d => d.value),
+                        backgroundColor: '#C62828'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Risk Value Scatter
+            const valueBands = ['High Value', 'Low Value', 'Medium Value'];
+            const scatterData = valueBands.map(value => {
+                const valueData = filteredData.filter(c => c.valueBand === value);
+                const exitRate = valueData.filter(c => c.exited === 1).length / (valueData.length || 1) * 100;
+                const avgEngagement = valueData.reduce((sum, c) => sum + c.engagementScore, 0) / (valueData.length || 1);
+                return {
+                    x: exitRate,
+                    y: avgEngagement,
+                    r: 20
+                };
+            });
+
+            destroyChart('riskValueScatterChart');
+            charts.riskValueScatter = new Chart(document.getElementById('riskValueScatterChart'), {
+                type: 'bubble',
+                data: {
+                    datasets: [
+                        { label: 'High Value', data: [scatterData[0]], backgroundColor: '#1E3A8A' },
+                        { label: 'Low Value', data: [scatterData[1]], backgroundColor: '#3B82F6' },
+                        { label: 'Medium Value', data: [scatterData[2]], backgroundColor: '#F97316' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'Exit Rate (%)' } },
+                        y: { title: { display: true, text: 'Sum of Engagement Score' } }
+                    }
+                }
+            });
+        }
+
+        function destroyChart(chartId) {
+            const chartKey = chartId.replace('Chart', '');
+            if (charts[chartKey]) {
+                charts[chartKey].destroy();
+            }
+        }
+
+        function showPage(pageNum) {
+            document.querySelectorAll('.dashboard-page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(`page${pageNum}`).classList.add('active');
+            document.querySelectorAll('.page-btn')[pageNum - 1].classList.add('active');
+
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+    </script>
+</body>
+</html>
