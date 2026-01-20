@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Finding Profit Drivers | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      View Dashboard
+     </a>
+    </section>
+    <!-- Agentic Workflow Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      AI Assistant
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-profit-drivers/cover%20image.png"/>
+      <h1>
+       Finding Profit Drivers
+      </h1>
+      <p>
+       Using Data to Improve Bicycle Shop Profit
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This report is written for bicycle retail chain managers who want to improve profit without increasing inventory risk or operational complexity. The challenge is not selling more units, but clearly understanding which products truly make money, which quietly hurt margins, and whether each store is carrying the right mix for its local market.
+      </p>
+      <p>
+       The analysis is designed to support practical decisions—what to push, what to fix, and what to stop. It focuses on profit rather than revenue, highlights where pricing and assortment changes can make an immediate difference, and helps managers manage stores and regions based on evidence instead of habit.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <p>
+       We analyzed approximately 60,000 transaction-level sales records from a multi-region bicycle retail business, covering bikes, accessories, and clothing across the United States, Canada, the United Kingdom, France, Germany, and Australia. The data included pricing, cost, quantity sold, profit, and regional details, allowing us to observe how revenue, profit, demand, and pricing interact in real operating conditions.
+      </p>
+      <p>
+       The analysis followed a decision-focused approach. We identified which products and categories truly drive profit, compared performance across regions to understand differences in demand and product mix, and tested targeted pricing scenarios to estimate short-term profit impact. The goal throughout was to produce clear, actionable insight—helping managers decide what to stock, where to focus attention, and which pricing actions are most likely to improve results.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. Which products and categories actually generate profit—not just sales?
+      </h2>
+      <img alt="Chart 1 - Pareto Analysis of Product Profit" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-profit-drivers/Q1%20product_profit_pareto.png"/>
+      <p>
+       Profit is driven mainly by bike models, not accessories or clothing. The strongest profit contributors are high-value bikes such as road, mountain, touring, and performance models. These products combine high prices with steady demand, resulting in large profit per unit even when margins are not the highest.
+      </p>
+      <p>
+       This explains why the most profitable products are not the same as the highest-margin products. Accessories often have margins above 60%, but their low prices limit how much profit each sale generates. A bike with a lower margin but a much higher price delivers far more profit overall. Profit comes from price multiplied by volume, not margin alone.
+      </p>
+      <p>
+       At the category level, bikes dominate total profit because they generate the largest revenue base. Accessories and clothing are efficient but limited in scale. The key takeaway is that scale matters more than margin when it comes to total profit contribution.
+      </p>
+     </section>
+     <section>
+      <h2>
+       2. How do revenue and profit differ across product categories and regions?
+      </h2>
+      <p>
+       Revenue and profit vary significantly by region. The United States is the clear leader, delivering the highest revenue and profit due to strong demand and effective monetisation. Canada and the United Kingdom perform well at smaller scale, while France, Germany, and Australia contribute far less profit overall.
+      </p>
+      <p>
+       Demand patterns explain much of this difference. The US supports a wide range of products, including long-tail items, while other regions show demand concentrated in fewer products. Outside the US, carrying too many SKUs increases complexity without improving profit.
+      </p>
+      <p>
+       Margins also differ by category and region. Accessories consistently deliver high margins everywhere, bikes rely on volume rather than margin, and clothing performance depends heavily on the market. Profit leadership comes from matching product mix to regional demand, not applying the same strategy everywhere.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. Are there distinct product segments with fundamentally different value patterns?
+      </h2>
+      <p>
+       Yes. Products fall into clear segments rather than performing evenly. A small group of high-value products generates most of the profit, while a large number of products sell occasionally but contribute little financially.
+      </p>
+      <p>
+       Between these extremes are products that drive volume with thinner margins and products that are stable but not profit leaders. Each group plays a different role in the business.
+      </p>
+      <p>
+       This means averages are misleading. Treating all products the same hides where profit really comes from and leads to poor allocation of attention and resources.
+      </p>
+     </section>
+     <section>
+      <h2>
+       4. Which segments deserve different management strategies rather than uniform treatment?
+      </h2>
+      <img alt="Chart 4 - Cluster Revenue and Profit" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-profit-drivers/Q4%20cluster_revenue_profit.png"/>
+      <p>
+       Each segment needs to be managed differently because its contribution to profit is different. High-value products are the profit backbone and must be protected through strong availability and careful pricing, as mistakes here have outsized impact.
+      </p>
+      <p>
+       Volume-driven products help maintain sales momentum but need tight control to prevent margin erosion. Low-value, long-tail products add complexity and tie up cash while contributing little profit, and should be reviewed unless there is a clear strategic reason to keep them.
+      </p>
+      <p>
+       Applying the same rules to all products would under-invest in profit drivers and over-manage low-impact items, ultimately reducing overall performance.
+      </p>
+     </section>
+     <section>
+      <h2>
+       5. Which factors are most strongly associated with profit performance?
+      </h2>
+      <img alt="Chart 5 - Price Sensitivity Products" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-profit-drivers/Q5%20price_sensitivity_products.png"/>
+      <p>
+       Price is the strongest factor linked to profit performance at the product level. Changes in profit are driven mainly by pricing decisions, not by order size or delivery speed, which have little impact.
+      </p>
+      <p>
+       However, products respond differently to price changes. Some products are highly price-sensitive and cannot absorb increases without losing demand, while others are more price-resilient and allow margin improvement with limited risk.
+      </p>
+      <p>
+       Operational improvements alone will not fix profit issues. Targeted pricing decisions, adjusted by product sensitivity, are far more effective than volume or logistics-based tactics.
+      </p>
+     </section>
+     <section>
+      <h2>
+       6. If we change one thing, what is most likely to improve results this quarter?
+      </h2>
+      <img alt="Chart 6 - Pricing Uplift Products" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-profit-drivers/Q6%20pricing_uplift_products.png"/>
+      <p>
+       The most effective short-term action is small, targeted price increases on selected Mountain-200 bike models. A modest 3% increase on specific sizes delivers meaningful profit uplift while having minimal impact on demand.
+      </p>
+      <p>
+       This approach outperforms options such as reducing low-margin stock or adjusting product mix, which take longer to show results. Pricing changes affect every unit sold immediately.
+      </p>
+      <p>
+       The recommendation is to focus on precision pricing rather than broad changes. Avoid blanket increases and do not rely on inventory or assortment changes to fix margins this quarter. Targeted price adjustments on resilient products offer the fastest and lowest-risk improvement.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       Profit improves through focus, not expansion. High-value bike models are the main profit drivers and should receive priority in floor space, availability, and pricing discipline. Core road and mountain bikes can be stocked confidently, while low-value, slow-moving products should be reduced to avoid unnecessary complexity. Accessories contribute best as add-ons, with high-margin items pushed through bundling rather than broad assortment growth.
+      </p>
+      <p>
+       Pricing and regional strategy should be equally targeted. Modest price increases on price-resilient bikes offer the fastest, lowest-risk profit gains, while price-sensitive products should be protected from increases and deep discounting. Regional differences reflect product fit more than staff effort, with the US supporting broader assortments and other regions requiring tighter SKU control. Stronger performance comes from disciplined product focus, smart pricing, and locally tailored assortments.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
