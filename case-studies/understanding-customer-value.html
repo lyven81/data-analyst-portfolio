@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Understanding Customer Value | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      View Dashboard
+     </a>
+    </section>
+    <!-- AI Assistant Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      AI Assistant
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/understanding-customer-value/cover%20image.png"/>
+      <h1>
+       Understanding Customer Value
+      </h1>
+      <p>
+       Improving Bicycle Shop Profit with Customer Data
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       Bicycle shops often stay busy, but profit can still feel hard to grow. Sales happen every day, yet it is not always clear which customers truly keep the business healthy and which ones simply create work. This analysis looks at existing customers to understand where profit really comes from and whether the shop is relying too heavily on a small group of buyers.
+      </p>
+      <p>
+       The purpose of this report is to help shop owners decide where to focus their time and effort. It shows which customers are worth keeping close, which ones can be developed further, and which ones should not receive extra attention. The goal is to build more stable, long-term profit by managing the right customers better, rather than simply trying to sell more.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <p>
+       This analysis uses sales records from a bicycle shop, covering about 18,400 customers and more than 60,000 sales lines. The data shows what customers bought, how often they returned, and how much profit they generated over time, allowing us to understand customer value from the shop owner's point of view rather than short-term sales activity.
+      </p>
+      <p>
+       We focused on simple customer measures such as total profit, number of purchases, average order value, how long customers stayed active, and customer lifetime value based on actual profit. The data spans multiple years, so the analysis reflects long-term customer behavior and helps identify which customers matter most and how they should be managed differently.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. How many active customers do we actually have, and how often do they buy?
+      </h2>
+      <img alt="Chart 1 - Customer Purchase Frequency Distribution" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/understanding-customer-value/q1_customer_distribution.png"/>
+      <p>
+       The shop has 18,400 active customers, but most of them buy very little. Around 63% bought only once, and another 36% bought two to three times. Fewer than 2% of customers returned four times or more, showing that strong repeat buying is rare.
+      </p>
+      <p>
+       This means the shop's activity is driven mainly by one-off and casual buyers, not long-term customer relationships. A busy shop or a high number of transactions does not automatically mean customers are loyal or returning consistently.
+      </p>
+      <p>
+       From a business point of view, this creates risk. If nothing changes, the shop will continue to depend on new customers, leading to higher effort, less predictable income, and limited long-term growth.
+      </p>
+     </section>
+     <section>
+      <h2>
+       2. How uneven is customer contribution to revenue and profit?
+      </h2>
+      <img alt="Chart 2 - Customer Contribution Distribution" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/understanding-customer-value/q2_profit_pareto.png"/>
+      <p>
+       Customer contribution to profit is very uneven. A small group of customers generates a large share of total profit, while most customers contribute very little on their own. After the top group, adding more customers increases profit only slightly.
+      </p>
+      <p>
+       This shows the business is financially dependent on a narrow group of customers. If a few high-profit customers buy less or stop coming, profit would drop sharply even if customer numbers remain high.
+      </p>
+      <p>
+       The key message is simple: volume does not equal value. The shop may look busy, but profit is fragile if it relies on too few customers without actively protecting them.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. Which customers generate the highest total profit over their lifetime with the shop?
+      </h2>
+      <img alt="Chart 3 - CLV Group Profit Comparison" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/understanding-customer-value/q3_clv_tier_profit.png"/>
+      <p>
+       Customers in the high-CLV group generate almost all of the shop's profit. They contribute about 10.6 million in profit, compared with 1.4 million from medium-CLV customers and just 0.12 million from low-CLV customers. The gap is very large, not marginal.
+      </p>
+      <p>
+       Even though high-CLV customers are fewer in number, they clearly carry the business financially. Losing a small number of them would hurt profit far more than losing many low-value customers.
+      </p>
+      <p>
+       Medium-CLV customers matter, but they cannot sustain the shop on their own. They represent the best opportunity for growth, while low-CLV customers create activity without meaningfully supporting profit.
+      </p>
+     </section>
+     <section>
+      <h2>
+       4. What differentiates high-CLV customers from the rest?
+      </h2>
+      <img alt="Chart 4 - CLV Customer Behavior Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/understanding-customer-value/q4_purchase_frequency_by_clv.png"/>
+      <p>
+       High-CLV customers are valuable not because they buy often, but because they buy well. Their purchase frequency is low, yet they generate far more profit than other customers.
+      </p>
+      <p>
+       Medium- and low-CLV customers buy much more frequently, but their purchases tend to be small and low-margin. High activity creates work, not value. Frequent transactions do not automatically lead to strong profit.
+      </p>
+      <p>
+       The real difference lies in profit per order and purchase quality. High-CLV customers tend to make fewer but more meaningful purchases, such as complete bikes or premium upgrades. They are quiet, efficient, and often overlooked until they are gone.
+      </p>
+     </section>
+     <section>
+      <h2>
+       5. Are there distinct customer groups with clearly different buying behaviours and value patterns?
+      </h2>
+      <img alt="Chart 5 - Customer Segmentation Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/understanding-customer-value/q5_customer_segments.png"/>
+      <p>
+       Yes, very clearly. Customers do not behave as one group. They fall into distinct groups that differ strongly in how often they buy and how much profit they generate.
+      </p>
+      <p>
+       One group buys infrequently but produces very high profit. Another buys very often but adds little value. A third sits in the middle with moderate buying and moderate profit. A final group buys once or becomes inactive and adds almost no long-term value.
+      </p>
+      <p>
+       These differences are structural, not random. Treating all customers the same leads to spending too much effort on low-value customers and not enough on high-value ones, which weakens long-term profitability.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       This analysis shows that not all customers contribute to the business in the same way. A small group of customers generates most of the profit, even though they do not buy often. Medium-value customers provide steady contribution and offer the best chance for growth, while frequent low-value customers keep the shop busy without adding much profit. One-time or inactive customers add volume but little long-term value. Being busy does not equal being profitable.
+      </p>
+      <p>
+       To improve long-term results, the shop needs to manage customers more deliberately. High-value customers should be protected and retained through good service and relevant follow-up, not discounts. Medium-value customers should be encouraged to grow through upgrades and repeat purchases, and low-value frequent buyers should be handled efficiently. Focusing on customer value instead of transaction volume helps the shop use its time and resources better and build a more stable, profitable business.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
