@@ -232,12 +232,16 @@
         }
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 15px;
         }
         td {
             padding: 20px;
             vertical-align: top;
             text-align: left;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         td h3 {
             font-size: 1.5rem;
@@ -987,7 +991,7 @@ const caseStudies = [
     },
     {
         title: "Global Sales Performance Dashboard",
-        description: "Track Samsung's revenue across regions, categories, and channels — see where growth is accelerating, where discounts are eroding value, and where return risk is highest.",
+        description: "Spot Samsung's top markets, products, and channels.",
         caseStudyUrl: "/data-analyst-portfolio/case-studies/where-the-money-is.html",
         dashboardUrl: "/data-analyst-portfolio/dashboards/where-the-money-is-dashboard.html",
         category: "Interactive Dashboards"
