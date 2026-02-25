@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Sales Performance Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #403B36;
+            --secondary-color: #CBA135;
+            --background-color: #FCF9F2;
+            --text-color: #2C2C2C;
+            --card-background: #FFFFFF;
+            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--background-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #403B36 0%, #2C2822 100%); color: #FCF9F2; padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .cta-buttons { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .cta-button { padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; }
+        .cta-primary { background: linear-gradient(135deg, #CBA135 0%, #B8903A 100%); color: #403B36; }
+        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(203,161,53,0.4); }
+        .cta-secondary { background: transparent; border: 2px solid #CBA135; color: #FCF9F2; }
+        .cta-secondary:hover { background: rgba(203,161,53,0.1); }
+        .page-nav { display: flex; justify-content: center; gap: 15px; margin: 30px auto; flex-wrap: wrap; }
+        .page-btn { padding: 12px 24px; background: white; border: 2px solid var(--secondary-color); border-radius: 8px; font-weight: 600; color: var(--primary-color); cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins', sans-serif; font-size: 0.95rem; }
+        .page-btn.active { background: var(--gold-gradient); color: white; border-color: var(--secondary-color); }
+        .page-btn:hover:not(.active) { background: rgba(203,161,53,0.1); }
+        .page { display: none; animation: fadeIn 0.5s ease-in; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px auto; }
+        .kpi-card { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); text-align: center; transition: all 0.3s ease; border-top: 4px solid var(--secondary-color); }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(64,59,54,0.15); }
+        .kpi-label { font-size: 1rem; color: #666; margin-bottom: 10px; font-weight: 500; }
+        .kpi-value { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+        .kpi-sub { font-size: 0.85rem; color: #999; }
+        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; margin: 30px auto; }
+        .chart-card { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); }
+        .chart-title { color: var(--primary-color); margin-bottom: 20px; font-size: 1.3rem; font-weight: 600; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; }
+        .chart-subtitle { font-size: 0.85rem; color: #888; margin-top: -15px; margin-bottom: 15px; }
+        .chart-container { position: relative; height: 300px; }
+        .chart-container.tall { height: 380px; }
+        .full-width { grid-column: 1 / -1; }
+        .footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        .footer p { margin: 5px 0; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .page-nav { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Global Sales Performance Dashboard</h1>
+        <p>Samsung Electronics — Revenue intelligence across regions, categories, channels, and risk signals (2021–2024)</p>
+        <div class="cta-buttons">
+            <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/where-the-money-is.html" class="cta-button cta-secondary">View Full Case Study</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="page-nav">
+        <button class="page-btn active" onclick="showPage(1)">Overview</button>
+        <button class="page-btn" onclick="showPage(2)">Growth</button>
+        <button class="page-btn" onclick="showPage(3)">Leverage</button>
+        <button class="page-btn" onclick="showPage(4)">Risk</button>
+    </div>
+
+    <!-- Page 1: Overview -->
+    <div id="page1" class="page active">
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Revenue (All Years)</div>
+                <div class="kpi-value">$228.7K</div>
+                <div class="kpi-sub">Across 150 transactions, 2021–2024</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Total Units Sold</div>
+                <div class="kpi-value">352</div>
+                <div class="kpi-sub">Avg 2.3 units per transaction</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Average Selling Price</div>
+                <div class="kpi-value">$701.89</div>
+                <div class="kpi-sub">Weighted avg across all categories</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Return Rate</div>
+                <div class="kpi-value">10.7%</div>
+                <div class="kpi-sub">16 of 150 transactions returned</div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card full-width">
+                <div class="chart-title">Monthly Revenue Trend (2021–2024)</div>
+                <div class="chart-subtitle">Revenue by calendar month — shows seasonality and inflection points</div>
+                <div class="chart-container tall">
+                    <canvas id="monthlyRevChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Revenue by Region</div>
+                <div class="chart-subtitle">Total revenue contribution by geography</div>
+                <div class="chart-container">
+                    <canvas id="regionRevChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Revenue by Sales Channel (by Year)</div>
+                <div class="chart-subtitle">Structural channel mix and year-over-year shifts</div>
+                <div class="chart-container">
+                    <canvas id="channelStackChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2: Growth -->
+    <div id="page2" class="page">
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Regional Growth Ranking (YoY 2022→2023)</div>
+                <div class="chart-subtitle">Separates large markets from fast-growing ones</div>
+                <div class="chart-container">
+                    <canvas id="regionYoyChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Category Revenue by Year</div>
+                <div class="chart-subtitle">Which product lines are driving growth</div>
+                <div class="chart-container">
+                    <canvas id="catGrowthChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">5G Revenue Share Trend (by Year)</div>
+                <div class="chart-subtitle">Innovation momentum — share of revenue from 5G products</div>
+                <div class="chart-container">
+                    <canvas id="fivegChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Top 10 Cities by Total Revenue</div>
+                <div class="chart-subtitle">Emerging growth pockets at territory level</div>
+                <div class="chart-container">
+                    <canvas id="topCitiesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Leverage -->
+    <div id="page3" class="page">
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Discount % vs Units Sold</div>
+                <div class="chart-subtitle">Does discounting drive volume? Each dot = one transaction</div>
+                <div class="chart-container">
+                    <canvas id="discScatterChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Revenue by Discount Band</div>
+                <div class="chart-subtitle">Are discounts driving revenue or eroding value?</div>
+                <div class="chart-container">
+                    <canvas id="discBandChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Average Selling Price by Year</div>
+                <div class="chart-subtitle">Is ASP increasing (premiumization) or falling (erosion)?</div>
+                <div class="chart-container">
+                    <canvas id="aspTrendChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Revenue by Payment Method (by Year)</div>
+                <div class="chart-subtitle">Is BNPL and financing influencing growth?</div>
+                <div class="chart-container">
+                    <canvas id="paymentStackChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card full-width">
+                <div class="chart-title">Category Revenue Mix</div>
+                <div class="chart-subtitle">Are we selling premium or mid-tier? Structural portfolio composition</div>
+                <div class="chart-container">
+                    <canvas id="catMixChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: Risk -->
+    <div id="page4" class="page">
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Return Rate by Product Category</div>
+                <div class="chart-subtitle">Which categories have the highest return exposure?</div>
+                <div class="chart-container">
+                    <canvas id="retCatChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Return Rate by Region</div>
+                <div class="chart-subtitle">Geographic instability and unstable zones</div>
+                <div class="chart-container">
+                    <canvas id="retRegionChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Avg Rating vs Return Rate by Category</div>
+                <div class="chart-subtitle">Is low customer rating linked to higher returns?</div>
+                <div class="chart-container">
+                    <canvas id="ratingReturnChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Return Rate by Customer Segment</div>
+                <div class="chart-subtitle">Which segments generate the most return risk?</div>
+                <div class="chart-container">
+                    <canvas id="retSegChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card full-width">
+                <div class="chart-title">Cities with Returned Transactions</div>
+                <div class="chart-subtitle">Local anomaly detection — cities where returns were recorded</div>
+                <div class="chart-container">
+                    <canvas id="cityRetChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
+</div>
+
+<script>
+// ─── Color Palette ────────────────────────────────────────────
+const GOLD = '#CBA135';
+const DARK = '#403B36';
+const COLORS = ['#CBA135','#5A7FA8','#7BAF5A','#C0614A','#8E63A8','#4AAFAC','#D98B3A','#6E8E5A'];
+const YEARS = ['2021','2022','2023','2024'];
+const YEAR_COLORS = ['#5A7FA8','#7BAF5A','#CBA135','#C0614A'];
+
+function makeChart(id, config) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+    return new Chart(ctx, config);
+}
+
+// ─── PAGE 1: OVERVIEW ─────────────────────────────────────────
+
+// Monthly Revenue Trend
+const monthlyLabels = [
+    'Jan 21','Feb 21','Mar 21','Apr 21','May 21','Jun 21','Jul 21','Aug 21','Sep 21','Oct 21','Dec 21',
+    'Jan 22','Feb 22','Mar 22','Apr 22','May 22','Jun 22','Jul 22','Aug 22','Sep 22','Oct 22','Nov 22','Dec 22',
+    'Jan 23','Feb 23','Mar 23','Apr 23','May 23','Jul 23','Aug 23','Sep 23','Oct 23','Nov 23','Dec 23',
+    'Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24','Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24'
+];
+const monthlyData = [
+    5832.71,3356.69,4000.46,1413.28,4810.44,1693.15,9342.11,1289.41,6770.74,2993.39,1232.89,
+    2866.86,848.44,185.18,1539.12,2901.16,25830.78,2265.21,2265.08,957.33,5305.34,8251.63,9343.12,
+    1159.32,15256.86,7316.40,2761.64,1947.15,1165.79,2672.67,13712.89,5563.50,10102.17,3337.80,
+    1135.04,8446.00,8603.43,6304.37,5554.81,7513.30,9809.37,3385.45,3805.84,886.34,2232.30,700.42
+];
+
+makeChart('monthlyRevChart', {
+    type: 'line',
+    data: {
+        labels: monthlyLabels,
+        datasets: [{
+            label: 'Revenue (USD)',
+            data: monthlyData,
+            borderColor: GOLD,
+            backgroundColor: 'rgba(203,161,53,0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 3,
+            pointHoverRadius: 6
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toLocaleString('en-US', {minimumFractionDigits:0}) } } },
+        scales: { x: { ticks: { maxTicksLimit: 16, maxRotation: 45 } }, y: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// Revenue by Region (Horizontal Bar)
+makeChart('regionRevChart', {
+    type: 'bar',
+    data: {
+        labels: ['Europe','Asia','Africa','South America','Oceania','Europe/Asia','Middle East','North America'],
+        datasets: [{ label: 'Revenue (USD)', data: [75443,66336,37662,22087,8966,7316,5717,5141], backgroundColor: COLORS }]
+    },
+    options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.x.toLocaleString() } } },
+        scales: { x: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// Revenue by Channel Stacked Column
+makeChart('channelStackChart', {
+    type: 'bar',
+    data: {
+        labels: YEARS,
+        datasets: [
+            { label: 'Carrier Store',       data: [17189,5000,15942,6788],  backgroundColor: '#5A7FA8' },
+            { label: 'E-commerce Platform', data: [4327,25612,12855,1102],   backgroundColor: '#7BAF5A' },
+            { label: 'Third-Party Retailer',data: [6055,3094,8843,22522],    backgroundColor: '#CBA135' },
+            { label: 'Authorized Reseller', data: [3155,11619,9048,6373],    backgroundColor: '#C0614A' },
+            { label: 'Samsung Store',       data: [6353,495,8856,10696],     backgroundColor: '#8E63A8' },
+            { label: 'Corporate / B2B',     data: [3200,12567,2575,3434],    backgroundColor: '#4AAFAC' },
+            { label: 'Online (Samsung.com)',data: [2458,4171,6877,7463],     backgroundColor: '#D98B3A' }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString() } } },
+        scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// ─── PAGE 2: GROWTH ───────────────────────────────────────────
+
+// Regional YoY Growth (2022→2023)
+makeChart('regionYoyChart', {
+    type: 'bar',
+    data: {
+        labels: ['Europe','Asia','Middle East','South America','Africa','North America','Oceania'],
+        datasets: [{
+            label: 'YoY Growth % (2022→2023)',
+            data: [132.4, 93.1, 64.3, 56.1, -91.9, -50.8, -85.3],
+            backgroundColor: [132.4,93.1,64.3,56.1,-91.9,-50.8,-85.3].map(v => v >= 0 ? '#7BAF5A' : '#C0614A')
+        }]
+    },
+    options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.x.toFixed(1) + '%' } } },
+        scales: { x: { ticks: { callback: v => v + '%' } } }
+    }
+});
+
+// Category Revenue by Year (Grouped Bar)
+makeChart('catGrowthChart', {
+    type: 'bar',
+    data: {
+        labels: ['Smart TV','Galaxy S','Galaxy Z','Appliances','Monitor','Galaxy Tab','Galaxy A','Galaxy Watch','Accessories','Galaxy Buds','Galaxy M'],
+        datasets: [
+            { label: '2021', data: [13618,3601,3573,9055,2095,1105,6111,2234,690,653,0],    backgroundColor: '#5A7FA8' },
+            { label: '2022', data: [35056,7660,7387,2184,5436,662,522,1085,2084,484,0],      backgroundColor: '#7BAF5A' },
+            { label: '2023', data: [6507,16635,17823,10253,6941,1754,979,684,395,405,2620],  backgroundColor: '#CBA135' },
+            { label: '2024', data: [7972,12068,6257,9193,5484,13239,390,542,697,2221,314],   backgroundColor: '#C0614A' }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString() } } },
+        scales: { x: { ticks: { maxRotation: 45, font: { size: 9 } } }, y: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// 5G Revenue Share Trend
+makeChart('fivegChart', {
+    type: 'line',
+    data: {
+        labels: YEARS,
+        datasets: [
+            { label: '5G Revenue Share (%)', data: [30.9,23.8,57.7,33.5], borderColor: GOLD, backgroundColor: 'rgba(203,161,53,0.15)', fill: true, tension: 0.4, pointRadius: 6, pointHoverRadius: 8 },
+            { label: 'Non-5G Share (%)', data: [69.1,76.2,42.3,66.5], borderColor: '#5A7FA8', backgroundColor: 'rgba(90,127,168,0.1)', fill: true, tension: 0.4, pointRadius: 6, pointHoverRadius: 8 }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } },
+        scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } } }
+    }
+});
+
+// Top 10 Cities by Revenue
+makeChart('topCitiesChart', {
+    type: 'bar',
+    data: {
+        labels: ['Cairo','Taoyuan','Berlin','Taichung','Wels','Brisbane','Lublin','Kaohsiung','São Paulo','Negombo'],
+        datasets: [{ label: 'Revenue (USD)', data: [17257,8827,8490,7947,7572,7387,7259,5721,5712,5444], backgroundColor: GOLD }]
+    },
+    options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.x.toLocaleString() } } },
+        scales: { x: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// ─── PAGE 3: LEVERAGE ─────────────────────────────────────────
+
+// Discount % vs Units Sold (Scatter)
+const scatterData = [
+    {x:10,y:4},{x:0,y:2},{x:20,y:3},{x:2,y:2},{x:10,y:1},{x:12,y:6},{x:20,y:3},{x:12,y:4},{x:20,y:1},
+    {x:12,y:2},{x:5,y:5},{x:0,y:1},{x:0,y:1},{x:0,y:3},{x:0,y:1},{x:0,y:3},{x:15,y:3},{x:7,y:1},
+    {x:5,y:2},{x:0,y:2},{x:10,y:1},{x:12,y:1},{x:0,y:1},{x:5,y:1},{x:2,y:2},{x:12,y:5},{x:0,y:2},
+    {x:5,y:4},{x:20,y:2},{x:10,y:1},{x:0,y:3},{x:0,y:2},{x:0,y:1},{x:0,y:1},{x:3,y:1},{x:20,y:1},
+    {x:7,y:3},{x:0,y:1},{x:0,y:1},{x:5,y:1},{x:3,y:6},{x:2,y:1},{x:7,y:1},{x:0,y:2},{x:0,y:1},
+    {x:0,y:4},{x:10,y:1},{x:0,y:6},{x:0,y:1},{x:0,y:10},{x:0,y:1},{x:0,y:1},{x:12,y:1},{x:20,y:1},
+    {x:7,y:2},{x:12,y:1},{x:0,y:3},{x:0,y:1},{x:0,y:5},{x:3,y:2},{x:20,y:2},{x:0,y:1},{x:0,y:1},
+    {x:0,y:1},{x:10,y:1},{x:2,y:1},{x:0,y:3},{x:15,y:1},{x:0,y:6},{x:10,y:1},{x:7,y:2},{x:5,y:1},
+    {x:7,y:5},{x:10,y:1},{x:0,y:9},{x:7,y:1},{x:2,y:3},{x:3,y:1},{x:10,y:1},{x:5,y:4},{x:15,y:1},
+    {x:15,y:1},{x:15,y:3},{x:0,y:2},{x:0,y:4},{x:2,y:1},{x:10,y:3},{x:3,y:1},{x:10,y:1},{x:0,y:1},
+    {x:2,y:7},{x:10,y:6},{x:0,y:3},{x:12,y:3},{x:7,y:1},{x:2,y:1},{x:10,y:2},{x:0,y:2},{x:15,y:1},
+    {x:2,y:2},{x:12,y:3},{x:3,y:2},{x:15,y:2},{x:0,y:1},{x:7,y:1},{x:7,y:1},{x:0,y:1},{x:3,y:5},
+    {x:0,y:1},{x:5,y:10},{x:12,y:2},{x:0,y:2},{x:15,y:1},{x:15,y:4},{x:12,y:2},{x:0,y:1},{x:10,y:1},
+    {x:10,y:1},{x:0,y:9},{x:0,y:1},{x:0,y:1},{x:5,y:1},{x:0,y:10},{x:5,y:1},{x:7,y:3},{x:0,y:1},
+    {x:2,y:1},{x:0,y:6},{x:20,y:1},{x:15,y:2},{x:10,y:3},{x:15,y:2},{x:15,y:1},{x:12,y:3},{x:0,y:3},
+    {x:2,y:1},{x:7,y:1},{x:0,y:1},{x:12,y:2},{x:20,y:2},{x:0,y:3},{x:0,y:2},{x:0,y:1},{x:2,y:1},
+    {x:0,y:3},{x:10,y:1},{x:20,y:1},{x:20,y:1},{x:0,y:4},{x:2,y:10}
+];
+
+makeChart('discScatterChart', {
+    type: 'scatter',
+    data: { datasets: [{ label: 'Transaction', data: scatterData, backgroundColor: 'rgba(203,161,53,0.6)', pointRadius: 5, pointHoverRadius: 7 }] },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `Discount: ${ctx.parsed.x}%  Units: ${ctx.parsed.y}` } } },
+        scales: {
+            x: { title: { display: true, text: 'Discount %' }, min: -1, max: 22 },
+            y: { title: { display: true, text: 'Units Sold' }, min: 0 }
+        }
+    }
+});
+
+// Revenue by Discount Band
+makeChart('discBandChart', {
+    type: 'bar',
+    data: {
+        labels: ['0%','1–5%','6–10%','11–20%'],
+        datasets: [{ label: 'Revenue (USD)', data: [101490,47896,32952,46329], backgroundColor: [GOLD,'#7BAF5A','#5A7FA8','#C0614A'] }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toLocaleString() } } },
+        scales: { y: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// ASP Trend by Year
+makeChart('aspTrendChart', {
+    type: 'line',
+    data: {
+        labels: YEARS,
+        datasets: [{ label: 'Avg ASP (USD)', data: [648.80,635.76,855.96,689.03], borderColor: GOLD, backgroundColor: 'rgba(203,161,53,0.15)', fill: true, tension: 0.4, pointRadius: 6, pointHoverRadius: 8 }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toFixed(2) } } },
+        scales: { y: { min: 500, ticks: { callback: v => '$' + v } } }
+    }
+});
+
+// Revenue by Payment Method Stacked Bar (by year)
+makeChart('paymentStackChart', {
+    type: 'bar',
+    data: {
+        labels: YEARS,
+        datasets: [
+            { label: 'Cash',              data: [6894,14282,17364,8791],  backgroundColor: '#5A7FA8' },
+            { label: 'Gift Card',         data: [6994,22054,4206,4685],   backgroundColor: '#7BAF5A' },
+            { label: 'Samsung Pay',       data: [14723,4322,5596,4822],   backgroundColor: '#CBA135' },
+            { label: 'BNPL',              data: [5343,1930,5491,14819],   backgroundColor: '#C0614A' },
+            { label: 'EMI / Installment', data: [728,14709,3721,7090],    backgroundColor: '#8E63A8' },
+            { label: 'Debit Card',        data: [3442,1625,9601,10638],   backgroundColor: '#4AAFAC' },
+            { label: 'Net Banking',       data: [1602,1952,15165,1374],   backgroundColor: '#D98B3A' },
+            { label: 'Credit Card',       data: [3009,1686,3852,6156],    backgroundColor: '#6E8E5A' }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 9 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString() } } },
+        scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// Category Mix (Horizontal Bar sorted by revenue)
+makeChart('catMixChart', {
+    type: 'bar',
+    data: {
+        labels: ['Smart TV','Galaxy S','Galaxy Z','Appliances','Monitor','Galaxy Tab','Galaxy A','Galaxy Watch','Accessories','Galaxy Buds','Galaxy M'],
+        datasets: [{ label: 'Total Revenue (USD)', data: [63154,39964,35039,30685,19956,16760,8002,4545,3867,3762,2934], backgroundColor: COLORS }]
+    },
+    options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.x.toLocaleString() } } },
+        scales: { x: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
+    }
+});
+
+// ─── PAGE 4: RISK ─────────────────────────────────────────────
+
+// Return Rate by Product Category
+makeChart('retCatChart', {
+    type: 'bar',
+    data: {
+        labels: ['Galaxy Buds','Galaxy M','Appliances','Galaxy Z','Galaxy Tab','Monitor','Accessories','Smart TV','Galaxy S','Galaxy Watch','Galaxy A'],
+        datasets: [{ label: 'Return Rate (%)', data: [25.0,25.0,21.4,16.7,16.7,12.5,7.7,7.7,4.3,0.0,0.0], backgroundColor: [25.0,25.0,21.4,16.7,16.7,12.5,7.7,7.7,4.3,0.0,0.0].map(v => v >= 20 ? '#C0614A' : v >= 10 ? '#D98B3A' : '#7BAF5A') }]
+    },
+    options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.x.toFixed(1) + '%' } } },
+        scales: { x: { min: 0, max: 30, ticks: { callback: v => v + '%' } } }
+    }
+});
+
+// Return Rate by Region
+makeChart('retRegionChart', {
+    type: 'bar',
+    data: {
+        labels: ['Oceania','Middle East','Africa','North America','Europe','Asia','South America','Europe/Asia'],
+        datasets: [{ label: 'Return Rate (%)', data: [25.0,25.0,23.5,20.0,13.7,4.0,0.0,0.0], backgroundColor: [25.0,25.0,23.5,20.0,13.7,4.0,0.0,0.0].map(v => v >= 20 ? '#C0614A' : v >= 10 ? '#D98B3A' : '#7BAF5A') }]
+    },
+    options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.x.toFixed(1) + '%' } } },
+        scales: { x: { min: 0, max: 30, ticks: { callback: v => v + '%' } } }
+    }
+});
+
+// Rating vs Return Rate (Scatter by category)
+const ratingReturnData = [
+    {x:4.13,y:7.7,label:'Accessories'},{x:3.55,y:21.4,label:'Appliances'},{x:4.36,y:0.0,label:'Galaxy A'},
+    {x:3.34,y:25.0,label:'Galaxy Buds'},{x:4.05,y:25.0,label:'Galaxy M'},{x:3.84,y:4.3,label:'Galaxy S'},
+    {x:3.79,y:16.7,label:'Galaxy Tab'},{x:3.92,y:0.0,label:'Galaxy Watch'},{x:3.56,y:16.7,label:'Galaxy Z'},
+    {x:3.83,y:12.5,label:'Monitor'},{x:3.43,y:7.7,label:'Smart TV'}
+];
+
+makeChart('ratingReturnChart', {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'Category',
+            data: ratingReturnData,
+            backgroundColor: COLORS,
+            pointRadius: 8,
+            pointHoverRadius: 10
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => `${ctx.raw.label} — Rating: ${ctx.parsed.x.toFixed(2)}  Return Rate: ${ctx.parsed.y.toFixed(1)}%` } }
+        },
+        scales: {
+            x: { title: { display: true, text: 'Avg Customer Rating' }, min: 2.5, max: 5 },
+            y: { title: { display: true, text: 'Return Rate (%)' }, ticks: { callback: v => v + '%' } }
+        }
+    }
+});
+
+// Return Rate by Customer Segment
+makeChart('retSegChart', {
+    type: 'bar',
+    data: {
+        labels: ['Government','Individual','Business','Enterprise','Education'],
+        datasets: [{ label: 'Return Rate (%)', data: [17.9,12.1,8.7,8.6,6.5], backgroundColor: [17.9,12.1,8.7,8.6,6.5].map(v => v >= 15 ? '#C0614A' : v >= 10 ? '#D98B3A' : '#7BAF5A') }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' } } },
+        scales: { y: { ticks: { callback: v => v + '%' } } }
+    }
+});
+
+// Cities with Returns
+makeChart('cityRetChart', {
+    type: 'bar',
+    data: {
+        labels: ['Birmingham','Wels','Dnipro','Uppsala','Krakow','Mandalay','Hawassa','Cairo','Palmerston North','Soweto','Singapore','Dallas','Almada','Nairobi','Amsterdam'],
+        datasets: [{ label: 'Returns', data: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], backgroundColor: '#C0614A' }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.y + ' returned transaction(s)' } } },
+        scales: { y: { min: 0, max: 2, ticks: { stepSize: 1 } } }
+    }
+});
+
+// ─── Page Navigation ──────────────────────────────────────────
+function showPage(n) {
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById('page' + i).classList.toggle('active', i === n);
+    }
+    document.querySelectorAll('.page-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === n - 1);
+    });
+}
+</script>
+</body>
+</html>
