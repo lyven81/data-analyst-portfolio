@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not All Homes Are Equal – Colorado Real Estate Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #403B36;
+            --secondary-color: #CBA135;
+            --background-color: #FCF9F2;
+            --text-color: #2C2C2C;
+            --card-background: #FFFFFF;
+            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #403B36 0%, #2C2822 100%);
+            color: #FCF9F2;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .cta-buttons { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .cta-button {
+            padding: 12px 30px; border-radius: 8px; text-decoration: none;
+            font-weight: 600; transition: all 0.3s ease; display: inline-block;
+        }
+        .cta-primary { background: linear-gradient(135deg, #CBA135 0%, #B8903A 100%); color: #403B36; }
+        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(203,161,53,0.4); }
+        .cta-secondary { background: transparent; border: 2px solid #CBA135; color: #FCF9F2; }
+        .cta-secondary:hover { background: rgba(203,161,53,0.1); }
+        .page-nav {
+            display: flex; justify-content: center; gap: 15px;
+            margin: 30px auto; flex-wrap: wrap;
+        }
+        .page-btn {
+            padding: 12px 24px; background: white; border: 2px solid var(--secondary-color);
+            border-radius: 8px; font-weight: 600; color: var(--primary-color);
+            cursor: pointer; transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+        }
+        .page-btn.active { background: var(--gold-gradient); color: white; border-color: var(--secondary-color); }
+        .page-btn:hover:not(.active) { background: rgba(203,161,53,0.1); }
+        .page { display: none; animation: fadeIn 0.5s ease-in; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .kpi-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin: 30px auto;
+        }
+        .kpi-card {
+            background: white; padding: 30px; border-radius: 15px;
+            box-shadow: var(--shadow); text-align: center;
+            transition: all 0.3s ease; border-top: 4px solid var(--secondary-color);
+        }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(64,59,54,0.15); }
+        .kpi-label { font-size: 1rem; color: #666; margin-bottom: 10px; font-weight: 500; }
+        .kpi-value { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+        .kpi-sub { font-size: 0.85rem; color: #888; }
+        .chart-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px; margin: 30px auto;
+        }
+        .chart-card { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); }
+        .chart-title {
+            color: var(--primary-color); margin-bottom: 20px; font-size: 1.15rem;
+            font-weight: 600; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px;
+        }
+        .chart-sub { font-size: 0.8rem; color: #888; margin-top: -15px; margin-bottom: 15px; }
+        .chart-container { position: relative; height: 300px; }
+        .chart-container-lg { position: relative; height: 380px; }
+        .full-width { grid-column: 1 / -1; }
+        /* Beds×Baths Heatmap Table */
+        .heatmap-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .heatmap-table th {
+            background: var(--gradient); color: white; padding: 10px 14px;
+            text-align: center; font-weight: 600;
+        }
+        .heatmap-table td {
+            padding: 10px 14px; text-align: center; font-weight: 600;
+            border: 1px solid #E8DFC8;
+        }
+        .heatmap-table td.row-header {
+            background: #F0EBE0; text-align: left; color: var(--primary-color);
+            font-weight: 700;
+        }
+        .heatmap-table td.empty { background: #F9F6F1; color: #CCC; font-weight: 400; }
+        /* Ranked Table */
+        .ranked-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .ranked-table thead { background: var(--gradient); color: white; }
+        .ranked-table th { padding: 12px 15px; text-align: left; font-weight: 600; }
+        .ranked-table td { padding: 11px 15px; border-bottom: 1px solid #E8DFC8; }
+        .ranked-table tr:hover { background-color: rgba(203,161,53,0.08); }
+        .badge-gold { display:inline-block; background:#CBA135; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-dark { display:inline-block; background:#403B36; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-green { display:inline-block; background:#5C7A5C; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        .footer p { margin: 5px 0; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+            .page-nav { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Not All Homes Are Equal</h1>
+        <p>Price, Space, and Features Across Colorado's Property Market — An Interactive Investment Analysis Dashboard</p>
+        <div class="cta-buttons">
+            <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/not-all-homes-are-equal.html" class="cta-button cta-secondary">View Full Case Study</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
+        </div>
+    </div>
+
+    <!-- Page Navigation -->
+    <div class="page-nav">
+        <button class="page-btn active" onclick="showPage(1)">Market Overview</button>
+        <button class="page-btn" onclick="showPage(2)">Value Per Dollar</button>
+        <button class="page-btn" onclick="showPage(3)">Features &amp; Structure</button>
+        <button class="page-btn" onclick="showPage(4)">Investment Opportunity</button>
+    </div>
+
+    <!-- PAGE 1: Market Overview -->
+    <div id="page1" class="page active">
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Median Listing Price</div>
+                <div class="kpi-value">$637K</div>
+                <div class="kpi-sub">Across 150 listings analysed</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Property Types Covered</div>
+                <div class="kpi-value">6</div>
+                <div class="kpi-sub">Single family, condos, townhomes & more</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Price Range</div>
+                <div class="kpi-value">$95K–$4M</div>
+                <div class="kpi-sub">Core listing range (outliers excluded)</div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Price Distribution Across Listings</div>
+                <p class="chart-sub">More than a third of listings fall in the $400K–$800K range</p>
+                <div class="chart-container"><canvas id="priceDistChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Property Type Mix</div>
+                <p class="chart-sub">Single-family homes dominate at 69% of all listings</p>
+                <div class="chart-container"><canvas id="propTypePieChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Price vs Square Footage by Property Type</div>
+                <p class="chart-sub">Each point is one listing, coloured by property type</p>
+                <div class="chart-container-lg"><canvas id="priceVsSqftChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Bedroom Distribution</div>
+                <p class="chart-sub">3-bedroom homes are the most common listing</p>
+                <div class="chart-container-lg"><canvas id="bedroomDistChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Value Per Dollar -->
+    <div id="page2" class="page">
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Median Price Per Sqft</div>
+                <div class="kpi-value">$281</div>
+                <div class="kpi-sub">Market median — benchmark for efficiency</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Most Affordable Type ($/sqft)</div>
+                <div class="kpi-value">Mobile</div>
+                <div class="kpi-sub">$188/sqft median — highest space per dollar</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Most Expensive Type ($/sqft)</div>
+                <div class="kpi-value">Multi-Family</div>
+                <div class="kpi-sub">$419/sqft median — premium per sqft</div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Median Price Per Sqft by Property Type</div>
+                <p class="chart-sub">Mobile offers the most space per dollar; multi-family costs most per sqft</p>
+                <div class="chart-container"><canvas id="ppsfByTypeChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Price Per Sqft by Bedroom Count</div>
+                <p class="chart-sub">Larger homes (4+ beds) offer better value per sqft than smaller units</p>
+                <div class="chart-container"><canvas id="ppsfByBedsChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Listings Above vs Below Market PPSF Median</div>
+                <p class="chart-sub">Gold = above $281/sqft (higher cost per sqft). Dark = below (better value per sqft)</p>
+                <div class="chart-container-lg"><canvas id="efficiencyScatterChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Value Quadrant: PPSF vs Median Price by Type</div>
+                <p class="chart-sub">Dotted lines show market medians. Bottom-left = affordable & efficient</p>
+                <div class="chart-container-lg"><canvas id="valueQuadrantChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Features & Structure -->
+    <div id="page3" class="page">
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Median Price by Bedroom Count</div>
+                <p class="chart-sub">5+ bedroom homes command a 2× premium over 3-bedroom homes</p>
+                <div class="chart-container"><canvas id="priceByBedsChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Garage Premium: Impact on Listing Price</div>
+                <p class="chart-sub">Homes with a garage list $273K higher than those without</p>
+                <div class="chart-container"><canvas id="garageImpactChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Stories Premium: Median Price by Number of Stories</div>
+                <p class="chart-sub">3-story homes carry a dramatic premium — driven by a small, high-value segment</p>
+                <div class="chart-container"><canvas id="storiesImpactChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Feature Correlations with Listing Price</div>
+                <p class="chart-sub">PPSF is derived from price. Among structural features, sqft and baths matter most</p>
+                <div class="chart-container"><canvas id="featureCorrChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card full-width">
+                <div class="chart-title">Beds × Baths Price Matrix (Median Listing Price)</div>
+                <p class="chart-sub">Each cell shows median price for that beds/baths combination. Darker = higher price. Cells with n=1 are indicative only.</p>
+                <div style="overflow-x:auto; margin-top:15px;">
+                    <table class="heatmap-table" id="heatmapTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: Investment Opportunity -->
+    <div id="page4" class="page">
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Affordable Entry Points: Listings Under $400K</div>
+                <p class="chart-sub">Condos dominate affordable inventory; single-family offers better value at $340K median</p>
+                <div class="chart-container"><canvas id="under400kChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Market Depth vs Price Efficiency by Type</div>
+                <p class="chart-sub">Bubble size = listing count. Single-family offers the best balance of depth and efficiency</p>
+                <div class="chart-container"><canvas id="bubbleChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Market Position: Above vs Below PPSF Median</div>
+                <p class="chart-sub">More than half of single-family listings fall below the $281/sqft market median</p>
+                <div class="chart-container"><canvas id="marketPositionChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Median Price by Property Type and Bedroom Count</div>
+                <p class="chart-sub">Single-family 3-bed offers the strongest combination of price and depth across segments</p>
+                <div class="chart-container"><canvas id="priceByTypeBedChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card full-width">
+                <div class="chart-title">Top Investment Segments Ranked by Value Efficiency</div>
+                <p class="chart-sub">Segments with sufficient market depth (5+ listings), sorted by median PPSF ascending (lower = more space per dollar)</p>
+                <div style="overflow-x:auto; margin-top:15px;">
+                    <table class="ranked-table" id="rankedTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Property Type</th>
+                                <th>Bedroom Category</th>
+                                <th>Listings</th>
+                                <th>Median PPSF</th>
+                                <th>Median Price</th>
+                                <th>Verdict</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankedTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- end dashboard-container -->
+
+<div class="footer">
+    <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
+</div>
+
+<script>
+// =====================================================================
+// DATA CONSTANTS
+// =====================================================================
+
+// Price vs Sqft scatter data by type (price 50K–4M, PPSF < 2500)
+const sfData = [
+  {x:2499,y:199000},{x:1467,y:515900},{x:2860,y:529973},{x:1769,y:439999},{x:1465,y:315000},
+  {x:2128,y:650000},{x:2612,y:530000},{x:3120,y:983193},{x:2968,y:639900},{x:2836,y:619000},
+  {x:2316,y:835000},{x:5078,y:1350000},{x:3691,y:835000},{x:1992,y:400000},{x:2731,y:1399000},
+  {x:4893,y:1776900},{x:1500,y:440000},{x:2178,y:885000},{x:3324,y:2225000},{x:1353,y:750000},
+  {x:1874,y:259000},{x:1925,y:350000},{x:2122,y:482990},{x:4535,y:1999000},{x:2450,y:799000},
+  {x:677,y:629000},{x:2411,y:650000},{x:1569,y:524900},{x:1820,y:500000},{x:1074,y:463000},
+  {x:4284,y:925000},{x:2775,y:2683729},{x:5366,y:850000},{x:3598,y:1690000},{x:2770,y:759900},
+  {x:3004,y:650000},{x:2606,y:459900},{x:5127,y:1699000},{x:2688,y:359900},{x:4438,y:1025000},
+  {x:3912,y:700000},{x:1994,y:335000},{x:1782,y:484900},{x:1104,y:469000},{x:3799,y:942800},
+  {x:3161,y:2600000},{x:2861,y:1100000},{x:2354,y:470000},{x:1440,y:339900},{x:3900,y:645000},
+  {x:2988,y:625000},{x:2873,y:629000},{x:2694,y:675000},{x:3402,y:860000},{x:5206,y:1600000},
+  {x:6464,y:2150000},{x:4576,y:1350000},{x:2208,y:520000},{x:2086,y:2595000},{x:4664,y:1360000},
+  {x:2920,y:594900},{x:4142,y:1400000},{x:2591,y:1000000},{x:2300,y:685000},{x:1848,y:484990},
+  {x:1473,y:485000},{x:1992,y:410000},{x:2221,y:899900},{x:2725,y:1450000},{x:1599,y:349000},
+  {x:3687,y:1181597},{x:3302,y:1249900},{x:2408,y:725000},{x:2902,y:670000},{x:4067,y:699000},
+  {x:5177,y:1185000},{x:1818,y:369500},{x:2439,y:440000},{x:3189,y:1199000},{x:2318,y:825000},
+  {x:1931,y:467500},{x:6634,y:1050000},{x:2632,y:679990},{x:3427,y:2300000},{x:2005,y:849900},
+  {x:1521,y:799999},{x:1332,y:425000},{x:5558,y:1750000},{x:1704,y:455127},{x:2448,y:589990},
+  {x:5992,y:1095000},{x:2209,y:465000},{x:3443,y:715000},{x:1092,y:599000},{x:2082,y:1699000},
+  {x:3091,y:550000},{x:6205,y:1645000},{x:3185,y:622950},{x:1736,y:499900}
+];
+const condoData = [
+  {x:1062,y:310000},{x:657,y:399000},{x:1512,y:380000},{x:2100,y:780000},{x:1167,y:1400000},
+  {x:1115,y:259500},{x:2782,y:699000},{x:1581,y:595000},{x:1444,y:75000},{x:1448,y:464900},
+  {x:982,y:270000},{x:660,y:1139000},{x:1284,y:950000},{x:1720,y:869000},{x:1737,y:529000},
+  {x:1255,y:342995},{x:1798,y:342900},{x:2345,y:3575000},{x:1266,y:3900000},{x:887,y:310000},
+  {x:422,y:349000},{x:769,y:185000}
+];
+const townData = [
+  {x:1874,y:484990},{x:2384,y:699999},{x:1826,y:499900},{x:1099,y:420000},{x:1319,y:501945},
+  {x:1990,y:359900},{x:1668,y:773000},{x:1704,y:408000},{x:884,y:199999},{x:1685,y:507900},
+  {x:2723,y:800000}
+];
+const mobileData = [
+  {x:1123,y:149900},{x:1648,y:634000},{x:1078,y:327900},{x:960,y:180000},{x:1152,y:95000}
+];
+const multiData = [
+  {x:2279,y:1373010},{x:2623,y:1100000},{x:4000,y:348596}
+];
+
+// Efficiency scatter: Above vs Below market median PPSF ($281.45)
+const aboveData = [
+  {x:602.5,y:1373010},{x:351.7,y:515900},{x:291.9,y:310000},{x:305.5,y:650000},{x:384.7,y:634000},
+  {x:607.3,y:399000},{x:315.1,y:983193},{x:419.4,y:1100000},{x:304.2,y:327900},{x:360.5,y:835000},
+  {x:293.6,y:699999},{x:371.4,y:780000},{x:512.3,y:1399000},{x:363.2,y:1776900},{x:293.3,y:440000},
+  {x:406.3,y:885000},{x:669.4,y:2225000},{x:554.3,y:750000},{x:440.8,y:1999000},{x:376.3,y:595000},
+  {x:326.1,y:799000},{x:929.1,y:629000},{x:334.5,y:524900},{x:300.4,y:325000},{x:431.1,y:463000},
+  {x:505.2,y:869000},{x:967.1,y:2683729},{x:469.7,y:1690000},{x:331.4,y:1699000},{x:321.1,y:464900},
+  {x:382.2,y:420000},{x:424.8,y:469000},{x:380.5,y:501945},{x:822.5,y:2600000},{x:384.5,y:1100000},
+  {x:739.9,y:950000},{x:307.3,y:1600000},{x:332.6,y:2150000},{x:295.0,y:1350000},{x:291.6,y:1360000},
+  {x:304.5,y:529000},{x:338.0,y:1400000},{x:386.0,y:1000000},{x:297.8,y:685000},{x:463.4,y:773000},
+  {x:329.3,y:485000},{x:405.2,y:899900},{x:532.1,y:1450000},{x:320.5,y:1181597},{x:378.5,y:1249900},
+  {x:301.1,y:725000},{x:376.0,y:1199000},{x:355.9,y:825000},{x:671.1,y:2300000},{x:423.9,y:849900},
+  {x:526.0,y:799999},{x:319.1,y:425000},{x:314.9,y:1750000},{x:548.5,y:599000},{x:816.0,y:1699000},
+  {x:301.4,y:507900},{x:293.8,y:800000},{x:349.5,y:310000},{x:827.0,y:349000},{x:288.0,y:499900}
+];
+const belowData = [
+  {x:133.5,y:149900},{x:79.6,y:199000},{x:185.3,y:529973},{x:248.7,y:439999},{x:215.0,y:315000},
+  {x:258.8,y:484990},{x:251.3,y:380000},{x:202.9,y:530000},{x:215.6,y:639900},{x:218.3,y:619000},
+  {x:265.9,y:1350000},{x:226.2,y:835000},{x:200.8,y:400000},{x:273.8,y:499900},{x:138.2,y:259000},
+  {x:181.8,y:350000},{x:232.7,y:259500},{x:227.6,y:482990},{x:251.3,y:699000},{x:269.6,y:650000},
+  {x:274.7,y:500000},{x:215.9,y:925000},{x:232.0,y:235000},{x:158.4,y:850000},{x:274.3,y:759900},
+  {x:216.4,y:650000},{x:176.5,y:459900},{x:133.9,y:359900},{x:231.0,y:1025000},{x:87.1,y:348596},
+  {x:178.9,y:700000},{x:168.0,y:335000},{x:51.9,y:75000},{x:274.9,y:270000},{x:272.1,y:484900},
+  {x:248.2,y:942800},{x:199.7,y:470000},{x:187.5,y:180000},{x:236.0,y:339900},{x:165.4,y:645000},
+  {x:209.2,y:625000},{x:218.9,y:629000},{x:250.6,y:675000},{x:252.8,y:860000},{x:235.5,y:520000},
+  {x:180.9,y:359900},{x:203.7,y:594900},{x:273.3,y:342995},{x:262.4,y:484990},{x:226.2,y:199999},
+  {x:205.8,y:410000},{x:190.7,y:342900},{x:218.3,y:349000},{x:230.9,y:670000},{x:171.9,y:699000},
+  {x:228.9,y:1185000},{x:203.2,y:369500},{x:180.4,y:440000},{x:242.1,y:467500},{x:158.3,y:1050000},
+  {x:258.4,y:679990},{x:239.4,y:408000},{x:267.1,y:455127},{x:241.0,y:589990},{x:182.7,y:1095000},
+  {x:210.5,y:465000},{x:207.7,y:715000},{x:82.5,y:95000},{x:177.9,y:550000},{x:265.1,y:1645000},
+  {x:195.6,y:622950},{x:240.6,y:185000}
+];
+
+// =====================================================================
+// CHART HELPERS
+// =====================================================================
+const charts = {};
+
+function mkChart(id, config) {
+    if (charts[id]) charts[id].destroy();
+    const ctx = document.getElementById(id);
+    if (ctx) charts[id] = new Chart(ctx, config);
+}
+
+function fmtPrice(v) {
+    if (v >= 1000000) return '$' + (v/1000000).toFixed(2) + 'M';
+    if (v >= 1000) return '$' + Math.round(v/1000) + 'K';
+    return '$' + v;
+}
+
+// =====================================================================
+// PAGE 1: MARKET OVERVIEW
+// =====================================================================
+function renderPage1() {
+    // Chart 1: Price Distribution
+    mkChart('priceDistChart', {
+        type: 'bar',
+        data: {
+            labels: ['< $200K', '$200K–$400K', '$400K–$600K', '$600K–$800K', '$800K+'],
+            datasets: [{
+                label: 'Number of Listings',
+                data: [10, 23, 36, 28, 53],
+                backgroundColor: ['#D4C5B0','#C9B490','#CBA135','#8B7355','#403B36'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => `${ctx.parsed.y} listings` } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Number of Listings' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 2: Property Type Mix (donut)
+    mkChart('propTypePieChart', {
+        type: 'doughnut',
+        data: {
+            labels: ['Single Family', 'Condos', 'Townhomes', 'Mobile', 'Multi-Family', 'Duplex/Triplex'],
+            datasets: [{
+                data: [103, 27, 11, 5, 3, 1],
+                backgroundColor: ['#403B36','#CBA135','#8B7355','#D4A017','#5C7A5C','#9E9E9E'],
+                borderWidth: 2, borderColor: '#FCF9F2'
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right', labels: { font: { size: 12 }, padding: 12 } },
+                tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed} listings (${Math.round(ctx.parsed/150*100)}%)` } }
+            }
+        }
+    });
+
+    // Chart 3: Price vs Sqft scatter
+    mkChart('priceVsSqftChart', {
+        type: 'scatter',
+        data: {
+            datasets: [
+                { label: 'Single Family', data: sfData, backgroundColor: 'rgba(64,59,54,0.55)', pointRadius: 4 },
+                { label: 'Condos', data: condoData, backgroundColor: 'rgba(203,161,53,0.75)', pointRadius: 5 },
+                { label: 'Townhomes', data: townData, backgroundColor: 'rgba(139,115,85,0.75)', pointRadius: 5 },
+                { label: 'Mobile', data: mobileData, backgroundColor: 'rgba(212,160,23,0.85)', pointRadius: 7 },
+                { label: 'Multi-Family', data: multiData, backgroundColor: 'rgba(92,122,92,0.85)', pointRadius: 7 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 }, padding: 10 } },
+                tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.x.toLocaleString()} sqft | ${fmtPrice(ctx.parsed.y)}` } }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Square Footage' }, grid: { color: '#F0EBE0' },
+                     ticks: { callback: v => v.toLocaleString() } },
+                y: { title: { display: true, text: 'Listing Price' }, grid: { color: '#F0EBE0' },
+                     ticks: { callback: v => fmtPrice(v) }, max: 4000000 }
+            }
+        }
+    });
+
+    // Chart 4: Bedroom Distribution
+    mkChart('bedroomDistChart', {
+        type: 'bar',
+        data: {
+            labels: ['1–2 Beds', '3 Beds', '4 Beds', '5+ Beds'],
+            datasets: [{
+                label: 'Number of Listings',
+                data: [27, 57, 39, 27],
+                backgroundColor: ['#D4C5B0','#CBA135','#8B7355','#403B36'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => `${ctx.parsed.y} listings` } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Number of Listings' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+}
+
+// =====================================================================
+// PAGE 2: VALUE PER DOLLAR
+// =====================================================================
+function renderPage2() {
+    // Chart 5: PPSF by Property Type (horizontal bar)
+    mkChart('ppsfByTypeChart', {
+        type: 'bar',
+        data: {
+            labels: ['Mobile', 'Single Family', 'Townhomes', 'Condos', 'Multi-Family'],
+            datasets: [{
+                label: 'Median Price Per Sqft ($)',
+                data: [187.50, 272.11, 293.62, 300.37, 419.37],
+                backgroundColor: ['#D4A017','#403B36','#8B7355','#CBA135','#5C7A5C'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => `$${ctx.parsed.x.toFixed(2)}/sqft` } }
+            },
+            scales: {
+                x: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Median Price Per Sqft ($)' } },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 6: PPSF by Bedroom Count (line)
+    mkChart('ppsfByBedsChart', {
+        type: 'line',
+        data: {
+            labels: ['1–2 Beds', '3 Beds', '4 Beds', '5+ Beds'],
+            datasets: [{
+                label: 'Median PPSF ($)',
+                data: [300.37, 293.33, 265.85, 265.11],
+                borderColor: '#CBA135',
+                backgroundColor: 'rgba(203,161,53,0.1)',
+                fill: true,
+                tension: 0.35,
+                pointBackgroundColor: '#403B36',
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => `$${ctx.parsed.y.toFixed(2)}/sqft` } }
+            },
+            scales: {
+                y: { min: 240, max: 320, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Median PPSF ($)' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 7: Efficiency Scatter (PPSF vs Price)
+    mkChart('efficiencyScatterChart', {
+        type: 'scatter',
+        data: {
+            datasets: [
+                { label: 'Above $281/sqft (higher cost)', data: aboveData,
+                  backgroundColor: 'rgba(203,161,53,0.6)', pointRadius: 4 },
+                { label: 'Below $281/sqft (better value)', data: belowData,
+                  backgroundColor: 'rgba(64,59,54,0.55)', pointRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 }, padding: 10 } },
+                tooltip: { callbacks: { label: ctx => `PPSF: $${ctx.parsed.x.toFixed(0)}/sqft | Price: ${fmtPrice(ctx.parsed.y)}` } }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Price Per Sqft ($)' }, grid: { color: '#F0EBE0' },
+                     ticks: { callback: v => '$' + v } },
+                y: { title: { display: true, text: 'Listing Price' }, grid: { color: '#F0EBE0' },
+                     ticks: { callback: v => fmtPrice(v) }, max: 3000000 }
+            }
+        }
+    });
+
+    // Chart 8: Value Quadrant (type-level scatter with quadrant lines)
+    const quadrantPlugin = {
+        id: 'quadrantLines',
+        afterDraw(chart) {
+            const {ctx, chartArea, scales: {x, y}} = chart;
+            if (!x || !y || !chartArea) return;
+            const mx = x.getPixelForValue(281.45);
+            const my = y.getPixelForValue(636950);
+            ctx.save();
+            ctx.setLineDash([6, 4]);
+            ctx.strokeStyle = 'rgba(203,161,53,0.5)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.moveTo(mx, chartArea.top); ctx.lineTo(mx, chartArea.bottom); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(chartArea.left, my); ctx.lineTo(chartArea.right, my); ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.font = '10px Poppins, sans-serif';
+            ctx.fillStyle = 'rgba(64,59,54,0.35)';
+            ctx.fillText('Best Value', chartArea.left + 5, chartArea.bottom - 10);
+            ctx.fillText('Large & Efficient', chartArea.left + 5, chartArea.top + 14);
+            ctx.fillText('Premium Small', mx + 5, chartArea.bottom - 10);
+            ctx.fillText('Premium Large', mx + 5, chartArea.top + 14);
+            // Label each point
+            chart.data.datasets.forEach((ds, di) => {
+                const meta = chart.getDatasetMeta(di);
+                if (meta.data[0]) {
+                    const pt = meta.data[0];
+                    ctx.font = 'bold 10px Poppins, sans-serif';
+                    ctx.fillStyle = ds.backgroundColor;
+                    ctx.fillText(ds.label, pt.x + 8, pt.y - 5);
+                }
+            });
+            ctx.restore();
+        }
+    };
+
+    mkChart('valueQuadrantChart', {
+        type: 'scatter',
+        data: {
+            datasets: [
+                { label: 'Mobile', data: [{x:187.50,y:180000}], backgroundColor: '#D4A017', pointRadius: 10, pointStyle: 'circle' },
+                { label: 'Single Family', data: [{x:272.11,y:699000}], backgroundColor: '#403B36', pointRadius: 13 },
+                { label: 'Townhomes', data: [{x:293.62,y:499900}], backgroundColor: '#8B7355', pointRadius: 10 },
+                { label: 'Condos', data: [{x:300.37,y:349000}], backgroundColor: '#CBA135', pointRadius: 10 },
+                { label: 'Multi-Family', data: [{x:419.37,y:1100000}], backgroundColor: '#5C7A5C', pointRadius: 10 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 10 }, padding: 8 } },
+                tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.parsed.x.toFixed(0)}/sqft | ${fmtPrice(ctx.parsed.y)} median` } }
+            },
+            scales: {
+                x: { min: 100, max: 500, title: { display: true, text: 'Median PPSF ($)' }, grid: { color: '#F0EBE0' },
+                     ticks: { callback: v => '$' + v } },
+                y: { min: 0, max: 1400000, title: { display: true, text: 'Median Listing Price' }, grid: { color: '#F0EBE0' },
+                     ticks: { callback: v => fmtPrice(v) } }
+            }
+        },
+        plugins: [quadrantPlugin]
+    });
+}
+
+// =====================================================================
+// PAGE 3: FEATURES & STRUCTURE
+// =====================================================================
+function renderPage3() {
+    // Chart 9: Price by Bedrooms
+    mkChart('priceByBedsChart', {
+        type: 'bar',
+        data: {
+            labels: ['1–2 Beds', '3 Beds', '4 Beds', '5+ Beds'],
+            datasets: [{
+                label: 'Median Price ($)',
+                data: [327900, 589990, 679990, 1181597],
+                backgroundColor: ['#D4C5B0','#CBA135','#8B7355','#403B36'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => fmtPrice(ctx.parsed.y) } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Median Price ($)' },
+                     ticks: { callback: v => fmtPrice(v) } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 10: Garage Impact
+    mkChart('garageImpactChart', {
+        type: 'bar',
+        data: {
+            labels: ['No Garage', 'With Garage'],
+            datasets: [{
+                label: 'Median Price ($)',
+                data: [399500, 672500],
+                backgroundColor: ['#D4C5B0','#403B36'],
+                borderRadius: 8,
+                barThickness: 80
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => fmtPrice(ctx.parsed.y) } }
+            },
+            scales: {
+                y: { beginAtZero: false, min: 300000, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Median Price ($)' },
+                     ticks: { callback: v => fmtPrice(v) } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 11: Stories Impact
+    mkChart('storiesImpactChart', {
+        type: 'bar',
+        data: {
+            labels: ['1 Story', '2 Stories', '3 Stories'],
+            datasets: [{
+                label: 'Median Price ($)',
+                data: [597000, 631500, 1844500],
+                backgroundColor: ['#D4C5B0','#CBA135','#403B36'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => fmtPrice(ctx.parsed.y) } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Median Price ($)' },
+                     ticks: { callback: v => fmtPrice(v) } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 12: Feature Correlations (horizontal bar)
+    mkChart('featureCorrChart', {
+        type: 'bar',
+        data: {
+            labels: ['Price/Sqft (derived)', 'Sqft', 'Bathrooms', 'Bedrooms', 'Stories', 'Garage Spaces'],
+            datasets: [{
+                label: 'Correlation with Price',
+                data: [0.87, 0.45, 0.40, 0.24, 0.15, 0.08],
+                backgroundColor: ['#9E9E9E','#403B36','#CBA135','#8B7355','#D4C5B0','#E8DFC8'],
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => `r = ${ctx.parsed.x.toFixed(2)}` } }
+            },
+            scales: {
+                x: { min: 0, max: 1.0, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Pearson Correlation (r)' } },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Beds × Baths Heatmap Table
+    const heatData = {
+        1: { 1: {price:374000,n:4} },
+        2: { 1:{price:310000,n:3}, 2:{price:325000,n:15}, 3:{price:342947,n:4} },
+        3: { 2:{price:499900,n:27}, 3:{price:645000,n:25}, 4:{price:1075000,n:4}, 5:{price:1373010,n:1} },
+        4: { 2:{price:369500,n:7}, 3:{price:586475,n:14}, 4:{price:959500,n:16}, 5:{price:1225000,n:2} },
+        5: { 3:{price:682500,n:4}, 4:{price:1117500,n:4}, 5:{price:1181597,n:7} }
+    };
+
+    function cellColor(price) {
+        if (price < 400000) return {bg:'#FDF6E3',txt:'#403B36'};
+        if (price < 600000) return {bg:'#F5E8B5',txt:'#403B36'};
+        if (price < 800000) return {bg:'#EDD180',txt:'#403B36'};
+        if (price < 1050000) return {bg:'#DDB94A',txt:'#403B36'};
+        return {bg:'#CBA135',txt:'#FFFFFF'};
+    }
+
+    const tbl = document.getElementById('heatmapTable');
+    let html = '<tr><th>Beds \\ Baths</th>';
+    for (let ba=1; ba<=5; ba++) html += `<th>${ba} Bath${ba>1?'s':''}</th>`;
+    html += '</tr>';
+    for (let b=1; b<=5; b++) {
+        html += `<tr><td class="row-header">${b} Bed${b>1?'s':''}</td>`;
+        for (let ba=1; ba<=5; ba++) {
+            const cell = heatData[b] && heatData[b][ba];
+            if (cell) {
+                const {bg,txt} = cellColor(cell.price);
+                const label = cell.price >= 1000000
+                    ? '$' + (cell.price/1000000).toFixed(2) + 'M'
+                    : '$' + Math.round(cell.price/1000) + 'K';
+                html += `<td style="background:${bg};color:${txt}">${label}<br><small style="font-weight:400;opacity:0.7">n=${cell.n}</small></td>`;
+            } else {
+                html += '<td class="empty">—</td>';
+            }
+        }
+        html += '</tr>';
+    }
+    tbl.innerHTML = html;
+}
+
+// =====================================================================
+// PAGE 4: INVESTMENT OPPORTUNITY
+// =====================================================================
+function renderPage4() {
+    // Chart 13: Under $400K listings
+    mkChart('under400kChart', {
+        type: 'bar',
+        data: {
+            labels: ['Condos\n$290K median', 'Single Family\n$340K median', 'Mobile\n$165K median', 'Townhomes\n$280K median', 'Multi-Family\n$349K median'],
+            datasets: [{
+                label: 'Listings Under $400K',
+                data: [16, 9, 4, 2, 1],
+                backgroundColor: ['#CBA135','#403B36','#D4A017','#8B7355','#5C7A5C'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: {display: false},
+                tooltip: { callbacks: { label: ctx => `${ctx.parsed.y} listings under $400K` } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Number of Listings' } },
+                x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+            }
+        }
+    });
+
+    // Chart 14: Bubble chart (Market Depth vs PPSF)
+    mkChart('bubbleChart', {
+        type: 'bubble',
+        data: {
+            datasets: [
+                { label: 'Single Family', data: [{x:272.11,y:103,r:28}], backgroundColor: 'rgba(64,59,54,0.75)' },
+                { label: 'Condos', data: [{x:300.37,y:27,r:14}], backgroundColor: 'rgba(203,161,53,0.8)' },
+                { label: 'Townhomes', data: [{x:293.62,y:11,r:9}], backgroundColor: 'rgba(139,115,85,0.8)' },
+                { label: 'Mobile', data: [{x:187.50,y:5,r:6}], backgroundColor: 'rgba(212,160,23,0.85)' },
+                { label: 'Multi-Family', data: [{x:419.37,y:3,r:5}], backgroundColor: 'rgba(92,122,92,0.85)' }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 }, padding: 10 } },
+                tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.parsed.x.toFixed(0)}/sqft | ${ctx.parsed.y} listings` } }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Median PPSF ($) → Higher cost per sqft →' },
+                     grid: { color: '#F0EBE0' }, ticks: { callback: v => '$' + v } },
+                y: { beginAtZero: true, title: { display: true, text: 'Number of Listings (market depth)' },
+                     grid: { color: '#F0EBE0' } }
+            }
+        }
+    });
+
+    // Chart 15: Market Position (Above vs Below Median PPSF)
+    mkChart('marketPositionChart', {
+        type: 'bar',
+        data: {
+            labels: ['Single Family', 'Condos', 'Townhomes', 'Multi-Family', 'Mobile'],
+            datasets: [
+                { label: 'Above $281/sqft', data: [49,15,6,2,2],
+                  backgroundColor: 'rgba(203,161,53,0.8)', borderRadius: 4 },
+                { label: 'Below $281/sqft', data: [54,12,5,1,3],
+                  backgroundColor: 'rgba(64,59,54,0.75)', borderRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 }, padding: 10 } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Number of Listings' }, stacked: false },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 16: Price by Type per Bed Category (grouped bar)
+    mkChart('priceByTypeBedChart', {
+        type: 'bar',
+        data: {
+            labels: ['3 Beds', '4 Beds', '5+ Beds'],
+            datasets: [
+                { label: 'Single Family', data: [599000, 670000, 1181597],
+                  backgroundColor: 'rgba(64,59,54,0.8)', borderRadius: 4 },
+                { label: 'Condos', data: [739500, 869000, null],
+                  backgroundColor: 'rgba(203,161,53,0.8)', borderRadius: 4 },
+                { label: 'Townhomes', data: [501945, null, null],
+                  backgroundColor: 'rgba(139,115,85,0.8)', borderRadius: 4 },
+                { label: 'Mobile', data: [122450, null, null],
+                  backgroundColor: 'rgba(212,160,23,0.8)', borderRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 }, padding: 10 } },
+                tooltip: { callbacks: { label: ctx => ctx.parsed.y ? `${ctx.dataset.label}: ${fmtPrice(ctx.parsed.y)}` : null } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0EBE0' },
+                     title: { display: true, text: 'Median Price ($)' },
+                     ticks: { callback: v => fmtPrice(v) } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Ranked Table
+    const rankedData = [
+        { rank:1, type:'Single Family', beds:'4 Beds', count:37, ppsf:258.35, price:670000, verdict:'best' },
+        { rank:2, type:'Single Family', beds:'5+ Beds', count:25, ppsf:265.11, price:1181597, verdict:'good' },
+        { rank:3, type:'Condos', beds:'1–2 Beds', count:20, ppsf:283.43, price:317500, verdict:'good' },
+        { rank:4, type:'Single Family', beds:'3 Beds', count:39, ppsf:287.96, price:599000, verdict:'best' },
+        { rank:5, type:'Townhomes', beds:'3 Beds', count:9, ppsf:293.62, price:501945, verdict:'good' },
+        { rank:6, type:'Condos', beds:'3 Beds', count:6, ppsf:337.99, price:739500, verdict:'neutral' }
+    ];
+
+    const tbody = document.getElementById('rankedTableBody');
+    tbody.innerHTML = rankedData.map(r => {
+        const badge = r.verdict === 'best'
+            ? `<span class="badge-gold">Best Value</span>`
+            : r.verdict === 'good'
+            ? `<span class="badge-dark">Good Value</span>`
+            : `<span class="badge-green">Moderate</span>`;
+        return `<tr>
+            <td><strong>#${r.rank}</strong></td>
+            <td>${r.type}</td>
+            <td>${r.beds}</td>
+            <td>${r.count}</td>
+            <td><strong>$${r.ppsf.toFixed(2)}/sqft</strong></td>
+            <td>${fmtPrice(r.price)}</td>
+            <td>${badge}</td>
+        </tr>`;
+    }).join('');
+}
+
+// =====================================================================
+// PAGE SWITCHING
+// =====================================================================
+const rendered = {};
+
+function showPage(num) {
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById(`page${i}`).classList.toggle('active', i === num);
+    }
+    document.querySelectorAll('.page-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === num - 1);
+    });
+    if (!rendered[num]) {
+        rendered[num] = true;
+        if (num === 1) renderPage1();
+        else if (num === 2) renderPage2();
+        else if (num === 3) renderPage3();
+        else if (num === 4) renderPage4();
+    }
+}
+
+// Initialise: render page 1 on load
+rendered[1] = true;
+renderPage1();
+</script>
+</body>
+</html>
