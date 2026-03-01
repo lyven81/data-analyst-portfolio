@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Property Assistant | Not All Homes Are Equal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #403B36;
+            background-color: #ffffff;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Column - Fixed Sidebar */
+        .left-column {
+            width: 30%;
+            background-color: #f8f8f8;
+            padding: 40px 30px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .left-column h1 {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #403B36;
+            margin-bottom: 10px;
+        }
+
+        .left-column h2 {
+            font-size: 1em;
+            font-weight: 400;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .home-link-section, .dashboard-link-section, .agentic-link-section {
+            margin: 20px 0;
+        }
+
+        .home-link-btn, .dashboard-link-btn, .agentic-link-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #403B36;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .home-link-btn:hover, .dashboard-link-btn:hover, .agentic-link-btn:hover {
+            background-color: #CBA135;
+        }
+
+        .agentic-link-btn {
+            background-color: #CBA135;
+        }
+
+        .agentic-link-btn:hover {
+            background-color: #B8902E;
+        }
+
+        .contact {
+            margin-top: 30px;
+        }
+
+        .contact h2 {
+            font-size: 1.2em;
+            color: #403B36;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .contact p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .contact ul {
+            list-style: none;
+        }
+
+        .contact li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .contact a {
+            color: #CBA135;
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Right Column - Chatbot Interface */
+        .right-column {
+            width: 70%;
+            margin-left: 30%;
+            padding: 40px 50px;
+            background-color: #ffffff;
+        }
+
+        .chatbot-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .chatbot-header h1 {
+            font-size: 2.2em;
+            color: #403B36;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .chatbot-header p {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .chat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .suggested-questions {
+            margin-bottom: 30px;
+        }
+
+        .suggested-questions h3 {
+            font-size: 1.3em;
+            color: #403B36;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .question-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            background-color: #ffffff;
+            color: #403B36;
+            border: 2px solid #CBA135;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .question-btn:hover {
+            background-color: #CBA135;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3);
+        }
+
+        .chat-messages {
+            min-height: 400px;
+            margin-top: 20px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            background-color: #CBA135;
+            color: #ffffff;
+            margin-left: 50px;
+            text-align: right;
+        }
+
+        .message.agent {
+            background-color: #ffffff;
+            color: #403B36;
+            margin-right: 50px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .message.agent .agent-label {
+            font-weight: 600;
+            color: #CBA135;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .workflow-step {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background-color: #f8f8f8;
+            border-left: 4px solid #CBA135;
+            border-radius: 4px;
+        }
+
+        .workflow-step .step-title {
+            font-weight: 600;
+            color: #403B36;
+            margin-bottom: 5px;
+        }
+
+        .workflow-step .step-content {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .data-result {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 6px;
+            border: 1px solid #b8dce8;
+        }
+
+        .data-result .result-title {
+            font-weight: 600;
+            color: #2c5f7a;
+            margin-bottom: 8px;
+        }
+
+        .data-result ul {
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .final-answer {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e8f8e8;
+            border-radius: 6px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .final-answer .answer-label {
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #222;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-column {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .right-column {
+                width: 100%;
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+
+            .message.user {
+                margin-left: 20px;
+            }
+
+            .message.agent {
+                margin-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Column -->
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Ask this AI assistant which Colorado property types offer the best value per dollar and which features move prices most — so you can invest with confidence.</p>
+            </section>
+
+            <!-- Navigation Buttons -->
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+            </section>
+
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/case-studies/not-all-homes-are-equal.html">Case Study</a>
+            </section>
+
+            <section class="dashboard-link-section">
+                <a class="dashboard-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/dashboards/not-all-homes-are-equal-dashboard.html">Dashboard</a>
+            </section>
+
+            <section class="agentic-link-section">
+                <a class="agentic-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/not-all-homes-are-equal.html">AI Assistant</a>
+            </section>
+
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Right Column - Chatbot Interface -->
+        <main class="right-column">
+            <div class="chatbot-header">
+                <h1>AI Property Assistant</h1>
+                <p>After your analysis is complete, imagine having these conversations available whenever you need them.</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="suggested-questions">
+                    <h3>Try these questions:</h3>
+                    <button class="question-btn" onclick="showResponse(1)">Which property type gives me the most space for my money in Colorado?</button>
+                    <button class="question-btn" onclick="showResponse(2)">I have a budget of $500,000 — what should I be buying?</button>
+                    <button class="question-btn" onclick="showResponse(3)">Why does a cheaper condo sometimes cost more per square foot than a pricier house?</button>
+                    <button class="question-btn" onclick="showResponse(4)">If I want to renovate to increase value, where should I spend the money?</button>
+                    <button class="question-btn" onclick="showResponse(5)">Why do more bedrooms sometimes hurt the value of a home?</button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <p style="text-align: center; color: #999; font-style: italic;">Select a question above to see how the AI agent works</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+    <script>
+        const responses = {
+            1: {
+                question: "Which property type gives me the most space for my money in Colorado?",
+                workflow: [
+                    {
+                        title: "📋 Planning",
+                        content: "Breaking down the query: Need to (1) Query price per sqft for each property type, (2) Rank types from lowest to highest cost per sqft, (3) Cross-reference with median sqft sizes to assess practical scale"
+                    },
+                    {
+                        title: "🔍 Data Retrieval — Structured Data (CSV)",
+                        content: "Querying median price per sqft and median sqft by property type across 5,897 Colorado listings..."
+                    }
+                ],
+                dataResult: {
+                    title: "Price Per Sqft Rankings:",
+                    items: [
+                        "Mobile: $112/sqft — most space per dollar (0.0089 sqft per dollar)",
+                        "Single Family: $272/sqft — 2,411 sqft median (0.0037 sqft per dollar)",
+                        "Multi-Family: $289/sqft — 2,410 sqft median",
+                        "Townhomes: $294/sqft — median 1,685 sqft",
+                        "Condos: $359/sqft — 1,133 sqft median (most expensive per sqft)"
+                    ]
+                },
+                workflow2: [
+                    {
+                        title: "📄 Context Search — Unstructured Data (Analysis Report)",
+                        content: "Searching insights for liquidity and practical investment trade-offs by property type..."
+                    }
+                ],
+                dataResult2: {
+                    title: "Insights Found:",
+                    items: [
+                        "\"Mobile homes deliver the most space per dollar but are smaller and less liquid\"",
+                        "\"Single-family is the more practical choice for investors who need both scale and ease of exit\"",
+                        "\"A condo that appears affordable at $380,000 is actually expensive on a per-sqft basis compared to single-family\""
+                    ]
+                },
+                answer: "Mobile homes deliver the most space per dollar at $112 per sqft, but they are small and harder to resell. For investors who need both scale and a liquid exit, single-family homes are the better choice — they average 2,411 sqft at just $272 per sqft, beating condos ($359/sqft) by a wide margin."
+            },
+            2: {
+                question: "I have a budget of $500,000 — what should I be buying?",
+                workflow: [
+                    {
+                        title: "📋 Planning",
+                        content: "Task requires: (1) Filter listings in the $400K–$900K medium budget tier, (2) Compare property types by price per sqft and median size, (3) Assess market depth for each type"
+                    },
+                    {
+                        title: "🔍 Data Retrieval — Structured Data (CSV)",
+                        content: "Filtering listings priced $400K–$900K and comparing property types by value efficiency..."
+                    }
+                ],
+                dataResult: {
+                    title: "Medium Budget Tier ($400K–$900K) Comparison:",
+                    items: [
+                        "Single Family: $254/sqft | 2,267 sqft median | 2,384 listings (strongest depth)",
+                        "Condos: $472/sqft | 1,150 sqft median | 156 listings",
+                        "Townhomes: $335/sqft | 1,850 sqft median | 201 listings",
+                        "Single Family vs Condos: same budget, nearly double the space at almost half the cost per sqft"
+                    ]
+                },
+                workflow2: [
+                    {
+                        title: "📄 Context Search — Unstructured Data (Analysis Report)",
+                        content: "Retrieving medium-budget investment recommendation from the analyst report..."
+                    }
+                ],
+                dataResult2: {
+                    title: "Report Recommendation:",
+                    items: [
+                        "\"For medium-budget investors between $400,000 and $900,000, single-family is the clear choice\"",
+                        "\"Condos in this range cost $472 per sqft for just 1,150 sqft — nearly double the cost per sqft for less than half the space\"",
+                        "\"Single-family delivers the best combination of value, space, and liquidity in the Colorado market\""
+                    ]
+                },
+                answer: "At that budget, single-family homes are the clear choice — 2,384 listings sit in the $400K–$900K range at $254 per sqft with a median of 2,267 sqft, giving you real space at a competitive price. Condos in the same range cost $472 per sqft for just 1,150 sqft, which is nearly double the cost for less than half the space."
+            },
+            3: {
+                question: "Why does a cheaper condo sometimes cost more per square foot than a pricier house?",
+                workflow: [
+                    {
+                        title: "📋 Planning",
+                        content: "Investigation requires: (1) Compare listing price vs price per sqft for condos and single-family, (2) Show the gap between absolute price and cost efficiency, (3) Retrieve report insight on the price-vs-value distinction"
+                    },
+                    {
+                        title: "🔍 Data Retrieval — Structured Data (CSV)",
+                        content: "Querying median listing price and median price per sqft for condos and single-family homes..."
+                    }
+                ],
+                dataResult: {
+                    title: "Condo vs Single Family — Price vs Cost:",
+                    items: [
+                        "Condos: median listing price = $380,000 | median PPSF = $359/sqft",
+                        "Single Family: median listing price = $619,000 | median PPSF = $272/sqft",
+                        "Condos cost $87 more per sqft despite listing $239,000 lower in absolute price",
+                        "At $380K, a condo delivers roughly 1,060 sqft vs 1,397 sqft from a single-family at the same spend"
+                    ]
+                },
+                workflow2: [
+                    {
+                        title: "📄 Context Search — Unstructured Data (Analysis Report)",
+                        content: "Searching analysis insights for the listing price vs value distinction..."
+                    }
+                ],
+                dataResult2: {
+                    title: "Key Insight from Report:",
+                    items: [
+                        "\"Price per sqft shifts the picture significantly — the gap between absolute price and PPSF is a critical lens\"",
+                        "\"It separates properties that look affordable from those that actually are\"",
+                        "\"Investors who focus only on size and room count may still overpay if they overlook what the data says\""
+                    ]
+                },
+                answer: "A lower listing price does not mean lower cost — condos have a median of $380,000 but cost $359 per sqft, while single-family homes list at $619,000 but cost only $272 per sqft. You are paying for a smaller unit, not a better deal."
+            },
+            4: {
+                question: "If I want to renovate to increase value, where should I spend the money?",
+                workflow: [
+                    {
+                        title: "📋 Planning",
+                        content: "Analysis requires: (1) Retrieve regression coefficients for each physical feature, (2) Rank features by their impact on listing price, (3) Check if impact differs by property type"
+                    },
+                    {
+                        title: "🔍 Data Retrieval — Structured Data (CSV)",
+                        content: "Running regression analysis on price vs physical features: sqft, beds, baths, stories, garage across all listings..."
+                    }
+                ],
+                dataResult: {
+                    title: "Feature Impact on Listing Price (per standard deviation):",
+                    items: [
+                        "Bathrooms: +$823,508 — strongest positive driver across all types",
+                        "Square Footage: +$646,911 — second strongest driver",
+                        "Bedrooms: -$457,761 — negative when sqft and baths are controlled (see Q5)",
+                        "Stories: -$8,953 — minimal effect",
+                        "Garage: -$112,409 — mixed effect across property types"
+                    ]
+                },
+                workflow2: [
+                    {
+                        title: "📄 Context Search — Unstructured Data (Analysis Report)",
+                        content: "Retrieving renovation strategy insights by property type..."
+                    }
+                ],
+                dataResult2: {
+                    title: "Strategic Guidance from Report:",
+                    items: [
+                        "\"Bathrooms and square footage are the two features most strongly linked to higher prices in the Colorado market\"",
+                        "\"Add bathrooms to a single-family home. Maximise sqft in a condo.\"",
+                        "\"Add a garage to a mobile home — significant because garages are uncommon and treated as a premium (+$98,802)\"",
+                        "\"Renovation budget spent where buyers in that specific segment actually pay for it is the difference between a project that returns value and one that does not\""
+                    ]
+                },
+                answer: "Focus on bathrooms first — each additional bathroom is associated with the largest price increase of any single feature in the Colorado market. Square footage comes second, so adding usable space through extensions or conversions also pays off, especially in single-family and condo segments where space directly drives price."
+            },
+            5: {
+                question: "Why do more bedrooms sometimes hurt the value of a home?",
+                workflow: [
+                    {
+                        title: "📋 Planning",
+                        content: "Investigation requires: (1) Check the bedroom coefficient in the regression model, (2) Explain why it turns negative when controlling for sqft and baths, (3) Retrieve report explanation in plain terms"
+                    },
+                    {
+                        title: "🔍 Data Retrieval — Structured Data (CSV)",
+                        content: "Querying regression coefficients with sqft and bathrooms held constant..."
+                    }
+                ],
+                dataResult: {
+                    title: "Regression Output — Bedroom Effect:",
+                    items: [
+                        "Bedrooms coefficient (alone): positive — more beds, higher price",
+                        "Bedrooms coefficient (controlling for sqft + baths): -$457,761",
+                        "R² of physical features: 25.6% — location explains the remaining 74.4%",
+                        "Correlation: bedrooms strongly correlated with sqft (r=0.65) and baths (r=0.76)"
+                    ]
+                },
+                workflow2: [
+                    {
+                        title: "📄 Context Search — Unstructured Data (Analysis Report)",
+                        content: "Searching analysis insights for the multicollinearity explanation and buyer behaviour..."
+                    }
+                ],
+                dataResult2: {
+                    title: "Explanation from Report:",
+                    items: [
+                        "\"This is a multicollinearity effect — when sqft and baths are already accounted for, adding bedrooms within the same space means smaller individual rooms\"",
+                        "\"Buyers penalise crowded layouts — room quality and size, not room count, is what they are actually paying for\"",
+                        "\"Investors should use physical features to screen and shortlist, but make final decisions with location in mind\""
+                    ]
+                },
+                answer: "When square footage stays fixed, adding bedrooms means making each room smaller — and buyers pay less for a crowded layout than for a spacious one. In the regression analysis, bedrooms showed a negative effect of -$457,761 on price once sqft and bathrooms were already accounted for, which means it is room quality and size, not room count, that buyers are actually paying for."
+            }
+        };
+
+        function showResponse(questionId) {
+            const response = responses[questionId];
+            const chatMessages = document.getElementById('chatMessages');
+
+            // Clear previous messages
+            chatMessages.innerHTML = '';
+
+            // Add user question
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = response.question;
+            chatMessages.appendChild(userMsg);
+
+            // Add agent response with workflow
+            setTimeout(() => {
+                const agentMsg = document.createElement('div');
+                agentMsg.className = 'message agent';
+
+                let html = '<span class="agent-label">AI Property Assistant</span>';
+
+                // Add workflow steps
+                response.workflow.forEach(step => {
+                    html += `
+                        <div class="workflow-step">
+                            <div class="step-title">${step.title}</div>
+                            <div class="step-content">${step.content}</div>
+                        </div>
+                    `;
+                });
+
+                // Add data result
+                if (response.dataResult) {
+                    html += `
+                        <div class="data-result">
+                            <div class="result-title">${response.dataResult.title}</div>
+                            <ul>
+                                ${response.dataResult.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                // Add second workflow steps if exists
+                if (response.workflow2) {
+                    response.workflow2.forEach(step => {
+                        html += `
+                            <div class="workflow-step">
+                                <div class="step-title">${step.title}</div>
+                                <div class="step-content">${step.content}</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // Add second data result if exists
+                if (response.dataResult2) {
+                    html += `
+                        <div class="data-result">
+                            <div class="result-title">${response.dataResult2.title}</div>
+                            <ul>
+                                ${response.dataResult2.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                // Add final answer
+                html += `
+                    <div class="final-answer">
+                        <span class="answer-label">Answer:</span>
+                        ${response.answer}
+                    </div>
+                `;
+
+                agentMsg.innerHTML = html;
+                chatMessages.appendChild(agentMsg);
+
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500);
+        }
+    </script>
+</body>
+</html>
