@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Not All Homes Are Equal | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      View Dashboard
+     </a>
+    </section>
+    <!-- Agentic Workflow Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      AI Assistant
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/cover%20image.jpeg"/>
+      <h1>
+       Not All Homes Are Equal
+      </h1>
+      <p>
+       Price, Space, and Features Across Colorado's Property Market
+      </p>
+     </header>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       Buying the right property at the right price is harder than it looks. Listing prices vary enormously across property types in the Colorado market, and a lower price tag does not always mean better value — sometimes it means less space at a higher cost per square foot. Investors who focus only on size and room count may still overpay if they overlook what the data says about which features actually move prices in their target segment.
+      </p>
+      <p>
+       This report analyses over 5,800 residential property listings from the Colorado real estate market in 2026 to answer two practical questions: which property types give investors the most for their money, and which physical features have the greatest impact on price. The findings are structured around three investor budget tiers — under $400,000, $400,000 to $900,000, and above $900,000 — to make the conclusions directly actionable regardless of where an investor is starting from.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <p>
+       We analysed a dataset of 8,362 residential property listings from the Colorado real estate market in 2026, covering six property types: single-family homes, condos, townhomes, multi-family units, mobile homes, and duplex/triplex properties. Our analysis focused on listing price, price per square foot, and five physical features — square footage, bedrooms, bathrooms, stories, and garage spaces. After removing duplicates, implausible prices, and land or farm listings that lacked structural data, the cleaned dataset contained 5,897 listings. Our goal was to identify which property types offer the best value per square foot and which physical features most significantly drive listing price — giving property investors a clearer basis for acquisition and improvement decisions.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. What is the median listing price and price per sqft for each property type?
+      </h2>
+      <img alt="Chart 1 - Median Price and Price per Sqft by Property Type" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q1%20chart.png"/>
+      <p>
+       The Colorado market spans a wide range by property type. Among mainstream residential types, multi-family homes have the highest median price at $648,000, followed by single-family at $619,000, townhomes at $508,000, condos at $380,000, and mobile homes at $125,000. Duplex/triplex sits far above all at $2.47M, but with only 26 listings it is too thin a market to rely on.
+      </p>
+      <p>
+       Price per sqft shifts the picture significantly. Condos cost $359 per sqft — the highest among affordable types — despite their lower absolute price. Single-family homes cost just $272 per sqft. Mobile homes are the cheapest at $112 per sqft. A condo that appears affordable at $380,000 is actually expensive on a per-sqft basis compared to single-family, which delivers more space for a lower cost per dollar.
+      </p>
+      <p>
+       For investors, the gap between absolute price and price per sqft is a critical lens. It separates properties that look affordable from those that actually are.
+      </p>
+     </section>
+     <section>
+      <h2>
+       2. Which property type offers the highest sqft per dollar — and which is the most expensive per sqft?
+      </h2>
+      <img alt="Chart 2 - Value Ranking by Property Type" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q2%20chart.png"/>
+      <p>
+       Mobile homes deliver the most space per dollar at $112 per sqft, returning 0.0089 sqft for every dollar spent — more than double the return of single-family homes at 0.0037 sqft per dollar. At the other end, duplex/triplex properties are the most expensive at $879 per sqft, returning just 0.0011 sqft per dollar.
+      </p>
+      <p>
+       Among mainstream types, single-family homes offer the strongest balance of value and scale. At $272 per sqft with a median of 2,411 sqft, they provide significantly more space than condos — which offer only 1,133 sqft at $359 per sqft — at a lower cost per dollar. Multi-family matches single-family on size at 2,410 sqft but costs slightly more per sqft at $289.
+      </p>
+      <p>
+       For investors focused on maximising space for their capital, mobile homes offer the sharpest efficiency, though they are smaller and less liquid. Single-family is the more practical choice for investors who need both scale and ease of exit.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. How much of listing price variation is explained by physical features?
+      </h2>
+      <img alt="Chart 3 - Explanatory Power of Physical Features" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q3%20chart.png"/>
+      <p>
+       Physical features — sqft, beds, baths, stories, and garage — explain only 25.6% of the variation in listing price across the Colorado market. The remaining 74.4% is likely driven by factors outside this dataset: location, neighbourhood quality, school districts, and property condition.
+      </p>
+      <p>
+       This does not make physical features irrelevant. It means they are a reliable baseline, not a complete picture. The same 3-bedroom home can command vastly different prices depending on where it sits in Colorado, and room counts alone will not capture that gap.
+      </p>
+      <p>
+       Investors should use physical features to screen and shortlist properties, but make final decisions with location in mind. Properties priced well above what their features predict may be justified by a strong location — or may be overpriced. Either way, the data flags them as worth a closer look.
+      </p>
+     </section>
+     <section>
+      <h2>
+       4. Which features have the strongest effect on listing price, and by how much per unit?
+      </h2>
+      <img alt="Chart 4 - Feature Impact on Listing Price" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q4%20chart.png"/>
+      <p>
+       Bathrooms and square footage are the two features most strongly linked to higher prices in the Colorado market. A one standard deviation increase in bathroom count is associated with an $823,508 rise in price; the same increase in sqft adds $646,911. These are the features investors should prioritise when evaluating renovation potential.
+      </p>
+      <p>
+       Bedrooms show a negative relationship at -$457,761 when all other features are held constant. This is a multicollinearity effect — when sqft and baths are already accounted for, adding bedrooms within the same space means smaller individual rooms, which buyers penalise. Garage spaces show a negative coefficient at -$112,409, reflecting the mix of property types where many higher-priced properties lack garages. Stories have minimal effect at -$8,953.
+      </p>
+      <p>
+       The takeaway for investors is straightforward: bathroom count and total sqft move prices the most. When assessing whether a renovation will pay off, focus on these two features first.
+      </p>
+     </section>
+     <section>
+      <h2>
+       5. Do price drivers differ in importance across property types?
+      </h2>
+      <p>
+       Yes — and the differences matter. Square footage is the dominant driver for single-family homes (+$857,935), condos (+$1,255,111), and townhomes (+$928,363). Condos are the most sensitive of all — a one standard deviation increase in sqft adds over $1.25M in price. In these segments, space is what buyers pay for.
+      </p>
+      <p>
+       Multi-family properties behave differently. Sqft impact drops to +$115,795, while bedrooms (+$104,012) and bathrooms (+$147,819) carry comparable weight. Buyers in this segment think about rental income and unit configuration rather than raw space. Mobile homes have the highest R² at 0.46, meaning physical features predict price more reliably here than in any other type. A garage adds +$98,802 in mobile homes — significant because garages are uncommon in this segment and treated as a premium.
+      </p>
+      <p>
+       Before spending money on improvements, investors need to know what type they own. Add bathrooms to a single-family home. Maximise sqft in a condo. Count rooms in a multi-family building. Add a garage to a mobile home. Renovation budget spent where buyers in that specific segment actually pay for it is the difference between a project that returns value and one that does not.
+      </p>
+     </section>
+     <section>
+      <h2>
+       6. Which property type is best for investors at each budget tier?
+      </h2>
+      <p>
+       For low-budget investors under $400,000, mobile homes offer the lowest cost at $103 per sqft but are small and less liquid. Multi-family at $153 per sqft and 2,169 sqft is the better value play, though only 14 listings fall in this range. Single-family is the most practical entry point — 541 listings at $229 per sqft — with enough market depth to find and exit deals without difficulty.
+      </p>
+      <p>
+       For medium-budget investors between $400,000 and $900,000, single-family is the clear choice. At $254 per sqft, 2,267 sqft, and 2,384 listings, it delivers the best combination of value, space, and liquidity in the Colorado market. Condos in this range cost $472 per sqft for just 1,150 sqft — nearly double the cost per sqft for less than half the space — making them a poor value proposition at this budget.
+      </p>
+      <p>
+       For high-budget investors above $900,000, single-family leads again at $379 per sqft with a median of 4,187 sqft across 995 listings — the largest properties at the most competitive price per sqft in this tier. Condos at $1,728 per sqft for 1,605 sqft carry a premium the features alone cannot justify. Across all three budget tiers, single-family homes consistently deliver the strongest combination of value, scale, and market depth.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       Before committing capital, investors should look beyond the listing price and focus on price per sqft — because the two do not always tell the same story. Across all three budget tiers in the Colorado market, single-family homes consistently offer the best combination of value, scale, and liquidity. Investors should also be clear on their renovation strategy before buying. Bathrooms and square footage are the features that move prices most across the market as a whole, but the right improvement depends on property type — adding sqft matters most in condos and single-family homes, room count matters more in multi-family, and a garage can add significant value in a mobile home segment where it is rare.
+      </p>
+      <p>
+       Investors should also set realistic expectations about what the data can and cannot tell them. Physical features explain only 26% of why one property is priced higher than another in Colorado. The remaining 74% comes down to location, condition, and neighbourhood factors that no listing spreadsheet fully captures. The most disciplined investors use data to shortlist and screen, then apply local knowledge to decide. A property that looks underpriced based on its features may be underpriced for a reason — and that reason is worth finding before any money changes hands.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
