@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lending Fairness Assistant | Do Dollars Drive Decisions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #403B36; background-color: #ffffff; }
+        .container { display: flex; min-height: 100vh; }
+        .left-column { width: 30%; background-color: #f8f8f8; padding: 40px 30px; position: fixed; height: 100vh; overflow-y: auto; border-right: 1px solid #e0e0e0; }
+        .left-column h1 { font-size: 1.8em; font-weight: bold; color: #403B36; margin-bottom: 10px; }
+        .left-column h2 { font-size: 1em; font-weight: 400; color: #666; margin-bottom: 20px; }
+        .intro p { color: #555; margin-bottom: 30px; line-height: 1.8; }
+        .home-link-section, .dashboard-link-section, .agentic-link-section { margin: 20px 0; }
+        .home-link-btn, .dashboard-link-btn, .agentic-link-btn { display: inline-block; padding: 12px 30px; background-color: #403B36; color: #fff; text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s ease; text-align: center; width: 100%; }
+        .home-link-btn:hover, .dashboard-link-btn:hover, .agentic-link-btn:hover { background-color: #CBA135; }
+        .agentic-link-btn { background-color: #CBA135; }
+        .agentic-link-btn:hover { background-color: #B8902E; }
+        .mcp-badge { display: inline-block; padding: 6px 12px; background-color: #e8f4f8; color: #2c5f7a; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-top: 10px; border: 1px solid #b8dce8; }
+        .contact { margin-top: 30px; }
+        .contact h2 { font-size: 1.2em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
+        .contact p { color: #555; margin-bottom: 15px; }
+        .contact ul { list-style: none; }
+        .contact li { margin-bottom: 10px; color: #555; }
+        .contact a { color: #CBA135; text-decoration: none; }
+        .contact a:hover { text-decoration: underline; }
+        .right-column { width: 70%; margin-left: 30%; padding: 40px 50px; background-color: #ffffff; }
+        .chatbot-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e0e0e0; }
+        .chatbot-header h1 { font-size: 2.2em; color: #403B36; margin-bottom: 10px; font-weight: 600; }
+        .chatbot-header p { font-size: 1.1em; color: #666; line-height: 1.8; }
+        .chat-container { max-width: 900px; margin: 0 auto; background-color: #f8f8f8; border-radius: 10px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .suggested-questions { margin-bottom: 30px; }
+        .suggested-questions h3 { font-size: 1.3em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
+        .question-btn { display: block; width: 100%; padding: 15px 20px; margin-bottom: 12px; background-color: #ffffff; color: #403B36; border: 2px solid #CBA135; border-radius: 8px; text-align: left; cursor: pointer; font-size: 1em; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+        .question-btn:hover { background-color: #CBA135; color: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3); }
+        .chat-messages { min-height: 400px; margin-top: 20px; }
+        .message { margin-bottom: 20px; padding: 15px 20px; border-radius: 10px; animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .message.user { background-color: #CBA135; color: #ffffff; margin-left: 50px; text-align: right; }
+        .message.agent { background-color: #ffffff; color: #403B36; margin-right: 50px; border: 1px solid #e0e0e0; }
+        .message.agent .agent-label { font-weight: 600; color: #CBA135; margin-bottom: 8px; display: block; }
+        .workflow-step { margin: 15px 0; padding: 12px 15px; background-color: #f8f8f8; border-left: 4px solid #CBA135; border-radius: 4px; }
+        .workflow-step .step-title { font-weight: 600; color: #403B36; margin-bottom: 5px; }
+        .workflow-step .step-content { color: #666; font-size: 0.95em; }
+        .data-result { margin: 15px 0; padding: 15px; background-color: #e8f4f8; border-radius: 6px; border: 1px solid #b8dce8; }
+        .data-result .result-title { font-weight: 600; color: #2c5f7a; margin-bottom: 8px; }
+        .data-result ul { margin-left: 20px; color: #555; }
+        .final-answer { margin-top: 15px; padding: 15px; background-color: #e8f8e8; border-radius: 6px; border-left: 4px solid #4CAF50; }
+        .final-answer .answer-label { font-weight: 600; color: #2e7d32; margin-bottom: 8px; display: block; }
+        footer { text-align: center; padding: 30px 20px; background-color: #222; color: #fff; margin-top: 50px; }
+        footer p { margin: 0; font-size: 0.9em; }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .left-column { width: 100%; position: relative; height: auto; }
+            .right-column { width: 100%; margin-left: 0; padding: 30px 20px; }
+            .message.user { margin-left: 20px; }
+            .message.agent { margin-right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Ask this AI assistant whether income really drives loan terms — interest rates, credit grades, and loan amounts — so you can spot unfair lending patterns before they become regulatory problems.</p>
+                <div class="mcp-badge">MCP Server • 150 rows • 7 tools</div>
+            </section>
+
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+            </section>
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html">Case Study</a>
+            </section>
+            <section class="dashboard-link-section">
+                <a class="dashboard-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/dashboards/do-dollar-drive-decisions-dashboard.html">Dashboard</a>
+            </section>
+            <section class="agentic-link-section">
+                <a class="agentic-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/do-dollar-drive-decisions.html">AI Assistant</a>
+            </section>
+
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <main class="right-column">
+            <div class="chatbot-header">
+                <h1>AI Lending Fairness Assistant</h1>
+                <p>Powered by an AI agent connected to an MCP server exposing 7 tools over a 150-row lending sample. Click any question to see how the agent plans, calls tools, and grounds its answer in real data.</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="suggested-questions">
+                    <h3>Try these questions:</h3>
+                    <button class="question-btn" onclick="showResponse(1)">Do higher-income borrowers really pay lower interest rates, and by how much?</button>
+                    <button class="question-btn" onclick="showResponse(2)">Is there a strong link between income and loan amount?</button>
+                    <button class="question-btn" onclick="showResponse(3)">Which credit grades do high-income borrowers usually receive?</button>
+                    <button class="question-btn" onclick="showResponse(4)">Are lower-income borrowers stuck with worse credit grades?</button>
+                    <button class="question-btn" onclick="showResponse(5)">Do higher-income borrowers actually have lower financial risk?</button>
+                    <button class="question-btn" onclick="showResponse(6)">What is the average debt-to-income ratio for each income group?</button>
+                    <button class="question-btn" onclick="showResponse(7)">How different is credit utilization between low and high income groups?</button>
+                    <button class="question-btn" onclick="showResponse(8)">If income alone doesn't drive loan amount, what seems to matter more?</button>
+                    <button class="question-btn" onclick="showResponse(9)">Is the grading system fair, or could it be biased toward higher income?</button>
+                    <button class="question-btn" onclick="showResponse(10)">As a lender, how should I adjust my policies based on what this data shows?</button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <p style="text-align: center; color: #999; font-style: italic;">Select a question above to see how the AI agent works</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+    <script>
+        const responses = {
+            1: {
+                question: "Do higher-income borrowers really pay lower interest rates, and by how much?",
+                workflow: [
+                    { title: "📋 Planning", content: "Breaking down the query: (1) Compare average interest rate across income groups, (2) Calculate the gap, (3) Cross-reference with report context on risk-based pricing." },
+                    { title: "🔍 MCP Tool Call — mcp_get_interest_rate_by_income", content: "Calling the 'do-dollar-drive-decisions-data-server' to fetch average interest rate grouped by income_group across 150 sampled loans..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Interest Rate by Income Group:",
+                    items: [
+                        "High-income borrowers: 11.39% average interest rate",
+                        "Low-income borrowers: 12.75% average interest rate",
+                        "Gap: 1.35 percentage points higher for low-income",
+                        "Sample: 66 high-income, 84 low-income loans"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Checking whether the rate gap is justified by risk or signals bias..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Higher-income applicants receive slightly lower interest rates, likely due to perceptions of lower risk associated with higher-income borrowers.\"",
+                        "\"The company should ensure this differentiation is based solely on risk and not unintentionally biased by income alone.\""
+                    ]
+                },
+                answer: "Yes — high-income borrowers pay 11.39% on average while low-income borrowers pay 12.75%, a 1.35 percentage point gap. The difference tracks real risk (lower debt-to-income for high earners), but the report warns it should be justified by objective credit factors, not income itself."
+            },
+            2: {
+                question: "Is there a strong link between income and loan amount?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: (1) Compute correlation between annual_income and loan_amount, (2) Compare average loan amounts across income groups, (3) Check if the difference is meaningful." },
+                    { title: "🔍 MCP Tool Call — mcp_get_loan_amount_by_income", content: "Fetching average loan amount and income-to-loan correlation from the MCP server..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Loan Amount vs Income:",
+                    items: [
+                        "Correlation (annual_income vs loan_amount): 0.35 — weak to moderate",
+                        "High-income avg loan amount: $21,481",
+                        "Low-income avg loan amount: $13,741",
+                        "Gap: high-income borrowers take loans ~56% larger on average"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Retrieving the report's position on income as a driver of loan amount..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"No strong correlation was found between income and loan amount.\"",
+                        "\"Factors such as credit scores, financial obligations, or debt-to-income ratios play a more significant role than income alone.\""
+                    ]
+                },
+                answer: "The link is weak — the correlation is only 0.35. High earners do borrow more on average ($21,481 vs $13,741), but the weak correlation tells you income alone does not drive loan amount. Credit score, debt obligations, and credit limits matter more."
+            },
+            3: {
+                question: "Which credit grades do high-income borrowers usually receive?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: filter by income_group='High', then compute grade distribution." },
+                    { title: "🔍 MCP Tool Call — mcp_get_grade_distribution", content: "Calling MCP tool with filter_group='High' on the lending data server..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Grade Distribution (High-Income):",
+                    items: [
+                        "Grade A: 30.3%",
+                        "Grade B: 31.8%",
+                        "Grade C: 27.3%",
+                        "Grade D: 7.6%",
+                        "Grade E: 3.0%",
+                        "Grade F: 0%",
+                        "Combined A+B share: 62.1%"
+                    ]
+                },
+                answer: "High-income borrowers are concentrated in the top grades — 62% of them hold grade A or B, with only 10.6% falling into D, E, or F. This is the grade profile you'd expect from lower-risk borrowers, but the report cautions it may partly reflect grading bias."
+            },
+            4: {
+                question: "Are lower-income borrowers stuck with worse credit grades?",
+                workflow: [
+                    { title: "📋 Planning", content: "Compare grade distributions for Low vs High income groups, focus on the share in lower grades (D, E, F)." },
+                    { title: "🔍 MCP Tool Call — mcp_get_grade_distribution", content: "Calling MCP tool twice, once with filter_group='Low' and once with 'High', for a side-by-side comparison..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Lower-Grade Share by Income:",
+                    items: [
+                        "Low-income in grades A+B: 52.4%",
+                        "High-income in grades A+B: 62.1%",
+                        "Low-income in grades D+E+F: 20.3%",
+                        "High-income in grades D+E+F: 10.6%",
+                        "Low-income borrowers are ~2x more likely to land in the worst grades"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Retrieving the fairness warning from the report..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Higher-income applicants are more likely to receive better credit grades (A and B), while lower-income applicants are more likely to receive lower grades (C, D, and E).\"",
+                        "\"This disparity could suggest grading biases, particularly if the grades are not fully justified by objective risk measures.\""
+                    ]
+                },
+                answer: "Yes — roughly 20% of low-income borrowers fall into grades D, E, or F, compared to just 11% of high-income ones. The report flags this as a possible grading bias that should be reviewed against objective risk metrics."
+            },
+            5: {
+                question: "Do higher-income borrowers actually have lower financial risk?",
+                workflow: [
+                    { title: "📋 Planning", content: "Pull risk metrics — debt-to-income, credit utilization, debt burden — for both income groups." },
+                    { title: "🔍 MCP Tool Call — mcp_get_risk_metrics", content: "Calling MCP tool to retrieve risk indicators grouped by income_group..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Risk Metrics by Income Group:",
+                    items: [
+                        "High-income debt-to-income: 17.14",
+                        "Low-income debt-to-income: 20.74",
+                        "High-income credit utilization: 34%",
+                        "Low-income credit utilization: 45%",
+                        "High-income debt burden: 17.48",
+                        "Low-income debt burden: 21.19"
+                    ]
+                },
+                answer: "Yes — high-income borrowers show meaningfully lower financial risk across every metric: a lower debt-to-income (17.14 vs 20.74) and lower credit utilization (34% vs 45%). This largely justifies better rates and grades, though the gap should still be priced by risk factors directly, not income."
+            },
+            6: {
+                question: "What is the average debt-to-income ratio for each income group?",
+                workflow: [
+                    { title: "📋 Planning", content: "Simple metric retrieval — debt-to-income by income group." },
+                    { title: "🔍 MCP Tool Call — mcp_get_risk_metrics", content: "Querying the MCP data server for debt_to_income averages grouped by income_group..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Debt-to-Income by Income Group:",
+                    items: [
+                        "High-income: 17.14 average DTI",
+                        "Low-income: 20.74 average DTI",
+                        "Gap: ~3.6 points higher for low-income borrowers"
+                    ]
+                },
+                answer: "High-income borrowers average a debt-to-income of 17.14, while low-income borrowers sit at 20.74 — about 3.6 points higher. That higher DTI is one of the strongest signals of real lending risk, and it explains much of the rate gap."
+            },
+            7: {
+                question: "How different is credit utilization between low and high income groups?",
+                workflow: [
+                    { title: "📋 Planning", content: "Retrieve credit_utilization_rate averages by income_group." },
+                    { title: "🔍 MCP Tool Call — mcp_compare_income_groups", content: "Calling MCP comparison tool with metric='credit_utilization_rate'..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Credit Utilization Comparison:",
+                    items: [
+                        "High-income: 34% average utilization",
+                        "Low-income: 45% average utilization",
+                        "Low-income borrowers use 11 percentage points more of their available credit"
+                    ]
+                },
+                answer: "Low-income borrowers use about 45% of their available credit on average, compared to 34% for high-income borrowers — an 11 point gap. Higher utilization is a classic risk signal and helps explain why they end up in lower grades."
+            },
+            8: {
+                question: "If income alone doesn't drive loan amount, what seems to matter more?",
+                workflow: [
+                    { title: "📋 Planning", content: "Run correlations between loan_amount and key financial variables: income, DTI, credit utilization, total credit limit." },
+                    { title: "🔍 MCP Tool Call — mcp_filter_loans + correlation analysis", content: "Fetching full-sample correlations from the MCP server..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Correlation with Loan Amount:",
+                    items: [
+                        "Total credit limit: 0.34 (strongest positive signal)",
+                        "Annual income: 0.35",
+                        "Credit utilization rate: -0.14",
+                        "Debt-to-income: -0.03 (effectively none)"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Checking the report's stance on what drives loan amounts..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Credit scores, financial obligations, or other risk factors play a more significant role in determining loan amounts than income alone.\"",
+                        "\"Income alone does not automatically grant higher loan amounts.\""
+                    ]
+                },
+                answer: "Total credit limit and overall credit profile matter about as much as income (both around 0.34–0.35), while credit utilization slightly limits loan size. The picture is clear — loan amount is determined by a borrower's broader credit capacity, not income alone."
+            },
+            9: {
+                question: "Is the grading system fair, or could it be biased toward higher income?",
+                workflow: [
+                    { title: "📋 Planning", content: "(1) Check if high-income borrowers get disproportionately better grades, (2) See if grade differences are fully explained by risk metrics, (3) Pull report conclusion." },
+                    { title: "🔍 MCP Tool Call — mcp_get_grade_distribution + mcp_get_risk_metrics", content: "Comparing grade share and risk metrics across income groups..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Fairness Check:",
+                    items: [
+                        "High-income share in A+B: 62.1%",
+                        "Low-income share in A+B: 52.4%",
+                        "Risk gap (DTI): 17.14 vs 20.74 — ~17% worse for low-income",
+                        "But grade A+B gap: 10 points — larger than the risk gap suggests"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Pulling the report's conclusion on grading fairness..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"The overrepresentation of higher credit grades in high-income groups may indicate a potential grading bias.\"",
+                        "\"The company should ensure grades are assigned based on consistent, transparent criteria that accurately reflect financial risk and not be influenced by income bias.\""
+                    ]
+                },
+                answer: "There's a credible fairness concern — the grade gap between income groups is wider than the underlying risk gap would justify. The report recommends reviewing grading criteria to ensure grades are driven by credit factors, not income itself."
+            },
+            10: {
+                question: "As a lender, how should I adjust my policies based on what this data shows?",
+                workflow: [
+                    { title: "📋 Planning", content: "Synthesize findings across all MCP tools and the report recommendations into actionable policy guidance." },
+                    { title: "🔍 MCP Tool Call — mcp_get_dataset_overview", content: "Getting a final summary view of the lending data before recommending..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Headline Signals:",
+                    items: [
+                        "Rate gap (1.35%) partly justified by risk but possibly inflated by income",
+                        "Grade gap (10 points A+B) wider than risk gap (3.6 DTI points)",
+                        "Loan amount driven by total credit profile, not income",
+                        "Real risk signals: debt-to-income and credit utilization"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report Recommendations", content: "Retrieving the four policy actions recommended in the report..." }
+                ],
+                dataResult2: {
+                    title: "Recommended Actions:",
+                    items: [
+                        "\"Review interest rate assignment criteria — rates should reflect risk, not income.\"",
+                        "\"Refine credit grading systems — ensure grades are driven by creditworthiness.\"",
+                        "\"Base loan amount decisions on credit score, DTI, and financial history.\"",
+                        "\"Monitor and adjust for sampling bias in the lending data used.\""
+                    ]
+                },
+                answer: "Price rates and assign grades directly off risk signals like debt-to-income and credit utilization, not income bracket. Review your grading system for bias, and make sure loan amount decisions are driven by the borrower's full credit profile so lending stays fair and compliant."
+            }
+        };
+
+        function showResponse(id) {
+            const r = responses[id];
+            const chat = document.getElementById("chatMessages");
+            chat.innerHTML = "";
+
+            const userMsg = document.createElement("div");
+            userMsg.className = "message user";
+            userMsg.textContent = r.question;
+            chat.appendChild(userMsg);
+
+            const agentMsg = document.createElement("div");
+            agentMsg.className = "message agent";
+            let html = '<span class="agent-label">AI Agent (Lending Fairness Advisor)</span>';
+
+            r.workflow.forEach(s => {
+                html += `<div class="workflow-step"><div class="step-title">${s.title}</div><div class="step-content">${s.content}</div></div>`;
+            });
+            html += `<div class="data-result"><div class="result-title">${r.dataResult.title}</div><ul>`;
+            r.dataResult.items.forEach(i => html += `<li>${i}</li>`);
+            html += `</ul></div>`;
+
+            if (r.workflow2) {
+                r.workflow2.forEach(s => {
+                    html += `<div class="workflow-step"><div class="step-title">${s.title}</div><div class="step-content">${s.content}</div></div>`;
+                });
+            }
+            if (r.dataResult2) {
+                html += `<div class="data-result"><div class="result-title">${r.dataResult2.title}</div><ul>`;
+                r.dataResult2.items.forEach(i => html += `<li>${i}</li>`);
+                html += `</ul></div>`;
+            }
+
+            html += `<div class="final-answer"><span class="answer-label">💡 Final Answer</span>${r.answer}</div>`;
+            agentMsg.innerHTML = html;
+            chat.appendChild(agentMsg);
+            chat.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    </script>
+</body>
+</html>
