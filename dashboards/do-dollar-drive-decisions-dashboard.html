@@ -115,7 +115,7 @@
       <label>State:
         <select id="f-state"><option value="All">All</option></select>
       </label>
-      <span class="filters-note">Filters are visual guides; charts show the full 2,990-loan dataset.</span>
+      <span class="filters-note">Showing 150 of 2,990 loans (representative sample). Filters operate on the sample and recompute all charts.</span>
     </div>
 
     <div class="page-nav">
@@ -207,64 +207,348 @@
 </div>
 
 <script>
-const DATA = {"kpi1": {"total_loans": 2990, "total_volume": 50.14, "avg_loan": 16770, "median_rate": 11.98}, "q1_2": {"labels": ["0-5000", "5000-10000", "10000-15000", "15000-20000", "20000-25000", "25000-30000", "30000-35000", "35000-40000"], "counts": [257, 535, 656, 439, 397, 232, 181, 293]}, "q1_3": {"labels": ["5-8", "8-11", "11-14", "14-17", "17-20", "20-23", "23-26", "26-29", "29-32"], "counts": [709, 748, 546, 437, 281, 157, 59, 40, 13]}, "q1_4": {"labels": ["A", "B", "C", "D", "E", "F", "G"], "counts": [709, 939, 792, 429, 97, 20, 4]}, "q1_5": {"labels": ["0-40000", "40000-70000", "70000-100000", "100000-130000", "130000-160000", "160000-200000", "200000-300000"], "counts": [421, 1062, 760, 377, 182, 96, 92]}, "q1_6": {"labels": ["CA", "NY", "TX", "FL", "IL", "OH", "GA", "NC", "NJ", "PA"], "counts": [398, 226, 225, 205, 108, 106, 100, 95, 93, 90]}, "q2_1": {"labels": ["A", "B", "C", "D", "E", "F", "G"], "values": [6.73, 10.51, 14.18, 19.16, 25.21, 29.3, 30.79]}, "q2_2": {"labels": ["High", "Low"], "values": [20739, 13176]}, "q2_3": {"labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], "values": [12.18, 12.3, 12.73, 12.74, 12.09, 12.57, 12.69, 12.77, 13.25, 12.25, 12.32]}, "q2_4": {"labels": ["MORTGAGE", "OWN", "RENT"], "values": [18522, 16386, 14596]}, "q2_5": {"labels": ["WA", "OH", "NY", "MI", "FL", "CA", "MA", "IL", "PA", "GA", "NJ", "AZ", "NC", "VA", "TX"], "values": [13.45, 12.78, 12.71, 12.59, 12.44, 12.44, 12.41, 12.39, 12.2, 12.14, 12.13, 11.89, 11.81, 11.8, 11.68]}, "q2_6": {"labels": ["A", "B", "C", "D", "E", "F", "G"], "values": [0.207, 0.247, 0.26, 0.278, 0.302, 0.435, 0.28]}, "kpi3": {"high_dti_count": 393, "pct_efg": 4.05, "avg_util": 40.83}, "q3_1": {"labels": ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60"], "counts": [639, 1140, 818, 306, 52, 35]}, "q3_2": {"labels": ["A", "B", "C", "D", "E", "F", "G"], "values": [31.08, 38.87, 45.06, 51.25, 48.28, 49.65, 46.25]}, "q3_3": [{"label": "Grade A", "data": [{"x": 0.15, "y": 22.93}, {"x": 0.14, "y": 19.13}, {"x": 0.1, "y": 15.66}, {"x": 0.16, "y": 16.18}, {"x": 0.33, "y": 19.93}, {"x": 0.13, "y": 4.39}, {"x": 0.15, "y": 4.09}, {"x": 0.17, "y": 23.28}, {"x": 0.11, "y": 18.19}, {"x": 0.1, "y": 1.0}, {"x": 0.25, "y": 22.72}, {"x": 0.18, "y": 29.68}, {"x": 0.13, "y": 35.8}, {"x": 0.22, "y": 19.23}, {"x": 0.4, "y": 2.0}, {"x": 0.3, "y": 30.71}, {"x": 0.17, "y": 29.84}, {"x": 0.17, "y": 16.12}, {"x": 0.24, "y": 10.29}, {"x": 0.15, "y": 12.08}, {"x": 0.24, "y": 15.19}, {"x": 0.3, "y": 27.27}, {"x": 0.08, "y": 22.51}, {"x": 0.15, "y": 7.5}, {"x": 0.34, "y": 17.65}, {"x": 0.12, "y": 7.85}, {"x": 0.24, "y": 24.52}, {"x": 0.33, "y": 24.26}, {"x": 0.06, "y": 9.98}, {"x": 0.47, "y": 20.32}, {"x": 0.13, "y": 20.05}, {"x": 0.04, "y": 20.99}, {"x": 0.13, "y": 19.26}, {"x": 0.08, "y": 8.68}, {"x": 0.09, "y": 7.77}, {"x": 0.02, "y": 19.46}, {"x": 0.3, "y": 1.43}, {"x": 0.12, "y": 22.56}, {"x": 0.32, "y": 8.65}, {"x": 0.15, "y": 26.18}, {"x": 0.33, "y": 27.83}, {"x": 0.11, "y": 14.23}, {"x": 0.25, "y": 17.78}, {"x": 0.36, "y": 25.73}, {"x": 0.13, "y": 30.06}, {"x": 0.3, "y": 4.02}, {"x": 0.11, "y": 4.56}, {"x": 0.22, "y": 9.66}, {"x": 0.22, "y": 18.39}, {"x": 0.05, "y": 13.01}, {"x": 0.24, "y": 5.93}, {"x": 0.17, "y": 25.38}, {"x": 0.3, "y": 13.51}, {"x": 0.16, "y": 24.99}, {"x": 0.07, "y": 19.64}, {"x": 0.1, "y": 19.38}, {"x": 0.4, "y": 15.27}, {"x": 0.05, "y": 17.98}, {"x": 0.15, "y": 20.79}, {"x": 0.21, "y": 20.08}, {"x": 0.42, "y": 13.98}, {"x": 0.18, "y": 20.53}, {"x": 0.35, "y": 11.37}, {"x": 0.27, "y": 29.47}, {"x": 0.46, "y": 47.67}, {"x": 0.1, "y": 26.58}, {"x": 0.43, "y": 13.41}, {"x": 0.22, "y": 13.88}, {"x": 0.06, "y": 6.07}, {"x": 0.08, "y": 19.25}, {"x": 0.15, "y": 26.01}, {"x": 0.25, "y": 15.99}, {"x": 0.19, "y": 17.5}, {"x": 0.17, "y": 23.91}, {"x": 0.08, "y": 22.06}, {"x": 0.27, "y": 6.26}, {"x": 0.25, "y": 14.4}, {"x": 0.12, "y": 10.81}, {"x": 0.2, "y": 15.2}, {"x": 0.12, "y": 22.98}, {"x": 0.02, "y": 1.54}, {"x": 0.12, "y": 13.95}, {"x": 0.25, "y": 9.78}, {"x": 0.1, "y": 22.38}, {"x": 0.04, "y": 10.61}, {"x": 0.13, "y": 11.91}, {"x": 0.21, "y": 36.01}, {"x": 0.07, "y": 16.21}, {"x": 0.16, "y": 17.33}, {"x": 0.21, "y": 19.98}, {"x": 0.12, "y": 11.19}, {"x": 0.13, "y": 5.19}, {"x": 0.39, "y": 17.93}, {"x": 0.35, "y": 26.61}, {"x": 0.24, "y": 19.59}, {"x": 0.53, "y": 135.28}, {"x": 0.02, "y": 8.87}, {"x": 0.37, "y": 7.29}, {"x": 0.2, "y": 6.78}, {"x": 0.27, "y": 5.81}, {"x": 0.16, "y": 5.81}, {"x": 0.04, "y": 1.97}, {"x": 0.34, "y": 17.56}, {"x": 0.1, "y": 6.21}, {"x": 0.2, "y": 9.38}, {"x": 0.13, "y": 6.53}, {"x": 0.22, "y": 22.1}], "backgroundColor": "#4CAF50"}, {"label": "Grade B", "data": [{"x": 0.02, "y": 10.68}, {"x": 0.33, "y": 62.58}, {"x": 0.26, "y": 22.83}, {"x": 0.15, "y": 1.45}, {"x": 0.24, "y": 30.96}, {"x": 0.17, "y": 31.4}, {"x": 0.29, "y": 11.18}, {"x": 0.06, "y": 20.32}, {"x": 0.13, "y": 13.79}, {"x": 0.37, "y": 10.27}, {"x": 0.05, "y": 27.77}, {"x": 0.19, "y": 20.82}, {"x": 0.06, "y": 15.88}, {"x": 0.08, "y": 22.05}, {"x": 0.22, "y": 6.69}, {"x": 0.27, "y": 14.83}, {"x": 0.2, "y": 36.87}, {"x": 0.18, "y": 1.15}, {"x": 0.23, "y": 21.85}, {"x": 0.25, "y": 3.96}, {"x": 0.48, "y": 2.86}, {"x": 0.06, "y": 17.83}, {"x": 0.1, "y": 2.31}, {"x": 0.53, "y": 16.02}, {"x": 0.07, "y": 12.82}, {"x": 0.17, "y": 27.33}, {"x": 0.33, "y": 16.09}, {"x": 0.06, "y": 8.8}, {"x": 0.22, "y": 10.7}, {"x": 0.34, "y": 14.68}, {"x": 0.12, "y": 29.67}, {"x": 0.1, "y": 7.08}, {"x": 0.19, "y": 5.21}, {"x": 0.56, "y": 46.29}, {"x": 0.12, "y": 9.34}, {"x": 0.22, "y": 13.4}, {"x": 0.43, "y": 9.82}, {"x": 0.08, "y": 16.79}, {"x": 0.52, "y": 2.75}, {"x": 0.08, "y": 16.31}, {"x": 0.26, "y": 13.38}, {"x": 0.28, "y": 31.79}, {"x": 0.25, "y": 7.14}, {"x": 0.51, "y": 44.14}, {"x": 0.17, "y": 9.26}, {"x": 0.05, "y": 14.59}, {"x": 0.19, "y": 3.67}, {"x": 0.06, "y": 19.83}, {"x": 0.09, "y": 11.27}, {"x": 0.19, "y": 22.52}, {"x": 0.03, "y": 20.99}, {"x": 0.15, "y": 8.74}, {"x": 0.18, "y": 23.03}, {"x": 0.21, "y": 6.46}, {"x": 0.17, "y": 26.88}, {"x": 0.08, "y": 37.61}, {"x": 0.2, "y": 33.6}, {"x": 0.18, "y": 1.44}, {"x": 0.04, "y": 5.66}, {"x": 0.33, "y": 29.52}, {"x": 0.18, "y": 16.17}, {"x": 0.22, "y": 28.94}, {"x": 0.37, "y": 11.44}, {"x": 0.18, "y": 9.62}, {"x": 0.16, "y": 24.97}, {"x": 0.19, "y": 20.51}, {"x": 0.93, "y": 1.56}, {"x": 0.46, "y": 22.09}, {"x": 0.08, "y": 11.82}, {"x": 0.36, "y": 13.08}, {"x": 0.35, "y": 19.84}, {"x": 0.31, "y": 19.89}, {"x": 0.27, "y": 11.52}, {"x": 0.09, "y": 11.13}, {"x": 0.27, "y": 9.79}, {"x": 0.49, "y": 8.55}, {"x": 0.35, "y": 26.27}, {"x": 0.16, "y": 8.28}, {"x": 0.58, "y": 23.04}, {"x": 0.13, "y": 12.59}, {"x": 0.14, "y": 16.72}, {"x": 0.08, "y": 21.86}, {"x": 0.2, "y": 27.32}, {"x": 0.21, "y": 17.44}, {"x": 0.09, "y": 11.47}, {"x": 0.12, "y": 0.68}, {"x": 0.49, "y": 35.5}, {"x": 0.26, "y": 22.65}, {"x": 0.14, "y": 7.47}, {"x": 0.41, "y": 29.07}, {"x": 0.32, "y": 11.99}, {"x": 0.4, "y": 17.86}, {"x": 0.24, "y": 21.6}, {"x": 0.1, "y": 4.04}, {"x": 0.4, "y": 3.17}, {"x": 0.1, "y": 12.79}, {"x": 0.39, "y": 24.82}, {"x": 0.13, "y": 8.64}, {"x": 0.56, "y": 24.86}, {"x": 0.5, "y": 17.45}, {"x": 0.2, "y": 13.08}, {"x": 0.18, "y": 28.95}, {"x": 0.15, "y": 10.04}, {"x": 0.03, "y": 12.58}, {"x": 0.05, "y": 0.69}, {"x": 0.57, "y": 8.86}, {"x": 0.35, "y": 26.77}, {"x": 0.12, "y": 27.39}, {"x": 0.42, "y": 9.41}, {"x": 0.13, "y": 26.4}, {"x": 0.14, "y": 5.81}, {"x": 0.42, "y": 20.89}, {"x": 0.06, "y": 9.63}, {"x": 0.12, "y": 16.37}, {"x": 0.33, "y": 23.22}, {"x": 0.35, "y": 17.67}, {"x": 0.12, "y": 7.89}, {"x": 0.18, "y": 20.1}, {"x": 0.43, "y": 18.81}, {"x": 0.15, "y": 27.04}, {"x": 0.51, "y": 8.15}], "backgroundColor": "#8BC34A"}, {"label": "Grade C", "data": [{"x": 0.31, "y": 10.29}, {"x": 0.4, "y": 4.99}, {"x": 0.32, "y": 25.49}, {"x": 0.31, "y": 4.5}, {"x": 0.12, "y": 9.93}, {"x": 0.48, "y": 19.84}, {"x": 0.09, "y": 1.79}, {"x": 0.26, "y": 18.18}, {"x": 0.16, "y": 15.01}, {"x": 0.14, "y": 8.37}, {"x": 0.09, "y": 10.85}, {"x": 0.5, "y": 12.29}, {"x": 0.22, "y": 4.64}, {"x": 0.02, "y": 26.07}, {"x": 0.08, "y": 12.83}, {"x": 0.08, "y": 23.47}, {"x": 0.2, "y": 35.67}, {"x": 0.32, "y": 33.14}, {"x": 0.35, "y": 14.08}, {"x": 0.1, "y": 27.23}, {"x": 0.17, "y": 25.02}, {"x": 0.62, "y": 19.85}, {"x": 0.04, "y": 16.0}, {"x": 0.06, "y": 25.44}, {"x": 0.14, "y": 19.38}, {"x": 0.29, "y": 11.18}, {"x": 0.42, "y": 20.93}, {"x": 0.14, "y": 17.51}, {"x": 0.42, "y": 12.24}, {"x": 0.16, "y": 24.01}, {"x": 0.44, "y": 29.62}, {"x": 0.36, "y": 31.92}, {"x": 0.19, "y": 16.75}, {"x": 0.13, "y": 20.39}, {"x": 0.1, "y": 13.62}, {"x": 0.25, "y": 14.7}, {"x": 0.39, "y": 9.54}, {"x": 0.25, "y": 22.92}, {"x": 0.54, "y": 11.84}, {"x": 0.4, "y": 12.58}, {"x": 0.25, "y": 26.82}, {"x": 0.2, "y": 13.74}, {"x": 0.25, "y": 27.4}, {"x": 0.07, "y": 19.41}, {"x": 0.29, "y": 31.34}, {"x": 0.62, "y": 27.78}, {"x": 0.43, "y": 16.08}, {"x": 0.06, "y": 12.29}, {"x": 0.17, "y": 22.28}, {"x": 0.32, "y": 17.3}, {"x": 0.12, "y": 35.49}, {"x": 0.02, "y": 14.43}, {"x": 0.29, "y": 7.73}, {"x": 0.16, "y": 35.15}, {"x": 0.86, "y": 5.52}, {"x": 0.25, "y": 27.51}, {"x": 0.27, "y": 3.12}, {"x": 0.31, "y": 20.38}, {"x": 0.29, "y": 19.67}, {"x": 0.36, "y": 18.02}, {"x": 0.37, "y": 5.41}, {"x": 0.27, "y": 11.6}, {"x": 0.53, "y": 22.73}, {"x": 0.06, "y": 3.06}, {"x": 0.28, "y": 21.99}, {"x": 0.31, "y": 13.2}, {"x": 0.28, "y": 31.76}, {"x": 0.1, "y": 10.29}, {"x": 0.41, "y": 27.45}, {"x": 0.08, "y": 11.63}, {"x": 0.21, "y": 20.6}, {"x": 0.18, "y": 1.43}, {"x": 0.35, "y": 3.83}, {"x": 0.33, "y": 8.7}, {"x": 0.65, "y": 5.63}, {"x": 0.08, "y": 2.97}, {"x": 0.17, "y": 19.46}, {"x": 0.33, "y": 41.35}, {"x": 0.4, "y": 20.25}, {"x": 0.24, "y": 23.63}, {"x": 0.42, "y": 30.66}, {"x": 0.23, "y": 11.41}, {"x": 0.22, "y": 4.36}, {"x": 0.08, "y": 5.85}, {"x": 0.34, "y": 21.79}, {"x": 0.17, "y": 25.16}, {"x": 0.1, "y": 23.91}, {"x": 0.08, "y": 8.48}, {"x": 0.12, "y": 6.84}, {"x": 0.57, "y": 32.74}, {"x": 0.17, "y": 3.79}, {"x": 0.17, "y": 15.23}, {"x": 0.09, "y": 17.78}, {"x": 0.07, "y": 7.9}, {"x": 0.27, "y": 9.78}, {"x": 0.19, "y": 13.29}, {"x": 0.25, "y": 18.86}, {"x": 0.31, "y": 18.37}, {"x": 0.24, "y": 19.45}, {"x": 0.1, "y": 23.53}, {"x": 0.28, "y": 9.98}, {"x": 0.08, "y": 1.71}, {"x": 0.14, "y": 20.88}], "backgroundColor": "#FFC107"}, {"label": "Grade D", "data": [{"x": 0.11, "y": 9.07}, {"x": 0.21, "y": 12.31}, {"x": 0.26, "y": 40.4}, {"x": 0.24, "y": 20.09}, {"x": 0.31, "y": 9.21}, {"x": 0.3, "y": 11.53}, {"x": 0.15, "y": 22.1}, {"x": 0.16, "y": 10.72}, {"x": 0.29, "y": 13.73}, {"x": 0.19, "y": 27.77}, {"x": 0.4, "y": 8.16}, {"x": 0.05, "y": 11.69}, {"x": 0.22, "y": 21.36}, {"x": 0.42, "y": 26.79}, {"x": 0.38, "y": 25.94}, {"x": 0.39, "y": 10.74}, {"x": 0.13, "y": 13.23}, {"x": 0.34, "y": 11.31}, {"x": 0.14, "y": 11.36}, {"x": 0.31, "y": 7.45}, {"x": 0.03, "y": 18.36}, {"x": 0.44, "y": 31.03}, {"x": 0.07, "y": 31.72}, {"x": 0.43, "y": 40.51}, {"x": 0.24, "y": 34.63}, {"x": 0.19, "y": 25.06}, {"x": 0.4, "y": 16.21}, {"x": 1.04, "y": 182.35}, {"x": 0.19, "y": 15.97}, {"x": 0.18, "y": 22.59}, {"x": 0.54, "y": 33.44}, {"x": 0.2, "y": 30.55}, {"x": 0.1, "y": 13.11}, {"x": 0.22, "y": 31.58}, {"x": 0.11, "y": 8.33}, {"x": 0.42, "y": 20.06}, {"x": 0.3, "y": 15.41}, {"x": 0.02, "y": 13.84}, {"x": 0.03, "y": 3.41}, {"x": 0.13, "y": 13.95}, {"x": 0.19, "y": 16.05}, {"x": 0.23, "y": 39.57}, {"x": 0.21, "y": 25.68}, {"x": 0.42, "y": 13.48}, {"x": 0.34, "y": 25.9}, {"x": 0.26, "y": 27.23}, {"x": 0.14, "y": 7.27}, {"x": 0.22, "y": 27.93}, {"x": 0.17, "y": 28.68}, {"x": 0.1, "y": 17.19}, {"x": 0.06, "y": 21.93}, {"x": 0.03, "y": 8.41}, {"x": 0.19, "y": 15.9}, {"x": 0.37, "y": 18.9}, {"x": 0.14, "y": 27.64}, {"x": 0.23, "y": 22.82}], "backgroundColor": "#FF9800"}, {"label": "Grade E", "data": [{"x": 0.17, "y": 29.47}, {"x": 0.11, "y": 21.88}, {"x": 0.53, "y": 24.2}, {"x": 0.16, "y": 30.96}, {"x": 0.35, "y": 53.25}, {"x": 0.53, "y": 18.95}, {"x": 0.27, "y": 12.49}, {"x": 0.11, "y": 25.27}, {"x": 0.18, "y": 30.94}, {"x": 0.23, "y": 7.15}], "backgroundColor": "#FF5722"}, {"label": "Grade F", "data": [{"x": 0.48, "y": 15.55}, {"x": 0.5, "y": 35.25}, {"x": 0.62, "y": 4.48}], "backgroundColor": "#E57373"}], "q3_4": {"labels": ["High", "Low"], "values": [17.21, 21.84]}, "q3_6": {"labels": ["A", "B", "C", "D", "E", "F", "G"], "values": [14140, 14994, 14963, 15091, 17388, 19155, 15444]}, "q4_1": {"labels": ["A", "B", "C", "D", "E", "F", "G"], "low": [6.88, 10.54, 14.23, 19.05, 25.05, 29.12, 30.79], "high": [6.61, 10.47, 14.13, 19.33, 25.43, 29.53, 30.79]}, "q4_2": {"labels": ["A", "B", "C", "D", "E", "F", "G"], "low": [11211, 13198, 13289, 14227, 16733, 21773, 18750], "high": [20319, 20471, 21061, 21220, 22280, 23033, 23433]}, "q4_3": {"labels": ["High", "Low"], "grades": ["A", "B", "C", "D", "E", "F", "G"], "data": {"A": [27.09, 20.65], "B": [32.51, 30.4], "C": [25.05, 27.79], "D": [11.61, 16.83], "E": [2.89, 3.57], "F": [0.63, 0.7], "G": [0.21, 0.06]}}, "q4_4": {"labels": ["High", "Low"], "values": [16.85, 21.39]}, "q4_5": {"labels": ["CA", "NY", "TX", "FL", "IL", "OH", "GA", "NC", "NJ", "PA"], "low": [12.75, 13.01, 12.17, 12.39, 12.92, 13.25, 12.4, 12.26, 13.45, 12.87], "high": [12.17, 12.31, 11.18, 12.5, 11.79, 12.01, 11.87, 11.16, 11.3, 11.47]}, "q4_6": {"labels": ["MORTGAGE", "OWN", "RENT"], "low": [14547, 13156, 12035], "high": [21305, 21242, 19299]}};
-
-document.getElementById('kpi-loans').textContent = DATA.kpi1.total_loans.toLocaleString();
-document.getElementById('kpi-volume').textContent = '$' + DATA.kpi1.total_volume + 'M';
-document.getElementById('kpi-avg').textContent = '$' + DATA.kpi1.avg_loan.toLocaleString();
-document.getElementById('kpi-rate').textContent = DATA.kpi1.median_rate + '%';
-document.getElementById('kpi-dti').textContent = DATA.kpi3.high_dti_count.toLocaleString();
-document.getElementById('kpi-efg').textContent = DATA.kpi3.pct_efg + '%';
-document.getElementById('kpi-util').textContent = DATA.kpi3.avg_util + '%';
-
-const BRAND = '#CBA135', DARK = '#403B36';
-const GRADE_COLORS = {A:'#4CAF50',B:'#8BC34A',C:'#FFC107',D:'#FF9800',E:'#FF5722',F:'#E57373',G:'#B71C1C'};
+const ROWS = [
+[10,'CA','OWN',10.68,150000,2800,9.44,'B',2456.67,'High',0.02,0.05],
+[2,'PA','RENT',10.29,55000,17000,15.04,'C',15856.03,'Low',0.31,0.46],
+[10,'VA','MORTGAGE',62.58,45000,15000,10.41,'B',13920.33,'Low',0.33,0.32],
+[4,'FL','MORTGAGE',9.07,57000,6500,17.09,'D',5930.09,'Low',0.11,0.51],
+[2,'NJ','MORTGAGE',22.93,100000,15000,6.08,'A',13464.86,'High',0.15,0.2],
+[10,'KY','MORTGAGE',22.83,42000,11000,9.43,'B',10563.97,'Low',0.26,0.19],
+[3,'NY','RENT',4.99,50000,20000,12.61,'C',13593.3,'Low',0.4,0.16],
+[9,'OH','MORTGAGE',25.49,79000,25000,12.62,'C',23462.69,'High',0.32,0.19],
+[1,'NC','MORTGAGE',1.45,66000,9600,9.44,'B',8899.33,'Low',0.15,0.01],
+[10,'NY','OWN',12.31,167000,35000,21.45,'D',33643.67,'High',0.21,0.72],
+[5,'TX','MORTGAGE',30.96,50000,12000,11.98,'B',11155.65,'Low',0.24,0.18],
+[1,'CA','RENT',40.4,60000,15600,20,'D',14807.46,'Low',0.26,0.73],
+[10,'CA','MORTGAGE',31.4,104000,18000,10.9,'B',16713.54,'High',0.17,0.96],
+[2,'AL','RENT',4.5,32000,10000,13.59,'C',9522.69,'Low',0.31,0.74],
+[3,'WI','RENT',29.47,36000,6100,23.88,'E',5615.58,'Low',0.17,0.94],
+[3,'VA','RENT',19.13,170000,23000,7.35,'A',20099.76,'High',0.14,0.88],
+[5,'MI','MORTGAGE',15.66,106000,11000,7.35,'A',9612.89,'High',0.1,0.43],
+[4,'NJ','RENT',9.93,40000,4800,13.59,'C',4357.6,'Low',0.12,0.3],
+[10,'NV','MORTGAGE',11.18,70000,20000,9.92,'B',0,'Low',0.29,0.15],
+[6,'FL','MORTGAGE',16.18,220000,36000,6.08,'A',31382.95,'High',0.16,0.13],
+[10,'MI','MORTGAGE',20.32,73000,4550,9.44,'B',4105.44,'High',0.06,0.14],
+[9,'CA','OWN',20.09,47611.2,11200,20.39,'D',10867.83,'Low',0.24,0.83],
+[7,'TX','MORTGAGE',13.79,45000,6000,10.42,'B',5400.65,'Low',0.13,0.71],
+[10,'CT','MORTGAGE',19.84,75000,36000,13.59,'C',34284.21,'High',0.48,0.48],
+[10,'MN','OWN',19.93,120000,40000,7.96,'A',37018.15,'High',0.33,0.19],
+[4,'GA','MORTGAGE',9.21,80000,25000,17.09,'D',23911.06,'High',0.31,0.33],
+[5,'TX','RENT',11.53,100000,30000,17.47,'D',29036.82,'High',0.3,0.66],
+[10,'GA','MORTGAGE',10.27,75000,28000,9.43,'B',26890.12,'High',0.37,0.23],
+[3,'WA','RENT',27.77,101000,5000,9.93,'B',4390.98,'High',0.05,0.51],
+[10,'NY','RENT',1.79,45000,4200,12.62,'C',3706.84,'Low',0.09,0.36],
+[8,'NC','MORTGAGE',4.39,125000,16000,6.07,'A',14774.84,'High',0.13,0.14],
+[3,'CT','RENT',20.82,66000,12800,10.91,'B',11574.83,'Low',0.19,0.58],
+[0,'CA','MORTGAGE',18.18,50000,12800,13.59,'C',11980.96,'Low',0.26,0.1],
+[9,'CA','RENT',15.01,125000,20250,16.02,'C',17981.27,'High',0.16,0.66],
+[2,'KY','MORTGAGE',22.1,81000,12000,17.09,'D',11477.29,'High',0.15,0.31],
+[9,'NC','OWN',4.09,46680,7000,6.72,'A',6109.84,'Low',0.15,0.2],
+[5,'TX','MORTGAGE',23.28,115000,20000,6.07,'A',0,'High',0.17,0.87],
+[10,'IL','MORTGAGE',8.37,197000,27000,16.01,'C',25789.99,'High',0.14,0.5],
+[2,'VA','MORTGAGE',10.85,80000,7000,13.58,'C',6681,'High',0.09,0.41],
+[10,'CA','MORTGAGE',18.19,95000,10000,7.34,'A',9247.93,'High',0.11,0.15],
+[1,'MA','MORTGAGE',21.88,320000,35000,26.3,'E',34119.79,'High',0.11,0.75],
+[8,'FL','RENT',10.72,80000,13000,21.85,'D',0,'High',0.16,0.57],
+[10,'UT','RENT',15.88,107000,6000,10.91,'B',5425.71,'High',0.06,0.41],
+[5,'WA','RENT',1,60000,6000,7.96,'A',5702.8,'Low',0.1,0.36],
+[10,'IN','MORTGAGE',22.05,65000,5500,10.9,'B',5106.89,'Low',0.08,0.29],
+[7,'TX','OWN',6.69,40000,9000,11.99,'B',7934.09,'Low',0.22,0.37],
+[10,'CA','OWN',13.73,100000,28525,21.45,'D',25563.99,'High',0.29,0.88],
+[3,'SC','OWN',27.77,52000,10000,21.85,'D',9391.92,'Low',0.19,0.79],
+[3,'OH','OWN',12.29,23920,12000,14.07,'C',11578.21,'Low',0.5,0.52],
+[5,'CA','RENT',8.16,7500,3000,19.42,'D',2760.78,'Low',0.4,0.4],
+[1,'KS','RENT',4.64,45000,10000,13.58,'C',9522.56,'Low',0.22,0.95],
+[5,'NJ','RENT',14.83,75000,20000,10.9,'B',19051.38,'High',0.27,0.58],
+[10,'FL','OWN',36.87,25000,5000,11.98,'B',4766.61,'Low',0.2,0.23],
+[10,'NY','RENT',22.72,80000,20000,7.97,'A',18005.74,'High',0.25,0.38],
+[10,'CA','MORTGAGE',26.07,110000,2400,13.58,'C',2290.62,'High',0.02,0.12],
+[3,'CA','RENT',29.68,85000,15000,6.08,'A',13076.2,'High',0.18,0.65],
+[2,'TX','RENT',1.15,26000,4800,9.93,'B',4684.99,'Low',0.18,0.12],
+[9,'CA','RENT',12.83,130000,10000,15.05,'C',9097.26,'High',0.08,0.59],
+[3,'CA','MORTGAGE',35.8,89179,12000,7.97,'A',10499.3,'High',0.13,0.27],
+[10,'OH','MORTGAGE',21.85,64000,15000,11.99,'B',14443.3,'Low',0.23,0.69],
+[9,'NM','MORTGAGE',19.23,90000,20000,7.97,'A',18005.74,'High',0.22,0.2],
+[10,'TN','OWN',23.47,66144,5000,14.08,'C',4424.95,'Low',0.08,0.45],
+[2,'NY','RENT',2,30000,12000,6.71,'A',11089.41,'Low',0.4,0.05],
+[4,'CA','MORTGAGE',3.96,60000,15000,9.44,'B',13160.89,'Low',0.25,0.03],
+[6,'CA','RENT',11.69,160000,8000,18.06,'D',7308.3,'High',0.05,0.61],
+[1,'WI','RENT',35.67,40000,8000,13.58,'C',7450.02,'Low',0.2,0.69],
+[10,'FL','OWN',21.36,89000,20000,18.06,'D',18270.81,'High',0.22,0.2],
+[3,'NY','RENT',2.86,52000,25000,11.98,'B',24071.97,'Low',0.48,0.2],
+[10,'OH','MORTGAGE',30.71,54000,16000,7.97,'A',13999.08,'Low',0.3,0.23],
+[7,'WA','MORTGAGE',17.83,98000,6000,11.98,'B',4894.78,'High',0.06,0.1],
+[3,'NY','OWN',26.79,48028,20000,17.47,'D',19357.88,'Low',0.42,0.7],
+[1,'CA','RENT',25.94,39000,15000,19.03,'D',13388.72,'Low',0.38,0.49],
+[2,'CA','RENT',2.31,200000,20000,9.44,'B',18046.67,'High',0.1,0.67],
+[10,'MT','MORTGAGE',16.02,57000,30000,10.42,'B',28050.79,'Low',0.53,0.17],
+[10,'NJ','MORTGAGE',10.74,83000,32000,21.45,'D',30759.92,'High',0.39,0.05],
+[10,'WI','OWN',33.14,78000,25000,12.62,'C',23776.62,'High',0.32,0.31],
+[10,'SD','MORTGAGE',12.82,54000,3800,9.43,'B',3522.59,'Low',0.07,0.21],
+[0,'IL','RENT',14.08,85000,30000,13.58,'C',29291.94,'High',0.35,0.68],
+[10,'TX','MORTGAGE',29.84,58000,9800,6.08,'A',8543.09,'Low',0.17,0.21],
+[3,'AZ','RENT',27.33,32500,5600,9.92,'B',5194.07,'Low',0.17,0.75],
+[1,'PA','MORTGAGE',27.23,72000,7000,12.62,'C',6178.08,'High',0.1,0.42],
+[10,'CA','MORTGAGE',25.02,54000,9125,15.05,'C',8088.8,'Low',0.17,0.82],
+[10,'CA','OWN',19.85,13000,8000,16.02,'C',7103.69,'Low',0.62,0.46],
+[10,'IL','RENT',13.23,114000,15000,18.45,'D',14365.05,'High',0.13,0.84],
+[10,'IN','MORTGAGE',16.12,60000,10000,7.35,'A',8996.09,'Low',0.17,0.17],
+[10,'TN','MORTGAGE',16,90000,3500,12.61,'C',3255.95,'High',0.04,0.51],
+[2,'KY','MORTGAGE',10.29,85000,20000,7.34,'A',17988.33,'High',0.24,0.47],
+[10,'FL','MORTGAGE',11.31,70500,24000,19.42,'D',23269.08,'High',0.34,0.05],
+[10,'PA','MORTGAGE',12.08,65000,10000,6.72,'A',8728.34,'Low',0.15,0.14],
+[0,'CA','MORTGAGE',15.55,28000,13500,29.69,'F',13084.09,'Low',0.48,0.62],
+[5,'NJ','MORTGAGE',15.19,50000,12000,7.35,'A',8696.96,'Low',0.24,0.07],
+[10,'MA','MORTGAGE',11.36,60000,8425,17.09,'D',7686.31,'Low',0.14,0.03],
+[10,'NH','MORTGAGE',27.27,50000,15000,6.72,'A',13478.32,'Low',0.3,0.29],
+[2,'NY','MORTGAGE',16.09,120000,40000,9.43,'B',38947.12,'High',0.33,0.19],
+[10,'NY','RENT',25.44,54000,3000,13.58,'C',2093.74,'Low',0.06,0.61],
+[0,'FL','RENT',22.51,32000,2500,7.96,'A',2326.16,'Low',0.08,0.8],
+[1,'FL','MORTGAGE',7.5,120000,18000,5.32,'A',16138.59,'High',0.15,0.05],
+[10,'FL','MORTGAGE',8.8,90000,5000,9.92,'B',4637.57,'High',0.06,0.13],
+[10,'FL','MORTGAGE',10.7,91100,20000,11.99,'B',19005.39,'High',0.22,0.1],
+[0,'CA','RENT',19.38,35000,5000,15.04,'C',1477.22,'Low',0.14,0.44],
+[10,'CA','RENT',11.18,48000,14000,12.61,'C',13660.94,'Low',0.29,0.5],
+[10,'GA','MORTGAGE',17.65,89000,30000,5.32,'A',27678.39,'High',0.34,0.11],
+[1,'TX','RENT',20.93,50000,21000,14.08,'C',19755.58,'Low',0.42,0.15],
+[10,'AR','MORTGAGE',7.85,260000,32000,6.72,'A',27930.78,'High',0.12,0.24],
+[7,'IL','RENT',14.68,35000,12000,10.42,'B',10843.53,'Low',0.34,0.34],
+[10,'NY','OWN',29.67,50000,6000,11.98,'B',5719.95,'Low',0.12,0.19],
+[10,'NC','MORTGAGE',17.51,140000,20000,16.01,'C',18673.24,'High',0.14,0.82],
+[3,'WA','RENT',24.52,105000,25000,6.72,'A',23103.19,'High',0.24,0.34],
+[10,'ID','RENT',7.08,120000,12600,10.91,'B',11085.68,'High',0.1,0.75],
+[6,'WI','OWN',24.26,45000,15000,6.72,'A',13478.32,'Low',0.33,0.33],
+[3,'CT','MORTGAGE',12.24,60000,25000,13.58,'C',22965.16,'Low',0.42,0.11],
+[8,'IN','MORTGAGE',9.98,120000,7500,6.71,'A',6930.87,'High',0.06,0.47],
+[2,'CA','RENT',24.01,100000,16100,16.02,'C',15032.1,'High',0.16,0.61],
+[10,'NC','RENT',29.62,80000,35000,14.08,'C',30972.01,'High',0.44,0.63],
+[3,'SC','MORTGAGE',20.32,86000,40000,5.32,'A',35863.53,'High',0.47,0.14],
+[10,'CA','MORTGAGE',5.21,180000,35000,10.41,'B',31626.48,'High',0.19,0.05],
+[0,'FL','RENT',46.29,45000,25050,9.92,'B',24069.4,'Low',0.56,0.78],
+[3,'CT','MORTGAGE',7.45,97000,30000,19.42,'D',29086.36,'High',0.31,0.05],
+[6,'MA','RENT',31.92,58000,21000,16.02,'C',19130.33,'Low',0.36,0.95],
+[1,'CA','MORTGAGE',9.34,120000,15000,10.9,'B',14620,'High',0.12,0.18],
+[5,'NE','RENT',20.05,55000,7000,6.08,'A',236.3,'Low',0.13,0.41],
+[10,'RI','MORTGAGE',20.99,285000,10000,6.07,'A',9234.27,'High',0.04,0.28],
+[0,'TX','RENT',16.75,100000,19000,15.05,'C',16842.46,'High',0.19,0.71],
+[8,'CO','OWN',20.39,85750,11400,12.62,'C',10842.12,'High',0.13,0.64],
+[2,'TX','MORTGAGE',13.4,125000,28000,9.44,'B',26136.03,'High',0.22,0.17],
+[3,'CA','MORTGAGE',13.62,100000,9600,12.61,'C',8930.65,'High',0.1,0.07],
+[10,'WI','RENT',9.82,75000,32000,9.93,'B',30323.29,'High',0.43,0.82],
+[3,'NC','MORTGAGE',19.26,78000,10000,7.96,'A',9254.54,'High',0.13,0.37],
+[10,'CT','MORTGAGE',16.79,81000,6600,9.93,'B',5959.57,'High',0.08,0.16],
+[10,'OK','MORTGAGE',18.36,44393,1500,21.45,'D',1344.29,'Low',0.03,0.18],
+[0,'NE','RENT',14.7,60000,15000,14.08,'C',13273.71,'Low',0.25,0.65],
+[10,'TN','RENT',31.03,34000,15000,19.03,'D',14218.17,'Low',0.44,0.6],
+[8,'NV','MORTGAGE',2.75,68095,35175,9.44,'B',32833.45,'Low',0.52,0.02],
+[10,'NM','RENT',16.31,90000,7000,10.41,'B',6496.14,'High',0.08,0.64],
+[10,'VA','MORTGAGE',24.2,30000,16000,25.82,'E',15305.33,'Low',0.53,0.12],
+[0,'TX','RENT',13.38,68000,18000,9.93,'B',16816.17,'Low',0.26,0.51],
+[0,'CA','RENT',9.54,76000,30000,15.05,'C',27291.78,'High',0.39,0.06],
+[10,'CA','MORTGAGE',8.68,500000,40000,7.35,'A',35977.23,'High',0.08,0.54],
+[2,'TX','RENT',31.72,30000,2200,18.06,'D',1875.81,'Low',0.07,0.66],
+[2,'NY','OWN',7.77,400000,35000,7.35,'A',30586.59,'High',0.09,1.01],
+[4,'CO','RENT',19.46,80000,1200,7.34,'A',999.82,'High',0.02,0.85],
+[10,'CA','MORTGAGE',22.92,60000,15000,14.07,'C',14472.78,'Low',0.25,0.13],
+[1,'CO','RENT',31.79,71500,20000,11.99,'B',18750.49,'High',0.28,0.84],
+[0,'CA','RENT',7.14,20000,5000,11.99,'B',4407.83,'Low',0.25,0.29],
+[10,'IL','RENT',11.84,65000,35000,14.08,'C',31796.51,'Low',0.54,0.45],
+[10,'IL','RENT',12.58,75000,30000,13.59,'C',28568.14,'High',0.4,0.41],
+[1,'GA','RENT',40.51,28000,12000,17.47,'D',11484.37,'Low',0.43,0.72],
+[2,'TN','MORTGAGE',30.96,25000,4050,26.3,'E',3657.85,'Low',0.16,0.09],
+[1,'CA','RENT',1.43,72000,21600,7.34,'A',21600,'High',0.3,0.09],
+[10,'TN','MORTGAGE',22.56,100000,12000,5.32,'A',10759.06,'High',0.12,0.19]
+];
+const I = {el:0,st:1,ho:2,dti:3,inc:4,lo:5,rt:6,gr:7,bal:8,ig:9,lti:10,cur:11};
+const GRADES = ['A','B','C','D','E','F','G'];
+const HOMES = ['MORTGAGE','OWN','RENT'];
+const INCS = ['High','Low'];
+const BRAND='#CBA135', DARK='#403B36';
+const GRADE_COLORS={A:'#4CAF50',B:'#8BC34A',C:'#FFC107',D:'#FF9800',E:'#FF5722',F:'#E57373',G:'#B71C1C'};
 const charts = {};
-function barOpts(extra){ return Object.assign({responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}, extra||{}); }
 
-charts.c12 = new Chart(document.getElementById('c12'), {type:'bar', data:{labels:DATA.q1_2.labels, datasets:[{data:DATA.q1_2.counts, backgroundColor:BRAND}]}, options: barOpts()});
-charts.c13 = new Chart(document.getElementById('c13'), {type:'bar', data:{labels:DATA.q1_3.labels, datasets:[{data:DATA.q1_3.counts, backgroundColor:BRAND}]}, options: barOpts()});
-charts.c14 = new Chart(document.getElementById('c14'), {type:'bar', data:{labels:DATA.q1_4.labels, datasets:[{data:DATA.q1_4.counts, backgroundColor: DATA.q1_4.labels.map(g=>GRADE_COLORS[g])}]}, options: barOpts()});
-charts.c15 = new Chart(document.getElementById('c15'), {type:'bar', data:{labels:DATA.q1_5.labels, datasets:[{data:DATA.q1_5.counts, backgroundColor:BRAND}]}, options: barOpts()});
-charts.c16 = new Chart(document.getElementById('c16'), {type:'bar', data:{labels:DATA.q1_6.labels, datasets:[{data:DATA.q1_6.counts, backgroundColor:DARK}]}, options: barOpts()});
-
-charts.c21 = new Chart(document.getElementById('c21'), {type:'bar', data:{labels:DATA.q2_1.labels, datasets:[{data:DATA.q2_1.values, backgroundColor: DATA.q2_1.labels.map(g=>GRADE_COLORS[g])}]}, options: barOpts({scales:{y:{beginAtZero:true, title:{display:true,text:'Rate %'}}}})});
-charts.c22 = new Chart(document.getElementById('c22'), {type:'bar', data:{labels:DATA.q2_2.labels, datasets:[{data:DATA.q2_2.values, backgroundColor:['#2196F3','#CBA135']}]}, options: barOpts({scales:{y:{beginAtZero:true, title:{display:true,text:'USD'}}}})});
-charts.c23 = new Chart(document.getElementById('c23'), {type:'line', data:{labels:DATA.q2_3.labels, datasets:[{data:DATA.q2_3.values, borderColor:BRAND, backgroundColor:'rgba(203,161,53,0.15)', fill:true, tension:0.3}]}, options: barOpts({scales:{y:{beginAtZero:false, title:{display:true,text:'Rate %'}}}})});
-charts.c24 = new Chart(document.getElementById('c24'), {type:'bar', data:{labels:DATA.q2_4.labels, datasets:[{data:DATA.q2_4.values, backgroundColor:['#4CAF50','#2196F3','#FF9800']}]}, options: barOpts({scales:{y:{beginAtZero:true, title:{display:true,text:'USD'}}}})});
-charts.c25 = new Chart(document.getElementById('c25'), {type:'bar', data:{labels:DATA.q2_5.labels, datasets:[{data:DATA.q2_5.values, backgroundColor:BRAND}]}, options: barOpts({indexAxis:'y', scales:{x:{beginAtZero:true, title:{display:true,text:'Rate %'}}, y:{}}})});
-charts.c26 = new Chart(document.getElementById('c26'), {type:'bar', data:{labels:DATA.q2_6.labels, datasets:[{data:DATA.q2_6.values, backgroundColor: DATA.q2_6.labels.map(g=>GRADE_COLORS[g])}]}, options: barOpts({scales:{y:{beginAtZero:true, title:{display:true,text:'LTI ratio'}}}})});
-
-charts.c31 = new Chart(document.getElementById('c31'), {type:'bar', data:{labels:DATA.q3_1.labels, datasets:[{data:DATA.q3_1.counts, backgroundColor: DATA.q3_1.labels.map((l,i)=>i>=3?'#E57373':BRAND)}]}, options: barOpts()});
-charts.c32 = new Chart(document.getElementById('c32'), {type:'bar', data:{labels:DATA.q3_2.labels, datasets:[{data:DATA.q3_2.values, backgroundColor: DATA.q3_2.labels.map(g=>GRADE_COLORS[g])}]}, options: barOpts({scales:{y:{beginAtZero:true, title:{display:true,text:'Utilization %'}}}})});
-charts.c33 = new Chart(document.getElementById('c33'), {type:'scatter', data:{datasets: DATA.q3_3}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:true, position:'bottom', labels:{boxWidth:10,font:{size:10}}}}, scales:{x:{title:{display:true,text:'Loan-to-Income'}}, y:{title:{display:true,text:'DTI'}, max:100}}}});
-charts.c34 = new Chart(document.getElementById('c34'), {type:'bar', data:{labels:DATA.q3_4.labels, datasets:[{data:DATA.q3_4.values, backgroundColor:['#2196F3','#E57373']}]}, options: barOpts()});
-charts.c35 = new Chart(document.getElementById('c35'), {type:'bar', data:{labels:DATA.q1_4.labels, datasets:[{data:DATA.q1_4.counts, backgroundColor: DATA.q1_4.labels.map(g=>GRADE_COLORS[g])}]}, options: barOpts()});
-charts.c36 = new Chart(document.getElementById('c36'), {type:'bar', data:{labels:DATA.q3_6.labels, datasets:[{data:DATA.q3_6.values, backgroundColor: DATA.q3_6.labels.map(g=>GRADE_COLORS[g])}]}, options: barOpts({scales:{y:{beginAtZero:true, title:{display:true,text:'USD'}}}})});
-
-function groupedBar(id, obj, yLabel){
-  charts[id] = new Chart(document.getElementById(id), {type:'bar', data:{labels:obj.labels, datasets:[{label:'Low Income', data:obj.low, backgroundColor:'#E57373'},{label:'High Income', data:obj.high, backgroundColor:'#2196F3'}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{boxWidth:12, font:{size:10}}}}, scales:{y:{beginAtZero:true, title:{display:!!yLabel, text:yLabel||''}}}}});
+function median(arr){if(!arr.length)return 0;const s=[...arr].sort((a,b)=>a-b);const m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2;}
+function mean(arr){return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0;}
+function bin(arr, edges){
+  const counts = new Array(edges.length-1).fill(0);
+  arr.forEach(v=>{
+    for(let i=0;i<edges.length-1;i++){if(v>=edges[i]&&v<edges[i+1]){counts[i]++;break;}}
+    if(v>=edges[edges.length-1])counts[counts.length-1]++;
+  });
+  return counts;
 }
-groupedBar('c41', DATA.q4_1, 'Rate %');
-groupedBar('c42', DATA.q4_2, 'USD');
+function topN(arr, key, n){
+  const c={};arr.forEach(r=>{c[r[key]]=(c[r[key]]||0)+1;});
+  return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n);
+}
 
-const g43 = DATA.q4_3;
-const stackedDs = g43.grades.map(gr => ({label:'Grade '+gr, data: g43.data[gr], backgroundColor: GRADE_COLORS[gr]}));
-charts.c43 = new Chart(document.getElementById('c43'), {type:'bar', data:{labels: g43.labels, datasets: stackedDs}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{boxWidth:10, font:{size:9}}}}, scales:{x:{stacked:true}, y:{stacked:true, beginAtZero:true, max:100, title:{display:true, text:'%'}}}}});
+function compute(rows){
+  const D = {};
+  D.kpi1 = {
+    total_loans: rows.length,
+    total_volume: +(rows.reduce((s,r)=>s+r[I.lo],0)/1e6).toFixed(2),
+    avg_loan: rows.length ? Math.round(rows.reduce((s,r)=>s+r[I.lo],0)/rows.length) : 0,
+    median_rate: +median(rows.map(r=>r[I.rt])).toFixed(2)
+  };
+  // q1_2 loan amount bins
+  D.q1_2 = {labels:['0-5K','5K-10K','10K-15K','15K-20K','20K-25K','25K-30K','30K-35K','35K-40K'],
+    counts: bin(rows.map(r=>r[I.lo]),[0,5000,10000,15000,20000,25000,30000,35000,40001])};
+  // q1_3 interest rate bins
+  D.q1_3 = {labels:['5-8','8-11','11-14','14-17','17-20','20-23','23-26','26-29','29-32'],
+    counts: bin(rows.map(r=>r[I.rt]),[5,8,11,14,17,20,23,26,29,33])};
+  // q1_4 grade counts
+  D.q1_4 = {labels: GRADES, counts: GRADES.map(g=>rows.filter(r=>r[I.gr]===g).length)};
+  // q1_5 income bins
+  D.q1_5 = {labels:['0-40K','40-70K','70-100K','100-130K','130-160K','160-200K','200K+'],
+    counts: bin(rows.map(r=>r[I.inc]),[0,40000,70000,100000,130000,160000,200000,1e7])};
+  // q1_6 top 10 states
+  const stEntries = Object.entries(rows.reduce((m,r)=>{m[r[I.st]]=(m[r[I.st]]||0)+1;return m;},{})).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  D.q1_6 = {labels: stEntries.map(e=>e[0]), counts: stEntries.map(e=>e[1])};
+  // q2_1 avg rate by grade
+  D.q2_1 = {labels: GRADES, values: GRADES.map(g=>+mean(rows.filter(r=>r[I.gr]===g).map(r=>r[I.rt])).toFixed(2))};
+  // q2_2 avg loan by income
+  D.q2_2 = {labels: INCS, values: INCS.map(ig=>Math.round(mean(rows.filter(r=>r[I.ig]===ig).map(r=>r[I.lo]))))};
+  // q2_3 avg rate by emp_length
+  const elVals = [0,1,2,3,4,5,6,7,8,9,10];
+  D.q2_3 = {labels: elVals.map(String), values: elVals.map(el=>+mean(rows.filter(r=>r[I.el]===el).map(r=>r[I.rt])).toFixed(2))};
+  // q2_4 avg loan by homeownership
+  D.q2_4 = {labels: HOMES, values: HOMES.map(h=>Math.round(mean(rows.filter(r=>r[I.ho]===h).map(r=>r[I.lo]))))};
+  // q2_5 avg rate by top 15 states
+  const top15st = stEntries.slice(0,15).map(e=>e[0]);
+  const stRates = top15st.map(s=>({s, r:+mean(rows.filter(r=>r[I.st]===s).map(r=>r[I.rt])).toFixed(2)})).sort((a,b)=>b.r-a.r);
+  D.q2_5 = {labels: stRates.map(e=>e.s), values: stRates.map(e=>e.r)};
+  // q2_6 avg LTI by grade
+  D.q2_6 = {labels: GRADES, values: GRADES.map(g=>+mean(rows.filter(r=>r[I.gr]===g).map(r=>r[I.lti])).toFixed(3))};
+  // KPIs page 3
+  D.kpi3 = {
+    high_dti_count: rows.filter(r=>r[I.dti]>30).length,
+    pct_efg: +(rows.filter(r=>['E','F','G'].includes(r[I.gr])).length/Math.max(rows.length,1)*100).toFixed(2),
+    avg_util: +(mean(rows.map(r=>r[I.cur]))*100).toFixed(2)
+  };
+  // q3_1 DTI bins
+  D.q3_1 = {labels:['0-10','10-20','20-30','30-40','40-50','50-60'],
+    counts: bin(rows.map(r=>r[I.dti]),[0,10,20,30,40,50,200])};
+  // q3_2 avg utilization by grade (%)
+  D.q3_2 = {labels: GRADES, values: GRADES.map(g=>+(mean(rows.filter(r=>r[I.gr]===g).map(r=>r[I.cur]))*100).toFixed(2))};
+  // q3_3 LTI vs DTI scatter by grade
+  D.q3_3 = GRADES.filter(g=>rows.some(r=>r[I.gr]===g)).map(g=>({
+    label:'Grade '+g,
+    data: rows.filter(r=>r[I.gr]===g).map(r=>({x:r[I.lti],y:r[I.dti]})),
+    backgroundColor: GRADE_COLORS[g]
+  }));
+  // q3_4 avg debt burden by income
+  D.q3_4 = {labels: INCS, values: INCS.map(ig=>+mean(rows.filter(r=>r[I.ig]===ig).map(r=>r[I.dti])).toFixed(2))};
+  // q3_6 avg balance by grade
+  D.q3_6 = {labels: GRADES, values: GRADES.map(g=>Math.round(mean(rows.filter(r=>r[I.gr]===g).map(r=>r[I.bal]))))};
+  // q4_1 avg rate by grade x income
+  D.q4_1 = {labels: GRADES,
+    low: GRADES.map(g=>+mean(rows.filter(r=>r[I.gr]===g && r[I.ig]==='Low').map(r=>r[I.rt])).toFixed(2)),
+    high: GRADES.map(g=>+mean(rows.filter(r=>r[I.gr]===g && r[I.ig]==='High').map(r=>r[I.rt])).toFixed(2))};
+  // q4_2 avg loan by grade x income
+  D.q4_2 = {labels: GRADES,
+    low: GRADES.map(g=>Math.round(mean(rows.filter(r=>r[I.gr]===g && r[I.ig]==='Low').map(r=>r[I.lo])))),
+    high: GRADES.map(g=>Math.round(mean(rows.filter(r=>r[I.gr]===g && r[I.ig]==='High').map(r=>r[I.lo]))))};
+  // q4_3 grade mix % by income
+  const totalLow = rows.filter(r=>r[I.ig]==='Low').length || 1;
+  const totalHigh = rows.filter(r=>r[I.ig]==='High').length || 1;
+  D.q4_3 = {labels: INCS, grades: GRADES, data: {}};
+  GRADES.forEach(g=>{
+    const hi = rows.filter(r=>r[I.gr]===g && r[I.ig]==='High').length;
+    const lo = rows.filter(r=>r[I.gr]===g && r[I.ig]==='Low').length;
+    D.q4_3.data[g] = [+(hi/totalHigh*100).toFixed(2), +(lo/totalLow*100).toFixed(2)];
+  });
+  // q4_4 avg DTI by income
+  D.q4_4 = {labels: INCS, values: INCS.map(ig=>+mean(rows.filter(r=>r[I.ig]===ig).map(r=>r[I.dti])).toFixed(2))};
+  // q4_5 avg rate by top 10 states x income
+  const top10st = stEntries.slice(0,10).map(e=>e[0]);
+  D.q4_5 = {labels: top10st,
+    low: top10st.map(s=>+mean(rows.filter(r=>r[I.st]===s && r[I.ig]==='Low').map(r=>r[I.rt])).toFixed(2)),
+    high: top10st.map(s=>+mean(rows.filter(r=>r[I.st]===s && r[I.ig]==='High').map(r=>r[I.rt])).toFixed(2))};
+  // q4_6 avg loan by homeownership x income
+  D.q4_6 = {labels: HOMES,
+    low: HOMES.map(h=>Math.round(mean(rows.filter(r=>r[I.ho]===h && r[I.ig]==='Low').map(r=>r[I.lo])))),
+    high: HOMES.map(h=>Math.round(mean(rows.filter(r=>r[I.ho]===h && r[I.ig]==='High').map(r=>r[I.lo]))))};
+  return D;
+}
 
-charts.c44 = new Chart(document.getElementById('c44'), {type:'bar', data:{labels:DATA.q4_4.labels, datasets:[{data:DATA.q4_4.values, backgroundColor:['#2196F3','#E57373']}]}, options: barOpts({scales:{y:{beginAtZero:true, title:{display:true,text:'DTI'}}}})});
-groupedBar('c45', DATA.q4_5, 'Rate %');
-groupedBar('c46', DATA.q4_6, 'USD');
+function destroyAll(){Object.keys(charts).forEach(k=>{charts[k].destroy();delete charts[k];});}
+function barOpts(extra){return Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}},extra||{});}
+
+function renderAll(){
+  const filtered = applyFilter();
+  const DATA = compute(filtered);
+  destroyAll();
+
+  document.getElementById('kpi-loans').textContent = DATA.kpi1.total_loans.toLocaleString();
+  document.getElementById('kpi-volume').textContent = '$' + DATA.kpi1.total_volume + 'M';
+  document.getElementById('kpi-avg').textContent = '$' + DATA.kpi1.avg_loan.toLocaleString();
+  document.getElementById('kpi-rate').textContent = DATA.kpi1.median_rate + '%';
+  document.getElementById('kpi-dti').textContent = DATA.kpi3.high_dti_count.toLocaleString();
+  document.getElementById('kpi-efg').textContent = DATA.kpi3.pct_efg + '%';
+  document.getElementById('kpi-util').textContent = DATA.kpi3.avg_util + '%';
+
+  charts.c12 = new Chart(document.getElementById('c12'),{type:'bar',data:{labels:DATA.q1_2.labels,datasets:[{data:DATA.q1_2.counts,backgroundColor:BRAND}]},options:barOpts()});
+  charts.c13 = new Chart(document.getElementById('c13'),{type:'bar',data:{labels:DATA.q1_3.labels,datasets:[{data:DATA.q1_3.counts,backgroundColor:BRAND}]},options:barOpts()});
+  charts.c14 = new Chart(document.getElementById('c14'),{type:'bar',data:{labels:DATA.q1_4.labels,datasets:[{data:DATA.q1_4.counts,backgroundColor:DATA.q1_4.labels.map(g=>GRADE_COLORS[g])}]},options:barOpts()});
+  charts.c15 = new Chart(document.getElementById('c15'),{type:'bar',data:{labels:DATA.q1_5.labels,datasets:[{data:DATA.q1_5.counts,backgroundColor:BRAND}]},options:barOpts()});
+  charts.c16 = new Chart(document.getElementById('c16'),{type:'bar',data:{labels:DATA.q1_6.labels,datasets:[{data:DATA.q1_6.counts,backgroundColor:DARK}]},options:barOpts()});
+
+  charts.c21 = new Chart(document.getElementById('c21'),{type:'bar',data:{labels:DATA.q2_1.labels,datasets:[{data:DATA.q2_1.values,backgroundColor:DATA.q2_1.labels.map(g=>GRADE_COLORS[g])}]},options:barOpts({scales:{y:{beginAtZero:true,title:{display:true,text:'Rate %'}}}})});
+  charts.c22 = new Chart(document.getElementById('c22'),{type:'bar',data:{labels:DATA.q2_2.labels,datasets:[{data:DATA.q2_2.values,backgroundColor:['#2196F3','#CBA135']}]},options:barOpts({scales:{y:{beginAtZero:true,title:{display:true,text:'USD'}}}})});
+  charts.c23 = new Chart(document.getElementById('c23'),{type:'line',data:{labels:DATA.q2_3.labels,datasets:[{data:DATA.q2_3.values,borderColor:BRAND,backgroundColor:'rgba(203,161,53,0.15)',fill:true,tension:0.3}]},options:barOpts({scales:{y:{beginAtZero:false,title:{display:true,text:'Rate %'}}}})});
+  charts.c24 = new Chart(document.getElementById('c24'),{type:'bar',data:{labels:DATA.q2_4.labels,datasets:[{data:DATA.q2_4.values,backgroundColor:['#4CAF50','#2196F3','#FF9800']}]},options:barOpts({scales:{y:{beginAtZero:true,title:{display:true,text:'USD'}}}})});
+  charts.c25 = new Chart(document.getElementById('c25'),{type:'bar',data:{labels:DATA.q2_5.labels,datasets:[{data:DATA.q2_5.values,backgroundColor:BRAND}]},options:barOpts({indexAxis:'y',scales:{x:{beginAtZero:true,title:{display:true,text:'Rate %'}},y:{}}})});
+  charts.c26 = new Chart(document.getElementById('c26'),{type:'bar',data:{labels:DATA.q2_6.labels,datasets:[{data:DATA.q2_6.values,backgroundColor:DATA.q2_6.labels.map(g=>GRADE_COLORS[g])}]},options:barOpts({scales:{y:{beginAtZero:true,title:{display:true,text:'LTI ratio'}}}})});
+
+  charts.c31 = new Chart(document.getElementById('c31'),{type:'bar',data:{labels:DATA.q3_1.labels,datasets:[{data:DATA.q3_1.counts,backgroundColor:DATA.q3_1.labels.map((l,i)=>i>=3?'#E57373':BRAND)}]},options:barOpts()});
+  charts.c32 = new Chart(document.getElementById('c32'),{type:'bar',data:{labels:DATA.q3_2.labels,datasets:[{data:DATA.q3_2.values,backgroundColor:DATA.q3_2.labels.map(g=>GRADE_COLORS[g])}]},options:barOpts({scales:{y:{beginAtZero:true,title:{display:true,text:'Utilization %'}}}})});
+  charts.c33 = new Chart(document.getElementById('c33'),{type:'scatter',data:{datasets:DATA.q3_3},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:10,font:{size:10}}}},scales:{x:{title:{display:true,text:'Loan-to-Income'}},y:{title:{display:true,text:'DTI'},max:100}}}});
+  charts.c34 = new Chart(document.getElementById('c34'),{type:'bar',data:{labels:DATA.q3_4.labels,datasets:[{data:DATA.q3_4.values,backgroundColor:['#2196F3','#E57373']}]},options:barOpts()});
+  charts.c35 = new Chart(document.getElementById('c35'),{type:'bar',data:{labels:DATA.q1_4.labels,datasets:[{data:DATA.q1_4.counts,backgroundColor:DATA.q1_4.labels.map(g=>GRADE_COLORS[g])}]},options:barOpts()});
+  charts.c36 = new Chart(document.getElementById('c36'),{type:'bar',data:{labels:DATA.q3_6.labels,datasets:[{data:DATA.q3_6.values,backgroundColor:DATA.q3_6.labels.map(g=>GRADE_COLORS[g])}]},options:barOpts({scales:{y:{beginAtZero:true,title:{display:true,text:'USD'}}}})});
+
+  function groupedBar(id, obj, yLabel){
+    charts[id] = new Chart(document.getElementById(id),{type:'bar',data:{labels:obj.labels,datasets:[{label:'Low Income',data:obj.low,backgroundColor:'#E57373'},{label:'High Income',data:obj.high,backgroundColor:'#2196F3'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:10}}}},scales:{y:{beginAtZero:true,title:{display:!!yLabel,text:yLabel||''}}}}});
+  }
+  groupedBar('c41', DATA.q4_1, 'Rate %');
+  groupedBar('c42', DATA.q4_2, 'USD');
+
+  const g43 = DATA.q4_3;
+  const stackedDs = g43.grades.map(gr=>({label:'Grade '+gr,data:g43.data[gr],backgroundColor:GRADE_COLORS[gr]}));
+  charts.c43 = new Chart(document.getElementById('c43'),{type:'bar',data:{labels:g43.labels,datasets:stackedDs},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:9}}}},scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true,max:100,title:{display:true,text:'%'}}}}});
+
+  charts.c44 = new Chart(document.getElementById('c44'),{type:'bar',data:{labels:DATA.q4_4.labels,datasets:[{data:DATA.q4_4.values,backgroundColor:['#2196F3','#E57373']}]},options:barOpts({scales:{y:{beginAtZero:true,title:{display:true,text:'DTI'}}}})});
+  groupedBar('c45', DATA.q4_5, 'Rate %');
+  groupedBar('c46', DATA.q4_6, 'USD');
+}
+
+function applyFilter(){
+  const fInc = document.getElementById('f-income').value;
+  const fGr = document.getElementById('f-grade').value;
+  const fHo = document.getElementById('f-home').value;
+  const fSt = document.getElementById('f-state').value;
+  return ROWS.filter(r =>
+    (fInc==='All' || r[I.ig]===fInc) &&
+    (fGr==='All' || r[I.gr]===fGr) &&
+    (fHo==='All' || r[I.ho]===fHo) &&
+    (fSt==='All' || r[I.st]===fSt)
+  );
+}
 
 const stateSelect = document.getElementById('f-state');
-DATA.q1_6.labels.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; stateSelect.appendChild(o); });
+[...new Set(ROWS.map(r=>r[I.st]))].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;stateSelect.appendChild(o);});
+
+['f-income','f-grade','f-home','f-state'].forEach(id=>document.getElementById(id).addEventListener('change', renderAll));
 
 function showPage(n){
   for (let i=1;i<=4;i++) document.getElementById('page'+i).classList.remove('active');
   document.getElementById('page'+n).classList.add('active');
   document.querySelectorAll('.page-btn').forEach((b,i)=>b.classList.toggle('active', i===n-1));
 }
+
+renderAll();
 </script>
+
 
 </body>
 </html>
