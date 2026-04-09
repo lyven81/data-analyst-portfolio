@@ -994,6 +994,7 @@ function renderTable(studies) {
                 <div class="case-study-links">
                     <a href="${leftStudy.caseStudyUrl}">Read More →</a>
                     <a href="${leftStudy.dashboardUrl}">View Dashboard</a>
+                    ${leftStudy.agenticUrl ? `<a href="${leftStudy.agenticUrl}">AI Assistant</a>` : ''}
                 </div>
             </td>
         `;
@@ -1009,6 +1010,7 @@ function renderTable(studies) {
                     <div class="case-study-links">
                         <a href="${rightStudy.caseStudyUrl}">Read More →</a>
                         <a href="${rightStudy.dashboardUrl}">View Dashboard</a>
+                        ${rightStudy.agenticUrl ? `<a href="${rightStudy.agenticUrl}">AI Assistant</a>` : ''}
                     </div>
                 </td>
             `;
