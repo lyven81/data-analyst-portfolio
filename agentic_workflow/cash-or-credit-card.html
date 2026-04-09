@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Payment Method Assistant | Cash or Credit Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #403B36; background-color: #ffffff; }
+        .container { display: flex; min-height: 100vh; }
+        .left-column { width: 30%; background-color: #f8f8f8; padding: 40px 30px; position: fixed; height: 100vh; overflow-y: auto; border-right: 1px solid #e0e0e0; }
+        .left-column h1 { font-size: 1.8em; font-weight: bold; color: #403B36; margin-bottom: 10px; }
+        .left-column h2 { font-size: 1em; font-weight: 400; color: #666; margin-bottom: 20px; }
+        .intro p { color: #555; margin-bottom: 30px; line-height: 1.8; }
+        .home-link-section, .dashboard-link-section, .agentic-link-section { margin: 20px 0; }
+        .home-link-btn, .dashboard-link-btn, .agentic-link-btn { display: inline-block; padding: 12px 30px; background-color: #403B36; color: #fff; text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s ease; text-align: center; width: 100%; }
+        .home-link-btn:hover, .dashboard-link-btn:hover, .agentic-link-btn:hover { background-color: #CBA135; }
+        .agentic-link-btn { background-color: #CBA135; }
+        .agentic-link-btn:hover { background-color: #B8902E; }
+        .mcp-badge { display: inline-block; padding: 6px 12px; background-color: #e8f4f8; color: #2c5f7a; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-top: 10px; border: 1px solid #b8dce8; }
+        .contact { margin-top: 30px; }
+        .contact h2 { font-size: 1.2em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
+        .contact p { color: #555; margin-bottom: 15px; }
+        .contact ul { list-style: none; }
+        .contact li { margin-bottom: 10px; color: #555; }
+        .contact a { color: #CBA135; text-decoration: none; }
+        .contact a:hover { text-decoration: underline; }
+        .right-column { width: 70%; margin-left: 30%; padding: 40px 50px; background-color: #ffffff; }
+        .chatbot-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e0e0e0; }
+        .chatbot-header h1 { font-size: 2.2em; color: #403B36; margin-bottom: 10px; font-weight: 600; }
+        .chatbot-header p { font-size: 1.1em; color: #666; line-height: 1.8; }
+        .chat-container { max-width: 900px; margin: 0 auto; background-color: #f8f8f8; border-radius: 10px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .suggested-questions { margin-bottom: 30px; }
+        .suggested-questions h3 { font-size: 1.3em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
+        .question-btn { display: block; width: 100%; padding: 15px 20px; margin-bottom: 12px; background-color: #ffffff; color: #403B36; border: 2px solid #CBA135; border-radius: 8px; text-align: left; cursor: pointer; font-size: 1em; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+        .question-btn:hover { background-color: #CBA135; color: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3); }
+        .chat-messages { min-height: 400px; margin-top: 20px; }
+        .message { margin-bottom: 20px; padding: 15px 20px; border-radius: 10px; animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .message.user { background-color: #CBA135; color: #ffffff; margin-left: 50px; text-align: right; }
+        .message.agent { background-color: #ffffff; color: #403B36; margin-right: 50px; border: 1px solid #e0e0e0; }
+        .message.agent .agent-label { font-weight: 600; color: #CBA135; margin-bottom: 8px; display: block; }
+        .workflow-step { margin: 15px 0; padding: 12px 15px; background-color: #f8f8f8; border-left: 4px solid #CBA135; border-radius: 4px; }
+        .workflow-step .step-title { font-weight: 600; color: #403B36; margin-bottom: 5px; }
+        .workflow-step .step-content { color: #666; font-size: 0.95em; }
+        .data-result { margin: 15px 0; padding: 15px; background-color: #e8f4f8; border-radius: 6px; border: 1px solid #b8dce8; }
+        .data-result .result-title { font-weight: 600; color: #2c5f7a; margin-bottom: 8px; }
+        .data-result ul { margin-left: 20px; color: #555; }
+        .final-answer { margin-top: 15px; padding: 15px; background-color: #e8f8e8; border-radius: 6px; border-left: 4px solid #4CAF50; }
+        .final-answer .answer-label { font-weight: 600; color: #2e7d32; margin-bottom: 8px; display: block; }
+        footer { text-align: center; padding: 30px 20px; background-color: #222; color: #fff; margin-top: 50px; }
+        footer p { margin: 0; font-size: 0.9em; }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .left-column { width: 100%; position: relative; height: auto; }
+            .right-column { width: 100%; margin-left: 0; padding: 30px 20px; }
+            .message.user { margin-left: 20px; }
+            .message.agent { margin-right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Ask this AI assistant whether payment method really predicts how much your fashion boutique customers spend — so you can decide if Cash vs Credit Card promotions are worth building.</p>
+                <div class="mcp-badge">MCP Server • 150 rows • 7 tools</div>
+            </section>
+
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+            </section>
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/case-studies/cash-or-credit-card.html">Case Study</a>
+            </section>
+            <section class="dashboard-link-section">
+                <a class="dashboard-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/dashboards/cash-or-credit-card-dashboard.html">Dashboard</a>
+            </section>
+            <section class="agentic-link-section">
+                <a class="agentic-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/cash-or-credit-card.html">AI Assistant</a>
+            </section>
+
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <main class="right-column">
+            <div class="chatbot-header">
+                <h1>AI Payment Method Assistant</h1>
+                <p>Powered by an AI agent connected to an MCP server exposing 7 tools over a 150-row fashion boutique sample. Click any question to see how the agent plans, calls tools, and grounds its answer in real data.</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="suggested-questions">
+                    <h3>Try these questions:</h3>
+                    <button class="question-btn" onclick="showResponse(1)">How many transactions and items are in my boutique data?</button>
+                    <button class="question-btn" onclick="showResponse(2)">Do Credit Card customers really spend more than Cash customers?</button>
+                    <button class="question-btn" onclick="showResponse(3)">Which items bring in the most revenue?</button>
+                    <button class="question-btn" onclick="showResponse(4)">Which products do Credit Card shoppers prefer most?</button>
+                    <button class="question-btn" onclick="showResponse(5)">Which products do Cash shoppers prefer most?</button>
+                    <button class="question-btn" onclick="showResponse(6)">Are high spenders mostly Cash or Credit Card users?</button>
+                    <button class="question-btn" onclick="showResponse(7)">Do Cash or Card customers give better reviews?</button>
+                    <button class="question-btn" onclick="showResponse(8)">Is the Card vs Cash spending gap consistent every month?</button>
+                    <button class="question-btn" onclick="showResponse(9)">Which months had the highest revenue overall?</button>
+                    <button class="question-btn" onclick="showResponse(10)">Should I run payment-method-based promotions?</button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <p style="text-align: center; color: #999; font-style: italic;">Select a question above to see how the AI agent works</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+    <script>
+        const responses = {
+            1: {
+                question: "How many transactions and items are in my boutique data?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: retrieve dataset overview — row count, item variety, date range, and payment method split." },
+                    { title: "🔍 MCP Tool Call — mcp_get_dataset_overview", content: "Calling 'cash-or-credit-card-data-server' for a summary of the 150-row boutique sample..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Dataset Overview:",
+                    items: [
+                        "Total transactions: 150",
+                        "Unique items: 46",
+                        "Date range: Oct 2022 to Oct 2023",
+                        "Cash transactions: 88 (59%)",
+                        "Credit Card transactions: 62 (41%)",
+                        "Overall average spend: $60.33"
+                    ]
+                },
+                answer: "Your boutique sample has 150 transactions across 46 different items over a full year (Oct 2022 to Oct 2023). Cash is used in 59% of purchases and Credit Card in 41%, with an average basket of around $60."
+            },
+            2: {
+                question: "Do Credit Card customers really spend more than Cash customers?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute average and median spend grouped by payment method, then cross-reference the report's hypothesis test finding." },
+                    { title: "🔍 MCP Tool Call — mcp_get_spend_by_payment_method", content: "Calling the MCP server to return mean, median, min and max purchase_amount by payment_method..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Spend by Payment Method:",
+                    items: [
+                        "Cash: 88 tx, mean $54.06, median $61.50",
+                        "Credit Card: 62 tx, mean $69.23, median $49.53",
+                        "Mean gap: Credit Card is about $15 higher per transaction in this sample",
+                        "Median gap: Cash is actually higher (one large Card outlier pulls the mean up)"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Checking the report's t-test verdict on the full 2,750-row dataset..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Credit Card users spend an average of $77.62, while Cash users spend $72.21. A p-value of 0.035 indicates the difference is statistically significant.\"",
+                        "\"The Cohen's d value of 0.018 indicates the effect size is small — not substantial enough to warrant major changes in pricing or promotions based solely on payment method.\""
+                    ]
+                },
+                answer: "Card users spend slightly more on average, and the difference is statistically significant — but the effect size is tiny (Cohen's d = 0.018). In practical terms the gap is only a few dollars, so don't reshape your pricing around payment method alone."
+            },
+            3: {
+                question: "Which items bring in the most revenue?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: sum purchase_amount grouped by item, then return the top 10." },
+                    { title: "🔍 MCP Tool Call — mcp_get_top_items_by_revenue", content: "Calling MCP tool with limit=10 to rank boutique items by total revenue..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Top 10 Items by Revenue:",
+                    items: [
+                        "Tunic: $1,231.89 (boosted by one large transaction)",
+                        "Hoodie: $506.35",
+                        "Jumpsuit: $370.43",
+                        "Jacket: $341.24",
+                        "Shorts: $331.19",
+                        "Vest: $299.12",
+                        "Bowtie: $285.24",
+                        "Hat: $278.06",
+                        "Tank Top: $262.75",
+                        "Overalls: $259.88"
+                    ]
+                },
+                answer: "Tunics top the list thanks to one unusually large sale, followed by Hoodies, Jumpsuits, Jackets and Shorts as reliable revenue drivers. Your top 10 items cover roughly 45% of the sampled revenue, so stocking and displaying them well should be a priority."
+            },
+            4: {
+                question: "Which products do Credit Card shoppers prefer most?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute % Credit Card share for each item (minimum 2 transactions), then rank descending." },
+                    { title: "🔍 MCP Tool Call — mcp_get_item_payment_preference", content: "Calling MCP tool with min_tx=2 to find items most often paid by Credit Card..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Top Card-Preferred Items:",
+                    items: [
+                        "Pants: 100% paid by Credit Card (3/3)",
+                        "Hat: 75% Credit Card (3/4)",
+                        "Pajamas: 75% Credit Card (3/4)",
+                        "Flannel Shirt: 67% Credit Card (2/3)",
+                        "Handbag: 67% Credit Card (2/3)",
+                        "Polo Shirt: 67% Credit Card (2/3)"
+                    ]
+                },
+                answer: "Pants, Hats and Pajamas are strongly card-preferred in your sample, with Pants paid 100% by Credit Card. These are the items to pair with card-issuer promotions like cashback bundles or instalment offers."
+            },
+            5: {
+                question: "Which products do Cash shoppers prefer most?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute % Cash share for each item (minimum 2 transactions) and rank." },
+                    { title: "🔍 MCP Tool Call — mcp_get_item_payment_preference", content: "Calling MCP tool to return items with highest Cash share..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Top Cash-Preferred Items:",
+                    items: [
+                        "Backpack: 100% Cash (2/2)",
+                        "Boots: 100% Cash (2/2)",
+                        "Blouse: 100% Cash (2/2)",
+                        "Coat: 100% Cash (2/2)",
+                        "Kimono: 100% Cash (2/2)",
+                        "Sweater: 100% Cash (2/2)"
+                    ]
+                },
+                answer: "Backpacks, Boots, Blouses, Coats, Kimonos and Sweaters are bought exclusively with Cash in the sample. Keep enough cash float at the counter when these items are on display, and consider bundling them with a card-preferred item to nudge shoppers to switch payment method."
+            },
+            6: {
+                question: "Are high spenders mostly Cash or Credit Card users?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: cross-tab spend_tier (Low/Mid/High) against payment_method." },
+                    { title: "🔍 MCP Tool Call — mcp_get_spend_tier_breakdown", content: "Calling MCP tool for spend tier counts by payment method..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Spend Tier × Payment Method:",
+                    items: [
+                        "Low tier (<$50): Cash 32, Credit Card 31 — evenly split",
+                        "Mid tier ($50–$100): Cash 56, Credit Card 30 — Cash dominates",
+                        "High tier (>$100): Cash 0, Credit Card 1 — only a Card outlier",
+                        "Mid-tier Cash shoppers are the single biggest segment"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Checking what the report concludes about high-spender segmentation..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Both Credit Card and Cash users show a similar number of high spenders (345 vs 331).\"",
+                        "\"Payment method alone is not a strong predictor of spending behavior. Total spend and frequency of purchases are more reliable indicators of customer value.\""
+                    ]
+                },
+                answer: "In your sample, mid-tier Cash shoppers are the largest group — 56 transactions — while high spenders are split almost evenly overall per the full-data report. So high value is not locked to Credit Card users; segment by total spend and frequency instead."
+            },
+            7: {
+                question: "Do Cash or Card customers give better reviews?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute average review_rating grouped by payment method." },
+                    { title: "🔍 MCP Tool Call — mcp_get_rating_by_payment_method", content: "Calling MCP tool to return mean review_rating per payment_method..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Avg Rating by Payment Method:",
+                    items: [
+                        "Cash customers: 2.97 average rating",
+                        "Credit Card customers: 3.16 average rating",
+                        "Gap: Card customers rate 0.19 points higher on average",
+                        "Both groups score below a 'satisfied' benchmark of 4.0"
+                    ]
+                },
+                answer: "Credit Card customers rate slightly higher (3.16 vs 2.97), but both groups sit below a 4.0 satisfaction benchmark. The real takeaway is that overall satisfaction is mediocre — worth investigating quality and service issues before worrying about payment-method-specific perks."
+            },
+            8: {
+                question: "Is the Card vs Cash spending gap consistent every month?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute monthly mean purchase_amount by payment method, then flag months where Cash exceeds Card." },
+                    { title: "🔍 MCP Tool Call — mcp_get_monthly_trend", content: "Calling MCP tool to return monthly avg spend by payment method across all 13 months..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Monthly Avg Spend (Cash vs Card):",
+                    items: [
+                        "Flip months (Cash higher): Oct 2022, Nov 2022, Jan 2023, Mar 2023, Apr 2023, May 2023, Jun 2023, Sep 2023",
+                        "Card-higher months: Dec 2022, Feb 2023, Jul 2023, Aug 2023",
+                        "Biggest Card spike: Jul 2023 at $221.93 avg (driven by one large Tunic sale)",
+                        "Cash-highest month: Sep 2023 at $74.06 avg"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Retrieving the report's finding on month-over-month consistency..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"In November 2022, cash users spent more than credit users ($198.32 vs $156.52), while in December 2022, credit card users outspent cash users significantly ($223.59 vs $147.49).\"",
+                        "\"Businesses should be cautious about relying solely on payment method for segmentation. Layer in seasonality, promotions, or product categories.\""
+                    ]
+                },
+                answer: "No — the gap flips almost every other month. Cash actually led in 8 of the 13 months in the sample, so any promotion anchored purely on payment method will miss the seasonal swings driving the real differences."
+            },
+            9: {
+                question: "Which months had the highest revenue overall?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: sum purchase_amount by month, rank descending." },
+                    { title: "🔍 MCP Tool Call — mcp_get_monthly_trend", content: "Calling MCP tool with payment_method='all' to return total monthly revenue..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Top 5 Revenue Months:",
+                    items: [
+                        "Jul 2023: $1,858.37 (boosted by one Tunic outlier)",
+                        "Jan 2023: $983.98",
+                        "Mar 2023: $929.90",
+                        "Oct 2022: $896.88",
+                        "Jun 2023: $732.72"
+                    ]
+                },
+                answer: "July 2023 is the standout, but that's inflated by one very large Tunic sale; the more reliable peaks are January, March, October and June. Plan your inventory build-up and staffing around those months."
+            },
+            10: {
+                question: "Should I run payment-method-based promotions?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: synthesise spend comparison, rating comparison, monthly flip pattern and report recommendation into a single decision." },
+                    { title: "🔍 MCP Tool Call — mcp_get_spend_by_payment_method + mcp_get_monthly_trend", content: "Pulling spend gap, monthly consistency, and tier split together..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Decision Signals:",
+                    items: [
+                        "Spend gap: small (~$5 on full dataset, statistically significant but d=0.018)",
+                        "Consistency: Cash outspent Card in 8 of 13 months",
+                        "High-spender split: ~345 Card vs 331 Cash — nearly identical",
+                        "Rating: Card only 0.19 points higher"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Retrieving the report's final recommendation on segmentation strategy..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Marketing efforts should focus on behavioral segmentation — total spend, purchase frequency, and product preferences — rather than focusing exclusively on payment method.\"",
+                        "\"Leverage seasonal demand and specific promotions to enhance customer engagement and spending, particularly around key shopping periods.\""
+                    ]
+                },
+                answer: "No — don't build promotions around payment method alone; the real spend gap is only a few dollars and it flips month to month. Instead, target behavior (spend size, visit frequency, favored items) and tie promotions to seasonal peaks like January and March."
+            }
+        };
+
+        function showResponse(id) {
+            const r = responses[id];
+            const chat = document.getElementById("chatMessages");
+            chat.innerHTML = "";
+
+            const userMsg = document.createElement("div");
+            userMsg.className = "message user";
+            userMsg.textContent = r.question;
+            chat.appendChild(userMsg);
+
+            const agentMsg = document.createElement("div");
+            agentMsg.className = "message agent";
+            let html = '<span class="agent-label">AI Agent (Payment Method Advisor)</span>';
+
+            r.workflow.forEach(s => {
+                html += `<div class="workflow-step"><div class="step-title">${s.title}</div><div class="step-content">${s.content}</div></div>`;
+            });
+            html += `<div class="data-result"><div class="result-title">${r.dataResult.title}</div><ul>`;
+            r.dataResult.items.forEach(i => html += `<li>${i}</li>`);
+            html += `</ul></div>`;
+
+            if (r.workflow2) {
+                r.workflow2.forEach(s => {
+                    html += `<div class="workflow-step"><div class="step-title">${s.title}</div><div class="step-content">${s.content}</div></div>`;
+                });
+            }
+            if (r.dataResult2) {
+                html += `<div class="data-result"><div class="result-title">${r.dataResult2.title}</div><ul>`;
+                r.dataResult2.items.forEach(i => html += `<li>${i}</li>`);
+                html += `</ul></div>`;
+            }
+
+            html += `<div class="final-answer"><span class="answer-label">💡 Final Answer</span>${r.answer}</div>`;
+            agentMsg.innerHTML = html;
+            chat.appendChild(agentMsg);
+            chat.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    </script>
+</body>
+</html>
