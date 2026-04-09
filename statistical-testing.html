@@ -896,6 +896,7 @@ function displayResults(results) {
                 <div class="search-result-buttons">
                     <a href="${study.caseStudyUrl}" class="search-result-btn">Read More</a>
                     <a href="${study.dashboardUrl}" class="search-result-btn">View Dashboard</a>
+                    ${study.agenticUrl ? `<a href="${study.agenticUrl}" class="search-result-btn">AI Assistant</a>` : ''}
                 </div>
             </div>
         `).join('');
