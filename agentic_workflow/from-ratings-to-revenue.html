@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Shopee Seller Assistant | From Ratings to Revenue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #403B36; background-color: #ffffff; }
+        .container { display: flex; min-height: 100vh; }
+        .left-column { width: 30%; background-color: #f8f8f8; padding: 40px 30px; position: fixed; height: 100vh; overflow-y: auto; border-right: 1px solid #e0e0e0; }
+        .left-column h1 { font-size: 1.8em; font-weight: bold; color: #403B36; margin-bottom: 10px; }
+        .left-column h2 { font-size: 1em; font-weight: 400; color: #666; margin-bottom: 20px; }
+        .intro p { color: #555; margin-bottom: 30px; line-height: 1.8; }
+        .home-link-section, .dashboard-link-section, .agentic-link-section { margin: 20px 0; }
+        .home-link-btn, .dashboard-link-btn, .agentic-link-btn { display: inline-block; padding: 12px 30px; background-color: #403B36; color: #fff; text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s ease; text-align: center; width: 100%; }
+        .home-link-btn:hover, .dashboard-link-btn:hover, .agentic-link-btn:hover { background-color: #CBA135; }
+        .agentic-link-btn { background-color: #CBA135; }
+        .agentic-link-btn:hover { background-color: #B8902E; }
+        .mcp-badge { display: inline-block; padding: 6px 12px; background-color: #e8f4f8; color: #2c5f7a; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-top: 10px; border: 1px solid #b8dce8; }
+        .contact { margin-top: 30px; }
+        .contact h2 { font-size: 1.2em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
+        .contact p { color: #555; margin-bottom: 15px; }
+        .contact ul { list-style: none; }
+        .contact li { margin-bottom: 10px; color: #555; }
+        .contact a { color: #CBA135; text-decoration: none; }
+        .contact a:hover { text-decoration: underline; }
+        .right-column { width: 70%; margin-left: 30%; padding: 40px 50px; background-color: #ffffff; }
+        .chatbot-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e0e0e0; }
+        .chatbot-header h1 { font-size: 2.2em; color: #403B36; margin-bottom: 10px; font-weight: 600; }
+        .chatbot-header p { font-size: 1.1em; color: #666; line-height: 1.8; }
+        .chat-container { max-width: 900px; margin: 0 auto; background-color: #f8f8f8; border-radius: 10px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .suggested-questions { margin-bottom: 30px; }
+        .suggested-questions h3 { font-size: 1.3em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
+        .question-btn { display: block; width: 100%; padding: 15px 20px; margin-bottom: 12px; background-color: #ffffff; color: #403B36; border: 2px solid #CBA135; border-radius: 8px; text-align: left; cursor: pointer; font-size: 1em; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+        .question-btn:hover { background-color: #CBA135; color: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3); }
+        .chat-messages { min-height: 400px; margin-top: 20px; }
+        .message { margin-bottom: 20px; padding: 15px 20px; border-radius: 10px; animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .message.user { background-color: #CBA135; color: #ffffff; margin-left: 50px; text-align: right; }
+        .message.agent { background-color: #ffffff; color: #403B36; margin-right: 50px; border: 1px solid #e0e0e0; }
+        .message.agent .agent-label { font-weight: 600; color: #CBA135; margin-bottom: 8px; display: block; }
+        .workflow-step { margin: 15px 0; padding: 12px 15px; background-color: #f8f8f8; border-left: 4px solid #CBA135; border-radius: 4px; }
+        .workflow-step .step-title { font-weight: 600; color: #403B36; margin-bottom: 5px; }
+        .workflow-step .step-content { color: #666; font-size: 0.95em; }
+        .data-result { margin: 15px 0; padding: 15px; background-color: #e8f4f8; border-radius: 6px; border: 1px solid #b8dce8; }
+        .data-result .result-title { font-weight: 600; color: #2c5f7a; margin-bottom: 8px; }
+        .data-result ul { margin-left: 20px; color: #555; }
+        .final-answer { margin-top: 15px; padding: 15px; background-color: #e8f8e8; border-radius: 6px; border-left: 4px solid #4CAF50; }
+        .final-answer .answer-label { font-weight: 600; color: #2e7d32; margin-bottom: 8px; display: block; }
+        footer { text-align: center; padding: 30px 20px; background-color: #222; color: #fff; margin-top: 50px; }
+        footer p { margin: 0; font-size: 0.9em; }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .left-column { width: 100%; position: relative; height: auto; }
+            .right-column { width: 100%; margin-left: 0; padding: 30px 20px; }
+            .message.user { margin-left: 20px; }
+            .message.agent { margin-right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="left-column">
+            <header>
+                <h1>Lee Yih Ven</h1>
+                <h2>Data Analytics Portfolio</h2>
+            </header>
+            <section class="intro">
+                <p>Ask this AI assistant how customer ratings drive sales on Shopee — which products to promote, which milestones to chase, and where price and category matter most.</p>
+                <div class="mcp-badge">MCP Server • 150 rows • 7 tools</div>
+            </section>
+
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+            </section>
+            <section class="home-link-section">
+                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/case-studies/from-ratings-to-revenue.html">Case Study</a>
+            </section>
+            <section class="dashboard-link-section">
+                <a class="dashboard-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/dashboards/from-ratings-to-revenue-dashboard.html">Dashboard</a>
+            </section>
+            <section class="agentic-link-section">
+                <a class="agentic-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/from-ratings-to-revenue.html">AI Assistant</a>
+            </section>
+
+            <section class="contact">
+                <h2>Contact</h2>
+                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+                <ul>
+                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+                    <li>Phone: +6014-9207099</li>
+                </ul>
+            </section>
+        </aside>
+
+        <main class="right-column">
+            <div class="chatbot-header">
+                <h1>AI Shopee Seller Assistant</h1>
+                <p>Powered by an AI agent connected to an MCP server exposing 7 tools over a 150-row Shopee listings sample. Click any question to see how the agent plans, calls tools, and grounds its answer in real data.</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="suggested-questions">
+                    <h3>Try these questions:</h3>
+                    <button class="question-btn" onclick="showResponse(1)">How big is the marketplace dataset and what does it cover?</button>
+                    <button class="question-btn" onclick="showResponse(2)">How strong is the link between customer ratings and sales?</button>
+                    <button class="question-btn" onclick="showResponse(3)">Do sales really accelerate at certain rating milestones?</button>
+                    <button class="question-btn" onclick="showResponse(4)">At what rating count does a product almost guarantee high sales?</button>
+                    <button class="question-btn" onclick="showResponse(5)">Which product categories move the most volume?</button>
+                    <button class="question-btn" onclick="showResponse(6)">Is every category equally rating-driven, or are some different?</button>
+                    <button class="question-btn" onclick="showResponse(7)">Does pricing low mean lower customer ratings?</button>
+                    <button class="question-btn" onclick="showResponse(8)">Which price band sells the most units?</button>
+                    <button class="question-btn" onclick="showResponse(9)">Do deeper discounts damage star ratings?</button>
+                    <button class="question-btn" onclick="showResponse(10)">Which products should I promote harder to grow fastest?</button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <p style="text-align: center; color: #999; font-style: italic;">Select a question above to see how the AI agent works</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    </footer>
+
+    <script>
+        const responses = {
+            1: {
+                question: "How big is the marketplace dataset and what does it cover?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: fetch dataset overview — row count, category coverage, price range, seller diversity." },
+                    { title: "🔍 MCP Tool Call — mcp_get_dataset_overview", content: "Calling 'from-ratings-to-revenue-data-server' for a summary of the 150-row Shopee listings sample..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Dataset Overview:",
+                    items: [
+                        "Total listings: 150",
+                        "Unique categories: 23",
+                        "Unique sellers: 148 (nearly one product per seller)",
+                        "Average price: RM162.83",
+                        "Average star rating: 4.89 / 5",
+                        "Total units sold across sample: 252,694"
+                    ]
+                },
+                answer: "Your sample covers 150 Shopee listings across 23 product categories and 148 different sellers, with a healthy average star rating of 4.89. The sample captures over 252,000 total units sold, giving you a reliable read on how ratings and sales interact across the marketplace."
+            },
+            2: {
+                question: "How strong is the link between customer ratings and sales?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute Pearson correlation between total_rating and total_sold, then cross-reference the report's headline finding." },
+                    { title: "🔍 MCP Tool Call — mcp_get_ratings_sales_correlation", content: "Computing correlation from the MCP server..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Ratings vs Sales Correlation:",
+                    items: [
+                        "Pearson r = 1.000 (perfect linear relationship)",
+                        "Every additional customer rating aligns with one additional unit sold",
+                        "No outliers break the pattern — the relationship holds across all price bands"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Checking how the report frames the headline finding..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"The relationship between customer ratings and sales is very strong. Every time a product gets one more customer rating, it usually sells one more unit.\"",
+                        "\"Sellers can confidently use customer ratings to predict how well their product will do.\""
+                    ]
+                },
+                answer: "The link is essentially perfect — every new customer rating adds one more unit sold, a correlation of 1.0 in your sample. You can treat rating count as a direct leading indicator of sales and plan promotions around it with confidence."
+            },
+            3: {
+                question: "Do sales really accelerate at certain rating milestones?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute average units sold within each rating bucket (0-30, 30-1000, 1000-5000, 5000-10000, 10000+)." },
+                    { title: "🔍 MCP Tool Call — mcp_get_sales_by_rating_bucket", content: "Calling MCP tool to return avg sales per bucket..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Avg Sales by Rating Bucket:",
+                    items: [
+                        "0–30 ratings: 10 units sold on average",
+                        "30–1,000 ratings: 285 units",
+                        "1,000–5,000 ratings: 2,041 units",
+                        "5,000–10,000 ratings: 7,020 units",
+                        "10,000+ ratings: 18,386 units",
+                        "Each milestone roughly multiplies sales rather than adding linearly"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Retrieving the report's milestone findings..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Once a product passes about 1000 customer ratings, sales start to grow much faster.\"",
+                        "\"Products with 1001–5000 ratings sell around 2,400 units on average, and those with more than 10,000 ratings sell about 23,000 units on average.\""
+                    ]
+                },
+                answer: "Yes — the jumps are dramatic. A product with 1,000+ ratings sells ~200× more than one with under 30 ratings, and the 10,000+ group sells ~18,000 units on average. The 1,000 rating line is the single most important threshold to cross."
+            },
+            4: {
+                question: "At what rating count does a product almost guarantee high sales?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute P(units sold > 1000) within each rating bucket." },
+                    { title: "🔍 MCP Tool Call — mcp_get_highseller_probability", content: "Calling MCP tool to return the high-seller probability by rating bucket..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — P(>1000 units sold) by Bucket:",
+                    items: [
+                        "0–30 ratings: 0% become high-sellers (n=24)",
+                        "30–1,000 ratings: 0% are above 1,000 units (n=82)",
+                        "1,000–5,000 ratings: 100% (n=32)",
+                        "5,000–10,000 ratings: 100% (n=5)",
+                        "10,000+ ratings: 100% (n=7)",
+                        "The tipping point in this sample sits right at 1,000 ratings"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Checking the report's early-threshold finding..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"With as few as 30–50 customer ratings, a product's chance of becoming a high-seller jumps to almost 100%.\"",
+                        "\"After reaching 30–50 ratings, most products maintain a very high chance of achieving strong sales.\""
+                    ]
+                },
+                answer: "In your sample, the 1,000-rating line is the hard threshold — every listing above it exceeds 1,000 units sold. The report adds that the climb actually starts earlier, around 30–50 ratings, so focus your first push on getting products past the 30-rating mark, then drive hard to 1,000."
+            },
+            5: {
+                question: "Which product categories move the most volume?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: group by category_main, average total_sold, rank top 6." },
+                    { title: "🔍 MCP Tool Call — mcp_get_top_categories_by_sales", content: "Calling MCP tool to rank categories by average units sold..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Top Categories by Avg Sales:",
+                    items: [
+                        "Muslim Fashion: 9,830 avg units sold",
+                        "Automotive: 4,489",
+                        "Home & Living: 3,390",
+                        "Home Appliances: 2,907",
+                        "Women Clothes: 2,317",
+                        "Watches: 2,076"
+                    ]
+                },
+                answer: "Muslim Fashion is the runaway leader in this sample, averaging nearly 10,000 units per listing — over twice the second-place Automotive category. If you're deciding where to list new products, these top 6 categories give you the best volume ceiling."
+            },
+            6: {
+                question: "Is every category equally rating-driven, or are some different?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute ratings-to-sales correlation within each category with ≥3 listings." },
+                    { title: "🔍 MCP Tool Call — mcp_get_category_rating_sensitivity", content: "Calling MCP tool to compute per-category correlation..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Correlation by Category (top 8 by listings):",
+                    items: [
+                        "Men Clothes: r = 1.00 (n=19)",
+                        "Baby & Toys: r = 1.00 (n=17)",
+                        "Health & Beauty: r = 1.00 (n=12)",
+                        "Groceries & Pets: r = 1.00 (n=10)",
+                        "Home Appliances: r = 1.00 (n=10)",
+                        "Mobile & Accessories: r = 1.00 (n=10)",
+                        "Women Clothes: r = 1.00 (n=10)",
+                        "Home & Living: r = 1.00 (n=8)",
+                        "Every category shows a perfect 1.0 correlation — the rating-drives-sales pattern is universal"
+                    ]
+                },
+                answer: "Every major category in your sample shows a perfect 1.0 rating-to-sales correlation, meaning there's no category where ratings 'don't matter'. Whatever you're selling, every rating you collect translates directly into a unit sold — the only difference between categories is ceiling volume, not the mechanism."
+            },
+            7: {
+                question: "Does pricing low mean lower customer ratings?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute average item_rating by price band." },
+                    { title: "🔍 MCP Tool Call — mcp_get_rating_by_price_band", content: "Calling MCP tool to return average star ratings by price segment..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Avg Star Rating by Price Band:",
+                    items: [
+                        "<RM20: 4.88",
+                        "RM20–50: 4.89",
+                        "RM50–100: 4.89",
+                        "RM100–300: 4.89",
+                        "RM300+: 4.95",
+                        "Spread is less than 0.1 points — price band has almost no effect on star rating"
+                    ]
+                },
+                answer: "No — customers rate cheap products almost identically to premium ones (4.88 vs 4.95 stars). You can price low to collect ratings and sales without worrying about a satisfaction penalty, because buyers seem to rate based on expectations set by the price, not on absolute quality."
+            },
+            8: {
+                question: "Which price band sells the most units?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: group by price_band, compute average total_sold." },
+                    { title: "🔍 MCP Tool Call — mcp_get_sales_by_price_band", content: "Calling MCP tool to return average units sold by price segment..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Avg Units Sold by Price Band:",
+                    items: [
+                        "<RM20: 2,234 units (highest volume)",
+                        "RM20–50: 1,814 units",
+                        "RM100–300: 762 units",
+                        "RM300+: 454 units",
+                        "RM50–100: 103 units (weakest segment)",
+                        "Sales volume drops sharply above RM50"
+                    ]
+                },
+                answer: "Products under RM20 sell the most — an average of 2,234 units each, compared to just 454 for items over RM300. The RM50–100 band is surprisingly weak (only 103 avg units), so avoid that middle dead zone and either go clearly budget or clearly premium."
+            },
+            9: {
+                question: "Do deeper discounts damage star ratings?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: compute correlation between discount_pct and item_rating." },
+                    { title: "🔍 MCP Tool Call — mcp_get_discount_rating_correlation", content: "Calling MCP tool to return the discount-vs-rating correlation..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Discount vs Star Rating:",
+                    items: [
+                        "Average discount across all listings: 29.4%",
+                        "Correlation (discount % vs star rating): −0.22",
+                        "Weak negative relationship — deeper discounts slightly reduce star ratings",
+                        "The effect is small enough that it's not a blocker for discount strategies"
+                    ]
+                },
+                answer: "Only slightly — the correlation between discount depth and star rating is −0.22, which is weak. Deep discounts nudge star ratings down a little (possibly through bargain-hunters with harsher reviews), but the effect is too small to abandon discounting as a lever for collecting ratings quickly."
+            },
+            10: {
+                question: "Which products should I promote harder to grow fastest?",
+                workflow: [
+                    { title: "📋 Planning", content: "Task: synthesise the milestone findings, category ranking, and price band performance into a prioritisation rule." },
+                    { title: "🔍 MCP Tool Call — mcp_get_promotion_targets", content: "Pulling listings near the 30-rating and 1,000-rating lines, cross-referenced with high-volume categories..." }
+                ],
+                dataResult: {
+                    title: "MCP Response — Promotion Priority Signals:",
+                    items: [
+                        "Products with 10–30 ratings: one big push can cross the first probability threshold",
+                        "Products with 500–1,000 ratings: one big push can cross the 2,000+ unit sales line",
+                        "Strongest category ceilings: Muslim Fashion, Automotive, Home & Living, Home Appliances",
+                        "Best price bands for volume: <RM20 and RM20–50"
+                    ]
+                },
+                workflow2: [
+                    { title: "📄 Context Search — Analyst Report", content: "Retrieving the report's recommended action list..." }
+                ],
+                dataResult2: {
+                    title: "Report Insight:",
+                    items: [
+                        "\"Work to get 30–50 customer ratings as soon as possible for each product.\"",
+                        "\"Products that are close to reaching 20–30 ratings are at a critical turning point. Give them extra attention through advertising, featured listings, or bundle offers.\"",
+                        "\"Products nearing 1000 ratings should receive extra marketing support. Once they cross 1000 ratings, sales growth will become much faster and stronger.\""
+                    ]
+                },
+                answer: "Focus your promotion budget on two groups: products with 10–30 ratings (to push them past the early threshold) and products with 500–1,000 ratings (to push them past the acceleration line). Keep them priced under RM50 in Muslim Fashion, Automotive, Home & Living, or Home Appliances for the fastest return."
+            }
+        };
+
+        function showResponse(id) {
+            const r = responses[id];
+            const chat = document.getElementById("chatMessages");
+            chat.innerHTML = "";
+
+            const userMsg = document.createElement("div");
+            userMsg.className = "message user";
+            userMsg.textContent = r.question;
+            chat.appendChild(userMsg);
+
+            const agentMsg = document.createElement("div");
+            agentMsg.className = "message agent";
+            let html = '<span class="agent-label">AI Agent (Shopee Seller Advisor)</span>';
+
+            r.workflow.forEach(s => {
+                html += `<div class="workflow-step"><div class="step-title">${s.title}</div><div class="step-content">${s.content}</div></div>`;
+            });
+            html += `<div class="data-result"><div class="result-title">${r.dataResult.title}</div><ul>`;
+            r.dataResult.items.forEach(i => html += `<li>${i}</li>`);
+            html += `</ul></div>`;
+
+            if (r.workflow2) {
+                r.workflow2.forEach(s => {
+                    html += `<div class="workflow-step"><div class="step-title">${s.title}</div><div class="step-content">${s.content}</div></div>`;
+                });
+            }
+            if (r.dataResult2) {
+                html += `<div class="data-result"><div class="result-title">${r.dataResult2.title}</div><ul>`;
+                r.dataResult2.items.forEach(i => html += `<li>${i}</li>`);
+                html += `</ul></div>`;
+            }
+
+            html += `<div class="final-answer"><span class="answer-label">💡 Final Answer</span>${r.answer}</div>`;
+            agentMsg.innerHTML = html;
+            chat.appendChild(agentMsg);
+            chat.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    </script>
+</body>
+</html>
