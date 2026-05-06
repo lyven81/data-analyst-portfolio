@@ -6,12 +6,800 @@
     <title>Lee Yih Ven | Data Analyst Portfolio - Business Intelligence & Predictive Analytics</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/data-analyst-portfolio/data-stories.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .portfolio-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #f9f9f9;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger-menu {
+            display: none; /* Hidden on desktop */
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger-menu span {
+            width: 25px;
+            height: 3px;
+            background-color: #007BFF;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px 40px 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            width: 200px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Magazine Layout Styles */
+        .magazine-container {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/not-all-homes-are-equal/cover image.jpeg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 40px;
+            color: white;
+        }
+
+        .hero-category {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-btn {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .hero-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Grid Section */
+        .grid-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .grid-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .grid-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.5);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 25px;
+            color: white;
+        }
+
+        .grid-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .grid-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .grid-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .grid-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .grid-btn {
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .grid-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Category Colors */
+        .predictive .grid-category {
+            color: #2196F3;
+        }
+        .regression .grid-category {
+            color: #FF9800;
+        }
+        .segmentation .grid-category {
+            color: #E91E63;
+        }
+        .optimization .grid-category {
+            color: #FFC107;
+        }
+
+        /* Banner Section */
+        .banner-section {
+            position: relative;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .banner-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/know-your-reseller/cover image.jpeg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 25px;
+            color: white;
+        }
+
+        .banner-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FFC107;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .banner-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .banner-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .banner-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .banner-btn {
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .banner-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Mobile-Friendly Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .portfolio-title {
+                font-size: 1.5rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            nav {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 10px 15px;
+            }
+
+            .hamburger-menu {
+                display: flex; /* Show on mobile */
+                order: 1;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                gap: 20px;
+                z-index: 1000;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s ease;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.3rem;
+                padding: 15px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .search-container {
+                order: 2;
+                margin-left: auto;
+                width: auto;
+                max-width: none;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+
+            .magazine-container {
+                gap: 20px;
+            }
+
+            .hero-section {
+                height: 350px;
+            }
+
+            .hero-overlay {
+                padding: 25px 20px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .hero-buttons {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .hero-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .grid-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .grid-card {
+                height: 250px;
+            }
+
+            .grid-overlay {
+                padding: 20px;
+            }
+
+            .grid-title {
+                font-size: 1.1rem;
+            }
+
+            .grid-description {
+                font-size: 0.85rem;
+            }
+
+            .grid-buttons {
+                flex-wrap: wrap;
+            }
+
+            .banner-section {
+                height: 250px;
+            }
+
+            .banner-overlay {
+                padding: 20px;
+            }
+
+            .banner-title {
+                font-size: 1.1rem;
+            }
+
+            .banner-description {
+                font-size: 0.85rem;
+            }
+
+            .banner-buttons {
+                flex-wrap: wrap;
+            }
+
+            footer {
+                margin-top: 20px;
+                padding: 20px 15px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .portfolio-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+
+            .grid-title {
+                font-size: 1rem;
+            }
+
+            .banner-title {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+        }
+
+        /* Search Results Styles */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            color: #007BFF;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .search-result-description {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .search-result-category {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .search-result-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .search-result-btn {
+            padding: 4px 12px;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+            color: #666;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-btn:hover {
+            background: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            display: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+
+        /* Mobile search improvements */
+        @media (max-width: 768px) {
+            .search-result-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .search-result-btn {
+                text-align: center;
+                padding: 8px 12px;
+            }
+        }
+
+        /* ── Data Stories Lab nav (overrides magazine-page nav styles) ── */
+        .navbar {
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #FAF6EE;
+            border-bottom: 1px solid #E5DFD0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .navbar .brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #1A1F3A;
+            letter-spacing: 0.01em;
+        }
+        .navbar .brand a { color: inherit; text-decoration: none; }
+        .topnav { display: flex; gap: 1.8rem; }
+        .topnav a {
+            color: #5A5F7A;
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .topnav a:hover { color: #1A1F3A; }
+        .search-section {
+            background: #FAF6EE;
+            padding: 1.4rem 2rem;
+            border-bottom: 1px solid #E5DFD0;
+            display: flex;
+            justify-content: center;
+        }
+        .search-section .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            margin-left: 0;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 1.2rem;
+                gap: 0.8rem;
+            }
+            .topnav { flex-wrap: wrap; gap: 0.4rem 1rem; }
+            .topnav a { font-size: 0.78rem; }
+            .search-section { padding: 1.2rem; }
+        }
+
+        /* ── Data Stories Lab footer ── */
+        body > footer {
+            background: #1A1F3A;
+            color: #FAF6EE;
+            padding: 2.4rem 2rem 1.8rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+        body > footer p { margin: 0; opacity: 0.85; }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Lee Yih Ven</h1>
+        <p class="portfolio-title">Data Analytics Portfolio</p>
+        <p class="tagline">Data-driven insights to unlock business growth</p>
+    </header>
+
     <div class="navbar">
         <div class="brand"><a href="/data-analyst-portfolio/index.html">Data Stories Lab</a></div>
         <div class="topnav">
@@ -22,13 +810,6 @@
             <a href="/data-analyst-portfolio/contact.html">Contact</a>
         </div>
     </div>
-
-    <header>
-        <h1>Lee Yih Ven</h1>
-        <p class="portfolio-title">Data Analytics Portfolio</p>
-        <p class="tagline">Data-driven insights to unlock business growth</p>
-    </header>
-
     <div class="search-section">
         <div class="search-container">
             <input type="text" class="search-input" placeholder="Search case studies..." id="searchInput" autocomplete="off">
@@ -595,6 +1376,37 @@
             if (e.key === 'Escape') {
                 hideResults();
                 searchInput.blur();
+            }
+        });
+
+        // Hamburger Menu Toggle
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const navLinks = document.querySelector('.nav-links');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+        function toggleMobileMenu() {
+            hamburgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburgerMenu.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking a nav link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                toggleMobileMenu();
             }
         });
     </script>
