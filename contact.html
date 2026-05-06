@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Data Analytics Consultant | Business Intelligence Services</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/data-analyst-portfolio/data-stories.css">
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -27,431 +28,19 @@
         });
     </script>
     
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #222;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .category-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .tagline {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #666;
-        }
-        nav {
-            position: sticky;
-            top: 0;
-            background-color: #ffffff;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        nav a {
-            color: #007BFF;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Hamburger Menu Styles */
-        .hamburger-menu {
-            display: none; /* Hidden on desktop */
-            flex-direction: column;
-            gap: 5px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
-
-        .hamburger-menu span {
-            width: 25px;
-            height: 3px;
-            background-color: #007BFF;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger-menu.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .mobile-menu-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        .search-container {
-            position: relative;
-            margin-left: 20px;
-        }
-        .search-input {
-            padding: 8px 40px 8px 12px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            width: 200px;
-            transition: all 0.3s ease;
-            background: white;
-        }
-        .search-input:focus {
-            outline: none;
-            border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-        }
-        .search-input::placeholder {
-            color: #999;
-        }
-        .search-icon {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            pointer-events: none;
-        }
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            max-height: 400px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-            margin-top: 5px;
-        }
-        .search-result-item {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        .search-result-item:hover {
-            background-color: #f8f9fa;
-        }
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-        .search-result-title {
-            font-weight: 600;
-            color: #007BFF;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-        }
-        .search-result-description {
-            color: #666;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        .search-result-category {
-            font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-        .search-result-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        .search-result-btn {
-            padding: 4px 12px;
-            border: 1px solid #ddd;
-            background: #f8f9fa;
-            color: #666;
-            text-decoration: none;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            transition: all 0.2s ease;
-        }
-        .search-result-btn:hover {
-            background: #007BFF;
-            color: white;
-            border-color: #007BFF;
-        }
-        .no-results {
-            padding: 20px;
-            text-align: center;
-            color: #666;
-            font-style: italic;
-        }
-        .search-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: 999;
-            display: none;
-        }
-        .contact-section {
-            background-color: #f9f9f9;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #007BFF;
-            margin-bottom: 30px;
-        }
-        .contact-info {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .contact-info h3 {
-            color: #007BFF;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-        }
-        .contact-details {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        .contact-item {
-            text-align: center;
-            padding: 15px;
-            background-color: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            min-width: 200px;
-        }
-        .contact-item strong {
-            display: block;
-            color: #007BFF;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .contact-item a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-        .contact-item a:hover {
-            color: #007BFF;
-        }
-        .form-section-header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-top: 1px solid #ddd;
-            padding-top: 30px;
-        }
-        .form-section-header h3 {
-            color: #007BFF;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-        .form-section-header p {
-            color: #555;
-            margin-bottom: 0;
-        }
-        .contact-form {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-        .contact-form label {
-            display: block;
-            margin-bottom: 8px;
-            color: #222;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-            transition: all 0.2s ease;
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: #007BFF;
-            outline: none;
-            background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-        }
-        .contact-form .submit-btn {
-            width: 100%;
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        .contact-form .submit-btn:hover {
-            background-color: #0056b3;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #222;
-            color: white;
-            margin-top: 40px;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive styles for mobile */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            .category-title {
-                font-size: 1.5rem;
-            }
-            .tagline {
-                font-size: 1rem;
-            }
-            nav a {
-                font-size: 1rem;
-            }
-            .container {
-                padding: 15px;
-            }
-            .contact-section {
-                padding: 20px;
-            }
-            .contact-details {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .contact-item {
-                min-width: auto;
-            }
-            iframe {
-                height: 450px;
-            }
-
-            nav {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 10px 15px;
-            }
-
-            .hamburger-menu {
-                display: flex;
-                order: 1;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                width: 280px;
-                height: 100vh;
-                background: white;
-                flex-direction: column;
-                padding: 80px 30px 30px;
-                gap: 20px;
-                z-index: 1000;
-                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-                transition: left 0.3s ease;
-                overflow-y: auto;
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .nav-links a {
-                font-size: 1.3rem;
-                padding: 15px 0;
-                border-bottom: 1px solid #f0f0f0;
-            }
-
-            .search-container {
-                order: 2;
-                margin-left: auto;
-            }
-
-            .search-input {
-                width: 180px;
-            }
-        }
-    </style>
 </head>
 <body>
+
+    <div class="navbar">
+        <div class="brand"><a href="/data-analyst-portfolio/index.html">Data Stories Lab</a></div>
+        <div class="topnav">
+            <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+            <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+            <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+            <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+            <a href="/data-analyst-portfolio/contact.html">Contact</a>
+        </div>
+    </div>
 
     <header>
         <h1>Lee Yih Ven</h1>
@@ -459,26 +48,13 @@
         <p class="tagline">Let's unlock data's potential.</p>
     </header>
 
-    <nav>
-        <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="nav-links">
-            <a href="/data-analyst-portfolio/index.html">Home</a>
-            <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-            <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
-            <a href="/data-analyst-portfolio/about-this-work.html">About This Work</a>
-            <a href="/data-analyst-portfolio/contact.html">Contact</a>
-        </div>
+    <div class="search-section">
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search case studies..." id="searchInput">
+            <input type="text" class="search-input" placeholder="Search case studies..." id="searchInput" autocomplete="off">
             <span class="search-icon">🔍</span>
             <div class="search-results" id="searchResults"></div>
         </div>
-    </nav>
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    </div>
     <div class="search-overlay" id="searchOverlay"></div>
 
     <div class="container">
@@ -519,7 +95,7 @@
     </div>
 
     <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
+        <p>@2026. Lee Yih Ven. Data Stories Lab</p>
     </footer>
 
 <script>
@@ -983,36 +559,6 @@ document.addEventListener('keydown', (e) => {
         searchInput.blur();
     }
 });
-        // Hamburger Menu Toggle
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const navLinks = document.querySelector('.nav-links');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-
-        function toggleMobileMenu() {
-            hamburgerMenu.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        }
-
-        hamburgerMenu.addEventListener('click', toggleMobileMenu);
-        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
-
-        // Close menu when clicking a nav link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            });
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                toggleMobileMenu();
-            }
-        });
 
 
 </script>
