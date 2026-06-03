@@ -1,131 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oriental Kopi — We Grew 42%, But Profit Didn't Keep Up | Lee Yih Ven</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --primary-color:#403B36; --secondary-color:#CBA135; --background-color:#FCF9F2; --text-color:#2C2C2C; --shadow:0 4px 20px rgba(64,59,54,0.1); }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Poppins',sans-serif; background:var(--background-color); color:var(--text-color); line-height:1.7; }
-        .container { max-width:900px; margin:0 auto; padding:20px; }
-        .header { background:linear-gradient(135deg,#403B36 0%,#2C2822 100%); color:#FCF9F2; padding:40px; border-radius:15px; margin-bottom:30px; box-shadow:0 4px 20px rgba(0,0,0,0.15); }
-        .header h1 { font-size:2.2rem; font-weight:700; margin-bottom:12px; }
-        .header p { font-size:1.05rem; opacity:0.9; }
-        .cta-buttons { display:flex; gap:15px; margin-top:25px; flex-wrap:wrap; }
-        .cta-button { padding:12px 28px; border-radius:8px; text-decoration:none; font-weight:600; transition:all 0.3s ease; display:inline-block; }
-        .cta-primary { background:linear-gradient(135deg,#CBA135 0%,#B8903A 100%); color:#403B36; }
-        .cta-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(203,161,53,0.4); }
-        .cta-secondary { background:transparent; border:2px solid #CBA135; color:#FCF9F2; }
-        .cta-secondary:hover { background:rgba(203,161,53,0.1); }
-        .card { background:white; padding:32px; border-radius:15px; box-shadow:var(--shadow); margin-bottom:25px; }
-        .card h2 { color:var(--primary-color); font-size:1.35rem; margin-bottom:14px; border-bottom:3px solid var(--secondary-color); padding-bottom:8px; }
-        .card .step { font-size:0.8rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--secondary-color); }
-        .card p { margin-bottom:12px; }
-        .card ul { margin:10px 0 12px 22px; }
-        .card li { margin-bottom:8px; }
-        .bottomline { background:linear-gradient(135deg,#FBF6EA 0%,#F4E9CE 100%); border:2px solid var(--secondary-color); }
-        .bottomline h2 { border-bottom:none; margin-bottom:8px; }
-        .lead { font-size:1.15rem; font-weight:500; color:var(--primary-color); }
-        .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:16px; margin:22px 0 6px; }
-        .stat { background:white; border-radius:12px; padding:18px; text-align:center; border-top:4px solid var(--secondary-color); }
-        .stat .v { font-size:1.7rem; font-weight:700; color:var(--primary-color); }
-        .stat .l { font-size:0.82rem; color:#666; }
-        .pos { color:#5C7A5C; font-weight:600; } .neg { color:#B5503C; font-weight:600; }
-        .footer { background:#333; color:white; text-align:center; padding:20px; margin-top:40px; border-radius:12px; }
-        .footer p { margin:5px 0; }
-        @media (max-width:768px){ .header h1{font-size:1.6rem;} }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="header">
-        <h1>Oriental Kopi: We Grew 42% — But Profit Didn't Keep Up</h1>
-        <p>A management read of 1Q FY2026. Strong top-line growth, but margins compressed across the board — and the cause is one line on the P&amp;L.</p>
-        <div class="cta-buttons">
-            <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
-            <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/oriental-kopi-pl-analysis-dashboard.html" class="cta-button cta-primary">View Interactive Dashboard</a>
-            <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Dashboards</a>
-        </div>
-    </div>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Oriental Kopi — Quarterly P&amp;L Analysis | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/oriental-kopi-pl-analysis-dashboard.html">
+      View Dashboard
+     </a>
+    </section>
+    <!-- AI Assistant Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      AI Assistant
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/oriental-kopi-pl-analysis/cover%20image.png"/>
+      <h1>
+       Oriental Kopi: We Grew 42% — But Profit Didn't Keep Up
+      </h1>
+      <p>
+       A management read of 1Q FY2026 — strong top-line growth, but margins compressed across the board, and the cause is one line on the P&amp;L.
+      </p>
+     </header>
 
-    <div class="card bottomline">
-        <h2>The Bottom Line</h2>
-        <p class="lead">Oriental Kopi's 1Q FY2026 was a strong growth quarter — revenue up 42% and net profit up 30% — but <strong>profit quality slipped: every margin tier compressed, driven mainly by cost of sales rising from 74% to 77% of revenue.</strong> Growth is healthy. Defending margin is now the priority.</p>
-        <div class="stat-grid">
-            <div class="stat"><div class="v">RM139.2M</div><div class="l">Revenue <span class="pos">+42.3%</span></div></div>
-            <div class="stat"><div class="v">RM17.0M</div><div class="l">Net Profit <span class="pos">+30.2%</span></div></div>
-            <div class="stat"><div class="v">23.0%</div><div class="l">Gross Margin <span class="neg">−2.9 ppt</span></div></div>
-            <div class="stat"><div class="v">12.2%</div><div class="l">Net Margin <span class="neg">−1.1 ppt</span></div></div>
-        </div>
-    </div>
+     <section>
+      <h2>
+       The Bottom Line
+      </h2>
+      <p>
+       Oriental Kopi's 1Q FY2026 was a strong growth quarter — revenue up 42% and net profit up 30% — but profit quality slipped: every margin tier compressed, driven mainly by cost of sales rising from 74% to 77% of revenue. Growth is healthy. Defending margin is now the priority.
+      </p>
+     </section>
 
-    <div class="card">
-        <span class="step">The Question</span>
-        <h2>Did 42% growth make us more profitable?</h2>
-        <p>Oriental Kopi Holdings Bhd — a Malaysian kopitiam café chain and packaged-food distributor listed on Bursa Malaysia — posted headline revenue growth of 42% in 1Q FY2026. For management, the headline number isn't the question. The question is sharper: <strong>did that growth convert into profit, or did we buy revenue at the expense of margin?</strong> This analysis reads the quarterly P&amp;L the way a finance team would — vertical analysis (each line as a share of revenue), horizontal analysis (year-on-year), and a segment breakdown — to answer it.</p>
-    </div>
+     <section>
+      <h2>
+       The Question: Did 42% growth make us more profitable?
+      </h2>
+      <p>
+       Oriental Kopi Holdings Bhd — a Malaysian kopitiam café chain and packaged-food distributor listed on Bursa Malaysia — posted headline revenue growth of 42% in 1Q FY2026. For management, the headline number isn't the question. The question is sharper: did that growth convert into profit, or did we buy revenue at the expense of margin?
+      </p>
+      <p>
+       This analysis reads the quarterly P&amp;L the way a finance team would — vertical analysis (each line as a share of revenue), horizontal analysis (year-on-year), and a segment breakdown — to answer it.
+      </p>
+     </section>
 
-    <div class="card">
-        <span class="step">Evidence 1 — The Result</span>
-        <h2>Growth is real — but profit grew slower than revenue</h2>
-        <p>Revenue rose <strong>+42.3%</strong> (RM97.8M → RM139.2M) and profit after tax rose <strong>+30.2%</strong> (RM13.1M → RM17.0M). Both up strongly — but the 12-point gap between revenue growth and profit growth is the first signal that something happened to margin on the way down the statement.</p>
-    </div>
+     <section>
+      <h2>
+       1. The Result: growth outpaced profit
+      </h2>
+      <img alt="Chart 1 - Revenue Growth vs Profit Growth" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/oriental-kopi-pl-analysis/chart%201.png"/>
+      <p>
+       Revenue rose 42.3% (RM97.8M to RM139.2M) and profit after tax rose 30.2% (RM13.1M to RM17.0M). Both up strongly — but the 12-point gap between revenue growth and profit growth is the first signal that something happened to margin on the way down the statement.
+      </p>
+     </section>
 
-    <div class="card">
-        <span class="step">Evidence 2 — The Quality Check</span>
-        <h2>Every margin tier compressed</h2>
-        <p>It wasn't one line — profitability fell at every level of the P&amp;L:</p>
-        <ul>
-            <li><strong>Gross margin:</strong> 25.9% → <strong>23.0%</strong> (−2.9 ppt)</li>
-            <li><strong>Operating margin:</strong> 18.6% → <strong>17.1%</strong> (−1.6 ppt)</li>
-            <li><strong>Net margin:</strong> 13.4% → <strong>12.2%</strong> (−1.1 ppt)</li>
-        </ul>
-        <p>Because the compression starts at the gross line and carries all the way down, the root cause sits at the top of the statement — not in financing or tax.</p>
-    </div>
+     <section>
+      <h2>
+       2. The Quality Check: every margin compressed
+      </h2>
+      <img alt="Chart 2 - Margins FY25 vs FY26" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/oriental-kopi-pl-analysis/chart%202.png"/>
+      <p>
+       It wasn't one line — profitability fell at every level of the P&amp;L. Gross margin slipped from 25.9% to 23.0% (−2.9 ppt), operating margin from 18.6% to 17.1% (−1.6 ppt), and net margin from 13.4% to 12.2% (−1.1 ppt).
+      </p>
+      <p>
+       Because the compression starts at the gross line and carries all the way down, the root cause sits at the top of the statement — not in financing or tax.
+      </p>
+     </section>
 
-    <div class="card">
-        <span class="step">Evidence 3 — The Cause</span>
-        <h2>Cost of sales is the leak</h2>
-        <p>Vertical analysis pinpoints it: <strong>cost of sales rose from 74.1% to 77.0% of revenue</strong> — it grew faster (+47.8%) than revenue did (+42.3%). That single 2.9-point shift is the largest driver of the margin squeeze, and it explains almost the entire drop in gross margin. Operating expenses stayed broadly in line as a share of revenue, so this is a cost-of-goods story, not an overhead story.</p>
-    </div>
+     <section>
+      <h2>
+       3. The Cause: cost of sales is the leak
+      </h2>
+      <img alt="Chart 3 - Cost of Sales as % of Revenue" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/oriental-kopi-pl-analysis/chart%203.png"/>
+      <p>
+       Vertical analysis pinpoints it: cost of sales rose from 74.1% to 77.0% of revenue — it grew faster (+47.8%) than revenue did (+42.3%). That single 2.9-point shift is the largest driver of the margin squeeze, and it explains almost the entire drop in gross margin.
+      </p>
+      <p>
+       Operating expenses stayed broadly in line as a share of revenue, so this is a cost-of-goods story, not an overhead story.
+      </p>
+     </section>
 
-    <div class="card">
-        <span class="step">Evidence 4 — The Shape of Growth</span>
-        <h2>The mix is shifting — and every segment's margin fell</h2>
-        <ul>
-            <li><strong>Cafe Chain</strong> — still ~90% of revenue, grew 37.0%, margin 24.3% → 21.2%.</li>
-            <li><strong>Distribution &amp; Retail (Packaged)</strong> — the growth engine, +125.6%, but margin fell 53.3% → 42.3%.</li>
-            <li><strong>Others</strong> — +77.9%, margin 16.1% → 15.0%.</li>
-        </ul>
-        <p>The fast-growing distribution business is gaining share, which shifts the group mix — but margin pressure is <strong>broad-based</strong>, not just a mix effect. Every segment is converting less of its revenue into profit than a year ago.</p>
-    </div>
+     <section>
+      <h2>
+       4. The Shape of Growth: the mix is shifting
+      </h2>
+      <img alt="Chart 4 - Segment Growth vs Margin Change" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/oriental-kopi-pl-analysis/chart%204.png"/>
+      <p>
+       The Cafe Chain is still ~90% of revenue and grew 37.0%, with margin slipping 24.3% to 21.2%. Distribution &amp; Retail (Packaged) is the growth engine — up 125.6% — but its margin fell sharply, 53.3% to 42.3%. Others grew 77.9%, margin 16.1% to 15.0%.
+      </p>
+      <p>
+       The fast-growing distribution business is gaining share, which shifts the group mix — but margin pressure is broad-based, not just a mix effect. Every segment is converting less of its revenue into profit than a year ago.
+      </p>
+     </section>
 
-    <div class="card">
-        <span class="step">The Verdict</span>
-        <h2>A growth quarter, not a margin quarter</h2>
-        <p>Across all four views the message is consistent: revenue rose 42% and profit 30%, but roughly three points of every revenue dollar leaked at the cost-of-sales line before reaching the bottom — pulling gross, operating, and net margin down together, across every segment. For a business compounding this fast, the risk isn't that growth runs out; it's that each new quarter of growth earns less. The priority is margin defense, not more top line — and the fix starts at the cost-of-sales line, where the leak is. The actions below follow directly.</p>
-    </div>
+     <section>
+      <h2>
+       The Verdict: a growth quarter, not a margin quarter
+      </h2>
+      <p>
+       Across all four views the message is consistent: revenue rose 42% and profit 30%, but roughly three points of every revenue dollar leaked at the cost-of-sales line before reaching the bottom — pulling gross, operating, and net margin down together, across every segment. For a business compounding this fast, the risk isn't that growth runs out; it's that each new quarter of growth earns less. The priority is margin defense, not more top line — and the fix starts at the cost-of-sales line, where the leak is.
+      </p>
+     </section>
 
-    <div class="card">
-        <h2>What management should do</h2>
-        <ul>
-            <li><strong>Protect gross margin first.</strong> The 2.9-ppt rise in cost of sales is the single biggest profit leak — investigate input costs, pricing, and product mix before chasing more top-line growth. Recovering ~3 ppt of COGS restores net margin to last year's level.</li>
-            <li><strong>Confirm the growth engine is accretive.</strong> Distribution &amp; Retail is doubling (+126%) but at an 11-point lower margin (53% → 42%) — verify it still adds to group profit as it scales, or the mix shift will keep dragging blended margin down even as revenue climbs.</li>
-            <li><strong>Pair every growth target with a margin guardrail.</strong> This quarter, revenue growth masked a profitability slip. Track margin quality alongside growth, not after it.</li>
-        </ul>
-    </div>
+     <section>
+      <h2>
+       What Management Should Do
+      </h2>
+      <p>
+       Protect gross margin first. The 2.9-ppt rise in cost of sales is the single biggest profit leak — investigate input costs, pricing, and product mix before chasing more top-line growth. Recovering roughly 3 ppt of cost of sales restores net margin to last year's level.
+      </p>
+      <p>
+       Confirm the growth engine is accretive. Distribution &amp; Retail is doubling (+126%) but at an 11-point lower margin (53% to 42%) — verify it still adds to group profit as it scales, or the mix shift will keep dragging blended margin down even as revenue climbs.
+      </p>
+      <p>
+       Pair every growth target with a margin guardrail. This quarter, revenue growth masked a profitability slip. Track margin quality alongside growth, not after it.
+      </p>
+     </section>
 
-    <div class="card">
-        <h2>Method &amp; Data</h2>
-        <p>Built from Oriental Kopi's published 1Q FY2026 quarterly report. Three tables — the full P&amp;L statement (12 line items, two periods), a 3-quarter headline trend, and a segment breakdown — drive an interactive dashboard (built in both Power BI and a live web version) computing vertical analysis, horizontal analysis, margins, and segment growth. Figures in RM'000. The headline trend covers three non-consecutive quarters (Dec'24 → Sep'25 → Dec'25), so the emphasis is year-on-year and structural comparison rather than a continuous time series.</p>
-    </div>
-
-</div>
-<div class="footer">
-    <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    <p style="font-size:0.8rem;opacity:0.7;">Source: Oriental Kopi Holdings Bhd — 1Q FY2026 quarterly report (public). Figures in RM'000.</p>
-</div>
-</body>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <p>
+       Built from Oriental Kopi's published 1Q FY2026 quarterly report. Three tables — the full P&amp;L statement (12 line items, two periods), a three-quarter headline trend, and a segment breakdown — drive an interactive dashboard (built in both Power BI and a live web version) computing vertical analysis, horizontal analysis, margins, and segment growth. Figures in RM'000. The headline trend covers three non-consecutive quarters (Dec'24, Sep'25, Dec'25), so the emphasis is year-on-year and structural comparison rather than a continuous time series.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2025 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
 </html>
