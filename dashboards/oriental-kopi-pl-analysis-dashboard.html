@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oriental Kopi – Quarterly P&L Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #403B36;
+            --secondary-color: #CBA135;
+            --background-color: #FCF9F2;
+            --text-color: #2C2C2C;
+            --card-background: #FFFFFF;
+            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #403B36 0%, #2C2822 100%);
+            color: #FCF9F2;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .cta-buttons { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .cta-button {
+            padding: 12px 30px; border-radius: 8px; text-decoration: none;
+            font-weight: 600; transition: all 0.3s ease; display: inline-block;
+        }
+        .cta-primary { background: linear-gradient(135deg, #CBA135 0%, #B8903A 100%); color: #403B36; }
+        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(203,161,53,0.4); }
+        .cta-secondary { background: transparent; border: 2px solid #CBA135; color: #FCF9F2; }
+        .cta-secondary:hover { background: rgba(203,161,53,0.1); }
+        .page-nav {
+            display: flex; justify-content: center; gap: 15px;
+            margin: 30px auto; flex-wrap: wrap;
+        }
+        .page-btn {
+            padding: 12px 24px; background: white; border: 2px solid var(--secondary-color);
+            border-radius: 8px; font-weight: 600; color: var(--primary-color);
+            cursor: pointer; transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+        }
+        .page-btn.active { background: var(--gold-gradient); color: white; border-color: var(--secondary-color); }
+        .page-btn:hover:not(.active) { background: rgba(203,161,53,0.1); }
+        .page { display: none; animation: fadeIn 0.5s ease-in; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .kpi-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px; margin: 30px auto;
+        }
+        .kpi-card {
+            background: white; padding: 28px; border-radius: 15px;
+            box-shadow: var(--shadow); text-align: center;
+            transition: all 0.3s ease; border-top: 4px solid var(--secondary-color);
+        }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(64,59,54,0.15); }
+        .kpi-label { font-size: 0.95rem; color: #666; margin-bottom: 10px; font-weight: 500; }
+        .kpi-value { font-size: 2.3rem; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+        .kpi-sub { font-size: 0.85rem; color: #888; }
+        .pos { color: #5C7A5C; font-weight: 600; }
+        .neg { color: #B5503C; font-weight: 600; }
+        .chart-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px; margin: 30px auto;
+        }
+        .chart-card { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); }
+        .chart-title {
+            color: var(--primary-color); margin-bottom: 20px; font-size: 1.15rem;
+            font-weight: 600; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px;
+        }
+        .chart-sub { font-size: 0.8rem; color: #888; margin-top: -15px; margin-bottom: 15px; }
+        .chart-container { position: relative; height: 300px; }
+        .chart-container-lg { position: relative; height: 380px; }
+        .full-width { grid-column: 1 / -1; }
+        /* P&L / scorecard tables */
+        .pl-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .pl-table thead { background: var(--gradient); color: white; }
+        .pl-table th { padding: 12px 15px; text-align: right; font-weight: 600; }
+        .pl-table th:first-child { text-align: left; }
+        .pl-table td { padding: 10px 15px; border-bottom: 1px solid #E8DFC8; text-align: right; }
+        .pl-table td:first-child { text-align: left; }
+        .pl-table tr.subtotal { background: #F0EBE0; font-weight: 700; color: var(--primary-color); }
+        .pl-table tr:hover { background-color: rgba(203,161,53,0.08); }
+        .footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        .footer p { margin: 5px 0; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+            .page-nav { flex-direction: column; }
+        }
+        @media print {
+            .page-nav, .cta-buttons { display: none !important; }
+            .page { display: block !important; page-break-before: always; }
+            .chart-card, .kpi-card, .pl-table, .chart-container, .chart-container-lg { break-inside: avoid; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Oriental Kopi — Quarterly P&amp;L Dashboard</h1>
+        <p>Revenue grew 42% but margins compressed — an interactive 1Q FY2026 profit &amp; loss analysis (RM'000, public quarterly report)</p>
+        <div class="cta-buttons">
+            <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/oriental-kopi-pl-analysis.html" class="cta-button cta-secondary">View Full Case Study</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
+        </div>
+    </div>
+
+    <!-- Page Navigation -->
+    <div class="page-nav">
+        <button class="page-btn active" onclick="showPage(1)">Overview</button>
+        <button class="page-btn" onclick="showPage(2)">Statement</button>
+        <button class="page-btn" onclick="showPage(3)">Margins</button>
+        <button class="page-btn" onclick="showPage(4)">Segments</button>
+    </div>
+
+    <!-- PAGE 1: Overview -->
+    <div id="page1" class="page active">
+        <h2 style="display:none">Overview</h2>
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Revenue (1Q FY26)</div>
+                <div class="kpi-value">RM139.2M</div>
+                <div class="kpi-sub"><span class="pos">+42.3%</span> YoY</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Gross Profit</div>
+                <div class="kpi-value">RM32.1M</div>
+                <div class="kpi-sub"><span class="pos">+26.6%</span> YoY</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Profit After Tax</div>
+                <div class="kpi-value">RM17.0M</div>
+                <div class="kpi-sub"><span class="pos">+30.2%</span> YoY</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Gross Margin</div>
+                <div class="kpi-value">23.0%</div>
+                <div class="kpi-sub"><span class="neg">−2.9 ppt</span> YoY</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Net Margin</div>
+                <div class="kpi-value">12.2%</div>
+                <div class="kpi-sub"><span class="neg">−1.1 ppt</span> YoY</div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Revenue vs Net Margin % — 3 Quarters</div>
+                <p class="chart-sub">Revenue keeps climbing, but net margin sits below the year-ago level (non-consecutive quarters)</p>
+                <div class="chart-container-lg"><canvas id="revVsMarginChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Revenue Growth vs Profit Growth (YoY %)</div>
+                <p class="chart-sub">Revenue grew faster than profit — the gap is the margin squeeze</p>
+                <div class="chart-container-lg"><canvas id="growthGapChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Headline P&amp;L: FY25 vs FY26 (RM'000)</div>
+                <p class="chart-sub">Revenue, gross profit and net profit all up year-on-year</p>
+                <div class="chart-container"><canvas id="headlineChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Revenue Trend — 3 Quarters (RM'000)</div>
+                <p class="chart-sub">Dec'24 → Sep'25 → Dec'25 (Mar/Jun'25 not in this dataset)</p>
+                <div class="chart-container"><canvas id="revTrendChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Statement -->
+    <div id="page2" class="page">
+        <h2 style="display:none">Statement</h2>
+        <div class="chart-grid">
+            <div class="chart-card full-width">
+                <div class="chart-title">Profit &amp; Loss Statement — RM'000 · YoY % · % of Revenue</div>
+                <p class="chart-sub">Full statement, 1Q FY2025 vs 1Q FY2026. Subtotals in bold. Costs shown as reported (negative).</p>
+                <div style="overflow-x:auto; margin-top:15px;">
+                    <table class="pl-table" id="plTable">
+                        <thead>
+                            <tr>
+                                <th>Line Item</th>
+                                <th>1Q FY25</th>
+                                <th>1Q FY26</th>
+                                <th>YoY %</th>
+                                <th>% of Rev (FY26)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Revenue → Net Profit Bridge (1Q FY26)</div>
+                <p class="chart-sub">How RM139.2M of revenue becomes RM17.0M of net profit</p>
+                <div class="chart-container-lg"><canvas id="waterfallChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Cost &amp; Profit Structure: % of Revenue (FY25 vs FY26)</div>
+                <p class="chart-sub">Cost of sales rose from 74.1% to 77.0% of revenue — the core of the squeeze</p>
+                <div class="chart-container-lg"><canvas id="structureChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Margins -->
+    <div id="page3" class="page">
+        <h2 style="display:none">Margins</h2>
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Gross Margin</div>
+                <div class="kpi-value">23.0%</div>
+                <div class="kpi-sub"><span class="neg">−2.9 ppt</span> vs FY25 (25.9%)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Operating Margin</div>
+                <div class="kpi-value">17.1%</div>
+                <div class="kpi-sub"><span class="neg">−1.6 ppt</span> vs FY25 (18.6%)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Net Margin</div>
+                <div class="kpi-value">12.2%</div>
+                <div class="kpi-sub"><span class="neg">−1.1 ppt</span> vs FY25 (13.4%)</div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Margins FY25 vs FY26 (Gross / Operating / Net)</div>
+                <p class="chart-sub">All three margins compressed year-on-year</p>
+                <div class="chart-container"><canvas id="marginsChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Gross &amp; Net Margin % Trend — 3 Quarters</div>
+                <p class="chart-sub">Margins dipped mid-year and have only partly recovered</p>
+                <div class="chart-container"><canvas id="marginTrendChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card full-width">
+                <div class="chart-title">Cost of Sales as % of Revenue (FY25 vs FY26)</div>
+                <p class="chart-sub">Cost of sales climbed 2.9 ppt — the single biggest driver of margin compression</p>
+                <div class="chart-container"><canvas id="cogsChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: Segments -->
+    <div id="page4" class="page">
+        <h2 style="display:none">Segments</h2>
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Revenue Mix Shift by Segment (FY25 vs FY26)</div>
+                <p class="chart-sub">Cafe Chain still ~90% of revenue, but Distribution &amp; Retail is gaining share</p>
+                <div class="chart-container-lg"><canvas id="mixChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Segment Revenue FY25 vs FY26 (RM'000)</div>
+                <p class="chart-sub">Distribution &amp; Retail more than doubled; Cafe Chain up 37%</p>
+                <div class="chart-container-lg"><canvas id="segRevChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <div class="chart-title">Segment Growth vs Margin Change</div>
+                <p class="chart-sub">Bubble size = FY26 revenue. Every segment grew but every segment's margin fell</p>
+                <div class="chart-container-lg"><canvas id="segBubbleChart"></canvas></div>
+            </div>
+            <div class="chart-card full-width">
+                <div class="chart-title">Segment Scorecard (1Q FY26)</div>
+                <p class="chart-sub">Revenue, profit, margin and YoY growth by business segment</p>
+                <div style="overflow-x:auto; margin-top:15px;">
+                    <table class="pl-table" id="segTable">
+                        <thead>
+                            <tr>
+                                <th>Segment</th>
+                                <th>Revenue (RM'000)</th>
+                                <th>Profit (RM'000)</th>
+                                <th>Margin %</th>
+                                <th>Revenue YoY %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="segTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- end dashboard-container -->
+
+<div class="footer">
+    <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    <p style="font-size:0.8rem;opacity:0.7">Source: Oriental Kopi Holdings Bhd — 1Q FY2026 quarterly report (public). Figures in RM'000.</p>
+</div>
+
+<script>
+// =====================================================================
+// DATA (Oriental Kopi 1Q FY2026, RM'000)
+// =====================================================================
+const pl = [
+  {item:'Revenue', sub:false, fy25:97830, fy26:139197},
+  {item:'Cost of Sales', sub:false, fy25:-72508, fy26:-107138},
+  {item:'Gross Profit', sub:true, fy25:25322, fy26:32059},
+  {item:'Other Income', sub:false, fy25:568, fy26:2318},
+  {item:'Selling & Distribution Expenses', sub:false, fy25:-4390, fy26:-5592},
+  {item:'Administrative Expenses', sub:false, fy25:-3220, fy26:-5070},
+  {item:'Share of Result of JV', sub:false, fy25:-54, fy26:29},
+  {item:'Profit from Operations', sub:true, fy25:18226, fy26:23744},
+  {item:'Finance Costs', sub:false, fy25:-933, fy26:-1406},
+  {item:'Profit Before Taxation', sub:true, fy25:17293, fy26:22338},
+  {item:'Income Tax Expenses', sub:false, fy25:-4200, fy26:-5291},
+  {item:'Profit After Taxation', sub:true, fy25:13093, fy26:17047}
+];
+const REV26 = 139197;
+const trend = {
+  labels: ["Dec'24 (1Q FY25)","Sep'25 (4Q FY25)","Dec'25 (1Q FY26)"],
+  revenue: [97830,133161,139197],
+  gm: [25.9,24.7,23.0],
+  nm: [13.4,11.9,12.2]
+};
+const segments = [
+  {name:'Cafe Chain', rev25:91600, rev26:125509, pft25:22285, pft26:26637},
+  {name:'Distribution & Retail', rev25:5467, rev26:12331, pft25:2914, pft26:5218},
+  {name:'Others', rev25:763, rev26:1357, pft25:123, pft26:204}
+];
+
+const COL = { dark:'#403B36', gold:'#CBA135', brown:'#8B7355', green:'#5C7A5C', red:'#B5503C', sand:'#D4C5B0' };
+const charts = {};
+function mkChart(id, config){ if (charts[id]) charts[id].destroy(); const c=document.getElementById(id); if(c) charts[id]=new Chart(c, config); }
+function fmtRM(v){ const a=Math.abs(v); const s=a>=1000?('RM'+(a/1000).toFixed(1)+'M'):('RM'+a+'K'); return (v<0?'-':'')+s; }
+function fmtK(v){ return v.toLocaleString(); }
+
+// ---------- PAGE 1 ----------
+function renderPage1(){
+  mkChart('revVsMarginChart', {
+    data: {
+      labels: trend.labels,
+      datasets: [
+        { type:'bar', label:"Revenue (RM'000)", data:trend.revenue, backgroundColor:COL.dark, borderRadius:6, yAxisID:'y' },
+        { type:'line', label:'Net Margin %', data:trend.nm, borderColor:COL.gold, backgroundColor:'rgba(203,161,53,0.15)', tension:0.35, pointRadius:6, pointBackgroundColor:COL.gold, yAxisID:'y1', fill:false }
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{ callbacks:{ label:ctx=> ctx.dataset.yAxisID==='y1' ? `${ctx.dataset.label}: ${ctx.parsed.y}%` : `${ctx.dataset.label}: ${fmtRM(ctx.parsed.y)}` } } },
+      scales:{ y:{ position:'left', grid:{color:'#F0EBE0'}, title:{display:true,text:"Revenue (RM'000)"}, ticks:{callback:v=>fmtRM(v)} },
+               y1:{ position:'right', grid:{display:false}, min:0, max:30, title:{display:true,text:'Net Margin %'}, ticks:{callback:v=>v+'%'} },
+               x:{ grid:{display:false} } } }
+  });
+  mkChart('growthGapChart', {
+    type:'bar',
+    data:{ labels:['Revenue','Gross Profit','Profit After Tax'], datasets:[{ label:'YoY Growth %', data:[42.3,26.6,30.2], backgroundColor:[COL.gold,COL.brown,COL.dark], borderRadius:6 }] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`+${ctx.parsed.y}% YoY`}} },
+      scales:{ y:{beginAtZero:true, grid:{color:'#F0EBE0'}, title:{display:true,text:'YoY Growth %'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } }
+  });
+  mkChart('headlineChart', {
+    type:'bar',
+    data:{ labels:['Revenue','Gross Profit','Profit After Tax'],
+      datasets:[ {label:'1Q FY25', data:[97830,25322,13093], backgroundColor:COL.sand, borderRadius:5},
+                 {label:'1Q FY26', data:[139197,32059,17047], backgroundColor:COL.dark, borderRadius:5} ] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${fmtRM(ctx.parsed.y)}`}} },
+      scales:{ y:{beginAtZero:true, grid:{color:'#F0EBE0'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}} } }
+  });
+  mkChart('revTrendChart', {
+    type:'line',
+    data:{ labels:trend.labels, datasets:[{ label:"Revenue (RM'000)", data:trend.revenue, borderColor:COL.gold, backgroundColor:'rgba(203,161,53,0.12)', fill:true, tension:0.35, pointRadius:6, pointBackgroundColor:COL.dark }] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>fmtRM(ctx.parsed.y)}} },
+      scales:{ y:{beginAtZero:false, grid:{color:'#F0EBE0'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}} } }
+  });
+}
+
+// ---------- PAGE 2 ----------
+function renderPage2(){
+  // P&L matrix
+  const body = document.getElementById('plTableBody');
+  body.innerHTML = pl.map(r=>{
+    const yoy = (r.fy26 - r.fy25)/Math.abs(r.fy25)*100;
+    const av = r.fy26/REV26*100;
+    const yoyTxt = (yoy>=0?'+':'') + yoy.toFixed(1) + '%';
+    const yoyCls = yoy>=0 ? 'pos' : 'neg';
+    return `<tr class="${r.sub?'subtotal':''}">
+      <td>${r.item}</td>
+      <td>${fmtK(r.fy25)}</td>
+      <td>${fmtK(r.fy26)}</td>
+      <td class="${yoyCls}">${yoyTxt}</td>
+      <td>${av.toFixed(1)}%</td>
+    </tr>`;
+  }).join('');
+
+  // Waterfall: Revenue -> PAT
+  const steps = [
+    {l:'Revenue', v:139197, type:'total'},
+    {l:'Cost of Sales', v:-107138, type:'dec'},
+    {l:'Other Income', v:2318, type:'inc'},
+    {l:'Selling & Dist', v:-5592, type:'dec'},
+    {l:'Admin', v:-5070, type:'dec'},
+    {l:'Share of JV', v:29, type:'inc'},
+    {l:'Finance Costs', v:-1406, type:'dec'},
+    {l:'Income Tax', v:-5291, type:'dec'},
+    {l:'Profit After Tax', v:17047, type:'total'}
+  ];
+  let run = 0; const bars=[]; const colors=[];
+  steps.forEach(s=>{
+    if (s.type==='total'){ bars.push([0, s.v]); colors.push(COL.dark); run = s.v; }
+    else { const start=run; const end=run+s.v; bars.push([Math.min(start,end), Math.max(start,end)]); colors.push(s.v>=0?COL.green:COL.red); run=end; }
+  });
+  mkChart('waterfallChart', {
+    type:'bar',
+    data:{ labels: steps.map(s=>s.l), datasets:[{ label:'RM\'000', data:bars, backgroundColor:colors, borderRadius:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=steps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+      scales:{ y:{beginAtZero:true, grid:{color:'#F0EBE0'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } }
+  });
+
+  // Cost & profit structure (% of revenue)
+  mkChart('structureChart', {
+    type:'bar',
+    data:{ labels:['Cost of Sales','Gross Profit','Operating Profit','Profit After Tax'],
+      datasets:[ {label:'FY25', data:[74.1,25.9,18.6,13.4], backgroundColor:COL.sand, borderRadius:5},
+                 {label:'FY26', data:[77.0,23.0,17.1,12.2], backgroundColor:COL.gold, borderRadius:5} ] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}% of revenue`}} },
+      scales:{ y:{beginAtZero:true, grid:{color:'#F0EBE0'}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } }
+  });
+}
+
+// ---------- PAGE 3 ----------
+function renderPage3(){
+  mkChart('marginsChart', {
+    type:'bar',
+    data:{ labels:['Gross Margin','Operating Margin','Net Margin'],
+      datasets:[ {label:'FY25', data:[25.9,18.6,13.4], backgroundColor:COL.sand, borderRadius:5},
+                 {label:'FY26', data:[23.0,17.1,12.2], backgroundColor:COL.dark, borderRadius:5} ] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}%`}} },
+      scales:{ y:{beginAtZero:true, grid:{color:'#F0EBE0'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } }
+  });
+  mkChart('marginTrendChart', {
+    type:'line',
+    data:{ labels:trend.labels, datasets:[
+      {label:'Gross Margin %', data:trend.gm, borderColor:COL.dark, backgroundColor:'rgba(64,59,54,0.08)', tension:0.35, pointRadius:5, fill:false},
+      {label:'Net Margin %', data:trend.nm, borderColor:COL.gold, backgroundColor:'rgba(203,161,53,0.12)', tension:0.35, pointRadius:5, fill:false} ] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}%`}} },
+      scales:{ y:{min:0, max:30, grid:{color:'#F0EBE0'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } }
+  });
+  mkChart('cogsChart', {
+    type:'bar',
+    data:{ labels:['1Q FY25','1Q FY26'], datasets:[{ label:'Cost of Sales (% of Revenue)', data:[74.1,77.0], backgroundColor:[COL.sand,COL.red], borderRadius:6, barThickness:90 }] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y}% of revenue`}} },
+      scales:{ y:{beginAtZero:false, min:70, max:80, grid:{color:'#F0EBE0'}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } }
+  });
+}
+
+// ---------- PAGE 4 ----------
+function renderPage4(){
+  const tot25 = segments.reduce((a,s)=>a+s.rev25,0);
+  const tot26 = segments.reduce((a,s)=>a+s.rev26,0);
+  mkChart('mixChart', {
+    type:'bar',
+    data:{ labels:['1Q FY25','1Q FY26'],
+      datasets: segments.map((s,i)=>({
+        label:s.name,
+        data:[ s.rev25/tot25*100, s.rev26/tot26*100 ],
+        backgroundColor:[COL.dark,COL.gold,COL.brown][i]
+      })) },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`}} },
+      scales:{ x:{stacked:true, grid:{display:false}}, y:{stacked:true, max:100, grid:{color:'#F0EBE0'}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}} } }
+  });
+  mkChart('segRevChart', {
+    type:'bar',
+    data:{ labels:segments.map(s=>s.name),
+      datasets:[ {label:'FY25', data:segments.map(s=>s.rev25), backgroundColor:COL.sand, borderRadius:5},
+                 {label:'FY26', data:segments.map(s=>s.rev26), backgroundColor:COL.dark, borderRadius:5} ] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${fmtRM(ctx.parsed.y)}`}} },
+      scales:{ y:{beginAtZero:true, grid:{color:'#F0EBE0'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}} } }
+  });
+  const bub = segments.map((s,i)=>{
+    const g=(s.rev26-s.rev25)/s.rev25*100;
+    const m26=s.pft26/s.rev26*100, m25=s.pft25/s.rev25*100;
+    return { label:s.name, data:[{x:g, y:m26-m25, r:[30,16,8][i]}], backgroundColor:['rgba(64,59,54,0.7)','rgba(203,161,53,0.8)','rgba(139,115,85,0.8)'][i] };
+  });
+  mkChart('segBubbleChart', {
+    type:'bubble',
+    data:{ datasets:bub },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: +${ctx.parsed.x.toFixed(1)}% revenue, ${ctx.parsed.y.toFixed(1)} ppt margin`}} },
+      scales:{ x:{title:{display:true,text:'Revenue Growth YoY %'}, grid:{color:'#F0EBE0'}, ticks:{callback:v=>v+'%'}},
+               y:{title:{display:true,text:'Margin Change (ppt)'}, grid:{color:'#F0EBE0'}, ticks:{callback:v=>v+' ppt'}} } }
+  });
+  const body=document.getElementById('segTableBody');
+  body.innerHTML = segments.map(s=>{
+    const g=(s.rev26-s.rev25)/s.rev25*100; const m=s.pft26/s.rev26*100;
+    return `<tr><td>${s.name}</td><td>${fmtK(s.rev26)}</td><td>${fmtK(s.pft26)}</td><td>${m.toFixed(1)}%</td><td class="pos">+${g.toFixed(1)}%</td></tr>`;
+  }).join('');
+}
+
+// ---------- PAGE SWITCH ----------
+const rendered={};
+function showPage(n){
+  for(let i=1;i<=4;i++){ document.getElementById('page'+i).classList.toggle('active', i===n); }
+  document.querySelectorAll('.page-btn').forEach((b,i)=>b.classList.toggle('active', i===n-1));
+  if(!rendered[n]){ rendered[n]=true; ({1:renderPage1,2:renderPage2,3:renderPage3,4:renderPage4})[n](); }
+}
+// reveal + render all on print
+window.addEventListener('beforeprint', ()=>{ [1,2,3,4].forEach(n=>{ if(!rendered[n]){ rendered[n]=true; ({1:renderPage1,2:renderPage2,3:renderPage3,4:renderPage4})[n](); } }); Object.values(charts).forEach(c=>{c.options.maintainAspectRatio=false; c.resize();}); });
+rendered[1]=true; renderPage1();
+</script>
+</body>
+</html>
