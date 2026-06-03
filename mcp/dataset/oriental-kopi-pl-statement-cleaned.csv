@@ -1,0 +1,25 @@
+Period,PeriodOrder,LineItem,LineOrder,LineType,Amount_RM000
+1Q FY2025 (Dec'24),1,Revenue,1,Line,97830
+1Q FY2026 (Dec'25),2,Revenue,1,Line,139197
+1Q FY2025 (Dec'24),1,Cost of Sales,2,Line,-72508
+1Q FY2026 (Dec'25),2,Cost of Sales,2,Line,-107138
+1Q FY2025 (Dec'24),1,Gross Profit,3,Subtotal,25322
+1Q FY2026 (Dec'25),2,Gross Profit,3,Subtotal,32059
+1Q FY2025 (Dec'24),1,Other Income,4,Line,568
+1Q FY2026 (Dec'25),2,Other Income,4,Line,2318
+1Q FY2025 (Dec'24),1,Selling & Distribution Expenses,5,Line,-4390
+1Q FY2026 (Dec'25),2,Selling & Distribution Expenses,5,Line,-5592
+1Q FY2025 (Dec'24),1,Administrative Expenses,6,Line,-3220
+1Q FY2026 (Dec'25),2,Administrative Expenses,6,Line,-5070
+1Q FY2025 (Dec'24),1,Share of Result of JV,7,Line,-54
+1Q FY2026 (Dec'25),2,Share of Result of JV,7,Line,29
+1Q FY2025 (Dec'24),1,Profit from Operations,8,Subtotal,18226
+1Q FY2026 (Dec'25),2,Profit from Operations,8,Subtotal,23744
+1Q FY2025 (Dec'24),1,Finance Costs,9,Line,-933
+1Q FY2026 (Dec'25),2,Finance Costs,9,Line,-1406
+1Q FY2025 (Dec'24),1,Profit Before Taxation,10,Subtotal,17293
+1Q FY2026 (Dec'25),2,Profit Before Taxation,10,Subtotal,22338
+1Q FY2025 (Dec'24),1,Income Tax Expenses,11,Line,-4200
+1Q FY2026 (Dec'25),2,Income Tax Expenses,11,Line,-5291
+1Q FY2025 (Dec'24),1,Profit After Taxation,12,Subtotal,13093
+1Q FY2026 (Dec'25),2,Profit After Taxation,12,Subtotal,17047
