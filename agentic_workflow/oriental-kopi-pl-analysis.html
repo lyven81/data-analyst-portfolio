@@ -6,14 +6,14 @@
 <title>AI P&amp;L Assistant | Under the Kopi Lid</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --brown:#5A3E2B; --brown2:#7A5535; --gold:#C8961E; --gold-soft:#F6ECD8;
     --cream:#FBF6EE; --bg:#F4ECE0; --ink:#33271C; --muted:#8A7660; --line:#E8DCC9;
     --card:#FFFFFF; --safe:#3C8C5A; --warn:#B07D27; --warn-bg:#FBF0DA;
     --shadow:0 1px 2px rgba(90,62,43,.05),0 8px 24px rgba(90,62,43,.08);
-    --display:'Fraunces',Georgia,serif; --body:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+    --display:'Poppins',sans-serif; --body:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
@@ -25,7 +25,7 @@
   .mark{width:42px;height:42px;border-radius:12px;flex-shrink:0;background:linear-gradient(150deg,#C8961E,#E0B445);display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.2)}
   .mark svg{width:22px;height:22px}
   .brand-name{font-family:var(--display);font-size:18px;font-weight:600;color:#fff;line-height:1.15}
-  .brand-sub{font-size:11px;color:#C9B79D;letter-spacing:.4px;text-transform:uppercase;margin-top:3px}
+  .brand-sub{font-size:11px;color:#fff;letter-spacing:.4px;text-transform:uppercase;margin-top:3px}
   .status{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:13px 14px}
   .status-title{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;margin-bottom:10px}
   .pill{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#EADDCB;padding:4px 0}
@@ -38,10 +38,10 @@
   .tool-list{list-style:none;display:flex;flex-direction:column;gap:1px}
   .tool-list li{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#CDBCA2;padding:6px 8px;border-radius:7px;display:flex;align-items:center;gap:8px}
   .tool-list li::before{content:"";width:5px;height:5px;border-radius:1.5px;background:#C8961E;flex-shrink:0}
-  .nav{display:flex;flex-direction:column;gap:8px;margin-top:2px}
-  .nav a{display:block;text-align:center;font-size:13px;font-weight:600;color:#3A2A1C;background:linear-gradient(150deg,#E0B445,#C8961E);padding:9px;border-radius:9px;text-decoration:none;transition:.15s}
-  .nav a.ghost{background:transparent;color:#EADDCB;border:1px solid rgba(255,255,255,.18)}
-  .nav a:hover{filter:brightness(1.05)}
+  .nav{display:flex;flex-direction:column;gap:8px}
+  .nav a{font-size:13px;color:#EADDCB;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 13px;transition:all .18s}
+  .nav a:hover{background:rgba(200,150,30,.16);border-color:var(--gold)}
+  .nav a.active{background:var(--gold);color:var(--brown);font-weight:600;border-color:var(--gold)}
   .foot{font-size:10.5px;color:#B5A084;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:13px;margin-top:auto}
   /* main */
   .main{flex:1;display:flex;flex-direction:column;min-width:0}
@@ -99,10 +99,11 @@
   .chip{font-size:12.5px;color:var(--brown2);background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:20px;cursor:pointer;transition:.15s}
   .chip:hover{background:var(--gold-soft);border-color:#EAD9B8}
   .chip.refuse-chip{border-style:dashed;color:var(--warn)}
-  .inbox{display:flex;gap:9px}
-  .inbox input{flex:1;font-family:var(--body);font-size:14px;padding:11px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;outline:none}
-  .inbox input:focus{border-color:#E0B445}
-  .inbox button{background:linear-gradient(150deg,#C8961E,#7A5535);color:#fff;border:none;padding:0 18px;border-radius:11px;font-weight:600;font-size:14px;cursor:pointer}
+  .inbox{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:5px 5px 5px 16px}
+  .inbox input{flex:1;font-family:var(--body);font-size:13.5px;padding:8px 0;border:none;background:transparent;outline:none;color:var(--ink)}
+  .inbox button{width:38px;height:38px;border-radius:10px;border:none;background:var(--brown);color:#fff;cursor:pointer;display:grid;place-items:center}
+  .inbox button:hover{background:#4A3122}
+  .inbox button svg{width:17px;height:17px}
   .footer-line{text-align:center;font-size:10.5px;color:var(--muted);padding:8px}
   @media(max-width:820px){body{flex-direction:column;height:auto;overflow:auto}.sidebar{width:100%}.thread{max-height:none}}
 </style>
@@ -111,19 +112,25 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="brand">
-      <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#3A2A1C" stroke-width="2" stroke-linecap="round"><path d="M4 19h16M6 19V9h3v10M11 19V5h3v14M16 19v-7h3v7"/></svg></div>
       <div><div class="brand-name">Lee Yih Ven</div><div class="brand-sub">Data Analytics Portfolio</div></div>
     </div>
 
+    <nav class="nav">
+      <a href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/oriental-kopi-pl-analysis.html">Case Study</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/oriental-kopi-pl-analysis-dashboard.html">Dashboard</a>
+      <a class="active" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/oriental-kopi-pl-analysis.html">AI Assistant</a>
+    </nav>
+
     <div class="status">
-      <div class="status-title">Agent status</div>
+      <div class="status-title">Asset status</div>
+      <div class="pill"><span class="dot ready"></span>Read-only access</div>
+      <div class="pill"><span class="dot lock"></span>Approved tools only</div>
       <div class="pill"><span class="dot" id="dbdot"></span><span id="dbstat">Loading database…</span></div>
-      <div class="pill"><span class="dot lock"></span>Read-only · no free SQL</div>
-      <div class="pill"><span class="dot ready"></span>Governed toolset only</div>
     </div>
 
     <div>
-      <div class="tools-head"><h3>Approved tools</h3><span class="tools-count">9</span></div>
+      <div class="tools-head"><h3>Approved tools</h3><span class="tools-count">9 &middot; fixed</span></div>
       <ul class="tool-list">
         <li>line_item_lookup</li>
         <li>headline_trend</li>
@@ -136,13 +143,6 @@
         <li>segment_revenue_share</li>
       </ul>
     </div>
-
-    <nav class="nav">
-      <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="ghost">Home</a>
-      <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/oriental-kopi-pl-analysis.html" class="ghost">Case Study</a>
-      <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/oriental-kopi-pl-analysis-dashboard.html" class="ghost">Dashboard</a>
-      <a href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/oriental-kopi-pl-analysis.html">AI Assistant</a>
-    </nav>
 
     <div class="foot">The agent answers only through pre-approved, parameterized queries against Oriental Kopi's 1Q FY2026 P&amp;L. It cannot write SQL, list tables, or export raw records.</div>
   </aside>
@@ -174,10 +174,10 @@
       </div>
       <div class="inbox">
         <input id="input" placeholder="Ask about revenue, margins, segments, costs…" autocomplete="off">
-        <button id="send">Ask</button>
+        <button id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
-    <div class="footer-line">© 2025 Lee Yih Ven | Data-Driven Solutions</div>
+    <div class="footer-line">The assistant surfaces P&amp;L figures for you to interpret. It does not give investment advice.</div>
   </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
