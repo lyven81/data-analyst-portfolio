@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Stock Screener Assistant | Cheap Stocks Worth Exploring</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#5A3E2B; --navy2:#3f2c1e; --gold:#C8961E; --gold-soft:#FBF6EE; --bg:#F4ECE0;
+    --ink:#33271C; --muted:#8A7660; --line:#E8DCC9; --card:#fff;
+    --green:#3C8C5A; --green-soft:#e7f3ec; --red:#c0392b; --amber:#9a7414;
+    --shadow:0 1px 2px rgba(31,58,95,.05),0 8px 24px rgba(31,58,95,.06);
+    --shadow-sm:0 1px 2px rgba(31,58,95,.05);
+    --body:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;height:100vh;overflow:hidden}
+  .sidebar{width:290px;flex-shrink:0;background:linear-gradient(180deg,var(--navy),var(--navy2));color:#dce6f1;padding:24px 20px;display:flex;flex-direction:column;gap:20px;overflow-y:auto}
+  .brand-name{font-size:18px;font-weight:700;color:#fff}
+  .brand-sub{font-size:11px;color:#fff;letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+  .status{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 14px}
+  .status-title{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#90a8c2;margin-bottom:10px}
+  .pill{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#d7e3f0;padding:4px 0}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(46,139,87,.18)}
+  .dot.lock{background:var(--gold);box-shadow:0 0 0 3px rgba(200,162,75,.18)}
+  .dot.loading{background:#c9a055;box-shadow:0 0 0 3px rgba(201,160,85,.18)}
+  .nav{display:flex;flex-direction:column;gap:8px}
+  .nav a{font-size:13px;color:#dce6f1;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 13px;transition:all .18s}
+  .nav a:hover{background:rgba(200,162,75,.16);border-color:var(--gold)}
+  .nav a.active{background:var(--gold);color:var(--navy);font-weight:600;border-color:var(--gold)}
+  .tools-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .tools-head h3{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#90a8c2;font-weight:600}
+  .tools-count{font-size:10.5px;color:#6f87a2;background:rgba(255,255,255,.06);padding:2px 8px;border-radius:20px}
+  .tool-list{list-style:none;display:flex;flex-direction:column;gap:1px}
+  .tool-list li{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#afc3d8;padding:6px 8px;border-radius:7px;display:flex;align-items:center;gap:8px}
+  .tool-list li::before{content:"";width:5px;height:5px;border-radius:1.5px;background:var(--gold);flex-shrink:0}
+  .foot{font-size:11px;color:#6f87a2;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:13px;margin-top:auto}
+  .main{flex:1;display:flex;flex-direction:column;min-width:0}
+  .topbar{padding:17px 30px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .topbar h1{font-size:19px;font-weight:600;color:var(--navy)}
+  .topbar .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .thread{flex:1;overflow-y:auto;padding:28px 30px 12px;display:flex;flex-direction:column;gap:20px}
+  .row{display:flex;gap:12px;max-width:760px;animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .row.user{margin-left:auto;flex-direction:row-reverse}
+  .av{width:34px;height:34px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .av.bot{background:var(--navy);color:#fff}.av.bot svg{width:17px;height:17px}
+  .av.me{background:#dce6f2;color:var(--navy)}
+  .bubble{font-size:14px;line-height:1.55}
+  .row.user .bubble{background:var(--navy);color:#eaf1f8;padding:11px 15px;border-radius:14px 14px 4px 14px}
+  .lead{margin-bottom:11px}.lead b{color:var(--navy);font-weight:600}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--navy);background:var(--gold-soft);border:1px solid #ecdcb0;padding:4px 10px;border-radius:7px;margin-bottom:11px}
+  .badge svg{width:12px;height:12px}.badge .lbl{color:#a98f4f}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px 18px;box-shadow:var(--shadow);max-width:600px}
+  .card h4{font-size:14.5px;color:var(--navy);font-weight:600;margin-bottom:3px}
+  .card .cap{font-size:12px;color:var(--muted);margin-bottom:13px}
+  .kpis{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi{flex:1;min-width:110px;background:#f7fafd;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center}
+  .kpi .v{font-size:26px;font-weight:700;color:var(--navy)}
+  .kpi.good .v{color:var(--green)}.kpi.bad .v{color:var(--red)}
+  .kpi .l{font-size:11px;color:var(--muted);margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.3px;padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px;border-bottom:1px solid #eef3f8}
+  tr:last-child td{border-bottom:none}
+  td.nm{font-weight:600;color:var(--ink)}
+  .scroll{max-height:340px;overflow-y:auto}
+  .scroll::-webkit-scrollbar{width:7px}.scroll::-webkit-scrollbar-thumb{background:#d2dee a;border-radius:7px}
+  .vb{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .vb.BUY{background:var(--green-soft);color:var(--green)}.vb.WAIT{background:#fcf2da;color:var(--amber)}.vb.FORGET{background:#fbe9e7;color:var(--red)}
+  .yes{color:var(--green);font-weight:700}.no{color:#c9b8a0}
+  .seg{display:flex;align-items:center;gap:11px;margin:9px 0}
+  .seg-lbl{width:128px;font-size:12.5px;flex-shrink:0}
+  .seg-track{flex:1;height:22px;background:#f0f4f9;border-radius:6px;overflow:hidden}
+  .seg-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),#e0c074);display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--navy);font-size:11px;font-weight:700;min-width:24px}
+  .note{font-size:11px;color:#9aaaba;margin-top:12px;display:flex;align-items:center;gap:6px}.note svg{width:12px;height:12px;flex-shrink:0}
+  .refuse{background:var(--gold-soft);border:1px solid #f0e2c2;border-radius:15px;padding:16px 18px;max-width:600px}
+  .refuse .rh{display:flex;align-items:center;gap:9px;margin-bottom:7px}.refuse .rh svg{width:17px;height:17px}
+  .refuse .rh span{font-weight:600;color:#b07d27;font-size:13.5px}
+  .refuse p{font-size:13.5px;line-height:1.55;color:#6a5526}
+  .refuse .why{font-size:11px;color:#9c8443;margin-top:10px;font-family:ui-monospace,monospace}
+  .think{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+  .think .tdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite}
+  .think .tdot:nth-child(2){animation-delay:.2s}.think .tdot:nth-child(3){animation-delay:.4s}
+  @keyframes pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+  .composer{padding:13px 30px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;max-height:96px;overflow-y:auto}
+  .chip{font-size:12px;color:var(--navy);background:#fff;border:1px solid #d8e2ee;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .18s;font-family:var(--body)}
+  .chip:hover{border-color:var(--gold);background:var(--gold-soft);transform:translateY(-1px)}
+  .chip.warn{border-color:#ebd8ae;color:#b07d27;background:#fcf6e9}
+  .inputbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #d8e2ee;border-radius:12px;padding:5px 5px 5px 16px;box-shadow:var(--shadow-sm)}
+  .inputbar input{flex:1;border:none;outline:none;font-family:var(--body);font-size:13.5px;color:var(--ink);background:transparent;padding:8px 0}
+  .send{width:38px;height:38px;border-radius:10px;border:none;background:var(--navy);color:#fff;cursor:pointer;display:grid;place-items:center}.send:hover{background:var(--navy2)}.send svg{width:17px;height:17px}
+  .disclaimer{text-align:center;font-size:11px;color:#a6b4c2;margin-top:10px}
+  @media(max-width:860px){.sidebar{display:none}.thread,.topbar,.composer{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div><div class="brand-name">Lee Yih Ven</div><div class="brand-sub">Data Analytics Portfolio</div></div>
+    <nav class="nav">
+      <a href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/cheap-stocks-worth-exploring.html">Case Study</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/cheap-stocks-worth-exploring-dashboard.html">Dashboard</a>
+      <a class="active" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/cheap-stocks-worth-exploring.html">AI Assistant</a>
+    </nav>
+    <div class="status">
+      <div class="status-title">Asset status</div>
+      <div class="pill"><span class="dot"></span> Read-only access</div>
+      <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+      <div class="pill"><span class="dot loading" id="dbdot"></span> <span id="dbstat">Loading database...</span></div>
+    </div>
+    <div class="tools">
+      <div class="tools-head"><h3>Approved tools</h3><span class="tools-count">11 &middot; fixed</span></div>
+      <ul class="tool-list">
+        <li>screen_summary</li><li>sector_breakdown</li><li>scorecard_all</li><li>top_by_roe</li>
+        <li>top_by_yield</li><li>cheapest_by_pe</li><li>below_book_value</li><li>safe_dividends</li>
+        <li>shortlist_profiles</li><li>quality_and_cheap</li><li>budget_allocation</li>
+      </ul>
+    </div>
+    <div class="foot">98 under-RM1 Bursa stocks, queried live in your browser. The assistant runs only pre-written, parameterized queries; it cannot author SQL or set price targets. For education, not investment advice.</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>AI Stock Screener Assistant</h1>
+      <div class="meta">Ask about the Cheap Stocks Worth Exploring screen. The agent picks one approved tool and answers live from the data.</div>
+    </header>
+    <section class="thread" id="thread">
+      <div class="row bot">
+        <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+        <div class="bubble"><div class="lead">I can answer questions about the <b>98 under-RM1 Bursa stocks</b> in this screen: how many are worth buying, which dividends are safe, the cheapest and most profitable names, and how to size a budget. Ask in plain language, or tap a prompt below.</div></div>
+      </div>
+    </section>
+    <div class="composer">
+      <div class="chips" id="chips">
+        <button class="chip" data-key="summary">How many are worth a buy?</button>
+        <button class="chip" data-key="sector">Break the stocks down by sector</button>
+        <button class="chip" data-key="scorecard">Show the scorecard for all stocks</button>
+        <button class="chip" data-key="roe">Which are the most profitable?</button>
+        <button class="chip" data-key="yield">Highest dividend yields?</button>
+        <button class="chip" data-key="pe">Which are the cheapest on PE?</button>
+        <button class="chip" data-key="book">Which trade below asset value?</button>
+        <button class="chip" data-key="safe">Which dividends are safe?</button>
+        <button class="chip" data-key="profiles">What kinds of stocks made the shortlist?</button>
+        <button class="chip" data-key="qualcheap">Which are cheap and high quality?</button>
+        <button class="chip" data-key="budget">How many shares for RM10,000?</button>
+        <button class="chip warn" data-key="refuse">What price should I buy each stock at?</button>
+      </div>
+      <div class="inputbar">
+        <input id="input" type="text" placeholder="Ask about the under-RM1 screen...">
+        <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="disclaimer">The assistant surfaces screen data for you to interpret. It does not give investment advice or price targets.</div>
+    </div>
+  </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+let db=null, dbReady=false;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const rm=v=>'RM'+Number(v).toLocaleString(undefined,{maximumFractionDigits:0});
+const mcap=v=>v>=1e9?'RM'+(v/1e9).toFixed(2)+'B':'RM'+Math.round(v/1e6)+'M';
+
+const SQL={
+  screen_summary:`SELECT COUNT(*) total, SUM(total_score>=3) worth, SUM(verdict='BUY') buys, SUM(value_trap) traps FROM stocks`,
+  sector_breakdown:`SELECT Sector, COUNT(*) n, SUM(verdict='BUY') buys FROM stocks GROUP BY Sector ORDER BY n DESC`,
+  scorecard_all:`SELECT Name, score_profit, score_backing, score_value, score_cashflow, score_liquidity, total_score, verdict FROM stocks ORDER BY total_score DESC, Name`,
+  top_by_roe:`SELECT Name, Sector, ROE_pct, verdict FROM stocks WHERE ROE_pct IS NOT NULL ORDER BY ROE_pct DESC LIMIT :n`,
+  top_by_yield:`SELECT Name, Sector, DividendYield_pct, FCF_Coverage, div_covered FROM stocks WHERE pays_dividend=1 ORDER BY DividendYield_pct DESC LIMIT :n`,
+  cheapest_by_pe:`SELECT Name, Sector, PE, verdict FROM stocks WHERE PE IS NOT NULL AND PE>0 ORDER BY PE ASC LIMIT :n`,
+  below_book_value:`SELECT Name, Sector, PTBV, Price, verdict FROM stocks WHERE PTBV<:ptbv ORDER BY PTBV ASC LIMIT :n`,
+  safe_dividends:`SELECT Name, Sector, DividendYield_pct, FCF_Coverage FROM stocks WHERE div_covered=1 ORDER BY FCF_Coverage DESC LIMIT :n`,
+  shortlist_profiles:`SELECT profile, COUNT(*) n, ROUND(AVG(DividendYield_pct),2) avg_yield, ROUND(AVG(ROE_pct),2) avg_roe FROM stocks WHERE total_score>=3 GROUP BY profile ORDER BY n DESC`,
+  quality_and_cheap:`SELECT Name, Sector, total_score, PE, DividendYield_pct, verdict FROM stocks WHERE total_score>=:minscore AND PE>0 AND PE<=:maxpe ORDER BY total_score DESC, PE ASC LIMIT :n`,
+  budget_allocation:`SELECT Name, Price, units, cost_RM, DividendYield_pct FROM stocks WHERE verdict='BUY' AND units>0 ORDER BY total_score DESC, FCF_Coverage DESC`
+};
+function run(sql,params){const st=db.prepare(sql);if(params)st.bind(params);const o=[];while(st.step())o.push(st.getAsObject());st.free();return o;}
+
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const info=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const vb=v=>`<span class="vb ${v}">${v}</span>`;
+const tick=v=>v?`<span class="yes">Y</span>`:`<span class="no">&middot;</span>`;
+const noteEl=t=>`<div class="note">${info} ${t}</div>`;
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+function tbl(head,body){return `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;}
+
+const responses={
+  summary(){
+    const r=run(SQL.screen_summary)[0];
+    return badge('screen_summary')+
+      `<div class="lead">Of <b>${r.total}</b> cheap stocks screened, <b>${r.buys}</b> are buys. Most of the list does not clear the bar, and ${r.traps} look like value traps.</div>
+      <div class="card"><div class="kpis">
+        <div class="kpi"><div class="v">${r.total}</div><div class="l">stocks screened</div></div>
+        <div class="kpi"><div class="v">${r.worth}</div><div class="l">worth a look (3+/5)</div></div>
+        <div class="kpi good"><div class="v">${r.buys}</div><div class="l">buys</div></div>
+        <div class="kpi bad"><div class="v">${r.traps}</div><div class="l">value traps</div></div>
+      </div>${noteEl('Counts come straight from the screen, not a guess.')}</div>`;
+  },
+  sector(){
+    const d=run(SQL.sector_breakdown);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Sector)}</td><td>${x.n}</td><td>${x.buys?`<span class="yes">${x.buys}</span>`:'0'}</td></tr>`).join('');
+    return badge('sector_breakdown')+
+      `<div class="lead">Here is how the universe splits by sector, with the buy count in each.</div>
+      <div class="card"><h4>Stocks by sector</h4><div class="cap">All 98 stocks, ranked by count</div>
+      ${tbl('<th>Sector</th><th>Stocks</th><th>Buys</th>',body)}</div>`;
+  },
+  scorecard(){
+    const d=run(SQL.scorecard_all);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>${tick(x.score_profit)}</td><td>${tick(x.score_backing)}</td><td>${tick(x.score_value)}</td><td>${tick(x.score_cashflow)}</td><td>${tick(x.score_liquidity)}</td><td><b>${x.total_score}/5</b></td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('scorecard_all')+
+      `<div class="lead">The full five-point scorecard for all <b>${d.length}</b> stocks, ranked by total score. Green tick means the test passed.</div>
+      <div class="card"><h4>Scorecard, all stocks</h4><div class="cap">Profitability, backing, valuation, dividend safety, liquidity</div>
+      ${tbl('<th>Name</th><th>Profit</th><th>Back</th><th>Value</th><th>Cash</th><th>Liq</th><th>Total</th><th>Verdict</th>',body)}
+      ${noteEl('Returns the scorecard fields only, never raw records.')}</div>`;
+  },
+  roe(){
+    const d=run(SQL.top_by_roe,{':n':8});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>${esc(x.Sector)}</td><td><b>${x.ROE_pct.toFixed(1)}%</b></td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('top_by_roe')+
+      `<div class="lead">The most profitable names by return on equity. A high return alone is not a buy, so the verdict is shown alongside.</div>
+      <div class="card"><h4>Top by return on equity</h4><div class="cap">Top 8 by ROE</div>
+      ${tbl('<th>Name</th><th>Sector</th><th>ROE</th><th>Verdict</th>',body)}</div>`;
+  },
+  yield(){
+    const d=run(SQL.top_by_yield,{':n':8});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>${esc(x.Sector)}</td><td><b>${x.DividendYield_pct.toFixed(1)}%</b></td><td>${x.FCF_Coverage==null?'-':x.FCF_Coverage.toFixed(1)+'x'}</td><td>${x.div_covered?`<span class="yes">covered</span>`:`<span style="color:var(--red);font-weight:600">not covered</span>`}</td></tr>`).join('');
+    return badge('top_by_yield')+
+      `<div class="lead">The biggest dividend yields. Check the cash cover column: a fat yield with cover below 1x is a trap, not income.</div>
+      <div class="card"><h4>Highest dividend yields</h4><div class="cap">Top 8 payers, with free-cash-flow cover</div>
+      ${tbl('<th>Name</th><th>Sector</th><th>Yield</th><th>Cash cover</th><th>Safe?</th>',body)}</div>`;
+  },
+  pe(){
+    const d=run(SQL.cheapest_by_pe,{':n':8});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>${esc(x.Sector)}</td><td><b>${x.PE.toFixed(1)}</b></td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('cheapest_by_pe')+
+      `<div class="lead">The cheapest stocks on price-to-earnings. Cheap is only useful when the business is sound, so the verdict is shown too.</div>
+      <div class="card"><h4>Cheapest on PE</h4><div class="cap">Lowest 8 by PE (profitable only)</div>
+      ${tbl('<th>Name</th><th>Sector</th><th>PE</th><th>Verdict</th>',body)}</div>`;
+  },
+  book(){
+    const d=run(SQL.below_book_value,{':ptbv':1.0,':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>${esc(x.Sector)}</td><td><b>${x.PTBV.toFixed(2)}x</b></td><td>RM${x.Price.toFixed(3)}</td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('below_book_value')+
+      `<div class="lead"><b>${d.length}</b> stocks trade below their net asset value (price-to-book under 1). Some are bargains, some are cheap for a reason, so weigh the verdict.</div>
+      <div class="card"><h4>Below asset value</h4><div class="cap">Price-to-book under 1.0, cheapest first</div>
+      ${tbl('<th>Name</th><th>Sector</th><th>P/Book</th><th>Price</th><th>Verdict</th>',body)}</div>`;
+  },
+  safe(){
+    const d=run(SQL.safe_dividends,{':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>${esc(x.Sector)}</td><td>${x.DividendYield_pct.toFixed(1)}%</td><td><b>${x.FCF_Coverage.toFixed(1)}x</b></td></tr>`).join('');
+    return badge('safe_dividends')+
+      `<div class="lead">Dividends paid from real cash: every name here covers its payout with free cash flow at least once over. This is the income you can trust.</div>
+      <div class="card"><h4>Safe dividends</h4><div class="cap">Covered payers, deepest cash cover first</div>
+      ${tbl('<th>Name</th><th>Sector</th><th>Yield</th><th>Cash cover</th>',body)}</div>`;
+  },
+  profiles(){
+    const d=run(SQL.shortlist_profiles);
+    const max=Math.max(...d.map(x=>x.n));
+    const bars=d.map(x=>`<div class="seg"><span class="seg-lbl">${esc(x.profile)}</span><div class="seg-track"><div class="seg-fill" style="width:${Math.max(12,Math.round(x.n/max*100))}%">${x.n}</div></div></div><div class="cap" style="margin:-4px 0 8px 0">avg yield ${x.avg_yield}%, avg ROE ${x.avg_roe}%</div>`).join('');
+    return badge('shortlist_profiles')+
+      `<div class="lead">The shortlist (stocks scoring 3 or more) splits into three kinds. Anchor on income and balanced names; treat the no-income group as growth only.</div>
+      <div class="card"><h4>What kinds of stocks made the shortlist</h4><div class="cap">Across the 24 shortlisted names</div>${bars}</div>`;
+  },
+  qualcheap(){
+    const d=run(SQL.quality_and_cheap,{':minscore':4,':maxpe':15,':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>${esc(x.Sector)}</td><td><b>${x.total_score}/5</b></td><td>${x.PE.toFixed(1)}</td><td>${x.DividendYield_pct.toFixed(1)}%</td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('quality_and_cheap')+
+      `<div class="lead">The sweet spot: <b>${d.length}</b> stocks that are both high quality (score 4+) and cheap (PE 15 or under). This is where the buys cluster.</div>
+      <div class="card"><h4>Cheap and high quality</h4><div class="cap">Score 4 or more, PE 15 or under</div>
+      ${tbl('<th>Name</th><th>Sector</th><th>Score</th><th>PE</th><th>Yield</th><th>Verdict</th>',body)}</div>`;
+  },
+  budget(){
+    const d=run(SQL.budget_allocation);
+    const total=d.reduce((a,x)=>a+x.cost_RM,0);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Name)}</td><td>RM${x.Price.toFixed(3)}</td><td>${Number(x.units).toLocaleString()}</td><td>${rm(x.cost_RM)}</td><td>${x.DividendYield_pct.toFixed(1)}%</td></tr>`).join('');
+    return badge('budget_allocation')+
+      `<div class="lead">Spreading <b>RM10,000</b> evenly across the ${d.length} buys, in 100-share lots, deploys ${rm(total)}. Here is the share count and cost per name at today's price.</div>
+      <div class="card"><h4>Shares to buy on RM10,000</h4><div class="cap">Equal weight across the buys, 100-share lots</div>
+      ${tbl('<th>Name</th><th>Price</th><th>Shares</th><th>Cost</th><th>Yield</th>',body)}
+      ${noteEl('Sizing uses the current price only. It is not a price target or a recommendation.')}</div>`;
+  },
+  refuse(){
+    return `<div class="refuse">
+      <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="#b07d27" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 18h.01"/></svg><span>Outside my approved tools</span></div>
+      <p>I can't tell you the price to buy each stock at. A target entry price is a forecast and a recommendation, and I have no approved tool for that. I work read-only through a fixed set of pre-written queries over the current screen data, so I cannot compose one for it.</p>
+      <p style="margin-top:9px">What I can do: show you each buy's current price and how many shares a budget buys (the budget tool), or surface the value, yield, and quality figures so you can judge an entry yourself.</p>
+      <div class="why">no_tool_matched &middot; price_target / forecast not defined &middot; access = read-only</div></div>`;
+  }
+};
+
+const userText={summary:"How many of these stocks are worth a buy?",sector:"Break the stocks down by sector",scorecard:"Show the scorecard for all the stocks",roe:"Which stocks are the most profitable?",yield:"Which stocks have the highest dividend yield?",pe:"Which stocks are the cheapest on PE?",book:"Which stocks trade below their asset value?",safe:"Which dividends are safe, paid from real cash?",profiles:"What kinds of stocks made the shortlist?",qualcheap:"Which stocks are both cheap and high quality?",budget:"How many shares can I buy for RM10,000?",refuse:"What price should I buy each stock at?"};
+const thinkLabel={summary:"screen_summary",sector:"sector_breakdown",scorecard:"scorecard_all",roe:"top_by_roe",yield:"top_by_yield",pe:"cheapest_by_pe",book:"below_book_value",safe:"safe_dividends",profiles:"shortlist_profiles",qualcheap:"quality_and_cheap",budget:"budget_allocation",refuse:"checking approved tools"};
+
+function addUser(t){thread.insertAdjacentHTML('beforeend',`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div>`);scroll();}
+function respond(key){
+  const id='t'+thread.children.length;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${thinkLabel[key]}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=responses[key]();scroll();},760);
+}
+function ask(key){addUser(userText[key]);setTimeout(()=>respond(key),220);}
+
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b||!dbReady)return;ask(b.dataset.key);});
+const input=document.getElementById('input');
+function route(){
+  const t=input.value.trim();if(!t||!dbReady)return;input.value='';const q=t.toLowerCase();let key=null;
+  if(/price (point|target|to buy)|buy.*at what|what price|entry price|when (should|to) (i )?buy|fair value|forecast|predict|target price|how much should i pay|will (go|rise|fall)|every stock'?s? (full )?record|dump|export|raw sql|select \*|run a query|delete|drop|update |insert /.test(q))key='refuse';
+  else if(/cheap and (high )?qualit|qualit.*cheap|both cheap|good and cheap/.test(q))key='qualcheap';
+  else if(/how many shares|budget|rm ?10|10[, ]?000|afford|shares can i|allocat/.test(q))key='budget';
+  else if(/safe dividend|real cash|covered|cash.?cover|sustainab/.test(q))key='safe';
+  else if(/highest (dividend )?yield|biggest dividend|best yield|top yield|most dividend/.test(q))key='yield';
+  else if(/cheapest|lowest pe|low pe|cheap on pe|low(est)? p\/e/.test(q))key='pe';
+  else if(/below (their )?(asset|book|net)|price.?to.?book|p\/?book|ptbv|undervalu/.test(q))key='book';
+  else if(/profitab|roe|return on equity|best business/.test(q))key='roe';
+  else if(/profile|what kind|what type|shortlist/.test(q))key='profiles';
+  else if(/sector|industr|breakdown/.test(q))key='sector';
+  else if(/scorecard|all (the )?stock|full score|every score|score for all/.test(q))key='scorecard';
+  else if(/how many|worth (a )?(buy|look)|overview|summary|verdict/.test(q))key='summary';
+  addUser(t);
+  if(key)setTimeout(()=>respond(key),220);
+  else setTimeout(()=>{thread.insertAdjacentHTML('beforeend',`<div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Try a suggested prompt to see it answer live from the screen.</div></div></div>`);scroll();},220);
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')route();});
+
+initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`})
+  .then(S=>fetch('cheap-stocks-worth-exploring.db').then(r=>r.arrayBuffer()).then(buf=>{
+    db=new S.Database(new Uint8Array(buf));dbReady=true;
+    document.getElementById('dbdot').className='dot';
+    document.getElementById('dbstat').textContent='Database ready';
+  }))
+  .catch(e=>{document.getElementById('dbstat').textContent='Load failed, serve over http';console.error(e);});
+</script>
+</body>
+</html>
