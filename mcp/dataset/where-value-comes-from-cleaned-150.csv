@@ -1,0 +1,151 @@
+customer_id,geo_region,geo_city,offer,acquisition_source,acquisition_channel,ad_campaign_id,first_order_date,last_order_date,total_orders,ltv_lifetime,total_profit,is_repeat,ltv_d7,ltv_d30,ltv_d60,ltv_d90,ltv_d180,ltv_d365,is_whale
+7164,Klang Valley,Ampang,Walk-in (No Promo),Paid Social,Instagram,IN-KV-W(P-2024Q1,2024-03-07,2024-03-07,1,219.0,127.0,0,219.0,219.0,219.0,219.0,219.0,219.0,0
+10386,Johor,Segamat,Free Alignment,Walk-in,Walk-in,WALK-IN,2024-12-21,2024-12-21,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+1903,Klang Valley,Subang Jaya,Free Engine Check,Organic,Organic Search,ORGANIC,2023-12-09,2024-10-01,3,1357.0,801.0,1,0.0,0.0,0.0,0.0,704.0,1357.0,0
+3398,Klang Valley,Subang Jaya,Free Alignment,Paid Social,Instagram,IN-KV-FA-2022Q4,2022-11-08,2023-03-02,2,2028.0,913.0,1,0.0,0.0,0.0,0.0,2028.0,2028.0,0
+11696,Penang,Balik Pulau,Aircond Service Package,Paid Social,Facebook,FA-PG-ASP-2022Q3,2022-07-02,2023-12-21,4,734.0,422.0,1,192.0,192.0,192.0,192.0,192.0,570.0,0
+6444,Klang Valley,Puchong,Free Alignment,Walk-in,Walk-in,WALK-IN,2022-12-22,2023-07-01,2,117.0,64.0,1,0.0,0.0,0.0,0.0,0.0,117.0,0
+10787,Klang Valley,Ampang,Free Alignment,Organic,Organic Search,ORGANIC,2024-04-02,2024-07-31,2,204.0,118.0,1,0.0,0.0,0.0,0.0,204.0,204.0,0
+9407,Klang Valley,Shah Alam,Free Alignment,Paid Social,Instagram,IN-KV-FA-2024Q3,2024-07-09,2024-07-09,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+4637,Klang Valley,Kajang,Free Engine Check,Paid Search,Google,GO-KV-FEC-2023Q2,2023-04-26,2023-12-08,3,1286.0,548.0,1,188.0,188.0,188.0,188.0,188.0,1286.0,0
+1174,Johor,Pasir Gudang,Oil Change Package,Paid Search,Google,GO-JH-OCP-2022Q4,2022-12-23,2022-12-23,1,448.0,224.0,0,448.0,448.0,448.0,448.0,448.0,448.0,0
+2031,Johor,Muar,RM50 Service Voucher,Paid Social,Facebook,FA-JH-RSV-2022Q3,2022-07-28,2023-07-08,3,1219.0,530.0,1,492.0,492.0,492.0,492.0,492.0,1219.0,0
+2489,Johor,Johor Bahru,Free Alignment,Paid Social,Facebook,FA-JH-FA-2024Q2,2024-04-30,2024-04-30,2,614.0,246.0,1,614.0,614.0,614.0,614.0,614.0,614.0,0
+2419,Penang,Balik Pulau,Oil Change Package,Paid Search,Google,GO-PG-OCP-2023Q3,2023-07-24,2024-10-18,3,3911.0,1664.0,1,2356.0,2356.0,2356.0,2356.0,2356.0,3198.0,0
+36,Johor,Pasir Gudang,RM50 Service Voucher,Walk-in,Walk-in,WALK-IN,2023-10-22,2023-10-22,1,12.0,7.0,0,12.0,12.0,12.0,12.0,12.0,12.0,0
+2117,Penang,Butterworth,Free Engine Check,Paid Search,Google,GO-PG-FEC-2022Q3,2022-07-26,2023-11-03,4,5751.0,2159.0,1,254.0,254.0,254.0,254.0,254.0,439.0,1
+1166,Klang Valley,Petaling Jaya,Free Engine Check,Referral,Referral,REFERRAL,2023-12-12,2024-11-02,3,2400.0,1231.0,1,0.0,0.0,0.0,0.0,382.0,2400.0,0
+947,Johor,Skudai,Walk-in (No Promo),Organic,Organic Search,ORGANIC,2024-03-13,2024-07-29,2,806.0,402.0,1,551.0,551.0,551.0,551.0,806.0,806.0,0
+2712,Johor,Batu Pahat,Aircond Service Package,Organic,Organic Search,ORGANIC,2022-10-10,2023-03-28,2,757.0,347.0,1,88.0,88.0,88.0,88.0,757.0,757.0,0
+10283,Penang,Bukit Mertajam,Free Alignment,Paid Social,Facebook,FA-PG-FA-2024Q3,2024-07-18,2024-11-24,3,9620.0,3457.0,1,4666.0,4666.0,4666.0,4666.0,9620.0,9620.0,1
+5970,Penang,Tanjung Tokong,Walk-in (No Promo),Walk-in,Walk-in,WALK-IN,2023-12-20,2023-12-20,1,2539.0,863.0,0,2539.0,2539.0,2539.0,2539.0,2539.0,2539.0,0
+1294,Penang,Bukit Mertajam,Free Engine Check,Paid Social,Instagram,IN-PG-FEC-2023Q3,2023-08-29,2024-11-29,4,2949.0,1053.0,1,0.0,0.0,0.0,0.0,341.0,2509.0,0
+10269,Penang,Tanjung Tokong,Free Engine Check,Paid Search,Google,GO-PG-FEC-2023Q3,2023-07-17,2024-07-30,4,3015.0,1474.0,1,813.0,813.0,813.0,813.0,813.0,1545.0,0
+2228,Klang Valley,Petaling Jaya,Walk-in (No Promo),Paid Social,Instagram,IN-KV-W(P-2024Q4,2024-11-14,2024-11-14,1,93.0,51.0,0,93.0,93.0,93.0,93.0,93.0,93.0,0
+4641,Johor,Segamat,Aircond Service Package,Paid Social,Facebook,FA-JH-ASP-2023Q2,2023-05-04,2023-05-04,1,74.0,38.0,0,74.0,74.0,74.0,74.0,74.0,74.0,0
+3506,Klang Valley,Cheras,Free Alignment,Paid Search,Google,GO-KV-FA-2023Q1,2023-01-27,2023-01-27,2,151.0,91.0,1,151.0,151.0,151.0,151.0,151.0,151.0,0
+8549,Klang Valley,Petaling Jaya,Oil Change Package,Paid Social,Facebook,FA-KV-OCP-2024Q4,2024-10-02,2024-10-02,1,1379.0,621.0,0,1379.0,1379.0,1379.0,1379.0,1379.0,1379.0,0
+6004,Penang,Butterworth,Aircond Service Package,Referral,Referral,REFERRAL,2023-11-22,2024-04-07,2,7040.0,2434.0,1,6813.0,6813.0,6813.0,6813.0,7040.0,7040.0,1
+5934,Penang,Balik Pulau,Oil Change Package,Paid Social,Facebook,FA-PG-OCP-2024Q3,2024-08-27,2024-08-27,1,2326.0,837.0,0,2326.0,2326.0,2326.0,2326.0,2326.0,2326.0,0
+11223,Klang Valley,Subang Jaya,Free Engine Check,Paid Social,Facebook,FA-KV-FEC-2023Q3,2023-09-26,2024-10-18,3,9234.0,3498.0,1,0.0,0.0,0.0,0.0,7301.0,7301.0,1
+491,Johor,Pasir Gudang,Aircond Service Package,Referral,Referral,REFERRAL,2023-04-26,2023-04-26,1,698.0,314.0,0,698.0,698.0,698.0,698.0,698.0,698.0,0
+11788,Klang Valley,Kajang,Oil Change Package,Organic,Organic Search,ORGANIC,2024-05-02,2024-08-16,2,5595.0,2126.0,1,695.0,695.0,695.0,695.0,5595.0,5595.0,1
+5186,Klang Valley,Cheras,Free Alignment,Paid Search,Google,GO-KV-FA-2024Q1,2024-02-20,2024-10-02,2,1690.0,710.0,1,0.0,0.0,0.0,0.0,0.0,1690.0,0
+5794,Klang Valley,Kajang,Aircond Service Package,Paid Social,Facebook,FA-KV-ASP-2024Q2,2024-05-26,2024-05-26,1,1450.0,580.0,0,1450.0,1450.0,1450.0,1450.0,1450.0,1450.0,0
+823,Johor,Skudai,RM50 Service Voucher,Referral,Referral,REFERRAL,2024-08-27,2024-08-27,1,78.0,45.0,0,78.0,78.0,78.0,78.0,78.0,78.0,0
+11159,Klang Valley,Ampang,RM50 Service Voucher,Paid Social,Facebook,FA-KV-RSV-2022Q4,2022-11-16,2022-11-16,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+4804,Klang Valley,Ampang,Free Alignment,Video,TikTok,TI-KV-FA-2023Q2,2023-06-03,2023-06-03,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+4274,Johor,Segamat,RM50 Service Voucher,Paid Social,Facebook,FA-JH-RSV-2023Q4,2023-11-05,2023-11-05,1,126.0,53.0,0,126.0,126.0,126.0,126.0,126.0,126.0,0
+4595,Klang Valley,Kajang,Oil Change Package,Video,TikTok,TI-KV-OCP-2023Q3,2023-08-13,2024-11-05,4,2128.0,778.0,1,74.0,74.0,74.0,74.0,771.0,2074.0,0
+6477,Klang Valley,Shah Alam,Oil Change Package,Paid Search,Google,GO-KV-OCP-2024Q3,2024-09-22,2024-09-22,1,696.0,383.0,0,696.0,696.0,696.0,696.0,696.0,696.0,0
+10897,Johor,Batu Pahat,Aircond Service Package,Referral,Referral,REFERRAL,2023-11-30,2024-06-22,2,435.0,234.0,1,232.0,232.0,232.0,232.0,232.0,435.0,0
+5960,Penang,Butterworth,Aircond Service Package,Referral,Referral,REFERRAL,2024-11-01,2024-11-01,1,570.0,256.0,0,570.0,570.0,570.0,570.0,570.0,570.0,0
+4465,Klang Valley,Shah Alam,Oil Change Package,Paid Search,Google,GO-KV-OCP-2023Q4,2023-10-20,2024-08-13,3,493.0,261.0,1,191.0,191.0,191.0,191.0,431.0,493.0,0
+2662,Johor,Muar,Walk-in (No Promo),Walk-in,Walk-in,WALK-IN,2024-01-20,2024-01-20,1,526.0,221.0,0,526.0,526.0,526.0,526.0,526.0,526.0,0
+18,Klang Valley,Kajang,RM50 Service Voucher,Referral,Referral,REFERRAL,2024-03-23,2024-03-23,1,653.0,294.0,0,653.0,653.0,653.0,653.0,653.0,653.0,0
+1989,Klang Valley,Petaling Jaya,Free Engine Check,Paid Search,Google,GO-KV-FEC-2024Q2,2024-05-16,2024-05-16,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+9630,Klang Valley,Kajang,Free Alignment,Organic,Organic Search,ORGANIC,2024-04-03,2024-08-29,2,856.0,428.0,1,0.0,0.0,0.0,0.0,856.0,856.0,0
+136,Klang Valley,Shah Alam,Free Engine Check,Walk-in,Walk-in,WALK-IN,2024-09-27,2024-12-11,2,68.0,41.0,1,0.0,0.0,0.0,68.0,68.0,68.0,0
+8102,Johor,Pasir Gudang,Walk-in (No Promo),Organic,Organic Search,ORGANIC,2023-05-21,2023-05-21,1,2263.0,769.0,0,2263.0,2263.0,2263.0,2263.0,2263.0,2263.0,0
+6284,Klang Valley,Kajang,Walk-in (No Promo),Paid Search,Google,GO-KV-W(P-2024Q4,2024-11-22,2024-11-22,1,398.0,219.0,0,398.0,398.0,398.0,398.0,398.0,398.0,0
+1990,Johor,Kulai,Aircond Service Package,Paid Search,Google,GO-JH-ASP-2023Q3,2023-08-25,2024-01-19,2,572.0,248.0,1,510.0,510.0,510.0,510.0,572.0,572.0,0
+2337,Klang Valley,Shah Alam,Walk-in (No Promo),Video,TikTok,TI-KV-W(P-2024Q2,2024-05-06,2024-08-02,2,8102.0,2827.0,1,345.0,345.0,345.0,8102.0,8102.0,8102.0,1
+9134,Johor,Segamat,RM50 Service Voucher,Referral,Referral,REFERRAL,2024-11-07,2024-11-07,1,99.0,35.0,0,99.0,99.0,99.0,99.0,99.0,99.0,0
+5951,Klang Valley,Cheras,Free Alignment,Paid Social,Facebook,FA-KV-FA-2023Q4,2023-11-17,2024-06-02,3,573.0,325.0,1,229.0,229.0,229.0,229.0,229.0,573.0,0
+6663,Klang Valley,Ampang,Oil Change Package,Paid Social,Instagram,IN-KV-OCP-2024Q4,2024-12-21,2024-12-21,1,1354.0,609.0,0,1354.0,1354.0,1354.0,1354.0,1354.0,1354.0,0
+11211,Johor,Batu Pahat,Aircond Service Package,Video,TikTok,TI-JH-ASP-2024Q3,2024-09-21,2024-09-21,1,2694.0,916.0,0,2694.0,2694.0,2694.0,2694.0,2694.0,2694.0,0
+7183,Klang Valley,Cheras,RM50 Service Voucher,Organic,Organic Search,ORGANIC,2024-12-08,2024-12-08,1,3.0,2.0,0,3.0,3.0,3.0,3.0,3.0,3.0,0
+1417,Klang Valley,Klang,Oil Change Package,Organic,Organic Search,ORGANIC,2024-03-30,2024-10-23,2,2000.0,819.0,1,536.0,536.0,536.0,536.0,536.0,2000.0,0
+9199,Penang,Bukit Mertajam,Free Engine Check,Paid Social,Facebook,FA-PG-FEC-2024Q4,2024-12-24,2024-12-24,2,194.0,113.0,1,194.0,194.0,194.0,194.0,194.0,194.0,0
+2405,Klang Valley,Klang,Walk-in (No Promo),Walk-in,Walk-in,WALK-IN,2023-09-29,2023-09-29,1,528.0,185.0,0,528.0,528.0,528.0,528.0,528.0,528.0,0
+1514,Penang,Perai,Oil Change Package,Walk-in,Walk-in,WALK-IN,2023-01-23,2024-06-27,4,1588.0,728.0,1,317.0,317.0,317.0,317.0,317.0,1287.0,0
+3676,Klang Valley,Subang Jaya,Oil Change Package,Walk-in,Walk-in,WALK-IN,2022-01-09,2024-10-12,7,9823.0,3869.0,1,1347.0,1347.0,1347.0,1347.0,1347.0,3764.0,1
+9929,Penang,Butterworth,Free Engine Check,Organic,Organic Search,ORGANIC,2022-05-12,2023-06-14,3,1253.0,545.0,1,0.0,0.0,0.0,0.0,144.0,144.0,0
+5394,Klang Valley,Cheras,Free Alignment,Referral,Referral,REFERRAL,2022-07-24,2024-04-08,5,22484.0,8246.0,1,0.0,0.0,0.0,0.0,3804.0,4423.0,1
+5989,Penang,Butterworth,Oil Change Package,Walk-in,Walk-in,WALK-IN,2024-05-26,2024-11-11,2,204.0,119.0,1,76.0,76.0,76.0,76.0,204.0,204.0,0
+7959,Klang Valley,Subang Jaya,Free Alignment,Paid Social,Facebook,FA-KV-FA-2024Q1,2024-01-10,2024-05-29,2,7687.0,2614.0,1,0.0,0.0,0.0,0.0,7687.0,7687.0,1
+8551,Klang Valley,Cheras,Free Engine Check,Paid Search,Google,GO-KV-FEC-2023Q3,2023-07-25,2024-12-23,5,10043.0,3820.0,1,134.0,134.0,134.0,134.0,134.0,2707.0,1
+7171,Penang,Balik Pulau,Aircond Service Package,Organic,Organic Search,ORGANIC,2024-11-24,2024-11-24,1,2116.0,804.0,0,2116.0,2116.0,2116.0,2116.0,2116.0,2116.0,0
+4313,Johor,Johor Bahru,Oil Change Package,Paid Social,Instagram,IN-JH-OCP-2023Q3,2023-08-23,2023-08-23,1,355.0,124.0,0,355.0,355.0,355.0,355.0,355.0,355.0,0
+7895,Johor,Iskandar Puteri,Free Alignment,Referral,Referral,REFERRAL,2022-02-11,2022-11-17,4,3510.0,1272.0,1,104.0,104.0,104.0,104.0,2803.0,3510.0,0
+5731,Klang Valley,Petaling Jaya,Oil Change Package,Referral,Referral,REFERRAL,2024-12-22,2024-12-22,1,3751.0,1350.0,0,3751.0,3751.0,3751.0,3751.0,3751.0,3751.0,0
+7672,Penang,Perai,Free Engine Check,Walk-in,Walk-in,WALK-IN,2023-03-01,2024-02-27,4,11719.0,4383.0,1,416.0,416.0,416.0,416.0,416.0,11719.0,1
+2707,Johor,Pasir Gudang,RM50 Service Voucher,Paid Social,Instagram,IN-JH-RSV-2022Q4,2022-10-12,2023-03-08,2,65.0,36.0,1,0.0,0.0,0.0,0.0,65.0,65.0,0
+7635,Klang Valley,Puchong,Oil Change Package,Organic,Organic Search,ORGANIC,2024-12-09,2024-12-09,1,401.0,233.0,0,401.0,401.0,401.0,401.0,401.0,401.0,0
+11426,Penang,Perai,Aircond Service Package,Referral,Referral,REFERRAL,2024-05-17,2024-05-17,1,573.0,287.0,0,573.0,573.0,573.0,573.0,573.0,573.0,0
+3729,Klang Valley,Klang,Aircond Service Package,Paid Social,Facebook,FA-KV-ASP-2024Q3,2024-07-29,2024-07-29,1,252.0,126.0,0,252.0,252.0,252.0,252.0,252.0,252.0,0
+826,Klang Valley,Cheras,Oil Change Package,Walk-in,Walk-in,WALK-IN,2024-11-07,2024-11-07,1,129.0,67.0,0,129.0,129.0,129.0,129.0,129.0,129.0,0
+5948,Klang Valley,Subang Jaya,RM50 Service Voucher,Paid Social,Instagram,IN-KV-RSV-2023Q2,2023-04-09,2023-04-09,1,113.0,57.0,0,113.0,113.0,113.0,113.0,113.0,113.0,0
+385,Klang Valley,Cheras,Free Alignment,Referral,Referral,REFERRAL,2023-10-21,2024-08-01,3,1300.0,749.0,1,0.0,0.0,0.0,0.0,632.0,1300.0,0
+4692,Johor,Kulai,Free Engine Check,Paid Search,Google,GO-JH-FEC-2023Q4,2023-12-21,2024-07-18,3,392.0,209.0,1,195.0,195.0,195.0,195.0,195.0,392.0,0
+2162,Klang Valley,Cheras,Walk-in (No Promo),Paid Social,Facebook,FA-KV-W(P-2024Q4,2024-11-21,2024-11-21,1,724.0,304.0,0,724.0,724.0,724.0,724.0,724.0,724.0,0
+10906,Klang Valley,Ampang,Walk-in (No Promo),Paid Social,Instagram,IN-KV-W(P-2022Q2,2022-06-01,2023-01-04,2,1152.0,482.0,1,788.0,788.0,788.0,788.0,788.0,1152.0,0
+8325,Penang,Bayan Lepas,RM50 Service Voucher,Walk-in,Walk-in,WALK-IN,2023-02-16,2023-02-16,1,55.0,33.0,0,55.0,55.0,55.0,55.0,55.0,55.0,0
+8138,Klang Valley,Klang,Free Engine Check,Paid Social,Instagram,IN-KV-FEC-2022Q4,2022-10-31,2023-03-07,2,123.0,71.0,1,0.0,0.0,0.0,0.0,123.0,123.0,0
+8971,Klang Valley,Puchong,Free Engine Check,Video,TikTok,TI-KV-FEC-2024Q1,2024-01-12,2024-07-14,3,2558.0,1099.0,1,762.0,762.0,762.0,762.0,762.0,2558.0,0
+2491,Penang,Bayan Lepas,Aircond Service Package,Paid Social,Facebook,FA-PG-ASP-2023Q4,2023-12-31,2024-12-28,3,441.0,226.0,1,301.0,301.0,301.0,301.0,301.0,441.0,0
+5150,Johor,Segamat,Free Alignment,Paid Search,Google,GO-JH-FA-2022Q3,2022-07-05,2024-04-23,4,2206.0,935.0,1,0.0,0.0,0.0,0.0,0.0,239.0,0
+5679,Penang,Bayan Lepas,Free Alignment,Paid Social,Instagram,IN-PG-FA-2023Q4,2023-12-29,2024-09-05,3,8661.0,2977.0,1,0.0,0.0,0.0,0.0,8483.0,8661.0,1
+6455,Johor,Segamat,Aircond Service Package,Paid Social,Facebook,FA-JH-ASP-2022Q4,2022-11-20,2023-06-01,2,387.0,181.0,1,50.0,50.0,50.0,50.0,50.0,387.0,0
+9252,Klang Valley,Petaling Jaya,Aircond Service Package,Paid Social,Instagram,IN-KV-ASP-2022Q3,2022-08-11,2023-02-14,2,636.0,278.0,1,530.0,530.0,530.0,530.0,530.0,636.0,0
+283,Johor,Johor Bahru,Walk-in (No Promo),Organic,Organic Search,ORGANIC,2023-02-15,2023-02-15,1,1316.0,500.0,0,1316.0,1316.0,1316.0,1316.0,1316.0,1316.0,0
+11413,Penang,Butterworth,RM50 Service Voucher,Video,TikTok,TI-PG-RSV-2024Q4,2024-12-02,2024-12-02,1,2738.0,931.0,0,2738.0,2738.0,2738.0,2738.0,2738.0,2738.0,0
+1650,Klang Valley,Shah Alam,Free Alignment,Referral,Referral,REFERRAL,2023-08-21,2023-08-21,2,496.0,258.0,1,496.0,496.0,496.0,496.0,496.0,496.0,0
+5920,Klang Valley,Petaling Jaya,Free Engine Check,Referral,Referral,REFERRAL,2023-04-09,2024-12-09,5,16707.0,5948.0,1,876.0,876.0,876.0,876.0,2523.0,2523.0,1
+2713,Johor,Muar,Aircond Service Package,Walk-in,Walk-in,WALK-IN,2023-05-01,2023-11-17,2,1301.0,514.0,1,1163.0,1163.0,1163.0,1163.0,1163.0,1301.0,0
+9823,Klang Valley,Kajang,Free Alignment,Paid Search,Google,GO-KV-FA-2023Q2,2023-05-31,2024-06-17,4,15519.0,5687.0,1,416.0,416.0,416.0,416.0,12774.0,12774.0,1
+8759,Johor,Iskandar Puteri,Free Alignment,Walk-in,Walk-in,WALK-IN,2024-01-24,2024-01-24,2,723.0,275.0,1,723.0,723.0,723.0,723.0,723.0,723.0,0
+5290,Klang Valley,Puchong,Free Engine Check,Paid Search,Google,GO-KV-FEC-2023Q3,2023-08-20,2024-12-09,5,6735.0,2663.0,1,542.0,542.0,542.0,542.0,3853.0,4861.0,1
+10383,Klang Valley,Subang Jaya,Walk-in (No Promo),Video,TikTok,TI-KV-W(P-2022Q2,2022-06-03,2022-09-12,2,1073.0,497.0,1,925.0,925.0,925.0,925.0,1073.0,1073.0,0
+4835,Klang Valley,Petaling Jaya,RM50 Service Voucher,Walk-in,Walk-in,WALK-IN,2022-09-01,2022-09-01,1,5.0,3.0,0,5.0,5.0,5.0,5.0,5.0,5.0,0
+6716,Penang,Balik Pulau,Free Engine Check,Walk-in,Walk-in,WALK-IN,2023-07-02,2023-07-02,2,125.0,75.0,1,125.0,125.0,125.0,125.0,125.0,125.0,0
+6592,Klang Valley,Subang Jaya,Aircond Service Package,Paid Social,Facebook,FA-KV-ASP-2023Q3,2023-07-30,2023-12-08,2,7322.0,2514.0,1,102.0,102.0,102.0,102.0,7322.0,7322.0,1
+8929,Johor,Skudai,Free Engine Check,Organic,Organic Search,ORGANIC,2024-07-01,2024-12-22,3,880.0,414.0,1,116.0,116.0,116.0,116.0,880.0,880.0,0
+10971,Johor,Segamat,Oil Change Package,Paid Social,Facebook,FA-JH-OCP-2024Q4,2024-12-16,2024-12-16,1,266.0,133.0,0,266.0,266.0,266.0,266.0,266.0,266.0,0
+7780,Klang Valley,Cheras,RM50 Service Voucher,Video,TikTok,TI-KV-RSV-2024Q4,2024-10-28,2024-10-28,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+8867,Klang Valley,Petaling Jaya,Aircond Service Package,Organic,Organic Search,ORGANIC,2022-08-20,2022-08-20,1,5274.0,1899.0,0,5274.0,5274.0,5274.0,5274.0,5274.0,5274.0,1
+7530,Penang,Butterworth,Free Engine Check,Paid Search,Google,GO-PG-FEC-2024Q3,2024-08-30,2024-08-30,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+10542,Johor,Pasir Gudang,Oil Change Package,Paid Search,Google,GO-JH-OCP-2024Q1,2024-01-18,2024-01-18,1,1737.0,625.0,0,1737.0,1737.0,1737.0,1737.0,1737.0,1737.0,0
+6171,Klang Valley,Kajang,Oil Change Package,Organic,Organic Search,ORGANIC,2022-03-06,2023-12-06,4,9317.0,3423.0,1,2439.0,2439.0,2439.0,2439.0,2439.0,3275.0,1
+11732,Klang Valley,Petaling Jaya,Walk-in (No Promo),Video,TikTok,TI-KV-W(P-2024Q3,2024-09-26,2024-09-26,1,672.0,302.0,0,672.0,672.0,672.0,672.0,672.0,672.0,0
+3896,Klang Valley,Subang Jaya,Aircond Service Package,Organic,Organic Search,ORGANIC,2024-10-12,2024-10-12,1,911.0,364.0,0,911.0,911.0,911.0,911.0,911.0,911.0,0
+1810,Klang Valley,Petaling Jaya,RM50 Service Voucher,Referral,Referral,REFERRAL,2023-09-22,2024-06-12,3,411.0,176.0,1,45.0,45.0,45.0,45.0,381.0,411.0,0
+5665,Klang Valley,Cheras,Oil Change Package,Paid Search,Google,GO-KV-OCP-2023Q4,2023-12-16,2024-05-02,2,468.0,260.0,1,97.0,97.0,97.0,97.0,468.0,468.0,0
+4167,Klang Valley,Petaling Jaya,Oil Change Package,Paid Social,Instagram,IN-KV-OCP-2024Q2,2024-04-11,2024-04-11,1,208.0,121.0,0,208.0,208.0,208.0,208.0,208.0,208.0,0
+1942,Klang Valley,Shah Alam,Walk-in (No Promo),Paid Search,Google,GO-KV-W(P-2023Q2,2023-05-19,2023-05-19,1,38.0,22.0,0,38.0,38.0,38.0,38.0,38.0,38.0,0
+3895,Johor,Kulai,Free Engine Check,Referral,Referral,REFERRAL,2023-09-23,2024-06-14,3,1558.0,738.0,1,375.0,375.0,375.0,375.0,375.0,1558.0,0
+11769,Johor,Pasir Gudang,Free Engine Check,Paid Social,Instagram,IN-JH-FEC-2024Q4,2024-12-24,2024-12-24,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+9409,Johor,Segamat,Walk-in (No Promo),Organic,Organic Search,ORGANIC,2023-05-08,2023-08-02,2,385.0,181.0,1,308.0,308.0,308.0,385.0,385.0,385.0,0
+11011,Johor,Muar,Aircond Service Package,Video,TikTok,TI-JH-ASP-2024Q3,2024-09-05,2024-09-05,1,819.0,369.0,0,819.0,819.0,819.0,819.0,819.0,819.0,0
+7399,Penang,George Town,Free Alignment,Organic,Organic Search,ORGANIC,2022-04-02,2023-01-22,2,82.0,45.0,1,0.0,0.0,0.0,0.0,0.0,82.0,0
+1326,Klang Valley,Ampang,RM50 Service Voucher,Paid Social,Facebook,FA-KV-RSV-2024Q2,2024-04-21,2024-04-21,1,23.0,13.0,0,23.0,23.0,23.0,23.0,23.0,23.0,0
+2039,Klang Valley,Klang,Oil Change Package,Paid Search,Google,GO-KV-OCP-2024Q3,2024-09-26,2024-09-26,1,1426.0,599.0,0,1426.0,1426.0,1426.0,1426.0,1426.0,1426.0,0
+6548,Penang,Butterworth,Walk-in (No Promo),Paid Social,Instagram,IN-PG-W(P-2023Q4,2023-11-02,2024-07-23,2,567.0,258.0,1,155.0,155.0,155.0,155.0,155.0,567.0,0
+8319,Klang Valley,Puchong,RM50 Service Voucher,Paid Social,Facebook,FA-KV-RSV-2023Q4,2023-12-13,2023-12-13,1,239.0,84.0,0,239.0,239.0,239.0,239.0,239.0,239.0,0
+5308,Klang Valley,Ampang,Oil Change Package,Referral,Referral,REFERRAL,2023-08-01,2024-12-13,3,3286.0,1454.0,1,757.0,757.0,757.0,757.0,757.0,2445.0,0
+3375,Klang Valley,Ampang,Free Engine Check,Video,TikTok,TI-KV-FEC-2022Q4,2022-10-07,2023-07-07,4,2170.0,973.0,1,1302.0,1302.0,1302.0,1645.0,1645.0,2170.0,0
+6451,Klang Valley,Shah Alam,Oil Change Package,Paid Social,Instagram,IN-KV-OCP-2024Q2,2024-05-15,2024-08-06,2,1422.0,608.0,1,644.0,644.0,644.0,1422.0,1422.0,1422.0,0
+6483,Klang Valley,Subang Jaya,Aircond Service Package,Paid Social,Facebook,FA-KV-ASP-2022Q4,2022-12-17,2024-06-21,4,1201.0,603.0,1,671.0,671.0,671.0,671.0,945.0,945.0,0
+10917,Klang Valley,Puchong,Free Alignment,Paid Social,Facebook,FA-KV-FA-2023Q2,2023-06-20,2024-11-12,4,7454.0,2702.0,1,0.0,0.0,0.0,0.0,0.0,6373.0,1
+8789,Penang,Bukit Mertajam,RM50 Service Voucher,Referral,Referral,REFERRAL,2023-02-27,2023-02-27,1,674.0,303.0,0,674.0,674.0,674.0,674.0,674.0,674.0,0
+1891,Johor,Johor Bahru,RM50 Service Voucher,Organic,Organic Search,ORGANIC,2024-05-31,2024-05-31,1,97.0,53.0,0,97.0,97.0,97.0,97.0,97.0,97.0,0
+7352,Johor,Johor Bahru,Free Engine Check,Paid Search,Google,GO-JH-FEC-2024Q4,2024-12-01,2024-12-01,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+4149,Klang Valley,Klang,Oil Change Package,Referral,Referral,REFERRAL,2024-11-18,2024-11-18,1,2291.0,916.0,0,2291.0,2291.0,2291.0,2291.0,2291.0,2291.0,0
+3786,Johor,Kluang,Oil Change Package,Paid Search,Google,GO-JH-OCP-2023Q2,2023-04-08,2024-02-19,3,266.0,146.0,1,94.0,94.0,94.0,94.0,94.0,266.0,0
+2796,Penang,Tanjung Tokong,Free Alignment,Paid Search,Google,GO-PG-FA-2023Q3,2023-09-12,2024-07-31,4,8632.0,3381.0,1,208.0,208.0,208.0,208.0,2734.0,8632.0,1
+6696,Klang Valley,Cheras,Oil Change Package,Paid Search,Google,GO-KV-OCP-2023Q4,2023-11-21,2024-05-07,2,6347.0,2330.0,1,6160.0,6160.0,6160.0,6160.0,6347.0,6347.0,1
+6813,Klang Valley,Petaling Jaya,RM50 Service Voucher,Walk-in,Walk-in,WALK-IN,2023-01-23,2023-05-13,2,965.0,399.0,1,774.0,774.0,774.0,774.0,965.0,965.0,0
+449,Klang Valley,Ampang,RM50 Service Voucher,Video,TikTok,TI-KV-RSV-2023Q3,2023-09-03,2024-10-27,3,554.0,243.0,1,0.0,0.0,0.0,0.0,0.0,326.0,0
+11925,Klang Valley,Puchong,Oil Change Package,Paid Social,Facebook,FA-KV-OCP-2022Q3,2022-08-16,2024-12-28,5,1112.0,540.0,1,97.0,97.0,97.0,97.0,157.0,157.0,0
+1463,Klang Valley,Petaling Jaya,Oil Change Package,Referral,Referral,REFERRAL,2022-10-20,2024-11-05,5,2292.0,1220.0,1,928.0,928.0,928.0,928.0,928.0,1061.0,0
+2165,Klang Valley,Subang Jaya,Walk-in (No Promo),Paid Search,Google,GO-KV-W(P-2024Q4,2024-10-06,2024-10-06,1,584.0,245.0,0,584.0,584.0,584.0,584.0,584.0,584.0,0
+1506,Klang Valley,Subang Jaya,Aircond Service Package,Referral,Referral,REFERRAL,2023-06-17,2023-06-17,1,1041.0,437.0,0,1041.0,1041.0,1041.0,1041.0,1041.0,1041.0,0
+11132,Johor,Johor Bahru,Aircond Service Package,Paid Social,Instagram,IN-JH-ASP-2024Q2,2024-05-04,2024-10-29,2,1794.0,689.0,1,1436.0,1436.0,1436.0,1436.0,1794.0,1794.0,0
+9980,Penang,Balik Pulau,Free Alignment,Paid Search,Google,GO-PG-FA-2022Q3,2022-08-13,2022-08-13,1,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0
+3299,Penang,Perai,Walk-in (No Promo),Paid Search,Google,GO-PG-W(P-2023Q3,2023-07-06,2024-07-21,3,3980.0,1704.0,1,1114.0,1114.0,1114.0,1114.0,1114.0,2167.0,0
+3707,Johor,Kluang,Oil Change Package,Paid Search,Google,GO-JH-OCP-2024Q1,2024-03-23,2024-10-08,2,440.0,215.0,1,303.0,303.0,303.0,303.0,303.0,440.0,0
+4204,Penang,Bayan Lepas,Free Engine Check,Paid Social,Instagram,IN-PG-FEC-2024Q4,2024-11-07,2024-11-07,2,645.0,245.0,1,645.0,645.0,645.0,645.0,645.0,645.0,0
+4327,Johor,Segamat,Free Alignment,Referral,Referral,REFERRAL,2023-09-01,2024-02-05,2,10843.0,3687.0,1,0.0,0.0,0.0,0.0,10843.0,10843.0,1
+8862,Johor,Skudai,Oil Change Package,Paid Search,Google,GO-JH-OCP-2024Q4,2024-11-25,2024-11-25,1,1788.0,608.0,0,1788.0,1788.0,1788.0,1788.0,1788.0,1788.0,0
+7434,Klang Valley,Puchong,Oil Change Package,Paid Social,Instagram,IN-KV-OCP-2024Q4,2024-12-12,2024-12-12,1,1302.0,547.0,0,1302.0,1302.0,1302.0,1302.0,1302.0,1302.0,0
+479,Klang Valley,Subang Jaya,RM50 Service Voucher,Video,TikTok,TI-KV-RSV-2022Q3,2022-09-28,2022-09-28,1,39.0,23.0,0,39.0,39.0,39.0,39.0,39.0,39.0,0
