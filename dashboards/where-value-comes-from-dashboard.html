@@ -220,7 +220,7 @@
         upChart('c_profitOffer',{type:'bar',data:{labels:D.offers,datasets:[{data:profOff,backgroundColor:'#5A524B'}]},options:baseOpts(true)});
         // cohort curves by offer
         const ds=D.offers.map((nm,oi)=>{const sub=c.filter(r=>r[O]===oi);return {label:nm,data:COHORT_IDX.map(ci=>mean(sub.map(r=>r[ci]))),borderColor:PAL[oi],backgroundColor:PAL[oi],tension:0.3,fill:false};});
-        upChart('c_cohortOffer',{type:'line',data:{labels:D.cohortDays,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:9}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>fmtRMk(v)}},x:{title:{display:true,text:'days since first visit'}}}});
+        upChart('c_cohortOffer',{type:'line',data:{labels:D.cohortDays,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:9}}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>fmtRMk(v)}},x:{title:{display:true,text:'days since first visit'}}}}});
     }
 
     function renderTab2(){
