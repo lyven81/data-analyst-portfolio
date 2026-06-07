@@ -320,6 +320,12 @@
             .case-study-links { flex-direction: column; gap: 6px; }
             .case-study-links a { text-align: center; }
         }
+        .pagination{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:34px 0 6px;}
+        .page-link{min-width:42px;padding:8px 14px;border:1px solid #CBA135;background:#fff;color:#403B36;border-radius:8px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.95rem;transition:all .2s;}
+        .page-link:hover:not(:disabled):not(.active){background:rgba(203,161,53,.12);}
+        .page-link.active{background:#CBA135;color:#fff;border-color:#CBA135;}
+        .page-link:disabled{opacity:.4;cursor:not-allowed;}
+        .page-info{text-align:center;color:#8A7660;font-size:0.85rem;margin:0 0 30px;}
     </style>
 </head>
 <body>
@@ -362,6 +368,9 @@
 
 <script>
 const aiAssistants = [
+    { title: "Where Value Comes From", description: "Ask which branches, offers and customers pay back", caseStudyUrl: "/data-analyst-portfolio/case-studies/where-value-comes-from.html", dashboardUrl: "/data-analyst-portfolio/dashboards/where-value-comes-from-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/where-value-comes-from.html", category: "Interactive Dashboards" },
+    { title: "Under the Kopi Lid", description: "What the numbers reveal beneath Oriental Kopi's growth", caseStudyUrl: "/data-analyst-portfolio/case-studies/oriental-kopi-pl-analysis.html", dashboardUrl: "/data-analyst-portfolio/dashboards/oriental-kopi-pl-analysis-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/oriental-kopi-pl-analysis.html", category: "Interactive Dashboards" },
+    { title: "Cheap Stocks Worth Exploring", description: "Find cheap stocks that pay safe dividends", caseStudyUrl: "/data-analyst-portfolio/case-studies/cheap-stocks-worth-exploring.html", dashboardUrl: "/data-analyst-portfolio/dashboards/cheap-stocks-worth-exploring-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/cheap-stocks-worth-exploring.html", category: "Interactive Dashboards" },
     { title: "Cash or Credit Card", description: "See if card users spend more than cash", caseStudyUrl: "/data-analyst-portfolio/case-studies/cash-or-credit-card.html", dashboardUrl: "/data-analyst-portfolio/dashboards/cash-or-credit-card-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/cash-or-credit-card.html", category: "Statistical Testing" },
     { title: "Do Dollars Drive Decisions?", description: "Spot bias in loan approval decisions", caseStudyUrl: "/data-analyst-portfolio/case-studies/do-dollar-drive-decisions.html", dashboardUrl: "/data-analyst-portfolio/dashboards/do-dollar-drive-decisions-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/do-dollar-drive-decisions.html", category: "Regression Analysis" },
     { title: "Customer Journey Dashboard", description: "See how stores perform across customer touchpoints", caseStudyUrl: "/data-analyst-portfolio/case-studies/evaluating-customer-experience.html", dashboardUrl: "/data-analyst-portfolio/dashboards/customer-journey-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/evaluating-customer-experience.html", category: "Interactive Dashboards" },
@@ -375,7 +384,7 @@ const aiAssistants = [
     { title: "Not All Homes Are Equal", description: "Find which homes give the best value per dollar", caseStudyUrl: "/data-analyst-portfolio/case-studies/not-all-homes-are-equal.html", dashboardUrl: "/data-analyst-portfolio/dashboards/not-all-homes-are-equal-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/not-all-homes-are-equal.html", category: "Interactive Dashboards" },
     { title: "Predicting Gym Member Dropout", description: "Find members who might quit and keep them", caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-gym-member-dropout.html", dashboardUrl: "/data-analyst-portfolio/dashboards/predicting-gym-member-dropout-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/predicting-gym-member-dropout.html", category: "Predictive Modeling" },
     { title: "Predicting Holiday Peaks", description: "Plan when to launch your holiday marketing campaigns", caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-holiday-peaks.html", dashboardUrl: "/data-analyst-portfolio/dashboards/predicting-holiday-peaks-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/predicting-holiday-peaks.html", category: "Time Series Analysis" },
-    { title: "Predicting Sales Cycles", description: "Turn seasonal patterns into actionable inventory and marketing strategies", caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-sales-cycles.html", dashboardUrl: "/data-analyst-portfolio/dashboards/Predicting Sales Cycles.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/predicting-sales-cycles.html", category: "Time Series Analysis" },
+    { title: "Predicting Sales Cycles", description: "Plan inventory and marketing around seasonality", caseStudyUrl: "/data-analyst-portfolio/case-studies/predicting-sales-cycles.html", dashboardUrl: "/data-analyst-portfolio/dashboards/Predicting Sales Cycles.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/predicting-sales-cycles.html", category: "Time Series Analysis" },
     { title: "Selling the Right Products", description: "Focus sales effort on products that drive profit", caseStudyUrl: "/data-analyst-portfolio/case-studies/selling-the-right-products.html", dashboardUrl: "/data-analyst-portfolio/dashboards/product-revenue-analysis-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/selling-the-right-products.html", category: "Interactive Dashboards" },
     { title: "Understanding Customer Value", description: "Know which customers drive your profits", caseStudyUrl: "/data-analyst-portfolio/case-studies/understanding-customer-value.html", dashboardUrl: "/data-analyst-portfolio/dashboards/bicycle-shop-customer-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/understanding-customer-value.html", category: "Interactive Dashboards" },
     { title: "What Causes Product Returns", description: "Spot which products get returned most often", caseStudyUrl: "/data-analyst-portfolio/case-studies/what-causes-product-returns.html", dashboardUrl: "/data-analyst-portfolio/dashboards/what-causes-product-returns-dashboard.html", agenticUrl: "/data-analyst-portfolio/agentic_workflow/what-causes-product-returns.html", category: "Regression Analysis" },
@@ -434,13 +443,21 @@ document.addEventListener('click', e => { if (!e.target.closest('.search-contain
 searchResults.addEventListener('click', e => e.stopPropagation());
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { hideResults(); searchInput.blur(); } });
 
+const PER_PAGE = 8;
+let currentPage = 1;
+
 function renderTable(studies) {
     const table = document.getElementById('aiAssistantsTable');
     const sorted = [...studies].sort((a, b) => a.title.localeCompare(b.title));
+    const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+    const startIdx = (currentPage - 1) * PER_PAGE;
+    const pageStudies = sorted.slice(startIdx, startIdx + PER_PAGE);
     let html = '';
-    for (let i = 0; i < sorted.length; i += 2) {
+    for (let i = 0; i < pageStudies.length; i += 2) {
         html += '<tr>';
-        const left = sorted[i];
+        const left = pageStudies[i];
         html += `
             <td>
                 <div class="card-tag">${left.category}</div>
@@ -449,8 +466,8 @@ function renderTable(studies) {
                 <div class="case-study-links"><a href="${left.agenticUrl}">AI Assistant</a></div>
             </td>
         `;
-        if (i + 1 < sorted.length) {
-            const right = sorted[i + 1];
+        if (i + 1 < pageStudies.length) {
+            const right = pageStudies[i + 1];
             html += `
                 <td>
                     <div class="card-tag">${right.category}</div>
@@ -465,6 +482,40 @@ function renderTable(studies) {
         html += '</tr>';
     }
     table.innerHTML = html;
+    renderPagination(totalPages, sorted.length);
+}
+
+function renderPagination(totalPages, totalCount) {
+    let el = document.getElementById('pagination');
+    if (!el) {
+        el = document.createElement('div');
+        el.id = 'pagination';
+        el.className = 'pagination';
+        document.getElementById('aiAssistantsTable').insertAdjacentElement('afterend', el);
+    }
+    let info = document.getElementById('page-info');
+    if (!info) {
+        info = document.createElement('div');
+        info.id = 'page-info';
+        info.className = 'page-info';
+        el.insertAdjacentElement('afterend', info);
+    }
+    if (totalPages <= 1) { el.innerHTML = ''; info.textContent = totalCount + ' AI assistants'; return; }
+    let h = '<button class="page-link" ' + (currentPage === 1 ? 'disabled' : '') + ' onclick="goToPage(' + (currentPage - 1) + ')">Prev</button>';
+    for (let p = 1; p <= totalPages; p++) {
+        h += '<button class="page-link ' + (p === currentPage ? 'active' : '') + '" onclick="goToPage(' + p + ')">' + p + '</button>';
+    }
+    h += '<button class="page-link" ' + (currentPage === totalPages ? 'disabled' : '') + ' onclick="goToPage(' + (currentPage + 1) + ')">Next</button>';
+    el.innerHTML = h;
+    const from = (currentPage - 1) * PER_PAGE + 1;
+    const to = Math.min(currentPage * PER_PAGE, totalCount);
+    info.textContent = 'Showing ' + from + '-' + to + ' of ' + totalCount + ' AI assistants';
+}
+
+function goToPage(p) {
+    currentPage = p;
+    renderTable(aiAssistants);
+    document.getElementById('aiAssistantsTable').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.addEventListener('DOMContentLoaded', () => renderTable(aiAssistants));
