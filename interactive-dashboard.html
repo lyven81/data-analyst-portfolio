@@ -8,6 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/data-analyst-portfolio/data-stories.css">
+    <style>
+      .pagination{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:34px 0 6px;}
+      .page-link{min-width:42px;padding:8px 14px;border:1px solid #CBA135;background:#fff;color:#403B36;border-radius:8px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.95rem;transition:all .2s;}
+      .page-link:hover:not(:disabled):not(.active){background:rgba(203,161,53,.12);}
+      .page-link.active{background:#CBA135;color:#fff;border-color:#CBA135;}
+      .page-link:disabled{opacity:.4;cursor:not-allowed;}
+      .page-info{text-align:center;color:#8A7660;font-size:0.85rem;margin:0 0 30px;}
+    </style>
 </head>
 <body>
 
@@ -722,19 +730,27 @@ function sortCaseStudies(studies, sortType) {
     return sorted;
 }
 
+const PER_PAGE = 8;
+let currentPage = 1;
+
 function renderTable(studies) {
     const table = document.getElementById('caseStudiesTable');
-    // Sort alphabetically
+    // Sort alphabetically, then paginate
     const sortedStudies = [...studies].sort((a, b) => a.title.localeCompare(b.title));
+    const totalPages = Math.max(1, Math.ceil(sortedStudies.length / PER_PAGE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+    const startIdx = (currentPage - 1) * PER_PAGE;
+    const pageStudies = sortedStudies.slice(startIdx, startIdx + PER_PAGE);
 
     let html = '';
 
     // Add case study rows
-    for (let i = 0; i < sortedStudies.length; i += 2) {
+    for (let i = 0; i < pageStudies.length; i += 2) {
         html += '<tr>';
 
         // Left column
-        const leftStudy = sortedStudies[i];
+        const leftStudy = pageStudies[i];
         html += `
             <td>
                 ${leftStudy.dateDisplay ? `<div class="case-study-date">${leftStudy.dateDisplay}</div>` : ''}
@@ -748,8 +764,8 @@ function renderTable(studies) {
         `;
 
         // Right column (if exists)
-        if (i + 1 < sortedStudies.length) {
-            const rightStudy = sortedStudies[i + 1];
+        if (i + 1 < pageStudies.length) {
+            const rightStudy = pageStudies[i + 1];
             html += `
                 <td>
                     ${rightStudy.dateDisplay ? `<div class="case-study-date">${rightStudy.dateDisplay}</div>` : ''}
@@ -769,10 +785,45 @@ function renderTable(studies) {
     }
 
     table.innerHTML = html;
+    renderPagination(totalPages, sortedStudies.length);
+}
+
+function renderPagination(totalPages, totalCount) {
+    let el = document.getElementById('pagination');
+    if (!el) {
+        el = document.createElement('div');
+        el.id = 'pagination';
+        el.className = 'pagination';
+        document.getElementById('caseStudiesTable').insertAdjacentElement('afterend', el);
+    }
+    let info = document.getElementById('page-info');
+    if (!info) {
+        info = document.createElement('div');
+        info.id = 'page-info';
+        info.className = 'page-info';
+        el.insertAdjacentElement('afterend', info);
+    }
+    if (totalPages <= 1) { el.innerHTML = ''; info.textContent = totalCount + ' dashboards'; return; }
+    let h = '<button class="page-link" ' + (currentPage === 1 ? 'disabled' : '') + ' onclick="goToPage(' + (currentPage - 1) + ')">Prev</button>';
+    for (let p = 1; p <= totalPages; p++) {
+        h += '<button class="page-link ' + (p === currentPage ? 'active' : '') + '" onclick="goToPage(' + p + ')">' + p + '</button>';
+    }
+    h += '<button class="page-link" ' + (currentPage === totalPages ? 'disabled' : '') + ' onclick="goToPage(' + (currentPage + 1) + ')">Next</button>';
+    el.innerHTML = h;
+    const from = (currentPage - 1) * PER_PAGE + 1;
+    const to = Math.min(currentPage * PER_PAGE, totalCount);
+    info.textContent = 'Showing ' + from + '-' + to + ' of ' + totalCount + ' dashboards';
+}
+
+function goToPage(p) {
+    currentPage = p;
+    renderTable(getInteractiveDashboards());
+    document.getElementById('caseStudiesTable').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function changeSortType(sortType) {
     currentSort = sortType;
+    currentPage = 1;
     renderTable(getInteractiveDashboards());
 }
 
