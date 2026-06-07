@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Where Value Comes From | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+  <style>
+   .cs-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:0.9rem;}
+   .cs-table th,.cs-table td{padding:8px 10px;border-bottom:1px solid #e3d6c2;text-align:left;}
+   .cs-table th{background:#4a3520;color:#fff;font-weight:600;}
+   .cs-table td.num{text-align:right;}
+   .cs-table tr:nth-child(even){background:#faf6ef;}
+   .cs-dd{color:#3c6e47;font-weight:700;} .cs-kill{color:#c0563b;font-weight:700;} .cs-test{color:#6b5d4d;}
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>
+      Lee Yih Ven
+     </h1>
+     <h2>
+      Data Analytics Portfolio
+     </h2>
+    </header>
+    <section class="intro">
+     <p>
+      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
+     </p>
+    </section>
+    <!-- Home Link Button -->
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
+      Home
+     </a>
+    </section>
+    <section class="contact">
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Have a project in mind? Let's work together to transform your data into actionable insights.
+     </p>
+     <ul>
+      <li>
+       Email:
+       <a href="mailto:director@pinnacleslearning.com">
+        director@pinnacleslearning.com
+       </a>
+      </li>
+      <li>
+       Phone: +6014-9207099
+      </li>
+     </ul>
+    </section>
+    <!-- Dashboard Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      View Dashboard
+     </a>
+    </section>
+    <!-- Agentic Workflow Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="#">
+      AI Assistant
+     </a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-value-comes-from/cover.jpeg"/>
+      <h1>
+       Where Value Comes From
+      </h1>
+      <p>
+       Customer lifetime value, the offers that build it, and the CAC it justifies
+      </p>
+     </header>
+     <section>
+      <h2>
+       Executive Summary
+      </h2>
+      <p>
+       A business owner does not really care which ad got the most clicks or which voucher was redeemed most. They care about one thing: which customers become valuable. The central finding here is that the highest-value customers are created by repeat behaviour and a small group of whales, not by revenue on the first visit, and that promotions differ dramatically in their ability to create those customers. A Free Engine Check customer returns 84% of the time and is worth RM2,519 over their life; an RM50 Voucher customer returns 28% of the time and is worth RM621, a four-times gap that the first visit, where the engine check is free and the voucher takes money, completely hides. The same gap is geographic: a Klang Valley customer is worth nearly twice a Johor one. Repeat visits drive 60% of revenue and the top 10% of customers drive 49%, so the offers that build repeat customers and whales are the offers that build the business.
+      </p>
+      <p>
+       That reframes the budget from a question of cost to a question of value. Fund the promotions that create valuable customers, Free Engine Check and Air-Cond in Klang Valley and Penang, and referral above all, and stop paying for the ones that do not, the RM50 voucher in Johor and Penang. At a 40% margin the chain can pay up to 30% of a customer's first-year value to acquire them, which leaves room to spend far more on the offers that work.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Overview
+      </h2>
+      <p>
+       This report is written for the owner of a multi-branch car-workshop business that wins customers through paid ads and promotions, then earns from years of servicing. It is built around a single question, because everything else serves it: which customers become valuable, and what should we pay to acquire them?
+      </p>
+      <p>
+       The flow follows that logic. We start with the branches, then the promotions inside each branch, then what valuable customers actually do, then how they were acquired, and only at the end what we should pay for them, because the right acquisition cost depends on customer value, not the other way around. The data covers 12,000 customers and 24,032 service visits from January 2022 to December 2024, across 24 branches. All figures are in Malaysian Ringgit; after parts and labour the chain runs a 40% gross margin.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Method and Attribution
+      </h2>
+      <p>
+       <strong>Customer value first.</strong> For each customer we measure cumulative revenue at 7, 30, 60, 90, 180 and 365 days after their first visit, and over their full life. Averaging within a group gives its lifetime-value curve. Because car servicing runs on a roughly six-month cycle, the early points mostly reflect the first visit; the decision-grade horizon is twelve months, where repeat behaviour has shown itself.
+      </p>
+      <p>
+       <strong>Then what creates it.</strong> Value is decomposed into repeat-purchase behaviour (how soon, how often, how much) and revenue concentration (the top 10%, 5% and 1% of customers).
+      </p>
+      <p>
+       <strong>Then acquisition.</strong> Every customer carries the promotion they came in on (the offer), the branch region, and the source and channel that brought them. The unit of decision is the branch-and-offer cell, because that is where the owner sets a budget.
+      </p>
+      <p>
+       <strong>Cost last.</strong> Ad spend is attributed at the branch-by-offer-by-channel level, the way a real ad-spend export joins to transaction data: on shared campaign keys, not by matching individual customers. CAC for a group is its ad spend divided by the customers it acquired. Organic, referral and walk-in carry no ad cost. Target CAC is derived from value: at a 40% gross margin, holding a 10% net cushion, the most we can pay is 30% of a customer's first-year value.
+      </p>
+      <p>
+       Two honest limits. This is a constructed dataset built to demonstrate the method, not one firm's books, and acquisition source is modelled, so the source-level read is directional. The structure, value then drivers then cost, transfers directly onto a live attribution export. Tools: Python and pandas, matplotlib for the charts.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Data Sources and Methodology
+      </h2>
+      <p>
+       We analysed a customer, transaction and ad-spend dataset for a Malaysian car-workshop chain: 12,000 customers, 24,032 service visits, 24 branches across Klang Valley, Penang and Johor, January 2022 to December 2024. The analysis examined lifetime value at fixed horizons, repeat-purchase behaviour, revenue concentration, and cost to acquire by branch, offer and channel, with the goal of telling the owner exactly which offers to run, in which branches, and the most to pay for a customer in each. The dataset is constructed to demonstrate the method; the same analysis applies directly to a live attribution export.
+      </p>
+     </section>
+     <section>
+      <h2>
+       1. Which Locations Create the Most Value?
+      </h2>
+      <img alt="Customer value by location" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-value-comes-from/chart5_ltv_by_location.png"/>
+      <p>
+       Start with location, because a branch is the first thing an owner can move budget between, and the three regions are not equal. A Klang Valley customer is worth RM2,082 over their life against RM1,539 in Penang and RM1,057 in Johor, so a customer won in Klang Valley is worth nearly twice one won in Johor. The gap compounds: Klang Valley holds half the customers but produces 62% of revenue (RM12.5M of RM20.1M) and 68% of the chain's whales, while Johor holds 28% of customers and produces 18% of revenue. Gross margin is a flat 40% everywhere, so this is not a pricing difference, it is a customer-value difference: Klang Valley simply attracts and keeps higher-spending car owners.
+      </p>
+      <p>
+       The instruction from location alone is to weight acquisition toward Klang Valley and treat Johor as a value problem, not a volume problem, since buying more Johor customers at Klang Valley prices funds a base worth half as much. But location is only the outer layer. The sharper lever sits inside each branch, in the promotion a customer walks in on.
+      </p>
+     </section>
+     <section>
+      <h2>
+       2. Within Each Location, Which Offers Create the Most Value?
+      </h2>
+      <img alt="Customer LTV by acquisition offer" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-value-comes-from/chart1_ltv_by_offer.png"/>
+      <p>
+       Inside every branch the promotion decides the customer, and the ranking is remarkably consistent. In all three regions the free-diagnostic and Air-Cond offers create the most valuable customers and the RM50 Service Voucher creates the least. In Klang Valley a Free Engine Check customer is worth RM2,355 in their first year against RM701 for an RM50 Voucher customer; in Penang the top offer is Air-Cond at RM1,682 against RM569; in Johor it is Free Engine Check at RM1,185 against RM389.
+      </p>
+      <p>
+       Two things follow. The offer effect is as large as the location effect, since the best offer in a region is worth three to four times the worst, and the two multiply: the most valuable customer in the business is a Free Engine Check customer in Klang Valley at RM2,355, the least is an RM50 Voucher customer in Johor at RM389, a 6.1-times gap from the same near-free first visit. The cohort curves show why the first visit misleads: the free-diagnostic offers book little or nothing on day one yet pull clear by month twelve.
+      </p>
+      <p>
+       The profit numbers confirm it. Free Engine Check is the most profitable promotion at RM2.02M in operating profit and carries a 6% ad burden; the RM50 Voucher is last at RM0.42M and carries a 24% ad burden, the worst offer and the one we spend the most to push. So value is built location by location and offer by offer. The next question is what those high-value customers actually do that makes them worth so much.
+      </p>
+     </section>
+     <section>
+      <h2>
+       3. How Do Valuable Customers Behave?
+      </h2>
+      <img alt="Revenue concentration, the whale curve" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-value-comes-from/chart3_whale_pareto.png"/>
+      <p>
+       They come back, and a few come back for big jobs. Across the chain 56% of customers return, on a median rhythm of 179 days, repeat customers average 2.8 visits, and 60% of all revenue comes from second and later visits rather than the acquisition visit. A customer is not won on the first service; they are won on the second.
+      </p>
+      <p>
+       Repeat rate is exactly what separates the offers from the previous story. Free Engine Check customers return 84% of the time and Free Alignment 80%, against 47% for Oil Change, 49% for Air-Cond, and just 28% for the RM50 Voucher. The free-diagnostic offers acquire the habit of coming back; the voucher acquires one discounted transaction.
+      </p>
+      <p>
+       Value is also concentrated. The top 10% of customers generate 49% of revenue, the top 5% generate 33%, and the top 1% alone generate 11%. These whales come in for major engine, transmission and suspension work, and they cluster exactly where the location and offer stories pointed: 68% in Klang Valley, and 17% of Free Engine Check customers become whales against 1% from the voucher. Behaviour explains the value: the locations and offers that win are the ones that produce repeat customers and whales. Knowing what valuable customers do, the next question is how we brought them in.
+      </p>
+     </section>
+     <section>
+      <h2>
+       4. How Are Valuable Customers Acquired?
+      </h2>
+      <img alt="Customer value by how they were acquired" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-value-comes-from/chart4_ltv_by_source.png"/>
+      <p>
+       Acquisition is a three-way trade between volume, value and cost, and the channels sit very differently on it. Paid Social brings the most customers (34% of the base) at middling value (RM1,341 lifetime). Paid Search brings a fifth at higher value (RM1,867). Referral and Organic together bring a quarter of all customers at the highest value of all (RM2,458 and RM1,964) and at zero ad cost. Video, our TikTok traffic, brings the cheapest customers to acquire but the lowest value (RM1,160).
+      </p>
+      <table class="cs-table">
+       <thead><tr><th>Source</th><th>Lifetime LTV</th><th>CAC</th><th>LTV : CAC</th></tr></thead>
+       <tbody>
+        <tr><td>Referral</td><td class="num">RM2,458</td><td class="num">free</td><td class="num">n/a</td></tr>
+        <tr><td>Organic</td><td class="num">RM1,964</td><td class="num">free</td><td class="num">n/a</td></tr>
+        <tr><td>Paid Search</td><td class="num">RM1,867</td><td class="num">RM135</td><td class="num">13.8&times;</td></tr>
+        <tr><td>Walk-in</td><td class="num">RM1,556</td><td class="num">free</td><td class="num">n/a</td></tr>
+        <tr><td>Paid Social</td><td class="num">RM1,341</td><td class="num">RM84</td><td class="num">16.0&times;</td></tr>
+        <tr><td>Video (TikTok)</td><td class="num">RM1,160</td><td class="num">RM43</td><td class="num">26.7&times;</td></tr>
+       </tbody>
+      </table>
+      <p>
+       Here the honest reading matters, because a naive cut would get it wrong. On value alone TikTok looks worst; on return per Ringgit it looks best, because its customers cost only RM43 to acquire against RM135 for Search, so it returns 27 times its cost against Search's 14. Both are true, and together they give the instruction. The outright winners are Referral and Organic, the best customers for free, which makes a referral programme the single highest-return move available. Among paid channels the choice is not which to kill but which job each does: TikTok buys cheap volume that rarely becomes a whale, while Search costs more but buys customers worth paying more for. We now know who is valuable, where, on what offer, and how they arrived. Only one question is left: what should we pay for them?
+      </p>
+     </section>
+     <section>
+      <h2>
+       5. What Should We Pay for Them?
+      </h2>
+      <img alt="Decision matrix, first-year LTV to CAC by branch and offer" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/where-value-comes-from/chart2_decision_matrix.png"/>
+      <p>
+       The rule comes from the margin, not from a media plan. After parts and labour the chain keeps RM40 of gross profit on every RM100 of revenue. To hold a 10% net cushion, the most it can spend to win a customer is the remaining 30% of that customer's value. So the CAC ceiling is 30% of a customer's first-year value, set by value, which is why this question belongs at the end. For Free Engine Check in Klang Valley the ceiling is 30% of RM2,355, or RM706, against an actual CAC of RM124, so the chain could spend five times more and still profit. For the RM50 Voucher in Johor the ceiling is 30% of RM389, or RM117, against an actual RM63, so even at a low cost the headroom is thin because the customer is worth so little.
+      </p>
+      <p>
+       Per acquired customer, after parts, labour and acquisition, Free Engine Check in Klang Valley returns RM1,166 in steady-state profit, the best cell in the business; the RM50 Voucher returns RM95 in Johor and RM149 in Penang, the worst. Every cell is positive on a lifetime basis, because a customer who returns even twice covers a RM60 to RM120 acquisition cost easily. So this is not about avoiding losses; it is opportunity cost: the same Ringgit earns eight to twelve times more on the best cells than the worst.
+      </p>
+      <p>
+       Ranking all 18 branch-and-offer cells by first-year return on acquisition gives a clean three-way split. Seven are double-down, the free-diagnostic, Air-Cond and Oil Change offers in Klang Valley and Penang, returning 14 to 21 times their acquisition cost with room to bid far harder. Two are outright kills: the RM50 Voucher in Johor and Penang. The remaining nine are test-and-hold, including the RM50 Voucher in Klang Valley, which survives only because even a deal-seeker there outspends a loyal customer in Johor.
+      </p>
+     </section>
+     <section>
+      <h2>
+       Recommendations
+      </h2>
+      <ol>
+       <li><strong>Build a referral programme first.</strong> Referred and organic customers are the most valuable in the business (RM2,458 and RM1,964 lifetime) at zero acquisition cost. Before touching the paid mix, put a structured incentive behind the channel that already produces the best customers for free.</li>
+       <li><strong>Double down on Free Engine Check and Air-Cond in Klang Valley and Penang.</strong> These cells return 17 to 21 times first-year acquisition cost and produce most of the chain's whales. Actual CAC is RM80 to RM124 against ceilings of RM470 to RM706, so bid far harder and still profit.</li>
+       <li><strong>Kill the RM50 Voucher in Johor and Penang; reallocate, do not cut.</strong> It returns 6 to 7 times its cost against 14-plus for the alternatives, with a 28% repeat rate and almost no whales. Move that budget to the double-down cells.</li>
+       <li><strong>Match paid channels to the job, do not chase a single winner.</strong> TikTok buys cheap, low-value volume efficiently; Search buys higher-value customers worth paying more for. Use TikTok for reach and Search where you have CAC headroom for quality, and do not expect whales from either.</li>
+       <li><strong>Treat Johor as a value problem, not a volume problem.</strong> Johor customers are worth half their Klang Valley equivalents. Lower the CAC ceiling there and lean on the free-diagnostic offers that still clear the bar.</li>
+      </ol>
+      <table class="cs-table">
+       <thead><tr><th>Branch</th><th>Offer</th><th>12-mo LTV</th><th>Current CAC</th><th>CAC ceiling (30%)</th><th>Verdict</th></tr></thead>
+       <tbody>
+        <tr><td>Klang Valley</td><td>Free Engine Check</td><td class="num">RM2,355</td><td class="num">RM124</td><td class="num">RM706</td><td class="cs-dd">Double down</td></tr>
+        <tr><td>Klang Valley</td><td>Air-Cond Package</td><td class="num">RM2,074</td><td class="num">RM114</td><td class="num">RM622</td><td class="cs-dd">Double down</td></tr>
+        <tr><td>Klang Valley</td><td>Oil Change Package</td><td class="num">RM1,827</td><td class="num">RM116</td><td class="num">RM548</td><td class="cs-dd">Double down</td></tr>
+        <tr><td>Klang Valley</td><td>Walk-in (No Promo)</td><td class="num">RM1,690</td><td class="num">RM104</td><td class="num">RM507</td><td class="cs-dd">Double down</td></tr>
+        <tr><td>Klang Valley</td><td>Free Alignment</td><td class="num">RM1,526</td><td class="num">RM110</td><td class="num">RM458</td><td class="cs-dd">Double down</td></tr>
+        <tr><td>Penang</td><td>Air-Cond Package</td><td class="num">RM1,682</td><td class="num">RM80</td><td class="num">RM505</td><td class="cs-dd">Double down</td></tr>
+        <tr><td>Penang</td><td>Free Engine Check</td><td class="num">RM1,581</td><td class="num">RM90</td><td class="num">RM474</td><td class="cs-dd">Double down</td></tr>
+        <tr><td>Penang</td><td>Oil Change Package</td><td class="num">RM1,354</td><td class="num">RM83</td><td class="num">RM406</td><td class="cs-test">Test / hold</td></tr>
+        <tr><td>Penang</td><td>Free Alignment</td><td class="num">RM1,230</td><td class="num">RM80</td><td class="num">RM369</td><td class="cs-test">Test / hold</td></tr>
+        <tr><td>Johor</td><td>Free Engine Check</td><td class="num">RM1,185</td><td class="num">RM74</td><td class="num">RM356</td><td class="cs-test">Test / hold</td></tr>
+        <tr><td>Johor</td><td>Air-Cond Package</td><td class="num">RM1,072</td><td class="num">RM65</td><td class="num">RM322</td><td class="cs-test">Test / hold</td></tr>
+        <tr><td>Johor</td><td>Oil Change Package</td><td class="num">RM1,038</td><td class="num">RM72</td><td class="num">RM311</td><td class="cs-test">Test / hold</td></tr>
+        <tr><td>Johor</td><td>Free Alignment</td><td class="num">RM919</td><td class="num">RM68</td><td class="num">RM276</td><td class="cs-test">Test / hold</td></tr>
+        <tr><td>Klang Valley</td><td>RM50 Voucher</td><td class="num">RM701</td><td class="num">RM109</td><td class="num">RM210</td><td class="cs-test">Test / hold</td></tr>
+        <tr><td>Penang</td><td>RM50 Voucher</td><td class="num">RM569</td><td class="num">RM77</td><td class="num">RM171</td><td class="cs-kill">Kill</td></tr>
+        <tr><td>Johor</td><td>RM50 Voucher</td><td class="num">RM389</td><td class="num">RM63</td><td class="num">RM117</td><td class="cs-kill">Kill</td></tr>
+       </tbody>
+      </table>
+     </section>
+     <section>
+      <h2>
+       Conclusion
+      </h2>
+      <p>
+       The chain's profit is built by customers who come back, and the promotion they walk in on decides whether they do. Start from value and the rest follows: free diagnostics in Klang Valley and Penang buy loyal, whale-producing customers and have room to spend three to five times more to win them; referral produces the best customers of all for nothing; and the RM50 voucher in Johor and Penang buys a single discounted visit and should be cut. The cost of doing nothing is quiet but real, since every Ringgit spent on the wrong voucher in the wrong branch is a Ringgit not spent on a customer worth six times more. Set the CAC ceilings by value, fund the cells that clear them, and the same ad budget will buy a materially more valuable customer base within two service cycles.
+      </p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>
+    © 2026 Lee Yih Ven | Data-Driven Solutions
+   </p>
+  </footer>
+ </body>
+</html>
