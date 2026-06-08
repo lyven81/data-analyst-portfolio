@@ -3,522 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who Is Most at Risk of Leaving the Bank - Customer Churn Prediction - Dashboard | Lee Yih Ven</title>
+    <title>Who Is Most at Risk of Leaving the Bank - Churn Dashboard | Lee Yih Ven</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         :root {
-            --primary-color: #403B36;
-            --secondary-color: #CBA135;
-            --background-color: #FCF9F2;
-            --text-color: #2C2C2C;
-            --card-background: #FFFFFF;
-            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --primary-color: #403B36; --secondary-color: #CBA135; --background-color: #FCF9F2;
+            --text-color: #2C2C2C; --card-background: #FFFFFF; --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
             --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
             --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: var(--gradient);
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,100 1000,0"/></svg>');
-            background-size: cover;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-weight: 300;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .btn-primary {
-            background: var(--gold-gradient);
-            color: var(--primary-color);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 80px 0;
-        }
-
-        /* Metrics Grid */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .metric-card {
-            background: var(--card-background);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--gold-gradient);
-        }
-
-        .metric-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
-        }
-
-        .metric-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .metric-label {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .metric-description {
-            font-size: 0.95rem;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        /* Insights Section */
-        .insights {
-            background: var(--card-background);
-            padding: 60px 40px;
-            border-radius: 25px;
-            box-shadow: var(--shadow);
-            margin-bottom: 80px;
-        }
-
-        .insights h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .insights h2::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: var(--gold-gradient);
-            margin: 20px auto 0;
-            border-radius: 2px;
-        }
-
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .insight-item {
-            padding: 30px;
-            background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-            border-radius: 15px;
-            border-left: 5px solid var(--secondary-color);
-            transition: all 0.3s ease;
-        }
-
-        .insight-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .insight-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .insight-text {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        /* Recommendations Section */
-        .recommendations {
-            background: var(--gradient);
-            padding: 80px 40px;
-            border-radius: 25px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .recommendations::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-
-        .recommendations-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .recommendations h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-        }
-
-        .recommendations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .recommendation-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .recommendation-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .recommendation-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .recommendation-text {
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #666;
-            background: var(--card-background);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--background-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; position: relative; }
+        .header { background: linear-gradient(135deg, #403B36 0%, #2C2822 100%); color: #FCF9F2; padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .header .sample-note { font-size: 0.85rem; opacity: 0.75; margin-top: 12px; }
+        .cta-buttons { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .cta-button { padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; }
+        .cta-secondary { background: transparent; border: 2px solid #CBA135; color: #FCF9F2; }
+        .cta-secondary:hover { background: rgba(203,161,53,0.1); }
+        .filter-bar { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; background: white; padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 10px; }
+        .filter-bar .filter-group { display: flex; flex-direction: column; gap: 6px; }
+        .filter-bar label { font-size: 0.8rem; font-weight: 600; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.5px; }
+        .filter-bar select { padding: 9px 14px; border: 2px solid #E8DFC8; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: var(--text-color); background: #FCF9F2; min-width: 170px; }
+        .filter-bar .filter-note { font-size: 0.78rem; color: #888; margin-left: auto; align-self: center; }
+        .page-nav { display: flex; justify-content: center; gap: 15px; margin: 30px auto; flex-wrap: wrap; }
+        .page-btn { padding: 12px 24px; background: white; border: 2px solid var(--secondary-color); border-radius: 8px; font-weight: 600; color: var(--primary-color); cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins', sans-serif; font-size: 0.95rem; }
+        .page-btn.active { background: var(--gold-gradient); color: white; border-color: var(--secondary-color); }
+        .page-btn:hover:not(.active) { background: rgba(203,161,53,0.1); }
+        .page { position: absolute; left: -10000px; top: 0; width: 100%; }
+        .page.active { position: static; left: auto; animation: fadeIn 0.4s ease-in; }
+        .page-print-title { display: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 30px auto; }
+        .kpi-card { background: white; padding: 28px 24px; border-radius: 15px; box-shadow: var(--shadow); text-align: center; transition: all 0.3s ease; border-top: 4px solid var(--secondary-color); }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(64,59,54,0.15); }
+        .kpi-label { font-size: 1rem; color: #666; margin-bottom: 10px; font-weight: 500; }
+        .kpi-value { font-size: 2.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+        .kpi-sub { font-size: 0.85rem; color: #888; }
+        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; margin: 30px auto; }
+        .chart-card { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); overflow: hidden; }
+        .chart-title { color: var(--primary-color); margin-bottom: 8px; font-size: 1.15rem; font-weight: 600; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; }
+        .chart-sub { font-size: 0.8rem; color: #888; margin-top: 0; margin-bottom: 15px; }
+        .chart-container { position: relative; height: 320px; }
+        .chart-container-lg { position: relative; height: 380px; }
+        .full-width { grid-column: 1 / -1; }
+        .ranked-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .ranked-table thead { background: var(--gradient); color: white; }
+        .ranked-table th { padding: 12px 15px; text-align: left; font-weight: 600; }
+        .ranked-table td { padding: 11px 15px; border-bottom: 1px solid #E8DFC8; }
+        .ranked-table tr:hover { background-color: rgba(203,161,53,0.08); }
+        .badge-green { display:inline-block; background:#5C7A5C; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-amber { display:inline-block; background:#CBA135; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-red { display:inline-block; background:#A8552F; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        .footer p { margin: 5px 0; }
         @media (max-width: 768px) {
-            .hero {
-                padding: 60px 0;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                font-size: 1rem;
-                padding: 12px 25px;
-            }
-
-            .main-content {
-                padding: 60px 0;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                margin-bottom: 60px;
-            }
-
-            .metric-card {
-                padding: 30px 20px;
-            }
-
-            .metric-number {
-                font-size: 2.5rem;
-            }
-
-            .insights,
-            .recommendations {
-                padding: 40px 20px;
-                margin-bottom: 60px;
-            }
-
-            .insights h2,
-            .recommendations h2 {
-                font-size: 2rem;
-                margin-bottom: 30px;
-            }
-
-            .insights-grid,
-            .recommendations-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .insight-item,
-            .recommendation-item {
-                padding: 25px 20px;
-            }
+            .header h1 { font-size: 1.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+            .page-nav { flex-direction: column; }
+            .filter-bar select { min-width: 140px; }
         }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .metric-number {
-                font-size: 2.2rem;
-            }
-
-            .insights h2,
-            .recommendations h2 {
-                font-size: 1.8rem;
-            }
+        @media print {
+            @page { size: A4 landscape; margin: 10mm; }
+            body { background: #fff; }
+            .page-nav, .filter-bar, .cta-buttons { display: none !important; }
+            .page { position: static !important; left: auto !important; width: 100% !important; page-break-before: always; }
+            #page1 { page-break-before: avoid; }
+            .page-print-title { display: block; font-size: 1.3rem; color: var(--primary-color); font-weight: 700; margin: 10px 0 4px; border-bottom: 2px solid var(--secondary-color); padding-bottom: 6px; }
+            .chart-card, .kpi-card, .ranked-table { break-inside: avoid; page-break-inside: avoid; box-shadow: none; }
+            .chart-grid { grid-template-columns: 1fr !important; }
+            .chart-container { height: 250px; }
+            .chart-container-lg { height: 290px; }
+            .chart-container canvas, .canvas-wrap canvas { width: 100% !important; height: 100% !important; }
+            .header { box-shadow: none; }
         }
-    </style>
+</style>
 </head>
 <body>
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Who Is Most at Risk of Leaving the Bank</h1>
-                <p>Predictive analytics identifies at-risk banking customers before they churn, enabling proactive retention strategies for relationship managers</p>
-                <div class="cta-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/bank-customer-churn-prediction.html" class="btn btn-primary">View Full Case Study</a>
-                    <a href="/data-analyst-portfolio/predictive-modeling.html" class="btn btn-secondary">More Analytics</a>
-                </div>
-            </div>
+<div class="dashboard-container">
+    <div class="header">
+        <h1>Who Is Most at Risk of Leaving the Bank</h1>
+        <p>A Risk-Tiered View of Customer Churn to Help Relationship Managers Prioritise Retention Outreach.</p>
+        <div class="cta-buttons">
+            <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/bank-customer-churn-prediction.html" class="cta-button cta-secondary">View Full Case Study</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
         </div>
-    </section>
-
-    <div class="container">
-        <section class="main-content">
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-number">5</div>
-                    <div class="metric-label">Key Risk Factors</div>
-                    <div class="metric-description">Age, geography (Germany), balance, activity status, and gender are the primary factors linked to customer churn</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">7</div>
-                    <div class="metric-label">Significant Predictors</div>
-                    <div class="metric-description">Age, activity status, Germany, gender, balance, credit score, and number of products show statistical significance</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">86%</div>
-                    <div class="metric-label">Model Accuracy</div>
-                    <div class="metric-description">Logistic regression model correctly predicts customer churn with 86% accuracy, identifying 8-9 out of 10 customers correctly</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">30%</div>
-                    <div class="metric-label">High-Risk Threshold</div>
-                    <div class="metric-description">Customers with churn probability above 30% require immediate relationship manager attention and intervention</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">19.3%</div>
-                    <div class="metric-label">Highest Individual Risk</div>
-                    <div class="metric-description">Customer 2840 shows the highest individual risk score among analyzed customers in the portfolio</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">2x</div>
-                    <div class="metric-label">Activity Impact</div>
-                    <div class="metric-description">Activity status is the strongest lever - becoming inactive dramatically increases churn risk probability</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">8-9</div>
-                    <div class="metric-label">Out of 10 Predictions Right</div>
-                    <div class="metric-description">Model correctly predicts about 86% of customers, getting 8 to 9 out of every 10 predictions right for reliable decision-making</div>
-                </div>
-            </div>
-
-            <section class="insights">
-                <h2>Key Customer Insights</h2>
-                <div class="insights-grid">
-                    <div class="insight-item">
-                        <div class="insight-title">Q1: Key Churn Factors Identified</div>
-                        <div class="insight-text">Age, geography (Germany), balance, activity status, and gender are the most important factors linked to customer leaving, while other variables add little predictive value.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Q2: Focus on Seven Significant Predictors</div>
-                        <div class="insight-text">Relationship managers should prioritize age, activity status, Germany location, gender, balance, credit score, and number of products as reliable churn indicators.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Q3: Reliable Predictive Model Built</div>
-                        <div class="insight-text">The logistic regression model provides moderate explanatory power and is stable enough to guide retention strategies for prioritizing high-risk customers.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Q4: Individual Probability Scoring</div>
-                        <div class="insight-text">Every customer receives a probability score between 0-1, with customers above 30% (like customer 1003 at 34%) requiring immediate attention from managers.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Q5: Customer-Specific Risk Assessment</div>
-                        <div class="insight-text">Individual risk scores enable targeted outreach, with customer 2840 showing highest risk (19.3%) and inactive customers requiring priority monitoring.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Q6: Activity Status as Strongest Lever</div>
-                        <div class="insight-text">Becoming inactive sharply raises churn risk while product additions lower it. German customers need special attention as they're twice as likely to leave.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Q7: Highly Accurate Prediction Performance</div>
-                        <div class="insight-text">Model correctly predicts about 86% of customers, getting 8 to 9 out of every 10 predictions right. This high accuracy makes it reliable for guiding retention decisions and resource allocation.</div>
-                    </div>
-                </div>
-            </section>
-        </section>
+        <p class="sample-note">Retail bank customer dataset scored by a logistic-regression churn model. Representative 150-customer sample illustrating the published model behaviour (86% accuracy). Filters operate on this sample.</p>
     </div>
+    <div class="filter-bar">
+        <div class="filter-group"><label for="geoFilter">Geography</label>
+            <select id="geoFilter"><option value="All">All countries</option><option>France</option><option>Germany</option><option>Spain</option></select></div>
+        <div class="filter-group"><label for="tierFilter">Risk Tier</label>
+            <select id="tierFilter"><option value="All">All tiers</option><option value="Green">Low (monitor)</option><option value="Amber">Moderate (offer)</option><option value="Red">High (outreach)</option></select></div>
+        <div class="filter-group"><label for="activeFilter">Activity Status</label>
+            <select id="activeFilter"><option value="All">All customers</option><option value="Yes">Active</option><option value="No">Inactive</option></select></div>
+<span class="filter-note" id="filterNote"></span></div>
+    <div class="page-nav">
+        <button class="page-btn active" onclick="showPage(1)">Churn Overview</button>
+        <button class="page-btn" onclick="showPage(2)">Churn Drivers</button>
+        <button class="page-btn" onclick="showPage(3)">Customer Scores</button>
+        <button class="page-btn" onclick="showPage(4)">Retention Strategy</button>
+</div>
+    <div id="page1" class="page active"><div class="page-print-title">1. Churn Overview</div>
+<div class="kpi-grid"><div class="kpi-card"><div class="kpi-label">Customers Scored</div><div class="kpi-value" id="kCust">-</div><div class="kpi-sub" id="kCusts">in portfolio</div></div><div class="kpi-card"><div class="kpi-label">Model Accuracy</div><div class="kpi-value" id="kAcc">-</div><div class="kpi-sub" id="kAccs">correct predictions</div></div><div class="kpi-card"><div class="kpi-label">Avg Churn Risk</div><div class="kpi-value" id="kAvg">-</div><div class="kpi-sub" id="kAvgs">predicted probability</div></div><div class="kpi-card"><div class="kpi-label">High Risk</div><div class="kpi-value" id="kRed">-</div><div class="kpi-sub" id="kReds">above 30% risk</div></div><div class="kpi-card"><div class="kpi-label">Inactive Customers</div><div class="kpi-value" id="kInact">-</div><div class="kpi-sub" id="kInacts">strongest churn driver</div></div></div><div class="chart-grid"><div class="chart-card"><div class="chart-title">Average Churn Risk by Geography</div><p class="chart-sub">German customers churn at roughly twice the French rate</p><div class="chart-container"><canvas id="riskByGeo"></canvas></div></div><div class="chart-card"><div class="chart-title">Risk Tier Mix (RAG)</div><p class="chart-sub">Green = monitor, amber = offer, red = direct outreach</p><div class="chart-container"><canvas id="tierMix"></canvas></div></div></div><div class="chart-grid"><div class="chart-card"><div class="chart-title">Average Churn Risk by Activity Status</div><p class="chart-sub">Inactivity is the single strongest lever on churn</p><div class="chart-container"><canvas id="riskByActive"></canvas></div></div><div class="chart-card"><div class="chart-title">Average Churn Risk by Age Band</div><p class="chart-sub">Older customers are more likely to leave</p><div class="chart-container"><canvas id="riskByAge"></canvas></div></div></div>
+</div>
+<div id="page2" class="page"><div class="page-print-title">2. Churn Drivers</div>
+<div class="chart-grid"><div class="chart-card"><div class="chart-title">Churn Driver Importance</div><p class="chart-sub">Activity status, geography (Germany) and age matter most; tenure and credit card do not</p><div class="chart-container"><canvas id="driverImp"></canvas></div></div><div class="chart-card"><div class="chart-title">Churn Risk by Number of Products</div><p class="chart-sub">Holding more products lowers churn risk</p><div class="chart-container"><canvas id="riskByProducts"></canvas></div></div></div><div class="chart-grid"><div class="chart-card"><div class="chart-title">Churn Risk by Balance Band</div><p class="chart-sub">Higher-balance customers carry higher churn risk</p><div class="chart-container"><canvas id="riskByBalance"></canvas></div></div><div class="chart-card"><div class="chart-title">Churn Risk by Gender</div><p class="chart-sub">Male customers are slightly less likely to leave</p><div class="chart-container"><canvas id="riskByGender"></canvas></div></div></div>
+</div>
+<div id="page3" class="page"><div class="page-print-title">3. Customer Scores</div>
+<div class="kpi-grid"><div class="kpi-card"><div class="kpi-label">Highest Risk Customer</div><div class="kpi-value" id="kTop">-</div><div class="kpi-sub" id="kTops">predicted churn</div></div><div class="kpi-card"><div class="kpi-label">Customers Above 30%</div><div class="kpi-value" id="kRed2">-</div><div class="kpi-sub" id="kRed2s">direct outreach</div></div><div class="kpi-card"><div class="kpi-label">Model Recall</div><div class="kpi-value" id="kRecall">-</div><div class="kpi-sub" id="kRecalls">of actual leavers caught</div></div></div><div class="chart-grid"><div class="chart-card full-width"><div class="chart-title">Predicted Churn Probability Distribution</div><p class="chart-sub">How churn risk is spread across the portfolio</p><div class="chart-container-lg"><canvas id="probDist"></canvas></div></div></div><div class="chart-grid"><div class="chart-card full-width"><div class="chart-title">Top 12 Customers at Risk of Leaving</div><p class="chart-sub">Prioritise these for retention outreach this month</p><div style="overflow-x:auto;margin-top:15px;"><table class="ranked-table"><thead><tr><th>Customer</th><th>Geography</th><th>Age</th><th>Balance</th><th>Products</th><th>Active</th><th>Churn Risk</th><th>Action</th></tr></thead><tbody id="topBody"></tbody></table></div></div></div>
+</div>
+<div id="page4" class="page"><div class="page-print-title">4. Retention Strategy</div>
+<div class="chart-grid"><div class="chart-card"><div class="chart-title">Retention Tier Mix (RAG)</div><p class="chart-sub">Outreach priority across the portfolio</p><div class="chart-container"><canvas id="tierMix2"></canvas></div></div><div class="chart-card"><div class="chart-title">Customers by Geography and Risk Tier</div><p class="chart-sub">Where the highest-risk customers sit</p><div class="chart-container"><canvas id="geoTier"></canvas></div></div></div><div class="chart-grid"><div class="chart-card full-width"><div class="chart-title">Relationship Manager Action Plan</div><p class="chart-sub">Tiered outreach: direct contact for high risk, personalised offers for moderate, light monitoring for low</p><div style="overflow-x:auto;margin-top:15px;"><table class="ranked-table"><thead><tr><th>Risk Tier</th><th>Churn Risk Range</th><th>Customers</th><th>Avg Balance</th><th>Recommended Action</th></tr></thead><tbody id="planBody"></tbody></table></div></div></div>
+</div>
 
-    <section class="recommendations">
-        <div class="container">
-            <div class="recommendations-content">
-                <h2>Strategic Retention Recommendations</h2>
-                <div class="recommendations-grid">
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Implement Tiered Response Strategy</div>
-                        <div class="recommendation-text">Focus immediate attention on high-risk customers (>30% probability), personalized outreach for moderate-risk (15-30%), and regular communication for low-risk segments.</div>
-                    </div>
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Prioritize Activity Engagement</div>
-                        <div class="recommendation-text">Develop targeted campaigns to re-engage inactive customers through personalized offers, digital banking incentives, and relationship manager outreach programs.</div>
-                    </div>
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Geographic Customization</div>
-                        <div class="recommendation-text">Create Germany-specific retention strategies addressing unique market conditions, competitive pressures, and customer expectations in the German banking sector.</div>
-                    </div>
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Product Portfolio Expansion</div>
-                        <div class="recommendation-text">Encourage additional product adoption through needs-based consultations, as customers with multiple products show significantly lower churn propensity.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+<div class="footer"><p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p></div>
+<script>
+const rawData = [{"id":"C1000","geo":"France","gender":"Male","age":68,"balance":66328,"products":1,"active":"Yes","score":659,"prob":0.1287,"tier":"Green","action":"Monitor"},{"id":"C1001","geo":"France","gender":"Female","age":26,"balance":15773,"products":2,"active":"Yes","score":514,"prob":0.059,"tier":"Green","action":"Monitor"},{"id":"C1002","geo":"Germany","gender":"Male","age":68,"balance":3250,"products":1,"active":"No","score":473,"prob":0.6629,"tier":"Red","action":"Direct outreach"},{"id":"C1003","geo":"Germany","gender":"Male","age":31,"balance":0,"products":2,"active":"Yes","score":716,"prob":0.0647,"tier":"Green","action":"Monitor"},{"id":"C1004","geo":"Germany","gender":"Female","age":58,"balance":0,"products":2,"active":"Yes","score":441,"prob":0.2685,"tier":"Amber","action":"Personalized offer"},{"id":"C1005","geo":"Germany","gender":"Female","age":75,"balance":18871,"products":1,"active":"No","score":477,"prob":0.72,"tier":"Red","action":"Direct outreach"},{"id":"C1006","geo":"France","gender":"Male","age":58,"balance":22291,"products":2,"active":"Yes","score":830,"prob":0.0437,"tier":"Green","action":"Monitor"},{"id":"C1007","geo":"France","gender":"Male","age":25,"balance":47918,"products":2,"active":"No","score":545,"prob":0.1785,"tier":"Amber","action":"Personalized offer"},{"id":"C1008","geo":"Spain","gender":"Female","age":20,"balance":106591,"products":2,"active":"Yes","score":793,"prob":0.0341,"tier":"Green","action":"Monitor"},{"id":"C1009","geo":"Germany","gender":"Female","age":68,"balance":0,"products":1,"active":"No","score":470,"prob":0.72,"tier":"Red","action":"Direct outreach"},{"id":"C1010","geo":"Spain","gender":"Female","age":71,"balance":0,"products":1,"active":"Yes","score":737,"prob":0.1135,"tier":"Green","action":"Monitor"},{"id":"C1011","geo":"France","gender":"Male","age":51,"balance":18477,"products":1,"active":"No","score":464,"prob":0.3765,"tier":"Red","action":"Direct outreach"},{"id":"C1012","geo":"Germany","gender":"Male","age":76,"balance":58952,"products":1,"active":"No","score":431,"prob":0.703,"tier":"Red","action":"Direct outreach"},{"id":"C1013","geo":"Spain","gender":"Female","age":38,"balance":0,"products":1,"active":"Yes","score":674,"prob":0.05,"tier":"Green","action":"Monitor"},{"id":"C1014","geo":"France","gender":"Male","age":27,"balance":57301,"products":2,"active":"No","score":708,"prob":0.1212,"tier":"Green","action":"Monitor"},{"id":"C1015","geo":"France","gender":"Female","age":77,"balance":0,"products":1,"active":"No","score":779,"prob":0.3822,"tier":"Red","action":"Direct outreach"},{"id":"C1016","geo":"Spain","gender":"Male","age":20,"balance":0,"products":2,"active":"Yes","score":788,"prob":0.0215,"tier":"Green","action":"Monitor"},{"id":"C1017","geo":"Spain","gender":"Male","age":51,"balance":0,"products":2,"active":"No","score":725,"prob":0.1361,"tier":"Green","action":"Monitor"},{"id":"C1018","geo":"Spain","gender":"Male","age":48,"balance":112518,"products":1,"active":"No","score":582,"prob":0.3974,"tier":"Red","action":"Direct outreach"},{"id":"C1019","geo":"Spain","gender":"Female","age":78,"balance":85381,"products":1,"active":"No","score":586,"prob":0.4772,"tier":"Red","action":"Direct outreach"},{"id":"C1020","geo":"France","gender":"Female","age":43,"balance":86787,"products":3,"active":"Yes","score":645,"prob":0.0877,"tier":"Green","action":"Monitor"},{"id":"C1021","geo":"France","gender":"Male","age":33,"balance":110926,"products":1,"active":"Yes","score":622,"prob":0.1124,"tier":"Green","action":"Monitor"},{"id":"C1022","geo":"France","gender":"Female","age":77,"balance":0,"products":4,"active":"Yes","score":477,"prob":0.095,"tier":"Green","action":"Monitor"},{"id":"C1023","geo":"France","gender":"Male","age":78,"balance":43075,"products":1,"active":"Yes","score":809,"prob":0.2176,"tier":"Amber","action":"Personalized offer"},{"id":"C1024","geo":"Germany","gender":"Male","age":73,"balance":238285,"products":1,"active":"Yes","score":549,"prob":0.5747,"tier":"Red","action":"Direct outreach"},{"id":"C1025","geo":"Spain","gender":"Female","age":51,"balance":0,"products":3,"active":"No","score":634,"prob":0.1892,"tier":"Amber","action":"Personalized offer"},{"id":"C1026","geo":"Spain","gender":"Female","age":82,"balance":8570,"products":1,"active":"No","score":797,"prob":0.3745,"tier":"Red","action":"Direct outreach"},{"id":"C1027","geo":"France","gender":"Male","age":40,"balance":122061,"products":2,"active":"No","score":749,"prob":0.2159,"tier":"Amber","action":"Personalized offer"},{"id":"C1028","geo":"Germany","gender":"Male","age":25,"balance":0,"products":1,"active":"No","score":687,"prob":0.2285,"tier":"Amber","action":"Personalized offer"},{"id":"C1029","geo":"Spain","gender":"Male","age":74,"balance":21340,"products":2,"active":"No","score":660,"prob":0.3121,"tier":"Red","action":"Direct outreach"},{"id":"C1030","geo":"France","gender":"Male","age":51,"balance":36669,"products":1,"active":"No","score":626,"prob":0.2705,"tier":"Amber","action":"Personalized offer"},{"id":"C1031","geo":"Germany","gender":"Female","age":27,"balance":0,"products":2,"active":"No","score":473,"prob":0.3117,"tier":"Red","action":"Direct outreach"},{"id":"C1032","geo":"France","gender":"Female","age":46,"balance":182200,"products":1,"active":"Yes","score":482,"prob":0.2577,"tier":"Amber","action":"Personalized offer"},{"id":"C1033","geo":"Spain","gender":"Female","age":61,"balance":27609,"products":2,"active":"Yes","score":573,"prob":0.1129,"tier":"Green","action":"Monitor"},{"id":"C1034","geo":"France","gender":"Male","age":67,"balance":0,"products":4,"active":"Yes","score":803,"prob":0.028,"tier":"Green","action":"Monitor"},{"id":"C1035","geo":"Spain","gender":"Male","age":51,"balance":65188,"products":1,"active":"Yes","score":819,"prob":0.0761,"tier":"Green","action":"Monitor"},{"id":"C1036","geo":"Spain","gender":"Female","age":69,"balance":9789,"products":1,"active":"No","score":429,"prob":0.5558,"tier":"Red","action":"Direct outreach"},{"id":"C1037","geo":"France","gender":"Male","age":52,"balance":0,"products":2,"active":"Yes","score":434,"prob":0.0674,"tier":"Green","action":"Monitor"},{"id":"C1038","geo":"France","gender":"Male","age":61,"balance":0,"products":1,"active":"Yes","score":456,"prob":0.1962,"tier":"Amber","action":"Personalized offer"},{"id":"C1039","geo":"France","gender":"Male","age":43,"balance":99977,"products":1,"active":"Yes","score":538,"prob":0.1059,"tier":"Green","action":"Monitor"},{"id":"C1040","geo":"France","gender":"Female","age":22,"balance":1006,"products":4,"active":"No","score":525,"prob":0.1103,"tier":"Green","action":"Monitor"},{"id":"C1041","geo":"France","gender":"Female","age":81,"balance":35777,"products":1,"active":"Yes","score":575,"prob":0.2059,"tier":"Amber","action":"Personalized offer"},{"id":"C1042","geo":"Spain","gender":"Male","age":69,"balance":0,"products":1,"active":"No","score":620,"prob":0.2876,"tier":"Amber","action":"Personalized offer"},{"id":"C1043","geo":"France","gender":"Female","age":82,"balance":0,"products":1,"active":"No","score":494,"prob":0.488,"tier":"Red","action":"Direct outreach"},{"id":"C1044","geo":"France","gender":"Female","age":64,"balance":0,"products":3,"active":"Yes","score":582,"prob":0.0614,"tier":"Green","action":"Monitor"},{"id":"C1045","geo":"France","gender":"Male","age":78,"balance":0,"products":2,"active":"Yes","score":446,"prob":0.1225,"tier":"Green","action":"Monitor"},{"id":"C1046","geo":"France","gender":"Female","age":23,"balance":25820,"products":1,"active":"Yes","score":736,"prob":0.0758,"tier":"Green","action":"Monitor"},{"id":"C1047","geo":"Spain","gender":"Female","age":59,"balance":0,"products":2,"active":"Yes","score":422,"prob":0.145,"tier":"Green","action":"Monitor"},{"id":"C1048","geo":"Germany","gender":"Female","age":82,"balance":9130,"products":2,"active":"Yes","score":823,"prob":0.3156,"tier":"Red","action":"Direct outreach"},{"id":"C1049","geo":"Spain","gender":"Male","age":28,"balance":65486,"products":4,"active":"No","score":827,"prob":0.0537,"tier":"Green","action":"Monitor"},{"id":"C1050","geo":"France","gender":"Male","age":49,"balance":32067,"products":1,"active":"Yes","score":737,"prob":0.0847,"tier":"Green","action":"Monitor"},{"id":"C1051","geo":"Germany","gender":"Female","age":50,"balance":0,"products":2,"active":"Yes","score":518,"prob":0.237,"tier":"Amber","action":"Personalized offer"},{"id":"C1052","geo":"Spain","gender":"Female","age":66,"balance":122784,"products":2,"active":"Yes","score":439,"prob":0.2136,"tier":"Amber","action":"Personalized offer"},{"id":"C1053","geo":"France","gender":"Female","age":35,"balance":818,"products":4,"active":"Yes","score":754,"prob":0.02,"tier":"Green","action":"Monitor"},{"id":"C1054","geo":"France","gender":"Female","age":77,"balance":0,"products":3,"active":"Yes","score":559,"prob":0.1624,"tier":"Amber","action":"Personalized offer"},{"id":"C1055","geo":"Spain","gender":"Male","age":55,"balance":30080,"products":4,"active":"No","score":598,"prob":0.0987,"tier":"Green","action":"Monitor"},{"id":"C1056","geo":"Spain","gender":"Male","age":27,"balance":71836,"products":1,"active":"No","score":467,"prob":0.2522,"tier":"Amber","action":"Personalized offer"},{"id":"C1057","geo":"Germany","gender":"Female","age":32,"balance":46094,"products":3,"active":"No","score":412,"prob":0.2998,"tier":"Amber","action":"Personalized offer"},{"id":"C1058","geo":"Spain","gender":"Female","age":69,"balance":19789,"products":1,"active":"No","score":400,"prob":0.4698,"tier":"Red","action":"Direct outreach"},{"id":"C1059","geo":"France","gender":"Female","age":33,"balance":61536,"products":1,"active":"Yes","score":601,"prob":0.0868,"tier":"Green","action":"Monitor"},{"id":"C1060","geo":"Spain","gender":"Male","age":64,"balance":0,"products":1,"active":"No","score":725,"prob":0.3801,"tier":"Red","action":"Direct outreach"},{"id":"C1061","geo":"France","gender":"Female","age":73,"balance":101366,"products":2,"active":"No","score":414,"prob":0.6142,"tier":"Red","action":"Direct outreach"},{"id":"C1062","geo":"Germany","gender":"Male","age":28,"balance":113855,"products":1,"active":"No","score":648,"prob":0.3573,"tier":"Red","action":"Direct outreach"},{"id":"C1063","geo":"Spain","gender":"Male","age":39,"balance":0,"products":1,"active":"No","score":607,"prob":0.227,"tier":"Amber","action":"Personalized offer"},{"id":"C1064","geo":"France","gender":"Female","age":33,"balance":0,"products":3,"active":"No","score":681,"prob":0.0922,"tier":"Green","action":"Monitor"},{"id":"C1065","geo":"Spain","gender":"Female","age":72,"balance":0,"products":1,"active":"Yes","score":563,"prob":0.1442,"tier":"Green","action":"Monitor"},{"id":"C1066","geo":"France","gender":"Male","age":20,"balance":49130,"products":2,"active":"No","score":538,"prob":0.1211,"tier":"Green","action":"Monitor"},{"id":"C1067","geo":"France","gender":"Female","age":64,"balance":125981,"products":3,"active":"Yes","score":447,"prob":0.1269,"tier":"Green","action":"Monitor"},{"id":"C1068","geo":"France","gender":"Female","age":75,"balance":100896,"products":4,"active":"Yes","score":416,"prob":0.125,"tier":"Green","action":"Monitor"},{"id":"C1069","geo":"Spain","gender":"Female","age":80,"balance":181317,"products":3,"active":"No","score":629,"prob":0.4242,"tier":"Red","action":"Direct outreach"},{"id":"C1070","geo":"France","gender":"Male","age":37,"balance":74272,"products":2,"active":"No","score":443,"prob":0.2479,"tier":"Amber","action":"Personalized offer"},{"id":"C1071","geo":"France","gender":"Male","age":47,"balance":64927,"products":4,"active":"No","score":670,"prob":0.1312,"tier":"Green","action":"Monitor"},{"id":"C1072","geo":"Germany","gender":"Male","age":30,"balance":198738,"products":1,"active":"No","score":514,"prob":0.663,"tier":"Red","action":"Direct outreach"},{"id":"C1073","geo":"France","gender":"Female","age":76,"balance":101465,"products":1,"active":"Yes","score":680,"prob":0.2129,"tier":"Amber","action":"Personalized offer"},{"id":"C1074","geo":"Spain","gender":"Female","age":25,"balance":195314,"products":2,"active":"Yes","score":531,"prob":0.0739,"tier":"Green","action":"Monitor"},{"id":"C1075","geo":"France","gender":"Female","age":47,"balance":32306,"products":1,"active":"No","score":501,"prob":0.2754,"tier":"Amber","action":"Personalized offer"},{"id":"C1076","geo":"France","gender":"Male","age":44,"balance":86268,"products":1,"active":"No","score":513,"prob":0.2987,"tier":"Amber","action":"Personalized offer"},{"id":"C1077","geo":"Spain","gender":"Male","age":81,"balance":0,"products":1,"active":"Yes","score":704,"prob":0.1113,"tier":"Green","action":"Monitor"},{"id":"C1078","geo":"France","gender":"Male","age":21,"balance":0,"products":1,"active":"No","score":630,"prob":0.1966,"tier":"Amber","action":"Personalized offer"},{"id":"C1079","geo":"Spain","gender":"Male","age":28,"balance":0,"products":3,"active":"No","score":416,"prob":0.09,"tier":"Green","action":"Monitor"},{"id":"C1080","geo":"Germany","gender":"Female","age":60,"balance":0,"products":1,"active":"No","score":615,"prob":0.7066,"tier":"Red","action":"Direct outreach"},{"id":"C1081","geo":"France","gender":"Male","age":66,"balance":100461,"products":1,"active":"No","score":500,"prob":0.4734,"tier":"Red","action":"Direct outreach"},{"id":"C1082","geo":"Spain","gender":"Male","age":59,"balance":122198,"products":1,"active":"No","score":420,"prob":0.4544,"tier":"Red","action":"Direct outreach"},{"id":"C1083","geo":"France","gender":"Male","age":50,"balance":68238,"products":1,"active":"No","score":715,"prob":0.2218,"tier":"Amber","action":"Personalized offer"},{"id":"C1084","geo":"Germany","gender":"Female","age":53,"balance":60494,"products":3,"active":"Yes","score":412,"prob":0.2707,"tier":"Amber","action":"Personalized offer"},{"id":"C1085","geo":"France","gender":"Female","age":67,"balance":51761,"products":2,"active":"No","score":493,"prob":0.3245,"tier":"Red","action":"Direct outreach"},{"id":"C1086","geo":"Spain","gender":"Female","age":37,"balance":172965,"products":2,"active":"Yes","score":662,"prob":0.0744,"tier":"Green","action":"Monitor"},{"id":"C1087","geo":"Spain","gender":"Male","age":70,"balance":4243,"products":1,"active":"No","score":453,"prob":0.5281,"tier":"Red","action":"Direct outreach"},{"id":"C1088","geo":"France","gender":"Male","age":44,"balance":195336,"products":4,"active":"Yes","score":519,"prob":0.0469,"tier":"Green","action":"Monitor"},{"id":"C1089","geo":"France","gender":"Male","age":33,"balance":0,"products":1,"active":"No","score":777,"prob":0.1329,"tier":"Green","action":"Monitor"},{"id":"C1090","geo":"France","gender":"Male","age":49,"balance":166877,"products":2,"active":"No","score":433,"prob":0.3694,"tier":"Red","action":"Direct outreach"},{"id":"C1091","geo":"Spain","gender":"Male","age":30,"balance":0,"products":2,"active":"Yes","score":830,"prob":0.0244,"tier":"Green","action":"Monitor"},{"id":"C1092","geo":"France","gender":"Female","age":47,"balance":66604,"products":2,"active":"Yes","score":438,"prob":0.1056,"tier":"Green","action":"Monitor"},{"id":"C1093","geo":"Spain","gender":"Female","age":51,"balance":60830,"products":2,"active":"No","score":511,"prob":0.2297,"tier":"Amber","action":"Personalized offer"},{"id":"C1094","geo":"France","gender":"Male","age":44,"balance":65011,"products":3,"active":"Yes","score":819,"prob":0.0315,"tier":"Green","action":"Monitor"},{"id":"C1095","geo":"Germany","gender":"Male","age":57,"balance":86661,"products":2,"active":"Yes","score":608,"prob":0.1717,"tier":"Amber","action":"Personalized offer"},{"id":"C1096","geo":"France","gender":"Male","age":29,"balance":81455,"products":1,"active":"No","score":741,"prob":0.1759,"tier":"Amber","action":"Personalized offer"},{"id":"C1097","geo":"Spain","gender":"Female","age":63,"balance":132387,"products":4,"active":"No","score":729,"prob":0.1796,"tier":"Amber","action":"Personalized offer"},{"id":"C1098","geo":"Germany","gender":"Male","age":18,"balance":0,"products":1,"active":"No","score":635,"prob":0.3418,"tier":"Red","action":"Direct outreach"},{"id":"C1099","geo":"France","gender":"Male","age":36,"balance":41987,"products":3,"active":"Yes","score":474,"prob":0.0381,"tier":"Green","action":"Monitor"},{"id":"C1100","geo":"France","gender":"Male","age":26,"balance":110296,"products":2,"active":"Yes","score":554,"prob":0.0418,"tier":"Green","action":"Monitor"},{"id":"C1101","geo":"Spain","gender":"Female","age":58,"balance":141310,"products":2,"active":"Yes","score":727,"prob":0.1586,"tier":"Amber","action":"Personalized offer"},{"id":"C1102","geo":"France","gender":"Female","age":43,"balance":54342,"products":1,"active":"Yes","score":596,"prob":0.1048,"tier":"Green","action":"Monitor"},{"id":"C1103","geo":"France","gender":"Male","age":23,"balance":64997,"products":1,"active":"No","score":681,"prob":0.2318,"tier":"Amber","action":"Personalized offer"},{"id":"C1104","geo":"Spain","gender":"Female","age":57,"balance":38183,"products":1,"active":"No","score":491,"prob":0.32,"tier":"Red","action":"Direct outreach"},{"id":"C1105","geo":"Germany","gender":"Female","age":77,"balance":118565,"products":2,"active":"Yes","score":814,"prob":0.3489,"tier":"Red","action":"Direct outreach"},{"id":"C1106","geo":"France","gender":"Male","age":63,"balance":107884,"products":2,"active":"Yes","score":420,"prob":0.1774,"tier":"Amber","action":"Personalized offer"},{"id":"C1107","geo":"France","gender":"Female","age":28,"balance":3557,"products":4,"active":"Yes","score":413,"prob":0.0398,"tier":"Green","action":"Monitor"},{"id":"C1108","geo":"Spain","gender":"Male","age":42,"balance":167733,"products":3,"active":"Yes","score":751,"prob":0.0669,"tier":"Green","action":"Monitor"},{"id":"C1109","geo":"Spain","gender":"Male","age":62,"balance":40007,"products":2,"active":"No","score":473,"prob":0.2663,"tier":"Amber","action":"Personalized offer"},{"id":"C1110","geo":"Spain","gender":"Female","age":44,"balance":38790,"products":1,"active":"Yes","score":501,"prob":0.0902,"tier":"Green","action":"Monitor"},{"id":"C1111","geo":"France","gender":"Female","age":59,"balance":109393,"products":1,"active":"Yes","score":725,"prob":0.2263,"tier":"Amber","action":"Personalized offer"},{"id":"C1112","geo":"Spain","gender":"Female","age":31,"balance":111675,"products":1,"active":"No","score":695,"prob":0.2148,"tier":"Amber","action":"Personalized offer"},{"id":"C1113","geo":"France","gender":"Male","age":74,"balance":83167,"products":1,"active":"No","score":558,"prob":0.5467,"tier":"Red","action":"Direct outreach"},{"id":"C1114","geo":"Spain","gender":"Female","age":18,"balance":0,"products":2,"active":"No","score":613,"prob":0.1152,"tier":"Green","action":"Monitor"},{"id":"C1115","geo":"Spain","gender":"Male","age":80,"balance":0,"products":2,"active":"No","score":454,"prob":0.3906,"tier":"Red","action":"Direct outreach"},{"id":"C1116","geo":"Germany","gender":"Female","age":56,"balance":38607,"products":2,"active":"Yes","score":468,"prob":0.1924,"tier":"Amber","action":"Personalized offer"},{"id":"C1117","geo":"Spain","gender":"Male","age":75,"balance":0,"products":2,"active":"No","score":605,"prob":0.3713,"tier":"Red","action":"Direct outreach"},{"id":"C1118","geo":"Spain","gender":"Male","age":62,"balance":208889,"products":2,"active":"Yes","score":484,"prob":0.2525,"tier":"Amber","action":"Personalized offer"},{"id":"C1119","geo":"France","gender":"Male","age":69,"balance":0,"products":2,"active":"Yes","score":713,"prob":0.0896,"tier":"Green","action":"Monitor"},{"id":"C1120","geo":"Spain","gender":"Male","age":70,"balance":127929,"products":2,"active":"No","score":816,"prob":0.3559,"tier":"Red","action":"Direct outreach"},{"id":"C1121","geo":"Germany","gender":"Male","age":56,"balance":66355,"products":2,"active":"Yes","score":592,"prob":0.2701,"tier":"Amber","action":"Personalized offer"},{"id":"C1122","geo":"Germany","gender":"Female","age":28,"balance":0,"products":1,"active":"Yes","score":729,"prob":0.0921,"tier":"Green","action":"Monitor"},{"id":"C1123","geo":"France","gender":"Female","age":24,"balance":117154,"products":2,"active":"No","score":551,"prob":0.2521,"tier":"Amber","action":"Personalized offer"},{"id":"C1124","geo":"Spain","gender":"Male","age":28,"balance":0,"products":3,"active":"Yes","score":481,"prob":0.0334,"tier":"Green","action":"Monitor"},{"id":"C1125","geo":"France","gender":"Female","age":60,"balance":179735,"products":2,"active":"No","score":641,"prob":0.5407,"tier":"Red","action":"Direct outreach"},{"id":"C1126","geo":"Germany","gender":"Male","age":73,"balance":204755,"products":2,"active":"No","score":718,"prob":0.72,"tier":"Red","action":"Direct outreach"},{"id":"C1127","geo":"Germany","gender":"Male","age":36,"balance":0,"products":3,"active":"No","score":472,"prob":0.3134,"tier":"Red","action":"Direct outreach"},{"id":"C1128","geo":"France","gender":"Male","age":23,"balance":0,"products":3,"active":"No","score":502,"prob":0.1183,"tier":"Green","action":"Monitor"},{"id":"C1129","geo":"Spain","gender":"Male","age":67,"balance":0,"products":1,"active":"Yes","score":822,"prob":0.1128,"tier":"Green","action":"Monitor"},{"id":"C1130","geo":"Germany","gender":"Female","age":30,"balance":72826,"products":1,"active":"No","score":572,"prob":0.4966,"tier":"Red","action":"Direct outreach"},{"id":"C1131","geo":"France","gender":"Female","age":54,"balance":3173,"products":4,"active":"No","score":835,"prob":0.0943,"tier":"Green","action":"Monitor"},{"id":"C1132","geo":"Germany","gender":"Female","age":21,"balance":0,"products":2,"active":"Yes","score":675,"prob":0.0912,"tier":"Green","action":"Monitor"},{"id":"C1133","geo":"Germany","gender":"Male","age":54,"balance":11166,"products":1,"active":"Yes","score":402,"prob":0.2537,"tier":"Amber","action":"Personalized offer"},{"id":"C1134","geo":"France","gender":"Male","age":81,"balance":38834,"products":2,"active":"Yes","score":545,"prob":0.2026,"tier":"Amber","action":"Personalized offer"},{"id":"C1135","geo":"Spain","gender":"Male","age":81,"balance":74407,"products":2,"active":"Yes","score":721,"prob":0.1185,"tier":"Green","action":"Monitor"},{"id":"C1136","geo":"France","gender":"Female","age":29,"balance":0,"products":1,"active":"Yes","score":594,"prob":0.1022,"tier":"Green","action":"Monitor"},{"id":"C1137","geo":"Germany","gender":"Female","age":34,"balance":34836,"products":2,"active":"No","score":738,"prob":0.3625,"tier":"Red","action":"Direct outreach"},{"id":"C1138","geo":"France","gender":"Female","age":74,"balance":0,"products":1,"active":"Yes","score":659,"prob":0.1411,"tier":"Green","action":"Monitor"},{"id":"C1139","geo":"France","gender":"Male","age":37,"balance":16226,"products":1,"active":"No","score":496,"prob":0.2122,"tier":"Amber","action":"Personalized offer"},{"id":"C1140","geo":"Spain","gender":"Male","age":39,"balance":43117,"products":4,"active":"No","score":775,"prob":0.0605,"tier":"Green","action":"Monitor"},{"id":"C1141","geo":"France","gender":"Male","age":31,"balance":18403,"products":1,"active":"No","score":837,"prob":0.189,"tier":"Amber","action":"Personalized offer"},{"id":"C1142","geo":"Germany","gender":"Female","age":77,"balance":78587,"products":1,"active":"Yes","score":836,"prob":0.3819,"tier":"Red","action":"Direct outreach"},{"id":"C1143","geo":"Germany","gender":"Female","age":47,"balance":0,"products":1,"active":"No","score":560,"prob":0.498,"tier":"Red","action":"Direct outreach"},{"id":"C1144","geo":"Germany","gender":"Female","age":49,"balance":112446,"products":1,"active":"No","score":647,"prob":0.6388,"tier":"Red","action":"Direct outreach"},{"id":"C1145","geo":"Germany","gender":"Female","age":41,"balance":0,"products":2,"active":"Yes","score":419,"prob":0.1539,"tier":"Amber","action":"Personalized offer"},{"id":"C1146","geo":"France","gender":"Male","age":62,"balance":0,"products":2,"active":"Yes","score":727,"prob":0.0909,"tier":"Green","action":"Monitor"},{"id":"C1147","geo":"France","gender":"Female","age":70,"balance":157536,"products":1,"active":"Yes","score":773,"prob":0.333,"tier":"Red","action":"Direct outreach"},{"id":"C1148","geo":"France","gender":"Male","age":50,"balance":0,"products":1,"active":"No","score":721,"prob":0.2767,"tier":"Amber","action":"Personalized offer"},{"id":"C1149","geo":"France","gender":"Female","age":31,"balance":14709,"products":4,"active":"Yes","score":810,"prob":0.0287,"tier":"Green","action":"Monitor"}];
+const AVG_PROB=0.2362;
+const MODEL_ACC=86;
+const MODEL_RECALL=54;
+let filtered = rawData.slice();
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-        </div>
-    </footer>
+Chart.defaults.animation = false;
+Chart.defaults.font.family = "'Poppins', sans-serif";
+const charts = {};
+function money(v){ if(v>=1000000) return '$'+(v/1000000).toFixed(2)+'M'; if(v>=1000) return '$'+(v/1000).toFixed(1)+'K'; return '$'+Math.round(v); }
+function pct(v){ return (v*100).toFixed(1)+'%'; }
+function sum(a,f){ return a.reduce((x,y)=>x+f(y),0); }
+function avg(a,f){ return a.length? sum(a,f)/a.length : 0; }
+function mkChart(id,cfg){ if(charts[id]) charts[id].destroy(); const c=document.getElementById(id); if(c) charts[id]=new Chart(c,cfg); }
+function groupAvg(arr,key,field){ const m={},n={}; arr.forEach(r=>{m[r[key]]=(m[r[key]]||0)+r[field]; n[r[key]]=(n[r[key]]||0)+1;}); const o={}; for(const k in m) o[k]=m[k]/n[k]; return o; }
+function avgLine(val,fmt){ return {id:'a'+Math.random(),afterDraw(ch){const{ctx,chartArea,scales:{y}}=ch; if(!y||!chartArea)return; const yp=y.getPixelForValue(val); ctx.save(); ctx.setLineDash([6,4]); ctx.strokeStyle='#CBA135'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(chartArea.left,yp); ctx.lineTo(chartArea.right,yp); ctx.stroke(); ctx.setLineDash([]); ctx.font='10px Poppins'; ctx.fillStyle='#403B36'; ctx.fillText('Avg '+fmt(val), chartArea.left+6, yp-5); ctx.restore();}}; }
+const RAG = {Green:'#5C7A5C', Amber:'#CBA135', Red:'#A8552F'};
+
+
+function ageBand(r){ if(r.age<35) return 'Under 35'; if(r.age<50) return '35-49'; if(r.age<65) return '50-64'; return '65+'; }
+function balBand(r){ if(r.balance===0) return 'Zero'; if(r.balance<60000) return '<60k'; if(r.balance<130000) return '60-130k'; return '130k+'; }
+const GREEN='#5C7A5C', AMBER='#CBA135', RED='#A8552F', BROWN='#403B36', TAN='#8B7355';
+
+function renderKPIs(){
+    document.getElementById('kCust').textContent=filtered.length;
+    document.getElementById('kAcc').textContent=MODEL_ACC+'%';
+    document.getElementById('kAvg').textContent=pct(avg(filtered,r=>r.prob));
+    document.getElementById('kRed').textContent=filtered.filter(r=>r.tier==='Red').length;
+    document.getElementById('kInact').textContent=filtered.filter(r=>r.active==='No').length;
+    if(filtered.length){ const t=[...filtered].sort((a,b)=>b.prob-a.prob)[0];
+        document.getElementById('kTop').textContent=pct(t.prob); document.getElementById('kTops').textContent=t.id+' · '+t.geo; }
+    document.getElementById('kRed2').textContent=filtered.filter(r=>r.tier==='Red').length;
+    document.getElementById('kRecall').textContent=MODEL_RECALL+'%';
+}
+function barAvg(id, labels, vals, colors, unit){ mkChart(id,{type:'bar',data:{labels:labels,datasets:[{data:vals,backgroundColor:colors,borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+unit}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+unit}},x:{grid:{display:false}}}}}); }
+
+function renderPage1(){
+    const g=['France','Germany','Spain']; const ga=groupAvg(filtered,'geo','prob');
+    barAvg('riskByGeo',g,g.map(x=>(ga[x]||0)*100),g.map(x=>x==='Germany'?RED:AMBER),'%');
+    const tc={Green:0,Amber:0,Red:0}; filtered.forEach(r=>tc[r.tier]++);
+    mkChart('tierMix',{type:'doughnut',data:{labels:['Low (Green)','Moderate (Amber)','High (Red)'],datasets:[{data:[tc.Green,tc.Amber,tc.Red],backgroundColor:[GREEN,AMBER,RED],borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed}}}}});
+    const aa=groupAvg(filtered,'active','prob');
+    barAvg('riskByActive',['Active','Inactive'],[(aa['Yes']||0)*100,(aa['No']||0)*100],[GREEN,RED],'%');
+    const ab=['Under 35','35-49','50-64','65+']; const aba={}; ab.forEach(b=>{const s=filtered.filter(r=>ageBand(r)===b); aba[b]=avg(s,r=>r.prob);});
+    barAvg('riskByAge',ab,ab.map(b=>aba[b]*100),AMBER,'%');
+}
+function renderPage2(){
+    mkChart('driverImp',{type:'bar',data:{labels:['Activity status','Geography (Germany)','Age','Balance','Num products','Credit score'],datasets:[{data:[0.46,0.38,0.30,0.22,0.20,0.12],backgroundColor:[RED,BROWN,AMBER,TAN,'#9E9E9E','#D4C5B0'],borderRadius:5}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'importance '+c.parsed.x.toFixed(2)}}},scales:{x:{beginAtZero:true,max:0.5,grid:{color:'#F0EBE0'},title:{display:true,text:'Relative importance'}},y:{grid:{display:false}}}}});
+    const pr=[1,2,3,4]; const pa={}; pr.forEach(p=>{const s=filtered.filter(r=>r.products===p); pa[p]=avg(s,r=>r.prob);});
+    mkChart('riskByProducts',{type:'line',data:{labels:pr.map(p=>p+' product'+(p>1?'s':'')),datasets:[{data:pr.map(p=>pa[p]*100),borderColor:AMBER,backgroundColor:'rgba(203,161,53,0.12)',fill:true,tension:0.35,pointBackgroundColor:BROWN,pointRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% avg risk'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+    const bb=['Zero','<60k','60-130k','130k+']; const ba={}; bb.forEach(b=>{const s=filtered.filter(r=>balBand(r)===b); ba[b]=avg(s,r=>r.prob);});
+    barAvg('riskByBalance',bb,bb.map(b=>ba[b]*100),TAN,'%');
+    const gn=groupAvg(filtered,'gender','prob');
+    barAvg('riskByGender',['Female','Male'],[(gn['Female']||0)*100,(gn['Male']||0)*100],[AMBER,BROWN],'%');
+}
+function renderPage3(){
+    renderKPIs();
+    const bins=[0,10,15,20,30,40,50,75]; const labels=[],counts=[];
+    for(let i=0;i<bins.length-1;i++){ labels.push(bins[i]+'-'+bins[i+1]+'%'); counts.push(filtered.filter(r=>r.prob*100>=bins[i]&&r.prob*100<bins[i+1]).length); }
+    mkChart('probDist',{type:'bar',data:{labels:labels,datasets:[{data:counts,backgroundColor:labels.map((l,i)=>bins[i]<15?GREEN:(bins[i]<30?AMBER:RED)),borderRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' customers'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},title:{display:true,text:'Customers'}},x:{grid:{display:false}}}}});
+    const top=[...filtered].sort((a,b)=>b.prob-a.prob).slice(0,12);
+    const badge={'Monitor':'badge-green','Personalized offer':'badge-amber','Direct outreach':'badge-red'};
+    document.getElementById('topBody').innerHTML=top.map(r=>'<tr><td>'+r.id+'</td><td>'+r.geo+'</td><td>'+r.age+'</td><td>'+money(r.balance)+'</td><td>'+r.products+'</td><td>'+r.active+'</td><td><strong>'+pct(r.prob)+'</strong></td><td><span class="'+badge[r.action]+'">'+r.action+'</span></td></tr>').join('');
+}
+function renderPage4(){
+    const tc={Green:0,Amber:0,Red:0}; filtered.forEach(r=>tc[r.tier]++);
+    mkChart('tierMix2',{type:'doughnut',data:{labels:['Monitor','Personalized offer','Direct outreach'],datasets:[{data:[tc.Green,tc.Amber,tc.Red],backgroundColor:[GREEN,AMBER,RED],borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:12}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+' customers'}}}}});
+    const g=['France','Germany','Spain'];
+    const ds=[['Green','Monitor',GREEN],['Amber','Offer',AMBER],['Red','Outreach',RED]].map(([t,lab,col])=>({label:lab,data:g.map(x=>filtered.filter(r=>r.geo===x&&r.tier===t).length),backgroundColor:col,borderRadius:4}));
+    mkChart('geoTier',{type:'bar',data:{labels:g,datasets:ds},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{color:'#F0EBE0'},title:{display:true,text:'Customers'}}}}});
+    const tiers=[['Green','Under 15%','Light monitoring, regular communication','badge-green'],['Amber','15% - 30%','Personalised messages or targeted offers','badge-amber'],['Red','Above 30%','Direct outreach: call or meeting','badge-red']];
+    document.getElementById('planBody').innerHTML=tiers.map(([t,rng,act,b])=>{const s=filtered.filter(r=>r.tier===t);return '<tr><td><span class="'+b+'">'+(t==='Green'?'Low':t==='Amber'?'Moderate':'High')+'</span></td><td>'+rng+'</td><td>'+s.length+'</td><td>'+(s.length?money(avg(s,r=>r.balance)):'-')+'</td><td>'+act+'</td></tr>';}).join('');
+}
+function renderAll(){ renderKPIs(); renderPage1(); renderPage2(); renderPage3(); renderPage4(); }
+function showPage(n){ for(let i=1;i<=4;i++) document.getElementById('page'+i).classList.toggle('active',i===n); document.querySelectorAll('.page-btn').forEach((b,i)=>b.classList.toggle('active',i===n-1)); }
+function applyFilters(){ const g=geoFilter.value,t=tierFilter.value,a=activeFilter.value;
+    filtered=rawData.filter(r=>(g==='All'||r.geo===g)&&(t==='All'||r.tier===t)&&(a==='All'||r.active===a));
+    document.getElementById('filterNote').textContent=filtered.length+' of '+rawData.length+' customers shown'; renderAll(); }
+['geoFilter','tierFilter','activeFilter'].forEach(id=>document.getElementById(id).addEventListener('change',applyFilters));
+document.getElementById('filterNote').textContent=rawData.length+' of '+rawData.length+' customers shown';
+renderAll();
+
+</script>
 </body>
 </html>

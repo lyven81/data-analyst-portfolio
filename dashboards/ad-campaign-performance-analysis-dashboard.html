@@ -3,469 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Campaign Performance Analysis - Digital Marketing Analytics - Dashboard | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
+    <title>Ad Campaign Performance Analysis – Marketing ROI Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        /* Professional branding with Dark Brown, Gold, Beige color scheme */
         :root {
-            --dark-brown: #403B36;
-            --gold: #CBA135;
-            --beige: #FCF9F2;
-            --light-gold: #E6D4AA;
-            --text-primary: #2C2C2C;
-            --text-secondary: #555555;
+            --primary-color: #403B36; --secondary-color: #CBA135; --background-color: #FCF9F2;
+            --text-color: #2C2C2C; --card-background: #FFFFFF; --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
         }
-        
-        body {
-            background-color: var(--beige);
-            color: var(--text-primary);
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-        
-        .dashboard-content {
-            padding: 30px;
-            background: linear-gradient(135deg, white 0%, var(--beige) 100%);
-            border-radius: 20px;
-            margin-bottom: 35px;
-            box-shadow: 0 10px 30px rgba(64, 59, 54, 0.1);
-            border: 3px solid var(--light-gold);
-        }
-        
-        .hero-section {
-            background: linear-gradient(135deg, var(--dark-brown) 0%, #2C2820 50%, var(--dark-brown) 100%);
-            color: white;
-            padding: 45px 35px;
-            border-radius: 18px;
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(203, 161, 53, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(203, 161, 53, 0.1) 0%, transparent 50%);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-title {
-            font-size: 2.6em;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-            letter-spacing: -0.5px;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.3em;
-            opacity: 0.95;
-            max-width: 750px;
-            margin: 0 auto;
-            line-height: 1.5;
-            font-weight: 400;
-        }
-        
-        .section-divider {
-            text-align: center;
-            margin: 45px 0 35px;
-        }
-        
-        .section-title {
-            font-size: 2.1em;
-            color: var(--dark-brown);
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, var(--beige) 0%, white 100%);
-            border-radius: 50px;
-            border: 2px solid var(--gold);
-            box-shadow: 0 6px 20px rgba(203, 161, 53, 0.15);
-        }
-        
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .metric-card {
-            background: linear-gradient(145deg, white 0%, #FEFEFE 100%);
-            padding: 35px 25px;
-            border-radius: 18px;
-            text-align: center;
-            border: 4px solid var(--gold);
-            box-shadow: 0 12px 30px rgba(203, 161, 53, 0.15);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(203, 161, 53, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        
-        .metric-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(203, 161, 53, 0.25);
-            border-color: var(--dark-brown);
-        }
-        
-        .metric-card:hover::before {
-            left: 100%;
-        }
-        
-        .metric-value {
-            font-size: 3.2em;
-            font-weight: 900;
-            color: var(--gold);
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(203, 161, 53, 0.2);
-            position: relative;
-        }
-        
-        .metric-label {
-            font-size: 1.15em;
-            color: var(--dark-brown);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            line-height: 1.3;
-        }
-        
-        .insights-container {
-            margin: 50px 0;
-        }
-        
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-            gap: 30px;
-        }
-        
-        .insight-card {
-            background: white;
-            padding: 35px;
-            border-radius: 18px;
-            border-left: 8px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .insight-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 8px;
-            background: linear-gradient(180deg, var(--gold) 0%, var(--light-gold) 100%);
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .insight-card:hover {
-            transform: translateX(8px);
-            box-shadow: 0 15px 40px rgba(203, 161, 53, 0.15);
-        }
-        
-        .insight-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-        
-        .insight-number {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1em;
-            box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3);
-        }
-        
-        .insight-title {
-            font-size: 1.45em;
-            font-weight: 700;
-            color: var(--dark-brown);
-            margin: 0;
-        }
-        
-        .insight-text {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1.08em;
-            margin: 0;
-        }
-        
-        .visualization-showcase {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin: 50px 0;
-            border: 3px solid var(--light-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        
-        .viz-header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-        
-        .data-visual {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 50%, var(--gold) 100%);
-            padding: 35px;
-            border-radius: 15px;
-            text-align: center;
-            color: white;
-            font-size: 1.35em;
-            font-weight: 600;
-            margin: 30px 0;
-            box-shadow: 0 10px 25px rgba(203, 161, 53, 0.3);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .data-visual::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        .recommendations-section {
-            background: linear-gradient(135deg, var(--beige) 0%, #FEFCF8 50%, white 100%);
-            padding: 40px;
-            border-radius: 20px;
-            border: 3px solid var(--light-gold);
-            margin: 50px 0;
-        }
-        
-        .recommendations-title {
-            color: var(--dark-brown);
-            font-size: 2em;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .recommendation-grid {
-            display: grid;
-            gap: 25px;
-        }
-        
-        .recommendation-item {
-            background: white;
-            padding: 25px 30px;
-            border-radius: 12px;
-            border-left: 6px solid var(--gold);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-        
-        .recommendation-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 10px 30px rgba(203, 161, 53, 0.15);
-        }
-        
-        .recommendation-item strong {
-            color: var(--dark-brown);
-            font-size: 1.1em;
-        }
-        
-        .full-report-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #f5f5dc;
-            color: #333;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-        
-        .full-report-link:hover {
-            background-color: #daa520;
-            color: white;
-            border-color: #daa520;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(218, 165, 32, 0.3);
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--background-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; position: relative; }
+        .header { background: linear-gradient(135deg, #403B36 0%, #2C2822 100%); color: #FCF9F2; padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .header .sample-note { font-size: 0.85rem; opacity: 0.75; margin-top: 12px; }
+        .cta-buttons { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .cta-button { padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; }
+        .cta-secondary { background: transparent; border: 2px solid #CBA135; color: #FCF9F2; }
+        .cta-secondary:hover { background: rgba(203,161,53,0.1); }
+        .filter-bar { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; background: white; padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 10px; }
+        .filter-bar .filter-group { display: flex; flex-direction: column; gap: 6px; }
+        .filter-bar label { font-size: 0.8rem; font-weight: 600; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.5px; }
+        .filter-bar select { padding: 9px 14px; border: 2px solid #E8DFC8; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: var(--text-color); background: #FCF9F2; min-width: 170px; }
+        .filter-bar .filter-note { font-size: 0.78rem; color: #888; margin-left: auto; align-self: center; }
+        .page-nav { display: flex; justify-content: center; gap: 15px; margin: 30px auto; flex-wrap: wrap; }
+        .page-btn { padding: 12px 24px; background: white; border: 2px solid var(--secondary-color); border-radius: 8px; font-weight: 600; color: var(--primary-color); cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins', sans-serif; font-size: 0.95rem; }
+        .page-btn.active { background: var(--gold-gradient); color: white; border-color: var(--secondary-color); }
+        .page-btn:hover:not(.active) { background: rgba(203,161,53,0.1); }
+        .page { position: absolute; left: -10000px; top: 0; width: 100%; }
+        .page.active { position: static; left: auto; animation: fadeIn 0.4s ease-in; }
+        .page-print-title { display: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 30px auto; }
+        .kpi-card { background: white; padding: 28px 24px; border-radius: 15px; box-shadow: var(--shadow); text-align: center; transition: all 0.3s ease; border-top: 4px solid var(--secondary-color); }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(64,59,54,0.15); }
+        .kpi-label { font-size: 1rem; color: #666; margin-bottom: 10px; font-weight: 500; }
+        .kpi-value { font-size: 2.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+        .kpi-sub { font-size: 0.85rem; color: #888; }
+        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; margin: 30px auto; }
+        .chart-card { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); overflow: hidden; }
+        .chart-title { color: var(--primary-color); margin-bottom: 8px; font-size: 1.15rem; font-weight: 600; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; }
+        .chart-sub { font-size: 0.8rem; color: #888; margin-top: 0; margin-bottom: 15px; }
+        .chart-container { position: relative; height: 320px; }
+        .chart-container-lg { position: relative; height: 380px; }
+        .full-width { grid-column: 1 / -1; }
+        .ranked-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .ranked-table thead { background: var(--gradient); color: white; }
+        .ranked-table th { padding: 12px 15px; text-align: left; font-weight: 600; }
+        .ranked-table td { padding: 11px 15px; border-bottom: 1px solid #E8DFC8; }
+        .ranked-table tr:hover { background-color: rgba(203,161,53,0.08); }
+        .badge-gold { display:inline-block; background:#CBA135; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-dark { display:inline-block; background:#403B36; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-green { display:inline-block; background:#5C7A5C; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-red { display:inline-block; background:#A8552F; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        .footer p { margin: 5px 0; }
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.2em; }
-            .hero-subtitle { font-size: 1.15em; }
-            .metrics-grid { grid-template-columns: 1fr; }
-            .insights-grid { grid-template-columns: 1fr; }
-            .metric-value { font-size: 2.8em; }
-            .section-title { font-size: 1.8em; padding: 12px 25px; }
-            .insight-card { padding: 25px; }
+            .header h1 { font-size: 1.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+            .page-nav { flex-direction: column; }
+            .filter-bar select { min-width: 140px; }
+        }
+        @media print {
+            @page { size: A4 landscape; margin: 10mm; }
+            body { background: #fff; }
+            .page-nav, .filter-bar, .cta-buttons { display: none !important; }
+            .page { position: static !important; left: auto !important; width: 100% !important; page-break-before: always; }
+            #page1 { page-break-before: avoid; }
+            .page-print-title { display: block; font-size: 1.3rem; color: var(--primary-color); font-weight: 700; margin: 10px 0 4px; border-bottom: 2px solid var(--secondary-color); padding-bottom: 6px; }
+            .chart-card, .kpi-card, .ranked-table { break-inside: avoid; page-break-inside: avoid; box-shadow: none; }
+            .chart-grid { grid-template-columns: 1fr !important; }
+            .chart-container { height: 250px; }
+            .chart-container-lg { height: 290px; }
+            .chart-container canvas { width: 100% !important; height: 100% !important; }
+            .header { box-shadow: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
+<div class="dashboard-container">
 
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <section class="home-link-section">
-                <a href="/data-analyst-portfolio/index.html" class="home-link-btn">Home</a>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-
-            <section class="full-report-section">
-                <a href="/data-analyst-portfolio/case-studies/ad-campaign-performance-analysis.html" class="full-report-link">Full Report</a>
-            </section>
-        </aside>
-
-        <main class="right-column">
-            <section class="hero-section">
-                <div class="hero-content">
-                    <h1 class="hero-title">Ad Campaign Performance Analysis - Digital Marketing Analytics</h1>
-                    <p class="hero-subtitle">Comprehensive analysis of digital advertising campaign performance across multiple channels</p>
-                </div>
-            </section>
-
-            <section class="dashboard-content">
-                <div class="section-divider">
-                    <h2 class="section-title">📊 Key Performance Metrics</h2>
-                </div>
-                
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">4.7%</div>
-                        <div class="metric-label">Average Click-Through Rate</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">€8.23</div>
-                        <div class="metric-label">Cost Per Conversion</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">287%</div>
-                        <div class="metric-label">Return on Ad Spend</div>
-                    </div>
-                </div>
-
-                <div class="insights-container">
-                    <div class="section-divider">
-                        <h2 class="section-title">💡 Strategic Insights</h2>
-                    </div>
-                    
-                    <div class="insights-grid">
-                        <div class="insight-card">
-                            <div class="insight-header">
-                                <div class="insight-number">1</div>
-                                <h3 class="insight-title">High Engagement</h3>
-                            </div>
-                            <p class="insight-text">4.7% click-through rate exceeds industry benchmarks by 41%</p>
-                        </div>
-                        <div class="insight-card">
-                            <div class="insight-header">
-                                <div class="insight-number">2</div>
-                                <h3 class="insight-title">Efficient Conversion</h3>
-                            </div>
-                            <p class="insight-text">€8.23 cost per conversion demonstrates effective targeting and optimization</p>
-                        </div>
-                        <div class="insight-card">
-                            <div class="insight-header">
-                                <div class="insight-number">3</div>
-                                <h3 class="insight-title">Strong ROAS</h3>
-                            </div>
-                            <p class="insight-text">287% return on ad spend validates campaign strategy and budget allocation</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="visualization-showcase">
-                    <div class="viz-header">
-                        <h2 class="section-title">📈 Data Visualization Summary</h2>
-                    </div>
-                    <div class="data-visual">
-                        📱 CTR: 4.7% | CPC: €8.23 | ROAS: 287%
-                    </div>
-                </div>
-
-                <section class="recommendations-section">
-                    <h3 class="recommendations-title">🎯 Strategic Action Plan</h3>
-                    <div class="recommendation-grid">
-                        <div class="recommendation-item">
-                            <strong>🚀 Primary Focus:</strong> Leverage the key insights from this comprehensive analysis to drive strategic decision-making and optimize business performance across all identified areas.
-                        </div>
-                        <div class="recommendation-item">
-                            <strong>📈 Implementation Priority:</strong> Focus resources on the highest-impact metrics and findings identified in this dashboard to maximize return on investment and accelerate growth.
-                        </div>
-                        <div class="recommendation-item">
-                            <strong>📊 Performance Monitoring:</strong> Establish robust KPI tracking systems based on these analytical findings to ensure continuous improvement and maintain competitive advantage.
-                        </div>
-                        <div class="recommendation-item">
-                            <strong>🔄 Continuous Optimization:</strong> Regularly review and update strategies based on ongoing data collection to maintain relevance and effectiveness of implemented solutions.
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </main>
+    <div class="header">
+        <h1>Ad Campaign Performance Analysis</h1>
+        <p>Which Ad Types and Products Deliver the Best Return on Ad Spend? An Interactive Marketing ROI Dashboard for an Online Gadget Shop.</p>
+        <div class="cta-buttons">
+            <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/ad-campaign-performance-analysis.html" class="cta-button cta-secondary">View Full Case Study</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
+        </div>
+        <p class="sample-note">Online gadget shop ad campaign (Search vs Display). Representative product-level dataset reconciled to the published ad-type and category totals. Filters operate on this dataset.</p>
     </div>
 
-    <footer style="background: linear-gradient(135deg, var(--dark-brown) 0%, #2C2820 100%); color: white; text-align: center; padding: 30px; margin-top: 50px;">
-        <p style="margin: 0; font-size: 1.1em;">© 2025 Lee Yih Ven | Pinnacles Learning Solutions</p>
-    </footer>
+    <div class="filter-bar">
+        <div class="filter-group"><label for="adFilter">Ad Type</label>
+            <select id="adFilter"><option value="All">All ad types</option><option value="Search">Search Ads</option><option value="Display">Display Ads</option></select></div>
+        <div class="filter-group"><label for="catFilter">Product Category</label>
+            <select id="catFilter"><option value="All">All categories</option></select></div>
+        <div class="filter-group"><label for="verdictFilter">Recommended Action</label>
+            <select id="verdictFilter"><option value="All">All actions</option><option value="Scale">Scale</option><option value="Keep">Keep</option><option value="Fix">Fix</option><option value="Cut">Cut</option></select></div>
+        <span class="filter-note" id="filterNote"></span>
+    </div>
+
+    <div class="page-nav">
+        <button class="page-btn active" onclick="showPage(1)">Campaign Overview</button>
+        <button class="page-btn" onclick="showPage(2)">Ad Type Deep Dive</button>
+        <button class="page-btn" onclick="showPage(3)">Product Performance</button>
+        <button class="page-btn" onclick="showPage(4)">Budget Reallocation</button>
+    </div>
+
+    <div id="page1" class="page active">
+        <div class="page-print-title">1. Campaign Overview</div>
+        <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Total Revenue</div><div class="kpi-value" id="kRev">$0</div><div class="kpi-sub">ad-driven sales</div></div>
+            <div class="kpi-card"><div class="kpi-label">Total Ad Spend</div><div class="kpi-value" id="kSpend">$0</div><div class="kpi-sub" id="kCount">products</div></div>
+            <div class="kpi-card"><div class="kpi-label">Overall ROAS</div><div class="kpi-value" id="kRoas">0&times;</div><div class="kpi-sub">revenue per $1 of spend</div></div>
+            <div class="kpi-card"><div class="kpi-label">Units Sold</div><div class="kpi-value" id="kUnits">0</div><div class="kpi-sub">total conversions</div></div>
+            <div class="kpi-card"><div class="kpi-label">Top Category (revenue)</div><div class="kpi-value" id="kTopCat" style="font-size:1.5rem">-</div><div class="kpi-sub" id="kTopCatSub"></div></div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card"><div class="chart-title">Revenue by Ad Type</div><p class="chart-sub">Search vs Display: where the revenue comes from</p><div class="chart-container"><canvas id="revByAd"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">ROAS by Ad Type</div><p class="chart-sub">Return per $1 of spend, by ad type</p><div class="chart-container"><canvas id="roasByAd"></canvas></div></div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card"><div class="chart-title">Revenue by Product Category</div><p class="chart-sub">Which categories drive the most sales</p><div class="chart-container"><canvas id="revByCat"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">ROAS by Product Category</div><p class="chart-sub">Gold beats the campaign average (dashed line); brown lags</p><div class="chart-container"><canvas id="roasByCat"></canvas></div></div>
+        </div>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="page-print-title">2. Ad Type Deep Dive</div>
+        <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Search Ads ROAS</div><div class="kpi-value" id="kSearchRoas">0&times;</div><div class="kpi-sub" id="kSearchRev"></div></div>
+            <div class="kpi-card"><div class="kpi-label">Display Ads ROAS</div><div class="kpi-value" id="kDisplayRoas">0&times;</div><div class="kpi-sub" id="kDisplayRev"></div></div>
+            <div class="kpi-card"><div class="kpi-label">Search Revenue Share</div><div class="kpi-value" id="kSearchShare">0%</div><div class="kpi-sub">of total ad revenue</div></div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card"><div class="chart-title">Revenue Share by Ad Type</div><p class="chart-sub">Split of revenue between Search and Display</p><div class="chart-container"><canvas id="revShareAd"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">Ad Spend Share by Ad Type</div><p class="chart-sub">Where the budget currently sits</p><div class="chart-container"><canvas id="spendShareAd"></canvas></div></div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card full-width"><div class="chart-title">Ad Spend vs Revenue by Product</div><p class="chart-sub">Each point is one product, coloured by ad type; higher and left is better</p><div class="chart-container-lg"><canvas id="spendVsRev"></canvas></div></div>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <div class="page-print-title">3. Product Performance</div>
+        <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Best Product (ROAS)</div><div class="kpi-value" id="kBest">-</div><div class="kpi-sub" id="kBestSub"></div></div>
+            <div class="kpi-card"><div class="kpi-label">Weakest Product (ROAS)</div><div class="kpi-value" id="kWorst">-</div><div class="kpi-sub" id="kWorstSub"></div></div>
+            <div class="kpi-card"><div class="kpi-label">Products Above Average</div><div class="kpi-value" id="kAbove">0</div><div class="kpi-sub">beating campaign ROAS</div></div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card"><div class="chart-title">Top 10 Products by ROAS</div><p class="chart-sub">Best return per $1 of ad spend</p><div class="chart-container-lg"><canvas id="topRoas"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">Top 10 Products by Revenue</div><p class="chart-sub">The products bringing in the most money</p><div class="chart-container-lg"><canvas id="topRev"></canvas></div></div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card full-width"><div class="chart-title">Fitness Tracker Product ROAS</div><p class="chart-sub">Product-level efficiency within the revenue-leading category</p><div class="chart-container"><canvas id="fitnessRoas"></canvas></div></div>
+        </div>
+    </div>
+
+    <div id="page4" class="page">
+        <div class="page-print-title">4. Budget Reallocation</div>
+        <div class="chart-grid">
+            <div class="chart-card"><div class="chart-title">Recommended Action Mix</div><p class="chart-sub">Products grouped by what to do next</p><div class="chart-container"><canvas id="verdictMix"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">Ad Spend by Recommended Action</div><p class="chart-sub">Where the budget currently sits vs where it should move</p><div class="chart-container"><canvas id="spendByVerdict"></canvas></div></div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card full-width"><div class="chart-title">Product Action Plan (ranked by revenue)</div><p class="chart-sub">Scale the high-ROAS winners, reassess the laggards</p>
+                <div style="overflow-x:auto; margin-top:15px;">
+                    <table class="ranked-table"><thead><tr><th>Product</th><th>Category</th><th>Ad Type</th><th>Ad Spend</th><th>Revenue</th><th>ROAS</th><th>Action</th></tr></thead>
+                    <tbody id="actionBody"></tbody></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer"><p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p></div>
+
+<script>
+const rawData = [{"product":"Mi Smart Band 5","category":"Fitness Trackers","adType":"Search","roas":98.73,"revenue":20000.0,"spend":202.57,"units":476,"clicks":3283,"impressions":61701,"ctr":5.32,"convRate":14.5,"costPerConv":0.43,"tier":"Above","verdict":"Scale"},{"product":"Mi Band 7","category":"Fitness Trackers","adType":"Search","roas":92.14,"revenue":18000.0,"spend":195.35,"units":429,"clicks":2995,"impressions":58788,"ctr":5.09,"convRate":14.32,"costPerConv":0.46,"tier":"Above","verdict":"Scale"},{"product":"Mi Band 8","category":"Fitness Trackers","adType":"Search","roas":62.81,"revenue":17000.0,"spend":270.67,"units":405,"clicks":3349,"impressions":75973,"ctr":4.41,"convRate":12.09,"costPerConv":0.67,"tier":"Above","verdict":"Keep"},{"product":"Air Purifier Pro","category":"Air Purifier","adType":"Search","roas":69.53,"revenue":18000.0,"spend":258.88,"units":150,"clicks":1144,"impressions":27271,"ctr":4.19,"convRate":13.11,"costPerConv":1.73,"tier":"Above","verdict":"Keep"},{"product":"Mi Band 6","category":"Fitness Trackers","adType":"Display","roas":44.95,"revenue":14000.0,"spend":311.45,"units":333,"clicks":4022,"impressions":147384,"ctr":2.73,"convRate":8.28,"costPerConv":0.94,"tier":"Below","verdict":"Cut"},{"product":"Mi Band 3","category":"Fitness Trackers","adType":"Display","roas":49.34,"revenue":12895.0,"spend":261.36,"units":307,"clicks":3655,"impressions":113292,"ctr":3.23,"convRate":8.4,"costPerConv":0.85,"tier":"Below","verdict":"Fix"},{"product":"Amazfit Bip 5","category":"Fitness Trackers","adType":"Display","roas":54.05,"revenue":10000.0,"spend":185.03,"units":238,"clicks":2756,"impressions":92506,"ctr":2.98,"convRate":8.64,"costPerConv":0.78,"tier":"Below","verdict":"Fix"},{"product":"Smart Watch GT","category":"Smart Watch","adType":"Search","roas":48.67,"revenue":25655.0,"spend":527.1,"units":270,"clicks":2113,"impressions":47329,"ctr":4.46,"convRate":12.78,"costPerConv":1.95,"tier":"Below","verdict":"Cut"},{"product":"Wireless Earbuds Pro","category":"Wireless Earbuds","adType":"Search","roas":66.1,"revenue":24125.0,"spend":364.97,"units":402,"clicks":2539,"impressions":50647,"ctr":5.01,"convRate":15.83,"costPerConv":0.91,"tier":"Above","verdict":"Keep"},{"product":"BT Speaker Boom","category":"Bluetooth Speaker","adType":"Search","roas":64.07,"revenue":19041.0,"spend":297.21,"units":346,"clicks":2393,"impressions":55311,"ctr":4.33,"convRate":14.46,"costPerConv":0.86,"tier":"Above","verdict":"Keep"},{"product":"Smart Scale 2","category":"Smart Scale","adType":"Search","roas":71.38,"revenue":16416.0,"spend":229.97,"units":469,"clicks":3135,"impressions":72648,"ctr":4.32,"convRate":14.96,"costPerConv":0.49,"tier":"Above","verdict":"Scale"},{"product":"Power Bank 20000","category":"Power Bank","adType":"Search","roas":44.04,"revenue":27806.0,"spend":631.31,"units":927,"clicks":6870,"impressions":124798,"ctr":5.5,"convRate":13.49,"costPerConv":0.68,"tier":"Below","verdict":"Cut"},{"product":"Smart Bulb Color","category":"Smart Bulb","adType":"Search","roas":55.42,"revenue":18989.0,"spend":342.65,"units":1055,"clicks":7232,"impressions":148136,"ctr":4.88,"convRate":14.59,"costPerConv":0.32,"tier":"Below","verdict":"Fix"},{"product":"Robot Vacuum S","category":"Robot Vacuum","adType":"Search","roas":42.11,"revenue":15525.0,"spend":368.7,"units":74,"clicks":501,"impressions":9464,"ctr":5.29,"convRate":14.77,"costPerConv":4.98,"tier":"Below","verdict":"Cut"},{"product":"Security Cam 360","category":"Security Camera","adType":"Search","roas":48.52,"revenue":15581.0,"spend":321.12,"units":208,"clicks":1372,"impressions":31112,"ctr":4.41,"convRate":15.16,"costPerConv":1.54,"tier":"Below","verdict":"Cut"},{"product":"Air Purifier Mini","category":"Air Purifier","adType":"Display","roas":62.42,"revenue":18705.0,"spend":299.65,"units":156,"clicks":2016,"impressions":68844,"ctr":2.93,"convRate":7.74,"costPerConv":1.92,"tier":"Above","verdict":"Keep"},{"product":"Smart Watch Lite","category":"Smart Watch","adType":"Display","roas":45.01,"revenue":16237.0,"spend":360.76,"units":171,"clicks":2042,"impressions":72125,"ctr":2.83,"convRate":8.37,"costPerConv":2.11,"tier":"Below","verdict":"Cut"},{"product":"Wireless Earbuds Air","category":"Wireless Earbuds","adType":"Display","roas":51.28,"revenue":18297.0,"spend":356.81,"units":305,"clicks":2991,"impressions":86695,"ctr":3.45,"convRate":10.2,"costPerConv":1.17,"tier":"Below","verdict":"Fix"},{"product":"BT Speaker Go","category":"Bluetooth Speaker","adType":"Display","roas":67.69,"revenue":17513.0,"spend":258.73,"units":318,"clicks":3741,"impressions":115301,"ctr":3.24,"convRate":8.5,"costPerConv":0.81,"tier":"Above","verdict":"Keep"},{"product":"Smart Scale Mini","category":"Smart Scale","adType":"Display","roas":63.87,"revenue":15554.0,"spend":243.53,"units":444,"clicks":5093,"impressions":146118,"ctr":3.49,"convRate":8.72,"costPerConv":0.55,"tier":"Above","verdict":"Keep"},{"product":"Power Bank Slim","category":"Power Bank","adType":"Display","roas":52.06,"revenue":19977.0,"spend":383.7,"units":666,"clicks":7492,"impressions":260018,"ctr":2.88,"convRate":8.89,"costPerConv":0.58,"tier":"Below","verdict":"Fix"},{"product":"Smart Bulb White","category":"Smart Bulb","adType":"Display","roas":65.48,"revenue":13957.0,"spend":213.16,"units":775,"clicks":9320,"impressions":295210,"ctr":3.16,"convRate":8.32,"costPerConv":0.28,"tier":"Above","verdict":"Keep"},{"product":"Robot Vacuum E","category":"Robot Vacuum","adType":"Display","roas":73.49,"revenue":15714.0,"spend":213.82,"units":75,"clicks":897,"impressions":28219,"ctr":3.18,"convRate":8.36,"costPerConv":2.85,"tier":"Above","verdict":"Scale"},{"product":"Security Cam Out","category":"Security Camera","adType":"Display","roas":44.28,"revenue":18522.0,"spend":418.29,"units":247,"clicks":2452,"impressions":81558,"ctr":3.01,"convRate":10.07,"costPerConv":1.69,"tier":"Below","verdict":"Cut"}];
+const AVG_ROAS = 56.87;
+let filtered = rawData.slice();
+const charts = {};
+Chart.defaults.animation = false;
+Chart.defaults.font.family = "'Poppins', sans-serif";
+const COLORS = ['#403B36','#CBA135','#8B7355','#D4A017','#5C7A5C','#9E9E9E','#C9B490','#A8552F','#6B8E9E','#C2843A'];
+const CATS = [...new Set(rawData.map(r=>r.category))];
+
+(function(){ const s=document.getElementById('catFilter'); CATS.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;s.appendChild(o);}); })();
+
+function money(v){ if(v>=1000000) return '$'+(v/1000000).toFixed(2)+'M'; if(v>=1000) return '$'+(v/1000).toFixed(1)+'K'; return '$'+Math.round(v); }
+function sum(a,f){ return a.reduce((x,y)=>x+f(y),0); }
+function mkChart(id,cfg){ if(charts[id]) charts[id].destroy(); const c=document.getElementById(id); if(c) charts[id]=new Chart(c,cfg); }
+function groupSum(field,key){ const m={}; filtered.forEach(r=>{m[r[key]]=(m[r[key]]||0)+r[field];}); return m; }
+
+function avgLine(val,unit){ return {id:'avg'+Math.random(),afterDraw(ch){const{ctx,chartArea,scales:{y}}=ch; if(!y||!chartArea)return; const yp=y.getPixelForValue(val); ctx.save(); ctx.setLineDash([6,4]); ctx.strokeStyle='#CBA135'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(chartArea.left,yp); ctx.lineTo(chartArea.right,yp); ctx.stroke(); ctx.setLineDash([]); ctx.font='10px Poppins'; ctx.fillStyle='#403B36'; ctx.fillText('Avg '+val.toFixed(1)+unit, chartArea.left+6, yp-5); ctx.restore();}}; }
+
+function renderKPIs(){
+    const rev=sum(filtered,r=>r.revenue), spend=sum(filtered,r=>r.spend), units=sum(filtered,r=>r.units);
+    document.getElementById('kRev').textContent=money(rev);
+    document.getElementById('kSpend').textContent=money(spend);
+    document.getElementById('kRoas').textContent=(spend>0?rev/spend:0).toFixed(1)+'×';
+    document.getElementById('kUnits').textContent=units.toLocaleString();
+    document.getElementById('kCount').textContent=filtered.length+' products';
+    const cr=groupSum('revenue','category'); const top=Object.keys(cr).sort((a,b)=>cr[b]-cr[a])[0]||'-';
+    document.getElementById('kTopCat').textContent=top;
+    document.getElementById('kTopCatSub').textContent=top!=='-'?money(cr[top])+' revenue':'';
+    // ad type
+    const sR=sum(filtered.filter(r=>r.adType==='Search'),r=>r.revenue), sS=sum(filtered.filter(r=>r.adType==='Search'),r=>r.spend);
+    const dR=sum(filtered.filter(r=>r.adType==='Display'),r=>r.revenue), dS=sum(filtered.filter(r=>r.adType==='Display'),r=>r.spend);
+    document.getElementById('kSearchRoas').textContent=(sS>0?sR/sS:0).toFixed(2)+'×';
+    document.getElementById('kSearchRev').textContent=money(sR)+' revenue';
+    document.getElementById('kDisplayRoas').textContent=(dS>0?dR/dS:0).toFixed(2)+'×';
+    document.getElementById('kDisplayRev').textContent=money(dR)+' revenue';
+    document.getElementById('kSearchShare').textContent=(rev>0?sR/rev*100:0).toFixed(0)+'%';
+    // products
+    if(filtered.length){
+        const best=[...filtered].sort((a,b)=>b.roas-a.roas)[0], worst=[...filtered].sort((a,b)=>a.roas-b.roas)[0];
+        document.getElementById('kBest').textContent=best.roas.toFixed(2)+'×';
+        document.getElementById('kBestSub').textContent=best.product;
+        document.getElementById('kWorst').textContent=worst.roas.toFixed(2)+'×';
+        document.getElementById('kWorstSub').textContent=worst.product;
+    }
+    document.getElementById('kAbove').textContent=filtered.filter(r=>r.roas>=AVG_ROAS).length;
+}
+
+function renderPage1(){
+    const sR=sum(filtered.filter(r=>r.adType==='Search'),r=>r.revenue), dR=sum(filtered.filter(r=>r.adType==='Display'),r=>r.revenue);
+    const sS=sum(filtered.filter(r=>r.adType==='Search'),r=>r.spend), dS=sum(filtered.filter(r=>r.adType==='Display'),r=>r.spend);
+    mkChart('revByAd',{type:'bar',data:{labels:['Search Ads','Display Ads'],datasets:[{data:[sR,dR],backgroundColor:['#CBA135','#403B36'],borderRadius:6,maxBarThickness:120}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>money(c.parsed.y)}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>money(v)}},x:{grid:{display:false}}}}});
+    mkChart('roasByAd',{type:'bar',data:{labels:['Search Ads','Display Ads'],datasets:[{data:[sS>0?sR/sS:0,dS>0?dR/dS:0],backgroundColor:['#CBA135','#403B36'],borderRadius:6,maxBarThickness:120}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(2)+'×'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'×'}},x:{grid:{display:false}}}}});
+    const cr=groupSum('revenue','category'); const cats=Object.keys(cr).sort((a,b)=>cr[b]-cr[a]);
+    mkChart('revByCat',{type:'bar',data:{labels:cats,datasets:[{data:cats.map(c=>cr[c]),backgroundColor:'#CBA135',borderRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>money(c.parsed.y)}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>money(v)}},x:{grid:{display:false},ticks:{font:{size:9},maxRotation:55,minRotation:40}}}}});
+    const cs=groupSum('spend','category');
+    mkChart('roasByCat',{type:'bar',data:{labels:cats,datasets:[{data:cats.map(c=>cs[c]>0?cr[c]/cs[c]:0),backgroundColor:cats.map(c=>(cr[c]/cs[c])>=AVG_ROAS?'#CBA135':'#8B7355'),borderRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(2)+'×'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'×'}},x:{grid:{display:false},ticks:{font:{size:9},maxRotation:55,minRotation:40}}}},plugins:[avgLine(AVG_ROAS,'×')]});
+}
+
+function renderPage2(){
+    const sR=sum(filtered.filter(r=>r.adType==='Search'),r=>r.revenue), dR=sum(filtered.filter(r=>r.adType==='Display'),r=>r.revenue);
+    const sS=sum(filtered.filter(r=>r.adType==='Search'),r=>r.spend), dS=sum(filtered.filter(r=>r.adType==='Display'),r=>r.spend);
+    mkChart('revShareAd',{type:'doughnut',data:{labels:['Search Ads','Display Ads'],datasets:[{data:[sR,dR],backgroundColor:['#CBA135','#403B36'],borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:12}}},tooltip:{callbacks:{label:c=>c.label+': '+money(c.parsed)}}}}});
+    mkChart('spendShareAd',{type:'doughnut',data:{labels:['Search Ads','Display Ads'],datasets:[{data:[sS,dS],backgroundColor:['#CBA135','#403B36'],borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:12}}},tooltip:{callbacks:{label:c=>c.label+': '+money(c.parsed)}}}}});
+    const se=filtered.filter(r=>r.adType==='Search').map(r=>({x:r.spend,y:r.revenue,p:r.product}));
+    const de=filtered.filter(r=>r.adType==='Display').map(r=>({x:r.spend,y:r.revenue,p:r.product}));
+    mkChart('spendVsRev',{type:'scatter',data:{datasets:[{label:'Search Ads',data:se,backgroundColor:'rgba(203,161,53,0.75)',pointRadius:6},{label:'Display Ads',data:de,backgroundColor:'rgba(64,59,54,0.6)',pointRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{callbacks:{label:c=>c.raw.p+': '+money(c.parsed.x)+' spend → '+money(c.parsed.y)}}},
+            scales:{x:{title:{display:true,text:'Ad Spend ($)'},grid:{color:'#F0EBE0'},ticks:{callback:v=>money(v)}},y:{title:{display:true,text:'Revenue ($)'},grid:{color:'#F0EBE0'},ticks:{callback:v=>money(v)}}}}});
+}
+
+function renderPage3(){
+    const tr=[...filtered].sort((a,b)=>b.roas-a.roas).slice(0,10);
+    mkChart('topRoas',{type:'bar',data:{labels:tr.map(r=>r.product),datasets:[{data:tr.map(r=>r.roas),backgroundColor:'#CBA135',borderRadius:5}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x.toFixed(2)+'×'}}},scales:{x:{beginAtZero:true,grid:{color:'#F0EBE0'},title:{display:true,text:'ROAS (×)'}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+    const tv=[...filtered].sort((a,b)=>b.revenue-a.revenue).slice(0,10);
+    mkChart('topRev',{type:'bar',data:{labels:tv.map(r=>r.product),datasets:[{data:tv.map(r=>r.revenue),backgroundColor:'#403B36',borderRadius:5}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>money(c.parsed.x)}}},scales:{x:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>money(v)}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+    const fit=filtered.filter(r=>r.category==='Fitness Trackers').sort((a,b)=>b.roas-a.roas);
+    mkChart('fitnessRoas',{type:'bar',data:{labels:fit.map(r=>r.product),datasets:[{data:fit.map(r=>r.roas),backgroundColor:fit.map(r=>r.roas>=AVG_ROAS?'#CBA135':'#8B7355'),borderRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(2)+'×'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'×'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+}
+
+function renderPage4(){
+    const order=['Scale','Keep','Fix','Cut'], cmap={Scale:'#5C7A5C',Keep:'#CBA135',Fix:'#8B7355',Cut:'#A8552F'};
+    const cnt={},spd={}; order.forEach(v=>{cnt[v]=0;spd[v]=0;});
+    filtered.forEach(r=>{cnt[r.verdict]++; spd[r.verdict]+=r.spend;});
+    mkChart('verdictMix',{type:'doughnut',data:{labels:order,datasets:[{data:order.map(v=>cnt[v]),backgroundColor:order.map(v=>cmap[v]),borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:12},padding:12}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+' products'}}}}});
+    mkChart('spendByVerdict',{type:'bar',data:{labels:order,datasets:[{data:order.map(v=>spd[v]),backgroundColor:order.map(v=>cmap[v]),borderRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>money(c.parsed.y)}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>money(v)}},x:{grid:{display:false}}}}});
+    const rows=[...filtered].sort((a,b)=>b.revenue-a.revenue).slice(0,15);
+    const badge={Scale:'badge-green',Keep:'badge-gold',Fix:'badge-dark',Cut:'badge-red'};
+    document.getElementById('actionBody').innerHTML=rows.map(r=>'<tr><td>'+r.product+'</td><td>'+r.category+'</td><td>'+r.adType+'</td><td>'+money(r.spend)+'</td><td>'+money(r.revenue)+'</td><td><strong>'+r.roas.toFixed(2)+'×</strong></td><td><span class="'+badge[r.verdict]+'">'+r.verdict+'</span></td></tr>').join('');
+}
+
+function renderAll(){ renderKPIs(); renderPage1(); renderPage2(); renderPage3(); renderPage4(); }
+
+function showPage(num){
+    for(let i=1;i<=4;i++) document.getElementById('page'+i).classList.toggle('active', i===num);
+    document.querySelectorAll('.page-btn').forEach((b,i)=>b.classList.toggle('active', i===num-1));
+}
+
+function applyFilters(){
+    const ad=document.getElementById('adFilter').value, cat=document.getElementById('catFilter').value, ve=document.getElementById('verdictFilter').value;
+    filtered=rawData.filter(r=>(ad==='All'||r.adType===ad)&&(cat==='All'||r.category===cat)&&(ve==='All'||r.verdict===ve));
+    document.getElementById('filterNote').textContent=filtered.length+' of '+rawData.length+' products shown';
+    renderAll();
+}
+['adFilter','catFilter','verdictFilter'].forEach(id=>document.getElementById(id).addEventListener('change',applyFilters));
+
+document.getElementById('filterNote').textContent = rawData.length+' of '+rawData.length+' products shown';
+renderAll();
+</script>
 </body>
 </html>

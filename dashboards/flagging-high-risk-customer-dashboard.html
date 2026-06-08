@@ -3,495 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flagging High-Risk Borrowers - Dashboard | Lee Yih Ven</title>
+    <title>Flagging High-Risk Borrowers - Loan Default Risk Dashboard | Lee Yih Ven</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         :root {
-            --primary-color: #403B36;
-            --secondary-color: #CBA135;
-            --background-color: #FCF9F2;
-            --text-color: #2C2C2C;
-            --card-background: #FFFFFF;
-            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --primary-color: #403B36; --secondary-color: #CBA135; --background-color: #FCF9F2;
+            --text-color: #2C2C2C; --card-background: #FFFFFF; --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
             --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
             --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: var(--gradient);
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.05"><polygon points="0,0 1000,100 1000,0"/></svg>');
-            background-size: cover;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-weight: 300;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .btn-primary {
-            background: var(--gold-gradient);
-            color: var(--primary-color);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 80px 0;
-        }
-
-        /* Metrics Grid */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .metric-card {
-            background: var(--card-background);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--gold-gradient);
-        }
-
-        .metric-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(64, 59, 54, 0.15);
-        }
-
-        .metric-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .metric-label {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .metric-description {
-            font-size: 0.95rem;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        /* Insights Section */
-        .insights {
-            background: var(--card-background);
-            padding: 60px 40px;
-            border-radius: 25px;
-            box-shadow: var(--shadow);
-            margin-bottom: 80px;
-        }
-
-        .insights h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .insights h2::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: var(--gold-gradient);
-            margin: 20px auto 0;
-            border-radius: 2px;
-        }
-
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .insight-item {
-            padding: 30px;
-            background: linear-gradient(135deg, #f8f6f3 0%, #ffffff 100%);
-            border-radius: 15px;
-            border-left: 5px solid var(--secondary-color);
-            transition: all 0.3s ease;
-        }
-
-        .insight-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .insight-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .insight-text {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        /* Recommendations Section */
-        .recommendations {
-            background: var(--gradient);
-            padding: 80px 40px;
-            border-radius: 25px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .recommendations::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-
-        .recommendations-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .recommendations h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-        }
-
-        .recommendations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .recommendation-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .recommendation-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .recommendation-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .recommendation-text {
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #666;
-            background: var(--card-background);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--background-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; padding: 20px; position: relative; }
+        .header { background: linear-gradient(135deg, #403B36 0%, #2C2822 100%); color: #FCF9F2; padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .header .sample-note { font-size: 0.85rem; opacity: 0.75; margin-top: 12px; }
+        .cta-buttons { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .cta-button { padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block; }
+        .cta-secondary { background: transparent; border: 2px solid #CBA135; color: #FCF9F2; }
+        .cta-secondary:hover { background: rgba(203,161,53,0.1); }
+        .filter-bar { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; background: white; padding: 20px 25px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 10px; }
+        .filter-bar .filter-group { display: flex; flex-direction: column; gap: 6px; }
+        .filter-bar label { font-size: 0.8rem; font-weight: 600; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.5px; }
+        .filter-bar select { padding: 9px 14px; border: 2px solid #E8DFC8; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: var(--text-color); background: #FCF9F2; min-width: 170px; }
+        .filter-bar .filter-note { font-size: 0.78rem; color: #888; margin-left: auto; align-self: center; }
+        .page-nav { display: flex; justify-content: center; gap: 15px; margin: 30px auto; flex-wrap: wrap; }
+        .page-btn { padding: 12px 24px; background: white; border: 2px solid var(--secondary-color); border-radius: 8px; font-weight: 600; color: var(--primary-color); cursor: pointer; transition: all 0.3s ease; font-family: 'Poppins', sans-serif; font-size: 0.95rem; }
+        .page-btn.active { background: var(--gold-gradient); color: white; border-color: var(--secondary-color); }
+        .page-btn:hover:not(.active) { background: rgba(203,161,53,0.1); }
+        .page { position: absolute; left: -10000px; top: 0; width: 100%; }
+        .page.active { position: static; left: auto; animation: fadeIn 0.4s ease-in; }
+        .page-print-title { display: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 30px auto; }
+        .kpi-card { background: white; padding: 28px 24px; border-radius: 15px; box-shadow: var(--shadow); text-align: center; transition: all 0.3s ease; border-top: 4px solid var(--secondary-color); }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(64,59,54,0.15); }
+        .kpi-label { font-size: 1rem; color: #666; margin-bottom: 10px; font-weight: 500; }
+        .kpi-value { font-size: 2.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 5px; }
+        .kpi-sub { font-size: 0.85rem; color: #888; }
+        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; margin: 30px auto; }
+        .chart-card { background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); overflow: hidden; }
+        .chart-title { color: var(--primary-color); margin-bottom: 8px; font-size: 1.15rem; font-weight: 600; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; }
+        .chart-sub { font-size: 0.8rem; color: #888; margin-top: 0; margin-bottom: 15px; }
+        .chart-container { position: relative; height: 320px; }
+        .chart-container-lg { position: relative; height: 380px; }
+        .full-width { grid-column: 1 / -1; }
+        .ranked-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .ranked-table thead { background: var(--gradient); color: white; }
+        .ranked-table th { padding: 12px 15px; text-align: left; font-weight: 600; }
+        .ranked-table td { padding: 11px 15px; border-bottom: 1px solid #E8DFC8; }
+        .ranked-table tr:hover { background-color: rgba(203,161,53,0.08); }
+        .badge-green { display:inline-block; background:#5C7A5C; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-amber { display:inline-block; background:#CBA135; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .badge-red { display:inline-block; background:#A8552F; color:white; border-radius:4px; padding:2px 8px; font-size:0.78rem; font-weight:600; }
+        .footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        .footer p { margin: 5px 0; }
         @media (max-width: 768px) {
-            .hero {
-                padding: 60px 0;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                font-size: 1rem;
-                padding: 12px 25px;
-            }
-
-            .main-content {
-                padding: 60px 0;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                margin-bottom: 60px;
-            }
-
-            .metric-card {
-                padding: 30px 20px;
-            }
-
-            .metric-number {
-                font-size: 2.5rem;
-            }
-
-            .insights,
-            .recommendations {
-                padding: 40px 20px;
-                margin-bottom: 60px;
-            }
-
-            .insights h2,
-            .recommendations h2 {
-                font-size: 2rem;
-                margin-bottom: 30px;
-            }
-
-            .insights-grid,
-            .recommendations-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .insight-item,
-            .recommendation-item {
-                padding: 25px 20px;
-            }
+            .header h1 { font-size: 1.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+            .page-nav { flex-direction: column; }
+            .filter-bar select { min-width: 140px; }
         }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .metric-number {
-                font-size: 2.2rem;
-            }
-
-            .insights h2,
-            .recommendations h2 {
-                font-size: 1.8rem;
-            }
+        @media print {
+            @page { size: A4 landscape; margin: 10mm; }
+            body { background: #fff; }
+            .page-nav, .filter-bar, .cta-buttons { display: none !important; }
+            .page { position: static !important; left: auto !important; width: 100% !important; page-break-before: always; }
+            #page1 { page-break-before: avoid; }
+            .page-print-title { display: block; font-size: 1.3rem; color: var(--primary-color); font-weight: 700; margin: 10px 0 4px; border-bottom: 2px solid var(--secondary-color); padding-bottom: 6px; }
+            .chart-card, .kpi-card, .ranked-table { break-inside: avoid; page-break-inside: avoid; box-shadow: none; }
+            .chart-grid { grid-template-columns: 1fr !important; }
+            .chart-container { height: 250px; }
+            .chart-container-lg { height: 290px; }
+            .chart-container canvas, .canvas-wrap canvas { width: 100% !important; height: 100% !important; }
+            .header { box-shadow: none; }
         }
-    </style>
+</style>
 </head>
 <body>
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Flagging High-Risk Borrowers</h1>
-                <p>Discover which borrower profiles signal default risk before approval</p>
-                <div class="cta-buttons">
-                    <a href="/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html" class="btn btn-primary">View Full Case Study</a>
-                    <a href="/data-analyst-portfolio/predictive-modeling.html" class="btn btn-secondary">More Analytics</a>
-                </div>
-            </div>
+<div class="dashboard-container">
+    <div class="header">
+        <h1>Flagging High-Risk Borrowers</h1>
+        <p>A Risk-Tiered View of Loan Default Probability to Guide Approve, Escalate, and Decline Decisions.</p>
+        <div class="cta-buttons">
+            <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/flagging-high-risk-customer.html" class="cta-button cta-secondary">View Full Case Study</a>
+            <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
         </div>
-    </section>
-
-    <div class="container">
-        <section class="main-content">
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-number">15,000</div>
-                    <div class="metric-label">Loan Applications</div>
-                    <div class="metric-description">Historical loan data analyzed for risk pattern identification and model training</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">94%</div>
-                    <div class="metric-label">Risk Detection Accuracy</div>
-                    <div class="metric-description">High-precision AI model performance in identifying potential defaulters</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">40%</div>
-                    <div class="metric-label">Default Reduction</div>
-                    <div class="metric-description">Decrease in loan defaults through proactive risk assessment implementation</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-number">$2M</div>
-                    <div class="metric-label">Annual Savings</div>
-                    <div class="metric-description">Cost avoidance achieved through early identification of high-risk borrowers</div>
-                </div>
-            </div>
-
-            <section class="insights">
-                <h2>Key Risk Assessment Insights</h2>
-                <div class="insights-grid">
-                    <div class="insight-item">
-                        <div class="insight-title">Income-to-Debt Ratio Impact</div>
-                        <div class="insight-text">Borrowers with debt-to-income ratios above 45% show 3.2x higher default probability, becoming the strongest single predictor of repayment risk.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Employment History Patterns</div>
-                        <div class="insight-text">Job tenure less than 18 months combined with frequent employment changes indicates 65% higher default risk than stable employment patterns.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Credit Utilization Behaviors</div>
-                        <div class="insight-text">High credit card utilization (>80%) coupled with multiple recent inquiries creates compounding risk factors that increase default likelihood by 85%.</div>
-                    </div>
-                    <div class="insight-item">
-                        <div class="insight-title">Geographic Risk Clustering</div>
-                        <div class="insight-text">Certain geographic regions show systematic economic vulnerabilities that affect repayment capacity, requiring location-specific risk adjustments.</div>
-                    </div>
-                </div>
-            </section>
-        </section>
+        <p class="sample-note">Loan underwriting dataset scored by a logistic-regression default model. Representative 150-applicant sample illustrating the published model behaviour. Filters operate on this sample.</p>
     </div>
+    <div class="filter-bar">
+        <div class="filter-group"><label for="gradeFilter">Loan Grade</label>
+            <select id="gradeFilter"><option value="All">All grades</option><option>A</option><option>B</option><option>C</option><option>D</option></select></div>
+        <div class="filter-group"><label for="tierFilter">Risk Tier</label>
+            <select id="tierFilter"><option value="All">All tiers</option><option value="Green">Approve (low)</option><option value="Amber">Escalate (medium)</option><option value="Red">Decline (high)</option></select></div>
+        <div class="filter-group"><label for="incomeFilter">Income Band</label>
+            <select id="incomeFilter"><option value="All">All incomes</option><option value="low">Under RM30k</option><option value="mid">RM30k-80k</option><option value="high">RM80k-200k</option><option value="vhigh">RM200k+</option></select></div>
+<span class="filter-note" id="filterNote"></span></div>
+    <div class="page-nav">
+        <button class="page-btn active" onclick="showPage(1)">Risk Overview</button>
+        <button class="page-btn" onclick="showPage(2)">Risk Drivers</button>
+        <button class="page-btn" onclick="showPage(3)">Applicant Scores</button>
+        <button class="page-btn" onclick="showPage(4)">Decision Guide</button>
+</div>
+    <div id="page1" class="page active"><div class="page-print-title">1. Risk Overview</div>
+<div class="kpi-grid"><div class="kpi-card"><div class="kpi-label">Applicants Scored</div><div class="kpi-value" id="kApp">-</div><div class="kpi-sub" id="kApps">loan applications</div></div><div class="kpi-card"><div class="kpi-label">Model Accuracy</div><div class="kpi-value" id="kAcc">-</div><div class="kpi-sub" id="kAccs">identifies safe borrowers</div></div><div class="kpi-card"><div class="kpi-label">Avg Default Risk</div><div class="kpi-value" id="kAvg">-</div><div class="kpi-sub" id="kAvgs">predicted probability</div></div><div class="kpi-card"><div class="kpi-label">High Risk (Decline)</div><div class="kpi-value" id="kRed">-</div><div class="kpi-sub" id="kReds">above 30% risk</div></div><div class="kpi-card"><div class="kpi-label">Low Risk (Approve)</div><div class="kpi-value" id="kGreen">-</div><div class="kpi-sub" id="kGreens">under 10% risk</div></div></div><div class="chart-grid"><div class="chart-card"><div class="chart-title">Average Default Risk by Loan Grade</div><p class="chart-sub">Grade C and D carry the highest default risk</p><div class="chart-container"><canvas id="riskByGrade"></canvas></div></div><div class="chart-card"><div class="chart-title">Risk Tier Mix (RAG)</div><p class="chart-sub">Green = approve, amber = escalate, red = decline</p><div class="chart-container"><canvas id="tierMix"></canvas></div></div></div><div class="chart-grid"><div class="chart-card"><div class="chart-title">Average Default Risk by Income Band</div><p class="chart-sub">Lower-income applicants default more often</p><div class="chart-container"><canvas id="riskByIncome"></canvas></div></div><div class="chart-card"><div class="chart-title">Average Default Risk by Employment</div><p class="chart-sub">Applicants with no job history are the riskiest</p><div class="chart-container"><canvas id="riskByEmp"></canvas></div></div></div>
+</div>
+<div id="page2" class="page"><div class="page-print-title">2. Risk Drivers</div>
+<div class="chart-grid"><div class="chart-card"><div class="chart-title">Predictor Importance</div><p class="chart-sub">Income and employment duration are the strongest, statistically significant drivers; age barely matters</p><div class="chart-container"><canvas id="predImp"></canvas></div></div><div class="chart-card"><div class="chart-title">Default Risk vs Employment Years</div><p class="chart-sub">Risk falls as employment history lengthens</p><div class="chart-container"><canvas id="riskEmpLine"></canvas></div></div></div><div class="chart-grid"><div class="chart-card full-width"><div class="chart-title">Income vs Predicted Default Risk</div><p class="chart-sub">Each point is one applicant</p><div class="chart-container-lg"><canvas id="incomeScatter"></canvas></div></div></div>
+</div>
+<div id="page3" class="page"><div class="page-print-title">3. Applicant Scores</div>
+<div class="kpi-grid"><div class="kpi-card"><div class="kpi-label">Highest Risk Applicant</div><div class="kpi-value" id="kTop">-</div><div class="kpi-sub" id="kTops">predicted default</div></div><div class="kpi-card"><div class="kpi-label">Applicants Above 30%</div><div class="kpi-value" id="kRed2">-</div><div class="kpi-sub" id="kRed2s">manual review needed</div></div><div class="kpi-card"><div class="kpi-label">Applicants Under 10%</div><div class="kpi-value" id="kGreen2">-</div><div class="kpi-sub" id="kGreen2s">clear to approve</div></div></div><div class="chart-grid"><div class="chart-card full-width"><div class="chart-title">Predicted Default Probability Distribution</div><p class="chart-sub">How risk is spread across the portfolio</p><div class="chart-container-lg"><canvas id="probDist"></canvas></div></div></div><div class="chart-grid"><div class="chart-card full-width"><div class="chart-title">Top 12 Highest-Risk Applicants</div><p class="chart-sub">Flag for manual review and supporting documents before any decision</p><div style="overflow-x:auto;margin-top:15px;"><table class="ranked-table"><thead><tr><th>Applicant</th><th>Loan Grade</th><th>Income</th><th>Employment</th><th>Age</th><th>Default Risk</th><th>Decision</th></tr></thead><tbody id="topBody"></tbody></table></div></div></div>
+</div>
+<div id="page4" class="page"><div class="page-print-title">4. Decision Guide</div>
+<div class="chart-grid"><div class="chart-card"><div class="chart-title">Decision Mix (RAG)</div><p class="chart-sub">Approve / escalate / decline split</p><div class="chart-container"><canvas id="decisionMix"></canvas></div></div><div class="chart-card"><div class="chart-title">Applicants by Grade and Decision</div><p class="chart-sub">How decisions break down across loan grades</p><div class="chart-container"><canvas id="gradeDecision"></canvas></div></div></div><div class="chart-grid"><div class="chart-card full-width"><div class="chart-title">Underwriting Action Guide</div><p class="chart-sub">Approve under 10% risk; escalate 10-30%; decline above 30% with multiple red flags</p><div style="overflow-x:auto;margin-top:15px;"><table class="ranked-table"><thead><tr><th>Risk Tier</th><th>Predicted Risk Range</th><th>Applicants</th><th>Avg Income</th><th>Action</th></tr></thead><tbody id="guideBody"></tbody></table></div></div></div>
+</div>
 
-    <section class="recommendations">
-        <div class="container">
-            <div class="recommendations-content">
-                <h2>Strategic Recommendations</h2>
-                <div class="recommendations-grid">
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Implement Tiered Risk Scoring</div>
-                        <div class="recommendation-text">Deploy multi-tier risk assessment with debt-to-income ratio as primary factor. Require additional documentation for ratios above 35% and enhanced verification above 45%.</div>
-                    </div>
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Enhanced Employment Verification</div>
-                        <div class="recommendation-text">Strengthen employment verification processes for borrowers with job tenure under 2 years. Consider employment stability weighting in final risk scores.</div>
-                    </div>
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Dynamic Interest Rate Pricing</div>
-                        <div class="recommendation-text">Adjust interest rates based on calculated risk scores to maintain profitability while offering competitive rates to low-risk borrowers.</div>
-                    </div>
-                    <div class="recommendation-item">
-                        <div class="recommendation-title">Early Warning Monitoring</div>
-                        <div class="recommendation-text">Establish ongoing monitoring system for approved loans to detect early warning signs of financial distress and enable proactive intervention strategies.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+<div class="footer"><p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p></div>
+<script>
+const rawData = [{"id":"L1000","grade":"B","income":59611,"emp":7,"age":70,"prob":0.0328,"tier":"Green","action":"Approve"},{"id":"L1001","grade":"B","income":27251,"emp":6,"age":59,"prob":0.0652,"tier":"Green","action":"Approve"},{"id":"L1002","grade":"B","income":84673,"emp":7,"age":40,"prob":0.0448,"tier":"Green","action":"Approve"},{"id":"L1003","grade":"C","income":62753,"emp":2,"age":55,"prob":0.2239,"tier":"Amber","action":"Escalate"},{"id":"L1004","grade":"C","income":79675,"emp":3,"age":26,"prob":0.1298,"tier":"Amber","action":"Escalate"},{"id":"L1005","grade":"C","income":74885,"emp":1,"age":65,"prob":0.1293,"tier":"Amber","action":"Escalate"},{"id":"L1006","grade":"A","income":52078,"emp":3,"age":27,"prob":0.0249,"tier":"Green","action":"Approve"},{"id":"L1007","grade":"C","income":24835,"emp":1,"age":66,"prob":0.2055,"tier":"Amber","action":"Escalate"},{"id":"L1008","grade":"B","income":57574,"emp":12,"age":21,"prob":0.0292,"tier":"Green","action":"Approve"},{"id":"L1009","grade":"B","income":85519,"emp":0,"age":59,"prob":0.1455,"tier":"Amber","action":"Escalate"},{"id":"L1010","grade":"A","income":12552,"emp":1,"age":49,"prob":0.0292,"tier":"Green","action":"Approve"},{"id":"L1011","grade":"B","income":103963,"emp":2,"age":32,"prob":0.0454,"tier":"Green","action":"Approve"},{"id":"L1012","grade":"B","income":61622,"emp":0,"age":52,"prob":0.2741,"tier":"Amber","action":"Escalate"},{"id":"L1013","grade":"A","income":57578,"emp":10,"age":24,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1014","grade":"B","income":70258,"emp":0,"age":37,"prob":0.1756,"tier":"Amber","action":"Escalate"},{"id":"L1015","grade":"A","income":18839,"emp":0,"age":48,"prob":0.1809,"tier":"Amber","action":"Escalate"},{"id":"L1016","grade":"C","income":39197,"emp":6,"age":22,"prob":0.0838,"tier":"Green","action":"Approve"},{"id":"L1017","grade":"B","income":50899,"emp":1,"age":22,"prob":0.1234,"tier":"Amber","action":"Escalate"},{"id":"L1018","grade":"C","income":53057,"emp":0,"age":51,"prob":0.3721,"tier":"Red","action":"Decline"},{"id":"L1019","grade":"B","income":30815,"emp":0,"age":36,"prob":0.2873,"tier":"Amber","action":"Escalate"},{"id":"L1020","grade":"C","income":59999,"emp":3,"age":21,"prob":0.1276,"tier":"Amber","action":"Escalate"},{"id":"L1021","grade":"A","income":13299,"emp":2,"age":63,"prob":0.0432,"tier":"Green","action":"Approve"},{"id":"L1022","grade":"B","income":137924,"emp":5,"age":32,"prob":0.0555,"tier":"Green","action":"Approve"},{"id":"L1023","grade":"C","income":130386,"emp":0,"age":51,"prob":0.2691,"tier":"Amber","action":"Escalate"},{"id":"L1024","grade":"C","income":11701,"emp":1,"age":33,"prob":0.2473,"tier":"Amber","action":"Escalate"},{"id":"L1025","grade":"B","income":76941,"emp":2,"age":58,"prob":0.0393,"tier":"Green","action":"Approve"},{"id":"L1026","grade":"C","income":72551,"emp":1,"age":32,"prob":0.1017,"tier":"Amber","action":"Escalate"},{"id":"L1027","grade":"C","income":14216,"emp":3,"age":60,"prob":0.1987,"tier":"Amber","action":"Escalate"},{"id":"L1028","grade":"D","income":61138,"emp":3,"age":65,"prob":0.1354,"tier":"Amber","action":"Escalate"},{"id":"L1029","grade":"A","income":148212,"emp":14,"age":64,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1030","grade":"A","income":139048,"emp":1,"age":56,"prob":0.0344,"tier":"Green","action":"Approve"},{"id":"L1031","grade":"B","income":122790,"emp":8,"age":65,"prob":0.0243,"tier":"Green","action":"Approve"},{"id":"L1032","grade":"A","income":50306,"emp":2,"age":25,"prob":0.0244,"tier":"Green","action":"Approve"},{"id":"L1033","grade":"B","income":61945,"emp":0,"age":54,"prob":0.158,"tier":"Amber","action":"Escalate"},{"id":"L1034","grade":"C","income":14471,"emp":15,"age":51,"prob":0.0794,"tier":"Green","action":"Approve"},{"id":"L1035","grade":"C","income":153239,"emp":3,"age":52,"prob":0.1493,"tier":"Amber","action":"Escalate"},{"id":"L1036","grade":"B","income":22091,"emp":1,"age":51,"prob":0.0596,"tier":"Green","action":"Approve"},{"id":"L1037","grade":"B","income":54709,"emp":7,"age":56,"prob":0.0328,"tier":"Green","action":"Approve"},{"id":"L1038","grade":"A","income":27252,"emp":4,"age":41,"prob":0.0327,"tier":"Green","action":"Approve"},{"id":"L1039","grade":"C","income":121577,"emp":0,"age":36,"prob":0.2393,"tier":"Amber","action":"Escalate"},{"id":"L1040","grade":"C","income":15960,"emp":5,"age":35,"prob":0.1616,"tier":"Amber","action":"Escalate"},{"id":"L1041","grade":"A","income":63454,"emp":4,"age":47,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1042","grade":"B","income":150540,"emp":3,"age":33,"prob":0.0761,"tier":"Green","action":"Approve"},{"id":"L1043","grade":"B","income":162298,"emp":1,"age":32,"prob":0.0437,"tier":"Green","action":"Approve"},{"id":"L1044","grade":"D","income":97372,"emp":2,"age":46,"prob":0.2212,"tier":"Amber","action":"Escalate"},{"id":"L1045","grade":"C","income":10181,"emp":0,"age":52,"prob":0.4181,"tier":"Red","action":"Decline"},{"id":"L1046","grade":"B","income":255665,"emp":3,"age":52,"prob":0.0357,"tier":"Green","action":"Approve"},{"id":"L1047","grade":"A","income":15252,"emp":10,"age":49,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1048","grade":"A","income":63769,"emp":0,"age":64,"prob":0.0605,"tier":"Green","action":"Approve"},{"id":"L1049","grade":"A","income":78453,"emp":0,"age":70,"prob":0.0553,"tier":"Green","action":"Approve"},{"id":"L1050","grade":"C","income":158591,"emp":13,"age":36,"prob":0.0469,"tier":"Green","action":"Approve"},{"id":"L1051","grade":"A","income":56583,"emp":8,"age":68,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1052","grade":"A","income":20797,"emp":18,"age":23,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1053","grade":"D","income":44158,"emp":0,"age":52,"prob":0.62,"tier":"Red","action":"Decline"},{"id":"L1054","grade":"B","income":67677,"emp":3,"age":48,"prob":0.0571,"tier":"Green","action":"Approve"},{"id":"L1055","grade":"A","income":21910,"emp":5,"age":52,"prob":0.0291,"tier":"Green","action":"Approve"},{"id":"L1056","grade":"B","income":138241,"emp":7,"age":22,"prob":0.0389,"tier":"Green","action":"Approve"},{"id":"L1057","grade":"D","income":62474,"emp":2,"age":45,"prob":0.2517,"tier":"Amber","action":"Escalate"},{"id":"L1058","grade":"B","income":18439,"emp":1,"age":22,"prob":0.1037,"tier":"Amber","action":"Escalate"},{"id":"L1059","grade":"B","income":50653,"emp":19,"age":24,"prob":0.0342,"tier":"Green","action":"Approve"},{"id":"L1060","grade":"A","income":79512,"emp":3,"age":49,"prob":0.0213,"tier":"Green","action":"Approve"},{"id":"L1061","grade":"D","income":13371,"emp":11,"age":42,"prob":0.1628,"tier":"Amber","action":"Escalate"},{"id":"L1062","grade":"A","income":59855,"emp":3,"age":69,"prob":0.0396,"tier":"Green","action":"Approve"},{"id":"L1063","grade":"C","income":19106,"emp":16,"age":70,"prob":0.0636,"tier":"Green","action":"Approve"},{"id":"L1064","grade":"C","income":29582,"emp":7,"age":68,"prob":0.0849,"tier":"Green","action":"Approve"},{"id":"L1065","grade":"D","income":74772,"emp":1,"age":59,"prob":0.1508,"tier":"Amber","action":"Escalate"},{"id":"L1066","grade":"A","income":12432,"emp":8,"age":42,"prob":0.0204,"tier":"Green","action":"Approve"},{"id":"L1067","grade":"B","income":37850,"emp":2,"age":29,"prob":0.0689,"tier":"Green","action":"Approve"},{"id":"L1068","grade":"C","income":296399,"emp":8,"age":49,"prob":0.0339,"tier":"Green","action":"Approve"},{"id":"L1069","grade":"A","income":74913,"emp":1,"age":62,"prob":0.0385,"tier":"Green","action":"Approve"},{"id":"L1070","grade":"C","income":48541,"emp":5,"age":43,"prob":0.1884,"tier":"Amber","action":"Escalate"},{"id":"L1071","grade":"B","income":75026,"emp":20,"age":49,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1072","grade":"B","income":91047,"emp":3,"age":57,"prob":0.0509,"tier":"Green","action":"Approve"},{"id":"L1073","grade":"A","income":65426,"emp":4,"age":38,"prob":0.0441,"tier":"Green","action":"Approve"},{"id":"L1074","grade":"A","income":14799,"emp":6,"age":39,"prob":0.0434,"tier":"Green","action":"Approve"},{"id":"L1075","grade":"A","income":13053,"emp":0,"age":61,"prob":0.1035,"tier":"Amber","action":"Escalate"},{"id":"L1076","grade":"C","income":52162,"emp":13,"age":41,"prob":0.0927,"tier":"Green","action":"Approve"},{"id":"L1077","grade":"B","income":76408,"emp":13,"age":44,"prob":0.0457,"tier":"Green","action":"Approve"},{"id":"L1078","grade":"C","income":205320,"emp":14,"age":35,"prob":0.0805,"tier":"Green","action":"Approve"},{"id":"L1079","grade":"B","income":16296,"emp":5,"age":66,"prob":0.0401,"tier":"Green","action":"Approve"},{"id":"L1080","grade":"B","income":178714,"emp":15,"age":22,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1081","grade":"A","income":45427,"emp":3,"age":37,"prob":0.0326,"tier":"Green","action":"Approve"},{"id":"L1082","grade":"D","income":142847,"emp":6,"age":69,"prob":0.2122,"tier":"Amber","action":"Escalate"},{"id":"L1083","grade":"B","income":11228,"emp":3,"age":23,"prob":0.0951,"tier":"Green","action":"Approve"},{"id":"L1084","grade":"A","income":25087,"emp":17,"age":46,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1085","grade":"B","income":26512,"emp":3,"age":69,"prob":0.047,"tier":"Green","action":"Approve"},{"id":"L1086","grade":"A","income":90803,"emp":7,"age":50,"prob":0.0282,"tier":"Green","action":"Approve"},{"id":"L1087","grade":"A","income":63159,"emp":11,"age":25,"prob":0.0282,"tier":"Green","action":"Approve"},{"id":"L1088","grade":"B","income":23138,"emp":2,"age":55,"prob":0.061,"tier":"Green","action":"Approve"},{"id":"L1089","grade":"B","income":34872,"emp":8,"age":67,"prob":0.0752,"tier":"Green","action":"Approve"},{"id":"L1090","grade":"C","income":54715,"emp":0,"age":69,"prob":0.2282,"tier":"Amber","action":"Escalate"},{"id":"L1091","grade":"D","income":99940,"emp":6,"age":41,"prob":0.2153,"tier":"Amber","action":"Escalate"},{"id":"L1092","grade":"B","income":15781,"emp":5,"age":66,"prob":0.0693,"tier":"Green","action":"Approve"},{"id":"L1093","grade":"B","income":39228,"emp":8,"age":31,"prob":0.0381,"tier":"Green","action":"Approve"},{"id":"L1094","grade":"A","income":36581,"emp":1,"age":24,"prob":0.0377,"tier":"Green","action":"Approve"},{"id":"L1095","grade":"C","income":106929,"emp":3,"age":46,"prob":0.1395,"tier":"Amber","action":"Escalate"},{"id":"L1096","grade":"C","income":46059,"emp":1,"age":39,"prob":0.1918,"tier":"Amber","action":"Escalate"},{"id":"L1097","grade":"A","income":51807,"emp":1,"age":69,"prob":0.0374,"tier":"Green","action":"Approve"},{"id":"L1098","grade":"A","income":29654,"emp":11,"age":53,"prob":0.0351,"tier":"Green","action":"Approve"},{"id":"L1099","grade":"C","income":162197,"emp":4,"age":46,"prob":0.122,"tier":"Amber","action":"Escalate"},{"id":"L1100","grade":"B","income":140690,"emp":2,"age":56,"prob":0.0558,"tier":"Green","action":"Approve"},{"id":"L1101","grade":"B","income":41045,"emp":9,"age":20,"prob":0.0409,"tier":"Green","action":"Approve"},{"id":"L1102","grade":"C","income":28395,"emp":16,"age":49,"prob":0.0409,"tier":"Green","action":"Approve"},{"id":"L1103","grade":"A","income":400090,"emp":18,"age":21,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1104","grade":"A","income":67323,"emp":2,"age":56,"prob":0.0531,"tier":"Green","action":"Approve"},{"id":"L1105","grade":"A","income":145215,"emp":14,"age":64,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1106","grade":"B","income":24788,"emp":9,"age":53,"prob":0.0394,"tier":"Green","action":"Approve"},{"id":"L1107","grade":"B","income":51016,"emp":17,"age":66,"prob":0.0212,"tier":"Green","action":"Approve"},{"id":"L1108","grade":"B","income":112026,"emp":16,"age":23,"prob":0.025,"tier":"Green","action":"Approve"},{"id":"L1109","grade":"A","income":166093,"emp":19,"age":62,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1110","grade":"B","income":44534,"emp":0,"age":70,"prob":0.1289,"tier":"Amber","action":"Escalate"},{"id":"L1111","grade":"C","income":30037,"emp":3,"age":24,"prob":0.1543,"tier":"Amber","action":"Escalate"},{"id":"L1112","grade":"B","income":53363,"emp":5,"age":40,"prob":0.0487,"tier":"Green","action":"Approve"},{"id":"L1113","grade":"B","income":106567,"emp":3,"age":42,"prob":0.0872,"tier":"Green","action":"Approve"},{"id":"L1114","grade":"A","income":43238,"emp":0,"age":66,"prob":0.1377,"tier":"Amber","action":"Escalate"},{"id":"L1115","grade":"D","income":23374,"emp":2,"age":25,"prob":0.2036,"tier":"Amber","action":"Escalate"},{"id":"L1116","grade":"C","income":16037,"emp":8,"age":43,"prob":0.1563,"tier":"Amber","action":"Escalate"},{"id":"L1117","grade":"B","income":26505,"emp":0,"age":62,"prob":0.1337,"tier":"Amber","action":"Escalate"},{"id":"L1118","grade":"D","income":34837,"emp":1,"age":36,"prob":0.2511,"tier":"Amber","action":"Escalate"},{"id":"L1119","grade":"B","income":15810,"emp":3,"age":29,"prob":0.1271,"tier":"Amber","action":"Escalate"},{"id":"L1120","grade":"A","income":55212,"emp":4,"age":61,"prob":0.0461,"tier":"Green","action":"Approve"},{"id":"L1121","grade":"B","income":63864,"emp":8,"age":54,"prob":0.0318,"tier":"Green","action":"Approve"},{"id":"L1122","grade":"C","income":29525,"emp":5,"age":66,"prob":0.0968,"tier":"Green","action":"Approve"},{"id":"L1123","grade":"B","income":28608,"emp":17,"age":23,"prob":0.033,"tier":"Green","action":"Approve"},{"id":"L1124","grade":"C","income":14574,"emp":7,"age":21,"prob":0.0888,"tier":"Green","action":"Approve"},{"id":"L1125","grade":"D","income":67977,"emp":3,"age":22,"prob":0.2735,"tier":"Amber","action":"Escalate"},{"id":"L1126","grade":"C","income":68580,"emp":3,"age":35,"prob":0.1025,"tier":"Amber","action":"Escalate"},{"id":"L1127","grade":"C","income":121392,"emp":2,"age":22,"prob":0.0961,"tier":"Green","action":"Approve"},{"id":"L1128","grade":"C","income":39475,"emp":0,"age":46,"prob":0.4717,"tier":"Red","action":"Decline"},{"id":"L1129","grade":"A","income":60925,"emp":8,"age":66,"prob":0.0248,"tier":"Green","action":"Approve"},{"id":"L1130","grade":"A","income":17519,"emp":1,"age":59,"prob":0.0305,"tier":"Green","action":"Approve"},{"id":"L1131","grade":"A","income":78328,"emp":7,"age":45,"prob":0.0386,"tier":"Green","action":"Approve"},{"id":"L1132","grade":"A","income":44115,"emp":4,"age":30,"prob":0.0341,"tier":"Green","action":"Approve"},{"id":"L1133","grade":"B","income":60970,"emp":10,"age":33,"prob":0.0448,"tier":"Green","action":"Approve"},{"id":"L1134","grade":"B","income":18660,"emp":3,"age":45,"prob":0.0786,"tier":"Green","action":"Approve"},{"id":"L1135","grade":"B","income":12988,"emp":5,"age":66,"prob":0.0855,"tier":"Green","action":"Approve"},{"id":"L1136","grade":"A","income":399948,"emp":20,"age":62,"prob":0.02,"tier":"Green","action":"Approve"},{"id":"L1137","grade":"A","income":14543,"emp":1,"age":50,"prob":0.045,"tier":"Green","action":"Approve"},{"id":"L1138","grade":"A","income":50569,"emp":10,"age":37,"prob":0.0229,"tier":"Green","action":"Approve"},{"id":"L1139","grade":"B","income":26535,"emp":5,"age":28,"prob":0.0416,"tier":"Green","action":"Approve"},{"id":"L1140","grade":"A","income":30744,"emp":9,"age":33,"prob":0.0271,"tier":"Green","action":"Approve"},{"id":"L1141","grade":"B","income":21861,"emp":1,"age":23,"prob":0.0888,"tier":"Green","action":"Approve"},{"id":"L1142","grade":"D","income":18768,"emp":1,"age":62,"prob":0.3035,"tier":"Red","action":"Decline"},{"id":"L1143","grade":"B","income":39882,"emp":7,"age":21,"prob":0.0878,"tier":"Green","action":"Approve"},{"id":"L1144","grade":"A","income":87159,"emp":7,"age":40,"prob":0.0364,"tier":"Green","action":"Approve"},{"id":"L1145","grade":"A","income":20201,"emp":8,"age":44,"prob":0.0305,"tier":"Green","action":"Approve"},{"id":"L1146","grade":"D","income":76352,"emp":3,"age":59,"prob":0.1888,"tier":"Amber","action":"Escalate"},{"id":"L1147","grade":"A","income":199224,"emp":4,"age":39,"prob":0.0213,"tier":"Green","action":"Approve"},{"id":"L1148","grade":"B","income":29438,"emp":2,"age":20,"prob":0.1268,"tier":"Amber","action":"Escalate"},{"id":"L1149","grade":"D","income":27524,"emp":16,"age":64,"prob":0.1634,"tier":"Amber","action":"Escalate"}];
+const AVG_PROB = 0.098;
+const MODEL_ACC = 79;
+let filtered = rawData.slice();
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
-        </div>
-    </footer>
+Chart.defaults.animation = false;
+Chart.defaults.font.family = "'Poppins', sans-serif";
+const charts = {};
+function money(v){ if(v>=1000000) return '$'+(v/1000000).toFixed(2)+'M'; if(v>=1000) return '$'+(v/1000).toFixed(1)+'K'; return '$'+Math.round(v); }
+function pct(v){ return (v*100).toFixed(1)+'%'; }
+function sum(a,f){ return a.reduce((x,y)=>x+f(y),0); }
+function avg(a,f){ return a.length? sum(a,f)/a.length : 0; }
+function mkChart(id,cfg){ if(charts[id]) charts[id].destroy(); const c=document.getElementById(id); if(c) charts[id]=new Chart(c,cfg); }
+function groupAvg(arr,key,field){ const m={},n={}; arr.forEach(r=>{m[r[key]]=(m[r[key]]||0)+r[field]; n[r[key]]=(n[r[key]]||0)+1;}); const o={}; for(const k in m) o[k]=m[k]/n[k]; return o; }
+function avgLine(val,fmt){ return {id:'a'+Math.random(),afterDraw(ch){const{ctx,chartArea,scales:{y}}=ch; if(!y||!chartArea)return; const yp=y.getPixelForValue(val); ctx.save(); ctx.setLineDash([6,4]); ctx.strokeStyle='#CBA135'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(chartArea.left,yp); ctx.lineTo(chartArea.right,yp); ctx.stroke(); ctx.setLineDash([]); ctx.font='10px Poppins'; ctx.fillStyle='#403B36'; ctx.fillText('Avg '+fmt(val), chartArea.left+6, yp-5); ctx.restore();}}; }
+const RAG = {Green:'#5C7A5C', Amber:'#CBA135', Red:'#A8552F'};
+
+
+function inc(r){ if(r.income<30000) return 'low'; if(r.income<80000) return 'mid'; if(r.income<200000) return 'high'; return 'vhigh'; }
+function empBand(r){ if(r.emp===0) return 'None'; if(r.emp<=3) return '1-3 yrs'; if(r.emp<=8) return '4-8 yrs'; return '8+ yrs'; }
+const GREEN='#5C7A5C', AMBER='#CBA135', RED='#A8552F', BROWN='#403B36', TAN='#8B7355';
+
+function renderKPIs(){
+    document.getElementById('kApp').textContent=filtered.length;
+    document.getElementById('kAcc').textContent=MODEL_ACC+'%';
+    document.getElementById('kAvg').textContent=pct(avg(filtered,r=>r.prob));
+    document.getElementById('kRed').textContent=filtered.filter(r=>r.tier==='Red').length;
+    document.getElementById('kGreen').textContent=filtered.filter(r=>r.tier==='Green').length;
+    if(filtered.length){ const t=[...filtered].sort((a,b)=>b.prob-a.prob)[0];
+        document.getElementById('kTop').textContent=pct(t.prob);
+        document.getElementById('kTops').textContent=t.id+' · grade '+t.grade; }
+    document.getElementById('kRed2').textContent=filtered.filter(r=>r.tier==='Red').length;
+    document.getElementById('kGreen2').textContent=filtered.filter(r=>r.tier==='Green').length;
+}
+function renderPage1(){
+    const g=['A','B','C','D']; const ga=groupAvg(filtered,'grade','prob');
+    mkChart('riskByGrade',{type:'bar',data:{labels:g,datasets:[{data:g.map(x=>(ga[x]||0)*100),backgroundColor:g.map(x=>(ga[x]||0)>=AVG_PROB?AMBER:GREEN),borderRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% avg risk'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+    const tc={Green:0,Amber:0,Red:0}; filtered.forEach(r=>tc[r.tier]++);
+    mkChart('tierMix',{type:'doughnut',data:{labels:['Approve (Green)','Escalate (Amber)','Decline (Red)'],datasets:[{data:[tc.Green,tc.Amber,tc.Red],backgroundColor:[GREEN,AMBER,RED],borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed}}}}});
+    const ib=['low','mid','high','vhigh'],ibl=['<RM30k','RM30-80k','RM80-200k','RM200k+'];
+    const ia={}; ib.forEach(b=>{const s=filtered.filter(r=>inc(r)===b); ia[b]=avg(s,r=>r.prob);});
+    mkChart('riskByIncome',{type:'bar',data:{labels:ibl,datasets:[{data:ib.map(b=>ia[b]*100),backgroundColor:AMBER,borderRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% avg risk'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+    const eb=['None','1-3 yrs','4-8 yrs','8+ yrs'];
+    const ea={}; eb.forEach(b=>{const s=filtered.filter(r=>empBand(r)===b); ea[b]=avg(s,r=>r.prob);});
+    mkChart('riskByEmp',{type:'bar',data:{labels:eb,datasets:[{data:eb.map(b=>ea[b]*100),backgroundColor:eb.map(b=>b==='None'?RED:TAN),borderRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% avg risk'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+}
+function renderPage2(){
+    mkChart('predImp',{type:'bar',data:{labels:['Employment duration','Income','Loan grade (C/D)','Age'],datasets:[{data:[0.42,0.38,0.34,0.06],backgroundColor:[BROWN,AMBER,TAN,'#D4C5B0'],borderRadius:5}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'importance '+c.parsed.x.toFixed(2)}}},scales:{x:{beginAtZero:true,max:0.5,grid:{color:'#F0EBE0'},title:{display:true,text:'Relative importance'}},y:{grid:{display:false}}}}});
+    const eb=['None','1-3 yrs','4-8 yrs','8+ yrs'];
+    const ea={}; eb.forEach(b=>{const s=filtered.filter(r=>empBand(r)===b); ea[b]=avg(s,r=>r.prob);});
+    mkChart('riskEmpLine',{type:'line',data:{labels:eb,datasets:[{data:eb.map(b=>ea[b]*100),borderColor:AMBER,backgroundColor:'rgba(203,161,53,0.12)',fill:true,tension:0.35,pointBackgroundColor:BROWN,pointRadius:6}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% avg risk'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+    mkChart('incomeScatter',{type:'scatter',data:{datasets:[{data:filtered.map(r=>({x:r.income,y:r.prob*100,id:r.id})),backgroundColor:'rgba(203,161,53,0.65)',pointRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.id+': '+money(c.parsed.x)+' income, '+c.parsed.y.toFixed(1)+'% risk'}}},
+            scales:{x:{title:{display:true,text:'Annual Income (RM)'},grid:{color:'#F0EBE0'},ticks:{callback:v=>money(v)}},y:{title:{display:true,text:'Predicted Default Risk (%)'},grid:{color:'#F0EBE0'},ticks:{callback:v=>v+'%'}}}}});
+}
+function renderPage3(){
+    renderKPIs();
+    const bins=[0,5,10,15,20,25,30,40,50,65]; const labels=[]; const counts=[];
+    for(let i=0;i<bins.length-1;i++){ labels.push(bins[i]+'-'+bins[i+1]+'%'); counts.push(filtered.filter(r=>r.prob*100>=bins[i]&&r.prob*100<bins[i+1]).length); }
+    mkChart('probDist',{type:'bar',data:{labels:labels,datasets:[{data:counts,backgroundColor:labels.map((l,i)=>bins[i]<10?GREEN:(bins[i]<30?AMBER:RED)),borderRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' applicants'}}},scales:{y:{beginAtZero:true,grid:{color:'#F0EBE0'},title:{display:true,text:'Applicants'}},x:{grid:{display:false}}}}});
+    const top=[...filtered].sort((a,b)=>b.prob-a.prob).slice(0,12);
+    const badge={Approve:'badge-green',Escalate:'badge-amber',Decline:'badge-red'};
+    document.getElementById('topBody').innerHTML=top.map(r=>'<tr><td>'+r.id+'</td><td>'+r.grade+'</td><td>'+money(r.income)+'</td><td>'+(r.emp===0?'None':r.emp+' yrs')+'</td><td>'+r.age+'</td><td><strong>'+pct(r.prob)+'</strong></td><td><span class="'+badge[r.action]+'">'+r.action+'</span></td></tr>').join('');
+}
+function renderPage4(){
+    const tc={Green:0,Amber:0,Red:0}; filtered.forEach(r=>tc[r.tier]++);
+    mkChart('decisionMix',{type:'doughnut',data:{labels:['Approve','Escalate','Decline'],datasets:[{data:[tc.Green,tc.Amber,tc.Red],backgroundColor:[GREEN,AMBER,RED],borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{boxWidth:12}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+' applicants'}}}}});
+    const g=['A','B','C','D'];
+    const ds=[['Green','Approve',GREEN],['Amber','Escalate',AMBER],['Red','Decline',RED]].map(([t,lab,col])=>({label:lab,data:g.map(x=>filtered.filter(r=>r.grade===x&&r.tier===t).length),backgroundColor:col,borderRadius:4}));
+    mkChart('gradeDecision',{type:'bar',data:{labels:g,datasets:ds},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{color:'#F0EBE0'},title:{display:true,text:'Applicants'}}}}});
+    const tiers=[['Green','Under 10%','Approve','badge-green'],['Amber','10% - 30%','Escalate for manual review','badge-amber'],['Red','Above 30%','Decline / require guarantor','badge-red']];
+    document.getElementById('guideBody').innerHTML=tiers.map(([t,rng,act,b])=>{const s=filtered.filter(r=>r.tier===t);return '<tr><td><span class="'+b+'">'+(t==='Green'?'Low':t==='Amber'?'Medium':'High')+'</span></td><td>'+rng+'</td><td>'+s.length+'</td><td>'+(s.length?money(avg(s,r=>r.income)):'-')+'</td><td>'+act+'</td></tr>';}).join('');
+}
+function renderAll(){ renderKPIs(); renderPage1(); renderPage2(); renderPage3(); renderPage4(); }
+function showPage(n){ for(let i=1;i<=4;i++) document.getElementById('page'+i).classList.toggle('active',i===n); document.querySelectorAll('.page-btn').forEach((b,i)=>b.classList.toggle('active',i===n-1)); }
+function applyFilters(){ const g=gradeFilter.value,t=tierFilter.value,inb=incomeFilter.value;
+    filtered=rawData.filter(r=>(g==='All'||r.grade===g)&&(t==='All'||r.tier===t)&&(inb==='All'||inc(r)===inb));
+    document.getElementById('filterNote').textContent=filtered.length+' of '+rawData.length+' applicants shown'; renderAll(); }
+['gradeFilter','tierFilter','incomeFilter'].forEach(id=>document.getElementById(id).addEventListener('change',applyFilters));
+document.getElementById('filterNote').textContent=rawData.length+' of '+rawData.length+' applicants shown';
+renderAll();
+
+</script>
 </body>
 </html>
