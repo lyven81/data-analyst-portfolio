@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Influencer Performance Assistant | Who Really Drives Sales?</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#5A3E2B; --navy2:#3f2c1e; --gold:#C8961E; --gold-soft:#FBF6EE; --bg:#F4ECE0;
+    --ink:#33271C; --muted:#8A7660; --line:#E8DCC9; --card:#fff;
+    --green:#3C8C5A; --green-soft:#e7f3ec; --red:#c0392b; --amber:#9a7414;
+    --shadow:0 1px 2px rgba(31,58,95,.05),0 8px 24px rgba(31,58,95,.06);
+    --shadow-sm:0 1px 2px rgba(31,58,95,.05);
+    --body:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;height:100vh;overflow:hidden}
+  .sidebar{width:290px;flex-shrink:0;background:linear-gradient(180deg,var(--navy),var(--navy2));color:#dce6f1;padding:24px 20px;display:flex;flex-direction:column;gap:20px;overflow-y:auto}
+  .brand-name{font-size:18px;font-weight:700;color:#fff}
+  .brand-sub{font-size:11px;color:#fff;letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+  .status{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 14px}
+  .status-title{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;margin-bottom:10px}
+  .pill{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#EADDCB;padding:4px 0}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(46,139,87,.18)}
+  .dot.lock{background:var(--gold);box-shadow:0 0 0 3px rgba(200,162,75,.18)}
+  .dot.loading{background:#c9a055;box-shadow:0 0 0 3px rgba(201,160,85,.18)}
+  .nav{display:flex;flex-direction:column;gap:8px}
+  .nav a{font-size:13px;color:#EADDCB;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 13px;transition:all .18s}
+  .nav a:hover{background:rgba(200,162,75,.16);border-color:var(--gold)}
+  .nav a.active{background:var(--gold);color:var(--navy);font-weight:600;border-color:var(--gold)}
+  .tools-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .tools-head h3{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;font-weight:600}
+  .tools-count{font-size:10.5px;color:#C9B79D;background:rgba(255,255,255,.07);padding:2px 8px;border-radius:20px}
+  .tool-list{list-style:none;display:flex;flex-direction:column;gap:1px}
+  .tool-list li{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#CDBCA2;padding:6px 8px;border-radius:7px;display:flex;align-items:center;gap:8px}
+  .tool-list li::before{content:"";width:5px;height:5px;border-radius:1.5px;background:var(--gold);flex-shrink:0}
+  .foot{font-size:11px;color:#B5A084;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:13px;margin-top:auto}
+  .main{flex:1;display:flex;flex-direction:column;min-width:0}
+  .topbar{padding:17px 30px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .topbar h1{font-size:19px;font-weight:600;color:var(--navy)}
+  .topbar .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .thread{flex:1;overflow-y:auto;padding:28px 30px 12px;display:flex;flex-direction:column;gap:20px}
+  .row{display:flex;gap:12px;max-width:760px;animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .row.user{margin-left:auto;flex-direction:row-reverse}
+  .av{width:34px;height:34px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .av.bot{background:var(--navy);color:#fff}.av.bot svg{width:17px;height:17px}
+  .av.me{background:#e7dcc9;color:var(--navy)}
+  .bubble{font-size:14px;line-height:1.55}
+  .row.user .bubble{background:var(--navy);color:#f3ece0;padding:11px 15px;border-radius:14px 14px 4px 14px}
+  .lead{margin-bottom:11px}.lead b{color:var(--navy);font-weight:600}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--navy);background:var(--gold-soft);border:1px solid #ecdcb0;padding:4px 10px;border-radius:7px;margin-bottom:11px}
+  .badge svg{width:12px;height:12px}.badge .lbl{color:#a98f4f}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px 18px;box-shadow:var(--shadow);max-width:600px}
+  .card h4{font-size:14.5px;color:var(--navy);font-weight:600;margin-bottom:3px}
+  .card .cap{font-size:12px;color:var(--muted);margin-bottom:13px}
+  .kpis{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi{flex:1;min-width:110px;background:#faf6ef;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center}
+  .kpi .v{font-size:26px;font-weight:700;color:var(--navy)}
+  .kpi.good .v{color:var(--green)}.kpi.bad .v{color:var(--red)}
+  .kpi .l{font-size:11px;color:var(--muted);margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.3px;padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px;border-bottom:1px solid #f0ebe2}
+  tr:last-child td{border-bottom:none}
+  td.nm{font-weight:600;color:var(--ink)}
+  td.num{text-align:right}
+  .scroll{max-height:360px;overflow-y:auto}
+  .scroll::-webkit-scrollbar{width:7px}.scroll::-webkit-scrollbar-thumb{background:#dcd0bd;border-radius:7px}
+  .vb{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .vb.Promote{background:var(--green-soft);color:var(--green)}.vb.Keep{background:#fcf2da;color:var(--amber)}.vb.Dismiss{background:#fbe9e7;color:var(--red)}
+  .grp-h{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin:14px 0 4px}
+  .src{border:1px solid var(--line);border-radius:11px;padding:12px 13px;margin-bottom:9px;background:#faf6ef}
+  .src .st{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:5px}
+  .src .sn{font-weight:600;color:var(--navy);font-size:13px}
+  .src .role{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:20px}
+  .src .role.main{background:var(--green-soft);color:var(--green)}.src .role.minor{background:#fcf2da;color:var(--amber)}.src .role.no{background:#fbe9e7;color:var(--red)}
+  .src .ev{font-size:12px;color:#6a5a45;line-height:1.5}
+  .note{font-size:11px;color:#a99a82;margin-top:12px;display:flex;align-items:center;gap:6px}.note svg{width:12px;height:12px;flex-shrink:0}
+  .refuse{background:var(--gold-soft);border:1px solid #f0e2c2;border-radius:15px;padding:16px 18px;max-width:600px}
+  .refuse .rh{display:flex;align-items:center;gap:9px;margin-bottom:7px}.refuse .rh svg{width:17px;height:17px}
+  .refuse .rh span{font-weight:600;color:#b07d27;font-size:13.5px}
+  .refuse p{font-size:13.5px;line-height:1.55;color:#6a5526}
+  .refuse .why{font-size:11px;color:#9c8443;margin-top:10px;font-family:ui-monospace,monospace}
+  .think{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+  .think .tdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite}
+  .think .tdot:nth-child(2){animation-delay:.2s}.think .tdot:nth-child(3){animation-delay:.4s}
+  @keyframes pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+  .composer{padding:13px 30px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+  .chip{font-size:12px;color:var(--navy);background:#fff;border:1px solid #e0d6c5;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .18s;font-family:var(--body)}
+  .chip:hover{border-color:var(--gold);background:var(--gold-soft);transform:translateY(-1px)}
+  .chip.warn{border-color:#ebd8ae;color:#b07d27;background:#fcf6e9}
+  .inputbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e0d6c5;border-radius:12px;padding:5px 5px 5px 16px;box-shadow:var(--shadow-sm)}
+  .inputbar input{flex:1;border:none;outline:none;font-family:var(--body);font-size:13.5px;color:var(--ink);background:transparent;padding:8px 0}
+  .send{width:38px;height:38px;border-radius:10px;border:none;background:var(--navy);color:#fff;cursor:pointer;display:grid;place-items:center}.send:hover{background:var(--navy2)}.send svg{width:17px;height:17px}
+  .disclaimer{text-align:center;font-size:11px;color:#b3a98c;margin-top:10px}
+  @media(max-width:860px){.sidebar{display:none}.thread,.topbar,.composer{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div><div class="brand-name">Lee Yih Ven</div><div class="brand-sub">Data Analytics Portfolio</div></div>
+    <nav class="nav">
+      <a href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/who-really-drives-sales.html">Case Study</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/who-really-drives-sales-dashboard.html">Dashboard</a>
+      <a class="active" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/who-really-drives-sales.html">AI Assistant</a>
+    </nav>
+    <div class="status">
+      <div class="status-title">Asset status</div>
+      <div class="pill"><span class="dot"></span> Read-only access</div>
+      <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+      <div class="pill"><span class="dot loading" id="dbdot"></span> <span id="dbstat">Loading database...</span></div>
+    </div>
+    <div class="tools">
+      <div class="tools-head"><h3>Approved tools</h3><span class="tools-count">8 &middot; fixed</span></div>
+      <ul class="tool-list">
+        <li>rank_influencers</li><li>top_by_efficiency</li><li>revenue_driver</li><li>same_product_leaders</li>
+        <li>same_slot_leaders</li><li>variation_source</li><li>hour_performance</li><li>top_products</li>
+      </ul>
+    </div>
+    <div class="foot">Synthetic toy-retailer data, June 2024, queried live in your browser. The assistant runs only pre-written, parameterized queries; it cannot author SQL or change any influencer's status. Read-only.</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>AI Influencer Performance Assistant</h1>
+      <div class="meta">Ask about the Who Really Drives Sales study. The agent picks one approved tool and answers live from the data.</div>
+    </header>
+    <section class="thread" id="thread">
+      <div class="row bot">
+        <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+        <div class="bubble"><div class="lead">I can answer questions about the <b>10 TikTok live influencers</b> in this study. Each ran the same <b>120 one-hour sessions</b>, so the numbers compare like-for-like: who sells most, what actually drives sales, and whether the results come from the person, their slot, or their products. Ask in plain language, or tap a prompt below.</div></div>
+      </div>
+    </section>
+    <div class="composer">
+      <div class="chips" id="chips">
+        <button class="chip" data-key="rank">Who generates the most revenue and units?</button>
+        <button class="chip" data-key="eff">Who earns the most revenue per hour?</button>
+        <button class="chip" data-key="aud">Does a bigger audience mean more sales?</button>
+        <button class="chip" data-key="eng">Does higher engagement mean more sales?</button>
+        <button class="chip" data-key="conv">Does a higher conversion rate mean more revenue?</button>
+        <button class="chip" data-key="product">Selling the same products, who consistently wins?</button>
+        <button class="chip" data-key="slot">In the same hour slots, who consistently wins?</button>
+        <button class="chip" data-key="variation">Is it the influencer, the product, or the slot?</button>
+        <button class="chip" data-key="hour">Which hour slots perform best?</button>
+        <button class="chip" data-key="products">Which products sell the most?</button>
+        <button class="chip warn" data-key="refuse">Please promote influencer 3 to premium influencer</button>
+      </div>
+      <div class="inputbar">
+        <input id="input" type="text" placeholder="Ask about the 10 influencers...">
+        <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="disclaimer">The assistant surfaces study data for you to interpret. It cannot promote, keep, or dismiss anyone; those are management decisions.</div>
+    </div>
+  </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+let db=null, dbReady=false;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const usd=v=>'$'+Number(v).toLocaleString(undefined,{maximumFractionDigits:0});
+
+const SQL={
+  rank_influencers:`SELECT influencer_id, grp, revenue, units, rev_per_hr, verdict FROM roster ORDER BY revenue DESC`,
+  top_by_efficiency:`SELECT influencer_id, grp, rev_per_hr, revenue, units, verdict FROM roster ORDER BY rev_per_hr DESC`,
+  revenue_driver:`SELECT factor, correlation, plain FROM drivers WHERE factor=:factor`,
+  same_product_leaders:`SELECT influencer_id, grp, avg_rank, times_rank1, verdict FROM product_consistency ORDER BY avg_rank ASC`,
+  same_slot_leaders:`SELECT influencer_id, grp, revenue, rev_per_hr, verdict FROM roster ORDER BY grp ASC, revenue DESC`,
+  variation_source:`SELECT source, role, evidence FROM variation`,
+  hour_performance:`SELECT start_time, audience, engagement, conversion, sell_pressure FROM hours ORDER BY hour_order`,
+  top_products:`SELECT product_name, revenue, units, avg_price, n_influencers FROM products ORDER BY revenue DESC LIMIT :n`
+};
+function run(sql,params){const st=db.prepare(sql);if(params)st.bind(params);const o=[];while(st.step())o.push(st.getAsObject());st.free();return o;}
+
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const info=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const vb=v=>`<span class="vb ${v}">${v}</span>`;
+const noteEl=t=>`<div class="note">${info} ${t}</div>`;
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+function tbl(head,body){return `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;}
+
+function driverCard(factor,question){
+  const r=run(SQL.revenue_driver,{':factor':factor})[0];
+  const c=r.correlation, cls=c>0.3?'good':'bad', ans=c>0.3?'A little, yes':'No';
+  return badge('revenue_driver')+
+    `<div class="lead">${question} <b>${ans}.</b></div>
+     <div class="card"><div class="kpis">
+       <div class="kpi ${cls}"><div class="v">${c>0?'+':''}${c.toFixed(2)}</div><div class="l">correlation with revenue</div></div>
+     </div><p class="cap" style="margin-top:13px">${esc(r.plain)}</p>
+     ${noteEl('Correlation across the 10 influencers, computed live from the data.')}</div>`;
+}
+
+const responses={
+  rank(){
+    const d=run(SQL.rank_influencers);
+    const body=d.map((x,i)=>`<tr><td>${i+1}</td><td class="nm">#${x.influencer_id}</td><td>${x.grp}</td><td class="num">${usd(x.revenue)}</td><td class="num">${usd(x.rev_per_hr)}</td><td class="num">${x.units}</td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('rank_influencers')+
+      `<div class="lead">The leaderboard by revenue. <b>#3</b> leads at ${usd(d[0].revenue)} and <b>#10</b> trails at ${usd(d[d.length-1].revenue)}, a 1.56 times gap for the same 120 hours.</div>
+      <div class="card"><h4>Influencers ranked by revenue</h4><div class="cap">Revenue, revenue per hour, units, and verdict</div>
+      ${tbl('<th>#</th><th>Influencer</th><th>Group</th><th>Revenue</th><th>Rev/hr</th><th>Units</th><th>Verdict</th>',body)}</div>`;
+  },
+  eff(){
+    const d=run(SQL.top_by_efficiency);
+    const body=d.map((x,i)=>`<tr><td>${i+1}</td><td class="nm">#${x.influencer_id}</td><td>${x.grp}</td><td class="num"><b>${usd(x.rev_per_hr)}</b></td><td class="num">${usd(x.revenue)}</td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('top_by_efficiency')+
+      `<div class="lead">Because every influencer streamed the same 120 hours, revenue per hour is pure efficiency. <b>#3</b> earns ${usd(d[0].rev_per_hr)} an hour against ${usd(d[d.length-1].rev_per_hr)} at the bottom.</div>
+      <div class="card"><h4>Revenue per streaming hour</h4><div class="cap">Ranked by dollars earned per hour live</div>
+      ${tbl('<th>#</th><th>Influencer</th><th>Group</th><th>Rev/hr</th><th>Revenue</th><th>Verdict</th>',body)}</div>`;
+  },
+  aud(){ return driverCard('audience','Does a bigger audience lead to more sales?'); },
+  eng(){ return driverCard('engagement','Does higher engagement lead to more sales?'); },
+  conv(){ return driverCard('conversion','Does a higher conversion rate lead to more revenue?'); },
+  product(){
+    const d=run(SQL.same_product_leaders);
+    const body=d.map((x,i)=>`<tr><td>${i+1}</td><td class="nm">#${x.influencer_id}</td><td>${x.grp}</td><td class="num"><b>${x.avg_rank.toFixed(2)}</b></td><td class="num">${x.times_rank1}</td><td>${vb(x.verdict)}</td></tr>`).join('');
+    return badge('same_product_leaders')+
+      `<div class="lead">Selling the same toys, the same people win. Ranked by average position across all 103 products (1 is best), the four <b>Promote</b> influencers hold the top spots, so the lead is skill, not a lucky product.</div>
+      <div class="card"><h4>Consistency across the same products</h4><div class="cap">Average rank and number-one finishes over 103 toys</div>
+      ${tbl('<th>#</th><th>Influencer</th><th>Group</th><th>Avg rank</th><th>#1 finishes</th><th>Verdict</th>',body)}</div>`;
+  },
+  slot(){
+    const d=run(SQL.same_slot_leaders);
+    const mk=g=>d.filter(x=>x.grp===g).map((x,i)=>`<tr><td>${i+1}</td><td class="nm">#${x.influencer_id}</td><td class="num">${usd(x.revenue)}</td><td class="num">${usd(x.rev_per_hr)}</td><td>${vb(x.verdict)}</td></tr>`).join('');
+    const h='<th>#</th><th>Influencer</th><th>Revenue</th><th>Rev/hr</th><th>Verdict</th>';
+    return badge('same_slot_leaders')+
+      `<div class="lead">Each group works identical hours, so any gap inside a group cannot be the slot. Yet both spread widely (1.3 to 1.45 times top to bottom), so the difference is the person, not the schedule.</div>
+      <div class="card"><h4>Same slots, different results</h4><div class="cap">Each group's five influencers worked the same four hours</div>
+      <div class="grp-h">Group a &middot; 8pm, 10pm, 12am, 2am</div>${tbl(h,mk('a'))}
+      <div class="grp-h">Group b &middot; 9pm, 11pm, 1am, 3am</div>${tbl(h,mk('b'))}</div>`;
+  },
+  variation(){
+    const d=run(SQL.variation_source);
+    const cls={'The main driver':'main','A minor factor':'minor','Cannot explain it':'no'};
+    const cards=d.map(x=>`<div class="src"><div class="st"><span class="sn">${esc(x.source)}</span><span class="role ${cls[x.role]||'no'}">${esc(x.role)}</span></div><div class="ev">${esc(x.evidence)}</div></div>`).join('');
+    return badge('variation_source')+
+      `<div class="lead">What drives the revenue gap: <b>the influencer, decisively.</b> Product mix adds a little and the time slot adds almost nothing.</div>
+      <div class="card"><h4>Influencer, product, or slot?</h4><div class="cap">Where the differences in revenue actually come from</div>${cards}
+      ${noteEl('Each line is grounded in the figures the study computed.')}</div>`;
+  },
+  hour(){
+    const d=run(SQL.hour_performance);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.start_time)}</td><td class="num">${Math.round(x.audience)}</td><td class="num">${x.engagement.toFixed(1)}%</td><td class="num">${x.conversion.toFixed(2)}%</td><td class="num"><b>${x.sell_pressure.toFixed(1)}</b></td></tr>`).join('');
+    return badge('hour_performance')+
+      `<div class="lead">3am draws the biggest crowd and the most selling pressure, but the whole night is close (22.8 to 27.4 expected buyers), so no influencer is helped or hurt much by their slot.</div>
+      <div class="card"><h4>Performance by hour slot</h4><div class="cap">Audience, engagement, conversion, and expected buyers per session</div>
+      ${tbl('<th>Hour</th><th>Audience</th><th>Engage</th><th>Convert</th><th>Buyers/session</th>',body)}</div>`;
+  },
+  products(){
+    const d=run(SQL.top_products,{':n':10});
+    const body=d.map((x,i)=>`<tr><td>${i+1}</td><td class="nm">${esc(x.product_name)}</td><td class="num">${usd(x.revenue)}</td><td class="num">${x.units}</td><td class="num">$${x.avg_price.toFixed(0)}</td></tr>`).join('');
+    return badge('top_products')+
+      `<div class="lead">No hero toy. The best seller, ${esc(d[0].product_name)}, is just ${usd(d[0].revenue)}, about 1.7% of the $515,317 total, so revenue is spread across the whole catalogue rather than carried by one product.</div>
+      <div class="card"><h4>Top products by revenue</h4><div class="cap">Top 10 of 103 toys</div>
+      ${tbl('<th>#</th><th>Product</th><th>Revenue</th><th>Units</th><th>Avg price</th>',body)}</div>`;
+  },
+  refuse(){
+    return `<div class="refuse">
+      <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="#b07d27" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 18h.01"/></svg><span>Outside my approved tools</span></div>
+      <p>I can't promote influencer 3, or change anyone's status. Promoting, keeping, or dismissing is a management action, and I have no tool that writes to the data. I work read-only through a fixed set of pre-written queries, so changing a record is not something I can do.</p>
+      <p style="margin-top:9px">What I can do: show you why #3 leads, their rank and revenue (rank_influencers), how they hold up selling the same products (same_product_leaders), and the verdict the benchmark assigns. The decision stays yours.</p>
+      <div class="why">no_tool_matched &middot; write / status-change not defined &middot; access = read-only</div></div>`;
+  }
+};
+
+const userText={rank:"Which influencers generate the most revenue and units?",eff:"Who earns the most revenue per streaming hour?",aud:"Does a bigger audience lead to more sales?",eng:"Does higher engagement lead to more sales?",conv:"Does a higher conversion rate lead to more revenue?",product:"Selling the same products, which influencers consistently win?",slot:"In the same hour slots, which influencers consistently win?",variation:"What drives revenue: the influencer, the product, or the slot?",hour:"Which hour slots perform best?",products:"Which products sell the most?",refuse:"Please promote influencer 3 to premium influencer"};
+const thinkLabel={rank:"rank_influencers",eff:"top_by_efficiency",aud:"revenue_driver",eng:"revenue_driver",conv:"revenue_driver",product:"same_product_leaders",slot:"same_slot_leaders",variation:"variation_source",hour:"hour_performance",products:"top_products",refuse:"checking approved tools"};
+
+function addUser(t){thread.insertAdjacentHTML('beforeend',`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div>`);scroll();}
+function respond(key){
+  const id='t'+thread.children.length;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${thinkLabel[key]}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=responses[key]();scroll();},760);
+}
+function ask(key){addUser(userText[key]);setTimeout(()=>respond(key),220);}
+
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b||!dbReady)return;ask(b.dataset.key);});
+const input=document.getElementById('input');
+function route(){
+  const t=input.value.trim();if(!t||!dbReady)return;input.value='';const q=t.toLowerCase();let key=null;
+  if(/promote\s+(influencer\s*)?#?\d|demote|make .* premium|set .*(premium|status|tier)|change .*(status|tier|verdict|rank)|fire |terminate|hire |add .* influencer|update |insert |delete |drop |raw sql|select \*|run (a )?query|write (a |me )?(sql|query)|dump|export every|full record/.test(q))key='refuse';
+  else if(/influencer.*product.*slot|product.*slot|what (drives|contributes|explains).*(variation|gap|differen)|talent.*(product|schedule)|skill or (the )?(product|slot)|is (it|success) (really )?(due to|the influencer)/.test(q))key='variation';
+  else if(/same product|same.*products|selling the same|product popularit|consistent.*(across|product)|outperform.*product/.test(q))key='product';
+  else if(/which product|top product|best.?selling (toy|product)|product.*(revenue|sell|sold)|hero product|what should we sell|best (toy|product)/.test(q))key='products';
+  else if(/same (hour |time )?slot|same hours|same rota|within.*group|time.?slot advantage|outperform.*(hour|slot)/.test(q))key='slot';
+  else if(/per hour|per streaming hour|efficien|revenue per hour|most efficient/.test(q))key='eff';
+  else if(/audience|crowd|viewer|reach|how many watch/.test(q))key='aud';
+  else if(/engagement|engage|attention|interaction/.test(q))key='eng';
+  else if(/conversion|convert|closing|close rate/.test(q))key='conv';
+  else if(/which hour|best hour|hour slot|time window|when (should|to) stream|best time|what time/.test(q))key='hour';
+  else if(/rank|leaderboard|most revenue|top sellers|best sellers|who.*(sold|generate|sell).*(most|revenue)|highest revenue|who.*winning|who is winning/.test(q))key='rank';
+  addUser(t);
+  if(key)setTimeout(()=>respond(key),220);
+  else setTimeout(()=>{thread.insertAdjacentHTML('beforeend',`<div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Try a suggested prompt to see it answer live from the data.</div></div></div>`);scroll();},220);
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')route();});
+
+initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`})
+  .then(S=>fetch('who-really-drives-sales.db').then(r=>r.arrayBuffer()).then(buf=>{
+    db=new S.Database(new Uint8Array(buf));dbReady=true;
+    document.getElementById('dbdot').className='dot';
+    document.getElementById('dbstat').textContent='Database ready';
+  }))
+  .catch(e=>{document.getElementById('dbstat').textContent='Load failed, serve over http';console.error(e);});
+</script>
+</body>
+</html>
