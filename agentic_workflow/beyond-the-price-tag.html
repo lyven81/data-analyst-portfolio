@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Review Insights Assistant | Beyond the Price Tag</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#5A3E2B; --navy2:#3f2c1e; --gold:#C8961E; --gold-soft:#FBF6EE; --bg:#F4ECE0;
+    --ink:#33271C; --muted:#8A7660; --line:#E8DCC9; --card:#fff;
+    --green:#3C8C5A; --green-soft:#e7f3ec; --red:#c0392b; --amber:#9a7414;
+    --shadow:0 1px 2px rgba(31,58,95,.05),0 8px 24px rgba(31,58,95,.06);
+    --shadow-sm:0 1px 2px rgba(31,58,95,.05);
+    --body:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;height:100vh;overflow:hidden}
+  .sidebar{width:290px;flex-shrink:0;background:linear-gradient(180deg,var(--navy),var(--navy2));color:#dce6f1;padding:24px 20px;display:flex;flex-direction:column;gap:20px;overflow-y:auto}
+  .brand-name{font-size:18px;font-weight:700;color:#fff}
+  .brand-sub{font-size:11px;color:#fff;letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+  .status{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 14px}
+  .status-title{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;margin-bottom:10px}
+  .pill{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#EADDCB;padding:4px 0}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(46,139,87,.18)}
+  .dot.lock{background:var(--gold);box-shadow:0 0 0 3px rgba(200,162,75,.18)}
+  .dot.loading{background:#c9a055;box-shadow:0 0 0 3px rgba(201,160,85,.18)}
+  .nav{display:flex;flex-direction:column;gap:8px}
+  .nav a{font-size:13px;color:#EADDCB;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 13px;transition:all .18s}
+  .nav a:hover{background:rgba(200,162,75,.16);border-color:var(--gold)}
+  .nav a.active{background:var(--gold);color:var(--navy);font-weight:600;border-color:var(--gold)}
+  .tools-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .tools-head h3{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;font-weight:600}
+  .tools-count{font-size:10.5px;color:#C9B79D;background:rgba(255,255,255,.07);padding:2px 8px;border-radius:20px}
+  .tool-list{list-style:none;display:flex;flex-direction:column;gap:1px}
+  .tool-list li{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#CDBCA2;padding:6px 8px;border-radius:7px;display:flex;align-items:center;gap:8px}
+  .tool-list li::before{content:"";width:5px;height:5px;border-radius:1.5px;background:var(--gold);flex-shrink:0}
+  .foot{font-size:11px;color:#B5A084;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:13px;margin-top:auto}
+  .main{flex:1;display:flex;flex-direction:column;min-width:0}
+  .topbar{padding:17px 30px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .topbar h1{font-size:19px;font-weight:600;color:var(--navy)}
+  .topbar .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .thread{flex:1;overflow-y:auto;padding:28px 30px 12px;display:flex;flex-direction:column;gap:20px}
+  .row{display:flex;gap:12px;max-width:760px;animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .row.user{margin-left:auto;flex-direction:row-reverse}
+  .av{width:34px;height:34px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .av.bot{background:var(--navy);color:#fff}.av.bot svg{width:17px;height:17px}
+  .av.me{background:#e7dccb;color:var(--navy)}
+  .bubble{font-size:14px;line-height:1.55}
+  .row.user .bubble{background:var(--navy);color:#f3ece1;padding:11px 15px;border-radius:14px 14px 4px 14px}
+  .lead{margin-bottom:11px}.lead b{color:var(--navy);font-weight:600}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--navy);background:var(--gold-soft);border:1px solid #ecdcb0;padding:4px 10px;border-radius:7px;margin-bottom:11px}
+  .badge svg{width:12px;height:12px}.badge .lbl{color:#a98f4f}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px 18px;box-shadow:var(--shadow);max-width:600px}
+  .card h4{font-size:14.5px;color:var(--navy);font-weight:600;margin-bottom:3px}
+  .card .cap{font-size:12px;color:var(--muted);margin-bottom:13px}
+  .kpis{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi{flex:1;min-width:104px;background:#faf6ef;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center}
+  .kpi .v{font-size:26px;font-weight:700;color:var(--navy)}
+  .kpi.good .v{color:var(--green)}.kpi.bad .v{color:var(--red)}
+  .kpi .l{font-size:11px;color:var(--muted);margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.3px;padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px;border-bottom:1px solid #f1e9db}
+  tr:last-child td{border-bottom:none}
+  td.nm{font-weight:600;color:var(--ink)}
+  .scroll{max-height:360px;overflow-y:auto}
+  .scroll::-webkit-scrollbar{width:7px}.scroll::-webkit-scrollbar-thumb{background:#d8cab2;border-radius:7px}
+  .vb{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .vb.POS{background:var(--green-soft);color:var(--green)}.vb.NEU{background:#fcf2da;color:var(--amber)}.vb.NEG{background:#fbe9e7;color:var(--red)}
+  .seg{display:flex;align-items:center;gap:11px;margin:9px 0}
+  .seg-lbl{width:120px;font-size:12.5px;flex-shrink:0}
+  .seg-track{flex:1;height:22px;background:#f3ece0;border-radius:6px;overflow:hidden}
+  .seg-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),#e0c074);display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--navy);font-size:11px;font-weight:700;min-width:24px}
+  .rev{border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:9px;background:#faf6ef}
+  .rev .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:12px;color:var(--muted)}
+  .rev .rt{font-size:13px;color:var(--ink);line-height:1.5}
+  .stars{color:var(--gold);font-size:12px;letter-spacing:1px}
+  .note{font-size:11px;color:#a08b6f;margin-top:12px;display:flex;align-items:center;gap:6px}.note svg{width:12px;height:12px;flex-shrink:0}
+  .refuse{background:var(--gold-soft);border:1px solid #f0e2c2;border-radius:15px;padding:16px 18px;max-width:600px}
+  .refuse .rh{display:flex;align-items:center;gap:9px;margin-bottom:7px}.refuse .rh svg{width:17px;height:17px}
+  .refuse .rh span{font-weight:600;color:#b07d27;font-size:13.5px}
+  .refuse p{font-size:13.5px;line-height:1.55;color:#6a5526}
+  .refuse .why{font-size:11px;color:#9c8443;margin-top:10px;font-family:ui-monospace,monospace}
+  .think{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+  .think .tdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite}
+  .think .tdot:nth-child(2){animation-delay:.2s}.think .tdot:nth-child(3){animation-delay:.4s}
+  @keyframes pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+  .composer{padding:13px 30px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+  .chip{font-size:12px;color:var(--navy);background:#fff;border:1px solid #e0d3bf;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .18s;font-family:var(--body)}
+  .chip:hover{border-color:var(--gold);background:var(--gold-soft);transform:translateY(-1px)}
+  .chip.warn{border-color:#ebd8ae;color:#b07d27;background:#fcf6e9}
+  .inputbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e0d3bf;border-radius:12px;padding:5px 5px 5px 16px;box-shadow:var(--shadow-sm)}
+  .inputbar input{flex:1;border:none;outline:none;font-family:var(--body);font-size:13.5px;color:var(--ink);background:transparent;padding:8px 0}
+  .send{width:38px;height:38px;border-radius:10px;border:none;background:var(--navy);color:#fff;cursor:pointer;display:grid;place-items:center}.send:hover{background:var(--navy2)}.send svg{width:17px;height:17px}
+  .disclaimer{text-align:center;font-size:11px;color:#ac9c84;margin-top:10px}
+  @media(max-width:860px){.sidebar{display:none}.thread,.topbar,.composer{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div><div class="brand-name">Lee Yih Ven</div><div class="brand-sub">Data Analytics Portfolio</div></div>
+    <nav class="nav">
+      <a href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/beyond-the-price-tag.html">Case Study</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/beyond-the-price-tag-dashboard.html">Dashboard</a>
+      <a class="active" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/beyond-the-price-tag.html">AI Assistant</a>
+    </nav>
+    <div class="status">
+      <div class="status-title">Asset status</div>
+      <div class="pill"><span class="dot"></span> Read-only access</div>
+      <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+      <div class="pill"><span class="dot loading" id="dbdot"></span> <span id="dbstat">Loading database...</span></div>
+    </div>
+    <div class="tools">
+      <div class="tools-head"><h3>Approved tools</h3><span class="tools-count">10 &middot; fixed</span></div>
+      <ul class="tool-list">
+        <li>review_summary</li><li>brand_satisfaction</li><li>feature_drivers</li><li>price_vs_satisfaction</li>
+        <li>age_group_sentiment</li><li>platform_comparison</li><li>country_sentiment</li><li>language_sentiment</li>
+        <li>top_models</li><li>sample_reviews</li>
+      </ul>
+    </div>
+    <div class="foot">A representative 10,000-review sample of the 50,000 smartphone reviews, queried live in your browser. The assistant runs only pre-written, parameterized queries; it cannot author SQL, dump records, or return customer identities (names are not in the database). Synthetic dataset, for portfolio demonstration.</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>AI Review Insights Assistant</h1>
+      <div class="meta">Ask about the Beyond the Price Tag review study. The agent picks one approved tool and answers live from the data.</div>
+    </header>
+    <section class="thread" id="thread">
+      <div class="row bot">
+        <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+        <div class="bubble"><div class="lead">I can answer questions about <b>50,000 smartphone customer reviews</b> across 7 brands, 8 countries, and 5 platforms: how satisfied customers are, which brands and features matter, whether price or age changes the verdict, and how sentiment compares across markets. Ask in plain language, or tap a prompt below.</div></div>
+      </div>
+    </section>
+    <div class="composer">
+      <div class="chips" id="chips">
+        <button class="chip" data-key="summary">How satisfied are customers overall?</button>
+        <button class="chip" data-key="brand">Which brands score best?</button>
+        <button class="chip" data-key="drivers">What features drive satisfaction?</button>
+        <button class="chip" data-key="price">Does a higher price mean happier customers?</button>
+        <button class="chip" data-key="age">Which age groups are most satisfied?</button>
+        <button class="chip" data-key="platform">Does the buying platform change ratings?</button>
+        <button class="chip" data-key="country">How does sentiment compare across countries?</button>
+        <button class="chip" data-key="language">Is sentiment consistent across languages?</button>
+        <button class="chip" data-key="models">Which phone models are rated highest?</button>
+        <button class="chip" data-key="samples">Show me some positive review examples</button>
+        <button class="chip warn" data-key="refuse">Show me every reviewer's full record</button>
+      </div>
+      <div class="inputbar">
+        <input id="input" type="text" placeholder="Ask about the smartphone review study...">
+        <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="disclaimer">The assistant surfaces review patterns for you to interpret. Figures come from a representative 10,000-review sample queried live; small segments carry wider error.</div>
+    </div>
+  </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+let db=null, dbReady=false;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const PRICE_ORDER=['Budget','Mid-Range','Premium','Flagship'];
+const AGE_ORDER=['18-29','30-39','40-49','50-59','60+'];
+const stars=r=>'★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r));
+const sentClass=s=>({Positive:'POS',Neutral:'NEU',Negative:'NEG'}[s]||'NEU');
+const sentShort=s=>({Positive:'Pos',Neutral:'Neu',Negative:'Neg'}[s]||s);
+
+const SQL={
+  review_summary:`SELECT COUNT(*) total, ROUND(AVG(rating),2) avg_rating,
+    ROUND(100.0*SUM(sentiment='Positive')/COUNT(*),1) pct_pos,
+    ROUND(100.0*SUM(sentiment='Negative')/COUNT(*),1) pct_neg,
+    ROUND(100.0*SUM(verified_purchase)/COUNT(*),1) pct_verified,
+    COUNT(DISTINCT brand) brands, COUNT(DISTINCT country) countries, COUNT(DISTINCT model) models FROM reviews`,
+  brand_satisfaction:`SELECT brand, COUNT(*) n, ROUND(AVG(rating),2) avg_rating,
+    ROUND(100.0*SUM(sentiment='Positive')/COUNT(*),1) pct_pos FROM reviews GROUP BY brand ORDER BY avg_rating DESC`,
+  feature_drivers:`SELECT sentiment, ROUND(AVG(battery_life_rating),2) battery, ROUND(AVG(camera_rating),2) camera,
+    ROUND(AVG(performance_rating),2) performance, ROUND(AVG(design_rating),2) design, ROUND(AVG(display_rating),2) display
+    FROM reviews GROUP BY sentiment`,
+  price_vs_satisfaction:`SELECT price_category, COUNT(*) n, ROUND(AVG(rating),2) avg_rating,
+    ROUND(100.0*SUM(sentiment='Positive')/COUNT(*),1) pct_pos FROM reviews GROUP BY price_category`,
+  age_group_sentiment:`SELECT age_group, COUNT(*) n, ROUND(AVG(rating),2) avg_rating,
+    ROUND(100.0*SUM(sentiment='Positive')/COUNT(*),1) pct_pos FROM reviews GROUP BY age_group`,
+  platform_comparison:`SELECT source, COUNT(*) n, ROUND(AVG(rating),2) avg_rating,
+    ROUND(100.0*SUM(sentiment='Positive')/COUNT(*),1) pct_pos FROM reviews GROUP BY source ORDER BY avg_rating DESC`,
+  country_sentiment:`SELECT country, COUNT(*) n, ROUND(AVG(rating),2) avg_rating,
+    ROUND(100.0*SUM(sentiment='Positive')/COUNT(*),1) pct_pos FROM reviews GROUP BY country ORDER BY pct_pos DESC`,
+  language_sentiment:`SELECT language, COUNT(*) n, ROUND(AVG(rating),2) avg_rating,
+    ROUND(100.0*SUM(sentiment='Positive')/COUNT(*),1) pct_pos FROM reviews GROUP BY language ORDER BY pct_pos DESC`,
+  top_models:`SELECT model, brand, COUNT(*) n, ROUND(AVG(rating),2) avg_rating FROM reviews
+    GROUP BY model HAVING COUNT(*) >= :minn ORDER BY avg_rating DESC LIMIT :n`,
+  sample_reviews:`SELECT brand, model, rating, sentiment, review_text FROM reviews
+    WHERE sentiment = :sentiment ORDER BY helpful_votes DESC LIMIT :n`
+};
+function run(sql,params){const st=db.prepare(sql);if(params)st.bind(params);const o=[];while(st.step())o.push(st.getAsObject());st.free();return o;}
+
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const info=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const sb=s=>`<span class="vb ${sentClass(s)}">${sentShort(s)}</span>`;
+const noteEl=t=>`<div class="note">${info} ${t}</div>`;
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+function tbl(head,body){return `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;}
+
+const responses={
+  summary(){
+    const r=run(SQL.review_summary)[0];
+    return badge('review_summary')+
+      `<div class="lead">Across <b>${r.total.toLocaleString()}</b> reviews in the sample, the average rating is <b>${r.avg_rating}</b> out of 5 and <b>${r.pct_pos}%</b> are positive. Ratings cluster around the middle: the experience, not the badge, decides the score.</div>
+      <div class="card"><div class="kpis">
+        <div class="kpi"><div class="v">${r.avg_rating}</div><div class="l">avg rating / 5</div></div>
+        <div class="kpi good"><div class="v">${r.pct_pos}%</div><div class="l">positive</div></div>
+        <div class="kpi bad"><div class="v">${r.pct_neg}%</div><div class="l">negative</div></div>
+        <div class="kpi"><div class="v">${r.pct_verified}%</div><div class="l">verified buyers</div></div>
+      </div>
+      <div class="cap" style="margin-top:13px">${r.brands} brands &middot; ${r.models} models &middot; ${r.countries} countries</div>
+      ${noteEl('Counts come straight from the review database, not a guess.')}</div>`;
+  },
+  brand(){
+    const d=run(SQL.brand_satisfaction);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.brand)}</td><td>${x.n.toLocaleString()}</td><td><b>${x.avg_rating.toFixed(2)}</b></td><td>${x.pct_pos}%</td></tr>`).join('');
+    return badge('brand_satisfaction')+
+      `<div class="lead">Brands sit within a narrow band: the top and bottom are barely <b>0.10 stars</b> apart. No brand wins on rating alone, which is the headline of this study.</div>
+      <div class="card"><h4>Satisfaction by brand</h4><div class="cap">Average rating and positive share, ranked</div>
+      ${tbl('<th>Brand</th><th>Reviews</th><th>Avg rating</th><th>Positive</th>',body)}</div>`;
+  },
+  drivers(){
+    const d=run(SQL.feature_drivers);
+    const pos=d.find(x=>x.sentiment==='Positive'), neg=d.find(x=>x.sentiment==='Negative');
+    const feats=[['Battery','battery'],['Camera','camera'],['Performance','performance'],['Design','design'],['Display','display']];
+    const gaps=feats.map(([lbl,k])=>({lbl,gap:+(pos[k]-neg[k]).toFixed(2),pos:pos[k],neg:neg[k]})).sort((a,b)=>b.gap-a.gap);
+    const max=Math.max(...gaps.map(g=>g.gap));
+    const bars=gaps.map(g=>`<div class="seg"><span class="seg-lbl">${g.lbl}</span><div class="seg-track"><div class="seg-fill" style="width:${Math.round(g.gap/max*100)}%">${g.gap.toFixed(2)}</div></div></div>`).join('');
+    return badge('feature_drivers')+
+      `<div class="lead">Each bar is the gap in a feature's rating between happy and unhappy customers (positive minus negative). The wider the gap, the more that feature separates a good review from a bad one. They are <b>almost equal</b>: customers reward phones that simply work well across the board.</div>
+      <div class="card"><h4>What separates happy from unhappy customers</h4><div class="cap">Average feature rating: positive reviews vs negative reviews</div>${bars}
+      ${noteEl('Positive reviews average around '+pos.battery.toFixed(1)+'/5 on features; negative reviews around '+neg.battery.toFixed(1)+'/5.')}</div>`;
+  },
+  price(){
+    const d=run(SQL.price_vs_satisfaction);
+    d.sort((a,b)=>PRICE_ORDER.indexOf(a.price_category)-PRICE_ORDER.indexOf(b.price_category));
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.price_category)}</td><td>${x.n.toLocaleString()}</td><td><b>${x.avg_rating.toFixed(2)}</b></td><td>${x.pct_pos}%</td></tr>`).join('');
+    return badge('price_vs_satisfaction')+
+      `<div class="lead">Spending more does not buy happiness: average rating barely moves from budget to flagship. Satisfaction is value-based, not price-based.</div>
+      <div class="card"><h4>Satisfaction by price tier</h4><div class="cap">Budget, mid-range, premium, flagship</div>
+      ${tbl('<th>Price tier</th><th>Reviews</th><th>Avg rating</th><th>Positive</th>',body)}</div>`;
+  },
+  age(){
+    const d=run(SQL.age_group_sentiment);
+    d.sort((a,b)=>AGE_ORDER.indexOf(a.age_group)-AGE_ORDER.indexOf(b.age_group));
+    const small=d.some(x=>x.n<50);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.age_group)}</td><td>${x.n.toLocaleString()}${x.n<50?' <span style="color:var(--amber)">small</span>':''}</td><td><b>${x.avg_rating.toFixed(2)}</b></td><td>${x.pct_pos}%</td></tr>`).join('');
+    return badge('age_group_sentiment')+
+      `<div class="lead">Satisfaction is fairly steady across ages. The reviewer base skews young, so the oldest groups have few reviews and should be read with caution.</div>
+      <div class="card"><h4>Satisfaction by age group</h4><div class="cap">Average rating and positive share</div>
+      ${tbl('<th>Age group</th><th>Reviews</th><th>Avg rating</th><th>Positive</th>',body)}
+      ${small?noteEl('Groups flagged "small" have under 50 reviews; their averages are noisy.'):''}</div>`;
+  },
+  platform(){
+    const d=run(SQL.platform_comparison);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.source)}</td><td>${x.n.toLocaleString()}</td><td><b>${x.avg_rating.toFixed(2)}</b></td><td>${x.pct_pos}%</td></tr>`).join('');
+    return badge('platform_comparison')+
+      `<div class="lead">Where the phone is bought barely changes the verdict: every marketplace lands around 3.1 stars. The platform shapes tone, not satisfaction.</div>
+      <div class="card"><h4>Satisfaction by platform</h4><div class="cap">Across the five marketplaces, ranked</div>
+      ${tbl('<th>Platform</th><th>Reviews</th><th>Avg rating</th><th>Positive</th>',body)}</div>`;
+  },
+  country(){
+    const d=run(SQL.country_sentiment);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.country)}</td><td>${x.n.toLocaleString()}</td><td><b>${x.avg_rating.toFixed(2)}</b></td><td>${x.pct_pos}%</td></tr>`).join('');
+    return badge('country_sentiment')+
+      `<div class="lead">Eight markets, one consistent story. Positive share is highest in the lead markets and lowest in others, but the spread is modest, so a unified global message works.</div>
+      <div class="card"><h4>Sentiment by country</h4><div class="cap">Ranked by positive share</div>
+      ${tbl('<th>Country</th><th>Reviews</th><th>Avg rating</th><th>Positive</th>',body)}</div>`;
+  },
+  language(){
+    const d=run(SQL.language_sentiment);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.language)}</td><td>${x.n.toLocaleString()}</td><td><b>${x.avg_rating.toFixed(2)}</b></td><td>${x.pct_pos}%</td></tr>`).join('');
+    return badge('language_sentiment')+
+      `<div class="lead">Review language barely shifts the verdict. English, German, Hindi, and Portuguese reviews score within a narrow band, so sentiment translates across cultures.</div>
+      <div class="card"><h4>Sentiment by language</h4><div class="cap">Ranked by positive share</div>
+      ${tbl('<th>Language</th><th>Reviews</th><th>Avg rating</th><th>Positive</th>',body)}</div>`;
+  },
+  models(){
+    const d=run(SQL.top_models,{':minn':50,':n':10});
+    const body=d.map((x,i)=>`<tr><td>${i+1}</td><td class="nm">${esc(x.model)}</td><td>${esc(x.brand)}</td><td>${x.n.toLocaleString()}</td><td><b>${x.avg_rating.toFixed(2)}</b></td></tr>`).join('');
+    return badge('top_models')+
+      `<div class="lead">The highest-rated models with a solid review base (50 or more reviews). Even the leaders sit close together, in line with the brand-level near-tie.</div>
+      <div class="card"><h4>Top-rated models</h4><div class="cap">Models with 50+ reviews, by average rating</div>
+      ${tbl('<th>#</th><th>Model</th><th>Brand</th><th>Reviews</th><th>Avg rating</th>',body)}</div>`;
+  },
+  samples(){
+    const d=run(SQL.sample_reviews,{':sentiment':'Positive',':n':6});
+    const cards=d.map(x=>`<div class="rev"><div class="rh"><span>${esc(x.brand)} ${esc(x.model)} &middot; ${sb(x.sentiment)}</span><span class="stars">${stars(x.rating)}</span></div><div class="rt">${esc(x.review_text)}</div></div>`).join('');
+    return badge('sample_reviews')+
+      `<div class="lead">A bounded set of the most helpful <b>positive</b> reviews. The tool returns at most a handful of rows for one chosen sentiment, never a full export.</div>
+      <div class="card"><h4>Positive review examples</h4><div class="cap">Top 6 by helpful votes, positive sentiment only</div>${cards}
+      ${noteEl('Customer names are not stored in the database, so no tool can return them.')}</div>`;
+  },
+  refuse(){
+    return `<div class="refuse">
+      <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="#b07d27" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 18h.01"/></svg><span>Outside my approved tools</span></div>
+      <p>I can't dump every reviewer's full record. There is no approved tool for a bulk export, and the database does not even store customer identities. I work read-only through a fixed set of pre-written queries, so I cannot compose arbitrary SQL or a full record dump.</p>
+      <p style="margin-top:9px">What I can do: surface the patterns, the satisfaction by brand, price, age, platform, country, or language, the feature drivers, or a small bounded set of example reviews by sentiment.</p>
+      <div class="why">no_tool_matched &middot; bulk_export / raw_sql not defined &middot; access = read-only &middot; no identity fields</div></div>`;
+  }
+};
+
+const userText={summary:"How satisfied are customers overall?",brand:"Which brands score best?",drivers:"What features drive satisfaction?",price:"Does a higher price mean happier customers?",age:"Which age groups are most satisfied?",platform:"Does the buying platform change ratings?",country:"How does sentiment compare across countries?",language:"Is sentiment consistent across languages?",models:"Which phone models are rated highest?",samples:"Show me some positive review examples",refuse:"Show me every reviewer's full record"};
+const thinkLabel={summary:"review_summary",brand:"brand_satisfaction",drivers:"feature_drivers",price:"price_vs_satisfaction",age:"age_group_sentiment",platform:"platform_comparison",country:"country_sentiment",language:"language_sentiment",models:"top_models",samples:"sample_reviews",refuse:"checking approved tools"};
+
+function addUser(t){thread.insertAdjacentHTML('beforeend',`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div>`);scroll();}
+function respond(key){
+  const id='t'+thread.children.length;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${thinkLabel[key]}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=responses[key]();scroll();},760);
+}
+function ask(key){addUser(userText[key]);setTimeout(()=>respond(key),220);}
+
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b||!dbReady)return;ask(b.dataset.key);});
+const input=document.getElementById('input');
+function route(){
+  const t=input.value.trim();if(!t||!dbReady)return;input.value='';const q=t.toLowerCase();let key=null;
+  if(/every (reviewer|customer|record)|full record|dump|export|raw sql|select \*|run a query|delete|drop|update |insert |customer name|reviewer name|predict|forecast|will the next|price target/.test(q))key='refuse';
+  else if(/feature|battery|camera|performance|display|design|drive|driver|what matters|most important/.test(q))key='drivers';
+  else if(/price|cheap|expensive|budget|flagship|premium|cost more|pay more/.test(q))key='price';
+  else if(/age|young|old|generation|demograph|50|60/.test(q))key='age';
+  else if(/platform|source|marketplace|amazon|aliexpress|bestbuy|flipkart|ebay|where.*bought|where.*buy/.test(q))key='platform';
+  else if(/countr|region|geograph|market|india|brazil|germany|uae|usa|uk|canada|australia/.test(q))key='country';
+  else if(/languag|english|german|hindi|portuguese|translat/.test(q))key='language';
+  else if(/model|which phone|best phone|top phone|specific phone/.test(q))key='models';
+  else if(/example|sample|show.*review|read.*review|what.*say|comment|quote/.test(q))key='samples';
+  else if(/brand|samsung|apple|google|xiaomi|realme|oneplus|motorola|manufacturer|maker/.test(q))key='brand';
+  else if(/how many|overall|summary|in general|satisf|positive|sentiment|average rating|how good/.test(q))key='summary';
+  addUser(t);
+  if(key)setTimeout(()=>respond(key),220);
+  else setTimeout(()=>{thread.insertAdjacentHTML('beforeend',`<div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Try a suggested prompt to see it answer live from the review data.</div></div></div>`);scroll();},220);
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')route();});
+
+initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`})
+  .then(S=>fetch('beyond-the-price-tag.db').then(r=>r.arrayBuffer()).then(buf=>{
+    db=new S.Database(new Uint8Array(buf));dbReady=true;
+    document.getElementById('dbdot').className='dot';
+    document.getElementById('dbstat').textContent='Database ready';
+  }))
+  .catch(e=>{document.getElementById('dbstat').textContent='Load failed, serve over http';console.error(e);});
+</script>
+</body>
+</html>
