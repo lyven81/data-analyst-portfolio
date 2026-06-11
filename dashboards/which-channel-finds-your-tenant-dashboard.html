@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which Channel Finds Your Tenant - Lead Source Attribution Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #403B36;
+            --secondary-color: #CBA135;
+            --background-color: #FCF9F2;
+            --text-color: #2C2C2C;
+            --card-background: #FFFFFF;
+            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
+            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
+            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #403B36 0%, #2C2822 100%);
+            color: #FCF9F2;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #CBA135 0%, #B8903A 100%);
+            color: #403B36;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(203, 161, 53, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid #CBA135;
+            color: #FCF9F2;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(203, 161, 53, 0.1);
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .page-btn.active {
+            background: var(--gold-gradient);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .page-btn:hover:not(.active) {
+            background: rgba(203, 161, 53, 0.1);
+        }
+
+        /* Filter bar */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            background: white;
+            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin: 0 auto 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-group select {
+            padding: 10px 12px;
+            border: 1.5px solid var(--secondary-color);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            background: var(--background-color);
+            cursor: pointer;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .print-heading {
+            display: none;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px auto;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(64, 59, 54, 0.15);
+        }
+
+        .kpi-label {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 500;
+            min-height: 2.9em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .kpi-sub {
+            font-size: 0.85rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin: 30px auto;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .chart-title {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .chart-note {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        thead {
+            background: var(--gradient);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        tr:hover {
+            background-color: rgba(203, 161, 53, 0.1);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .metric-positive {
+            color: #2E7D32;
+            font-weight: 600;
+        }
+
+        .metric-negative {
+            color: #C62828;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .page-nav {
+                flex-direction: column;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+            }
+        }
+
+        @media print {
+            .page-nav, .filter-bar, #loading, .cta-buttons {
+                display: none !important;
+            }
+            .page {
+                display: block !important;
+                animation: none !important;
+                page-break-before: always;
+            }
+            .print-heading {
+                display: block;
+                font-size: 1.6rem;
+                color: var(--primary-color);
+                margin: 20px 0;
+            }
+            .chart-card, .chart-container, .kpi-card, table {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Which Channel Finds Your Tenant</h1>
+            <p>Lead source attribution for a rental agency: which channel signs tenants, and what each one costs</p>
+            <div class="cta-buttons">
+                <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+                <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/which-channel-finds-your-tenant.html" class="cta-button cta-secondary">View Full Case Study</a>
+                <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button class="page-btn active" onclick="showPage(1)">Channel Scoreboard</button>
+            <button class="page-btn" onclick="showPage(2)">Lead Quality</button>
+            <button class="page-btn" onclick="showPage(3)">Property Type & Sell-Through</button>
+            <button class="page-btn" onclick="showPage(4)">Responsiveness</button>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label for="sourceFilter">Source</label>
+                <select id="sourceFilter">
+                    <option value="all">All sources</option>
+                    <option value="referral">WhatsApp referral</option>
+                    <option value="propertyguru">PropertyGuru</option>
+                    <option value="google_ads">Google Ads</option>
+                    <option value="meta_ads">Meta Ads</option>
+                    <option value="mudah">Mudah.my</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="monthFilter">Month</label>
+                <select id="monthFilter">
+                    <option value="all">All months</option>
+                    <option value="2025-12">Dec 2025</option>
+                    <option value="2026-01">Jan 2026</option>
+                    <option value="2026-02">Feb 2026</option>
+                    <option value="2026-03">Mar 2026</option>
+                    <option value="2026-04">Apr 2026</option>
+                    <option value="2026-05">May 2026</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">Loading data...</div>
+
+        <!-- Page 1: Channel scoreboard -->
+        <div id="page1" class="page active">
+            <h2 class="print-heading">Tab 1: Channel Scoreboard</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Enquiries</div>
+                    <div class="kpi-value" id="kpiEnquiries">-</div>
+                    <div class="kpi-sub">&nbsp;</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Qualified</div>
+                    <div class="kpi-value" id="kpiQualified">-</div>
+                    <div class="kpi-sub" id="kpiQualifiedSub">&nbsp;</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Tenancies signed</div>
+                    <div class="kpi-value" id="kpiTenancies">-</div>
+                    <div class="kpi-sub">&nbsp;</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg cost per tenancy</div>
+                    <div class="kpi-value" id="kpiCostPerTenancy">-</div>
+                    <div class="kpi-sub" id="kpiCostPerTenancySub">&nbsp;</div>
+                </div>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <div class="chart-title">Cost per tenancy by channel</div>
+                    <div class="chart-note">Cost in RM. A channel with no tenancy in the current filter shows as 0 tenancies, not a cost.</div>
+                    <div class="chart-container">
+                        <canvas id="costPerTenancyChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">Volume vs quality</div>
+                    <div class="chart-note">Share of enquiries (%) against qualified rate (%) per source.</div>
+                    <div class="chart-container">
+                        <canvas id="volumeQualityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card full-width">
+                <div class="chart-title">Channel performance</div>
+                <div style="overflow-x: auto;">
+                    <table id="channelTable">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Enquiries</th>
+                                <th>Qualified rate</th>
+                                <th>Enquiry to viewing rate</th>
+                                <th>Tenancies</th>
+                                <th>Cost per enquiry</th>
+                                <th>Cost per tenancy</th>
+                                <th>Verdict</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Lead quality and the volume trap -->
+        <div id="page2" class="page">
+            <h2 class="print-heading">Tab 2: Lead Quality and the Volume Trap</h2>
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <div class="chart-title">Where every enquiry ends up</div>
+                    <div class="chart-note">Outcome distribution across all enquiries in the current filter.</div>
+                    <div class="chart-container">
+                        <canvas id="outcomeDoughnut"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">Funnel by source</div>
+                    <div class="chart-note">Qualified rate (%) and enquiry to viewing rate (%) per source.</div>
+                    <div class="chart-container">
+                        <canvas id="funnelBySourceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card full-width">
+                <div class="chart-title">Mudah's outcomes</div>
+                <div class="chart-note" id="mudahNote">459 enquiries, zero tenancies signed.</div>
+                <div class="chart-container" style="height: 360px;">
+                    <canvas id="mudahOutcomeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Channel by property type, and sell-through -->
+        <div id="page3" class="page">
+            <h2 class="print-heading">Tab 3: Channel by Property Type and Sell-Through</h2>
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <div class="chart-title">Tenancies by channel and property type</div>
+                    <div class="chart-note">Signed tenancies grouped by source and property type.</div>
+                    <div class="chart-container">
+                        <canvas id="tenancyTypeChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">Qualified rate by channel and property type</div>
+                    <div class="chart-note">Qualified rate (%) per source and property type.</div>
+                    <div class="chart-container">
+                        <canvas id="qualRateTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card full-width">
+                <div class="chart-title">Monthly enquiries by source</div>
+                <div class="chart-note">Enquiry volume per month, stacked by source. Declining totals point to portfolio sell-through over the period.</div>
+                <div class="chart-container" style="height: 360px;">
+                    <canvas id="monthlyBySourceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Responsiveness and the after-hours leak -->
+        <div id="page4" class="page">
+            <h2 class="print-heading">Tab 4: Responsiveness and the After-Hours Leak</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Median response (office hours)</div>
+                    <div class="kpi-value" id="kpiMedianResp">-</div>
+                    <div class="kpi-sub">minutes</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">After-hours share</div>
+                    <div class="kpi-value" id="kpiAfterShare">-</div>
+                    <div class="kpi-sub">of enquiries</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Unanswered, office hours</div>
+                    <div class="kpi-value" id="kpiUnansOffice">-</div>
+                    <div class="kpi-sub">&nbsp;</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Unanswered, after hours</div>
+                    <div class="kpi-value" id="kpiUnansAfter">-</div>
+                    <div class="kpi-sub">&nbsp;</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Paid leads lost</div>
+                    <div class="kpi-value" id="kpiPaidLost">-</div>
+                    <div class="kpi-sub">estimated</div>
+                </div>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <div class="chart-title">Unanswered rate: office vs after-hours</div>
+                    <div class="chart-note">Share of enquiries that went unanswered, split by when they arrived.</div>
+                    <div class="chart-container">
+                        <canvas id="unansSplitChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">Enquiries by time slot</div>
+                    <div class="chart-note">Volume of enquiries arriving in office hours vs after 8pm and weekends.</div>
+                    <div class="chart-container">
+                        <canvas id="timeSlotChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DATA = {"cols":["s","seg","cm","q","r","ah","vb","va","o","mo","lid","frm"],"rows":[["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2025-12","L02",47.2],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2025-12","L02",3.5],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L02",55.8],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L01",17.0],["google_ads","whole_unit","phone_call",0,1,0,0,0,"budget_mismatch","2025-12","L01",36.0],["google_ads","whole_unit","lead_form",0,1,0,0,0,"lowball","2025-12","L01",5.1],["meta_ads","room","lead_form",1,1,1,0,0,"still_open","2025-12","L02",56.1],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2025-12","L01",12.2],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2025-12","L02",41.7],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2025-12","L02",11.1],["google_ads","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2025-12","L01",227.9],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L02",55.8],["propertyguru","whole_unit","portal_chat",1,1,0,1,0,"no_show","2025-12","L01",35.1],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"lowball","2025-12","L01",8.7],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L02",28.0],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2025-12","L02",null],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L01",63.1],["referral","room","whatsapp",1,1,1,1,1,"lost_to_other","2025-12","L02",50.1],["meta_ads","room","lead_form",0,1,1,0,0,"requirement_mismatch","2025-12","L02",138.5],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2025-12","L03",33.0],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2025-12","L02",null],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L06",22.7],["propertyguru","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2025-12","L02",17.9],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2025-12","L02",45.0],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2025-12","L02",19.8],["referral","room","phone_call",1,1,0,1,1,"lost_to_other","2025-12","L03",149.8],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L02",22.5],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2025-12","L06",87.3],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2025-12","L06",6.5],["google_ads","whole_unit","whatsapp",0,1,0,0,0,"lowball","2025-12","L07",73.4],["propertyguru","room","whatsapp",1,1,0,0,0,"no_reply","2025-12","L03",146.9],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L02",29.2],["google_ads","whole_unit","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L01",64.2],["propertyguru","whole_unit","phone_call",0,1,0,0,0,"budget_mismatch","2025-12","L01",96.8],["google_ads","whole_unit","phone_call",0,1,0,0,0,"requirement_mismatch","2025-12","L07",25.1],["propertyguru","whole_unit","portal_chat",1,0,0,0,0,"unanswered","2025-12","L07",null],["mudah","room","whatsapp",0,1,0,0,0,"budget_mismatch","2025-12","L06",26.0],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2025-12","L07",92.1],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"viewing_pipeline","2025-12","L01",3.8],["google_ads","whole_unit","phone_call",0,1,0,0,0,"lowball","2025-12","L01",81.4],["meta_ads","whole_unit","lead_form",0,1,0,0,0,"budget_mismatch","2025-12","L01",60.4],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2025-12","L03",65.9],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2025-12","L03",null],["google_ads","whole_unit","lead_form",0,1,0,0,0,"no_reply","2025-12","L07",8.0],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2025-12","L01",57.3],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L03",13.0],["mudah","whole_unit","portal_chat",0,1,1,0,0,"budget_mismatch","2025-12","L01",87.5],["propertyguru","room","portal_chat",1,1,0,1,1,"viewing_pipeline","2025-12","L06",47.6],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2025-12","L02",24.9],["mudah","room","phone_call",0,0,0,0,0,"unanswered","2025-12","L06",null],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2025-12","L06",32.6],["propertyguru","room","whatsapp",0,1,0,0,0,"no_reply","2025-12","L03",54.7],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L07",31.8],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2025-12","L03",52.6],["propertyguru","room","whatsapp",1,1,1,0,0,"no_reply","2025-12","L02",239.5],["propertyguru","whole_unit","portal_chat",1,1,1,1,1,"lost_to_other","2025-12","L01",157.2],["mudah","room","phone_call",0,1,1,0,0,"requirement_mismatch","2025-12","L02",49.1],["referral","room","whatsapp",1,1,1,1,1,"lost_to_other","2025-12","L03",105.4],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L03",9.9],["referral","room","whatsapp",1,1,0,1,1,"still_open","2025-12","L02",61.3],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L01",17.2],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L03",21.8],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2025-12","L03",8.7],["meta_ads","studio","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L04",23.6],["propertyguru","room","whatsapp",1,1,0,1,1,"still_open","2025-12","L02",26.7],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2025-12","L06",24.8],["referral","whole_unit","whatsapp",1,1,0,0,0,"still_open","2025-12","L01",23.5],["meta_ads","room","lead_form",1,1,0,0,0,"no_reply","2025-12","L02",5.1],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2025-12","L06",52.1],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"lost_to_other","2025-12","L07",42.2],["referral","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2025-12","L07",68.6],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2025-12","L03",110.6],["referral","room","whatsapp",1,1,0,1,1,"still_open","2025-12","L06",100.9],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2025-12","L03",12.7],["meta_ads","whole_unit","lead_form",0,1,0,0,0,"no_reply","2025-12","L07",110.6],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2025-12","L03",14.1],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2025-12","L06",145.6],["referral","whole_unit","whatsapp",0,1,0,0,0,"requirement_mismatch","2025-12","L07",38.4],["google_ads","room","whatsapp",1,1,0,1,0,"no_show","2025-12","L03",12.0],["google_ads","whole_unit","whatsapp",1,1,0,1,1,"lost_to_other","2025-12","L07",73.8],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L07",13.6],["meta_ads","room","lead_form",0,0,0,0,0,"unanswered","2025-12","L03",null],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L03",37.4],["propertyguru","studio","portal_chat",0,1,1,0,0,"no_reply","2025-12","L04",45.9],["mudah","whole_unit","portal_chat",0,1,1,0,0,"no_reply","2025-12","L07",66.3],["meta_ads","room","whatsapp",1,1,0,0,0,"budget_mismatch","2025-12","L02",30.1],["propertyguru","whole_unit","portal_chat",1,1,0,0,0,"no_reply","2025-12","L07",16.4],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2025-12","L04",73.0],["referral","whole_unit","phone_call",0,1,0,0,0,"lowball","2025-12","L07",32.9],["propertyguru","whole_unit","whatsapp",1,0,0,0,0,"unanswered","2025-12","L07",null],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2025-12","L01",25.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L07",7.6],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L03",81.3],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L03",102.0],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L02",20.0],["propertyguru","studio","whatsapp",1,0,0,0,0,"unanswered","2025-12","L04",null],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2025-12","L04",9.5],["referral","room","phone_call",0,1,0,0,0,"requirement_mismatch","2025-12","L06",109.8],["referral","room","whatsapp",0,1,1,0,0,"lowball","2025-12","L02",40.3],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2025-12","L06",26.3],["propertyguru","room","portal_chat",1,1,0,0,0,"budget_mismatch","2025-12","L06",11.0],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L06",185.4],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L01",53.1],["meta_ads","room","phone_call",0,1,0,0,0,"requirement_mismatch","2025-12","L03",37.3],["google_ads","whole_unit","whatsapp",0,1,0,0,0,"lowball","2025-12","L07",123.2],["mudah","room","phone_call",1,1,0,0,0,"no_reply","2025-12","L02",51.1],["propertyguru","whole_unit","phone_call",1,1,1,1,0,"no_show","2025-12","L01",882.4],["mudah","room","phone_call",0,1,1,0,0,"lowball","2025-12","L03",73.2],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2025-12","L07",8.8],["mudah","whole_unit","phone_call",0,1,0,0,0,"no_reply","2025-12","L07",26.9],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L06",5.8],["mudah","whole_unit","phone_call",0,1,0,0,0,"no_reply","2025-12","L07",23.8],["google_ads","whole_unit","whatsapp",1,1,0,1,1,"viewing_pipeline","2025-12","L07",60.2],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2025-12","L02",33.3],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2025-12","L06",7.8],["propertyguru","room","portal_chat",0,1,1,0,0,"lowball","2025-12","L02",67.9],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2025-12","L06",74.6],["mudah","room","phone_call",1,0,1,0,0,"unanswered","2025-12","L02",null],["google_ads","room","lead_form",1,1,1,1,1,"viewing_pipeline","2025-12","L03",70.8],["meta_ads","whole_unit","lead_form",0,1,1,0,0,"budget_mismatch","2025-12","L07",118.0],["meta_ads","studio","whatsapp",1,1,1,0,0,"still_open","2025-12","L10",36.8],["meta_ads","room","lead_form",0,1,1,0,0,"no_reply","2025-12","L06",13.4],["google_ads","studio","phone_call",0,1,0,0,0,"budget_mismatch","2025-12","L10",44.9],["mudah","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2025-12","L06",26.2],["referral","whole_unit","whatsapp",1,1,0,1,1,"lost_to_other","2025-12","L07",9.3],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2025-12","L03",58.8],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2025-12","L06",13.9],["google_ads","room","whatsapp",0,1,0,0,0,"lowball","2025-12","L03",4.4],["referral","whole_unit","whatsapp",0,1,0,0,0,"lowball","2025-12","L07",54.2],["google_ads","whole_unit","lead_form",1,1,0,0,0,"no_reply","2025-12","L01",15.5],["google_ads","whole_unit","phone_call",1,1,0,1,1,"viewing_pipeline","2025-12","L07",35.4],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2025-12","L10",20.6],["meta_ads","whole_unit","lead_form",0,1,1,0,0,"no_reply","2025-12","L07",212.2],["google_ads","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2025-12","L07",17.0],["mudah","studio","portal_chat",0,1,0,0,0,"lowball","2025-12","L10",326.5],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L07",23.3],["propertyguru","whole_unit","phone_call",0,1,0,0,0,"budget_mismatch","2025-12","L01",37.7],["mudah","room","phone_call",1,1,0,0,0,"still_open","2025-12","L06",17.3],["propertyguru","room","phone_call",0,1,0,0,0,"lowball","2025-12","L03",4.4],["google_ads","whole_unit","phone_call",1,1,0,1,1,"viewing_pipeline","2025-12","L01",13.0],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L06",10.2],["propertyguru","room","portal_chat",1,0,0,0,0,"unanswered","2025-12","L02",null],["referral","studio","whatsapp",1,1,0,1,1,"viewing_pipeline","2025-12","L10",34.1],["google_ads","whole_unit","whatsapp",1,1,1,1,0,"no_show","2025-12","L07",84.8],["mudah","room","phone_call",0,1,1,0,0,"requirement_mismatch","2025-12","L02",171.9],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"requirement_mismatch","2025-12","L07",12.8],["meta_ads","room","phone_call",1,1,0,0,0,"no_reply","2025-12","L03",30.4],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L06",107.6],["meta_ads","room","lead_form",1,1,0,0,0,"budget_mismatch","2025-12","L06",43.2],["propertyguru","studio","whatsapp",1,0,0,0,0,"unanswered","2025-12","L04",null],["mudah","whole_unit","phone_call",1,1,0,0,0,"budget_mismatch","2025-12","L01",30.8],["google_ads","studio","whatsapp",0,1,1,0,0,"no_reply","2025-12","L10",143.7],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2025-12","L03",null],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2025-12","L02",26.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2025-12","L07",103.7],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2025-12","L06",31.7],["meta_ads","room","phone_call",1,1,0,0,0,"no_reply","2025-12","L02",24.0],["meta_ads","room","whatsapp",1,1,0,1,1,"viewing_pipeline","2025-12","L06",110.7],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2025-12","L02",82.0],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"still_open","2025-12","L01",126.7],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2025-12","L07",9.4],["meta_ads","studio","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L10",53.7],["propertyguru","studio","whatsapp",1,1,0,0,0,"still_open","2025-12","L10",20.7],["meta_ads","room","whatsapp",0,1,0,0,0,"budget_mismatch","2025-12","L03",77.2],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2025-12","L03",22.4],["mudah","room","phone_call",1,1,0,1,0,"no_show","2025-12","L02",121.1],["google_ads","whole_unit","whatsapp",1,1,0,0,0,"no_reply","2025-12","L07",119.0],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L02",7.4],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2025-12","L02",null],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L06",41.6],["mudah","whole_unit","portal_chat",0,0,0,0,0,"unanswered","2025-12","L07",null],["mudah","studio","portal_chat",0,1,0,0,0,"lowball","2025-12","L04",27.6],["propertyguru","whole_unit","whatsapp",1,1,0,0,0,"still_open","2025-12","L07",18.1],["propertyguru","whole_unit","whatsapp",1,1,0,0,0,"no_reply","2025-12","L07",49.7],["google_ads","whole_unit","lead_form",1,1,0,1,1,"lost_to_other","2025-12","L01",25.5],["google_ads","room","whatsapp",1,1,1,1,1,"viewing_pipeline","2025-12","L03",11.6],["mudah","whole_unit","whatsapp",0,1,1,0,0,"no_reply","2025-12","L07",208.6],["meta_ads","whole_unit","whatsapp",1,0,1,0,0,"unanswered","2025-12","L07",null],["mudah","room","whatsapp",0,1,1,0,0,"no_reply","2025-12","L02",113.9],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2025-12","L03",94.0],["meta_ads","whole_unit","lead_form",1,0,1,0,0,"unanswered","2025-12","L07",null],["google_ads","whole_unit","whatsapp",1,1,1,1,1,"still_open","2025-12","L07",104.8],["meta_ads","room","whatsapp",0,1,0,0,0,"lowball","2025-12","L03",70.8],["meta_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2025-12","L10",17.5],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L03",28.1],["google_ads","room","phone_call",0,1,0,0,0,"budget_mismatch","2025-12","L06",14.9],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2025-12","L02",17.7],["google_ads","whole_unit","whatsapp",1,1,0,1,1,"tenancy_signed","2025-12","L07",93.2],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2025-12","L03",27.1],["referral","room","whatsapp",0,1,0,0,0,"no_reply","2025-12","L02",13.3],["mudah","studio","portal_chat",0,1,1,0,0,"requirement_mismatch","2025-12","L10",158.6],["mudah","studio","phone_call",0,1,0,0,0,"budget_mismatch","2025-12","L10",59.8],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2025-12","L06",22.7],["referral","room","whatsapp",1,1,0,1,0,"no_show","2025-12","L03",47.2],["propertyguru","studio","whatsapp",0,1,0,0,0,"budget_mismatch","2025-12","L10",12.5],["propertyguru","whole_unit","portal_chat",1,1,0,1,0,"no_show","2025-12","L01",11.1],["referral","room","phone_call",1,1,0,1,1,"still_open","2025-12","L02",14.7],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2025-12","L02",12.2],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"lowball","2025-12","L07",45.8],["mudah","room","portal_chat",1,1,0,0,0,"no_reply","2025-12","L02",13.2],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"lost_to_other","2025-12","L07",26.3],["mudah","studio","phone_call",0,1,1,0,0,"no_reply","2025-12","L10",126.2],["meta_ads","room","whatsapp",0,1,0,0,0,"lowball","2026-01","L06",33.0],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-01","L03",null],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L02",52.1],["meta_ads","room","lead_form",0,0,0,0,0,"unanswered","2026-01","L03",null],["google_ads","studio","lead_form",1,1,0,1,1,"lost_to_other","2026-01","L10",34.2],["mudah","room","phone_call",1,1,0,1,0,"no_show","2026-01","L06",11.3],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L03",10.9],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L03",36.2],["mudah","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L01",24.4],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-01","L10",31.5],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L06",14.8],["mudah","studio","phone_call",0,1,0,0,0,"lowball","2026-01","L10",33.1],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L01",8.3],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-01","L06",105.8],["meta_ads","room","whatsapp",0,1,1,0,0,"no_reply","2026-01","L02",39.6],["propertyguru","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-01","L02",79.3],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"no_reply","2026-01","L01",36.3],["meta_ads","room","lead_form",0,0,1,0,0,"unanswered","2026-01","L03",null],["mudah","studio","portal_chat",0,1,1,0,0,"no_reply","2026-01","L04",40.1],["propertyguru","studio","whatsapp",1,1,1,1,1,"lost_to_other","2026-01","L04",31.2],["referral","room","whatsapp",1,1,1,1,1,"still_open","2026-01","L02",19.5],["mudah","studio","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L04",37.8],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L06",54.4],["mudah","room","whatsapp",0,0,0,0,0,"unanswered","2026-01","L06",null],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L06",80.2],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-01","L02",null],["meta_ads","room","lead_form",0,1,0,0,0,"budget_mismatch","2026-01","L02",23.4],["referral","room","phone_call",1,1,0,1,1,"lost_to_other","2026-01","L03",124.5],["google_ads","studio","whatsapp",1,1,0,1,1,"still_open","2026-01","L10",55.4],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"lowball","2026-01","L05",89.2],["mudah","studio","phone_call",0,0,1,0,0,"unanswered","2026-01","L10",null],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L03",69.4],["google_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2026-01","L04",178.4],["mudah","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L05",17.0],["mudah","room","phone_call",1,1,0,1,0,"no_show","2026-01","L06",72.9],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L06",11.5],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L06",37.9],["google_ads","whole_unit","phone_call",1,1,0,1,1,"lost_to_other","2026-01","L05",33.0],["mudah","studio","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-01","L10",7.3],["referral","studio","whatsapp",1,0,1,0,0,"unanswered","2026-01","L04",null],["propertyguru","whole_unit","portal_chat",1,1,1,1,1,"lost_to_other","2026-01","L05",154.5],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L02",6.2],["referral","whole_unit","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-01","L05",30.6],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L03",64.4],["propertyguru","studio","phone_call",0,1,0,0,0,"lowball","2026-01","L10",51.4],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-01","L06",null],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2026-01","L02",77.7],["mudah","studio","whatsapp",0,1,0,0,0,"no_reply","2026-01","L04",47.9],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"still_open","2026-01","L05",24.8],["meta_ads","whole_unit","lead_form",1,1,0,1,1,"viewing_pipeline","2026-01","L01",61.2],["referral","whole_unit","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L05",6.0],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"lowball","2026-01","L01",48.4],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L06",33.2],["google_ads","studio","lead_form",0,1,0,0,0,"no_reply","2026-01","L04",43.3],["propertyguru","room","portal_chat",1,1,0,1,1,"still_open","2026-01","L06",42.8],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-01","L03",9.9],["referral","room","phone_call",1,1,0,1,1,"still_open","2026-01","L06",57.2],["propertyguru","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-01","L06",6.5],["mudah","room","portal_chat",1,1,0,1,1,"lost_to_other","2026-01","L06",53.4],["meta_ads","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L05",66.0],["propertyguru","studio","portal_chat",0,1,0,0,0,"lowball","2026-01","L04",85.9],["meta_ads","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-01","L03",48.6],["propertyguru","room","portal_chat",0,0,1,0,0,"unanswered","2026-01","L02",null],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-01","L06",5.7],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L03",24.8],["propertyguru","studio","portal_chat",0,1,0,0,0,"lowball","2026-01","L04",50.9],["propertyguru","whole_unit","portal_chat",0,0,0,0,0,"unanswered","2026-01","L05",null],["propertyguru","studio","portal_chat",0,0,0,0,0,"unanswered","2026-01","L10",null],["meta_ads","studio","lead_form",1,1,1,0,0,"budget_mismatch","2026-01","L04",37.5],["mudah","room","whatsapp",1,1,1,1,1,"viewing_pipeline","2026-01","L02",58.1],["propertyguru","whole_unit","whatsapp",1,1,1,0,0,"budget_mismatch","2026-01","L01",37.9],["propertyguru","room","portal_chat",0,1,1,0,0,"lowball","2026-01","L06",27.6],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-01","L06",46.4],["propertyguru","room","whatsapp",1,1,1,0,0,"no_reply","2026-01","L02",311.1],["meta_ads","studio","lead_form",0,1,1,0,0,"no_reply","2026-01","L04",74.0],["propertyguru","studio","portal_chat",0,1,1,0,0,"budget_mismatch","2026-01","L04",111.7],["meta_ads","room","whatsapp",1,1,0,0,0,"still_open","2026-01","L02",63.7],["meta_ads","whole_unit","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L05",57.5],["propertyguru","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L08",19.7],["propertyguru","room","whatsapp",1,1,0,1,0,"no_show","2026-01","L08",72.5],["referral","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L02",13.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-01","L05",28.7],["meta_ads","room","whatsapp",1,1,0,1,1,"still_open","2026-01","L02",30.1],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-01","L01",30.6],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L08",23.3],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L08",80.1],["mudah","whole_unit","portal_chat",0,1,1,0,0,"budget_mismatch","2026-01","L01",270.1],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-01","L04",12.7],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-01","L06",70.0],["meta_ads","room","phone_call",0,1,0,0,0,"lowball","2026-01","L03",40.7],["mudah","whole_unit","whatsapp",0,1,0,0,0,"lowball","2026-01","L05",5.8],["mudah","whole_unit","phone_call",0,1,0,0,0,"lowball","2026-01","L01",57.5],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L02",46.7],["google_ads","studio","phone_call",1,1,0,0,0,"budget_mismatch","2026-01","L10",4.9],["mudah","room","whatsapp",1,0,0,0,0,"unanswered","2026-01","L08",null],["google_ads","studio","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-01","L10",72.6],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-01","L01",11.2],["meta_ads","room","lead_form",1,1,1,1,0,"no_show","2026-01","L08",40.1],["meta_ads","room","whatsapp",0,1,1,0,0,"no_reply","2026-01","L02",226.8],["propertyguru","whole_unit","whatsapp",0,1,1,0,0,"requirement_mismatch","2026-01","L05",181.7],["mudah","whole_unit","portal_chat",1,1,0,0,0,"still_open","2026-01","L05",20.5],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-01","L05",13.1],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L02",32.0],["mudah","room","whatsapp",1,1,0,0,0,"no_reply","2026-01","L08",27.8],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L08",47.1],["propertyguru","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L08",13.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L06",52.5],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-01","L02",79.7],["google_ads","whole_unit","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-01","L01",11.0],["meta_ads","studio","phone_call",0,1,0,0,0,"no_reply","2026-01","L04",4.9],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L02",83.9],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-01","L01",30.9],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-01","L08",48.8],["mudah","studio","phone_call",0,1,1,0,0,"lowball","2026-01","L10",78.3],["referral","room","whatsapp",1,1,1,1,1,"lost_to_other","2026-01","L08",73.2],["mudah","room","phone_call",1,1,0,0,0,"still_open","2026-01","L08",39.5],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2026-01","L03",31.2],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-01","L02",52.0],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L03",29.4],["referral","studio","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L10",45.1],["mudah","studio","portal_chat",0,0,0,0,0,"unanswered","2026-01","L10",null],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L06",13.8],["mudah","whole_unit","whatsapp",1,1,0,1,0,"no_show","2026-01","L05",21.4],["meta_ads","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L08",14.1],["mudah","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L02",25.4],["mudah","room","phone_call",1,1,0,0,0,"still_open","2026-01","L03",67.8],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L08",61.1],["mudah","studio","portal_chat",0,1,0,0,0,"lowball","2026-01","L04",26.8],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-01","L02",20.1],["mudah","room","whatsapp",1,1,0,0,0,"still_open","2026-01","L06",7.5],["google_ads","whole_unit","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-01","L01",113.5],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L03",48.5],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2026-01","L02",10.6],["mudah","whole_unit","phone_call",0,1,0,0,0,"no_reply","2026-01","L01",11.4],["mudah","studio","portal_chat",0,0,0,0,0,"unanswered","2026-01","L10",null],["meta_ads","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-01","L02",11.3],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-01","L06",41.3],["propertyguru","room","portal_chat",1,0,0,0,0,"unanswered","2026-01","L02",null],["propertyguru","studio","phone_call",1,1,0,1,0,"no_show","2026-01","L10",26.5],["google_ads","studio","lead_form",1,1,0,1,1,"lost_to_other","2026-01","L04",63.3],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-01","L06",68.0],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-01","L03",286.8],["propertyguru","room","portal_chat",0,0,1,0,0,"unanswered","2026-01","L03",null],["propertyguru","studio","portal_chat",1,1,1,1,0,"no_show","2026-01","L04",326.9],["google_ads","whole_unit","phone_call",1,1,1,1,1,"viewing_pipeline","2026-01","L05",90.8],["meta_ads","room","lead_form",0,1,1,0,0,"no_reply","2026-01","L08",163.2],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-01","L02",42.5],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"no_reply","2026-01","L01",179.1],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-01","L02",18.5],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L01",24.0],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-01","L10",18.8],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L08",59.6],["referral","studio","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L10",6.4],["mudah","studio","portal_chat",1,1,0,1,1,"lost_to_other","2026-01","L10",43.8],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-01","L01",5.2],["referral","room","phone_call",0,1,0,0,0,"lowball","2026-01","L03",28.9],["meta_ads","room","whatsapp",1,1,0,0,0,"still_open","2026-01","L02",25.6],["google_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-01","L08",18.0],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L02",13.3],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-01","L06",null],["propertyguru","room","phone_call",0,1,0,0,0,"no_reply","2026-01","L06",33.7],["propertyguru","room","whatsapp",1,1,0,0,0,"budget_mismatch","2026-01","L08",147.6],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-01","L08",43.7],["mudah","studio","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L04",92.3],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-01","L01",14.9],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-01","L10",51.7],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-01","L02",160.6],["referral","room","whatsapp",1,1,0,1,1,"still_open","2026-01","L02",66.4],["google_ads","whole_unit","phone_call",1,1,0,1,0,"no_show","2026-01","L01",23.3],["mudah","studio","portal_chat",0,1,0,0,0,"lowball","2026-01","L10",10.7],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-01","L02",28.6],["referral","whole_unit","whatsapp",0,0,0,0,0,"unanswered","2026-01","L01",null],["meta_ads","studio","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L10",97.0],["propertyguru","room","portal_chat",1,1,0,0,0,"still_open","2026-01","L06",99.0],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L06",13.8],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"lost_to_other","2026-01","L05",91.8],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L03",43.9],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-01","L01",8.3],["propertyguru","studio","whatsapp",1,1,0,0,0,"no_reply","2026-01","L04",4.7],["referral","room","whatsapp",1,1,0,0,0,"no_reply","2026-01","L06",26.1],["propertyguru","studio","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L10",154.4],["mudah","whole_unit","portal_chat",1,1,0,0,0,"budget_mismatch","2026-01","L01",30.5],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-01","L08",null],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L03",38.7],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-01","L03",null],["referral","whole_unit","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L01",4.5],["mudah","studio","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L04",50.2],["meta_ads","whole_unit","lead_form",1,1,0,1,1,"viewing_pipeline","2026-01","L01",41.0],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2026-01","L08",157.3],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L08",65.2],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L03",23.0],["referral","whole_unit","phone_call",0,0,0,0,0,"unanswered","2026-01","L01",null],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-01","L01",29.7],["mudah","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L01",47.3],["propertyguru","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L02",17.1],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L03",9.0],["mudah","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L06",89.0],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-01","L05",11.8],["mudah","whole_unit","phone_call",0,1,0,0,0,"no_reply","2026-01","L01",25.3],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-01","L06",43.1],["mudah","room","phone_call",0,1,0,0,0,"budget_mismatch","2026-01","L03",39.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L03",80.5],["propertyguru","studio","whatsapp",1,1,1,0,0,"budget_mismatch","2026-01","L04",44.3],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-01","L08",21.4],["propertyguru","room","portal_chat",1,1,1,0,0,"no_reply","2026-01","L08",41.2],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-01","L03",88.7],["google_ads","whole_unit","phone_call",0,1,1,0,0,"budget_mismatch","2026-01","L01",228.1],["google_ads","room","phone_call",0,1,1,0,0,"requirement_mismatch","2026-01","L08",37.6],["mudah","room","whatsapp",0,1,1,0,0,"requirement_mismatch","2026-01","L02",68.5],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2026-01","L02",191.1],["mudah","room","portal_chat",1,1,1,0,0,"no_reply","2026-01","L03",139.2],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L08",60.2],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L02",82.6],["google_ads","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L08",19.6],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L08",105.4],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-01","L05",14.1],["propertyguru","room","whatsapp",1,1,0,1,0,"no_show","2026-01","L02",10.4],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-01","L06",44.1],["mudah","studio","portal_chat",1,1,0,0,0,"budget_mismatch","2026-01","L10",67.2],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-01","L05",66.2],["google_ads","whole_unit","phone_call",1,1,0,1,0,"no_show","2026-01","L01",59.8],["meta_ads","studio","whatsapp",1,1,0,0,0,"no_reply","2026-01","L04",42.3],["propertyguru","room","portal_chat",0,1,1,0,0,"lowball","2026-01","L02",549.0],["propertyguru","room","whatsapp",0,1,1,0,0,"no_reply","2026-01","L02",472.6],["propertyguru","room","whatsapp",0,1,1,0,0,"lowball","2026-01","L06",122.5],["referral","room","whatsapp",0,1,0,0,0,"lowball","2026-01","L08",31.7],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L03",38.7],["mudah","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L01",48.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-01","L05",7.2],["google_ads","whole_unit","phone_call",0,1,0,0,0,"no_reply","2026-01","L01",17.3],["mudah","studio","whatsapp",0,1,0,0,0,"no_reply","2026-01","L10",23.7],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L06",66.3],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L06",43.3],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L05",86.1],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L08",9.4],["referral","room","whatsapp",1,1,1,0,0,"budget_mismatch","2026-01","L03",71.6],["mudah","room","portal_chat",1,1,0,0,0,"budget_mismatch","2026-01","L08",19.1],["propertyguru","studio","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-01","L04",20.6],["propertyguru","room","portal_chat",1,1,0,1,1,"viewing_pipeline","2026-01","L03",52.7],["google_ads","studio","lead_form",1,1,0,1,0,"no_show","2026-01","L10",121.6],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L06",33.7],["mudah","studio","portal_chat",1,1,0,0,0,"budget_mismatch","2026-01","L04",16.6],["google_ads","studio","lead_form",1,1,0,1,1,"still_open","2026-01","L10",73.0],["google_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-01","L03",77.3],["meta_ads","studio","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L04",23.8],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-01","L08",96.8],["google_ads","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L01",35.5],["mudah","studio","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L04",47.5],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-01","L01",8.9],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L02",147.3],["google_ads","studio","whatsapp",1,1,0,1,0,"no_show","2026-01","L04",70.4],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L08",20.9],["meta_ads","room","lead_form",0,1,1,0,0,"lowball","2026-01","L08",79.2],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-01","L08",5.0],["meta_ads","studio","lead_form",0,1,0,0,0,"no_reply","2026-01","L10",35.5],["referral","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-01","L02",152.8],["mudah","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L08",49.6],["propertyguru","studio","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L10",41.7],["google_ads","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-01","L08",11.6],["propertyguru","whole_unit","phone_call",1,1,0,0,0,"still_open","2026-01","L01",44.7],["mudah","room","portal_chat",1,1,0,1,0,"no_show","2026-01","L06",21.3],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-01","L02",23.4],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-01","L02",54.7],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2026-01","L01",26.2],["google_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2026-01","L10",127.4],["mudah","room","portal_chat",1,1,0,1,0,"no_show","2026-01","L06",41.3],["referral","whole_unit","whatsapp",1,1,0,1,1,"still_open","2026-01","L05",29.1],["meta_ads","studio","whatsapp",1,0,0,0,0,"unanswered","2026-01","L04",null],["mudah","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L02",9.2],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-01","L03",20.7],["propertyguru","room","whatsapp",0,1,0,0,0,"no_reply","2026-01","L02",6.5],["google_ads","whole_unit","lead_form",1,0,0,0,0,"unanswered","2026-01","L01",null],["referral","whole_unit","whatsapp",1,1,0,1,1,"lost_to_other","2026-01","L05",75.1],["meta_ads","studio","whatsapp",0,1,0,0,0,"budget_mismatch","2026-01","L10",114.2],["mudah","room","portal_chat",1,1,0,1,0,"no_show","2026-01","L03",32.7],["meta_ads","studio","lead_form",1,1,0,1,1,"lost_to_other","2026-01","L10",5.4],["meta_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2026-01","L10",4.8],["propertyguru","room","portal_chat",1,1,0,0,0,"still_open","2026-01","L03",62.6],["referral","room","whatsapp",1,1,0,1,0,"no_show","2026-01","L06",11.4],["propertyguru","room","phone_call",0,1,0,0,0,"no_reply","2026-01","L06",65.7],["propertyguru","whole_unit","phone_call",1,0,0,0,0,"unanswered","2026-01","L01",null],["meta_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2026-01","L10",37.6],["google_ads","whole_unit","phone_call",1,1,0,0,0,"still_open","2026-01","L05",9.0],["propertyguru","whole_unit","portal_chat",1,1,0,0,0,"budget_mismatch","2026-01","L01",15.7],["propertyguru","room","portal_chat",1,1,0,1,1,"lost_to_other","2026-01","L06",28.4],["referral","studio","phone_call",0,1,1,0,0,"lowball","2026-01","L10",333.8],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2026-01","L03",null],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2026-01","L08",null],["meta_ads","room","lead_form",0,1,1,0,0,"no_reply","2026-01","L03",185.2],["mudah","whole_unit","phone_call",0,1,1,0,0,"no_reply","2026-01","L05",117.8],["meta_ads","studio","phone_call",0,1,1,0,0,"lowball","2026-01","L04",25.6],["mudah","studio","portal_chat",0,0,1,0,0,"unanswered","2026-01","L10",null],["meta_ads","room","whatsapp",0,0,1,0,0,"unanswered","2026-02","L08",null],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L09",17.9],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-02","L03",23.5],["mudah","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-02","L03",48.8],["mudah","whole_unit","phone_call",0,1,0,0,0,"lowball","2026-02","L01",141.5],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L03",38.6],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L03",55.7],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L06",107.1],["mudah","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-02","L02",126.7],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L01",38.9],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L10",47.3],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L09",31.4],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"still_open","2026-02","L05",61.1],["mudah","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-02","L08",35.4],["mudah","room","whatsapp",0,0,1,0,0,"unanswered","2026-02","L03",null],["mudah","room","phone_call",0,0,1,0,0,"unanswered","2026-02","L06",null],["meta_ads","whole_unit","phone_call",1,1,1,0,0,"no_reply","2026-02","L09",34.0],["google_ads","whole_unit","phone_call",0,1,1,0,0,"budget_mismatch","2026-02","L01",75.6],["propertyguru","room","portal_chat",1,1,0,1,1,"lost_to_other","2026-02","L02",13.7],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"still_open","2026-02","L01",37.4],["propertyguru","room","portal_chat",1,1,0,1,1,"viewing_pipeline","2026-02","L08",102.9],["propertyguru","room","whatsapp",0,0,0,0,0,"unanswered","2026-02","L03",null],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-02","L09",15.1],["referral","room","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-02","L02",40.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L09",64.0],["meta_ads","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-02","L03",15.1],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L02",40.8],["referral","room","whatsapp",1,0,0,0,0,"unanswered","2026-02","L02",null],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-02","L09",4.6],["google_ads","whole_unit","phone_call",0,1,0,0,0,"no_reply","2026-02","L01",6.3],["propertyguru","studio","portal_chat",1,1,0,1,0,"no_show","2026-02","L10",233.1],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-02","L08",37.1],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-02","L06",25.8],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L03",13.8],["google_ads","whole_unit","lead_form",1,1,1,1,1,"viewing_pipeline","2026-02","L05",51.1],["propertyguru","room","portal_chat",0,0,1,0,0,"unanswered","2026-02","L08",null],["mudah","room","whatsapp",0,1,1,0,0,"lowball","2026-02","L02",53.5],["mudah","whole_unit","whatsapp",1,1,0,1,1,"still_open","2026-02","L09",245.7],["propertyguru","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-02","L03",13.6],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L02",38.5],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L02",31.3],["referral","room","whatsapp",1,0,0,0,0,"unanswered","2026-02","L02",null],["mudah","studio","phone_call",1,1,0,0,0,"still_open","2026-02","L04",11.1],["referral","whole_unit","phone_call",0,1,0,0,0,"budget_mismatch","2026-02","L01",90.0],["referral","whole_unit","phone_call",0,1,0,0,0,"lowball","2026-02","L09",65.5],["google_ads","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L08",112.2],["google_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2026-02","L10",11.7],["propertyguru","room","whatsapp",1,1,0,0,0,"no_reply","2026-02","L03",15.3],["google_ads","room","whatsapp",1,1,0,1,0,"no_show","2026-02","L02",42.8],["mudah","whole_unit","portal_chat",1,1,0,0,0,"still_open","2026-02","L09",66.6],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L02",10.9],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-02","L05",65.7],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"lowball","2026-02","L01",35.9],["propertyguru","whole_unit","portal_chat",1,0,0,0,0,"unanswered","2026-02","L09",null],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L04",78.9],["propertyguru","whole_unit","portal_chat",0,0,0,0,0,"unanswered","2026-02","L09",null],["propertyguru","studio","phone_call",0,1,0,0,0,"no_reply","2026-02","L10",4.4],["meta_ads","studio","lead_form",0,1,0,0,0,"requirement_mismatch","2026-02","L04",48.5],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L06",20.8],["propertyguru","studio","phone_call",0,0,0,0,0,"unanswered","2026-02","L10",null],["propertyguru","room","portal_chat",1,1,0,0,0,"budget_mismatch","2026-02","L03",13.3],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-02","L03",136.2],["propertyguru","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L02",36.2],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-02","L09",12.5],["propertyguru","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-02","L03",51.5],["mudah","whole_unit","portal_chat",1,1,1,0,0,"no_reply","2026-02","L09",87.3],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-02","L08",76.7],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L02",6.5],["referral","room","phone_call",1,1,0,1,1,"lost_to_other","2026-02","L08",84.9],["referral","whole_unit","phone_call",0,1,0,0,0,"lowball","2026-02","L05",6.1],["meta_ads","studio","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-02","L04",110.1],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-02","L08",4.4],["google_ads","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-02","L09",25.6],["referral","studio","phone_call",0,1,0,0,0,"no_reply","2026-02","L10",53.0],["google_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L02",20.6],["referral","studio","whatsapp",1,1,0,1,1,"still_open","2026-02","L04",13.0],["propertyguru","room","portal_chat",0,0,1,0,0,"unanswered","2026-02","L06",null],["mudah","room","whatsapp",0,1,1,0,0,"no_reply","2026-02","L06",147.8],["meta_ads","studio","lead_form",0,1,1,0,0,"no_reply","2026-02","L10",194.1],["meta_ads","room","lead_form",0,0,1,0,0,"unanswered","2026-02","L08",null],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-02","L08",293.9],["propertyguru","room","phone_call",0,1,1,0,0,"lowball","2026-02","L08",151.9],["mudah","studio","portal_chat",0,0,1,0,0,"unanswered","2026-02","L10",null],["mudah","room","portal_chat",1,1,1,1,0,"no_show","2026-02","L02",47.6],["mudah","room","phone_call",1,1,1,0,0,"no_reply","2026-02","L03",46.5],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-02","L03",83.8],["propertyguru","room","whatsapp",0,1,1,0,0,"no_reply","2026-02","L08",48.4],["propertyguru","room","whatsapp",1,0,1,0,0,"unanswered","2026-02","L02",null],["mudah","studio","phone_call",0,1,0,0,0,"budget_mismatch","2026-02","L10",26.7],["mudah","whole_unit","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L05",58.4],["propertyguru","room","whatsapp",1,1,0,0,0,"no_reply","2026-02","L02",22.4],["propertyguru","room","phone_call",1,1,0,0,0,"no_reply","2026-02","L02",7.9],["propertyguru","studio","portal_chat",0,1,0,0,0,"lowball","2026-02","L04",27.0],["mudah","room","portal_chat",1,1,0,1,1,"lost_to_other","2026-02","L02",25.3],["meta_ads","studio","whatsapp",0,1,0,0,0,"budget_mismatch","2026-02","L10",36.7],["google_ads","whole_unit","lead_form",1,1,0,1,0,"no_show","2026-02","L05",44.8],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L02",15.0],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"lowball","2026-02","L09",15.1],["propertyguru","studio","portal_chat",0,0,0,0,0,"unanswered","2026-02","L04",null],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2026-02","L03",18.0],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-02","L01",98.6],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L02",64.5],["mudah","studio","portal_chat",0,0,0,0,0,"unanswered","2026-02","L04",null],["propertyguru","whole_unit","portal_chat",0,0,1,0,0,"unanswered","2026-02","L09",null],["meta_ads","studio","lead_form",0,1,0,0,0,"lowball","2026-02","L04",65.9],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L10",414.2],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-02","L01",10.1],["meta_ads","room","phone_call",1,1,0,0,0,"no_reply","2026-02","L06",37.4],["propertyguru","whole_unit","phone_call",1,1,0,1,1,"lost_to_other","2026-02","L09",67.8],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"still_open","2026-02","L09",71.7],["propertyguru","studio","whatsapp",0,1,0,0,0,"budget_mismatch","2026-02","L10",108.8],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L08",101.7],["referral","whole_unit","whatsapp",1,1,0,1,1,"still_open","2026-02","L09",135.1],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L03",24.8],["mudah","studio","phone_call",0,1,1,0,0,"lowball","2026-02","L04",32.2],["mudah","whole_unit","portal_chat",1,0,1,0,0,"unanswered","2026-02","L09",null],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2026-02","L02",null],["propertyguru","room","whatsapp",0,1,1,0,0,"no_reply","2026-02","L02",53.4],["google_ads","room","phone_call",1,1,0,1,1,"viewing_pipeline","2026-02","L03",12.3],["mudah","whole_unit","phone_call",0,0,0,0,0,"unanswered","2026-02","L09",null],["referral","room","whatsapp",0,1,0,0,0,"lowball","2026-02","L03",45.9],["mudah","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L02",49.0],["google_ads","whole_unit","phone_call",1,1,0,1,1,"lost_to_other","2026-02","L09",16.3],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L09",45.6],["google_ads","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-02","L06",14.4],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-02","L09",15.5],["google_ads","room","phone_call",1,1,0,1,1,"still_open","2026-02","L03",3.0],["google_ads","room","lead_form",1,0,0,0,0,"unanswered","2026-02","L03",null],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L03",49.7],["meta_ads","whole_unit","lead_form",1,1,0,0,0,"still_open","2026-02","L05",457.9],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-02","L02",65.3],["meta_ads","room","whatsapp",1,1,0,1,0,"no_show","2026-02","L03",20.5],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L06",25.0],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L03",75.8],["google_ads","room","phone_call",0,1,0,0,0,"budget_mismatch","2026-02","L06",56.0],["mudah","whole_unit","portal_chat",0,0,0,0,0,"unanswered","2026-02","L09",null],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L09",116.1],["mudah","whole_unit","whatsapp",0,1,0,0,0,"lowball","2026-02","L09",45.1],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"lowball","2026-02","L09",14.3],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L02",45.9],["meta_ads","studio","whatsapp",1,1,0,1,1,"lost_to_other","2026-02","L10",12.2],["mudah","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-02","L06",78.3],["google_ads","whole_unit","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L01",5.8],["meta_ads","studio","lead_form",1,1,0,0,0,"no_reply","2026-02","L10",10.7],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L06",72.0],["referral","room","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-02","L02",5.5],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L03",42.9],["propertyguru","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L08",138.5],["propertyguru","whole_unit","portal_chat",1,1,0,0,0,"still_open","2026-02","L01",15.0],["mudah","room","portal_chat",1,1,0,1,1,"still_open","2026-02","L06",68.7],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2026-02","L01",94.0],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-02","L01",4.4],["propertyguru","room","portal_chat",1,0,1,0,0,"unanswered","2026-02","L02",null],["mudah","whole_unit","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L05",27.8],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L08",38.3],["google_ads","room","phone_call",1,1,0,1,0,"no_show","2026-02","L03",88.9],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-02","L03",14.0],["propertyguru","room","phone_call",0,1,0,0,0,"lowball","2026-02","L03",20.4],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L06",31.0],["referral","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L02",36.5],["referral","room","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-02","L03",11.4],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-02","L06",41.3],["mudah","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L09",7.6],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L02",47.9],["propertyguru","room","phone_call",1,1,1,0,0,"budget_mismatch","2026-02","L08",16.2],["mudah","room","phone_call",0,1,1,0,0,"lowball","2026-02","L03",88.0],["propertyguru","studio","portal_chat",0,0,1,0,0,"unanswered","2026-02","L10",null],["mudah","room","phone_call",0,1,1,0,0,"requirement_mismatch","2026-02","L08",35.5],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-02","L02",91.9],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L04",30.3],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L02",112.6],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-02","L09",21.0],["mudah","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L05",75.9],["mudah","studio","portal_chat",0,1,0,0,0,"lowball","2026-02","L04",56.7],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-02","L02",87.9],["propertyguru","room","whatsapp",0,1,0,0,0,"lowball","2026-02","L03",10.5],["mudah","studio","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L10",73.8],["mudah","room","whatsapp",0,0,0,0,0,"unanswered","2026-02","L03",null],["google_ads","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L06",152.9],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-02","L08",47.8],["mudah","room","portal_chat",1,1,0,1,0,"no_show","2026-02","L03",17.2],["propertyguru","studio","portal_chat",1,1,0,0,0,"no_reply","2026-02","L10",14.5],["mudah","studio","whatsapp",0,1,0,0,0,"lowball","2026-02","L04",89.3],["mudah","room","whatsapp",0,1,0,0,0,"lowball","2026-02","L06",31.4],["referral","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-02","L01",63.6],["google_ads","whole_unit","whatsapp",1,0,0,0,0,"unanswered","2026-02","L01",null],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"tenancy_signed","2026-02","L01",116.9],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L10",26.0],["mudah","room","portal_chat",1,1,0,0,0,"no_reply","2026-02","L03",141.8],["mudah","room","phone_call",1,1,0,0,0,"no_reply","2026-02","L03",50.5],["mudah","room","whatsapp",0,0,0,0,0,"unanswered","2026-02","L03",null],["google_ads","whole_unit","whatsapp",1,1,1,1,1,"lost_to_other","2026-02","L09",87.7],["google_ads","whole_unit","whatsapp",0,1,1,0,0,"budget_mismatch","2026-02","L05",137.4],["meta_ads","room","phone_call",0,1,0,0,0,"no_reply","2026-02","L03",241.2],["mudah","room","portal_chat",1,1,0,0,0,"no_reply","2026-02","L08",41.3],["mudah","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-02","L06",75.8],["meta_ads","studio","lead_form",1,1,0,1,1,"lost_to_other","2026-02","L10",59.9],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-02","L06",54.8],["google_ads","studio","phone_call",0,1,0,0,0,"no_reply","2026-02","L04",34.2],["google_ads","whole_unit","phone_call",0,1,1,0,0,"budget_mismatch","2026-02","L09",80.5],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L02",116.5],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L06",10.8],["referral","whole_unit","whatsapp",1,1,0,0,0,"no_reply","2026-02","L01",9.2],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-02","L02",31.8],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"viewing_pipeline","2026-02","L05",111.5],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L06",76.9],["referral","studio","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-02","L10",63.0],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-02","L06",5.5],["propertyguru","studio","portal_chat",1,1,0,1,0,"no_show","2026-02","L04",38.7],["referral","room","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-02","L03",10.5],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-02","L02",null],["propertyguru","studio","portal_chat",1,1,1,0,0,"still_open","2026-02","L04",77.9],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-02","L03",34.1],["mudah","room","portal_chat",1,1,0,0,0,"budget_mismatch","2026-02","L06",30.7],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L08",37.1],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L08",87.1],["mudah","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2026-02","L09",30.2],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L04",21.2],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L08",32.7],["propertyguru","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-02","L03",14.5],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L03",54.3],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-02","L07",102.0],["propertyguru","room","portal_chat",0,1,1,0,0,"lowball","2026-02","L08",200.2],["mudah","room","phone_call",0,1,1,0,0,"no_reply","2026-02","L03",107.1],["mudah","room","phone_call",0,1,1,0,0,"no_reply","2026-02","L03",154.8],["meta_ads","room","whatsapp",1,1,1,0,0,"no_reply","2026-02","L06",209.1],["mudah","studio","portal_chat",0,1,1,0,0,"lowball","2026-02","L10",96.5],["referral","studio","whatsapp",1,1,1,1,1,"lost_to_other","2026-02","L04",547.8],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"no_reply","2026-02","L05",57.7],["mudah","studio","portal_chat",0,1,1,0,0,"no_reply","2026-02","L10",235.7],["google_ads","whole_unit","whatsapp",0,1,1,0,0,"requirement_mismatch","2026-02","L01",218.8],["mudah","room","portal_chat",1,0,1,0,0,"unanswered","2026-02","L03",null],["meta_ads","room","lead_form",0,0,1,0,0,"unanswered","2026-02","L02",null],["meta_ads","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-02","L03",91.3],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-02","L06",18.3],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L08",13.0],["google_ads","room","phone_call",1,1,0,1,0,"no_show","2026-02","L08",6.0],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L08",49.5],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-02","L06",101.0],["referral","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L08",27.3],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L08",16.5],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L03",17.1],["propertyguru","room","portal_chat",1,1,0,0,0,"still_open","2026-02","L03",105.9],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L08",31.4],["propertyguru","room","phone_call",0,1,0,0,0,"no_reply","2026-02","L02",17.8],["propertyguru","room","phone_call",1,1,0,0,0,"no_reply","2026-02","L02",29.1],["mudah","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L06",38.2],["propertyguru","room","phone_call",1,1,0,0,0,"budget_mismatch","2026-02","L03",125.0],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L03",63.7],["google_ads","studio","whatsapp",0,1,1,0,0,"no_reply","2026-02","L04",105.3],["referral","studio","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-02","L10",56.1],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L04",5.5],["mudah","room","whatsapp",0,0,0,0,0,"unanswered","2026-02","L02",null],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L06",16.8],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-02","L09",71.3],["mudah","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L08",104.7],["referral","room","whatsapp",1,1,0,1,1,"tenancy_signed","2026-02","L06",4.0],["propertyguru","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L02",7.9],["propertyguru","room","portal_chat",1,1,1,1,1,"viewing_pipeline","2026-02","L08",18.5],["mudah","room","phone_call",1,1,1,1,1,"lost_to_other","2026-02","L02",47.3],["propertyguru","room","portal_chat",1,1,1,0,0,"no_reply","2026-02","L08",833.0],["mudah","studio","phone_call",0,1,0,0,0,"requirement_mismatch","2026-02","L10",7.6],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L08",26.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L02",46.5],["mudah","room","whatsapp",0,1,0,0,0,"no_reply","2026-02","L03",248.8],["google_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2026-02","L10",87.3],["google_ads","studio","phone_call",0,1,0,0,0,"no_reply","2026-02","L10",173.7],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L09",13.6],["referral","whole_unit","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-02","L05",47.8],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-02","L06",12.4],["propertyguru","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L03",5.8],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2026-02","L08",9.3],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-02","L04",63.7],["mudah","studio","portal_chat",0,1,1,0,0,"lowball","2026-02","L04",78.2],["mudah","whole_unit","portal_chat",0,0,1,0,0,"unanswered","2026-02","L05",null],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L06",21.7],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2026-02","L05",144.4],["meta_ads","room","lead_form",0,1,0,0,0,"budget_mismatch","2026-02","L06",76.4],["mudah","studio","whatsapp",0,1,0,0,0,"no_reply","2026-02","L10",39.7],["meta_ads","studio","lead_form",0,1,0,0,0,"no_reply","2026-02","L10",19.8],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L05",18.5],["propertyguru","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-02","L06",12.2],["propertyguru","whole_unit","phone_call",1,1,0,1,1,"still_open","2026-02","L05",15.8],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L02",180.0],["mudah","studio","phone_call",1,1,0,1,0,"no_show","2026-02","L10",23.8],["propertyguru","studio","portal_chat",1,1,0,1,0,"no_show","2026-02","L10",24.2],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-02","L02",18.1],["mudah","room","whatsapp",0,1,0,0,0,"lowball","2026-02","L08",20.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-02","L03",12.5],["google_ads","room","lead_form",1,1,0,1,1,"still_open","2026-02","L08",53.3],["meta_ads","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-02","L03",48.7],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-02","L08",57.1],["mudah","room","portal_chat",1,1,1,0,0,"still_open","2026-02","L02",315.4],["meta_ads","room","lead_form",0,1,1,0,0,"lowball","2026-02","L03",108.6],["mudah","room","whatsapp",1,1,1,0,0,"no_reply","2026-02","L08",112.9],["propertyguru","room","portal_chat",0,1,1,0,0,"lowball","2026-02","L03",39.2],["mudah","room","phone_call",0,1,1,0,0,"no_reply","2026-02","L02",137.2],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-02","L08",104.0],["propertyguru","whole_unit","whatsapp",0,1,1,0,0,"budget_mismatch","2026-02","L09",153.4],["google_ads","whole_unit","lead_form",0,1,1,0,0,"no_reply","2026-03","L05",34.6],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L06",413.1],["mudah","studio","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L10",34.7],["mudah","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-03","L09",19.2],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L02",5.4],["referral","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-03","L08",17.1],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",18.2],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-03","L02",90.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L06",19.8],["propertyguru","whole_unit","phone_call",1,1,0,0,0,"no_reply","2026-03","L09",23.7],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-03","L02",8.3],["referral","room","whatsapp",0,1,0,0,0,"lowball","2026-03","L03",76.5],["meta_ads","room","phone_call",1,1,0,0,0,"no_reply","2026-03","L08",25.2],["propertyguru","studio","phone_call",0,1,0,0,0,"no_reply","2026-03","L04",26.6],["propertyguru","studio","portal_chat",1,1,0,0,0,"no_reply","2026-03","L04",132.5],["referral","room","phone_call",1,0,1,0,0,"unanswered","2026-03","L02",null],["google_ads","studio","whatsapp",1,0,1,0,0,"unanswered","2026-03","L10",null],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-03","L02",null],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-03","L03",39.1],["meta_ads","room","whatsapp",1,1,0,0,0,"no_reply","2026-03","L02",152.3],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L08",42.0],["mudah","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L05",93.9],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-03","L08",23.1],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L06",44.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L08",163.9],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",61.0],["mudah","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-03","L09",43.6],["meta_ads","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-03","L06",26.8],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L06",83.2],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-03","L08",107.3],["referral","studio","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-03","L10",112.1],["mudah","studio","portal_chat",1,1,0,1,0,"no_show","2026-03","L10",23.5],["mudah","studio","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L10",35.0],["referral","room","phone_call",1,1,0,1,1,"lost_to_other","2026-03","L02",11.5],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-03","L04",21.7],["meta_ads","room","lead_form",0,0,0,0,0,"unanswered","2026-03","L08",null],["mudah","whole_unit","phone_call",0,1,0,0,0,"lowball","2026-03","L05",18.9],["google_ads","room","phone_call",1,1,1,0,0,"still_open","2026-03","L03",14.9],["referral","studio","whatsapp",0,0,1,0,0,"unanswered","2026-03","L04",null],["mudah","room","portal_chat",0,1,1,0,0,"budget_mismatch","2026-03","L03",12.6],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-03","L06",169.0],["mudah","room","portal_chat",0,1,1,0,0,"budget_mismatch","2026-03","L06",18.6],["mudah","studio","portal_chat",1,1,0,1,1,"lost_to_other","2026-03","L10",11.0],["propertyguru","room","whatsapp",0,1,0,0,0,"no_reply","2026-03","L08",54.7],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-03","L10",22.9],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-03","L02",39.0],["google_ads","studio","whatsapp",0,1,1,0,0,"no_reply","2026-03","L10",89.4],["mudah","studio","phone_call",0,1,0,0,0,"budget_mismatch","2026-03","L10",28.4],["google_ads","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-03","L03",27.5],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-03","L02",126.2],["meta_ads","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-03","L08",47.9],["propertyguru","studio","whatsapp",1,1,0,1,1,"still_open","2026-03","L10",17.5],["meta_ads","room","phone_call",0,1,0,0,0,"lowball","2026-03","L03",86.7],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2026-03","L06",116.7],["meta_ads","whole_unit","lead_form",1,1,0,0,0,"no_reply","2026-03","L05",26.4],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-03","L04",193.1],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-03","L02",8.3],["propertyguru","room","phone_call",1,1,0,0,0,"still_open","2026-03","L08",11.6],["mudah","room","phone_call",0,0,0,0,0,"unanswered","2026-03","L08",null],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L06",152.5],["meta_ads","room","whatsapp",1,0,0,0,0,"unanswered","2026-03","L03",null],["referral","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-03","L02",30.4],["mudah","whole_unit","whatsapp",0,1,0,0,0,"lowball","2026-03","L05",28.7],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-03","L03",28.3],["propertyguru","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L03",49.9],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L03",34.5],["mudah","room","portal_chat",1,1,0,0,0,"no_reply","2026-03","L02",33.8],["propertyguru","room","phone_call",0,1,0,0,0,"no_reply","2026-03","L06",56.0],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-03","L06",44.0],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L08",12.0],["propertyguru","room","portal_chat",1,0,0,0,0,"unanswered","2026-03","L02",null],["google_ads","room","whatsapp",1,1,0,0,0,"budget_mismatch","2026-03","L02",63.3],["referral","room","whatsapp",1,1,0,1,0,"no_show","2026-03","L03",7.8],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-03","L03",24.0],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-03","L03",222.2],["propertyguru","room","portal_chat",1,1,0,1,0,"no_show","2026-03","L02",65.9],["meta_ads","room","whatsapp",0,1,1,0,0,"lowball","2026-03","L08",190.5],["propertyguru","room","portal_chat",1,1,1,0,0,"budget_mismatch","2026-03","L08",7.0],["meta_ads","room","phone_call",0,1,1,0,0,"no_reply","2026-03","L08",105.4],["mudah","room","phone_call",0,1,1,0,0,"lowball","2026-03","L08",142.7],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2026-03","L08",60.5],["meta_ads","room","lead_form",0,1,1,0,0,"no_reply","2026-03","L02",55.5],["propertyguru","studio","portal_chat",1,1,0,1,1,"viewing_pipeline","2026-03","L10",42.1],["mudah","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-03","L03",37.5],["referral","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-03","L03",31.0],["propertyguru","whole_unit","portal_chat",1,1,0,0,0,"still_open","2026-03","L09",29.4],["meta_ads","room","phone_call",0,1,0,0,0,"budget_mismatch","2026-03","L02",68.8],["referral","room","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-03","L08",35.5],["google_ads","studio","lead_form",1,1,0,0,0,"still_open","2026-03","L04",9.8],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",25.8],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",87.5],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-03","L02",73.7],["mudah","room","portal_chat",1,1,0,0,0,"no_reply","2026-03","L02",16.5],["propertyguru","room","portal_chat",1,1,0,1,1,"lost_to_other","2026-03","L08",350.1],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-03","L02",82.9],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L08",21.2],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-03","L08",51.5],["propertyguru","whole_unit","portal_chat",1,1,0,0,0,"still_open","2026-03","L05",211.4],["propertyguru","studio","portal_chat",1,0,1,0,0,"unanswered","2026-03","L10",null],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-03","L09",145.2],["google_ads","whole_unit","whatsapp",0,0,0,0,0,"unanswered","2026-03","L05",null],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-03","L04",13.0],["mudah","studio","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L10",64.3],["mudah","studio","portal_chat",0,0,0,0,0,"unanswered","2026-03","L04",null],["meta_ads","room","phone_call",0,1,0,0,0,"no_reply","2026-03","L03",29.1],["propertyguru","whole_unit","portal_chat",1,1,0,0,0,"no_reply","2026-03","L05",47.3],["propertyguru","room","whatsapp",0,1,1,0,0,"lowball","2026-03","L03",78.6],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-03","L03",198.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-03","L05",19.7],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",11.4],["google_ads","whole_unit","phone_call",1,1,0,0,0,"still_open","2026-03","L05",19.3],["propertyguru","whole_unit","phone_call",0,1,1,0,0,"lowball","2026-03","L05",110.1],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2026-03","L08",41.6],["google_ads","whole_unit","lead_form",0,0,1,0,0,"unanswered","2026-03","L05",null],["google_ads","studio","whatsapp",1,1,1,1,0,"no_show","2026-03","L04",12.1],["propertyguru","room","portal_chat",1,0,1,0,0,"unanswered","2026-03","L02",null],["mudah","room","phone_call",0,0,1,0,0,"unanswered","2026-03","L02",null],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2026-03","L03",238.9],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2026-03","L02",null],["meta_ads","room","phone_call",0,1,1,0,0,"lowball","2026-03","L02",101.2],["mudah","whole_unit","whatsapp",0,1,0,0,0,"budget_mismatch","2026-03","L09",12.5],["propertyguru","studio","portal_chat",1,1,0,1,0,"no_show","2026-03","L04",39.5],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L03",29.4],["mudah","studio","portal_chat",0,1,0,0,0,"lowball","2026-03","L10",42.0],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L03",16.9],["mudah","room","portal_chat",1,0,1,0,0,"unanswered","2026-03","L02",null],["propertyguru","whole_unit","whatsapp",1,1,0,1,1,"lost_to_other","2026-03","L09",40.8],["mudah","room","phone_call",1,1,0,0,0,"still_open","2026-03","L03",8.3],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-03","L05",28.0],["mudah","room","portal_chat",0,1,1,0,0,"no_reply","2026-03","L02",80.3],["google_ads","whole_unit","whatsapp",1,1,0,1,1,"still_open","2026-03","L05",132.8],["propertyguru","studio","whatsapp",1,1,0,0,0,"still_open","2026-03","L10",14.9],["google_ads","studio","phone_call",1,1,0,1,1,"tenancy_signed","2026-03","L10",6.2],["propertyguru","studio","phone_call",0,1,0,0,0,"lowball","2026-03","L04",28.6],["propertyguru","room","whatsapp",0,1,0,0,0,"lowball","2026-03","L08",12.3],["google_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-03","L02",15.4],["propertyguru","room","phone_call",1,1,0,1,1,"lost_to_other","2026-03","L02",17.5],["mudah","studio","portal_chat",0,1,0,0,0,"budget_mismatch","2026-03","L10",7.7],["google_ads","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-03","L02",89.4],["propertyguru","whole_unit","phone_call",1,1,0,1,1,"lost_to_other","2026-03","L07",94.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",93.8],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",65.6],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L08",84.9],["mudah","room","portal_chat",1,1,0,1,0,"no_show","2026-03","L03",39.5],["google_ads","whole_unit","phone_call",1,1,0,1,1,"still_open","2026-03","L05",19.3],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L05",37.3],["meta_ads","room","whatsapp",1,1,0,1,0,"no_show","2026-03","L02",21.5],["google_ads","studio","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-03","L04",129.0],["google_ads","room","phone_call",1,1,0,0,0,"budget_mismatch","2026-03","L03",10.5],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-03","L03",36.4],["mudah","whole_unit","phone_call",0,1,1,0,0,"lowball","2026-03","L05",139.3],["referral","studio","phone_call",0,1,1,0,0,"requirement_mismatch","2026-03","L04",73.7],["referral","room","whatsapp",0,1,1,0,0,"no_reply","2026-03","L08",208.6],["propertyguru","room","whatsapp",1,0,1,0,0,"unanswered","2026-03","L03",null],["propertyguru","studio","whatsapp",0,0,1,0,0,"unanswered","2026-03","L04",null],["mudah","room","portal_chat",1,1,1,1,1,"lost_to_other","2026-03","L08",59.9],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L02",62.4],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-03","L02",13.3],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2026-03","L08",34.6],["meta_ads","room","lead_form",1,1,0,0,0,"no_reply","2026-03","L02",22.5],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-03","L05",11.7],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L08",16.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L08",51.0],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-03","L05",103.2],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-03","L08",13.3],["mudah","room","phone_call",0,0,1,0,0,"unanswered","2026-03","L08",null],["mudah","room","portal_chat",0,1,1,0,0,"lowball","2026-03","L02",252.4],["google_ads","studio","phone_call",1,1,0,1,1,"lost_to_other","2026-03","L04",27.2],["mudah","studio","whatsapp",0,0,0,0,0,"unanswered","2026-03","L04",null],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-03","L08",46.1],["meta_ads","room","phone_call",0,1,0,0,0,"lowball","2026-03","L02",12.7],["mudah","studio","phone_call",0,1,0,0,0,"no_reply","2026-03","L04",20.6],["propertyguru","studio","whatsapp",0,1,0,0,0,"no_reply","2026-04","L04",13.7],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-04","L02",24.9],["google_ads","whole_unit","lead_form",1,1,0,1,1,"still_open","2026-04","L09",120.6],["mudah","room","whatsapp",0,1,0,0,0,"no_reply","2026-04","L02",83.1],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-04","L08",38.7],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L03",48.5],["propertyguru","room","portal_chat",1,0,0,0,0,"unanswered","2026-04","L02",null],["propertyguru","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-04","L08",19.4],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L08",16.4],["mudah","room","portal_chat",1,1,0,0,0,"still_open","2026-04","L08",36.0],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-04","L02",8.1],["referral","room","phone_call",1,1,0,1,1,"tenancy_signed","2026-04","L08",15.0],["referral","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-04","L09",63.4],["referral","whole_unit","whatsapp",1,1,1,0,0,"no_reply","2026-04","L07",45.8],["google_ads","whole_unit","lead_form",1,1,1,0,0,"no_reply","2026-04","L05",42.3],["referral","room","whatsapp",1,1,1,0,0,"budget_mismatch","2026-04","L03",62.6],["referral","room","whatsapp",1,1,1,1,1,"viewing_pipeline","2026-04","L03",86.3],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-04","L02",6.7],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-04","L02",25.5],["meta_ads","room","whatsapp",0,0,0,0,0,"unanswered","2026-04","L02",null],["google_ads","studio","whatsapp",1,1,0,1,0,"no_show","2026-04","L04",86.4],["propertyguru","studio","whatsapp",1,1,0,0,0,"still_open","2026-04","L04",28.4],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L03",20.2],["mudah","room","phone_call",1,1,0,0,0,"no_reply","2026-04","L08",6.5],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L03",9.6],["mudah","studio","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L04",15.4],["propertyguru","whole_unit","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-04","L09",10.2],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-04","L08",24.6],["google_ads","studio","lead_form",1,1,1,1,1,"lost_to_other","2026-04","L04",64.0],["mudah","whole_unit","portal_chat",1,1,0,0,0,"still_open","2026-04","L09",17.2],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"still_open","2026-04","L05",19.1],["meta_ads","room","lead_form",1,1,0,1,1,"lost_to_other","2026-04","L02",57.1],["propertyguru","studio","phone_call",1,1,0,1,1,"lost_to_other","2026-04","L04",55.2],["mudah","room","phone_call",0,1,1,0,0,"requirement_mismatch","2026-04","L08",114.6],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-04","L05",9.0],["propertyguru","room","phone_call",0,1,0,0,0,"no_reply","2026-04","L02",24.8],["propertyguru","room","whatsapp",1,1,0,0,0,"no_reply","2026-04","L02",117.7],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-04","L02",100.7],["mudah","studio","portal_chat",0,1,0,0,0,"lowball","2026-04","L04",27.3],["meta_ads","room","phone_call",0,1,0,0,0,"no_reply","2026-04","L02",30.9],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-04","L08",23.2],["mudah","studio","whatsapp",0,1,0,0,0,"lowball","2026-04","L04",15.0],["mudah","room","whatsapp",1,1,0,0,0,"no_reply","2026-04","L02",91.0],["mudah","room","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-04","L02",92.0],["meta_ads","room","lead_form",0,0,1,0,0,"unanswered","2026-04","L02",null],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L03",27.3],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-04","L09",57.7],["referral","room","phone_call",1,1,0,1,1,"still_open","2026-04","L02",19.9],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-04","L02",12.8],["propertyguru","room","portal_chat",0,1,0,0,0,"lowball","2026-04","L02",41.2],["mudah","studio","portal_chat",0,0,0,0,0,"unanswered","2026-04","L04",null],["meta_ads","room","lead_form",1,1,0,1,1,"still_open","2026-04","L03",104.9],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-04","L03",49.5],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L02",15.8],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-04","L03",32.2],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L03",73.7],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L03",15.0],["mudah","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-04","L02",33.2],["meta_ads","whole_unit","lead_form",0,1,0,0,0,"lowball","2026-04","L05",17.3],["propertyguru","room","portal_chat",1,1,0,0,0,"no_reply","2026-04","L03",9.3],["mudah","room","portal_chat",1,1,0,0,0,"no_reply","2026-04","L03",141.7],["referral","room","whatsapp",1,1,0,1,1,"still_open","2026-04","L02",11.7],["meta_ads","room","whatsapp",0,1,0,0,0,"budget_mismatch","2026-04","L03",66.6],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-04","L02",21.4],["mudah","studio","portal_chat",0,1,1,0,0,"requirement_mismatch","2026-04","L04",109.9],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"lowball","2026-04","L07",27.3],["mudah","room","phone_call",0,1,0,0,0,"requirement_mismatch","2026-04","L03",15.6],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L03",25.5],["meta_ads","studio","phone_call",1,1,0,1,1,"lost_to_other","2026-04","L04",11.5],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-04","L04",14.0],["propertyguru","room","portal_chat",0,1,1,0,0,"budget_mismatch","2026-04","L02",176.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"budget_mismatch","2026-04","L05",26.1],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L03",11.3],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L03",48.4],["propertyguru","whole_unit","portal_chat",1,0,0,0,0,"unanswered","2026-04","L01",null],["propertyguru","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L02",42.6],["propertyguru","room","phone_call",0,1,0,0,0,"lowball","2026-04","L02",19.8],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L03",58.0],["meta_ads","room","whatsapp",1,1,0,1,1,"tenancy_signed","2026-04","L02",96.4],["meta_ads","room","lead_form",0,1,0,0,0,"no_reply","2026-04","L02",30.9],["meta_ads","room","lead_form",0,1,0,0,0,"requirement_mismatch","2026-04","L02",44.4],["mudah","room","phone_call",0,1,0,0,0,"budget_mismatch","2026-04","L02",29.5],["mudah","room","portal_chat",0,1,0,0,0,"no_reply","2026-04","L02",19.7],["propertyguru","whole_unit","whatsapp",0,1,1,0,0,"no_reply","2026-04","L05",77.5],["google_ads","whole_unit","lead_form",0,1,1,0,0,"no_reply","2026-04","L09",452.1],["meta_ads","room","whatsapp",0,1,0,0,0,"lowball","2026-04","L02",85.6],["mudah","studio","portal_chat",0,0,0,0,0,"unanswered","2026-04","L04",null],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-04","L05",338.0],["propertyguru","room","portal_chat",1,1,0,0,0,"budget_mismatch","2026-04","L03",93.9],["propertyguru","whole_unit","phone_call",0,1,1,0,0,"requirement_mismatch","2026-04","L05",105.4],["referral","room","whatsapp",0,1,1,0,0,"lowball","2026-04","L02",415.2],["mudah","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-04","L03",72.1],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-04","L05",12.5],["mudah","room","portal_chat",0,0,0,0,0,"unanswered","2026-04","L08",null],["mudah","room","portal_chat",1,1,1,0,0,"no_reply","2026-04","L03",39.5],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L03",57.8],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L05",19.8],["propertyguru","whole_unit","whatsapp",1,1,0,0,0,"no_reply","2026-04","L05",31.2],["meta_ads","room","lead_form",1,1,0,0,0,"still_open","2026-04","L03",16.0],["google_ads","whole_unit","phone_call",0,1,0,0,0,"no_reply","2026-04","L05",119.2],["propertyguru","room","whatsapp",0,1,0,0,0,"no_reply","2026-04","L03",10.3],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-04","L03",24.3],["referral","room","whatsapp",1,1,0,1,1,"still_open","2026-04","L03",27.6],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-04","L09",16.1],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-04","L04",2.6],["propertyguru","studio","whatsapp",1,1,0,1,1,"still_open","2026-04","L04",26.1],["meta_ads","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-04","L03",51.0],["mudah","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-04","L05",11.0],["propertyguru","whole_unit","phone_call",0,1,0,0,0,"requirement_mismatch","2026-04","L09",36.3],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-04","L04",44.3],["mudah","room","phone_call",0,1,0,0,0,"lowball","2026-04","L03",122.7],["meta_ads","whole_unit","lead_form",0,1,0,0,0,"requirement_mismatch","2026-05","L09",63.5],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-05","L03",27.3],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-05","L03",46.6],["google_ads","whole_unit","phone_call",1,1,0,1,0,"no_show","2026-05","L09",222.0],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2026-05","L03",null],["propertyguru","studio","portal_chat",0,1,1,0,0,"no_reply","2026-05","L04",160.8],["referral","room","phone_call",1,1,0,1,1,"viewing_pipeline","2026-05","L03",120.9],["google_ads","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-05","L03",19.3],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-05","L04",62.6],["referral","studio","whatsapp",1,1,0,0,0,"no_reply","2026-05","L04",5.1],["mudah","room","whatsapp",0,1,0,0,0,"lowball","2026-05","L03",22.7],["google_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-05","L06",32.5],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-05","L04",33.8],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-05","L04",66.6],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-05","L03",8.6],["meta_ads","whole_unit","lead_form",0,1,0,0,0,"no_reply","2026-05","L05",12.7],["meta_ads","studio","whatsapp",0,1,0,0,0,"no_reply","2026-05","L04",58.1],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-05","L03",110.8],["propertyguru","whole_unit","whatsapp",1,1,0,1,1,"tenancy_signed","2026-05","L05",63.9],["mudah","room","phone_call",0,1,0,0,0,"no_reply","2026-05","L03",102.9],["mudah","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-05","L09",69.9],["google_ads","studio","phone_call",0,1,0,0,0,"budget_mismatch","2026-05","L04",44.0],["referral","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-05","L03",7.7],["mudah","studio","portal_chat",0,1,0,0,0,"no_reply","2026-05","L04",82.3],["propertyguru","studio","portal_chat",0,1,0,0,0,"no_reply","2026-05","L04",95.8],["google_ads","room","whatsapp",0,1,0,0,0,"lowball","2026-05","L03",61.6],["meta_ads","whole_unit","lead_form",0,1,1,0,0,"no_reply","2026-05","L09",155.4],["propertyguru","studio","portal_chat",1,1,0,0,0,"no_reply","2026-05","L04",48.8],["mudah","studio","phone_call",0,1,0,0,0,"requirement_mismatch","2026-05","L04",14.5],["meta_ads","whole_unit","phone_call",0,0,0,0,0,"unanswered","2026-05","L09",null],["referral","studio","whatsapp",0,1,0,0,0,"no_reply","2026-05","L04",66.5],["propertyguru","room","whatsapp",1,1,0,0,0,"budget_mismatch","2026-05","L03",20.6],["meta_ads","room","lead_form",0,1,0,0,0,"lowball","2026-05","L03",148.0],["meta_ads","room","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-05","L03",45.0],["meta_ads","room","whatsapp",0,1,0,0,0,"no_reply","2026-05","L03",48.4],["referral","whole_unit","whatsapp",1,0,0,0,0,"unanswered","2026-05","L05",null],["meta_ads","studio","lead_form",1,1,0,1,1,"viewing_pipeline","2026-05","L04",8.4],["referral","room","phone_call",1,1,1,0,0,"no_reply","2026-05","L03",90.2],["mudah","room","portal_chat",0,0,1,0,0,"unanswered","2026-05","L03",null],["mudah","room","phone_call",1,1,0,1,1,"lost_to_other","2026-05","L03",13.8],["propertyguru","studio","whatsapp",0,1,0,0,0,"lowball","2026-05","L04",17.5],["propertyguru","whole_unit","whatsapp",0,1,0,0,0,"no_reply","2026-05","L07",22.2],["propertyguru","whole_unit","portal_chat",0,1,0,0,0,"no_reply","2026-05","L01",43.8],["propertyguru","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-05","L03",47.0],["mudah","whole_unit","phone_call",0,1,0,0,0,"lowball","2026-05","L05",36.5],["google_ads","whole_unit","whatsapp",0,1,0,0,0,"requirement_mismatch","2026-05","L09",7.2],["propertyguru","studio","whatsapp",0,1,0,0,0,"lowball","2026-05","L04",21.6],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-05","L03",37.3],["meta_ads","studio","lead_form",0,1,0,0,0,"requirement_mismatch","2026-05","L04",15.7],["referral","room","whatsapp",1,1,0,1,1,"still_open","2026-05","L08",45.8],["propertyguru","studio","portal_chat",1,1,0,0,0,"no_reply","2026-05","L04",53.4],["propertyguru","studio","whatsapp",1,1,0,1,1,"viewing_pipeline","2026-05","L04",8.1],["meta_ads","room","lead_form",0,1,1,0,0,"no_reply","2026-05","L03",18.3],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-05","L03",68.8],["mudah","room","portal_chat",0,1,0,0,0,"requirement_mismatch","2026-05","L03",7.6],["propertyguru","room","whatsapp",1,1,0,1,1,"lost_to_other","2026-05","L03",124.6],["mudah","room","portal_chat",0,1,0,0,0,"budget_mismatch","2026-05","L03",19.9],["meta_ads","room","lead_form",1,1,1,1,1,"still_open","2026-05","L03",126.2],["propertyguru","studio","portal_chat",0,1,1,0,0,"no_reply","2026-05","L04",121.9],["mudah","room","portal_chat",0,1,0,0,0,"lowball","2026-05","L02",100.7],["propertyguru","whole_unit","portal_chat",1,1,0,1,1,"lost_to_other","2026-05","L09",93.0],["meta_ads","room","lead_form",1,1,0,0,0,"no_reply","2026-05","L03",8.2],["mudah","studio","portal_chat",1,1,0,1,1,"still_open","2026-05","L04",13.1],["google_ads","studio","whatsapp",0,0,1,0,0,"unanswered","2026-05","L04",null]],"cost":{"referral":0,"propertyguru":2700,"mudah":360,"google_ads":3600,"meta_ads":2400},"label":{"referral":"WhatsApp referral","propertyguru":"PropertyGuru","google_ads":"Google Ads","meta_ads":"Meta Ads","mudah":"Mudah.my"},"listings":{"L01":{"name":"Arte Mont Kiara","seg":"whole_unit","rent":1749},"L02":{"name":"Nexus Residence (Room)","seg":"room","rent":899},"L03":{"name":"J.Dupion Residence (Female Room)","seg":"room","rent":799},"L04":{"name":"28 Boulevard Studio","seg":"studio","rent":1599},"L05":{"name":"Nexus Residence (Whole Unit)","seg":"whole_unit","rent":2999},"L06":{"name":"J.Dupion Residence (Master Room)","seg":"room","rent":1200},"L07":{"name":"Lavile Kuala Lumpur","seg":"whole_unit","rent":1800},"L08":{"name":"M Vertica (Room)","seg":"room","rent":850},"L09":{"name":"Sunway Velocity Two","seg":"whole_unit","rent":3400},"L10":{"name":"Razak City Residences Studio","seg":"studio","rent":1350}}};
+
+        const MONTHLY_COST = {referral: 0, propertyguru: 450, mudah: 60, google_ads: 600, meta_ads: 400};
+        const SOURCE_ORDER = ['referral', 'propertyguru', 'google_ads', 'meta_ads', 'mudah'];
+        const SEG_ORDER = ['whole_unit', 'studio', 'room'];
+        const SEG_LABEL = {whole_unit: 'Whole unit', studio: 'Studio', room: 'Room'};
+        const ALL_MONTHS = ['2025-12', '2026-01', '2026-02', '2026-03', '2026-04', '2026-05'];
+        const MONTH_LABEL = {
+            '2025-12': 'Dec 2025', '2026-01': 'Jan 2026', '2026-02': 'Feb 2026',
+            '2026-03': 'Mar 2026', '2026-04': 'Apr 2026', '2026-05': 'May 2026'
+        };
+        const OUTCOME_ORDER = ['no_reply', 'lowball', 'requirement_mismatch', 'budget_mismatch',
+            'unanswered', 'still_open', 'lost_to_other', 'no_show', 'viewing_pipeline', 'tenancy_signed'];
+        const OUTCOME_LABEL = {
+            no_reply: 'No reply', lowball: 'Lowball', requirement_mismatch: 'Requirement mismatch',
+            budget_mismatch: 'Budget mismatch', unanswered: 'Unanswered', still_open: 'Still open',
+            lost_to_other: 'Lost to other', no_show: 'No show', viewing_pipeline: 'Viewing pipeline',
+            tenancy_signed: 'Tenancy signed'
+        };
+        const SRC_COLOR = {
+            referral: '#2E7D32', propertyguru: '#CBA135', google_ads: '#5A7DBF',
+            meta_ads: '#9B59B6', mudah: '#A8453A'
+        };
+        const VERDICT = {
+            referral: 'Champion', propertyguru: 'Workhorse', google_ads: 'Quality engine',
+            meta_ads: 'Rooms only', mudah: 'Volume trap'
+        };
+        const GOLD = '#CBA135', BROWN = '#403B36', RED = '#A8453A';
+
+        let allRows = [];
+        let charts = {};
+
+        function buildRows() {
+            const cols = DATA.cols;
+            allRows = DATA.rows.map(r => {
+                const o = {};
+                cols.forEach((c, i) => { o[c] = r[i]; });
+                return o;
+            });
+        }
+
+        function getFilters() {
+            return {
+                source: document.getElementById('sourceFilter').value,
+                month: document.getElementById('monthFilter').value
+            };
+        }
+
+        function selectedMonths(f) {
+            return f.month === 'all' ? ALL_MONTHS.slice() : [f.month];
+        }
+
+        function selectedSources(f) {
+            return f.source === 'all' ? SOURCE_ORDER.slice() : [f.source];
+        }
+
+        function filterRows(f) {
+            return allRows.filter(r =>
+                (f.source === 'all' || r.s === f.source) &&
+                (f.month === 'all' || r.mo === f.month)
+            );
+        }
+
+        // Cost denominator: for each SELECTED source, monthlyCost * number of SELECTED months.
+        function selectionCost(source, f) {
+            const months = selectedMonths(f).length;
+            return MONTHLY_COST[source] * months;
+        }
+
+        function totalSelectionCost(f) {
+            return selectedSources(f).reduce((sum, s) => sum + selectionCost(s, f), 0);
+        }
+
+        function fmtRM(n) {
+            return 'RM' + Math.round(n).toLocaleString('en-US');
+        }
+
+        function pct(num, den, dp) {
+            if (!den) return 0;
+            const v = num / den * 100;
+            return dp === undefined ? v : Number(v.toFixed(dp));
+        }
+
+        function perSourceStats(rows) {
+            const stats = {};
+            SOURCE_ORDER.forEach(s => {
+                const rs = rows.filter(r => r.s === s);
+                stats[s] = {
+                    enq: rs.length,
+                    qual: rs.reduce((a, r) => a + r.q, 0),
+                    viewBooked: rs.reduce((a, r) => a + r.vb, 0),
+                    tenancies: rs.filter(r => r.o === 'tenancy_signed').length
+                };
+            });
+            return stats;
+        }
+
+        // ---------- MAIN ----------
+        function applyFilters() {
+            const f = getFilters();
+            const rows = filterRows(f);
+            renderTab1(rows, f);
+            renderTab2(rows, f);
+            renderTab3(rows, f);
+            renderTab4(rows, f);
+        }
+
+        function renderTab1(rows, f) {
+            const totalEnq = rows.length;
+            const totalQual = rows.reduce((a, r) => a + r.q, 0);
+            const totalTen = rows.filter(r => r.o === 'tenancy_signed').length;
+            const totalCost = totalSelectionCost(f);
+
+            document.getElementById('kpiEnquiries').textContent = totalEnq.toLocaleString('en-US');
+            document.getElementById('kpiQualified').textContent = totalQual.toLocaleString('en-US');
+            document.getElementById('kpiQualifiedSub').textContent =
+                pct(totalQual, totalEnq, 1) + '% of enquiries';
+            document.getElementById('kpiTenancies').textContent = totalTen.toLocaleString('en-US');
+            const cpt = totalTen > 0 ? fmtRM(totalCost / totalTen) : 'Undefined';
+            document.getElementById('kpiCostPerTenancy').textContent = cpt;
+            document.getElementById('kpiCostPerTenancySub').textContent = fmtRM(totalCost) + ' total spend';
+
+            const stats = perSourceStats(rows);
+            const srcs = selectedSources(f);
+
+            // Cost per tenancy bar
+            const cptLabels = [], cptData = [], cptColors = [], cptTenancies = [];
+            srcs.forEach(s => {
+                const st = stats[s];
+                const cost = selectionCost(s, f);
+                cptLabels.push(DATA.label[s]);
+                cptTenancies.push(st.tenancies);
+                if (st.tenancies > 0) {
+                    cptData.push(Math.round(cost / st.tenancies));
+                } else {
+                    cptData.push(0);
+                }
+                cptColors.push(SRC_COLOR[s]);
+            });
+            renderChart('costPerTenancyChart', {
+                type: 'bar',
+                data: {
+                    labels: cptLabels,
+                    datasets: [{ label: 'Cost per tenancy (RM)', data: cptData, backgroundColor: cptColors }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => {
+                                    const t = cptTenancies[ctx.dataIndex];
+                                    if (t === 0) return '0 tenancies';
+                                    return fmtRM(ctx.parsed.y) + ' (' + t + ' tenanc' + (t === 1 ? 'y' : 'ies') + ')';
+                                }
+                            }
+                        }
+                    },
+                    scales: { y: { beginAtZero: true, ticks: { callback: v => 'RM' + v.toLocaleString('en-US') } } }
+                }
+            });
+
+            // Volume vs quality grouped bar
+            const vqLabels = srcs.map(s => DATA.label[s]);
+            const shareData = srcs.map(s => pct(stats[s].enq, totalEnq, 1));
+            const qualData = srcs.map(s => pct(stats[s].qual, stats[s].enq, 1));
+            renderChart('volumeQualityChart', {
+                type: 'bar',
+                data: {
+                    labels: vqLabels,
+                    datasets: [
+                        { label: 'Share of enquiries %', data: shareData, backgroundColor: GOLD },
+                        { label: 'Qualified rate %', data: qualData, backgroundColor: BROWN }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' } } }
+                }
+            });
+
+            // Channel performance table
+            const tbody = document.querySelector('#channelTable tbody');
+            tbody.innerHTML = '';
+            srcs.forEach(s => {
+                const st = stats[s];
+                const cost = selectionCost(s, f);
+                const qualRate = pct(st.qual, st.enq, 0);
+                const viewRate = pct(st.viewBooked, st.enq, 0);
+                const costPerEnq = st.enq > 0 ? (cost / st.enq) : 0;
+                const cptCell = st.tenancies > 0 ? fmtRM(cost / st.tenancies) : 'Undefined';
+                const row = tbody.insertRow();
+                row.innerHTML =
+                    '<td><strong>' + DATA.label[s] + '</strong></td>' +
+                    '<td>' + st.enq.toLocaleString('en-US') + '</td>' +
+                    '<td>' + qualRate + '%</td>' +
+                    '<td>' + viewRate + '%</td>' +
+                    '<td>' + st.tenancies + '</td>' +
+                    '<td>RM' + costPerEnq.toFixed(2) + '</td>' +
+                    '<td>' + cptCell + '</td>' +
+                    '<td>' + VERDICT[s] + '</td>';
+            });
+        }
+
+        function renderTab2(rows, f) {
+            // Outcome doughnut
+            const counts = {};
+            OUTCOME_ORDER.forEach(o => counts[o] = 0);
+            rows.forEach(r => { counts[r.o] = (counts[r.o] || 0) + 1; });
+            const present = OUTCOME_ORDER.filter(o => counts[o] > 0);
+            const palette = ['#A8453A', '#CBA135', '#5A7DBF', '#9B59B6', '#B0764A',
+                '#7E9B58', '#C77B3A', '#6C757D', '#4FA0A0', '#2E7D32'];
+            renderChart('outcomeDoughnut', {
+                type: 'doughnut',
+                data: {
+                    labels: present.map(o => OUTCOME_LABEL[o]),
+                    datasets: [{ data: present.map(o => counts[o]),
+                        backgroundColor: present.map((o, i) => palette[OUTCOME_ORDER.indexOf(o) % palette.length]) }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right', labels: { boxWidth: 14, font: { size: 11 } } } }
+                }
+            });
+
+            // Funnel by source
+            const stats = perSourceStats(rows);
+            const srcs = selectedSources(f);
+            renderChart('funnelBySourceChart', {
+                type: 'bar',
+                data: {
+                    labels: srcs.map(s => DATA.label[s]),
+                    datasets: [
+                        { label: 'Qualified rate %', data: srcs.map(s => pct(stats[s].qual, stats[s].enq, 1)), backgroundColor: BROWN },
+                        { label: 'Enquiry to viewing %', data: srcs.map(s => pct(stats[s].viewBooked, stats[s].enq, 1)), backgroundColor: GOLD }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' } } }
+                }
+            });
+
+            // Mudah outcomes (horizontal) - recompute from current filter, source mudah only
+            const mudahRows = rows.filter(r => r.s === 'mudah');
+            const mCounts = {};
+            OUTCOME_ORDER.forEach(o => mCounts[o] = 0);
+            mudahRows.forEach(r => { mCounts[r.o] = (mCounts[r.o] || 0) + 1; });
+            const mOrdered = OUTCOME_ORDER.slice().sort((a, b) => mCounts[b] - mCounts[a]);
+            const mTen = mCounts['tenancy_signed'] || 0;
+            document.getElementById('mudahNote').textContent =
+                mudahRows.length.toLocaleString('en-US') + ' enquiries, ' +
+                (mTen === 0 ? 'zero' : mTen) + ' tenanc' + (mTen === 1 ? 'y' : 'ies') + ' signed.';
+            renderChart('mudahOutcomeChart', {
+                type: 'bar',
+                data: {
+                    labels: mOrdered.map(o => OUTCOME_LABEL[o]),
+                    datasets: [{ label: 'Mudah enquiries', data: mOrdered.map(o => mCounts[o]), backgroundColor: RED }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { beginAtZero: true } }
+                }
+            });
+        }
+
+        function renderTab3(rows, f) {
+            const srcs = selectedSources(f);
+            // Tenancies by channel and property type (grouped: dataset per segment)
+            const tenMatrix = {};
+            srcs.forEach(s => { tenMatrix[s] = {whole_unit: 0, studio: 0, room: 0}; });
+            rows.filter(r => r.o === 'tenancy_signed').forEach(r => {
+                if (tenMatrix[r.s]) tenMatrix[r.s][r.seg]++;
+            });
+            renderChart('tenancyTypeChart', {
+                type: 'bar',
+                data: {
+                    labels: srcs.map(s => DATA.label[s]),
+                    datasets: SEG_ORDER.map((seg, i) => ({
+                        label: SEG_LABEL[seg],
+                        data: srcs.map(s => tenMatrix[s][seg]),
+                        backgroundColor: [BROWN, GOLD, '#5A7DBF'][i]
+                    }))
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+                }
+            });
+
+            // Qualified rate by channel and property type
+            const qMatrix = {}, eMatrix = {};
+            srcs.forEach(s => { qMatrix[s] = {whole_unit: 0, studio: 0, room: 0}; eMatrix[s] = {whole_unit: 0, studio: 0, room: 0}; });
+            rows.forEach(r => {
+                if (eMatrix[r.s]) { eMatrix[r.s][r.seg]++; qMatrix[r.s][r.seg] += r.q; }
+            });
+            renderChart('qualRateTypeChart', {
+                type: 'bar',
+                data: {
+                    labels: srcs.map(s => DATA.label[s]),
+                    datasets: SEG_ORDER.map((seg, i) => ({
+                        label: SEG_LABEL[seg],
+                        data: srcs.map(s => pct(qMatrix[s][seg], eMatrix[s][seg], 1)),
+                        backgroundColor: [BROWN, GOLD, '#5A7DBF'][i]
+                    }))
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' } } }
+                }
+            });
+
+            // Monthly enquiries by source (stacked)
+            const months = selectedMonths(f);
+            const monthCounts = {};
+            months.forEach(m => { monthCounts[m] = {}; srcs.forEach(s => monthCounts[m][s] = 0); });
+            rows.forEach(r => {
+                if (monthCounts[r.mo] && monthCounts[r.mo][r.s] !== undefined) monthCounts[r.mo][r.s]++;
+            });
+            renderChart('monthlyBySourceChart', {
+                type: 'bar',
+                data: {
+                    labels: months.map(m => MONTH_LABEL[m]),
+                    datasets: srcs.map(s => ({
+                        label: DATA.label[s],
+                        data: months.map(m => monthCounts[m][s]),
+                        backgroundColor: SRC_COLOR[s]
+                    }))
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } },
+                    scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } }
+                }
+            });
+        }
+
+        function renderTab4(rows, f) {
+            const office = rows.filter(r => r.ah === 0);
+            const after = rows.filter(r => r.ah === 1);
+            const officeFrm = office.filter(r => r.frm !== null && r.frm !== undefined).map(r => r.frm).sort((a, b) => a - b);
+            const median = officeFrm.length ?
+                (officeFrm.length % 2 ? officeFrm[(officeFrm.length - 1) / 2]
+                    : (officeFrm[officeFrm.length / 2 - 1] + officeFrm[officeFrm.length / 2]) / 2) : 0;
+            const afterShare = pct(after.length, rows.length, 1);
+            const unansOffice = pct(office.filter(r => r.o === 'unanswered').length, office.length, 1);
+            const unansAfter = pct(after.filter(r => r.o === 'unanswered').length, after.length, 1);
+
+            // Paid leads lost: unanswered enquiries from the paid advertising channels
+            // (PropertyGuru, Google Ads, Meta Ads), valued at their cost-per-enquiry within
+            // the current filter. Mudah is excluded: its cost-per-enquiry is near zero, so a
+            // lost Mudah lead carries no meaningful spend.
+            const paidSources = ['propertyguru', 'google_ads', 'meta_ads'];
+            let paidLost = 0;
+            paidSources.forEach(s => {
+                if (f.source !== 'all' && f.source !== s) return;
+                const sr = rows.filter(r => r.s === s);
+                if (!sr.length) return;
+                const cpe = selectionCost(s, f) / sr.length;
+                const unans = sr.filter(r => r.o === 'unanswered').length;
+                paidLost += unans * cpe;
+            });
+
+            document.getElementById('kpiMedianResp').textContent = Math.round(median);
+            document.getElementById('kpiAfterShare').textContent = afterShare + '%';
+            document.getElementById('kpiUnansOffice').textContent = unansOffice + '%';
+            document.getElementById('kpiUnansAfter').textContent = unansAfter + '%';
+            document.getElementById('kpiPaidLost').textContent = '~' + fmtRM(paidLost);
+
+            renderChart('unansSplitChart', {
+                type: 'bar',
+                data: {
+                    labels: ['Office hours', 'After 8pm + weekends'],
+                    datasets: [{ label: 'Unanswered rate %', data: [unansOffice, unansAfter], backgroundColor: [BROWN, RED] }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' } } }
+                }
+            });
+
+            renderChart('timeSlotChart', {
+                type: 'bar',
+                data: {
+                    labels: ['Office hours', 'After 8pm + weekends'],
+                    datasets: [{ label: 'Enquiries', data: [office.length, after.length], backgroundColor: [GOLD, RED] }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        function renderChart(id, config) {
+            if (charts[id]) charts[id].destroy();
+            const ctx = document.getElementById(id);
+            if (ctx) charts[id] = new Chart(ctx, config);
+        }
+
+        function showPage(pageNum) {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById('page' + i).classList.remove('active');
+            }
+            document.getElementById('page' + pageNum).classList.add('active');
+            const buttons = document.querySelectorAll('.page-btn');
+            buttons.forEach((btn, i) => btn.classList.toggle('active', i === pageNum - 1));
+            // Resize charts on the now-visible page
+            Object.values(charts).forEach(c => { try { c.resize(); } catch (e) {} });
+        }
+
+        window.addEventListener('beforeprint', () => {
+            Object.values(charts).forEach(c => {
+                c.options.maintainAspectRatio = false;
+                c.resize();
+            });
+        });
+        window.addEventListener('afterprint', () => {
+            Object.values(charts).forEach(c => { c.resize(); });
+        });
+
+        // Initialize
+        buildRows();
+        document.getElementById('sourceFilter').addEventListener('change', applyFilters);
+        document.getElementById('monthFilter').addEventListener('change', applyFilters);
+        applyFilters();
+        document.getElementById('loading').style.display = 'none';
+    </script>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2026 Lee Yih Ven | Data-Driven Solutions</p>
+    </div>
+</body>
+</html>
