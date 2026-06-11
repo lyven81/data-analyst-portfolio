@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Lead Source Assistant | Which Channel Finds Your Tenant</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#5A3E2B; --navy2:#3f2c1e; --gold:#C8961E; --gold-soft:#FBF6EE; --bg:#F4ECE0;
+    --ink:#33271C; --muted:#8A7660; --line:#E8DCC9; --card:#fff;
+    --green:#3C8C5A; --green-soft:#e7f3ec; --red:#c0392b; --amber:#9a7414;
+    --shadow:0 1px 2px rgba(31,58,95,.05),0 8px 24px rgba(31,58,95,.06);
+    --shadow-sm:0 1px 2px rgba(31,58,95,.05);
+    --body:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;height:100vh;overflow:hidden}
+  .sidebar{width:290px;flex-shrink:0;background:linear-gradient(180deg,var(--navy),var(--navy2));color:#dce6f1;padding:24px 20px;display:flex;flex-direction:column;gap:20px;overflow-y:auto}
+  .brand-name{font-size:18px;font-weight:700;color:#fff}
+  .brand-sub{font-size:11px;color:#fff;letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+  .status{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 14px}
+  .status-title{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;margin-bottom:10px}
+  .pill{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#EADDCB;padding:4px 0}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(46,139,87,.18)}
+  .dot.lock{background:var(--gold);box-shadow:0 0 0 3px rgba(200,162,75,.18)}
+  .dot.loading{background:#c9a055;box-shadow:0 0 0 3px rgba(201,160,85,.18)}
+  .nav{display:flex;flex-direction:column;gap:8px}
+  .nav a{font-size:13px;color:#EADDCB;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 13px;transition:all .18s}
+  .nav a:hover{background:rgba(200,162,75,.16);border-color:var(--gold)}
+  .nav a.active{background:var(--gold);color:var(--navy);font-weight:600;border-color:var(--gold)}
+  .tools-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .tools-head h3{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;font-weight:600}
+  .tools-count{font-size:10.5px;color:#C9B79D;background:rgba(255,255,255,.07);padding:2px 8px;border-radius:20px}
+  .tool-list{list-style:none;display:flex;flex-direction:column;gap:1px}
+  .tool-list li{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#CDBCA2;padding:6px 8px;border-radius:7px;display:flex;align-items:center;gap:8px}
+  .tool-list li::before{content:"";width:5px;height:5px;border-radius:1.5px;background:var(--gold);flex-shrink:0}
+  .foot{font-size:11px;color:#B5A084;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:13px;margin-top:auto}
+  .main{flex:1;display:flex;flex-direction:column;min-width:0}
+  .topbar{padding:17px 30px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .topbar h1{font-size:19px;font-weight:600;color:var(--navy)}
+  .topbar .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .thread{flex:1;overflow-y:auto;padding:28px 30px 12px;display:flex;flex-direction:column;gap:20px}
+  .row{display:flex;gap:12px;max-width:760px;animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .row.user{margin-left:auto;flex-direction:row-reverse}
+  .av{width:34px;height:34px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .av.bot{background:var(--navy);color:#fff}.av.bot svg{width:17px;height:17px}
+  .av.me{background:#dce6f2;color:var(--navy)}
+  .bubble{font-size:14px;line-height:1.55}
+  .row.user .bubble{background:var(--navy);color:#eaf1f8;padding:11px 15px;border-radius:14px 14px 4px 14px}
+  .lead{margin-bottom:11px}.lead b{color:var(--navy);font-weight:600}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--navy);background:var(--gold-soft);border:1px solid #ecdcb0;padding:4px 10px;border-radius:7px;margin-bottom:11px}
+  .badge svg{width:12px;height:12px}.badge .lbl{color:#a98f4f}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px 18px;box-shadow:var(--shadow);max-width:600px}
+  .card h4{font-size:14.5px;color:var(--navy);font-weight:600;margin-bottom:3px}
+  .card .cap{font-size:12px;color:var(--muted);margin-bottom:13px}
+  .kpis{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi{flex:1;min-width:110px;background:#f7fafd;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center}
+  .kpi .v{font-size:26px;font-weight:700;color:var(--navy)}
+  .kpi.good .v{color:var(--green)}.kpi.bad .v{color:var(--red)}
+  .kpi .l{font-size:11px;color:var(--muted);margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.3px;padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px;border-bottom:1px solid #eef3f8}
+  tr:last-child td{border-bottom:none}
+  td.nm{font-weight:600;color:var(--ink)}
+  .scroll{max-height:340px;overflow-y:auto}
+  .scroll::-webkit-scrollbar{width:7px}.scroll::-webkit-scrollbar-thumb{background:#d2deea;border-radius:7px}
+  .vb{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .vb.BUY{background:var(--green-soft);color:var(--green)}.vb.WAIT{background:#fcf2da;color:var(--amber)}.vb.FORGET{background:#fbe9e7;color:var(--red)}
+  .yes{color:var(--green);font-weight:700}.no{color:#c9b8a0}
+  .seg{display:flex;align-items:center;gap:11px;margin:9px 0}
+  .seg-lbl{width:128px;font-size:12.5px;flex-shrink:0}
+  .seg-track{flex:1;height:22px;background:#f0f4f9;border-radius:6px;overflow:hidden}
+  .seg-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),#e0c074);display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--navy);font-size:11px;font-weight:700;min-width:24px}
+  .note{font-size:11px;color:#9aaaba;margin-top:12px;display:flex;align-items:center;gap:6px}.note svg{width:12px;height:12px;flex-shrink:0}
+  .refuse{background:var(--gold-soft);border:1px solid #f0e2c2;border-radius:15px;padding:16px 18px;max-width:600px}
+  .refuse .rh{display:flex;align-items:center;gap:9px;margin-bottom:7px}.refuse .rh svg{width:17px;height:17px}
+  .refuse .rh span{font-weight:600;color:#b07d27;font-size:13.5px}
+  .refuse p{font-size:13.5px;line-height:1.55;color:#6a5526}
+  .refuse .why{font-size:11px;color:#9c8443;margin-top:10px;font-family:ui-monospace,monospace}
+  .think{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+  .think .tdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite}
+  .think .tdot:nth-child(2){animation-delay:.2s}.think .tdot:nth-child(3){animation-delay:.4s}
+  @keyframes pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+  .composer{padding:13px 30px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+  .chip{font-size:12px;color:var(--navy);background:#fff;border:1px solid #d8e2ee;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .18s;font-family:var(--body)}
+  .chip:hover{border-color:var(--gold);background:var(--gold-soft);transform:translateY(-1px)}
+  .chip.warn{border-color:#ebd8ae;color:#b07d27;background:#fcf6e9}
+  .inputbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #d8e2ee;border-radius:12px;padding:5px 5px 5px 16px;box-shadow:var(--shadow-sm)}
+  .inputbar input{flex:1;border:none;outline:none;font-family:var(--body);font-size:13.5px;color:var(--ink);background:transparent;padding:8px 0}
+  .send{width:38px;height:38px;border-radius:10px;border:none;background:var(--navy);color:#fff;cursor:pointer;display:grid;place-items:center}.send:hover{background:var(--navy2)}.send svg{width:17px;height:17px}
+  .disclaimer{text-align:center;font-size:11px;color:#a6b4c2;margin-top:10px}
+  @media(max-width:860px){.sidebar{display:none}.thread,.topbar,.composer{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div><div class="brand-name">Lee Yih Ven</div><div class="brand-sub">Data Analytics Portfolio</div></div>
+    <nav class="nav">
+      <a href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/which-channel-finds-your-tenant.html">Case Study</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/which-channel-finds-your-tenant-dashboard.html">Dashboard</a>
+      <a class="active" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/which-channel-finds-your-tenant.html">AI Assistant</a>
+    </nav>
+    <div class="status">
+      <div class="status-title">Asset status</div>
+      <div class="pill"><span class="dot"></span> Read-only access</div>
+      <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+      <div class="pill"><span class="dot loading" id="dbdot"></span> <span id="dbstat">Loading database...</span></div>
+    </div>
+    <div class="tools">
+      <div class="tools-head"><h3>Approved tools</h3><span class="tools-count">10 &middot; fixed</span></div>
+      <ul class="tool-list">
+        <li>cost_per_tenancy</li><li>cost_per_enquiry</li><li>enquiry_volume</li><li>volume_trap</li>
+        <li>qualified_by_channel</li><li>outcomes_for_source</li><li>channel_by_property_type</li>
+        <li>tenancies_by_channel_segment</li><li>response_time</li><li>stale_listing</li>
+      </ul>
+    </div>
+    <div class="foot">1,140 rental enquiries across five lead channels, queried live in your browser. The agent supplies parameter values only: it cannot author SQL, list tables, dump records, or take any action. Synthetic data, for illustration.</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Property Lead Source Assistant</h1>
+      <div class="meta">Ask which lead channel signs tenants and at what cost. The agent picks one approved tool and answers live from the data.</div>
+    </header>
+    <section class="thread" id="thread">
+      <div class="row bot">
+        <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+        <div class="bubble"><div class="lead">I can answer questions about <b>1,140 rental enquiries</b> across five lead channels: which channel signs tenants, what each signed tenant costs, where leads go quietly to waste, how fast we reply, and which active listing has gone stale. Ask in plain language, or tap a prompt below.</div></div>
+      </div>
+    </section>
+    <div class="composer">
+      <div class="chips" id="chips">
+        <button class="chip" data-key="cpt">What does a signed tenant cost from each channel?</button>
+        <button class="chip" data-key="cpe">What does one enquiry cost from each channel?</button>
+        <button class="chip" data-key="volume">Which channel brings the most enquiries?</button>
+        <button class="chip" data-key="trap">Which channel brings lots of leads but no tenants?</button>
+        <button class="chip" data-key="qualified">Which channel gives the most qualified leads?</button>
+        <button class="chip" data-key="out_mudah">What happens to Mudah leads?</button>
+        <button class="chip" data-key="out_google">What happens to Google Ads leads?</button>
+        <button class="chip" data-key="bytype">Which channel works best for each property type?</button>
+        <button class="chip" data-key="signed">Which property types has each channel signed?</button>
+        <button class="chip" data-key="response">How fast do we reply, office hours vs after hours?</button>
+        <button class="chip" data-key="stale">Which active listing has gone stale?</button>
+        <button class="chip warn" data-key="refuse">Postpone appointment at Arte Mont Kiara with Mr. Leong to 2pm, 13 June 2026</button>
+      </div>
+      <div class="inputbar">
+        <input id="input" type="text" placeholder="Ask which lead channel finds your tenant...">
+        <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="disclaimer">The assistant surfaces lead-source data for you to interpret. It is read-only and cannot book, cancel, or reschedule anything.</div>
+    </div>
+  </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+let db=null, dbReady=false;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const rm=v=>'RM'+Number(v).toLocaleString(undefined,{maximumFractionDigits:0});
+
+const SRC={referral:'WhatsApp referral',propertyguru:'PropertyGuru',google_ads:'Google Ads',meta_ads:'Meta Ads',mudah:'Mudah.my'};
+const SEG={whole_unit:'Whole unit',studio:'Studio',room:'Room'};
+const OUT={no_reply:'No reply',lowball:'Lowball',requirement_mismatch:'Requirement mismatch',budget_mismatch:'Budget mismatch',unanswered:'Unanswered',still_open:'Still open',lost_to_other:'Lost to other',no_show:'No show',viewing_pipeline:'Viewing pipeline',tenancy_signed:'Tenancy signed'};
+const sLbl=s=>SRC[s]||esc(s);
+const gLbl=s=>SEG[s]||esc(s);
+const oLbl=s=>OUT[s]||esc(s);
+const ALLOWED=['referral','propertyguru','google_ads','meta_ads','mudah'];
+
+const SQL={
+  cost_per_tenancy:`SELECT c.source, c.cost_6mo, COUNT(CASE WHEN e.outcome='tenancy_signed' THEN 1 END) ten, CASE WHEN COUNT(CASE WHEN e.outcome='tenancy_signed' THEN 1 END)=0 THEN NULL ELSE c.cost_6mo/COUNT(CASE WHEN e.outcome='tenancy_signed' THEN 1 END) END cpt FROM channel_cost c JOIN enquiries e ON e.source=c.source GROUP BY c.source ORDER BY cpt IS NULL, cpt`,
+  cost_per_enquiry:`SELECT c.source, COUNT(*) enq, c.cost_6mo, ROUND(c.cost_6mo*1.0/COUNT(*),2) cpe FROM channel_cost c JOIN enquiries e ON e.source=c.source GROUP BY c.source ORDER BY cpe`,
+  enquiry_volume:`SELECT source, COUNT(*) enq, ROUND(100.0*COUNT(*)/(SELECT COUNT(*) FROM enquiries),1) share FROM enquiries GROUP BY source ORDER BY enq DESC`,
+  volume_trap:`SELECT source, COUNT(*) enq, ROUND(100.0*SUM(qualified)/COUNT(*),0) qual_rate, COUNT(CASE WHEN outcome='tenancy_signed' THEN 1 END) ten FROM enquiries GROUP BY source ORDER BY enq DESC`,
+  qualified_by_channel:`SELECT source, COUNT(*) enq, SUM(qualified) qualified, ROUND(100.0*SUM(qualified)/COUNT(*),0) rate FROM enquiries GROUP BY source ORDER BY qualified DESC`,
+  outcomes_for_source:`SELECT outcome, COUNT(*) n FROM enquiries WHERE source = $source GROUP BY outcome ORDER BY n DESC`,
+  channel_by_property_type:`SELECT segment, source, COUNT(*) enq, ROUND(100.0*SUM(qualified)/COUNT(*),0) qual_rate, COUNT(CASE WHEN outcome='tenancy_signed' THEN 1 END) ten FROM enquiries GROUP BY segment, source HAVING ten>0 OR enq>40 ORDER BY segment, ten DESC, enq DESC`,
+  tenancies_by_channel_segment:`SELECT source, segment, COUNT(*) ten FROM enquiries WHERE outcome='tenancy_signed' GROUP BY source, segment ORDER BY ten DESC`,
+  response_time:`SELECT after_hours, ROUND(AVG(frm),1) median, cnt FROM (SELECT after_hours, first_response_min frm, ROW_NUMBER() OVER (PARTITION BY after_hours ORDER BY first_response_min) rn, COUNT(*) OVER (PARTITION BY after_hours) cnt FROM enquiries WHERE responded=1 AND first_response_min IS NOT NULL) WHERE rn IN ((cnt+1)/2,(cnt+2)/2) GROUP BY after_hours`,
+  stale_listing:`SELECT name, rent, segment, enquiries, velocity_drop_pct, recent_weekly, early_weekly FROM listing_stats WHERE status='active' AND stale_flag=1`
+};
+function run(sql,params){const st=db.prepare(sql);if(params)st.bind(params);const o=[];while(st.step())o.push(st.getAsObject());st.free();return o;}
+
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const info=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const noteEl=t=>`<div class="note">${info} ${t}</div>`;
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+function tbl(head,body){return `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;}
+
+const responses={
+  cpt(){
+    const d=run(SQL.cost_per_tenancy);
+    const body=d.map(x=>`<tr><td class="nm">${sLbl(x.source)}</td><td>${rm(x.cost_6mo)}</td><td>${x.ten}</td><td>${x.cpt==null?'<span style="color:var(--red);font-weight:600">Undefined</span>':'<b>'+rm(x.cpt)+'</b>'}</td></tr>`).join('');
+    return badge('cost_per_tenancy')+
+      `<div class="lead">The cheapest leads signed no one: <b>WhatsApp referral</b> signed two tenants for free, while Mudah.my spent RM360 and signed nobody, so its cost per tenant is undefined.</div>
+      <div class="card"><h4>Cost per signed tenant</h4><div class="cap">Six-month channel spend divided by tenancies signed</div>
+      ${tbl('<th>Channel</th><th>Spend (6mo)</th><th>Tenancies</th><th>Cost per tenant</th>',body)}
+      ${noteEl('Every figure is computed live from the enquiry and cost tables.')}</div>`;
+  },
+  cpe(){
+    const d=run(SQL.cost_per_enquiry);
+    const body=d.map(x=>`<tr><td class="nm">${sLbl(x.source)}</td><td>${x.enq}</td><td>${rm(x.cost_6mo)}</td><td><b>RM${Number(x.cpe).toFixed(2)}</b></td></tr>`).join('');
+    return badge('cost_per_enquiry')+
+      `<div class="lead">Per enquiry, the paid portals look cheap and the ad channels look dear, but a low cost per enquiry says nothing about whether the lead signs.</div>
+      <div class="card"><h4>Cost per enquiry</h4><div class="cap">Six-month channel spend divided by enquiries received</div>
+      ${tbl('<th>Channel</th><th>Enquiries</th><th>Spend (6mo)</th><th>Cost per enquiry</th>',body)}</div>`;
+  },
+  volume(){
+    const d=run(SQL.enquiry_volume);
+    const max=Math.max(...d.map(x=>x.enq));
+    const bars=d.map(x=>`<div class="seg"><span class="seg-lbl">${sLbl(x.source)}</span><div class="seg-track"><div class="seg-fill" style="width:${Math.max(12,Math.round(x.enq/max*100))}%">${x.enq}</div></div></div><div class="cap" style="margin:-4px 0 8px 0">${x.share}% of all enquiries</div>`).join('');
+    return badge('enquiry_volume')+
+      `<div class="lead"><b>Mudah.my</b> brings by far the most enquiries (40% of the total), with PropertyGuru a distant second. Volume alone does not mean tenants, so read this with the next tool.</div>
+      <div class="card"><h4>Enquiry volume by channel</h4><div class="cap">Across 1,140 enquiries</div>${bars}</div>`;
+  },
+  trap(){
+    const d=run(SQL.volume_trap);
+    const body=d.map(x=>`<tr><td class="nm">${sLbl(x.source)}</td><td>${x.enq}</td><td>${x.qual_rate}%</td><td>${x.ten?`<span class="yes">${x.ten}</span>`:'<span style="color:var(--red);font-weight:600">0</span>'}</td></tr>`).join('');
+    return badge('volume_trap')+
+      `<div class="lead">The volume trap is <b>Mudah.my</b>: 459 enquiries, only 15% qualified, and not a single tenancy signed. The loudest channel is the emptiest one.</div>
+      <div class="card"><h4>Volume versus tenants</h4><div class="cap">Enquiries, qualified rate, and tenancies by channel</div>
+      ${tbl('<th>Channel</th><th>Enquiries</th><th>Qualified</th><th>Tenancies</th>',body)}</div>`;
+  },
+  qualified(){
+    const d=run(SQL.qualified_by_channel);
+    const body=d.map(x=>`<tr><td class="nm">${sLbl(x.source)}</td><td>${x.enq}</td><td><b>${x.qualified}</b></td><td>${x.rate}%</td></tr>`).join('');
+    return badge('qualified_by_channel')+
+      `<div class="lead"><b>PropertyGuru</b> produces the most qualified leads in raw count, but <b>WhatsApp referral</b> qualifies the highest share (67%) off a much smaller base.</div>
+      <div class="card"><h4>Qualified leads by channel</h4><div class="cap">Count and rate of qualified enquiries</div>
+      ${tbl('<th>Channel</th><th>Enquiries</th><th>Qualified</th><th>Rate</th>',body)}</div>`;
+  },
+  outcomes(src){
+    const d=run(SQL.outcomes_for_source,{$source:src});
+    const total=d.reduce((a,x)=>a+x.n,0);
+    const signed=(d.find(x=>x.outcome==='tenancy_signed')||{}).n||0;
+    const body=d.map(x=>`<tr><td class="nm">${oLbl(x.outcome)}</td><td>${x.n}</td><td>${total?Math.round(100*x.n/total):0}%</td></tr>`).join('');
+    const lead = signed===0
+      ? `Of <b>${total}</b> ${sLbl(src)} leads, none signed a tenancy. The biggest single outcome is no reply, so the spend buys mostly silence.`
+      : `Here is where every <b>${sLbl(src)}</b> lead landed across <b>${total}</b> enquiries, with ${signed} ending in a signed tenancy.`;
+    return badge('outcomes_for_source')+
+      `<div class="lead">${lead}</div>
+      <div class="card"><h4>Where ${sLbl(src)} leads end up</h4><div class="cap">Outcome breakdown for one channel</div>
+      ${tbl('<th>Outcome</th><th>Count</th><th>Share</th>',body)}
+      ${noteEl('source is the only value the agent supplies, bound from an approved list.')}</div>`;
+  },
+  bytype(){
+    const d=run(SQL.channel_by_property_type);
+    const groups={};
+    d.forEach(x=>{(groups[x.segment]=groups[x.segment]||[]).push(x);});
+    let html='';
+    Object.keys(groups).forEach(seg=>{
+      const body=groups[seg].map(x=>`<tr><td class="nm">${sLbl(x.source)}</td><td>${x.enq}</td><td>${x.qual_rate}%</td><td>${x.ten?`<span class="yes">${x.ten}</span>`:'0'}</td></tr>`).join('');
+      html+=`<h4 style="margin-top:14px">${gLbl(seg)}</h4>${tbl('<th>Channel</th><th>Enquiries</th><th>Qualified</th><th>Tenancies</th>',body)}`;
+    });
+    return badge('channel_by_property_type')+
+      `<div class="lead">Different channels win different property types: <b>referral</b> dominates rooms, <b>Google Ads</b> works for studios, and <b>PropertyGuru</b> leads whole units. No single channel wins everywhere.</div>
+      <div class="card"><div class="cap" style="margin-bottom:2px">Channels that signed a tenant or drew over 40 enquiries, grouped by property type</div>${html}</div>`;
+  },
+  signed(){
+    const d=run(SQL.tenancies_by_channel_segment);
+    const body=d.map(x=>`<tr><td class="nm">${sLbl(x.source)}</td><td>${gLbl(x.segment)}</td><td><b>${x.ten}</b></td></tr>`).join('');
+    return badge('tenancies_by_channel_segment')+
+      `<div class="lead">Every signed tenancy mapped to the channel and property type that produced it. <b>PropertyGuru</b> and <b>referral</b> each signed two, the rest one apiece.</div>
+      <div class="card"><h4>Signed tenancies by channel and type</h4><div class="cap">Only enquiries that ended in a tenancy</div>
+      ${tbl('<th>Channel</th><th>Property type</th><th>Tenancies</th>',body)}</div>`;
+  },
+  response(){
+    const d=run(SQL.response_time);
+    const office=d.find(x=>x.after_hours===0)||{};
+    const after=d.find(x=>x.after_hours===1)||{};
+    const om=Math.round(office.median), am=Math.round(after.median);
+    return badge('response_time')+
+      `<div class="lead">Replies are about <b>2.6x slower after hours</b>: a median of ${om} minutes in office hours stretches to ${am} minutes once the office closes.</div>
+      <div class="card"><h4>First reply, office hours vs after hours</h4><div class="cap">Median minutes to first response on answered enquiries</div>
+      <div class="kpis">
+        <div class="kpi good"><div class="v">${om} min</div><div class="l">office hours (${office.cnt} replies)</div></div>
+        <div class="kpi bad"><div class="v">${am} min</div><div class="l">after hours (${after.cnt} replies)</div></div>
+      </div>${noteEl('Median computed live from first-response times on answered enquiries.')}</div>`;
+  },
+  stale(){
+    const d=run(SQL.stale_listing);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.name)}</td><td>${rm(x.rent)}</td><td>${gLbl(x.segment)}</td><td>${x.enquiries}</td><td><b style="color:var(--red)">down ${x.velocity_drop_pct}%</b></td></tr>`).join('');
+    const r=d[0]||{};
+    return badge('stale_listing')+
+      `<div class="lead">One active listing has gone stale: <b>${esc(r.name)}</b> at ${rm(r.rent)} has seen enquiry velocity fall ${r.velocity_drop_pct}% (from ${r.early_weekly} to ${r.recent_weekly} a week). The fix is a price review, not more ad spend.</div>
+      <div class="card"><h4>Stale active listing</h4><div class="cap">Active listings flagged for a sharp drop in enquiry velocity</div>
+      ${tbl('<th>Listing</th><th>Rent</th><th>Type</th><th>Enquiries</th><th>Velocity</th>',body)}</div>`;
+  },
+  refuse(reason){
+    const why = reason==='action'
+      ? 'no_tool_matched &middot; action requested (book / cancel / reschedule) &middot; access = read-only'
+      : reason==='schema'
+        ? 'no_tool_matched &middot; schema / table listing not exposed &middot; access = read-only'
+        : reason==='dump'
+          ? 'no_tool_matched &middot; raw record export not permitted &middot; access = read-only'
+          : 'no_tool_matched &middot; outside approved lead-data tools &middot; access = read-only';
+    const msg = reason==='action'
+      ? `I can't postpone, book, cancel, or reschedule anything. That is an action, and I have no write tool: I am read-only and only answer questions about lead sources using a fixed set of approved queries.`
+      : reason==='schema'
+        ? `I can't list tables or show you the schema. I work through a fixed set of approved queries over lead-source data and cannot expose the database structure.`
+        : reason==='dump'
+          ? `I can't dump or export raw records. I only return the aggregated answers my approved tools produce, never the underlying rows.`
+          : `That falls outside my approved tools. I answer questions about which lead channel signs tenants and at what cost, using a fixed set of pre-written queries. I cannot author SQL or step outside them.`;
+    return `<div class="refuse">
+      <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="#b07d27" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 18h.01"/></svg><span>Outside my approved tools</span></div>
+      <p>${msg}</p>
+      <p style="margin-top:9px">What I can do: tell you which channel signs tenants and at what cost, where leads go to waste, how fast we reply, and which active listing has gone stale. Tap a prompt to see it answer live from the data.</p>
+      <div class="why">${why}</div></div>`;
+  }
+};
+
+const userText={
+  cpt:"What does a signed tenant cost from each channel?",
+  cpe:"What does one enquiry cost from each channel?",
+  volume:"Which channel brings the most enquiries?",
+  trap:"Which channel brings lots of leads but no tenants?",
+  qualified:"Which channel gives the most qualified leads?",
+  out_mudah:"What happens to Mudah leads?",
+  out_google:"What happens to Google Ads leads?",
+  bytype:"Which channel works best for each property type?",
+  signed:"Which property types has each channel signed?",
+  response:"How fast do we reply, office hours vs after hours?",
+  stale:"Which active listing has gone stale?",
+  refuse:"Postpone appointment at Arte Mont Kiara with Mr. Leong to 2pm, 13 June 2026"
+};
+const thinkLabel={
+  cpt:"cost_per_tenancy",cpe:"cost_per_enquiry",volume:"enquiry_volume",trap:"volume_trap",
+  qualified:"qualified_by_channel",out_mudah:"outcomes_for_source",out_google:"outcomes_for_source",
+  bytype:"channel_by_property_type",signed:"tenancies_by_channel_segment",response:"response_time",
+  stale:"stale_listing",refuse:"checking approved tools"
+};
+
+function render(key){
+  if(key==='out_mudah')return responses.outcomes('mudah');
+  if(key==='out_google')return responses.outcomes('google_ads');
+  if(key==='refuse')return responses.refuse('action');
+  return responses[key]();
+}
+
+function addUser(t){thread.insertAdjacentHTML('beforeend',`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div>`);scroll();}
+function respond(key,html){
+  const id='t'+thread.children.length;
+  const lbl = thinkLabel[key] || 'checking approved tools';
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${lbl}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=html||render(key);scroll();},760);
+}
+function ask(key){addUser(userText[key]);setTimeout(()=>respond(key),220);}
+
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b||!dbReady)return;ask(b.dataset.key);});
+const input=document.getElementById('input');
+
+function route(){
+  const t=input.value.trim();if(!t||!dbReady)return;input.value='';const q=t.toLowerCase();
+  addUser(t);
+  let html=null,lbl='checking approved tools';
+  // Refusals first: actions, schema, dumps, raw SQL
+  if(/postpone|reschedul|resched|cancel|\bbook|change the|move the|\bemail|\bpay\b|invoice|confirm the appointment|set up a viewing|set up an? appointment/.test(q)){
+    html=responses.refuse('action');
+  } else if(/list (the )?tables|show (the )?schema|what tables|describe (the )?(table|database)|table names/.test(q)){
+    html=responses.refuse('schema');
+  } else if(/dump|export|every (record|row)|all (the )?records|raw (data|records|sql|rows)|select \*|run a query|drop table|delete from|insert into|update /.test(q)){
+    html=responses.refuse('dump');
+  } else {
+    let key=null,src=null;
+    if(/what happens to|outcome|where do .* (leads|enquir)|land|end up/.test(q)){
+      key='outcomes';
+      if(/mudah/.test(q))src='mudah';
+      else if(/google/.test(q))src='google_ads';
+      else if(/property\s?guru|propertyguru/.test(q))src='propertyguru';
+      else if(/meta|facebook|instagram/.test(q))src='meta_ads';
+      else if(/referral|whatsapp|word of mouth/.test(q))src='referral';
+    }
+    else if(/cost.*(tenant|tenanc|sign)|(tenant|sign).*cost|cost per tenant|cost to sign/.test(q))key='cpt';
+    else if(/cost.*(enquir|lead)|(enquir|lead).*cost|cost per enquiry|cost per lead|cheapest (lead|enquir)/.test(q))key='cpe';
+    else if(/(lots of|many) (leads|enquir).*(no|few|zero) (tenant|sign)|volume trap|trap|wasted|waste|no tenant|brings .* but no/.test(q))key='trap';
+    else if(/most (qualified|quality)|qualified|quality lead/.test(q))key='qualified';
+    else if(/most (enquir|leads|volume)|which.*most.*(enquir|lead)|biggest (channel|source)|highest volume/.test(q))key='volume';
+    else if(/(signed|tenanc).*(property|type|segment|room|studio|whole)|which (property )?type.*(sign|each channel)|property type.*sign/.test(q))key='signed';
+    else if(/(best|which channel).*(property|type|segment)|property type|each (property )?type|room|studio|whole unit/.test(q))key='bytype';
+    else if(/(reply|respond|response).*(fast|time|hour)|how fast|after hours|office hours|fast.*reply/.test(q))key='response';
+    else if(/stale|gone quiet|no (more )?interest|slow(ing)? down|losing interest|velocity|price review/.test(q))key='stale';
+    if(key==='outcomes'){
+      if(src){html=responses.outcomes(src);lbl='outcomes_for_source';}
+      else{html=responses.refuse('generic');}
+    } else if(key){html=responses[key]();lbl=thinkLabel[key];}
+  }
+  if(html){
+    const id='t'+thread.children.length;
+    thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${lbl}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+    scroll();
+    setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=html;scroll();},760);
+  } else {
+    setTimeout(()=>{thread.insertAdjacentHTML('beforeend',`<div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools, but I can't tell which fits. Try a suggested prompt to see it answer live from the lead-source data.</div></div></div>`);scroll();},220);
+  }
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')route();});
+
+initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`})
+  .then(S=>fetch('which-channel-finds-your-tenant.db').then(r=>r.arrayBuffer()).then(buf=>{
+    db=new S.Database(new Uint8Array(buf));dbReady=true;
+    document.getElementById('dbdot').className='dot';
+    document.getElementById('dbstat').textContent='Database ready';
+  }))
+  .catch(e=>{document.getElementById('dbstat').textContent='Load failed, serve over http';console.error(e);});
+</script>
+</body>
+</html>
