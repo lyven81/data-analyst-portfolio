@@ -56,9 +56,9 @@
       View Dashboard
      </a>
     </section>
-    <!-- AI Assistant Link Button -->
-    <section class="agentic-link-section">
-     <a class="agentic-link-btn" href="/data-analyst-portfolio/agentic_workflow/beyond-the-price-tag.html">
+    <!-- Agentic Workflow Link Button -->
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/beyond-the-price-tag.html">
       AI Assistant
      </a>
     </section>
@@ -72,18 +72,26 @@
        Beyond the Price Tag
       </h1>
       <p>
-       What Drives Smartphone Satisfaction Across Brands and Regions
+       What 50,000 Reviews Say Buyers Want in a New Phone
       </p>
      </header>
+     <section>
+      <h2>
+       Executive Summary
+      </h2>
+      <p>
+       A smartphone brand competing across seven makers and eight markets wants to know what actually earns a good review. The common assumption is that a higher price signals a better phone and a happier buyer. The data says the opposite. Across 50,000 reviews, the five core features (battery, camera, performance, design and display) explain 86% of a phone's rating, while price has no measurable effect at all. The way to win is to amplify the features buyers already praise and fix the three that quietly sink reviews, not to move the price.
+      </p>
+     </section>
      <section>
       <h2>
        Overview
       </h2>
       <p>
-       This analysis helps the marketing team understand how customers feel about different smartphone brands and models. It looks at what makes people satisfied or disappointed – such as battery life, design, or value for money – and compares how sentiment differs across regions, languages, and shopping platforms.
+       Product and marketing leadership face one recurring decision: where to put the next dollar. Into feature development, into marketing copy, or into price positioning. Reviews are the clearest unfiltered voice of the buyer, so we read 50,000 of them to separate what buyers reward from what they ignore.
       </p>
       <p>
-       The goal is to use these insights to guide marketing decisions: which brands to promote, what product qualities to highlight, where to focus ad budgets, and how to respond to negative feedback. In short, this study turns customer reviews into practical insights that help shape better campaigns and stronger brand messages.
+       Two questions drive the analysis. Does a higher price buy happier customers, or is satisfaction earned through the product experience? And which specific features should the brand promote, and which should it fix? To answer honestly, we measured sentiment directly from the words in each review rather than trusting the star label, then tied that sentiment to features, price, brand and market.
       </p>
      </section>
      <section>
@@ -91,163 +99,140 @@
        Data Sources and Methodology
       </h2>
       <p>
-       This analysis draws from over 30,000 customer reviews collected across multiple e-commerce platforms, regions, and languages. Each record includes product details such as brand, model, and price, along with ratings, feature evaluations, and written feedback. Demographic information, including age group and purchase source, was also considered to understand how different users perceive and rate their phones.
-      </p>
-      <p>
-       We used both numbers and text to understand customer sentiment. Quantitative analysis included averages, correlations, and regression to find patterns and measure how features like battery life or design affect satisfaction. Machine learning models were applied to identify the most influential features. Qualitative analysis focused on review text to identify recurring themes and emotional tone using sentiment scoring and keyword mapping.
-      </p>
-      <p>
-       The data represents reviews from the most recent quarter of 2025. Results were compared across brands, models, platforms, and countries to uncover what customers value most and where brands need improvement. This mixed-method approach helps translate customer feedback into clear insights that guide marketing strategy, brand positioning, and campaign planning.
+       We analysed 50,000 smartphone reviews spanning 7 brands, 22 models, 8 countries and 5 retail platforms, from October 2022 to October 2025. Each review carries a 1 to 5 star rating, the written text, five feature sub-ratings (battery, camera, performance, design and display), price, and buyer details. We measured sentiment ourselves from the review text using a transparent language tool (VADER), independent of any platform label, and tagged each review by the feature it discusses. Our derived sentiment matched the star ratings in direction and agreed with the platform's own labels 72% of the time, which confirms the signal is real and not an artefact of one label set. One caveat for transparency: the tool under-reads the word "overheats", so the Heat topic shows up milder than it truly is.
       </p>
      </section>
      <section>
       <h2>
-       1. Which brand and model are well received by the market, and which are least popular?
+       1. Which features do buyers care about most?
       </h2>
-      <img alt="Brand Popularity and Satisfaction Bubble Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/Q1%20bubble_popularity_satisfaction.png"/>
-      <img alt="Sentiment Word Cloud" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/Q1%20wordcloud_sentiment.png"/>
+      <img alt="Chart 1 - What buyers talk about most" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q1_feature_attention.png"/>
       <p>
-       Apple and Samsung receive the strongest customer approval, combining high sentiment and high ratings. Realme performs well too, offering strong satisfaction at mid-range prices and standing out for its value-for-money image. Google and OnePlus maintain a stable reputation but need consistent brand communication to strengthen trust. Motorola and Xiaomi lag behind, showing lower satisfaction tied to reliability and service issues.
+       Value for money is the single most-discussed topic, raised in 22.5% of reviews, far ahead of any piece of hardware. Performance follows at 14.6%, then design and build at 13.4%, battery at 10.0% and camera at 9.8%. Niche topics like heat, customer service and sound each appear in only 2 to 4% of reviews.
       </p>
       <p>
-       Positive reviews highlight "smooth performance" and "worth every penny," while negative ones mention "customer service" and "overheating." This shows that reliability, performance, and support matter more to customers than features alone. Overall, Apple, Samsung, and Realme lead the market in brand perception, while Motorola and Xiaomi must rebuild credibility through better after-sales experiences.
+       Buyers frame the whole purchase through one lens: did I get my money's worth. Value is a verdict on the total experience, not a comment on the price tag. The hardware features that dominate the rest of the conversation, performance, design, battery and camera, are where buyer attention actually sits.
+      </p>
+      <p>
+       Lead messaging with the value story and the four features buyers genuinely talk about. Spec points that almost nobody mentions do not belong in the headline.
       </p>
      </section>
      <section>
       <h2>
-       2. What phone features make a model well received?
+       2. Which features are we winning on?
       </h2>
-      <img alt="Feature Importance Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/Q2%20feature_importance_bar.png"/>
+      <img alt="Chart 2 - Feature sentiment scorecard" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q2_feature_scorecard.png"/>
       <p>
-       Battery life has the greatest impact on customer satisfaction, followed by design and performance. Users consistently link long-lasting power and durable design with positive emotions, while the camera plays a smaller role. Apple leads in design and display quality, Realme in battery strength, and OnePlus in overall balance, showing that dependability and everyday usability matter more than technical specs.
+       Nine features carry strongly positive sentiment. Face unlock is universally praised at a net of +100, followed by design and build at +84, battery at +81, value for money at +80, display at +75 and charging at +73. Even the more contested features, camera at +52 and performance at +35, stay clearly in the positive.
       </p>
       <p>
-       Customers clearly reward phones that perform well over time and look refined. Marketing messages should focus on "all-day battery life" and "reliable performance" rather than overemphasizing camera pixels. Brands that invest in endurance and build quality will see stronger emotional connection and reputation growth.
+       These are the brand's proof points, the features that already earn goodwill in the buyer's own words. Value for money sitting at +80 is the headline result: buyers feel they got a fair deal, and that is exactly the sentiment that turns into recommendations.
+      </p>
+      <p>
+       Put the top strengths, build quality, battery and value, into ad copy and store pages, backed by real review language. They are credible precisely because customers already say them.
       </p>
      </section>
      <section>
       <h2>
-       3. How do price and value perception affect customer satisfaction?
+       3. Which features let buyers down?
       </h2>
-      <img alt="Sentiment and Rating by Price Category" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/Q3%20bar_sentiment_rating_by_price.png"/>
+      <img alt="Chart 3 - The three sore points" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q3_pain_points.png"/>
       <p>
-       Satisfaction levels are consistent across all price categories – high or low cost doesn't predict happiness. Customers judge value based on how well the phone meets expectations, not how much they spent. Budget models show more mixed reactions, while premium buyers demand reliability and consistency.
+       Three topics pull reviews into the red. Customer service is the worst by far, with 100% of its mentions negative. Sound is next, 44% negative for a net of -25. Heat is mixed and understated by the text tool, but it is a complaint-only topic whenever it is raised.
       </p>
       <p>
-       The key insight is that satisfaction is value-based, not price-based. Customers want fairness – they feel positive when the experience matches the price. Marketing should focus on "worth the spend" and real-world reliability rather than price comparisons, using relatable user stories to reinforce perceived value.
+       The weak points are not the core hardware, they are service and audio. A poor support experience or a tinny speaker is what converts an otherwise satisfied buyer into a one-star reviewer. These are also far cheaper to fix than redesigning a phone.
+      </p>
+      <p>
+       Prioritise customer service and speaker quality now, before a competitor markets against them. Fixing a single recurring pain point removes a standing source of negative reviews.
       </p>
      </section>
      <section>
       <h2>
-       4. Who is more likely to give good reviews, and does age play a factor?
+       4. Do better features actually win better reviews?
       </h2>
-      <img alt="Sentiment by Age Group" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/Q4%20stacked_sentiment_age.png"/>
+      <img alt="Chart 4 - Features and price effect on rating" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q4_features_vs_price.png"/>
       <p>
-       Age affects how people review phones. Customers aged 50–59 give the most positive feedback, with the highest ratings and sentiment. Younger groups (18–49) are more critical and focus on innovation, while those over 60 express lower satisfaction and need clearer communication and support.
+       Yes, decisively. The five feature ratings together explain 86% of the variation in star rating, and each feature carries almost identical weight, a standardized effect of about 0.28, every one highly significant. Price carries an effect of 0.001 and is not statistically significant at all (p = 0.52).
       </p>
       <p>
-       As people age, their ratings improve slightly, showing that middle-aged users value practicality and trust, while younger buyers seek novelty. Marketing can adapt by using innovation-driven campaigns for younger audiences and assurance-based messaging for older groups. Testimonials from the 50–59 segment can be powerful tools for credibility and brand loyalty.
+       Satisfaction is built almost entirely on the product experience, and no single feature is a silver bullet. They matter about equally. A phone wins by being good across battery, camera, performance, design and display together, not by leading on one hero spec.
+      </p>
+      <p>
+       Invest in balanced feature quality rather than chasing one standout number. A weak link in any of the five pulls the rating down just as hard as any other.
       </p>
      </section>
      <section>
       <h2>
-       5. Does where the buyer gets the phone influence the review rating for the same model?
+       5. Does charging more buy happier customers?
       </h2>
-      <img alt="Sentiment by Purchase Platform" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/Q5%20stacked_sentiment_by_source.png"/>
+      <img alt="Chart 5 - Average rating by price tier" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q5_price_tier_rating.png"/>
       <p>
-       Ratings are steady across all major platforms, with average scores around three stars, showing that the buying platform has little effect on satisfaction. Positive sentiment dominates everywhere, though tone differs slightly – Aliexpress buyers are more upbeat, while Bestbuy reviewers are more demanding.
+       No. Average rating is flat across every price tier: 3.12 for budget phones, 3.13 for premium, with everything between within a rounding error. The difference is not statistically significant (p = 0.73), and price correlates with rating at 0.001, which is effectively zero.
       </p>
       <p>
-       These differences suggest that platform audiences shape expectations. Campaigns on Aliexpress and Flipkart should highlight affordability and value, while those on Bestbuy and Amazon should focus on product reliability and service quality. Tailoring tone to each platform's audience will help maintain consistent brand sentiment and trust.
+       Price and satisfaction are decoupled. A premium price does not earn a premium review, and a budget price does not depress one. Buyers judge the phone on what it does, not on what it cost them.
+      </p>
+      <p>
+       Stop treating price as a satisfaction lever. Price is a positioning and margin decision; it will not move review scores up or down.
       </p>
      </section>
      <section>
       <h2>
-       6. How consistent is brand sentiment across different regions and languages?
+       6. Is this the same across brands, prices and countries?
       </h2>
-      <img alt="Sentiment by Language" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/Q6%20bar_sentiment_by_language.png"/>
+      <img alt="Chart 6 - Positive sentiment by brand" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q6_consistency.png"/>
       <p>
-       Customer sentiment is stable across both languages and countries. Differences in sentiment scores between English, Portuguese, Hindi, and German reviews are minimal, showing that emotional tone and satisfaction translate well across cultures. Similarly, sentiment across regions – including India, Brazil, the UAE, Australia, Germany, the UK, Canada, and the USA – remains highly consistent for all major brands.
+       Yes, the pattern is universal. Positive sentiment sits between 67.4% and 67.9% across all seven brands, a spread of just 0.6 points, holds across price tiers, and varies by only 1.6 points across eight countries. Sentiment is statistically independent of brand (p = 0.87).
       </p>
       <p>
-       This stability means customers perceive brands similarly worldwide. Marketing teams can maintain a unified global message focused on reliability and satisfaction, adjusting tone slightly for local preferences. Strong consistency across markets signals high brand trust and gives marketers confidence to scale campaigns globally without losing authenticity.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       Apple, Samsung, and Realme should lead upcoming campaigns, as they deliver the highest satisfaction and engagement. Motorola and Xiaomi need repositioning and stronger post-purchase support before re-entering major promotions. Campaigns should highlight practical benefits – long battery life, reliability, and premium design – rather than technical specifications.
+       "Features beat price" is not a quirk of one brand or one market. It is how smartphone buyers everywhere decide, which makes the finding safe to build a global strategy on.
       </p>
       <p>
-       Ad budgets should follow sentiment patterns: emphasize affordability on Aliexpress and Flipkart, and service quality on Amazon and Bestbuy. Because sentiment is consistent worldwide, a unified global campaign can be effective with small cultural adjustments. Negative sentiment, often about service or overheating, should be addressed openly with clear communication and engagement initiatives that demonstrate responsiveness and build trust.
+       Apply the same feature-first playbook across every market and brand line. There is no segment where price positioning rescues a weak feature experience.
       </p>
      </section>
      <section>
       <h2>
-       Marketing Recommendations
+       Conclusion: What Buyers Really Want
       </h2>
-      <ul>
-       <li>
-        <strong>
-         Promote:
-        </strong>
-        Apple, Samsung, and Realme – these brands show the highest customer satisfaction and should receive priority in marketing budgets.
-       </li>
-       <li>
-        <strong>
-         Rebuild:
-        </strong>
-        Motorola and Xiaomi need improved after-sales service and reliability messaging before large-scale campaigns.
-       </li>
-       <li>
-        <strong>
-         Message Focus:
-        </strong>
-        Emphasize "all-day battery life," "reliable performance," and "worth the spend" rather than technical specifications.
-       </li>
-       <li>
-        <strong>
-         Platform Strategy:
-        </strong>
-        Tailor campaigns by platform – affordability messaging on Aliexpress/Flipkart, reliability on Amazon/Bestbuy.
-       </li>
-       <li>
-        <strong>
-         Age Segmentation:
-        </strong>
-        Use innovation-driven campaigns for ages 18–49, assurance-based messaging for ages 50+.
-       </li>
-       <li>
-        <strong>
-         Global Consistency:
-        </strong>
-        Leverage sentiment stability across regions for unified global campaigns with minor local adjustments.
-       </li>
-       <li>
-        <strong>
-         Address Negativity:
-        </strong>
-        Proactively communicate about service improvements and overheating solutions to build trust.
-       </li>
-      </ul>
+      <p>
+       When buyers shop for a new phone, they are not buying a price, they are buying a feeling of value built from the experience the phone delivers. Across 50,000 reviews, the five core features explain 86% of satisfaction while price explains none, and the word buyers reach for most is not a spec, it is "worth it". Value, to a buyer, is what the phone does for them set against what they paid, and it is won on features.
+      </p>
+      <p>
+       Getting this wrong is expensive. A brand that pours budget into price promotions and premium positioning is spending against the one lever that does not move reviews, while the real drivers, build, battery, camera and a clean support experience, go under-funded. The opportunity is just as clear, because the same playbook works in every brand and every market we tested.
+      </p>
+      <p>
+       Compete on the feature experience, not the price tag. Amplify the features buyers already praise, fix the three that quietly sink reviews, and treat price as a margin decision rather than a satisfaction strategy.
+      </p>
      </section>
      <section>
       <h2>
-       Final Note
+       Recommendations
       </h2>
       <p>
-       Customer satisfaction in smartphones is driven by practical, everyday factors like battery life, reliability, and value perception – not just by the latest features or lowest prices. Marketing that focuses on these core drivers, tailored to the right audience on the right platform, will create stronger emotional connections and drive better business outcomes.
+       1. Lead marketing with value and the four most-discussed features. Build store pages and ads around the "worth it" story plus performance, design, battery and camera, using real review language. This aligns the message with what buyers actually raise in 22.5% of reviews and with features that all score net-positive.
+      </p>
+      <p>
+       2. Fix customer service and speaker quality first. Invest in support response and audio tuning before the next launch. These are the two largest recurring sources of negative reviews, with service 100% negative and sound 44% negative, and both are cheaper than any hardware redesign.
+      </p>
+      <p>
+       3. Fund balanced feature quality, not a hero spec. Hold all five core features to a high bar rather than over-investing in one. Each feature weighs about equally and together they explain 86% of the rating, so the rating is protected by removing weak links, not by chasing a single standout.
+      </p>
+      <p>
+       4. Stop using price as a satisfaction lever. Set price for positioning and margin, decoupled from any review-score target. Price has effectively zero effect on rating, so promotional spend aimed at satisfaction is wasted and better redirected to feature work.
+      </p>
+      <p>
+       5. Run one global feature-first playbook. Apply the same strategy across brands and markets rather than reinventing it locally. The pattern is statistically identical across brands and countries, so a single playbook avoids costly market-by-market duplication.
       </p>
      </section>
     </section>
+    <footer>
+     <p>
+      © 2026 Lee Yih Ven | Data-Driven Solutions
+     </p>
+    </footer>
    </main>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
  </body>
 </html>
