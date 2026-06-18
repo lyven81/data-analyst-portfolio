@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Right Price, Right Season - Seasonal Pricing Dashboard | Lee Yih Ven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root{--primary-color:#403B36;--secondary-color:#CBA135;--background-color:#FCF9F2;--text-color:#2C2C2C;
+        --card-background:#FFFFFF;--shadow:0 4px 20px rgba(64,59,54,0.1);--gradient:linear-gradient(135deg,#403B36 0%,#5A524B 100%);
+        --gold-gradient:linear-gradient(135deg,#CBA135 0%,#E8C55A 100%);}
+        *{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+        body{font-family:'Poppins',sans-serif;background-color:var(--background-color);color:var(--text-color);line-height:1.6;overflow-x:hidden;}
+        .dashboard-container{max-width:1400px;margin:0 auto;padding:20px;}
+        .header{background:linear-gradient(135deg,#403B36 0%,#2C2822 100%);color:#FCF9F2;padding:40px;border-radius:15px;margin-bottom:30px;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
+        .header h1{font-size:2.5rem;font-weight:700;margin-bottom:10px;}
+        .header p{font-size:1.1rem;opacity:0.9;}
+        .cta-buttons{display:flex;gap:15px;margin-top:25px;flex-wrap:wrap;}
+        .cta-button{padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s ease;display:inline-block;}
+        .cta-secondary{background:transparent;border:2px solid #CBA135;color:#FCF9F2;}
+        .cta-secondary:hover{background:rgba(203,161,53,0.1);}
+        .controls{display:flex;align-items:center;gap:12px;margin:0 0 10px;flex-wrap:wrap;}
+        .controls label{font-weight:600;color:var(--primary-color);}
+        .controls select{padding:10px 14px;border:2px solid var(--secondary-color);border-radius:8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--primary-color);background:white;}
+        .page-nav{display:flex;justify-content:center;gap:15px;margin:30px auto;flex-wrap:wrap;}
+        .page-btn{padding:12px 24px;background:white;border:2px solid var(--secondary-color);border-radius:8px;font-weight:600;color:var(--primary-color);cursor:pointer;transition:all .3s ease;font-family:'Poppins',sans-serif;font-size:.95rem;}
+        .page-btn.active{background:var(--gold-gradient);color:white;border-color:var(--secondary-color);}
+        .page-btn:hover:not(.active){background:rgba(203,161,53,0.1);}
+        .page{display:none;animation:fadeIn .5s ease-in;}
+        .page.active{display:block;}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:30px auto;}
+        .kpi-card{background:white;padding:30px;border-radius:15px;box-shadow:var(--shadow);text-align:center;transition:all .3s ease;border-top:4px solid var(--secondary-color);}
+        .kpi-card:hover{transform:translateY(-5px);box-shadow:0 8px 30px rgba(64,59,54,0.15);}
+        .kpi-label{font-size:1rem;color:#666;margin-bottom:10px;font-weight:500;}
+        .kpi-value{font-size:2.5rem;font-weight:700;color:var(--primary-color);margin-bottom:5px;}
+        .chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(500px,1fr));gap:30px;margin:30px auto;}
+        .chart-card{background:white;padding:30px;border-radius:15px;box-shadow:var(--shadow);}
+        .chart-title{color:var(--primary-color);margin-bottom:20px;font-size:1.3rem;font-weight:600;border-bottom:3px solid var(--secondary-color);padding-bottom:10px;}
+        .chart-container{position:relative;height:300px;}
+        .full-width{grid-column:1 / -1;}
+        table{width:100%;border-collapse:collapse;font-size:.95rem;}
+        thead{background:var(--gradient);color:white;}
+        th{padding:13px 12px;text-align:left;font-weight:600;}
+        td{padding:10px 12px;border-bottom:1px solid #E0E0E0;}
+        tr:hover{background-color:rgba(203,161,53,0.1);}
+        .sheet td,.sheet th{text-align:center;padding:7px 6px;font-size:.85rem;}
+        .sheet td.name{text-align:left;font-weight:600;}
+        .sp{background:#F6E7DE;}.ss{background:#EAF1F8;}.st{background:#E3F1EA;}
+        .metric-positive{color:#2E7D32;font-weight:600;}.metric-negative{color:#C62828;font-weight:600;}
+        .legend{font-size:.85rem;color:#666;margin-top:10px;}
+        .legend span{display:inline-block;padding:2px 10px;border-radius:12px;margin-right:6px;}
+        .footer{background-color:#333;color:white;text-align:center;padding:20px;margin-top:40px;}
+        @media (max-width:768px){.chart-grid{grid-template-columns:1fr;}.kpi-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}.page-nav{flex-direction:column;}}
+        @media print{.page{display:block !important;}.page-btn,.page-nav,.controls{display:none !important;}.chart-card,.kpi-card,table{break-inside:avoid;}}
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1>Right Price, Right Season</h1>
+            <p>Seasonal Pricing Dashboard - How occupancy responds to price, and the rate that earns the most for each Ipoh listing</p>
+            <div class="cta-buttons">
+                <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
+                <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/right-price-right-season.html" class="cta-button cta-secondary">View Full Case Study</a>
+                <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <button class="page-btn active" onclick="showPage(1)">Seasonal Trends</button>
+            <button class="page-btn" onclick="showPage(2)">Price Sensitivity</button>
+            <button class="page-btn" onclick="showPage(3)">Pricing Plan</button>
+            <button class="page-btn" onclick="showPage(4)">Revenue Impact</button>
+        </div>
+
+        <!-- Page 1 -->
+        <div id="page1" class="page active">
+            <div class="kpi-grid">
+                <div class="kpi-card"><div class="kpi-label">Observed revenue (3 yrs)</div><div class="kpi-value" id="kRev">-</div></div>
+                <div class="kpi-card"><div class="kpi-label">Portfolio occupancy</div><div class="kpi-value" id="kOcc">-</div></div>
+                <div class="kpi-card"><div class="kpi-label">Busiest month</div><div class="kpi-value" id="kBusy">-</div></div>
+                <div class="kpi-card"><div class="kpi-label">Slowest month</div><div class="kpi-value" id="kSlow">-</div></div>
+            </div>
+            <div class="chart-grid"><div class="chart-card full-width">
+                <div class="chart-title">Bookings stay steady while prices rise in peak months</div>
+                <div class="chart-container" style="height:340px;"><canvas id="cTrend"></canvas></div></div></div>
+            <div class="chart-grid">
+                <div class="chart-card"><div class="chart-title">Revenue by season</div><div class="chart-container"><canvas id="cRevSeason"></canvas></div></div>
+                <div class="chart-card"><div class="chart-title">Average nightly price by season</div><div class="chart-container"><canvas id="cPriceSeason"></canvas></div></div>
+            </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div id="page2" class="page">
+            <div class="chart-grid">
+                <div class="chart-card"><div class="chart-title">Bookings lost for every 10% price rise, by room type</div><div class="chart-container"><canvas id="cSensType"></canvas></div></div>
+                <div class="chart-card"><div class="chart-title">Price sensitivity by room type and season</div><div class="chart-container"><canvas id="cSensSeason"></canvas></div></div>
+            </div>
+            <div class="chart-grid"><div class="chart-card full-width">
+                <div class="chart-title">Method check: our estimate is 3x closer to the truth than the quick rule</div>
+                <div class="chart-container"><canvas id="cMethod"></canvas></div>
+                <p class="legend">Tested on data with a known answer; the true value sat inside the 95% range in <span id="kInci"></span> of checks.</p></div></div>
+        </div>
+
+        <!-- Page 3 -->
+        <div id="page3" class="page">
+            <div class="kpi-grid">
+                <div class="kpi-card"><div class="kpi-label">Price points to raise</div><div class="kpi-value metric-positive" id="kRaise">-</div></div>
+                <div class="kpi-card"><div class="kpi-label">Price points to cut</div><div class="kpi-value metric-negative" id="kCut">-</div></div>
+            </div>
+            <div class="chart-grid"><div class="chart-card full-width">
+                <div class="chart-title">Suggested rates: studios down, larger units up</div>
+                <div class="chart-container"><canvas id="cCurOpt"></canvas></div></div></div>
+            <div class="controls">
+                <label for="typeFilter">Filter listings by type:</label>
+                <select id="typeFilter" onchange="renderSheet()">
+                    <option value="All">All types</option>
+                    <option value="Studio">Studio</option><option value="1BR">1BR</option>
+                    <option value="2BR">2BR</option><option value="3BR">3BR</option>
+                </select>
+            </div>
+            <div class="chart-card full-width">
+                <div class="chart-title">Price sheet: suggested nightly rate (RM) by property and month</div>
+                <div style="overflow-x:auto;"><table class="sheet" id="sheetTable"></table></div>
+                <p class="legend"><span class="sp">Peak (Dec, Feb, May)</span><span class="ss">Shoulder</span><span class="st">Value (Nov, Mar)</span> RM per night, before any weekend premium.</p>
+            </div>
+        </div>
+
+        <!-- Page 4 -->
+        <div id="page4" class="page">
+            <div class="kpi-grid">
+                <div class="kpi-card"><div class="kpi-label">Projected uplift / year</div><div class="kpi-value" id="kUpRm">-</div></div>
+                <div class="kpi-card"><div class="kpi-label">Uplift vs current</div><div class="kpi-value metric-positive" id="kUpPct">-</div></div>
+                <div class="kpi-card"><div class="kpi-label">Occupancy held</div><div class="kpi-value" id="kOcc2">-</div></div>
+                <div class="kpi-card"><div class="kpi-label">Listings optimized</div><div class="kpi-value" id="kList">-</div></div>
+            </div>
+            <div class="chart-grid">
+                <div class="chart-card"><div class="chart-title">Most of the gain is in the shoulder season</div><div class="chart-container"><canvas id="cUpSeason"></canvas></div></div>
+                <div class="chart-card"><div class="chart-title">Extra profit by room type</div><div class="chart-container"><canvas id="cUpType"></canvas></div></div>
+            </div>
+            <div class="chart-card full-width" style="margin-top:20px;">
+                <div class="chart-title">Biggest single gains</div>
+                <div style="overflow-x:auto;"><table id="topTable"><thead><tr><th>Listing</th><th>Type</th><th>Season</th><th>Now</th><th>Suggested</th><th>Move</th><th>Extra / year</th></tr></thead><tbody></tbody></table></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const DATA = {"portfolio": {"revenue": 2677982.0, "occ": 57.5, "upliftRM": 254138.0, "upliftPct": 9.5, "listings": 15, "raise_": 23, "cut": 22, "busy": "May", "slow": "Mar"}, "recovery": {"our": 0.224, "naive": 0.713, "inci": 100}, "byMonth": [{"m": "Jan", "occ": 54.5, "price": 269.0, "rev": 212792.0}, {"m": "Feb", "occ": 59.0, "price": 342.0, "rev": 262116.0}, {"m": "Mar", "occ": 53.2, "price": 229.0, "rev": 169751.0}, {"m": "Apr", "occ": 56.7, "price": 265.0, "rev": 203643.0}, {"m": "May", "occ": 61.6, "price": 337.0, "rev": 298857.0}, {"m": "Jun", "occ": 56.8, "price": 269.0, "rev": 210841.0}, {"m": "Jul", "occ": 59.4, "price": 261.0, "rev": 219314.0}, {"m": "Aug", "occ": 54.6, "price": 266.0, "rev": 206091.0}, {"m": "Sep", "occ": 60.5, "price": 257.0, "rev": 213870.0}, {"m": "Oct", "occ": 60.3, "price": 257.0, "rev": 219266.0}, {"m": "Nov", "occ": 53.9, "price": 235.0, "rev": 168928.0}, {"m": "Dec", "occ": 59.2, "price": 345.0, "rev": 292513.0}], "bySeason": [{"s": "Peak", "occ": 60.0, "price": 341.0, "rev": 853486.0}, {"s": "Shoulder", "occ": 57.5, "price": 263.0, "rev": 1485817.0}, {"s": "Trough", "occ": 53.6, "price": 232.0, "rev": 338679.0}], "sensType": [20.7, 14.1, 10.3, 8.4], "sensSeason": {"peak": [18.6, 10.9, 11.1, 5.8], "shoulder": [17.9, 13.6, 8.4, 9.9], "trough": [25.5, 17.9, 11.5, 9.5]}, "curType": [191, 256, 354, 478], "optType": [145, 289, 460, 620], "typeOpt": {"Studio": {"peak": 178, "shoulder": 135, "trough": 121}, "1BR": {"peak": 418, "shoulder": 275, "trough": 173}, "2BR": {"peak": 574, "shoulder": 441, "trough": 364}, "3BR": {"peak": 742, "shoulder": 595, "trough": 523}}, "listings": [{"id": "KS01", "name": "Infinity Poolside View @ The Haven Lakeside Tambun", "type": "1BR", "peak": 471.0, "shoulder": 279.0, "trough": 187.0}, {"id": "KS02", "name": "Sunset Hill View @ Sunway City Ipoh", "type": "1BR", "peak": 375.0, "shoulder": 273.0, "trough": 162.0}, {"id": "KS03", "name": "Hot Spring Retreat @ Lost World Tambun", "type": "1BR", "peak": 452.0, "shoulder": 277.0, "trough": 182.0}, {"id": "KS04", "name": "Comfy Apt @ Majestic Taman Jubilee", "type": "1BR", "peak": 376.0, "shoulder": 272.0, "trough": 162.0}, {"id": "KS05", "name": "Spacious Family Stay @ Ipoh Garden", "type": "2BR", "peak": 561.0, "shoulder": 447.0, "trough": 359.0}, {"id": "KS06", "name": "High Rise Mountain View @ Meru Raya", "type": "2BR", "peak": 525.0, "shoulder": 386.0, "trough": 331.0}, {"id": "KS07", "name": "Luxury Apt @ Kinta Riverfront", "type": "2BR", "peak": 637.0, "shoulder": 490.0, "trough": 403.0}, {"id": "KS08", "name": "Grand Family Retreat @ Tambun Lakeside", "type": "3BR", "peak": 848.0, "shoulder": 661.0, "trough": 568.0}, {"id": "KS09", "name": "Premium City View @ Greentown Octagon", "type": "3BR", "peak": 637.0, "shoulder": 529.0, "trough": 478.0}, {"id": "KS10", "name": "Heritage Studio @ Old Town Concubine Lane", "type": "Studio", "peak": 195.0, "shoulder": 151.0, "trough": 137.0}, {"id": "KS11", "name": "Modern Studio Loft @ Greentown", "type": "Studio", "peak": 181.0, "shoulder": 134.0, "trough": 123.0}, {"id": "KS12", "name": "Chic Studio @ The Horizon Bercham", "type": "Studio", "peak": 168.0, "shoulder": 129.0, "trough": 110.0}, {"id": "KS13", "name": "Compact Studio @ Ipoh Garden East", "type": "Studio", "peak": 180.0, "shoulder": 129.0, "trough": 111.0}, {"id": "KS14", "name": "Minimalist Studio @ Octagon Greentown", "type": "Studio", "peak": 183.0, "shoulder": 140.0, "trough": 129.0}, {"id": "KS15", "name": "Snug Studio @ Station 18 Kinta City", "type": "Studio", "peak": 164.0, "shoulder": 129.0, "trough": 116.0}], "topGains": [{"name": "Grand Family Retreat @ Tambun Lakeside", "type": "3BR", "season": "Peak", "cur": 636, "opt": 848, "up": 26571, "dir": "Charge more"}, {"name": "Grand Family Retreat @ Tambun Lakeside", "type": "3BR", "season": "Shoulder", "cur": 484, "opt": 661, "up": 22589, "dir": "Charge more"}, {"name": "Spacious Family Stay @ Ipoh Garden", "type": "2BR", "season": "Shoulder", "cur": 333, "opt": 447, "up": 22572, "dir": "Charge more"}, {"name": "High Rise Mountain View @ Meru Raya", "type": "2BR", "season": "Shoulder", "cur": 283, "opt": 386, "up": 21087, "dir": "Charge more"}, {"name": "Luxury Apt @ Kinta Riverfront", "type": "2BR", "season": "Shoulder", "cur": 368, "opt": 490, "up": 20922, "dir": "Charge more"}, {"name": "Premium City View @ Greentown Octagon", "type": "3BR", "season": "Shoulder", "cur": 402, "opt": 529, "up": 19233, "dir": "Charge more"}, {"name": "Premium City View @ Greentown Octagon", "type": "3BR", "season": "Peak", "cur": 512, "opt": 637, "up": 15525, "dir": "Charge more"}, {"name": "Heritage Studio @ Old Town Concubine Lane", "type": "Studio", "season": "Shoulder", "cur": 209, "opt": 151, "up": 7157, "dir": "Charge less"}], "upSeason": [86180, 132456, 35501], "upType": [65421, 16970, 78948, 92799]};
+    const BROWN="#403B36",GOLD="#CBA135",GREEN="#2E7D32",RED="#C62828",BLUE="#4A7FB5",GREY="#9DB4CC";
+    const SCOL={Peak:"#B5532A",Shoulder:"#4A7FB5",Value:"#2E7D5B"};
+    const TYPES=["Studio","1BR","2BR","3BR"], MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const MS=["shoulder","peak","trough","shoulder","peak","shoulder","shoulder","shoulder","shoulder","shoulder","trough","peak"];
+    const CLS={peak:"sp",shoulder:"ss",trough:"st"};
+    const rmC=n=>n>=1e6?"RM"+(n/1e6).toFixed(2)+"M":n>=1e3?"RM"+Math.round(n/1e3)+"K":"RM"+Math.round(n);
+    let charts={};
+    function mk(id,cfg){if(charts[id])charts[id].destroy();const c=document.getElementById(id);if(c)charts[id]=new Chart(c,cfg);}
+    const baseOpt={responsive:true,maintainAspectRatio:false};
+
+    function kpis(){
+        document.getElementById('kRev').textContent=rmC(DATA.portfolio.revenue);
+        document.getElementById('kOcc').textContent=DATA.portfolio.occ+'%';
+        document.getElementById('kBusy').textContent=DATA.portfolio.busy;
+        document.getElementById('kSlow').textContent=DATA.portfolio.slow;
+        document.getElementById('kInci').textContent=DATA.recovery.inci+'%';
+        document.getElementById('kRaise').textContent=DATA.portfolio.raise_;
+        document.getElementById('kCut').textContent=DATA.portfolio.cut;
+        document.getElementById('kUpRm').textContent=rmC(DATA.portfolio.upliftRM);
+        document.getElementById('kUpPct').textContent='+'+DATA.portfolio.upliftPct+'%';
+        document.getElementById('kOcc2').textContent=DATA.portfolio.occ+'%';
+        document.getElementById('kList').textContent=DATA.portfolio.listings;
+    }
+    function charts1(){
+        mk('cTrend',{data:{labels:DATA.byMonth.map(x=>x.m),datasets:[
+            {type:'bar',label:'Avg nightly price (RM)',data:DATA.byMonth.map(x=>x.price),backgroundColor:GREY,yAxisID:'y'},
+            {type:'line',label:'Occupancy %',data:DATA.byMonth.map(x=>x.occ),borderColor:BROWN,backgroundColor:BROWN,tension:.3,yAxisID:'y1'}]},
+            options:{...baseOpt,scales:{y:{title:{display:true,text:'avg price (RM)'}},y1:{position:'right',min:0,max:100,grid:{drawOnChartArea:false},title:{display:true,text:'occupancy %'}}}}});
+        mk('cRevSeason',{type:'bar',data:{labels:DATA.bySeason.map(x=>x.s),datasets:[{label:'Revenue (RM)',data:DATA.bySeason.map(x=>x.rev),backgroundColor:DATA.bySeason.map(x=>SCOL[x.s])}]},options:{...baseOpt,plugins:{legend:{display:false}}}});
+        mk('cPriceSeason',{type:'bar',data:{labels:DATA.bySeason.map(x=>x.s),datasets:[{label:'Avg price (RM)',data:DATA.bySeason.map(x=>x.price),backgroundColor:DATA.bySeason.map(x=>SCOL[x.s])}]},options:{...baseOpt,plugins:{legend:{display:false}}}});
+    }
+    function charts2(){
+        mk('cSensType',{type:'bar',data:{labels:TYPES,datasets:[{label:'Bookings lost per 100 (per 10% rise)',data:DATA.sensType,backgroundColor:BLUE}]},options:{...baseOpt,plugins:{legend:{display:false}}}});
+        mk('cSensSeason',{type:'bar',data:{labels:TYPES,datasets:["peak","shoulder","trough"].map(s=>({label:s[0].toUpperCase()+s.slice(1),data:DATA.sensSeason[s],backgroundColor:SCOL[s[0].toUpperCase()+s.slice(1)]}))},options:{...baseOpt}});
+        mk('cMethod',{type:'bar',data:{labels:['Our method','Quick rule of thumb'],datasets:[{label:'how far off the truth (lower is better)',data:[DATA.recovery.our,DATA.recovery.naive],backgroundColor:[GREEN,RED]}]},options:{...baseOpt,indexAxis:'y',plugins:{legend:{display:false}}}});
+    }
+    function charts3(){
+        mk('cCurOpt',{type:'bar',data:{labels:TYPES,datasets:[
+            {label:'Now',data:DATA.curType,backgroundColor:GREY},
+            {label:'Suggested',data:DATA.optType,backgroundColor:BROWN}]},options:{...baseOpt}});
+        renderSheet();
+    }
+    function renderSheet(){
+        const f=document.getElementById('typeFilter').value;
+        const rows=DATA.listings.filter(r=>f==='All'||r.type===f);
+        let h='<thead><tr><th>Listing</th><th>Type</th>'+MN.map(m=>'<th>'+m+'</th>').join('')+'</tr></thead><tbody>';
+        rows.forEach(r=>{const byS={peak:r.peak,shoulder:r.shoulder,trough:r.trough};
+            h+='<tr><td class="name">'+r.name+'</td><td>'+r.type+'</td>'+
+               MN.map((m,i)=>'<td class="'+CLS[MS[i]]+'">'+Math.round(byS[MS[i]])+'</td>').join('')+'</tr>';});
+        h+='</tbody>';document.getElementById('sheetTable').innerHTML=h;
+    }
+    function charts4(){
+        mk('cUpSeason',{type:'bar',data:{labels:['Peak','Shoulder','Value'],datasets:[{label:'Extra profit / year (RM)',data:DATA.upSeason,backgroundColor:GOLD}]},options:{...baseOpt,plugins:{legend:{display:false}}}});
+        mk('cUpType',{type:'bar',data:{labels:TYPES,datasets:[{label:'Extra profit / year (RM)',data:DATA.upType,backgroundColor:GOLD}]},options:{...baseOpt,plugins:{legend:{display:false}}}});
+        const tb=document.querySelector('#topTable tbody');tb.innerHTML='';
+        DATA.topGains.forEach(g=>{const up=g.dir==='Charge more';
+            tb.insertRow().innerHTML='<td><strong>'+g.name+'</strong></td><td>'+g.type+'</td><td>'+g.season+'</td><td>RM'+g.cur+'</td><td>RM'+g.opt+'</td>'+
+            '<td><span class="'+(up?'metric-positive':'metric-negative')+'">'+g.dir+'</span></td><td>RM'+g.up.toLocaleString()+'</td>';});
+    }
+    function showPage(n){for(let i=1;i<=4;i++)document.getElementById('page'+i).classList.remove('active');
+        document.getElementById('page'+n).classList.add('active');
+        document.querySelectorAll('.page-btn').forEach((b,i)=>b.classList.toggle('active',i===n-1));}
+    kpis();charts1();charts2();charts3();charts4();
+    </script>
+    <div class="footer"><p>&copy; 2026 Lee Yih Ven | Data-Driven Solutions</p></div>
+</body>
+</html>
