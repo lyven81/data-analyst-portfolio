@@ -730,8 +730,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #FAF6EE;
-            border-bottom: 1px solid #E5DFD0;
+            background: #f9f9f9;
+            border-bottom: 1px solid #f4f4f4;
             position: sticky;
             top: 0;
             z-index: 50;
@@ -757,9 +757,9 @@
         }
         .topnav a:hover { color: #1A1F3A; }
         .search-section {
-            background: #FAF6EE;
+            background: #f9f9f9;
             padding: 1.4rem 2rem;
-            border-bottom: 1px solid #E5DFD0;
+            border-bottom: 1px solid #f4f4f4;
             display: flex;
             justify-content: center;
         }
@@ -780,6 +780,68 @@
             .topnav a { font-size: 0.78rem; }
             .search-section { padding: 1.2rem; }
         }
+
+        /* ── Data Stories Lab search (blend the bar + results into the cream/navy theme) ── */
+        .search-section .search-input {
+            width: 100%;
+            padding: 0.8rem 2.9rem 0.8rem 1.1rem;
+            border: 1px solid #E5DFD0;
+            border-radius: 10px;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            color: #1A1F3A;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .search-section .search-input::placeholder { color: #9C96A8; }
+        .search-section .search-input:focus {
+            outline: none;
+            border-color: #1A1F3A;
+            box-shadow: 0 0 0 3px rgba(26, 31, 58, 0.08);
+        }
+        .search-section .search-icon {
+            right: 1.1rem;
+            color: #5A5F7A;
+            font-size: 0.95rem;
+        }
+        .search-section .search-results {
+            border: 1px solid #E5DFD0;
+            border-radius: 10px;
+            box-shadow: 0 10px 28px rgba(26, 31, 58, 0.12);
+            max-height: 72vh;
+            margin-top: 8px;
+        }
+        .search-section .search-result-item { padding: 14px 16px; border-bottom: 1px solid #EFE9DC; }
+        .search-section .search-result-item:hover { background-color: #FAF6EE; }
+        .search-section .search-result-category {
+            font-family: 'Inter', sans-serif;
+            color: #8A8597;
+            letter-spacing: 0.06em;
+        }
+        .search-section .search-result-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: #1A1F3A;
+            font-size: 0.98rem;
+        }
+        .search-section .search-result-description {
+            font-family: 'Inter', sans-serif;
+            color: #5A5F7A;
+        }
+        .search-section .search-result-btn {
+            font-family: 'Inter', sans-serif;
+            border: 1px solid #E5DFD0;
+            background: #FAF6EE;
+            color: #1A1F3A;
+            border-radius: 8px;
+            letter-spacing: 0.02em;
+        }
+        .search-section .search-result-btn:hover {
+            background: #1A1F3A;
+            color: #FAF6EE;
+            border-color: #1A1F3A;
+        }
+        .search-section .no-results { font-family: 'Inter', sans-serif; color: #5A5F7A; }
 
         /* ── Data Stories Lab footer ── */
         body > footer {
@@ -805,6 +867,14 @@
             <a href="/data-analyst-portfolio/contact.html">Contact</a>
         </div>
     </div>
+    <div class="search-section">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search case studies by topic, industry, or method..." id="searchInput" autocomplete="off" aria-label="Search case studies">
+            <span class="search-icon">🔍</span>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+    <div class="search-overlay" id="searchOverlay"></div>
     <div class="container">
         <div class="magazine-container">
             <!-- Hero Section: Right Price, Right Season -->
