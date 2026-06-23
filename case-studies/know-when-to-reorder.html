@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Know When to Reorder | Lee Yih Ven
+  </title>
+  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="container">
+   <!-- Left Column -->
+   <aside class="left-column">
+    <header>
+     <h1>Lee Yih Ven</h1>
+     <h2>Data Analytics Portfolio</h2>
+    </header>
+    <section class="intro">
+     <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
+    </section>
+    <section class="home-link-section">
+     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">Home</a>
+    </section>
+    <section class="contact">
+     <h2>Contact</h2>
+     <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
+     <ul>
+      <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
+      <li>Phone: +6014-9207099</li>
+     </ul>
+    </section>
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/know-when-to-reorder-dashboard.html">View Dashboard</a>
+    </section>
+    <section class="dashboard-link-section">
+     <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/know-when-to-reorder.html">AI Assistant</a>
+    </section>
+   </aside>
+   <!-- Right Column -->
+   <main class="right-column">
+    <section class="case-study-content">
+     <header>
+      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/cover%20image.png"/>
+      <h1>Know When to Reorder</h1>
+      <p>How better stock timing recovers lost sales</p>
+     </header>
+     <section>
+      <h2>Overview</h2>
+      <p>This case study reads two years of sales for a Malaysian bookshop to answer one practical question for the store manager: is the right stock on the shelf at the right time? It covers 385 titles across books, school workbooks and stationery, sold through walk-in customers, online orders, and bulk orders from schools and tuition centres.</p>
+      <p>The shop is profitable, but money leaks two ways. When popular workbooks sell out before exams, the sale walks out the door; when slow titles overstay their welcome, cash sits frozen on the shelf. The analysis finds where both happen, by title and by season, and sets out exactly what to reorder, what to clear, and what the fix is worth.</p>
+     </section>
+     <section>
+      <h2>Data Sources and Methodology</h2>
+      <p>We analysed 101,980 sales lines across 385 titles over two years (January 2024 to December 2025), sold through walk-in, online and bulk school channels. The analysis examined demand by title and season, inventory turnover, stockouts and lost sales, and the cash tied in dead and overstocked stock, then set a reorder point, safety stock and order size for every title. One note on method: the source recorded sales only, so stock-on-hand was reconstructed by simulation calibrated to real sales under the shop's current ordering pattern, with all assumptions documented and adjustable, so the figures are well-grounded estimates rather than audited stock counts.</p>
+     </section>
+     <section>
+      <h2>1. Which books perform, which don't?</h2>
+      <img alt="Chart 1 - Stock value by performance group" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-1.png"/>
+      <p>Of 385 titles, 343 are healthy, but the action sits in two small groups. Twenty-eight stockout-prone titles, under 8% of the range, drive RM 3.06 million of sales (16% of revenue) yet keep running out, while a dozen dead or overstocked titles freeze cash on the shelf.</p>
+      <p>Performance is concentrated, so inventory effort should focus on those two short lists, the stockout-prone titles to protect and the dead stock to clear, rather than spread evenly across the healthy 343.</p>
+     </section>
+     <section>
+      <h2>2. When does each book sell most?</h2>
+      <img alt="Chart 2 - Monthly units by category" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-2.png"/>
+      <p>Demand is highly seasonal. January runs 52% above the average month and December 36% above, while June and July fall to about two-thirds of average. Workbooks swing hardest, around 44,900 units in a typical January against 19,700 across June and July.</p>
+      <p>Stock needs are uneven but predictable. Build stock ahead of January and December, not during them, and ease off ordering into the mid-year lull so cash is not tied up while the shop is quiet.</p>
+     </section>
+     <section>
+      <h2>3. Which books sell out often?</h2>
+      <img alt="Chart 3 - Top titles losing sales to stockouts" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-3.png"/>
+      <p>Running out cost an estimated RM 1.49 million in sales over two years, about 8% of revenue. Workbooks account for RM 860,000 of that, led by the SPM exam package and Form 5 English workbooks.</p>
+      <p>This is the largest and most fixable leak, and it is a timing problem: several of these titles carry plenty of stock most of the year, then empty out at the exam-season peak. Seasonal safety stock on the exam and back-to-school workbooks is where an extra buffer pays for itself.</p>
+     </section>
+     <section>
+      <h2>4. What stock should we clear?</h2>
+      <img alt="Chart 4 - Cash frozen in stock to clear" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-4.png"/>
+      <p>About RM 7,700 is frozen across 14 titles, led by discontinued UPSR exam books (an exam abolished in 2021) still on the shelf, two of them holding more than four years of supply, plus a few slow-selling fiction and stationery lines.</p>
+      <p>This cash is dead; it will not turn into sales. Clearing the UPSR books and the slowest fiction, and not reordering them, frees the cash and the shelf space for faster titles. The sum is small next to the stockout leak, but it is a quick win.</p>
+     </section>
+     <section>
+      <h2>5. How fast does stock turn?</h2>
+      <img alt="Chart 5 - Inventory turnover by category" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-5.png"/>
+      <p>Stock turns about 8.6 times a year overall, which is healthy. Workbooks turn fastest at 10.4 times, with stationery and books around 8 to 9, while dead stock barely moves at 0.8.</p>
+      <p>The core range is efficient; the drag is the slow tail. Faster turn means cash comes back sooner to buy the next batch, so protecting the fast movers and keeping the slow tail lean protects cash flow.</p>
+     </section>
+     <section>
+      <h2>6. Which books make the money?</h2>
+      <img alt="Chart 6 - Revenue concentration (Pareto)" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-6.png"/>
+      <p>Ninety-two titles, just under a quarter of the range, generate 80% of revenue. The middle 128 add 15%, and the long tail of 165 titles contributes only 5%.</p>
+      <p>Revenue is heavily concentrated, so a short list of titles funds the business. Never let one of these 92 run out; manage the long tail by exception, stocked thin and reordered only on demand.</p>
+     </section>
+     <section>
+      <h2>7. What, how much, and when to reorder?</h2>
+      <img alt="Chart 7 - Current stock vs reorder point" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-7.png"/>
+      <p>149 titles are at or below their recommended reorder point, including 10 of the top earners. For each title the analysis sets a reorder point (when to order), a safety-stock cushion, and an order size (how much), with supplier lead time built in.</p>
+      <p>This replaces guesswork with a simple per-title rule: order when stock crosses the reorder point, order the set quantity, and the new stock lands before the shelf empties. Lift the reorder points on seasonal lines ahead of January and exam season so the cushion is in place before the surge.</p>
+     </section>
+     <section>
+      <h2>8. Which channel needs which stock?</h2>
+      <img alt="Chart 8 - Units by channel and category" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-8.png"/>
+      <p>Bulk school and tuition-centre orders drive 81% of revenue, against 11% walk-in and 8% online, and those bulk orders are overwhelmingly workbooks and stationery. Walk-in and online sales, by contrast, are led by general books.</p>
+      <p>This is really two businesses on one shelf. Prioritise workbook and stationery depth for the bulk channel, especially before term starts, and size the general-book range for steady walk-in demand. Stock planning should follow the school calendar first.</p>
+     </section>
+     <section>
+      <h2>9. How much money can we gain?</h2>
+      <img alt="Chart 9 - The prize, revenue and profit uplift" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-9.png"/>
+      <p>Putting the recommendations together, recovering even half of the lost sales adds about RM 372,000 in revenue and RM 149,000 in profit every year, while clearing dead and overstocked titles frees RM 7,700 at once.</p>
+      <p>The prize is a recurring six-figure profit gain from better timing, not a bigger budget. Most of it comes from one move: keeping the high-demand workbooks in stock through the exam and back-to-school peaks. The 50% recovery is deliberately cautious, so even this conservative figure understates the upside.</p>
+     </section>
+     <section>
+      <h2>Conclusion</h2>
+      <p>The shop's biggest inventory problem is timing, not quantity. It loses about RM 1.49 million in sales over two years because high-demand workbooks run out at seasonal peaks, while only a small sum sits in genuinely dead stock. The shelves are not too empty or too full on average; they are full of the wrong thing at the wrong moment.</p>
+      <p>Left alone, the same leak reopens every peak season. The fix is cheap, a set of reorder rules and a seasonal calendar, and the upside is a recurring RM 149,000 in annual profit plus freed cash. The recommended direction is a demand-matched reorder policy: seasonal safety stock on the exam and back-to-school workbooks, firm reorder points on the 92 titles that make the money, and a one-time clear-out of dead stock.</p>
+     </section>
+    </section>
+   </main>
+  </div>
+  <footer>
+   <p>© 2026 Lee Yih Ven | Data-Driven Solutions</p>
+  </footer>
+ </body>
+</html>

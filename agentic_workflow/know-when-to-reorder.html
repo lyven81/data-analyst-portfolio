@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Inventory Assistant | Know When to Reorder</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#5A3E2B; --navy2:#3f2c1e; --gold:#C8961E; --gold-soft:#FBF6EE; --bg:#F4ECE0;
+    --ink:#33271C; --muted:#8A7660; --line:#E8DCC9; --card:#fff;
+    --green:#3C8C5A; --green-soft:#e7f3ec; --red:#c0392b; --amber:#9a7414;
+    --shadow:0 1px 2px rgba(90,62,43,.05),0 8px 24px rgba(90,62,43,.06);
+    --shadow-sm:0 1px 2px rgba(90,62,43,.05);
+    --body:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;display:flex;height:100vh;overflow:hidden}
+  .sidebar{width:290px;flex-shrink:0;background:linear-gradient(180deg,var(--navy),var(--navy2));color:#dce6f1;padding:24px 20px;display:flex;flex-direction:column;gap:20px;overflow-y:auto}
+  .brand-name{font-size:18px;font-weight:700;color:#fff}
+  .brand-sub{font-size:11px;color:#fff;letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+  .status{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 14px}
+  .status-title{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;margin-bottom:10px}
+  .pill{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#EADDCB;padding:4px 0}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(46,139,87,.18)}
+  .dot.lock{background:var(--gold);box-shadow:0 0 0 3px rgba(200,162,75,.18)}
+  .dot.loading{background:#c9a055;box-shadow:0 0 0 3px rgba(201,160,85,.18)}
+  .nav{display:flex;flex-direction:column;gap:8px}
+  .nav a{font-size:13px;color:#EADDCB;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 13px;transition:all .18s}
+  .nav a:hover{background:rgba(200,162,75,.16);border-color:var(--gold)}
+  .nav a.active{background:var(--gold);color:var(--navy);font-weight:600;border-color:var(--gold)}
+  .tools-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .tools-head h3{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#C2AE92;font-weight:600}
+  .tools-count{font-size:10.5px;color:#C9B79D;background:rgba(255,255,255,.07);padding:2px 8px;border-radius:20px}
+  .tool-list{list-style:none;display:flex;flex-direction:column;gap:1px}
+  .tool-list li{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#CDBCA2;padding:6px 8px;border-radius:7px;display:flex;align-items:center;gap:8px}
+  .tool-list li::before{content:"";width:5px;height:5px;border-radius:1.5px;background:var(--gold);flex-shrink:0}
+  .foot{font-size:11px;color:#B5A084;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:13px;margin-top:auto}
+  .main{flex:1;display:flex;flex-direction:column;min-width:0}
+  .topbar{padding:17px 30px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .topbar h1{font-size:19px;font-weight:600;color:var(--navy)}
+  .topbar .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .thread{flex:1;overflow-y:auto;padding:28px 30px 12px;display:flex;flex-direction:column;gap:20px}
+  .row{display:flex;gap:12px;max-width:760px;animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .row.user{margin-left:auto;flex-direction:row-reverse}
+  .av{width:34px;height:34px;border-radius:10px;flex-shrink:0;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .av.bot{background:var(--navy);color:#fff}.av.bot svg{width:17px;height:17px}
+  .av.me{background:#e6d8c4;color:var(--navy)}
+  .bubble{font-size:14px;line-height:1.55}
+  .row.user .bubble{background:var(--navy);color:#f4ece0;padding:11px 15px;border-radius:14px 14px 4px 14px}
+  .lead{margin-bottom:11px}.lead b{color:var(--navy);font-weight:600}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--navy);background:var(--gold-soft);border:1px solid #ecdcb0;padding:4px 10px;border-radius:7px;margin-bottom:11px}
+  .badge svg{width:12px;height:12px}.badge .lbl{color:#a98f4f}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px 18px;box-shadow:var(--shadow);max-width:600px}
+  .card h4{font-size:14.5px;color:var(--navy);font-weight:600;margin-bottom:3px}
+  .card .cap{font-size:12px;color:var(--muted);margin-bottom:13px}
+  .kpis{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi{flex:1;min-width:110px;background:#faf6ef;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center}
+  .kpi .v{font-size:26px;font-weight:700;color:var(--navy)}
+  .kpi.good .v{color:var(--green)}.kpi.bad .v{color:var(--red)}
+  .kpi .l{font-size:11px;color:var(--muted);margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.3px;padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:7px 8px;border-bottom:1px solid #f3ece1}
+  tr:last-child td{border-bottom:none}
+  td.nm{font-weight:600;color:var(--ink)}
+  td.r{text-align:right;font-variant-numeric:tabular-nums}
+  .scroll{max-height:340px;overflow-y:auto}
+  .scroll::-webkit-scrollbar{width:7px}.scroll::-webkit-scrollbar-thumb{background:#ddd0bd;border-radius:7px}
+  .vb{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .vb.A{background:var(--green-soft);color:var(--green)}.vb.B{background:#fcf2da;color:var(--amber)}.vb.C{background:#f2ece3;color:var(--muted)}
+  .st{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;background:#f2ece3;color:var(--muted)}
+  .st.Healthy{background:var(--green-soft);color:var(--green)}
+  .st.Overstock{background:#fcf2da;color:var(--amber)}
+  .seg{display:flex;align-items:center;gap:11px;margin:9px 0}
+  .seg-lbl{width:120px;font-size:12.5px;flex-shrink:0}
+  .seg-track{flex:1;height:22px;background:#f3ece1;border-radius:6px;overflow:hidden}
+  .seg-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),#e0c074);display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--navy);font-size:11px;font-weight:700;min-width:24px}
+  .note{font-size:11px;color:#a99a85;margin-top:12px;display:flex;align-items:center;gap:6px}.note svg{width:12px;height:12px;flex-shrink:0}
+  .refuse{background:var(--gold-soft);border:1px solid #f0e2c2;border-radius:15px;padding:16px 18px;max-width:600px}
+  .refuse .rh{display:flex;align-items:center;gap:9px;margin-bottom:7px}.refuse .rh svg{width:17px;height:17px}
+  .refuse .rh span{font-weight:600;color:#b07d27;font-size:13.5px}
+  .refuse p{font-size:13.5px;line-height:1.55;color:#6a5526}
+  .refuse .why{font-size:11px;color:#9c8443;margin-top:10px;font-family:ui-monospace,monospace}
+  .think{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+  .think .tdot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite}
+  .think .tdot:nth-child(2){animation-delay:.2s}.think .tdot:nth-child(3){animation-delay:.4s}
+  @keyframes pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+  .composer{padding:13px 30px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.6);backdrop-filter:blur(8px)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+  .chip{font-size:12px;color:var(--navy);background:#fff;border:1px solid #e4d8c4;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .18s;font-family:var(--body)}
+  .chip:hover{border-color:var(--gold);background:var(--gold-soft);transform:translateY(-1px)}
+  .chip.warn{border-color:#ebd8ae;color:#b07d27;background:#fcf6e9}
+  .inputbar{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e4d8c4;border-radius:12px;padding:5px 5px 5px 16px;box-shadow:var(--shadow-sm)}
+  .inputbar input{flex:1;border:none;outline:none;font-family:var(--body);font-size:13.5px;color:var(--ink);background:transparent;padding:8px 0}
+  .send{width:38px;height:38px;border-radius:10px;border:none;background:var(--navy);color:#fff;cursor:pointer;display:grid;place-items:center}.send:hover{background:var(--navy2)}.send svg{width:17px;height:17px}
+  .disclaimer{text-align:center;font-size:11px;color:#a99a85;margin-top:10px}
+  @media(max-width:860px){.sidebar{display:none}.thread,.topbar,.composer{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div><div class="brand-name">Lee Yih Ven</div><div class="brand-sub">Data Analytics Portfolio</div></div>
+    <nav class="nav">
+      <a href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/know-when-to-reorder.html">Case Study</a>
+      <a href="https://lyven81.github.io/data-analyst-portfolio/dashboards/know-when-to-reorder-dashboard.html">Dashboard</a>
+      <a class="active" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/know-when-to-reorder.html">AI Assistant</a>
+    </nav>
+    <div class="status">
+      <div class="status-title">Asset status</div>
+      <div class="pill"><span class="dot"></span> Read-only access</div>
+      <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+      <div class="pill"><span class="dot loading" id="dbdot"></span> <span id="dbstat">Loading database...</span></div>
+    </div>
+    <div class="tools">
+      <div class="tools-head"><h3>Approved tools</h3><span class="tools-count">10 &middot; fixed</span></div>
+      <ul class="tool-list">
+        <li>reorder_now</li><li>sells_out_most</li><li>top_earners</li><li>stock_speed</li>
+        <li>overstocked</li><li>category_cash</li><li>slow_movers</li><li>total_stock_value</li>
+        <li>best_margin</li><li>days_of_stock</li>
+      </ul>
+    </div>
+    <div class="foot">385 bookshop titles, queried live in your browser. The assistant runs only pre-written, parameterized inventory queries; it cannot author SQL, set prices, or run promotions. Illustrative model on sample data.</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>AI Inventory Assistant</h1>
+      <div class="meta">Ask about the Know When to Reorder inventory. The agent picks one approved tool and answers live from the data.</div>
+    </header>
+    <section class="thread" id="thread">
+      <div class="row bot">
+        <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+        <div class="bubble"><div class="lead">I can answer questions about the <b>385 titles</b> in this bookshop's inventory: what to reorder, what sells out, what makes the money, what is overstocked or slow, and how fast stock turns. Ask in plain language, or tap a prompt below.</div></div>
+      </div>
+    </section>
+    <div class="composer">
+      <div class="chips" id="chips">
+        <button class="chip" data-key="reorder">Which books should I reorder now?</button>
+        <button class="chip" data-key="stockout">Which books sell out the most?</button>
+        <button class="chip" data-key="money">Which books make the most money?</button>
+        <button class="chip" data-key="speed">How fast does my stock sell?</button>
+        <button class="chip" data-key="overstock">Which books am I overstocked on?</button>
+        <button class="chip" data-key="catcash">Which category ties up the most cash?</button>
+        <button class="chip" data-key="slow">Which books barely sell?</button>
+        <button class="chip" data-key="total">What is my total stock value?</button>
+        <button class="chip" data-key="margin">Which books have the best margin?</button>
+        <button class="chip" data-key="daysofstock">How many days of stock for a book?</button>
+        <button class="chip warn" data-key="refuse">What discount should I offer?</button>
+      </div>
+      <div class="inputbar">
+        <input id="input" type="text" placeholder="Ask about reordering, stockouts, slow stock, or cash...">
+        <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="disclaimer">The assistant surfaces inventory data for you to act on. It does not set prices, promotions, or forecasts.</div>
+    </div>
+  </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+let db=null, dbReady=false, TITLES=[];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const rm=v=>'RM'+Number(v).toLocaleString(undefined,{maximumFractionDigits:0});
+const rmk=v=>v>=1e6?'RM'+(v/1e6).toFixed(2)+'M':v>=1e3?'RM'+Math.round(v/1e3)+'K':'RM'+Math.round(v);
+
+const SQL={
+  reorder_now:`SELECT Title, CurrentStock, ReorderPoint, OrderQty FROM inventory WHERE ReorderFlag='Yes' ORDER BY Revenue DESC LIMIT :n`,
+  reorder_count:`SELECT COUNT(*) c FROM inventory WHERE ReorderFlag='Yes'`,
+  sells_out_most:`SELECT Title, StockoutDays, StockoutUnits, LostRevenue FROM inventory WHERE StockoutUnits>0 ORDER BY StockoutUnits DESC LIMIT :n`,
+  top_earners:`SELECT Title, Revenue, ABC FROM inventory ORDER BY Revenue DESC LIMIT :n`,
+  stock_speed:`SELECT Category, ROUND(AVG(Turnover),1) turns, ROUND(AVG(DaysOfSupply),0) dos FROM inventory GROUP BY Category ORDER BY turns DESC`,
+  overstocked:`SELECT Title, CurrentStock, DaysOfSupply, StockValue FROM inventory WHERE Status='Overstock' ORDER BY StockValue DESC LIMIT :n`,
+  category_cash:`SELECT Category, SUM(StockValue) cash, COUNT(*) titles FROM inventory GROUP BY Category ORDER BY cash DESC`,
+  slow_movers:`SELECT Title, UnitsSold, Status FROM inventory ORDER BY UnitsSold ASC LIMIT :n`,
+  total_stock_value:`SELECT SUM(StockValue) total, COUNT(*) titles FROM inventory`,
+  best_margin:`SELECT Title, MarginPct, Price, ItemCost FROM inventory ORDER BY MarginPct DESC LIMIT :n`,
+  days_of_stock:`SELECT Title, CurrentStock, DaysOfSupply, ReorderPoint FROM inventory WHERE Title LIKE :q ORDER BY Revenue DESC LIMIT 6`
+};
+function run(sql,params){const st=db.prepare(sql);if(params)st.bind(params);const o=[];while(st.step())o.push(st.getAsObject());st.free();return o;}
+
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const info=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const abc=v=>`<span class="vb ${v}">${v}</span>`;
+const stt=v=>`<span class="st ${esc(v).split(' ')[0].replace('/','')}">${esc(v)}</span>`;
+const noteEl=t=>`<div class="note">${info} ${t}</div>`;
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+function tbl(head,body){return `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;}
+
+const responses={
+  reorder(){
+    const n=run(SQL.reorder_count)[0].c, d=run(SQL.reorder_now,{':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Title)}</td><td class="r">${x.CurrentStock}</td><td class="r">${x.ReorderPoint}</td><td class="r"><b>${x.OrderQty}</b></td></tr>`).join('');
+    return badge('reorder_now')+
+      `<div class="lead"><b>${n}</b> titles have dropped to their reorder point. Order the quantity shown to refill before they run out. Here are the top ${d.length} by sales.</div>
+      <div class="card"><h4>Reorder now</h4><div class="cap">At or below reorder point, ranked by sales</div>
+      ${tbl('<th>Title</th><th class="r">Current</th><th class="r">Reorder pt</th><th class="r">Order qty</th>',body)}
+      ${noteEl('Order quantity is the economic order size; the rule, not a guess.')}</div>`;
+  },
+  stockout(){
+    const d=run(SQL.sells_out_most,{':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Title)}</td><td class="r">${x.StockoutDays}</td><td class="r">${Number(x.StockoutUnits).toLocaleString()}</td><td class="r"><b>${rmk(x.LostRevenue)}</b></td></tr>`).join('');
+    return badge('sells_out_most')+
+      `<div class="lead">These titles run out most often, and each stockout is a lost sale. The last column is what running out has cost over two years.</div>
+      <div class="card"><h4>Sells out the most</h4><div class="cap">Top 12 by units lost to stockouts</div>
+      ${tbl('<th>Title</th><th class="r">Days out</th><th class="r">Units lost</th><th class="r">Lost sales</th>',body)}</div>`;
+  },
+  money(){
+    const d=run(SQL.top_earners,{':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Title)}</td><td class="r"><b>${rmk(x.Revenue)}</b></td><td>${abc(x.ABC)}</td></tr>`).join('');
+    return badge('top_earners')+
+      `<div class="lead">Your top earners by revenue. Protect these first, never let them run out.</div>
+      <div class="card"><h4>Makes the most money</h4><div class="cap">Top 12 titles by revenue</div>
+      ${tbl('<th>Title</th><th class="r">Revenue</th><th>Tier</th>',body)}</div>`;
+  },
+  speed(){
+    const d=run(SQL.stock_speed);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Category)}</td><td class="r"><b>${x.turns}x</b></td><td class="r">${x.dos}</td></tr>`).join('');
+    return badge('stock_speed')+
+      `<div class="lead">How fast stock turns per year, by category. A faster turn means cash comes back sooner to buy the next batch.</div>
+      <div class="card"><h4>How fast stock sells</h4><div class="cap">Turns per year and average days of stock</div>
+      ${tbl('<th>Category</th><th class="r">Turns/year</th><th class="r">Avg days of stock</th>',body)}</div>`;
+  },
+  overstock(){
+    const d=run(SQL.overstocked,{':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Title)}</td><td class="r">${x.CurrentStock}</td><td class="r">${x.DaysOfSupply}</td><td class="r"><b>${rm(x.StockValue)}</b></td></tr>`).join('');
+    return badge('overstocked')+
+      `<div class="lead"><b>${d.length}</b> titles carry far more stock than they sell. Cash is sitting on the shelf here; these are candidates to stop reordering or clear.</div>
+      <div class="card"><h4>Overstocked titles</h4><div class="cap">Status overstock, most cash first</div>
+      ${tbl('<th>Title</th><th class="r">Stock</th><th class="r">Days of supply</th><th class="r">Cash held</th>',body)}</div>`;
+  },
+  catcash(){
+    const d=run(SQL.category_cash);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Category)}</td><td class="r"><b>${rm(x.cash)}</b></td><td class="r">${x.titles}</td></tr>`).join('');
+    return badge('category_cash')+
+      `<div class="lead">Where your stock cash sits, by category. Most of the money is tied up in the biggest category.</div>
+      <div class="card"><h4>Cash tied up by category</h4><div class="cap">Stock value held, most first</div>
+      ${tbl('<th>Category</th><th class="r">Cash tied up</th><th class="r">Titles</th>',body)}</div>`;
+  },
+  slow(){
+    const d=run(SQL.slow_movers,{':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Title)}</td><td class="r">${Number(x.UnitsSold).toLocaleString()}</td><td>${stt(x.Status)}</td></tr>`).join('');
+    return badge('slow_movers')+
+      `<div class="lead">Your slowest sellers by units over two years. Keep these lean and reorder only on demand, do not tie up cash here.</div>
+      <div class="card"><h4>Barely sell</h4><div class="cap">Lowest 12 by units sold</div>
+      ${tbl('<th>Title</th><th class="r">Units sold</th><th>Status</th>',body)}</div>`;
+  },
+  total(){
+    const r=run(SQL.total_stock_value)[0];
+    return badge('total_stock_value')+
+      `<div class="lead">Your total cash held in stock across all titles right now.</div>
+      <div class="card"><div class="kpis">
+        <div class="kpi"><div class="v">${rmk(r.total)}</div><div class="l">total stock value</div></div>
+        <div class="kpi"><div class="v">${r.titles}</div><div class="l">titles in stock</div></div>
+      </div>${noteEl('A live SUM over the inventory, not a stored figure.')}</div>`;
+  },
+  margin(){
+    const d=run(SQL.best_margin,{':n':12});
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Title)}</td><td class="r"><b>${x.MarginPct}%</b></td><td class="r">RM${Number(x.Price).toFixed(2)}</td><td class="r">RM${Number(x.ItemCost).toFixed(2)}</td></tr>`).join('');
+    return badge('best_margin')+
+      `<div class="lead">Highest-margin titles. Each sale of these keeps the most profit, worth keeping well stocked.</div>
+      <div class="card"><h4>Best margin</h4><div class="cap">Top 12 by gross margin</div>
+      ${tbl('<th>Title</th><th class="r">Margin</th><th class="r">Price</th><th class="r">Cost</th>',body)}</div>`;
+  },
+  daysofstock(title){
+    title=title||'Atomic Habits';
+    const d=run(SQL.days_of_stock,{':q':'%'+title+'%'});
+    if(!d.length) return badge('days_of_stock')+`<div class="lead">I could not find a title matching "<b>${esc(title)}</b>". Try part of a book title, for example "Atomic Habits" or "SPM English".</div>`;
+    const first=d[0];
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.Title)}</td><td class="r">${x.CurrentStock}</td><td class="r"><b>${x.DaysOfSupply}</b></td><td class="r">${x.ReorderPoint}</td></tr>`).join('');
+    return badge('days_of_stock')+
+      `<div class="lead"><b>${esc(first.Title)}</b> has about <b>${first.DaysOfSupply} days</b> of stock left at the current pace, with ${first.CurrentStock} on hand and a reorder point of ${first.ReorderPoint}.</div>
+      <div class="card"><h4>Days of stock for a title</h4><div class="cap">Matched on the title you named</div>
+      ${tbl('<th>Title</th><th class="r">On hand</th><th class="r">Days of stock</th><th class="r">Reorder pt</th>',body)}
+      ${noteEl('The title is the only value supplied; the query is fixed.')}</div>`;
+  },
+  refuse(){
+    return `<div class="refuse">
+      <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="#b07d27" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 18h.01"/></svg><span>Outside my approved tools</span></div>
+      <p>I can't recommend a discount or a promotion. Setting a markdown is a pricing decision and a forecast of how buyers will respond, and I have no approved tool for that. I work read-only through a fixed set of inventory queries, so I cannot compose one for pricing.</p>
+      <p style="margin-top:9px">What I can do: show which books are <b>overstocked</b> or <b>barely selling</b> (the ones you might consider clearing) and how much cash they tie up, so you can decide on a markdown yourself.</p>
+      <div class="why">no_tool_matched &middot; pricing / promotion not defined &middot; access = read-only</div></div>`;
+  }
+};
+
+const userText={reorder:"Which books should I reorder now?",stockout:"Which books sell out the most?",money:"Which books make the most money?",speed:"How fast does my stock sell?",overstock:"Which books am I overstocked on?",catcash:"Which category ties up the most cash?",slow:"Which books barely sell?",total:"What is my total stock value?",margin:"Which books have the best margin?",daysofstock:"How many days of stock for a book?",refuse:"What discount should I offer?"};
+const thinkLabel={reorder:"reorder_now",stockout:"sells_out_most",money:"top_earners",speed:"stock_speed",overstock:"overstocked",catcash:"category_cash",slow:"slow_movers",total:"total_stock_value",margin:"best_margin",daysofstock:"days_of_stock",refuse:"checking approved tools"};
+
+function addUser(t){thread.insertAdjacentHTML('beforeend',`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div>`);scroll();}
+function respond(key,arg){
+  const id='t'+thread.children.length;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${thinkLabel[key]}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=responses[key](arg);scroll();},760);
+}
+function ask(key,arg){addUser(userText[key]);setTimeout(()=>respond(key,arg),220);}
+
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b||!dbReady)return;ask(b.dataset.key);});
+const input=document.getElementById('input');
+function findTitle(q){for(const t of TITLES){if(t.length>=4 && q.includes(t.toLowerCase()))return t;}return null;}
+function route(){
+  const t=input.value.trim();if(!t||!dbReady)return;input.value='';const q=t.toLowerCase();let key=null,arg=null;
+  if(/discount|promotion|promo|markdown|mark ?down|price|pricing|on sale|sale price|how much.*charge|raw sql|select \*|dump|export|every (record|title)|drop |delete |update |insert /.test(q))key='refuse';
+  else if(/days of stock|how many days|how long will|days of supply|days left|coverage|run out by/.test(q)){key='daysofstock';arg=findTitle(q);}
+  else if(/reorder|re-order|what (should|to) (i )?order|need to order|order now|below reorder/.test(q))key='reorder';
+  else if(/sell out|sells out|sold out|stock ?out|run out|out of stock/.test(q))key='stockout';
+  else if(/overstock|too much stock|sitting on|excess stock/.test(q))key='overstock';
+  else if(/barely sell|slow(est)?( sell)?|not selling|dead stock|hardly sell|low sell/.test(q))key='slow';
+  else if(/which category|by category|category.*cash|cash.*category/.test(q))key='catcash';
+  else if(/total (stock )?value|total value|how much (stock|inventory)|stock worth|value of (my )?(stock|inventory)/.test(q))key='total';
+  else if(/best margin|highest margin|most profit per|markup|margin/.test(q))key='margin';
+  else if(/how fast|turnover|turn over|stock turn|how quickly|days of (supply|stock)/.test(q))key='speed';
+  else if(/most money|top (earner|seller)|best.?sell|make.*money|biggest seller|most revenue|top revenue/.test(q))key='money';
+  addUser(t);
+  if(key)setTimeout(()=>respond(key,arg),220);
+  else setTimeout(()=>{thread.insertAdjacentHTML('beforeend',`<div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Try a suggested prompt to see it answer live from the inventory.</div></div></div>`);scroll();},220);
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')route();});
+
+initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`})
+  .then(S=>fetch('know-when-to-reorder.db').then(r=>r.arrayBuffer()).then(buf=>{
+    db=new S.Database(new Uint8Array(buf));dbReady=true;
+    TITLES=run("SELECT Title FROM inventory").map(r=>r.Title);
+    document.getElementById('dbdot').className='dot';
+    document.getElementById('dbstat').textContent='Database ready';
+  }))
+  .catch(e=>{document.getElementById('dbstat').textContent='Load failed, serve over http';console.error(e);});
+</script>
+</body>
+</html>
