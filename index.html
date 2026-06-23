@@ -1,985 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lee Yih Ven | Data Analyst Portfolio - Business Intelligence & Predictive Analytics</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header Styles */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .portfolio-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #666;
-        }
-
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            background-color: #f9f9f9;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        nav a {
-            color: #007BFF;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Hamburger Menu Styles */
-        .hamburger-menu {
-            display: none; /* Hidden on desktop */
-            flex-direction: column;
-            gap: 5px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
-
-        .hamburger-menu span {
-            width: 25px;
-            height: 3px;
-            background-color: #007BFF;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger-menu.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .mobile-menu-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        .search-container {
-            position: relative;
-            margin-left: 20px;
-        }
-
-        .search-input {
-            padding: 8px 40px 8px 12px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            width: 200px;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-        }
-
-        /* Magazine Layout Styles */
-        .magazine-container {
-            display: grid;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            height: 500px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #667eea, #764ba2);
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/know-when-to-reorder/cover image.png');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.4);
-        }
-
-        .hero-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            padding: 40px;
-            color: white;
-        }
-
-        .hero-category {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #4CAF50;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            opacity: 0.9;
-            max-width: 600px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .hero-btn {
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .hero-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Grid Section */
-        .grid-section {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .grid-card {
-            position: relative;
-            height: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-        }
-
-        .grid-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
-
-        .grid-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.5);
-        }
-
-        .grid-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 25px;
-            color: white;
-        }
-
-        .grid-category {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .grid-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .grid-description {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 15px;
-        }
-
-        .grid-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .grid-btn {
-            padding: 8px 15px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
-
-        .grid-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
-
-        /* Category Colors */
-        .predictive .grid-category {
-            color: #2196F3;
-        }
-        .regression .grid-category {
-            color: #FF9800;
-        }
-        .segmentation .grid-category {
-            color: #E91E63;
-        }
-        .optimization .grid-category {
-            color: #FFC107;
-        }
-
-        /* Banner Section */
-        .banner-section {
-            position: relative;
-            height: 200px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .banner-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/where-value-comes-from/cover.jpeg');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.4);
-        }
-
-        .banner-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 25px;
-            color: white;
-        }
-
-        .banner-category {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #FFC107;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .banner-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .banner-description {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 15px;
-        }
-
-        .banner-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .banner-btn {
-            padding: 8px 15px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
-
-        .banner-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 20px;
-        }
-
-        /* Mobile-Friendly Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            .portfolio-title {
-                font-size: 1.5rem;
-            }
-
-            .tagline {
-                font-size: 1rem;
-            }
-
-            nav {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 10px 15px;
-            }
-
-            .hamburger-menu {
-                display: flex; /* Show on mobile */
-                order: 1;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                width: 280px;
-                height: 100vh;
-                background: white;
-                flex-direction: column;
-                padding: 80px 30px 30px;
-                gap: 20px;
-                z-index: 1000;
-                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-                transition: left 0.3s ease;
-                overflow-y: auto;
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .nav-links a {
-                font-size: 1.3rem;
-                padding: 15px 0;
-                border-bottom: 1px solid #f0f0f0;
-            }
-
-            .search-container {
-                order: 2;
-                margin-left: auto;
-                width: auto;
-                max-width: none;
-            }
-
-            .search-input {
-                width: 200px;
-            }
-
-            .magazine-container {
-                gap: 20px;
-            }
-
-            .hero-section {
-                height: 350px;
-            }
-
-            .hero-overlay {
-                padding: 25px 20px;
-            }
-
-            .hero-title {
-                font-size: 1.8rem;
-            }
-
-            .hero-description {
-                font-size: 1rem;
-                margin-bottom: 20px;
-            }
-
-            .hero-buttons {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .hero-btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-
-            .grid-section {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .grid-card {
-                height: 250px;
-            }
-
-            .grid-overlay {
-                padding: 20px;
-            }
-
-            .grid-title {
-                font-size: 1.1rem;
-            }
-
-            .grid-description {
-                font-size: 0.85rem;
-            }
-
-            .grid-buttons {
-                flex-wrap: wrap;
-            }
-
-            .banner-section {
-                height: 250px;
-            }
-
-            .banner-overlay {
-                padding: 20px;
-            }
-
-            .banner-title {
-                font-size: 1.1rem;
-            }
-
-            .banner-description {
-                font-size: 0.85rem;
-            }
-
-            .banner-buttons {
-                flex-wrap: wrap;
-            }
-
-            footer {
-                margin-top: 20px;
-                padding: 20px 15px;
-            }
-        }
-
-        /* Extra small devices */
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            .portfolio-title {
-                font-size: 1.3rem;
-            }
-
-            .hero-title {
-                font-size: 1.5rem;
-            }
-
-            .hero-description {
-                font-size: 0.9rem;
-            }
-
-            .grid-title {
-                font-size: 1rem;
-            }
-
-            .banner-title {
-                font-size: 1.2rem;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            nav a {
-                font-size: 1rem;
-            }
-        }
-
-        /* Search Results Styles */
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            max-height: 400px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-            margin-top: 5px;
-        }
-
-        .search-result-item {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .search-result-item:hover {
-            background-color: #f8f9fa;
-        }
-
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-
-        .search-result-title {
-            font-weight: 600;
-            color: #007BFF;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-        }
-
-        .search-result-description {
-            color: #666;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .search-result-category {
-            font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .search-result-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .search-result-btn {
-            padding: 4px 12px;
-            border: 1px solid #ddd;
-            background: #f8f9fa;
-            color: #666;
-            text-decoration: none;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            transition: all 0.2s ease;
-        }
-
-        .search-result-btn:hover {
-            background: #007BFF;
-            color: white;
-            border-color: #007BFF;
-        }
-
-        .no-results {
-            padding: 20px;
-            text-align: center;
-            color: #666;
-            font-style: italic;
-        }
-
-        .search-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: 999;
-            display: none;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            pointer-events: none;
-        }
-
-        /* Mobile search improvements */
-        @media (max-width: 768px) {
-            .search-result-buttons {
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .search-result-btn {
-                text-align: center;
-                padding: 8px 12px;
-            }
-        }
-
-        /* ── Data Stories Lab nav (overrides magazine-page nav styles) ── */
-        .navbar {
-            padding: 1.2rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f9f9f9;
-            border-bottom: 1px solid #f4f4f4;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        .navbar .brand {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: #1A1F3A;
-            letter-spacing: 0.01em;
-        }
-        .navbar .brand a { color: inherit; text-decoration: none; }
-        .topnav { display: flex; gap: 1.8rem; }
-        .topnav a {
-            color: #5A5F7A;
-            text-decoration: none;
-            font-size: 0.86rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            transition: color 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        .topnav a:hover { color: #1A1F3A; }
-        .search-section {
-            background: #f9f9f9;
-            padding: 1.4rem 2rem;
-            border-bottom: 1px solid #f4f4f4;
-            display: flex;
-            justify-content: center;
-        }
-        .search-section .search-container {
-            position: relative;
-            width: 100%;
-            max-width: 520px;
-            margin-left: 0;
-        }
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1rem 1.2rem;
-                gap: 0.8rem;
-            }
-            .topnav { flex-wrap: wrap; gap: 0.4rem 1rem; }
-            .topnav a { font-size: 0.78rem; }
-            .search-section { padding: 1.2rem; }
-        }
-
-        /* ── Data Stories Lab search (blend the bar + results into the cream/navy theme) ── */
-        .search-section .search-input {
-            width: 100%;
-            padding: 0.8rem 2.9rem 0.8rem 1.1rem;
-            border: 1px solid #E5DFD0;
-            border-radius: 10px;
-            background: #FFFFFF;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.92rem;
-            color: #1A1F3A;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .search-section .search-input::placeholder { color: #9C96A8; }
-        .search-section .search-input:focus {
-            outline: none;
-            border-color: #1A1F3A;
-            box-shadow: 0 0 0 3px rgba(26, 31, 58, 0.08);
-        }
-        .search-section .search-icon {
-            right: 1.1rem;
-            color: #5A5F7A;
-            font-size: 0.95rem;
-        }
-        .search-section .search-results {
-            border: 1px solid #E5DFD0;
-            border-radius: 10px;
-            box-shadow: 0 10px 28px rgba(26, 31, 58, 0.12);
-            max-height: 72vh;
-            margin-top: 8px;
-        }
-        .search-section .search-result-item { padding: 14px 16px; border-bottom: 1px solid #EFE9DC; }
-        .search-section .search-result-item:hover { background-color: #FAF6EE; }
-        .search-section .search-result-category {
-            font-family: 'Inter', sans-serif;
-            color: #8A8597;
-            letter-spacing: 0.06em;
-        }
-        .search-section .search-result-title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            color: #1A1F3A;
-            font-size: 0.98rem;
-        }
-        .search-section .search-result-description {
-            font-family: 'Inter', sans-serif;
-            color: #5A5F7A;
-        }
-        .search-section .search-result-btn {
-            font-family: 'Inter', sans-serif;
-            border: 1px solid #E5DFD0;
-            background: #FAF6EE;
-            color: #1A1F3A;
-            border-radius: 8px;
-            letter-spacing: 0.02em;
-        }
-        .search-section .search-result-btn:hover {
-            background: #1A1F3A;
-            color: #FAF6EE;
-            border-color: #1A1F3A;
-        }
-        .search-section .no-results { font-family: 'Inter', sans-serif; color: #5A5F7A; }
-
-        /* ── Data Stories Lab footer ── */
-        body > footer {
-            background: #1A1F3A;
-            color: #FAF6EE;
-            padding: 2.4rem 2rem 1.8rem;
-            text-align: center;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-        }
-        body > footer p { margin: 0; opacity: 0.85; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lee Yih Ven | Data Analyst Portfolio - Business Intelligence & Predictive Analytics</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#222; --paper:#fff; --rule:#222; --hair:#dddddd; --gray:#555; --accent-link:#007BFF; --gold:#daa520; --cream:#f5f5dc; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  a:hover h2, a:hover h3, a:hover h4{ color:var(--accent-link); }
+
+  /* Masthead */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:1240px; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-family:Arial, Helvetica, sans-serif; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-family:Arial, Helvetica, sans-serif; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent-link); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid var(--rule); max-width:1240px; margin:0 auto; }
+
+  /* Search (lives in the nav, beside About) */
+  .search-box{ position:relative; width:200px; }
+  .search-input{ width:100%; padding:7px 30px 7px 12px; border:1px solid var(--hair); background:#fff;
+    font-family:Arial, Helvetica, sans-serif; font-size:.8rem; color:#222; }
+  .search-input:focus{ outline:none; border-color:var(--accent-link); box-shadow:0 0 0 3px rgba(0,123,255,.12); }
+  .search-ic{ position:absolute; right:10px; top:50%; transform:translateY(-50%); color:var(--gray); font-size:.8rem; pointer-events:none; }
+  .search-results{ position:absolute; top:calc(100% + 4px); left:0; width:340px; max-width:86vw; background:#fff; border:1px solid #222;
+    max-height:60vh; overflow-y:auto; z-index:120; display:none; }
+  .sr-item{ padding:12px 14px; border-bottom:1px solid var(--hair); }
+  .sr-item:last-child{ border-bottom:none; }
+  .sr-cat{ font-family:Arial, Helvetica, sans-serif; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; margin-bottom:4px; color:var(--accent-link); }
+  .sr-title{ font-weight:700; font-size:1.02rem; color:#222; }
+  .sr-links{ font-family:Arial, Helvetica, sans-serif; font-size:.58rem; letter-spacing:.8px; text-transform:uppercase; color:var(--gray); margin-top:5px; }
+  .sr-links a:hover{ color:var(--accent-link); }
+  .sr-none{ padding:16px 14px; font-family:Arial, Helvetica, sans-serif; font-size:.82rem; color:var(--gray); }
+  .rule-search{ border:none; border-top:1px solid var(--hair); max-width:1240px; margin:0 auto; }
+
+  /* Mobile drawer */
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200;
+    box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-family:Arial, Helvetica, sans-serif; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase;
+    padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; }
+  .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-family:Arial, Helvetica, sans-serif; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Shared type bits */
+  .tab{ display:inline-block; background:#222; color:#fff; font-family:Arial, Helvetica, sans-serif; font-weight:700;
+    font-size:.66rem; letter-spacing:2px; text-transform:uppercase; padding:6px 12px; margin-bottom:18px; }
+  .rubric{ font-family:Arial, Helvetica, sans-serif; font-size:.64rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; margin-bottom:6px; display:block; }
+  .byline{ font-family:Arial, Helvetica, sans-serif; font-size:.6rem; letter-spacing:1px; color:var(--gray); text-transform:uppercase; margin-top:8px; }
+  .links{ font-family:Arial, Helvetica, sans-serif; font-size:.58rem; letter-spacing:1px; text-transform:uppercase; margin-top:8px; color:var(--gray); }
+  .links a:hover{ color:var(--accent-link); }
+  .lead-dek{ font-style:italic; font-size:1.05rem; color:#333; max-width:52ch; }
+
+  /* ---------- UPPER BODY: 2 / 1 / 2 ---------- */
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 28px 10px; }
+  .grid{ display:grid; grid-template-columns:300px 1fr 320px; }
+  .col{ padding:24px 0; display:flex; flex-direction:column; }
+  .col-left{ padding-right:26px; border-right:1px solid var(--hair); }
+  .col-mid{ padding:24px 28px; }
+  .col-right{ padding-left:26px; border-left:1px solid var(--hair); }
+  .col-left #picks{ flex:1; display:flex; flex-direction:column; }
+  .col-right #recent{ flex:1; display:flex; flex-direction:column; }
+
+  /* Lead (center) — image grows so title/subheading/links sit flush at the bottom */
+  .col-mid > a:first-child{ flex:1; display:block; min-height:300px; margin-bottom:16px; overflow:hidden; }
+  .lead-img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .next-kicker{ font-family:Arial, Helvetica, sans-serif; font-weight:700; font-size:.7rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+  .lead-headline{ font-size:2.7rem; font-weight:900; line-height:1.02; text-transform:uppercase; letter-spacing:-.005em; margin-bottom:14px; }
+  .col-mid .lead-dek{ margin-bottom:6px; }
+
+  /* Left picks (2) — cover image on top; each grows equally */
+  .pick{ flex:1; display:flex; flex-direction:column; padding:20px 0; border-bottom:1px solid var(--hair); }
+  .pick:first-of-type{ padding-top:0; }
+  .pick:last-child{ border-bottom:none; padding-bottom:0; }
+  .pick > a:first-child{ flex:1; display:block; min-height:150px; margin-bottom:13px; overflow:hidden; }
+  .pick > a:first-child img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .pick h3{ font-size:1.42rem; font-weight:700; line-height:1.08; }
+
+  /* Right (2) — cover image on top of title + subheading; each grows to fill */
+  .recent{ flex:1; display:flex; flex-direction:column; padding:18px 0; border-bottom:1px solid var(--hair); }
+  .recent:first-of-type{ padding-top:0; }
+  .recent:last-child{ border-bottom:none; padding-bottom:0; }
+  .recent > a:first-child{ flex:1; display:block; min-height:110px; margin-bottom:11px; overflow:hidden; }
+  .recent > a:first-child img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .recent h3{ font-size:1.18rem; font-weight:700; line-height:1.14; }
+  .recent .lead-dek{ font-size:.92rem; margin-top:6px; }
+
+  /* ---------- EXPLORE BY METHOD ---------- */
+  .method{ max-width:1240px; margin:0 auto; padding:8px 28px 36px; }
+  .method-grid{ display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid var(--hair); }
+  .method-tile{ padding:18px 18px 22px; border-right:1px solid var(--hair); }
+  .method-tile:last-child{ border-right:none; }
+  .method-tile .rubric{ margin-bottom:10px; font-size:.54rem; letter-spacing:.3px; white-space:nowrap; }
+  .method-tile h4{ font-size:1.18rem; font-weight:700; line-height:1.1; margin-bottom:8px; }
+  .method-tile p{ font-family:Arial, Helvetica, sans-serif; font-size:.6rem; letter-spacing:.5px; line-height:1.5; color:var(--gray); margin-bottom:12px; }
+  .method-tile .go{ font-family:Arial, Helvetica, sans-serif; font-size:.6rem; letter-spacing:1px; text-transform:uppercase; }
+  .method-tile:hover h4{ color:var(--accent-link); }
+
+  /* ---------- LOWER BODY: 2 x 2 cards ---------- */
+  .lower{ max-width:1240px; margin:0 auto; padding:8px 28px 50px; }
+  .lower-grid{ display:grid; grid-template-columns:1fr 1fr; border-top:3px solid var(--rule); }
+  .lower-card{ padding:26px 0; border-bottom:1px solid var(--hair); }
+  .lower-card:nth-child(odd){ border-right:1px solid var(--hair); padding-right:34px; }
+  .lower-card:nth-child(even){ padding-left:34px; }
+  .lower-card:nth-last-child(-n+2){ border-bottom:none; }
+  .lower-card img{ width:100%; height:220px; object-fit:cover; display:block; margin-bottom:15px; }
+  .lower-card h3{ font-size:1.7rem; font-weight:700; line-height:1.06; }
+  .lower-card .lead-dek{ margin-top:8px; font-size:1rem; }
+
+  footer{ background:#222; max-width:1240px; margin:0 auto; padding:24px 28px;
+    font-family:Arial, Helvetica, sans-serif; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+
+  @media (max-width:1000px){
+    .method-grid{ grid-template-columns:repeat(3,1fr); }
+    .method-tile{ border-bottom:1px solid var(--hair); }
+    .method-tile:nth-child(3n){ border-right:none; }
+  }
+  @media (max-width:900px){
+    .grid{ grid-template-columns:1fr; }
+    .col-left,.col-right{ border:none; padding:22px 0; border-top:1px solid var(--hair); }
+    .col-mid{ padding:22px 0; }
+    .lead-headline{ font-size:2rem; }
+    .col-mid > a:first-child{ min-height:230px; }
+    .mast-nav{ display:none; }
+    .hamburger{ display:flex; }
+    .masthead{ padding:12px 16px; }
+    .mast-left{ gap:10px; min-width:0; flex:1; }
+    .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; }
+    /* search fills the space beside the logo; dropdown pins below the header */
+    .search-box{ flex:1; width:auto; min-width:0; }
+    .search-results{ position:fixed; top:58px; left:12px; right:12px; width:auto; max-width:none; }
+    .lower-grid{ grid-template-columns:1fr; }
+    .lower-card:nth-child(odd){ border-right:none; padding-right:0; }
+    .lower-card:nth-child(even){ padding-left:0; }
+    .lower-card{ border-bottom:1px solid var(--hair); }
+    .lower-card:last-child{ border-bottom:none; }
+  }
+  @media (max-width:560px){
+    .method-grid{ grid-template-columns:repeat(2,1fr); }
+    .method-tile:nth-child(3n){ border-right:1px solid var(--hair); }
+    .method-tile:nth-child(2n){ border-right:none; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="navbar">
-        <div class="brand"><a href="/data-analyst-portfolio/index.html">Data Stories Lab</a></div>
-        <div class="topnav">
-            <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-            <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
-            <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
-            <a href="/data-analyst-portfolio/about-this-work.html">About</a>
-            <a href="/data-analyst-portfolio/contact.html">Contact</a>
-        </div>
+  <!-- Mobile drawer -->
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+      </nav>
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" autocomplete="off"
+               placeholder="Search case studies..." aria-label="Search case studies">
+        <span class="search-ic">&#128269;</span>
+        <div class="search-results" id="searchResults"></div>
+      </div>
     </div>
-    <div class="search-section">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search case studies by topic, industry, or method..." id="searchInput" autocomplete="off" aria-label="Search case studies">
-            <span class="search-icon">🔍</span>
-            <div class="search-results" id="searchResults"></div>
-        </div>
+  </div>
+  <hr class="rule-top">
+
+  <!-- ===== UPPER BODY: 2 / 1 / 2 ===== -->
+  <div class="wrap">
+    <div class="grid">
+      <div class="col col-left">
+        <span class="tab">Featured</span>
+        <div id="picks"></div>
+      </div>
+      <div class="col col-mid" id="lead"></div>
+      <div class="col col-right">
+        <span class="tab">Latest</span>
+        <div id="recent"></div>
+      </div>
     </div>
-    <div class="search-overlay" id="searchOverlay"></div>
-    <div class="container">
-        <div class="magazine-container">
-            <!-- Hero Section: Know When to Reorder -->
-            <div class="hero-section">
-                <div class="hero-background"></div>
-                <div class="hero-overlay">
-                    <div class="hero-category">Time Series Analysis</div>
-                    <h2 class="hero-title">Know When to Reorder</h2>
-                    <p class="hero-description">Two years of bookshop sales show about RM1.49 million slipping away when workbooks sell out at exam-season peaks. See the per-title reorder rules that recover a recurring RM149,000 in annual profit.</p>
-                    <div class="hero-buttons">
-                        <a href="/data-analyst-portfolio/case-studies/know-when-to-reorder.html" class="hero-btn">Read more</a>
-                        <a href="/data-analyst-portfolio/dashboards/know-when-to-reorder-dashboard.html" class="hero-btn">Dashboard</a>
-                        <a href="/data-analyst-portfolio/agentic_workflow/know-when-to-reorder.html" class="hero-btn">AI Assistant</a>
-                    </div>
-                </div>
-            </div>
+  </div>
 
-            <!-- Grid Section: 4 Case Studies -->
-            <div class="grid-section">
-                <!-- Right Price, Right Season -->
-                <div class="grid-card optimization">
-                    <div class="grid-background" style="background-image: url('images/right-price-right-season/cover.png?v=2');"></div>
-                    <div class="grid-overlay">
-                        <div class="grid-category">Optimization Analysis</div>
-                        <h3 class="grid-title">Right Price, Right Season</h3>
-                        <p class="grid-description">Season-by-season nightly rates that earn the most per property.</p>
-                        <div class="grid-buttons">
-                            <a href="/data-analyst-portfolio/case-studies/right-price-right-season.html" class="grid-btn">Read More</a>
-                            <a href="/data-analyst-portfolio/dashboards/right-price-right-season-dashboard.html" class="grid-btn">Dashboard</a>
-                            <a href="/data-analyst-portfolio/agentic_workflow/right-price-right-season.html" class="grid-btn">AI Assistant</a>
-                        </div>
-                    </div>
-                </div>
+  <!-- ===== EXPLORE BY METHOD ===== -->
+  <section class="method">
+    <span class="tab">Explore by Method</span>
+    <div class="method-grid" id="methodGrid"></div>
+  </section>
 
-                <!-- Beyond the Price Tag -->
-                <div class="grid-card regression">
-                    <div class="grid-background" style="background-image: url('images/beyond-the-price-tag/cover%20image.png');"></div>
-                    <div class="grid-overlay">
-                        <div class="grid-category">Regression Analysis</div>
-                        <h3 class="grid-title">Beyond the Price Tag</h3>
-                        <p class="grid-description">The five phone features that drive ratings, not price.</p>
-                        <div class="grid-buttons">
-                            <a href="/data-analyst-portfolio/case-studies/beyond-the-price-tag.html" class="grid-btn">Read More</a>
-                            <a href="/data-analyst-portfolio/dashboards/beyond-the-price-tag-dashboard.html" class="grid-btn">Dashboard</a>
-                            <a href="/data-analyst-portfolio/agentic_workflow/beyond-the-price-tag.html" class="grid-btn">AI Assistant</a>
-                        </div>
-                    </div>
-                </div>
+  <!-- ===== LOWER BODY: 2 x 2 ===== -->
+  <section class="lower">
+    <span class="tab">More Case Studies</span>
+    <div class="lower-grid" id="lowerGrid"></div>
+  </section>
 
-                <!-- Which Channel Finds Your Tenant -->
-                <div class="grid-card optimization">
-                    <div class="grid-background" style="background-image: url('images/which-channel-finds-your-tenant/cover%20image.jpeg');"></div>
-                    <div class="grid-overlay">
-                        <div class="grid-category">Optimization Analysis</div>
-                        <h3 class="grid-title">Which Channel Finds Your Tenant</h3>
-                        <p class="grid-description">Rank every lead channel by cost per signed tenant.</p>
-                        <div class="grid-buttons">
-                            <a href="/data-analyst-portfolio/case-studies/which-channel-finds-your-tenant.html" class="grid-btn">Read More</a>
-                            <a href="/data-analyst-portfolio/dashboards/which-channel-finds-your-tenant-dashboard.html" class="grid-btn">Dashboard</a>
-                            <a href="/data-analyst-portfolio/agentic_workflow/which-channel-finds-your-tenant.html" class="grid-btn">AI Assistant</a>
-                        </div>
-                    </div>
-                </div>
+  <footer>&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
 
-                <!-- Who Really Drives Sales? -->
-                <div class="grid-card segmentation">
-                    <div class="grid-background" style="background-image: url('images/who-really-drives-sales/cover.png');"></div>
-                    <div class="grid-overlay">
-                        <div class="grid-category">Segmentation Analysis</div>
-                        <h3 class="grid-title">Who Really Drives Sales?</h3>
-                        <p class="grid-description">Rank live influencers fairly when effort and time are equal.</p>
-                        <div class="grid-buttons">
-                            <a href="/data-analyst-portfolio/case-studies/who-really-drives-sales.html" class="grid-btn">Read More</a>
-                            <a href="/data-analyst-portfolio/dashboards/who-really-drives-sales-dashboard.html" class="grid-btn">Dashboard</a>
-                            <a href="/data-analyst-portfolio/agentic_workflow/who-really-drives-sales.html" class="grid-btn">AI Assistant</a>
-                        </div>
-                    </div>
-                </div>
+<script>
+  const SITE = "/data-analyst-portfolio/";
+  const IMG  = "https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/";
+  const ACCENT = "#007BFF";
+  const accent = new Proxy({}, { get: () => ACCENT });
 
-            </div>
+  /* ============================================================
+     FEATURED LIST — newest first. 9 studies fill 9 positions.
+     TO PUBLISH A NEW CASE STUDY: prepend ONE object to items[].
+     It becomes the hero; every study cascades down one position
+     (column-major), and the 9th-oldest drops off the featured area
+     (it stays live as its own page and in the search database below).
+     Cascade order (newest -> oldest):
+       0 Hero (center)
+       1 Upper-left  top      2 Upper-left  bottom
+       3 Upper-right top      4 Upper-right bottom
+       5 Lower-left  top      6 Lower-left  bottom
+       7 Lower-right top      8 Lower-right bottom   -> drop
+     ============================================================ */
+  const items = [
+    {t:"Know When to Reorder", c:"Time Series Analysis", img:"know-when-to-reorder/cover%20image.png", s:"know-when-to-reorder", d:"know-when-to-reorder-dashboard", a:"know-when-to-reorder",
+     dek:"Two years of bookshop sales show RM1.49M slipping away when workbooks sell out at exam-season peaks. The per-title reorder rules recover RM149,000 in annual profit."},
+    {t:"Right Price, Right Season", c:"Optimization Analysis", img:"right-price-right-season/cover.png", s:"right-price-right-season", d:"right-price-right-season-dashboard", a:"right-price-right-season",
+     dek:"Season-by-season nightly rates that earn the most for every property."},
+    {t:"Where Value Comes From", c:"Optimization Analysis", img:"where-value-comes-from/cover.jpeg", s:"where-value-comes-from", d:"where-value-comes-from-dashboard", a:"where-value-comes-from",
+     dek:"The offers and locations that build customer lifetime value."},
+    {t:"Which Channel Finds Your Tenant", c:"Optimization Analysis", img:"which-channel-finds-your-tenant/cover%20image.jpeg", s:"which-channel-finds-your-tenant", d:"which-channel-finds-your-tenant-dashboard", a:"which-channel-finds-your-tenant",
+     dek:"Rank every lead channel by cost per signed tenant."},
+    {t:"Who Really Drives Sales?", c:"Segmentation Analysis", img:"who-really-drives-sales/cover.png", s:"who-really-drives-sales", d:"who-really-drives-sales-dashboard", a:"who-really-drives-sales",
+     dek:"Rank live influencers fairly when effort and time are equal."},
+    {t:"Under the Kopi Lid", c:"Time Series Analysis", img:"oriental-kopi-pl-analysis/cover%20image.png", s:"oriental-kopi-pl-analysis", d:"oriental-kopi-pl-analysis-dashboard", a:"oriental-kopi-pl-analysis",
+     dek:"What the numbers reveal beneath Oriental Kopi's growth."},
+    {t:"Fixing the Sales Leaks", c:"Optimization Analysis", img:"fixing-the-sales-leaks/cover%20image.jpeg", s:"fixing-the-sales-leaks", d:"fixing-the-sales-leaks-dashboard", a:"fixing-the-sales-leaks",
+     dek:"Where shoppers abandon, and which channels convert."},
+    {t:"Not All Homes Are Equal", c:"Regression Analysis", img:"not-all-homes-are-equal/cover%20image.jpeg", s:"not-all-homes-are-equal", d:"not-all-homes-are-equal-dashboard", a:"not-all-homes-are-equal",
+     dek:"Which property types deliver the most value per dollar."},
+    {t:"Where the Money Is", c:"Segmentation Analysis", img:"where-the-money-is/cover%20image.png", s:"where-the-money-is", d:"where-the-money-is-dashboard", a:"where-the-money-is",
+     dek:"Samsung's top markets, products, and channels across four years of sales."}
+  ];
 
-            <!-- Banner Section: Where Value Comes From -->
-            <div class="banner-section">
-                <div class="banner-background"></div>
-                <div class="banner-overlay">
-                    <div class="banner-category">Optimization Analysis</div>
-                    <h3 class="banner-title">Where Value Comes From</h3>
-                    <p class="banner-description">The offers and locations that build customer lifetime value.</p>
-                    <div class="banner-buttons">
-                        <a href="/data-analyst-portfolio/case-studies/where-value-comes-from.html" class="banner-btn">Read more</a>
-                        <a href="/data-analyst-portfolio/dashboards/where-value-comes-from-dashboard.html" class="banner-btn">Dashboard</a>
-                        <a href="/data-analyst-portfolio/agentic_workflow/where-value-comes-from.html" class="banner-btn">AI Assistant</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  const categories = [
+    {c:"Time Series Analysis", url:"time-series-analysis.html", p:"Forecasts, seasonality, and trends over time."},
+    {c:"Optimization Analysis", url:"optimization-analysis.html", p:"Pricing, channels, and where profit hides."},
+    {c:"Regression Analysis", url:"regression-analysis.html", p:"What drives the number, and by how much."},
+    {c:"Segmentation Analysis", url:"segmentation-analysis.html", p:"Who your customers really are."},
+    {c:"Predictive Modeling", url:"predictive-modeling.html", p:"Flag risk and outcomes before they happen."},
+    {c:"Statistical Testing", url:"statistical-testing.html", p:"Test claims and settle debates with data."}
+  ];
 
-    <footer>
-        <p>@2026. Lee Yih Ven. Data Stories Lab</p>
-    </footer>
-
-    <script>
-        // Case studies data - Complete database with all 49 case studies
-        const caseStudies = [
+  /* Full search database (every case study; never pruned). Used by the search bar only. */
+  const caseStudies = [
             // Added 2026-06-19: complete coverage of all 6 category pages
             {
                 title: "Know When to Reorder",
@@ -1554,118 +837,93 @@
             }
         ];
 
-        // DOM elements
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-        const searchOverlay = document.getElementById('searchOverlay');
+  const linkRow = (it) =>
+    `<div class="links">`+
+    `<a href="${SITE}case-studies/${it.s}.html">Read</a> &middot; `+
+    `<a href="${SITE}dashboards/${it.d}.html">Dashboard</a> &middot; `+
+    `<a href="${SITE}agentic_workflow/${it.a}.html">AI Assistant</a></div>`;
 
-        // Search functionality
-        function performSearch(query) {
-            if (query.length < 2) {
-                searchResults.style.display = 'none';
-                searchOverlay.style.display = 'none';
-                return;
-            }
+  // CASCADE selection
+  const lead       = items[0];
+  const leftPicks  = items.slice(1, 3);   // upper-left column: top, bottom
+  const rightItems = items.slice(3, 5);   // upper-right column: top, bottom
+  const lowerSrc   = items.slice(5, 9);   // lower 2x2
+  // grid renders row-major (TL, TR, BL, BR); reorder so the LEFT column fills first (TL, BL, then TR, BR)
+  const lowerOrder = [lowerSrc[0], lowerSrc[2], lowerSrc[1], lowerSrc[3]];
 
-            const filteredResults = caseStudies.filter(study =>
-                study.title.toLowerCase().includes(query.toLowerCase()) ||
-                study.description.toLowerCase().includes(query.toLowerCase()) ||
-                study.category.toLowerCase().includes(query.toLowerCase())
-            );
+  // CENTER lead
+  const L = lead;
+  document.getElementById('lead').innerHTML =
+    `<a href="${SITE}case-studies/${L.s}.html"><img class="lead-img" src="${IMG}${L.img}" alt="${L.t}"></a>`+
+    `<div class="next-kicker">Next!</div>`+
+    `<a href="${SITE}case-studies/${L.s}.html"><h2 class="lead-headline">${L.t}</h2></a>`+
+    `<p class="lead-dek">${L.dek}</p>`+
+    `<div class="byline">By Lee Yih Ven</div>`+linkRow(L);
 
-            displayResults(filteredResults);
-        }
+  // LEFT picks
+  document.getElementById('picks').innerHTML = leftPicks.map(it =>
+    `<article class="pick">`+
+    `<a href="${SITE}case-studies/${it.s}.html"><img src="${IMG}${it.img}" alt="${it.t}"></a>`+
+    `<span class="rubric" style="color:${accent[it.c]}">${it.c}</span>`+
+    `<a href="${SITE}case-studies/${it.s}.html"><h3>${it.t}</h3></a>`+
+    `<p class="lead-dek">${it.dek}</p>`+
+    `<div class="byline">By Lee Yih Ven</div>`+linkRow(it)+`</article>`).join('');
 
-        function displayResults(results) {
-            if (results.length === 0) {
-                searchResults.innerHTML = '<div class="no-results">No case studies found. Try different keywords.</div>';
-            } else {
-                searchResults.innerHTML = results.map(study => `
-                    <div class="search-result-item">
-                        <div class="search-result-category">${study.category}</div>
-                        <div class="search-result-title">${study.title}</div>
-                        <div class="search-result-description">${study.description}</div>
-                        <div class="search-result-buttons">
-                            <a href="${study.caseStudyUrl}" class="search-result-btn">Read More</a>
-                            <a href="${study.dashboardUrl}" class="search-result-btn">View Dashboard</a>
-                            ${study.agenticUrl ? `<a href="${study.agenticUrl}" class="search-result-btn">AI Assistant</a>` : ''}
-                        </div>
-                    </div>
-                `).join('');
-            }
+  // RIGHT items
+  document.getElementById('recent').innerHTML = rightItems.map(it =>
+    `<article class="recent">`+
+    `<a href="${SITE}case-studies/${it.s}.html"><img src="${IMG}${it.img}" alt="${it.t}"></a>`+
+    `<span class="rubric" style="color:${accent[it.c]}">${it.c}</span>`+
+    `<a href="${SITE}case-studies/${it.s}.html"><h3>${it.t}</h3></a>`+
+    `<p class="lead-dek">${it.dek}</p>`+
+    `<div class="byline">By Lee Yih Ven</div>`+linkRow(it)+`</article>`).join('');
 
-            searchResults.style.display = 'block';
-            searchOverlay.style.display = 'block';
-        }
+  // METHOD band
+  document.getElementById('methodGrid').innerHTML = categories.map(cat =>
+    `<a class="method-tile" href="${SITE}${cat.url}">`+
+    `<span class="rubric" style="color:${accent[cat.c]}">${cat.c}</span>`+
+    `<h4>${cat.c.replace(' Analysis','').replace(' Modeling','')}</h4>`+
+    `<p>${cat.p}</p>`+
+    `<span class="go">View all &rarr;</span></a>`).join('');
 
-        function hideResults() {
-            searchResults.style.display = 'none';
-            searchOverlay.style.display = 'none';
-        }
+  // LOWER: 2 x 2, column-major fill (TL, BL, TR, BR)
+  document.getElementById('lowerGrid').innerHTML = lowerOrder.map(it =>
+    `<article class="lower-card">`+
+    `<a href="${SITE}case-studies/${it.s}.html"><img src="${IMG}${it.img}" alt="${it.t}"></a>`+
+    `<span class="rubric" style="color:${accent[it.c]}">${it.c}</span>`+
+    `<a href="${SITE}case-studies/${it.s}.html"><h3>${it.t}</h3></a>`+
+    `<p class="lead-dek">${it.dek}</p>`+
+    `<div class="byline">By Lee Yih Ven</div>`+linkRow(it)+`</article>`).join('');
 
-        // Event listeners
-        searchInput.addEventListener('input', (e) => {
-            performSearch(e.target.value);
-        });
+  // SEARCH (over the full caseStudies database)
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  function runSearch(q){
+    if(q.trim().length < 2){ searchResults.style.display='none'; return; }
+    const ql = q.toLowerCase();
+    const hits = caseStudies.filter(s => (s.title+' '+s.description+' '+s.category).toLowerCase().includes(ql));
+    searchResults.innerHTML = hits.length ? hits.map(s =>
+      `<div class="sr-item">`+
+      `<div class="sr-cat">${s.category}</div>`+
+      `<a href="${s.caseStudyUrl}"><div class="sr-title">${s.title}</div></a>`+
+      `<div class="sr-links"><a href="${s.caseStudyUrl}">Read</a> &middot; `+
+      `<a href="${s.dashboardUrl}">Dashboard</a>`+
+      `${s.agenticUrl ? ` &middot; <a href="${s.agenticUrl}">AI Assistant</a>` : ``}</div></div>`).join('')
+      : `<div class="sr-none">No case studies found. Try a different keyword.</div>`;
+    searchResults.style.display='block';
+  }
+  searchInput.addEventListener('input', e => runSearch(e.target.value));
+  document.addEventListener('click', e => { if(!e.target.closest('.search-box')) searchResults.style.display='none'; });
 
-        searchInput.addEventListener('focus', () => {
-            if (searchInput.value.length >= 2) {
-                performSearch(searchInput.value);
-            }
-        });
-
-        // Hide results when clicking outside
-        searchOverlay.addEventListener('click', hideResults);
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) {
-                hideResults();
-            }
-        });
-
-        // Prevent search results from closing when clicked
-        searchResults.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-
-        // Handle escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                hideResults();
-                searchInput.blur();
-            }
-        });
-
-        // Hamburger Menu Toggle
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const navLinks = document.querySelector('.nav-links');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-
-        function toggleMobileMenu() {
-            hamburgerMenu.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        }
-
-        hamburgerMenu.addEventListener('click', toggleMobileMenu);
-        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
-
-        // Close menu when clicking a nav link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            });
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                toggleMobileMenu();
-            }
-        });
-    </script>
+  // HAMBURGER drawer
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeMenu(); searchResults.style.display='none'; }});
+</script>
 </body>
 </html>
