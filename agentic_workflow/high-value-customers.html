@@ -1,667 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Customer Insights Assistant | Where Are Your High-Value Customers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where Are Your High-Value Customers, AI Assistant | Data Stories Lab</title>
+<meta name="description" content="Ask the customer-value study in plain language. Answers come only from a fixed set of approved, read-only tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a2230; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff;
+         --panel:#F4F7FA; --green:#2E7D6F; --red:#B5503C; --amber:#92400e; --green-soft:#e6f1ee;
+         --gold:#004B87; --gold-soft:#EAF1F8; --steel:#6A9BD1; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #403B36;
-            background-color: #ffffff;
-        }
+  /* House chrome (crown) */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
 
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
+  /* Title block */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
 
-        /* Left Column - Fixed Sidebar */
-        .left-column {
-            width: 30%;
-            background-color: #f8f8f8;
-            padding: 40px 30px;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            border-right: 1px solid #e0e0e0;
-        }
+  /* Switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
 
-        .left-column h1 {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #403B36;
-            margin-bottom: 10px;
-        }
+  /* Assistant tool (identical shell for static and live-SQL) */
+  .assistant{ display:flex; border:1px solid var(--hair); height:min(640px,74vh); min-height:480px; margin:22px 0 4px; }
+  .side{ width:280px; flex-shrink:0; border-right:1px solid var(--hair); background:var(--panel); padding:20px 18px; overflow-y:auto; }
+  .side .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:12px; }
+  .bn{ font-weight:800; color:var(--navy); font-size:1.05rem; }
+  .bs{ font-size:.58rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-top:2px; }
+  .status{ border:1px solid var(--hair); background:#fff; padding:12px; margin:16px 0; }
+  .st-t{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-bottom:8px; }
+  .pill{ display:flex; align-items:center; gap:8px; color:#333; font-size:.78rem; padding:3px 0; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); } .dot.lock{ background:var(--accent); }
+  .th{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin:14px 0 8px; display:flex; justify-content:space-between; }
+  .tools{ list-style:none; font-family:"Courier New", monospace; font-size:.72rem; color:var(--navy); }
+  .tools li{ padding:3px 0; } .tools li::before{ content:"\25aa"; color:var(--accent); margin-right:7px; }
+  .gov{ font-size:.7rem; color:var(--mute); border-top:1px solid var(--hair); margin-top:16px; padding-top:12px; line-height:1.5; }
 
-        .left-column h2 {
-            font-size: 1em;
-            font-weight: 400;
-            color: #666;
-            margin-bottom: 20px;
-        }
+  .main{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .thread{ flex:1; overflow-y:auto; padding:22px 26px; display:flex; flex-direction:column; gap:16px; }
+  .row{ display:flex; gap:10px; max-width:720px; } .row.user{ margin-left:auto; flex-direction:row-reverse; }
+  .av{ width:30px; height:30px; flex-shrink:0; display:grid; place-items:center; font-size:.68rem; font-weight:700; }
+  .av.bot{ background:var(--navy); color:#fff; } .av.bot svg{ width:17px; height:17px; } .av.me{ background:#e7ecf2; color:var(--navy); }
+  .bubble{ font-size:.9rem; line-height:1.55; } .row.user .bubble{ background:var(--navy); color:#eef2f6; padding:10px 13px; }
+  .lead{ margin-bottom:10px; } .lead b{ color:var(--navy); font-weight:600; }
+  .badge{ display:inline-flex; align-items:center; gap:6px; font-family:"Courier New", monospace; font-size:.66rem; color:var(--navy); background:var(--gold-soft); border:1px solid #cdddf0; padding:3px 9px; margin-bottom:9px; }
+  .badge svg{ width:12px; height:12px; } .badge .lbl{ color:var(--mute); }
+  .card{ border:1px solid var(--hair); padding:13px 15px; margin-top:4px; background:#fff; max-width:600px; }
+  .card .cap{ font-size:.7rem; font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .card ul{ margin:0 0 0 18px; font-size:.88rem; color:#33414f; } .card li{ margin:4px 0; }
+  .note{ font-size:.68rem; color:var(--mute); margin-top:12px; display:flex; align-items:center; gap:6px; } .note svg{ width:12px; height:12px; flex-shrink:0; }
+  .think{ display:flex; align-items:center; gap:8px; color:var(--mute); font-size:.82rem; }
+  .think .tdot{ width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.2s infinite; }
+  .think .tdot:nth-child(2){ animation-delay:.2s; } .think .tdot:nth-child(3){ animation-delay:.4s; }
+  @keyframes pulse{ 0%,100%{ opacity:.25; transform:scale(.8); } 50%{ opacity:1; transform:scale(1); } }
+  .composer{ border-top:1px solid var(--hair); padding:12px 26px; background:var(--panel); }
+  .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-bottom:10px; }
+  .chip{ font-size:.74rem; border:1px solid var(--hair); background:#fff; padding:6px 11px; color:var(--navy); cursor:pointer; text-align:left; }
+  .chip:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .inputbar{ display:flex; align-items:center; gap:9px; background:#fff; border:1px solid var(--hair); padding:5px 5px 5px 14px; }
+  .inputbar input{ flex:1; border:none; outline:none; font-size:.85rem; padding:7px 0; font-family:inherit; }
+  .send{ width:34px; height:34px; border:none; background:var(--navy); color:#fff; cursor:pointer; display:grid; place-items:center; } .send svg{ width:17px; height:17px; }
+  .disclaimer{ text-align:center; font-size:.66rem; color:var(--mute); margin-top:10px; }
 
-        .intro p {
-            color: #555;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .home-link-section, .dashboard-link-section, .agentic-link-section {
-            margin: 20px 0;
-        }
-
-        .home-link-btn, .dashboard-link-btn, .agentic-link-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: #403B36;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            width: 100%;
-        }
-
-        .home-link-btn:hover, .dashboard-link-btn:hover, .agentic-link-btn:hover {
-            background-color: #CBA135;
-        }
-
-        .agentic-link-btn {
-            background-color: #CBA135;
-        }
-
-        .agentic-link-btn:hover {
-            background-color: #B8902E;
-        }
-
-        .contact {
-            margin-top: 30px;
-        }
-
-        .contact h2 {
-            font-size: 1.2em;
-            color: #403B36;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .contact p {
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .contact ul {
-            list-style: none;
-        }
-
-        .contact li {
-            margin-bottom: 10px;
-            color: #555;
-        }
-
-        .contact a {
-            color: #CBA135;
-            text-decoration: none;
-        }
-
-        .contact a:hover {
-            text-decoration: underline;
-        }
-
-        /* Right Column - Chatbot Interface */
-        .right-column {
-            width: 70%;
-            margin-left: 30%;
-            padding: 40px 50px;
-            background-color: #ffffff;
-        }
-
-        .chatbot-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .chatbot-header h1 {
-            font-size: 2.2em;
-            color: #403B36;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .chatbot-header p {
-            font-size: 1.1em;
-            color: #666;
-            line-height: 1.8;
-        }
-
-        .chat-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #f8f8f8;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .suggested-questions {
-            margin-bottom: 30px;
-        }
-
-        .suggested-questions h3 {
-            font-size: 1.3em;
-            color: #403B36;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .question-btn {
-            display: block;
-            width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 12px;
-            background-color: #ffffff;
-            color: #403B36;
-            border: 2px solid #CBA135;
-            border-radius: 8px;
-            text-align: left;
-            cursor: pointer;
-            font-size: 1em;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .question-btn:hover {
-            background-color: #CBA135;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3);
-        }
-
-        .chat-messages {
-            min-height: 400px;
-            margin-top: 20px;
-        }
-
-        .message {
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message.user {
-            background-color: #CBA135;
-            color: #ffffff;
-            margin-left: 50px;
-            text-align: right;
-        }
-
-        .message.agent {
-            background-color: #ffffff;
-            color: #403B36;
-            margin-right: 50px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .message.agent .agent-label {
-            font-weight: 600;
-            color: #CBA135;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .workflow-step {
-            margin: 15px 0;
-            padding: 12px 15px;
-            background-color: #f8f8f8;
-            border-left: 4px solid #CBA135;
-            border-radius: 4px;
-        }
-
-        .workflow-step .step-title {
-            font-weight: 600;
-            color: #403B36;
-            margin-bottom: 5px;
-        }
-
-        .workflow-step .step-content {
-            color: #666;
-            font-size: 0.95em;
-        }
-
-        .data-result {
-            margin: 15px 0;
-            padding: 15px;
-            background-color: #e8f4f8;
-            border-radius: 6px;
-            border: 1px solid #b8dce8;
-        }
-
-        .data-result .result-title {
-            font-weight: 600;
-            color: #2c5f7a;
-            margin-bottom: 8px;
-        }
-
-        .data-result ul {
-            margin-left: 20px;
-            color: #555;
-        }
-
-        .final-answer {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #e8f8e8;
-            border-radius: 6px;
-            border-left: 4px solid #4CAF50;
-        }
-
-        .final-answer .answer-label {
-            font-weight: 600;
-            color: #2e7d32;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: #222;
-            color: #fff;
-            margin-top: 50px;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .left-column {
-                width: 100%;
-                position: relative;
-                height: auto;
-            }
-
-            .right-column {
-                width: 100%;
-                margin-left: 0;
-                padding: 30px 20px;
-            }
-
-            .message.user {
-                margin-left: 20px;
-            }
-
-            .message.agent {
-                margin-right: 20px;
-            }
-        }
-    </style>
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:680px){ .side{ display:none; } .assistant{ height:min(560px,76vh); } }
+  /* Maximize control */
+  .assistant{ position:relative; }
+  .maxbtn{ position:absolute; top:10px; right:10px; z-index:6; width:30px; height:30px; border:1px solid var(--hair); background:#fff; color:var(--navy); cursor:pointer; display:grid; place-items:center; padding:0; }
+  .maxbtn:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .maxbtn svg{ width:15px; height:15px; }
+  .assistant.maxed{ position:fixed; inset:0; width:auto; height:auto; max-height:none; min-height:0; margin:0; z-index:9999; border:none; background:#fff; }
+  body.maxed-lock{ overflow:hidden; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- Left Column -->
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
 
-            <!-- Navigation Buttons -->
-            <section class="home-link-section">
-                <a class="home-link-btn" href="/data-analyst-portfolio/index.html">Home</a>
-            </section>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
 
-            <section class="home-link-section">
-                <a class="home-link-btn" href="/data-analyst-portfolio/case-studies/high-value-customers.html">Case Study</a>
-            </section>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Where Are Your High-Value Customers?</span>
+  </div>
 
-            <section class="dashboard-link-section">
-                <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/high-value-customers-dashboard.html">Dashboard</a>
-            </section>
-
-            <section class="agentic-link-section">
-                <a class="agentic-link-btn" href="/data-analyst-portfolio/agentic_workflow/high-value-customers.html">AI Assistant</a>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
-
-        <!-- Right Column - Chatbot Interface -->
-        <main class="right-column">
-            <div class="chatbot-header">
-                <h1>🤖 AI Customer Insights Assistant</h1>
-                <p>After your analysis is complete, imagine having these conversations available whenever you need them.</p>
-            </div>
-
-            <div class="chat-container">
-                <div class="suggested-questions">
-                    <h3>Try these questions:</h3>
-                    <button class="question-btn" onclick="showResponse(1)">Which marketing channel should I invest in most?</button>
-                    <button class="question-btn" onclick="showResponse(2)">What type of customers does each channel attract?</button>
-                    <button class="question-btn" onclick="showResponse(3)">Which customer segment is most valuable?</button>
-                    <button class="question-btn" onclick="showResponse(4)">How should I reallocate my RM300,000 marketing budget?</button>
-                    <button class="question-btn" onclick="showResponse(5)">Which channels bring repeat customers vs one-time buyers?</button>
-                </div>
-
-                <div class="chat-messages" id="chatMessages">
-                    <p style="text-align: center; color: #999; font-style: italic;">Select a question above to see how the AI agent works</p>
-                </div>
-            </div>
-        </main>
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/cover%20image.png" alt="Where Are Your High-Value Customers?">
+        <figcaption><span>Which channels bring the customers worth keeping.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Marketing &amp; CLV</span>
+      <h1 class="title">Where Are Your High-Value Customers?</h1>
+      <p class="standfirst">Find which channels bring high-value customers</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>AI assistant</span><span>Customer base &middot; segmentation</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/high-value-customers.html">Analyst Report</a>
+          <a class="sw" href="/data-analyst-portfolio/dashboards/high-value-customers-dashboard.html">Dashboard</a>
+          <span class="sw active" aria-current="page">AI Assistant</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
     </div>
 
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
+    <div class="assistant">
+      <button class="maxbtn" id="maxbtn" type="button" aria-label="Expand to full screen" title="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+      <aside class="side">
+        <span class="tab"></span>
+        <div class="bn">Customer Insights Assistant</div>
+        <div class="bs">Where Are Your High-Value Customers?</div>
+        <div class="status">
+          <div class="st-t">Asset status</div>
+          <div class="pill"><span class="dot"></span> Read-only access</div>
+          <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+          <div class="pill"><span class="dot"></span> Data server ready</div>
+        </div>
+        <div class="th"><span>Approved tools</span><span>5 &middot; fixed</span></div>
+        <ul class="tools">
+          <li>get_channel_loyalty_comparison</li><li>get_customer_profiles_by_channel</li><li>get_segment_value_rankings</li>
+          <li>get_budget_reallocation_plan</li><li>get_repeat_customer_analysis</li>
+        </ul>
+        <div class="gov">An AI agent over a fixed set of read-only tools on a 100,000-customer base. The agent picks one approved tool and grounds its answer in the data; it cannot author SQL, dump records, or change anything. Portfolio demonstration.</div>
+      </aside>
 
-    <script>
-        const responses = {
-            1: {
-                question: "Which marketing channel should I invest in most?",
-                workflow: [
-                    {
-                        title: "📋 Planning",
-                        content: "Breaking down the query: Need to (1) Compare loyalty scores across channels, (2) Evaluate customer quality metrics, (3) Recommend highest-ROI channel"
-                    },
-                    {
-                        title: "🔍 Data Retrieval - Channel Performance (CSV)",
-                        content: "Analyzing 100,000 customer records by acquisition channel..."
-                    }
-                ],
-                dataResult: {
-                    title: "Loyalty Score Comparison:",
-                    items: [
-                        "Paid Search: 1.582 (highest)",
-                        "Referral: 1.579 (second highest)",
-                        "Organic & Email: 1.574 (mid-tier)",
-                        "Social Media: 1.566 (lowest)"
-                    ]
-                },
-                workflow2: [
-                    {
-                        title: "📄 Context Search - Strategic Recommendations",
-                        content: "Retrieving investment guidance from case study..."
-                    }
-                ],
-                dataResult2: {
-                    title: "Strategic Insight:",
-                    items: [
-                        "\"Sarah doubled paid search investment based on highest loyalty scores\"",
-                        "\"Paid Search and Referral customers showed strongest repeat purchase behavior\"",
-                        "\"18% retention improvement and 34% revenue growth after reallocation\""
-                    ]
-                },
-                answer: "Invest most in Paid Search—it delivers the highest loyalty score (1.582) and attracts customers who make repeat purchases. Sarah doubled her Paid Search budget and saw 34% revenue growth in three months."
-            },
-            2: {
-                question: "What type of customers does each channel attract?",
-                workflow: [
-                    {
-                        title: "📋 Planning",
-                        content: "Task requires: (1) Segment customers by acquisition channel, (2) Analyze demographic and behavioral profiles, (3) Identify channel-specific customer characteristics"
-                    },
-                    {
-                        title: "🔍 Customer Profiling Analysis",
-                        content: "Analyzing customer attributes across channels from 100K records..."
-                    }
-                ],
-                dataResult: {
-                    title: "Customer Profiles by Channel:",
-                    items: [
-                        "Paid Search: Solution-seekers with high intent, 1.582 loyalty, active purchasers",
-                        "Organic & Email: Information-gatherers, largest volume (45,103), mid-tier loyalty (1.574)",
-                        "Social Media: Casual browsers, lowest loyalty (1.566), smallest segment (14,979)",
-                        "Referral: Trust-driven buyers, high loyalty (1.579), word-of-mouth advocates"
-                    ]
-                },
-                workflow2: [
-                    {
-                        title: "💡 Segmentation Insights",
-                        content: "Cross-referencing with messaging strategy recommendations..."
-                    }
-                ],
-                dataResult2: {
-                    title: "Channel-Specific Behaviors:",
-                    items: [
-                        "\"Paid Search customers respond to solution-focused messaging\"",
-                        "\"Organic & Email audiences need educational, informative content\"",
-                        "\"Social Media users engage with community-driven content\"",
-                        "\"Referral customers value trust signals and testimonials\""
-                    ]
-                },
-                answer: "Paid Search attracts high-intent solution-seekers, Referral brings trust-driven advocates, Organic & Email reaches information-gatherers (largest volume), and Social Media draws casual browsers. Each channel needs tailored messaging matching their behavior patterns."
-            },
-            3: {
-                question: "Which customer segment is most valuable?",
-                workflow: [
-                    {
-                        title: "📋 Planning",
-                        content: "Evaluation requires: (1) Compare loyalty scores across segments, (2) Assess lifetime value indicators, (3) Balance quality vs volume trade-offs"
-                    },
-                    {
-                        title: "📊 Segment Value Analysis",
-                        content: "Evaluating customer lifetime value across four segments..."
-                    }
-                ],
-                dataResult: {
-                    title: "Segment Value Rankings:",
-                    items: [
-                        "Paid Search Specialists: Loyalty 1.582 (highest quality)",
-                        "Referral Advocates: Loyalty 1.579 (high quality, word-of-mouth growth)",
-                        "Organic & Email Audience: Loyalty 1.574, 45,103 customers (scale advantage)",
-                        "Social Media Cohort: Loyalty 1.566, 14,979 customers (lowest value)"
-                    ]
-                },
-                workflow2: [
-                    {
-                        title: "🔍 Value Optimization Strategy",
-                        content: "Analyzing quality-volume balance for maximum ROI..."
-                    }
-                ],
-                dataResult2: {
-                    title: "Strategic Value Assessment:",
-                    items: [
-                        "\"Paid Search delivers highest per-customer value\"",
-                        "\"Referral offers dual benefit: high loyalty + organic growth through recommendations\"",
-                        "\"Organic & Email provides cost-efficient volume despite mid-tier loyalty\"",
-                        "\"Focus investment on Paid Search and Referral for maximum returns\""
-                    ]
-                },
-                answer: "Paid Search Specialists are most valuable with 1.582 loyalty scores and highest repeat purchase rates. Referral Advocates come close second (1.579) with the bonus of generating new customers through word-of-mouth."
-            },
-            4: {
-                question: "How should I reallocate my RM300,000 marketing budget?",
-                workflow: [
-                    {
-                        title: "📋 Planning",
-                        content: "Budget optimization requires: (1) Calculate ROI by channel, (2) Balance quality vs volume needs, (3) Develop data-driven allocation strategy"
-                    },
-                    {
-                        title: "💰 ROI-Based Budget Modeling",
-                        content: "Calculating optimal allocation based on loyalty scores and segment sizes..."
-                    }
-                ],
-                dataResult: {
-                    title: "Channel Performance Metrics:",
-                    items: [
-                        "Paid Search: 1.582 loyalty → Double investment priority",
-                        "Referral: 1.579 loyalty → Expand referral programs",
-                        "Organic & Email: 45,103 customers → Maintain for volume",
-                        "Social Media: 1.566 loyalty, 14,979 customers → Reposition to brand awareness"
-                    ]
-                },
-                workflow2: [
-                    {
-                        title: "📊 Sarah's Successful Reallocation",
-                        content: "Reviewing proven budget restructuring strategy..."
-                    }
-                ],
-                dataResult2: {
-                    title: "Recommended Budget Split:",
-                    items: [
-                        "\"Sarah doubled Paid Search budget for highest-value acquisition\"",
-                        "\"Expanded referral program investment for word-of-mouth growth\"",
-                        "\"Maintained Organic & Email for cost-efficient volume\"",
-                        "\"Repositioned Social Media to brand awareness vs direct acquisition\"",
-                        "\"Results: 18% retention boost, 34% revenue growth in 3 months\""
-                    ]
-                },
-                answer: "Double your Paid Search investment (highest loyalty 1.582), expand Referral programs, maintain Organic & Email for volume, and shift Social Media to brand awareness only. This strategy delivered 34% revenue growth for Sarah in three months."
-            },
-            5: {
-                question: "Which channels bring repeat customers vs one-time buyers?",
-                workflow: [
-                    {
-                        title: "📋 Planning",
-                        content: "Retention analysis requires: (1) Compare repeat purchase rates by channel, (2) Identify loyalty tier distribution, (3) Distinguish long-term vs transactional customers"
-                    },
-                    {
-                        title: "🔍 Repeat Purchase Analysis",
-                        content: "Analyzing customer retention patterns across channels..."
-                    }
-                ],
-                dataResult: {
-                    title: "Repeat Customer Rankings:",
-                    items: [
-                        "Paid Search: 1.582 loyalty → Highest repeat purchase rate",
-                        "Referral: 1.579 loyalty → Strong repeat behavior + advocacy",
-                        "Organic & Email: 1.574 loyalty → Moderate repeat purchases",
-                        "Social Media: 1.566 loyalty → Highest one-time buyer ratio"
-                    ]
-                },
-                workflow2: [
-                    {
-                        title: "💡 Customer Lifetime Value Insights",
-                        content: "Cross-referencing with loyalty tier distribution..."
-                    }
-                ],
-                dataResult2: {
-                    title: "Retention Patterns:",
-                    items: [
-                        "\"Paid Search and Referral customers consistently showed strongest repeat purchase behavior\"",
-                        "\"Social Media attracted more casual, one-time browsers\"",
-                        "\"Organic & Email balanced volume with mid-tier retention\"",
-                        "\"Focus acquisition budget on channels proven to bring loyal, repeat customers\""
-                    ]
-                },
-                answer: "Paid Search (1.582) and Referral (1.579) bring the most repeat customers, while Social Media (1.566) attracts mainly one-time buyers. Invest in channels that build long-term customer relationships, not just transaction volume."
-            }
-        };
+      <main class="main">
+        <div class="thread" id="thread">
+          <div class="row bot">
+            <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+            <div class="bubble"><div class="lead">I can answer questions about <b>100,000 customers</b> across 4 channel-based segments: which channels bring the most loyal customers, who each channel attracts, and how to reallocate budget toward high-value acquisition. Tap a prompt below, or type your own.</div></div>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="chips" id="chips"></div>
+          <div class="inputbar">
+            <input id="input" type="text" placeholder="Ask about channels, segments, loyalty, budget, or repeat customers...">
+            <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+          <div class="disclaimer">A portfolio demonstration. Figures come from a 100,000-customer base; the agent surfaces patterns for you to interpret.</div>
+        </div>
+      </main>
+    </div>
+  </div>
 
-        function showResponse(questionId) {
-            const response = responses[questionId];
-            const chatMessages = document.getElementById('chatMessages');
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
 
-            // Clear previous messages
-            chatMessages.innerHTML = '';
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  document.getElementById('hamburger').addEventListener('click',()=>{drawer.classList.add('open');overlay.classList.add('open');});
+  const _cl=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+  document.getElementById('drawerClose').addEventListener('click',_cl);
+  overlay.addEventListener('click',_cl);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',_cl));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')_cl(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+</script>
 
-            // Add user question
-            const userMsg = document.createElement('div');
-            userMsg.className = 'message user';
-            userMsg.textContent = response.question;
-            chatMessages.appendChild(userMsg);
+<script>
+// STATIC canned answers (no database). Each answer = approved tool + the answer + a data card.
+const responses = {
+  1:{question:"Which marketing channel should I invest in most?", tool:"get_channel_loyalty_comparison",
+    answer:"Invest most in Paid Search, it delivers the highest loyalty score (1.582) and attracts customers who make repeat purchases. Sarah doubled her Paid Search budget and saw 34% revenue growth in three months.",
+    dataResult:{title:"Loyalty Score Comparison",items:["Paid Search: 1.582 (highest)","Referral: 1.579 (second highest)","Organic & Email: 1.574 (mid-tier)","Social Media: 1.566 (lowest)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Sarah doubled paid search investment based on highest loyalty scores\"","\"Paid Search and Referral customers showed strongest repeat purchase behavior\"","\"18% retention improvement and 34% revenue growth after reallocation\""]}},
+  2:{question:"What type of customers does each channel attract?", tool:"get_customer_profiles_by_channel",
+    answer:"Paid Search attracts high-intent solution-seekers, Referral brings trust-driven advocates, Organic & Email reaches information-gatherers (largest volume), and Social Media draws casual browsers. Each channel needs tailored messaging matching their behavior patterns.",
+    dataResult:{title:"Customer Profiles by Channel",items:["Paid Search: Solution-seekers with high intent, 1.582 loyalty, active purchasers","Organic & Email: Information-gatherers, largest volume (45,103), mid-tier loyalty (1.574)","Social Media: Casual browsers, lowest loyalty (1.566), smallest segment (14,979)","Referral: Trust-driven buyers, high loyalty (1.579), word-of-mouth advocates"]},
+    dataResult2:{title:"From the analyst report",items:["\"Paid Search customers respond to solution-focused messaging\"","\"Organic & Email audiences need educational, informative content\"","\"Social Media users engage with community-driven content\"","\"Referral customers value trust signals and testimonials\""]}},
+  3:{question:"Which customer segment is most valuable?", tool:"get_segment_value_rankings",
+    answer:"Paid Search Specialists are most valuable with 1.582 loyalty scores and highest repeat purchase rates. Referral Advocates come close second (1.579) with the bonus of generating new customers through word-of-mouth.",
+    dataResult:{title:"Segment Value Rankings",items:["Paid Search Specialists: Loyalty 1.582 (highest quality)","Referral Advocates: Loyalty 1.579 (high quality, word-of-mouth growth)","Organic & Email Audience: Loyalty 1.574, 45,103 customers (scale advantage)","Social Media Cohort: Loyalty 1.566, 14,979 customers (lowest value)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Paid Search delivers highest per-customer value\"","\"Referral offers dual benefit: high loyalty + organic growth through recommendations\"","\"Organic & Email provides cost-efficient volume despite mid-tier loyalty\"","\"Focus investment on Paid Search and Referral for maximum returns\""]}},
+  4:{question:"How should I reallocate my RM300,000 marketing budget?", tool:"get_budget_reallocation_plan",
+    answer:"Double your Paid Search investment (highest loyalty 1.582), expand Referral programs, maintain Organic & Email for volume, and shift Social Media to brand awareness only. This strategy delivered 34% revenue growth for Sarah in three months.",
+    dataResult:{title:"Channel Performance Metrics",items:["Paid Search: 1.582 loyalty, Double investment priority","Referral: 1.579 loyalty, Expand referral programs","Organic & Email: 45,103 customers, Maintain for volume","Social Media: 1.566 loyalty, 14,979 customers, Reposition to brand awareness"]},
+    dataResult2:{title:"From the analyst report",items:["\"Sarah doubled Paid Search budget for highest-value acquisition\"","\"Expanded referral program investment for word-of-mouth growth\"","\"Maintained Organic & Email for cost-efficient volume\"","\"Repositioned Social Media to brand awareness vs direct acquisition\"","\"Results: 18% retention boost, 34% revenue growth in 3 months\""]}},
+  5:{question:"Which channels bring repeat customers vs one-time buyers?", tool:"get_repeat_customer_analysis",
+    answer:"Paid Search (1.582) and Referral (1.579) bring the most repeat customers, while Social Media (1.566) attracts mainly one-time buyers. Invest in channels that build long-term customer relationships, not just transaction volume.",
+    dataResult:{title:"Repeat Customer Rankings",items:["Paid Search: 1.582 loyalty, Highest repeat purchase rate","Referral: 1.579 loyalty, Strong repeat behavior + advocacy","Organic & Email: 1.574 loyalty, Moderate repeat purchases","Social Media: 1.566 loyalty, Highest one-time buyer ratio"]},
+    dataResult2:{title:"From the analyst report",items:["\"Paid Search and Referral customers consistently showed strongest repeat purchase behavior\"","\"Social Media attracted more casual, one-time browsers\"","\"Organic & Email balanced volume with mid-tier retention\"","\"Focus acquisition budget on channels proven to bring loyal, repeat customers\""]}}
+};
 
-            // Add agent response with workflow
-            setTimeout(() => {
-                const agentMsg = document.createElement('div');
-                agentMsg.className = 'message agent';
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const card=d=>`<div class="card"><div class="cap">${d.title}</div><ul>${d.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
 
-                let html = '<span class="agent-label">🤖 AI Customer Insights Assistant</span>';
+// answer directly: tool badge + the answer + a data card (no planning/workflow steps)
+function render(r){
+  let html=badge(r.tool)+`<div class="lead">${r.answer}</div>`+card(r.dataResult);
+  if(r.dataResult2) html+=card(r.dataResult2);
+  return html;
+}
 
-                // Add workflow steps
-                response.workflow.forEach(step => {
-                    html += `
-                        <div class="workflow-step">
-                            <div class="step-title">${step.title}</div>
-                            <div class="step-content">${step.content}</div>
-                        </div>
-                    `;
-                });
+// suggested prompts
+const chips=document.getElementById('chips');
+Object.keys(responses).forEach(k=>{ const b=document.createElement('button'); b.className='chip'; b.dataset.k=k; b.textContent=responses[k].question; chips.appendChild(b); });
 
-                // Add data result
-                if (response.dataResult) {
-                    html += `
-                        <div class="data-result">
-                            <div class="result-title">${response.dataResult.title}</div>
-                            <ul>
-                                ${response.dataResult.items.map(item => `<li>${item}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `;
-                }
+// Each new question REPLACES the previous exchange (no endless scroll).
+function ask(k){
+  const r=responses[k]; if(!r) return;
+  thread.innerHTML=`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(r.question)}</div></div>`;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="cur">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${r.tool}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{ document.getElementById('cur').querySelector('.bubble').innerHTML=render(r); scroll(); postH(); },620);
+}
+chips.addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(b) ask(b.dataset.k); });
 
-                // Add second workflow steps if exists
-                if (response.workflow2) {
-                    response.workflow2.forEach(step => {
-                        html += `
-                            <div class="workflow-step">
-                                <div class="step-title">${step.title}</div>
-                                <div class="step-content">${step.content}</div>
-                            </div>
-                        `;
-                    });
-                }
-
-                // Add second data result if exists
-                if (response.dataResult2) {
-                    html += `
-                        <div class="data-result">
-                            <div class="result-title">${response.dataResult2.title}</div>
-                            <ul>
-                                ${response.dataResult2.items.map(item => `<li>${item}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `;
-                }
-
-                // Add final answer
-                html += `
-                    <div class="final-answer">
-                        <span class="answer-label">✅ Answer:</span>
-                        ${response.answer}
-                    </div>
-                `;
-
-                agentMsg.innerHTML = html;
-                chatMessages.appendChild(agentMsg);
-
-                // Scroll to bottom
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 500);
-        }
-    </script>
+const input=document.getElementById('input');
+function route(){
+  const t=input.value.trim(); if(!t) return; input.value=''; const q=t.toLowerCase(); let k=null;
+  if(/invest|which channel|most in|best channel/.test(q)) k='1';
+  else if(/type of customer|attract|profile|who does|persona/.test(q)) k='2';
+  else if(/segment.*valuable|most valuable|valuable segment|best segment/.test(q)) k='3';
+  else if(/budget|reallocat|allocat|300|spend/.test(q)) k='4';
+  else if(/repeat|one-time|one time|retention|loyal.*buyer|return customer/.test(q)) k='5';
+  if(k) ask(k);
+  else { thread.innerHTML=`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div><div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Tap a suggested question to see the agent answer from the customer data.</div></div></div>`; scroll(); postH(); }
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{ if(e.key==='Enter') route(); });
+</script>
+<script>
+/* Maximize / restore the chat interface. Esc also restores. */
+(function(){
+  var panel=document.querySelector('.assistant'); if(!panel)return;
+  var btn=document.getElementById('maxbtn'); if(!btn)return;
+  var EXP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>', RES='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3a2 2 0 0 0 2-2V3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M21 16h-3a2 2 0 0 0-2 2v3"/></svg>';
+  btn.innerHTML=EXP;
+  function toggle(){
+    var on=panel.classList.toggle('maxed');
+    document.body.classList.toggle('maxed-lock',on);
+    btn.innerHTML=on?RES:EXP;
+    btn.title=on?'Restore':'Full screen';
+    btn.setAttribute('aria-label',on?'Restore size':'Expand to full screen');
+    if(typeof postH==='function')postH();
+  }
+  btn.addEventListener('click',toggle);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&panel.classList.contains('maxed'))toggle(); });
+})();
+</script>
 </body>
 </html>

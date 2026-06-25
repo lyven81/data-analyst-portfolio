@@ -1,443 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Product Returns Assistant | What Causes Product Returns</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: #403B36; background-color: #ffffff; }
-        .container { display: flex; min-height: 100vh; }
-        .left-column { width: 30%; background-color: #f8f8f8; padding: 40px 30px; position: fixed; height: 100vh; overflow-y: auto; border-right: 1px solid #e0e0e0; }
-        .left-column h1 { font-size: 1.8em; font-weight: bold; color: #403B36; margin-bottom: 10px; }
-        .left-column h2 { font-size: 1em; font-weight: 400; color: #666; margin-bottom: 20px; }
-        .intro p { color: #555; margin-bottom: 30px; line-height: 1.8; }
-        .home-link-section, .dashboard-link-section, .agentic-link-section { margin: 20px 0; }
-        .home-link-btn, .dashboard-link-btn, .agentic-link-btn { display: inline-block; padding: 12px 30px; background-color: #403B36; color: #fff; text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s ease; text-align: center; width: 100%; }
-        .home-link-btn:hover, .dashboard-link-btn:hover, .agentic-link-btn:hover { background-color: #CBA135; }
-        .agentic-link-btn { background-color: #CBA135; }
-        .agentic-link-btn:hover { background-color: #B8902E; }
-        .mcp-badge { display: inline-block; padding: 6px 12px; background-color: #e8f4f8; color: #2c5f7a; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-top: 10px; border: 1px solid #b8dce8; }
-        .contact { margin-top: 30px; }
-        .contact h2 { font-size: 1.2em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
-        .contact p { color: #555; margin-bottom: 15px; }
-        .contact ul { list-style: none; }
-        .contact li { margin-bottom: 10px; color: #555; }
-        .contact a { color: #CBA135; text-decoration: none; }
-        .contact a:hover { text-decoration: underline; }
-        .right-column { width: 70%; margin-left: 30%; padding: 40px 50px; background-color: #ffffff; }
-        .chatbot-header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e0e0e0; }
-        .chatbot-header h1 { font-size: 2.2em; color: #403B36; margin-bottom: 10px; font-weight: 600; }
-        .chatbot-header p { font-size: 1.1em; color: #666; line-height: 1.8; }
-        .chat-container { max-width: 900px; margin: 0 auto; background-color: #f8f8f8; border-radius: 10px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .suggested-questions { margin-bottom: 30px; }
-        .suggested-questions h3 { font-size: 1.3em; color: #403B36; margin-bottom: 15px; font-weight: 600; }
-        .question-btn { display: block; width: 100%; padding: 15px 20px; margin-bottom: 12px; background-color: #ffffff; color: #403B36; border: 2px solid #CBA135; border-radius: 8px; text-align: left; cursor: pointer; font-size: 1em; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
-        .question-btn:hover { background-color: #CBA135; color: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(203, 161, 53, 0.3); }
-        .chat-messages { min-height: 400px; margin-top: 20px; }
-        .message { margin-bottom: 20px; padding: 15px 20px; border-radius: 10px; animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .message.user { background-color: #CBA135; color: #ffffff; margin-left: 50px; text-align: right; }
-        .message.agent { background-color: #ffffff; color: #403B36; margin-right: 50px; border: 1px solid #e0e0e0; }
-        .message.agent .agent-label { font-weight: 600; color: #CBA135; margin-bottom: 8px; display: block; }
-        .workflow-step { margin: 15px 0; padding: 12px 15px; background-color: #f8f8f8; border-left: 4px solid #CBA135; border-radius: 4px; }
-        .workflow-step .step-title { font-weight: 600; color: #403B36; margin-bottom: 5px; }
-        .workflow-step .step-content { color: #666; font-size: 0.95em; }
-        .data-result { margin: 15px 0; padding: 15px; background-color: #e8f4f8; border-radius: 6px; border: 1px solid #b8dce8; }
-        .data-result .result-title { font-weight: 600; color: #2c5f7a; margin-bottom: 8px; }
-        .data-result ul { margin-left: 20px; color: #555; }
-        .final-answer { margin-top: 15px; padding: 15px; background-color: #e8f8e8; border-radius: 6px; border-left: 4px solid #4CAF50; }
-        .final-answer .answer-label { font-weight: 600; color: #2e7d32; margin-bottom: 8px; display: block; }
-        footer { text-align: center; padding: 30px 20px; background-color: #222; color: #fff; margin-top: 50px; }
-        footer p { margin: 0; font-size: 0.9em; }
-        @media (max-width: 768px) {
-            .container { flex-direction: column; }
-            .left-column { width: 100%; position: relative; height: auto; }
-            .right-column { width: 100%; margin-left: 0; padding: 30px 20px; }
-            .message.user { margin-left: 20px; }
-            .message.agent { margin-right: 20px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Causes Product Returns, AI Assistant | Data Stories Lab</title>
+<meta name="description" content="Ask the product returns study in plain language. Answers come only from a fixed set of approved, read-only tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a2230; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff;
+         --panel:#F4F7FA; --green:#2E7D6F; --red:#B5503C; --amber:#92400e; --green-soft:#e6f1ee;
+         --gold:#004B87; --gold-soft:#EAF1F8; --steel:#6A9BD1; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* House chrome (crown) */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Title block */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  /* Switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  /* Assistant tool (identical shell for static and live-SQL) */
+  .assistant{ display:flex; border:1px solid var(--hair); height:min(640px,74vh); min-height:480px; margin:22px 0 4px; }
+  .side{ width:280px; flex-shrink:0; border-right:1px solid var(--hair); background:var(--panel); padding:20px 18px; overflow-y:auto; }
+  .side .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:12px; }
+  .bn{ font-weight:800; color:var(--navy); font-size:1.05rem; }
+  .bs{ font-size:.58rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-top:2px; }
+  .status{ border:1px solid var(--hair); background:#fff; padding:12px; margin:16px 0; }
+  .st-t{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-bottom:8px; }
+  .pill{ display:flex; align-items:center; gap:8px; color:#333; font-size:.78rem; padding:3px 0; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); } .dot.lock{ background:var(--accent); }
+  .th{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin:14px 0 8px; display:flex; justify-content:space-between; }
+  .tools{ list-style:none; font-family:"Courier New", monospace; font-size:.72rem; color:var(--navy); }
+  .tools li{ padding:3px 0; } .tools li::before{ content:"\25aa"; color:var(--accent); margin-right:7px; }
+  .gov{ font-size:.7rem; color:var(--mute); border-top:1px solid var(--hair); margin-top:16px; padding-top:12px; line-height:1.5; }
+
+  .main{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .thread{ flex:1; overflow-y:auto; padding:22px 26px; display:flex; flex-direction:column; gap:16px; }
+  .row{ display:flex; gap:10px; max-width:720px; } .row.user{ margin-left:auto; flex-direction:row-reverse; }
+  .av{ width:30px; height:30px; flex-shrink:0; display:grid; place-items:center; font-size:.68rem; font-weight:700; }
+  .av.bot{ background:var(--navy); color:#fff; } .av.bot svg{ width:17px; height:17px; } .av.me{ background:#e7ecf2; color:var(--navy); }
+  .bubble{ font-size:.9rem; line-height:1.55; } .row.user .bubble{ background:var(--navy); color:#eef2f6; padding:10px 13px; }
+  .lead{ margin-bottom:10px; } .lead b{ color:var(--navy); font-weight:600; }
+  .badge{ display:inline-flex; align-items:center; gap:6px; font-family:"Courier New", monospace; font-size:.66rem; color:var(--navy); background:var(--gold-soft); border:1px solid #cdddf0; padding:3px 9px; margin-bottom:9px; }
+  .badge svg{ width:12px; height:12px; } .badge .lbl{ color:var(--mute); }
+  .card{ border:1px solid var(--hair); padding:13px 15px; margin-top:4px; background:#fff; max-width:600px; }
+  .card .cap{ font-size:.7rem; font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .card ul{ margin:0 0 0 18px; font-size:.88rem; color:#33414f; } .card li{ margin:4px 0; }
+  .note{ font-size:.68rem; color:var(--mute); margin-top:12px; display:flex; align-items:center; gap:6px; } .note svg{ width:12px; height:12px; flex-shrink:0; }
+  .think{ display:flex; align-items:center; gap:8px; color:var(--mute); font-size:.82rem; }
+  .think .tdot{ width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.2s infinite; }
+  .think .tdot:nth-child(2){ animation-delay:.2s; } .think .tdot:nth-child(3){ animation-delay:.4s; }
+  @keyframes pulse{ 0%,100%{ opacity:.25; transform:scale(.8); } 50%{ opacity:1; transform:scale(1); } }
+  .composer{ border-top:1px solid var(--hair); padding:12px 26px; background:var(--panel); }
+  .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-bottom:10px; }
+  .chip{ font-size:.74rem; border:1px solid var(--hair); background:#fff; padding:6px 11px; color:var(--navy); cursor:pointer; text-align:left; }
+  .chip:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .inputbar{ display:flex; align-items:center; gap:9px; background:#fff; border:1px solid var(--hair); padding:5px 5px 5px 14px; }
+  .inputbar input{ flex:1; border:none; outline:none; font-size:.85rem; padding:7px 0; font-family:inherit; }
+  .send{ width:34px; height:34px; border:none; background:var(--navy); color:#fff; cursor:pointer; display:grid; place-items:center; } .send svg{ width:17px; height:17px; }
+  .disclaimer{ text-align:center; font-size:.66rem; color:var(--mute); margin-top:10px; }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:680px){ .side{ display:none; } .assistant{ height:min(560px,76vh); } }
+  /* Maximize control */
+  .assistant{ position:relative; }
+  .maxbtn{ position:absolute; top:10px; right:10px; z-index:6; width:30px; height:30px; border:1px solid var(--hair); background:#fff; color:var(--navy); cursor:pointer; display:grid; place-items:center; padding:0; }
+  .maxbtn:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .maxbtn svg{ width:15px; height:15px; }
+  .assistant.maxed{ position:fixed; inset:0; width:auto; height:auto; max-height:none; min-height:0; margin:0; z-index:9999; border:none; background:#fff; }
+  body.maxed-lock{ overflow:hidden; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Ask this AI assistant what drives product returns — pricing, discounts, delivery, or product categories — so your warehouse team can focus inspection where it matters most.</p>
-                <div class="mcp-badge">MCP Server &bull; 150 rows &bull; 7 tools</div>
-            </section>
 
-            <section class="home-link-section">
-                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/index.html">Home</a>
-            </section>
-            <section class="home-link-section">
-                <a class="home-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/case-studies/what-causes-product-returns.html">Case Study</a>
-            </section>
-            <section class="dashboard-link-section">
-                <a class="dashboard-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/dashboards/what-causes-product-returns-dashboard.html">Dashboard</a>
-            </section>
-            <section class="agentic-link-section">
-                <a class="agentic-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/what-causes-product-returns.html">AI Assistant</a>
-            </section>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
 
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>What Causes Product Returns</span>
+  </div>
 
-        <main class="right-column">
-            <div class="chatbot-header">
-                <h1>AI Product Returns Assistant</h1>
-                <p>Powered by an AI agent connected to an MCP server exposing 7 tools over a 150-row product returns sample. Click any question to see how the agent plans, calls tools, and grounds its answer in real data.</p>
-            </div>
-
-            <div class="chat-container">
-                <div class="suggested-questions">
-                    <h3>Try these questions:</h3>
-                    <button class="question-btn" onclick="showResponse(1)">What does the return data look like overall?</button>
-                    <button class="question-btn" onclick="showResponse(2)">Are cheaper products returned more often?</button>
-                    <button class="question-btn" onclick="showResponse(3)">Do big discounts lead to more returns?</button>
-                    <button class="question-btn" onclick="showResponse(4)">Are campaign-discounted products returned more than regular ones?</button>
-                    <button class="question-btn" onclick="showResponse(5)">Which product categories have the highest return rates?</button>
-                    <button class="question-btn" onclick="showResponse(6)">Does delivery time affect how often products get returned?</button>
-                    <button class="question-btn" onclick="showResponse(7)">Are low-price products with big discounts the worst for returns?</button>
-                    <button class="question-btn" onclick="showResponse(8)">Which categories should the warehouse inspect more carefully?</button>
-                    <button class="question-btn" onclick="showResponse(9)">Is stock availability linked to higher returns?</button>
-                    <button class="question-btn" onclick="showResponse(10)">What should we focus on to reduce returns?</button>
-                </div>
-
-                <div class="chat-messages" id="chatMessages">
-                    <p style="text-align: center; color: #999; font-style: italic;">Select a question above to see how the AI agent works</p>
-                </div>
-            </div>
-        </main>
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-causes-product-returns/cover%20image.png" alt="What Causes Product Returns">
+        <figcaption><span>What makes some products get returned more.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Retail &amp; returns</span>
+      <h1 class="title">What Causes Product Returns</h1>
+      <p class="standfirst">Find what makes products get returned</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>AI assistant</span><span>Product returns &middot; regression</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/what-causes-product-returns.html">Analyst Report</a>
+          <a class="sw" href="/data-analyst-portfolio/dashboards/what-causes-product-returns-dashboard.html">Dashboard</a>
+          <span class="sw active" aria-current="page">AI Assistant</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
+    <div class="assistant">
+      <button class="maxbtn" id="maxbtn" type="button" aria-label="Expand to full screen" title="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+      <aside class="side">
+        <span class="tab"></span>
+        <div class="bn">Product Returns Assistant</div>
+        <div class="bs">What Causes Product Returns</div>
+        <div class="status">
+          <div class="st-t">Asset status</div>
+          <div class="pill"><span class="dot"></span> Read-only access</div>
+          <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+          <div class="pill"><span class="dot"></span> Data server ready</div>
+        </div>
+        <div class="th"><span>Approved tools</span><span>7 &middot; fixed</span></div>
+        <ul class="tools">
+          <li>get_dataset_overview</li><li>get_return_rate_by_price_band</li><li>get_return_rate_by_discount_band</li>
+          <li>get_campaign_vs_noncampaign</li><li>get_return_rate_by_category</li><li>get_return_rate_by_delivery_band</li>
+          <li>get_low_price_high_discount_segment</li>
+        </ul>
+        <div class="gov">An AI agent over a fixed set of read-only tools on a 150-row product returns sample. The agent picks one approved tool and grounds its answer in the data; it cannot author SQL, dump records, or change anything. Portfolio demonstration.</div>
+      </aside>
 
-    <script>
-        const responses = {
-            1: {
-                question: "What does the return data look like overall?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Get overall dataset statistics, (2) Summarize return rate distribution, (3) Identify how many products are high-return." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_dataset_overview", content: "Calling the 'what-causes-product-returns-data-server' to fetch overall dataset summary across 150 sampled products..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Dataset Overview:",
-                    items: [
-                        "Total products sampled: 150",
-                        "Average return rate: 34.4%",
-                        "Median return rate: 31.2%",
-                        "Product categories: 10",
-                        "Price range: $5.00 \u2013 $535.27",
-                        "Average price: $157.16",
-                        "Average discount: 27.9%",
-                        "High-return products (>50%): 35 (23.3% of sample)"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Retrieving overall findings from the analyst report..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Returns are more related to discounts and price than to product reviews or ratings.\"",
-                        "\"Return problems may be more about how a product is priced or promoted rather than how customers rate it.\""
-                    ]
-                },
-                answer: "The sample of 150 products has an average return rate of 34.4%, with about 1 in 4 products falling into the high-return category (above 50%). Returns appear driven more by pricing and promotion factors than by product quality indicators like ratings."
-            },
-            2: {
-                question: "Are cheaper products returned more often?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Compare return rates across price bands, (2) Check if lower-priced products show higher return rates." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_return_rate_by_price_band", content: "Calling the 'what-causes-product-returns-data-server' to fetch average return rate by price band..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Return Rate by Price Band:",
-                    items: [
-                        "Under $50: 37.3% avg return rate (17 products)",
-                        "$50\u2013$100: 32.6% avg return rate (26 products)",
-                        "$100\u2013$200: 33.4% avg return rate (67 products)",
-                        "$200+: 36.1% avg return rate (40 products)"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Checking report findings on price-return relationship..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Higher-priced items also have a slightly higher return rate, which may reflect unmet expectations.\"",
-                        "\"Products with higher discounts are slightly more likely to be returned.\""
-                    ]
-                },
-                answer: "Products under $50 have the highest average return rate at 37.3%, but the difference across price bands is small \u2014 ranging from 32.6% to 37.3%. Price alone is not a strong predictor of returns; the pattern is relatively flat across all segments."
-            },
-            3: {
-                question: "Do big discounts lead to more returns?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Compare return rates across discount bands, (2) Check if heavier discounts correlate with higher returns." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_return_rate_by_discount_band", content: "Calling the 'what-causes-product-returns-data-server' to fetch average return rate by discount band..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Return Rate by Discount Band:",
-                    items: [
-                        "0\u201310% discount: 31.7% avg return rate (19 products)",
-                        "10\u201330% discount: 33.2% avg return rate (73 products)",
-                        "30\u201350% discount: 36.8% avg return rate (44 products)",
-                        "50%+ discount: 37.3% avg return rate (14 products)"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Checking report findings on discount-return relationship..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Products with higher discounts are slightly more likely to be returned.\"",
-                        "\"Return problems may be more about how a product is priced or promoted rather than how customers rate it.\""
-                    ]
-                },
-                answer: "Yes, there is a gradual increase \u2014 products with 50%+ discounts average 37.3% returns compared to 31.7% for those with minimal discounts. This suggests heavy promotions may trigger impulse purchases that are more likely to be returned."
-            },
-            4: {
-                question: "Are campaign-discounted products returned more than regular ones?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Compare return rates for campaign (>40% discount) vs non-campaign products, (2) Check if the difference is meaningful." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_campaign_vs_noncampaign", content: "Calling the 'what-causes-product-returns-data-server' to compare campaign vs non-campaign return rates..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Campaign vs Non-Campaign:",
-                    items: [
-                        "Campaign products (>40% discount): 36.4% avg return rate (31 products)",
-                        "Non-campaign products: 33.9% avg return rate (119 products)",
-                        "Difference: 2.4 percentage points higher for campaign items"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Checking report insight on promotional impact..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Reassessing discount strategies to avoid encouraging impulse buys.\"",
-                        "\"Products with higher discounts are slightly more likely to be returned, possibly due to impulse purchases.\""
-                    ]
-                },
-                answer: "Campaign-discounted products average a 36.4% return rate versus 33.9% for regular items \u2014 a 2.4 percentage point gap. While not dramatic, this confirms the analyst report's finding that heavy promotions may encourage impulse purchases that end up being returned."
-            },
-            5: {
-                question: "Which product categories have the highest return rates?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Rank all 10 categories by average return rate, (2) Identify the top and bottom performers." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_return_rate_by_category", content: "Calling the 'what-causes-product-returns-data-server' to fetch return rate by category..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Return Rate by Category (Ranked):",
-                    items: [
-                        "Category 2: 49.4% avg return rate (5 products)",
-                        "Category 1: 42.5% avg return rate (15 products)",
-                        "Category 3: 38.1% avg return rate (17 products)",
-                        "Category 4: 36.6% avg return rate (14 products)",
-                        "Category 9: 36.0% avg return rate (15 products)",
-                        "Category 8: 34.6% avg return rate (26 products)",
-                        "Category 7: 32.3% avg return rate (18 products)",
-                        "Category 5: 28.0% avg return rate (13 products)",
-                        "Category 10: 28.0% avg return rate (12 products)",
-                        "Category 6: 26.7% avg return rate (15 products)"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Checking report for category-level insights..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Returns are influenced by more complex or hidden factors not currently captured in the data.\"",
-                        "\"The focus should be on reassessing discount strategies and providing clearer product information.\""
-                    ]
-                },
-                answer: "Categories 2 and 1 lead with return rates of 49.4% and 42.5% respectively, nearly double the best-performing Category 6 at 26.7%. These high-return categories should be prioritized for warehouse inspection and may benefit from clearer product descriptions to manage customer expectations."
-            },
-            6: {
-                question: "Does delivery time affect how often products get returned?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Compare return rates across delivery time bands, (2) Check if slower delivery leads to more returns." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_return_rate_by_delivery_band", content: "Calling the 'what-causes-product-returns-data-server' to fetch return rate by delivery band..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Return Rate by Delivery Band:",
-                    items: [
-                        "1\u20137 days: 35.1% avg return rate (30 products)",
-                        "8\u201314 days: 31.3% avg return rate (43 products)",
-                        "15\u201321 days: 39.8% avg return rate (43 products)",
-                        "22\u201330 days: 31.1% avg return rate (34 products)"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Checking report findings on delivery and returns..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Being out of stock doesn\u2019t seem to affect whether a product gets returned.\"",
-                        "\"Other factors are likely influencing returns that we haven\u2019t included yet.\""
-                    ]
-                },
-                answer: "Delivery time shows no consistent pattern \u2014 the 15\u201321 day band has the highest return rate at 39.8%, but the fastest deliveries (1\u20137 days) still see 35.1% returns. This confirms delivery speed is not a reliable predictor of returns."
-            },
-            7: {
-                question: "Are low-price products with big discounts the worst for returns?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Isolate products with price under $100 and discount above 40%, (2) Compare their return rate to all other products." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_low_price_high_discount_segment", content: "Calling the 'what-causes-product-returns-data-server' to compare low-price + high-discount segment vs others..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Low Price + High Discount Segment:",
-                    items: [
-                        "Low-price + high-discount products: 24.9% avg return rate (6 products)",
-                        "All other products: 34.8% avg return rate (144 products)",
-                        "Segment is LOWER than the rest by 9.9 percentage points"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Cross-referencing with report insight on price-discount interaction..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Returns are influenced by more complex or hidden factors not currently captured in the data.\"",
-                        "\"We can\u2019t rely on these three factors alone to make return predictions.\""
-                    ]
-                },
-                answer: "Surprisingly, the 6 products in this segment actually have a lower return rate (24.9%) than the rest (34.8%), based on this sample. This small sample size means we can't draw firm conclusions, but it shows that simple price-discount combinations alone don't reliably predict returns."
-            },
-            8: {
-                question: "Which categories should the warehouse inspect more carefully?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Identify categories with both high return rates and meaningful product volume, (2) Prioritize for inspection." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_return_rate_by_category", content: "Calling the 'what-causes-product-returns-data-server' to fetch return rate and volume by category..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Priority Categories (High Return + Volume):",
-                    items: [
-                        "Category 1: 42.5% return rate, 15 products \u2014 HIGH PRIORITY",
-                        "Category 3: 38.1% return rate, 17 products \u2014 HIGH PRIORITY",
-                        "Category 4: 36.6% return rate, 14 products \u2014 MEDIUM PRIORITY",
-                        "Category 8: 34.6% return rate, 26 products \u2014 MEDIUM PRIORITY (highest volume)",
-                        "Category 2: 49.4% return rate, 5 products \u2014 WATCH (small volume but very high rate)"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Checking report recommendations on reducing returns..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"To reduce returns, the focus should be on reassessing discount strategies and providing clearer product information for high-priced items.\""
-                    ]
-                },
-                answer: "Categories 1 and 3 should be top inspection priorities \u2014 they combine high return rates (42.5% and 38.1%) with meaningful volume (15 and 17 products). Category 8, while having a moderate return rate (34.6%), handles the most products (26) and deserves consistent inspection attention."
-            },
-            9: {
-                question: "Is stock availability linked to higher returns?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Compare return rates for in-stock vs out-of-stock products, (2) Determine if stock status matters." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_dataset_overview", content: "Calling the 'what-causes-product-returns-data-server' to compare return rates by stock availability..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Stock Availability vs Return Rate:",
-                    items: [
-                        "In-stock products: 33.2% avg return rate (137 products)",
-                        "Out-of-stock products: 47.4% avg return rate (13 products)",
-                        "Difference: 14.2 percentage points higher for out-of-stock items",
-                        "Note: Out-of-stock group is very small (13 products)"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Checking report findings on stock availability..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Products that were out of stock are returned just as often as those that were in stock.\"",
-                        "\"The return rate for both groups is nearly the same, and the difference is so small it\u2019s not meaningful.\""
-                    ]
-                },
-                answer: "In this 150-row sample, out-of-stock products show a higher return rate (47.4% vs 33.2%), but with only 13 out-of-stock products, this gap is likely due to small sample variation. The full dataset analysis in the report confirms stock availability has no meaningful effect on returns."
-            },
-            10: {
-                question: "What should we focus on to reduce returns?",
-                workflow: [
-                    { title: "\ud83d\udccb Planning", content: "Breaking down the query: (1) Summarize the strongest return drivers from the data, (2) Pull actionable recommendations from the analyst report." },
-                    { title: "\ud83d\udd0d MCP Tool Call \u2014 mcp_get_dataset_overview", content: "Calling the 'what-causes-product-returns-data-server' to summarize key findings..." }
-                ],
-                dataResult: {
-                    title: "MCP Response \u2014 Key Return Drivers Summary:",
-                    items: [
-                        "Discount effect: 37.3% return rate at 50%+ discount vs 31.7% at 0\u201310%",
-                        "Campaign effect: 36.4% for campaign vs 33.9% for non-campaign",
-                        "Top-return categories: Cat 2 (49.4%), Cat 1 (42.5%), Cat 3 (38.1%)",
-                        "Delivery and stock: no consistent impact on returns",
-                        "Price effect: slight variation but not a strong predictor"
-                    ]
-                },
-                workflow2: [
-                    { title: "\ud83d\udcc4 Context Search \u2014 Analyst Report", content: "Retrieving final recommendations from the analyst report..." }
-                ],
-                dataResult2: {
-                    title: "Report Insight:",
-                    items: [
-                        "\"Reassessing discount strategies to avoid encouraging impulse buys.\"",
-                        "\"Providing clearer product information for high-priced items to manage customer expectations.\"",
-                        "\"Collecting better data such as past return history, reasons for return, or delivery issues.\""
-                    ]
-                },
-                answer: "Focus on two areas: first, reassess heavy discount campaigns (50%+ discounts show 37.3% returns) as they may trigger impulse buys that get returned; second, prioritize warehouse inspection for Categories 1, 2, and 3 which have the highest return rates. Longer term, collecting return reasons and customer complaint data will unlock far better prediction than the current product attributes alone."
-            }
-        };
+      <main class="main">
+        <div class="thread" id="thread">
+          <div class="row bot">
+            <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+            <div class="bubble"><div class="lead">I can answer questions about <b>150 sampled products</b> across 10 categories: how price, discounts, campaigns, delivery, and category change the return rate. Tap a prompt below, or type your own.</div></div>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="chips" id="chips"></div>
+          <div class="inputbar">
+            <input id="input" type="text" placeholder="Ask about price, discounts, campaigns, delivery, or category...">
+            <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+          <div class="disclaimer">A portfolio demonstration. Figures come from a 150-row sample; the agent surfaces patterns for you to interpret.</div>
+        </div>
+      </main>
+    </div>
+  </div>
 
-        function showResponse(id) {
-            const r = responses[id];
-            if (!r) return;
-            const chat = document.getElementById('chatMessages');
-            let html = '<div class="message user">' + r.question + '</div>';
-            html += '<div class="message agent"><span class="agent-label">AI Agent</span>';
-            r.workflow.forEach(w => {
-                html += '<div class="workflow-step"><div class="step-title">' + w.title + '</div><div class="step-content">' + w.content + '</div></div>';
-            });
-            html += '<div class="data-result"><div class="result-title">' + r.dataResult.title + '</div><ul>';
-            r.dataResult.items.forEach(i => { html += '<li>' + i + '</li>'; });
-            html += '</ul></div>';
-            if (r.workflow2) {
-                r.workflow2.forEach(w => {
-                    html += '<div class="workflow-step"><div class="step-title">' + w.title + '</div><div class="step-content">' + w.content + '</div></div>';
-                });
-            }
-            if (r.dataResult2) {
-                html += '<div class="data-result"><div class="result-title">' + r.dataResult2.title + '</div><ul>';
-                r.dataResult2.items.forEach(i => { html += '<li>' + i + '</li>'; });
-                html += '</ul></div>';
-            }
-            html += '<div class="final-answer"><span class="answer-label">\ud83d\udca1 Final Answer</span>' + r.answer + '</div>';
-            html += '</div>';
-            chat.innerHTML = html;
-            chat.scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  document.getElementById('hamburger').addEventListener('click',()=>{drawer.classList.add('open');overlay.classList.add('open');});
+  const _cl=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+  document.getElementById('drawerClose').addEventListener('click',_cl);
+  overlay.addEventListener('click',_cl);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',_cl));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')_cl(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+</script>
+
+<script>
+// STATIC canned answers (no database). Each answer = approved tool + the answer + a data card.
+const responses = {
+  1:{question:"What does the return data look like overall?", tool:"get_dataset_overview",
+    answer:"The sample of 150 products has an average return rate of 34.4%, with about 1 in 4 products falling into the high-return category (above 50%). Returns appear driven more by pricing and promotion factors than by product quality indicators like ratings.",
+    dataResult:{title:"Dataset overview",items:["Total products sampled: 150","Average return rate: 34.4%","Median return rate: 31.2%","Product categories: 10","Price range: $5.00 – $535.27","Average price: $157.16","Average discount: 27.9%","High-return products (>50%): 35 (23.3% of sample)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Returns are more related to discounts and price than to product reviews or ratings.\"","\"Return problems may be more about how a product is priced or promoted rather than how customers rate it.\""]}},
+  2:{question:"Are cheaper products returned more often?", tool:"get_return_rate_by_price_band",
+    answer:"Products under $50 have the highest average return rate at 37.3%, but the difference across price bands is small, ranging from 32.6% to 37.3%. Price alone is not a strong predictor of returns; the pattern is relatively flat across all segments.",
+    dataResult:{title:"Return rate by price band",items:["Under $50: 37.3% avg return rate (17 products)","$50–$100: 32.6% avg return rate (26 products)","$100–$200: 33.4% avg return rate (67 products)","$200+: 36.1% avg return rate (40 products)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Higher-priced items also have a slightly higher return rate, which may reflect unmet expectations.\"","\"Products with higher discounts are slightly more likely to be returned.\""]}},
+  3:{question:"Do big discounts lead to more returns?", tool:"get_return_rate_by_discount_band",
+    answer:"Yes, there is a gradual increase, products with 50%+ discounts average 37.3% returns compared to 31.7% for those with minimal discounts. This suggests heavy promotions may trigger impulse purchases that are more likely to be returned.",
+    dataResult:{title:"Return rate by discount band",items:["0–10% discount: 31.7% avg return rate (19 products)","10–30% discount: 33.2% avg return rate (73 products)","30–50% discount: 36.8% avg return rate (44 products)","50%+ discount: 37.3% avg return rate (14 products)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Products with higher discounts are slightly more likely to be returned.\"","\"Return problems may be more about how a product is priced or promoted rather than how customers rate it.\""]}},
+  4:{question:"Are campaign-discounted products returned more than regular ones?", tool:"get_campaign_vs_noncampaign",
+    answer:"Campaign-discounted products average a 36.4% return rate versus 33.9% for regular items, a 2.4 percentage point gap. While not dramatic, this confirms the analyst report's finding that heavy promotions may encourage impulse purchases that end up being returned.",
+    dataResult:{title:"Campaign vs non-campaign",items:["Campaign products (>40% discount): 36.4% avg return rate (31 products)","Non-campaign products: 33.9% avg return rate (119 products)","Difference: 2.4 percentage points higher for campaign items"]},
+    dataResult2:{title:"From the analyst report",items:["\"Reassessing discount strategies to avoid encouraging impulse buys.\"","\"Products with higher discounts are slightly more likely to be returned, possibly due to impulse purchases.\""]}},
+  5:{question:"Which product categories have the highest return rates?", tool:"get_return_rate_by_category",
+    answer:"Categories 2 and 1 lead with return rates of 49.4% and 42.5% respectively, nearly double the best-performing Category 6 at 26.7%. These high-return categories should be prioritized for warehouse inspection and may benefit from clearer product descriptions to manage customer expectations.",
+    dataResult:{title:"Return rate by category (ranked)",items:["Category 2: 49.4% avg return rate (5 products)","Category 1: 42.5% avg return rate (15 products)","Category 3: 38.1% avg return rate (17 products)","Category 4: 36.6% avg return rate (14 products)","Category 9: 36.0% avg return rate (15 products)","Category 8: 34.6% avg return rate (26 products)","Category 7: 32.3% avg return rate (18 products)","Category 5: 28.0% avg return rate (13 products)","Category 10: 28.0% avg return rate (12 products)","Category 6: 26.7% avg return rate (15 products)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Returns are influenced by more complex or hidden factors not currently captured in the data.\"","\"The focus should be on reassessing discount strategies and providing clearer product information.\""]}},
+  6:{question:"Does delivery time affect how often products get returned?", tool:"get_return_rate_by_delivery_band",
+    answer:"Delivery time shows no consistent pattern, the 15–21 day band has the highest return rate at 39.8%, but the fastest deliveries (1–7 days) still see 35.1% returns. This confirms delivery speed is not a reliable predictor of returns.",
+    dataResult:{title:"Return rate by delivery band",items:["1–7 days: 35.1% avg return rate (30 products)","8–14 days: 31.3% avg return rate (43 products)","15–21 days: 39.8% avg return rate (43 products)","22–30 days: 31.1% avg return rate (34 products)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Being out of stock doesn’t seem to affect whether a product gets returned.\"","\"Other factors are likely influencing returns that we haven’t included yet.\""]}},
+  7:{question:"Are low-price products with big discounts the worst for returns?", tool:"get_low_price_high_discount_segment",
+    answer:"Surprisingly, the 6 products in this segment actually have a lower return rate (24.9%) than the rest (34.8%), based on this sample. This small sample size means we can't draw firm conclusions, but it shows that simple price-discount combinations alone don't reliably predict returns.",
+    dataResult:{title:"Low price + high discount segment",items:["Low-price + high-discount products: 24.9% avg return rate (6 products)","All other products: 34.8% avg return rate (144 products)","Segment is LOWER than the rest by 9.9 percentage points"]},
+    dataResult2:{title:"From the analyst report",items:["\"Returns are influenced by more complex or hidden factors not currently captured in the data.\"","\"We can’t rely on these three factors alone to make return predictions.\""]}},
+  8:{question:"Which categories should the warehouse inspect more carefully?", tool:"get_return_rate_by_category",
+    answer:"Categories 1 and 3 should be top inspection priorities, they combine high return rates (42.5% and 38.1%) with meaningful volume (15 and 17 products). Category 8, while having a moderate return rate (34.6%), handles the most products (26) and deserves consistent inspection attention.",
+    dataResult:{title:"Priority categories (high return + volume)",items:["Category 1: 42.5% return rate, 15 products, HIGH PRIORITY","Category 3: 38.1% return rate, 17 products, HIGH PRIORITY","Category 4: 36.6% return rate, 14 products, MEDIUM PRIORITY","Category 8: 34.6% return rate, 26 products, MEDIUM PRIORITY (highest volume)","Category 2: 49.4% return rate, 5 products, WATCH (small volume but very high rate)"]},
+    dataResult2:{title:"From the analyst report",items:["\"To reduce returns, the focus should be on reassessing discount strategies and providing clearer product information for high-priced items.\""]}},
+  9:{question:"Is stock availability linked to higher returns?", tool:"get_dataset_overview",
+    answer:"In this 150-row sample, out-of-stock products show a higher return rate (47.4% vs 33.2%), but with only 13 out-of-stock products, this gap is likely due to small sample variation. The full dataset analysis in the report confirms stock availability has no meaningful effect on returns.",
+    dataResult:{title:"Stock availability vs return rate",items:["In-stock products: 33.2% avg return rate (137 products)","Out-of-stock products: 47.4% avg return rate (13 products)","Difference: 14.2 percentage points higher for out-of-stock items","Note: Out-of-stock group is very small (13 products)"]},
+    dataResult2:{title:"From the analyst report",items:["\"Products that were out of stock are returned just as often as those that were in stock.\"","\"The return rate for both groups is nearly the same, and the difference is so small it’s not meaningful.\""]}},
+  10:{question:"What should we focus on to reduce returns?", tool:"get_dataset_overview",
+    answer:"Focus on two areas: first, reassess heavy discount campaigns (50%+ discounts show 37.3% returns) as they may trigger impulse buys that get returned; second, prioritize warehouse inspection for Categories 1, 2, and 3 which have the highest return rates. Longer term, collecting return reasons and customer complaint data will unlock far better prediction than the current product attributes alone.",
+    dataResult:{title:"Key return drivers summary",items:["Discount effect: 37.3% return rate at 50%+ discount vs 31.7% at 0–10%","Campaign effect: 36.4% for campaign vs 33.9% for non-campaign","Top-return categories: Cat 2 (49.4%), Cat 1 (42.5%), Cat 3 (38.1%)","Delivery and stock: no consistent impact on returns","Price effect: slight variation but not a strong predictor"]},
+    dataResult2:{title:"From the analyst report",items:["\"Reassessing discount strategies to avoid encouraging impulse buys.\"","\"Providing clearer product information for high-priced items to manage customer expectations.\"","\"Collecting better data such as past return history, reasons for return, or delivery issues.\""]}}
+};
+
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const card=d=>`<div class="card"><div class="cap">${d.title}</div><ul>${d.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+
+// answer directly: tool badge + the answer + a data card (no planning/workflow steps)
+function render(r){
+  let html=badge(r.tool)+`<div class="lead">${r.answer}</div>`+card(r.dataResult);
+  if(r.dataResult2) html+=card(r.dataResult2);
+  return html;
+}
+
+// suggested prompts
+const chips=document.getElementById('chips');
+Object.keys(responses).forEach(k=>{ const b=document.createElement('button'); b.className='chip'; b.dataset.k=k; b.textContent=responses[k].question; chips.appendChild(b); });
+
+// Each new question REPLACES the previous exchange (no endless scroll).
+function ask(k){
+  const r=responses[k]; if(!r) return;
+  thread.innerHTML=`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(r.question)}</div></div>`;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="cur">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${r.tool}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{ document.getElementById('cur').querySelector('.bubble').innerHTML=render(r); scroll(); postH(); },620);
+}
+chips.addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(b) ask(b.dataset.k); });
+
+const input=document.getElementById('input');
+function route(){
+  const t=input.value.trim(); if(!t) return; input.value=''; const q=t.toLowerCase(); let k=null;
+  if(/overview|dataset|how big|how many|cover|sample|overall|look like/.test(q)) k='1';
+  else if(/cheap|price band|by price|lower.?priced|expensive/.test(q)) k='2';
+  else if(/big discount|deep discount|discount.*return|more returns/.test(q)) k='3';
+  else if(/campaign|promotion|promo/.test(q)) k='4';
+  else if(/highest return|categor.*return|which categor|top categor/.test(q)) k='5';
+  else if(/deliver|shipping time|how long/.test(q)) k='6';
+  else if(/low.?price.*discount|worst for returns|segment/.test(q)) k='7';
+  else if(/inspect|warehouse|priorit/.test(q)) k='8';
+  else if(/stock|out of stock|availab|inventory/.test(q)) k='9';
+  else if(/reduce returns|focus|recommend|what should/.test(q)) k='10';
+  if(k) ask(k);
+  else { thread.innerHTML=`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div><div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Tap a suggested question to see the agent answer from the returns data.</div></div></div>`; scroll(); postH(); }
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{ if(e.key==='Enter') route(); });
+</script>
+<script>
+/* Maximize / restore the chat interface. Esc also restores. */
+(function(){
+  var panel=document.querySelector('.assistant'); if(!panel)return;
+  var btn=document.getElementById('maxbtn'); if(!btn)return;
+  var EXP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>', RES='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3a2 2 0 0 0 2-2V3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M21 16h-3a2 2 0 0 0-2 2v3"/></svg>';
+  btn.innerHTML=EXP;
+  function toggle(){
+    var on=panel.classList.toggle('maxed');
+    document.body.classList.toggle('maxed-lock',on);
+    btn.innerHTML=on?RES:EXP;
+    btn.title=on?'Restore':'Full screen';
+    btn.setAttribute('aria-label',on?'Restore size':'Expand to full screen');
+    if(typeof postH==='function')postH();
+  }
+  btn.addEventListener('click',toggle);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&panel.classList.contains('maxed'))toggle(); });
+})();
+</script>
 </body>
 </html>
