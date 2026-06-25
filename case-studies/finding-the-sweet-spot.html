@@ -1,265 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Finding the Sweet Spot | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <!-- Two-Column Layout Wrapper -->
-  <div class="container">
-   <!-- Left Column (Personal Info and Contact) -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let’s work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/finding-the-sweet-spot-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column (Full Case Study Content) -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Finding the Sweet Spot Cover" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/cover%20image.png"/>
-      <h1>
-       Finding the Sweet Spot
-      </h1>
-      <p>
-       Uncovering the Best Locations and Price Points for Mid-Sized Home Investments
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis explores the pricing landscape of residential properties sized between 2,000 and 2,500 square feet, a segment commonly sought by real estate investors seeking a balance between affordability and growth potential. Using historical sales data, the objective is to establish reliable pricing benchmarks, identify outliers, and determine how consistently properties in this size range perform across different cities and features.
-      </p>
-      <p>
-       By modeling price distributions and quantifying variability, the study provides investors with a data-driven foundation to assess whether a property is undervalued, overvalued, or fairly priced.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. What is the typical price range for homes between 2,000–2,500 sqft in this market?
-      </h2>
-      <p>
-       Based on historical sales data, the average price for homes in the 2,000–2,500 sqft range is RM 529,579, with a median price of RM 497,000. Prices span from a minimum of RM 194,250 to a maximum of RM 1,755,000. Most homes fall within the RM 320,000 to RM 740,000 range, which represents one standard deviation (±1σ) from the mean.
-      </p>
-      <p>
-       The distribution is right-skewed, meaning most homes are priced in the mid-range, while fewer higher-end properties pull the average upward. This pattern is confirmed by a histogram showing a dense cluster of prices between RM 400K and RM 600K, with outliers on the higher end.
-      </p>
-      <img alt="Histogram of Prices" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%201%20-%20histogram.png"/>
-      <p>
-       For investors, this range offers a practical benchmark. Homes priced below RM 320K may present undervalued opportunities, while those above RM 740K may require closer scrutiny to avoid overpaying.
-      </p>
-     </section>
-     <section>
-      <h2>
-       2. How variable is the pricing for homes in the 2,000–2,500 sqft range?
-      </h2>
-      <p>
-       Price variability in this segment is moderate. The standard deviation is RM 208,869, and the interquartile range (IQR) is RM 274,000. The coefficient of variation (CV) is 0.394, indicating that price fluctuations exist but are not extreme.
-      </p>
-      <img alt="KDE Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%202%20-%20kde%20plot.png"/>
-      <p>
-       Boxplots by city show consistent median values between RM 450K and RM 550K, although some cities like Subang Jaya and Cheras show wider spreads. KDE plots reveal a sharp density between RM 400K and RM 600K, with a long right tail suggesting a few high-priced homes that contribute to overall variability.
-      </p>
-      <img alt="Box Plot by City" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%202%20-%20box%20plot.png"/>
-      <p>
-       This means most homes are predictably priced, but the presence of high-end outliers increases the spread. Investors can expect a consistent pricing environment in most cities, but should account for price dispersion when targeting luxury or upgraded properties.
-      </p>
-     </section>
-     <section>
-      <h2>
-       3. What percentage of 2,000–2,500 sqft homes fall within 1 or 2 standard deviations of the mean?
-      </h2>
-      <p>
-       Approximately 72.6% of homes in this size range are priced within one standard deviation (±1σ) of the mean, between RM 320,710 and RM 738,448. Expanding the range to two standard deviations (±2σ), between RM 111,841 and RM 947,318, captures 95.84% of homes.
-      </p>
-      <img alt="Line Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%203%20-%20line%20chart.png"/>
-      <p>
-       Visual analysis supports these findings. In the histogram, the majority of price occurrences fall within the ±1σ zone, while the cumulative distribution curve rises steeply in that same range. Homes priced beyond ±2σ are rare outliers.
-      </p>
-      <img alt="Histogram within Standard Deviations" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%203%20-%20histogram.png"/>
-      <p>
-       This clustering indicates that the price range is highly reliable, giving investors confidence when estimating value. Properties priced outside the ±2σ band should be treated as exceptional cases requiring further validation.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. Where does a specific target property in this size range sit within that price distribution?
-      </h2>
-      <p>
-       A target property priced at RM 640,000 sits slightly above the market average. With a z-score of 0.53, this price is just over half a standard deviation above the mean and falls at the 70th percentile—more expensive than 70% of similar properties.
-      </p>
-      <img alt="Bar Chart of Target Property" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%204%20-%20bar%20chart.png"/>
-      <p>
-       The target price remains within the expected price band (below RM 738,000) and aligns with the densest part of the distribution, as shown in both the histogram and bar chart. It does not fall into the overpayment zone but does carry a slight premium.
-      </p>
-      <img alt="Histogram of Target Property" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%204%20-%20histogram.png"/>
-      <p>
-       This pricing could be reasonable if the home offers added value through renovation, location, or premium features. If such attributes are missing, investors may consider negotiating a better price or exploring similar properties in the RM 500K–RM 600K range.
-      </p>
-     </section>
-     <section>
-      <h2>
-       5. What is the risk of overpaying for a 2,000–2,500 sqft home based on historical pricing behavior?
-      </h2>
-      <p>
-       The historical risk of overpaying is relatively low. Only 7.04% of homes in this segment were sold above RM 842,883, which marks the overpayment threshold (defined as 1.5 standard deviations above the mean).
-      </p>
-      <img alt="Overpayment Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%205%20-%20bar%20chart.png"/>
-      <p>
-       The histogram shows that most transactions fall below this threshold. City-level analysis reveals that Serdang, Subang Jaya, and Petaling Jaya have the highest overpayment rates, each exceeding 8%. In contrast, Kuala Lumpur and Cyberjaya show lower overpayment tendencies, both below 6%.
-      </p>
-      <img alt="Overpayment Histogram" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%205%20-%20histogram.png"/>
-      <p>
-       Overpayment risk also varies by grade. Grade 11 homes show a 100% overpayment rate, while homes graded 10 are at 40%. Properties graded 7 or lower show minimal risk.
-      </p>
-      <img alt="Grade Overpayment Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%205%20-%20overpayment%20bar%20chart.png"/>
-      <p>
-       Investors should be especially cautious when buying high-grade homes or investing in high-demand areas. Using RM 842K as a ceiling for fair pricing can help avoid paying above market value unless there is clear justification.
-      </p>
-     </section>
-     <section>
-      <h2>
-       6. Is targeting 2,000–2,500 sqft homes a repeatable investment strategy, or is this case-specific?
-      </h2>
-      <p>
-       Targeting homes in the 2,000–2,500 sqft range appears to be a repeatable and scalable strategy, particularly in cities with predictable pricing. Cities such as Cyberjaya and Kuala Lumpur exhibit moderate average prices (around RM 510K–520K) and low standard deviations (below RM 200K), making them ideal for stable investments.
-      </p>
-      <p>
-       Cities like Serdang and Petaling Jaya offer higher average prices but also greater variability, which may appeal to investors willing to take on slightly more risk for higher potential returns. Shah Alam and Putrajaya offer a balance of price stability and market size.
-      </p>
-      <img alt="Scatter Plot by City" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%206%20-%20scatter%20plot.png"/>
-      <p>
-       The scatter plot shows these patterns clearly, with cities in the lower-right quadrant representing ideal conditions for repeatable investment. In contrast, cities in the upper-left reflect less consistency and may require more deal-by-deal evaluation.
-      </p>
-     </section>
-     <section>
-      <h2>
-       7. Do other features (e.g., location, grade, renovation status) significantly influence pricing within the 2,000–2,500 sqft range?
-      </h2>
-      <p>
-       Yes, several features have a significant impact on pricing. Renovated homes are priced RM 140K higher on average compared to non-renovated ones, showing that renovations contribute clear value. Homes with basements show a smaller premium, around RM 30K, suggesting additional space is valued, though not substantially.
-      </p>
-      <img alt="Renovation Impact Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%207%20-%20renovation%20bar%20chart.png"/>
-      <p>
-       Build quality, as indicated by grade, is the strongest determinant of price. Grade 11 homes average RM 1.23 million, more than four times the price of Grade 5 homes (RM 300K). Price increases steadily with grade and becomes more variable at the higher end, as seen in the violin plot.
-      </p>
-      <img alt="Grade Price Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%207%20-%20grade%20bar%20chart.png"/>
-      <p>
-       City differences are more subtle. Mean prices across Cyberjaya, Kuala Lumpur, Petaling Jaya, and Serdang fall within a close range (RM 511K–RM 543K), so city choice may depend more on volatility, feature mix, and overpayment trends.
-      </p>
-      <p>
-       For best returns, investors should look for Grade 8–10 homes with renovations in cities that show controlled overpayment and moderate price variability. Combining favorable features can help maximize return while reducing pricing risk.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       Based on the historical analysis, the expected price range for homes sized between 2,000–2,500 sqft lies between RM 320,000 and RM 740,000, which corresponds to one standard deviation (±1σ) around the mean price of RM 529,579. This range captures roughly 73% of all transactions, indicating strong clustering and high reliability in pricing for this segment.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Recommended Price Range to Buy
-      </h2>
-      <p>
-       For most investors, the ideal price range for purchasing 2,000–2,500 sqft homes is between RM 450,000 and RM 600,000. This range:
-      </p>
-      <ul>
-       <li>
-        Falls within the densest part of the distribution curve (as seen in the KDE and histogram),
-       </li>
-       <li>
-        Offers the best balance between affordability and resale potential,
-       </li>
-       <li>
-        Avoids the overpayment zone while still securing properties above entry-level stock.
-       </li>
-      </ul>
-     </section>
-     <section>
-      <h2>
-       Best Locations for Rental Yield and Resale Consistency
-      </h2>
-      <p>
-       Based on the price stability, overpayment behavior, and repeatability analysis:
-      </p>
-      <ul>
-       <li>
-        Cyberjaya and Kuala Lumpur offer the most consistent resale outcomes. These cities show:
-        <ul>
-         <li>
-          Moderate average prices (~RM 510K–RM 520K),
-         </li>
-         <li>
-          Lowest price variability (standard deviation &lt; RM 200K),
-         </li>
-         <li>
-          Lowest overpayment rates (&lt; 6%).
-         </li>
-        </ul>
-        These characteristics make them ideal for repeatable, low-risk investment strategies, where predictable price appreciation and easier resale are key.
-       </li>
-       <li>
-        For rental income, Cyberjaya stands out due to its large student and tech worker population, high rental demand, and stable pricing. Its moderate property values paired with strong rental markets often lead to above-average rental yields, particularly for renovated or upgraded homes.
-       </li>
-      </ul>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding the Sweet Spot | Data Stories Lab</title>
+<meta name="description" content="Find the fair price for mid-size homes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Segmentation Analysis</span>
+    <span class="sep">/</span><span>Finding the Sweet Spot</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/cover%20image.png" alt="Finding the Sweet Spot">
+    <figcaption><span>Pinning down the fair price for a mid-size home.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Property &amp; investment</div>
+  <h1 class="title">Finding the Sweet Spot</h1>
+  <p class="standfirst">Find the fair price for mid-size homes</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>2,000&ndash;2,500 sqft &middot; pricing</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/finding-the-sweet-spot-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/finding-the-sweet-spot.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis explores the pricing landscape of residential properties sized between 2,000 and 2,500 square feet, a segment commonly sought by real estate investors seeking a balance between affordability and growth potential. Using historical sales data, the objective is to establish reliable pricing benchmarks, identify outliers, and determine how consistently properties in this size range perform across different cities and features. </p> <p> By modeling price distributions and quantifying variability, the study provides investors with a data-driven foundation to assess whether a property is undervalued, overvalued, or fairly priced. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">RM529,579</div><div class="l">average price</div></div><div class="fig"><div class="n">72.6%</div><div class="l">within 1&sigma;</div></div><div class="fig"><div class="n">+RM140k</div><div class="l">renovation premium</div></div><div class="fig"><div class="n">7%</div><div class="l">overpay risk</div></div></div>
+
+  <div class="pull"><p>&ldquo;Based on the historical analysis, the expected price range for homes sized between 2,000–2,500 sqft lies between RM 320,000 and RM 740,000, which corresponds to one stand&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. What is the typical price range for homes between 2,000–2,500 sqft in this market?</h3><div class="ftext"><p> Based on historical sales data, the average price for homes in the 2,000–2,500 sqft range is RM 529,579, with a median price of RM 497,000. Prices span from a minimum of RM 194,250 to a maximum of RM 1,755,000. Most homes fall within the RM 320,000 to RM 740,000 range, which represents one standard deviation (±1σ) from the mean. </p> <p> The distribution is right-skewed, meaning most homes are priced in the mid-range, while fewer higher-end properties pull the average upward. This pattern is confirmed by a histogram showing a dense cluster of prices between RM 400K and RM 600K, with outliers on the higher end. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%201%20-%20histogram.png" alt="chart"></figure> <p> For investors, this range offers a practical benchmark. Homes priced below RM 320K may present undervalued opportunities, while those above RM 740K may require closer scrutiny to avoid overpaying. </p></div></article>
+    <article class="finding"><h3 class="fq">2. How variable is the pricing for homes in the 2,000–2,500 sqft range?</h3><div class="ftext"><p> Price variability in this segment is moderate. The standard deviation is RM 208,869, and the interquartile range (IQR) is RM 274,000. The coefficient of variation (CV) is 0.394, indicating that price fluctuations exist but are not extreme. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%202%20-%20kde%20plot.png" alt="chart"></figure> <p> Boxplots by city show consistent median values between RM 450K and RM 550K, although some cities like Subang Jaya and Cheras show wider spreads. KDE plots reveal a sharp density between RM 400K and RM 600K, with a long right tail suggesting a few high-priced homes that contribute to overall variability. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%202%20-%20box%20plot.png" alt="chart"></figure> <p> This means most homes are predictably priced, but the presence of high-end outliers increases the spread. Investors can expect a consistent pricing environment in most cities, but should account for price dispersion when targeting luxury or upgraded properties. </p></div></article>
+    <article class="finding"><h3 class="fq">3. What percentage of 2,000–2,500 sqft homes fall within 1 or 2 standard deviations of the mean?</h3><div class="ftext"><p> Approximately 72.6% of homes in this size range are priced within one standard deviation (±1σ) of the mean, between RM 320,710 and RM 738,448. Expanding the range to two standard deviations (±2σ), between RM 111,841 and RM 947,318, captures 95.84% of homes. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%203%20-%20line%20chart.png" alt="chart"></figure> <p> Visual analysis supports these findings. In the histogram, the majority of price occurrences fall within the ±1σ zone, while the cumulative distribution curve rises steeply in that same range. Homes priced beyond ±2σ are rare outliers. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%203%20-%20histogram.png" alt="chart"></figure> <p> This clustering indicates that the price range is highly reliable, giving investors confidence when estimating value. Properties priced outside the ±2σ band should be treated as exceptional cases requiring further validation. </p></div></article>
+    <article class="finding"><h3 class="fq">4. Where does a specific target property in this size range sit within that price distribution?</h3><div class="ftext"><p> A target property priced at RM 640,000 sits slightly above the market average. With a z-score of 0.53, this price is just over half a standard deviation above the mean and falls at the 70th percentile, more expensive than 70% of similar properties. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%204%20-%20bar%20chart.png" alt="chart"></figure> <p> The target price remains within the expected price band (below RM 738,000) and aligns with the densest part of the distribution, as shown in both the histogram and bar chart. It does not fall into the overpayment zone but does carry a slight premium. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%204%20-%20histogram.png" alt="chart"></figure> <p> This pricing could be reasonable if the home offers added value through renovation, location, or premium features. If such attributes are missing, investors may consider negotiating a better price or exploring similar properties in the RM 500K–RM 600K range. </p></div></article>
+    <article class="finding"><h3 class="fq">5. What is the risk of overpaying for a 2,000–2,500 sqft home based on historical pricing behavior?</h3><div class="ftext"><p> The historical risk of overpaying is relatively low. Only 7.04% of homes in this segment were sold above RM 842,883, which marks the overpayment threshold (defined as 1.5 standard deviations above the mean). </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%205%20-%20bar%20chart.png" alt="chart"></figure> <p> The histogram shows that most transactions fall below this threshold. City-level analysis reveals that Serdang, Subang Jaya, and Petaling Jaya have the highest overpayment rates, each exceeding 8%. In contrast, Kuala Lumpur and Cyberjaya show lower overpayment tendencies, both below 6%. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%205%20-%20histogram.png" alt="chart"></figure> <p> Overpayment risk also varies by grade. Grade 11 homes show a 100% overpayment rate, while homes graded 10 are at 40%. Properties graded 7 or lower show minimal risk. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%205%20-%20overpayment%20bar%20chart.png" alt="chart"></figure> <p> Investors should be especially cautious when buying high-grade homes or investing in high-demand areas. Using RM 842K as a ceiling for fair pricing can help avoid paying above market value unless there is clear justification. </p></div></article>
+    <article class="finding"><h3 class="fq">6. Is targeting 2,000–2,500 sqft homes a repeatable investment strategy, or is this case-specific?</h3><div class="ftext"><p> Targeting homes in the 2,000–2,500 sqft range appears to be a repeatable and scalable strategy, particularly in cities with predictable pricing. Cities such as Cyberjaya and Kuala Lumpur exhibit moderate average prices (around RM 510K–520K) and low standard deviations (below RM 200K), making them ideal for stable investments. </p> <p> Cities like Serdang and Petaling Jaya offer higher average prices but also greater variability, which may appeal to investors willing to take on slightly more risk for higher potential returns. Shah Alam and Putrajaya offer a balance of price stability and market size. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%206%20-%20scatter%20plot.png" alt="chart"></figure> <p> The scatter plot shows these patterns clearly, with cities in the lower-right quadrant representing ideal conditions for repeatable investment. In contrast, cities in the upper-left reflect less consistency and may require more deal-by-deal evaluation. </p></div></article>
+    <article class="finding"><h3 class="fq">7. Do other features (e.g., location, grade, renovation status) significantly influence pricing within the 2,000–2,500 sqft range?</h3><div class="ftext"><p> Yes, several features have a significant impact on pricing. Renovated homes are priced RM 140K higher on average compared to non-renovated ones, showing that renovations contribute clear value. Homes with basements show a smaller premium, around RM 30K, suggesting additional space is valued, though not substantially. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%207%20-%20renovation%20bar%20chart.png" alt="chart"></figure> <p> Build quality, as indicated by grade, is the strongest determinant of price. Grade 11 homes average RM 1.23 million, more than four times the price of Grade 5 homes (RM 300K). Price increases steadily with grade and becomes more variable at the higher end, as seen in the violin plot. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-the-sweet-spot/chart%207%20-%20grade%20bar%20chart.png" alt="chart"></figure> <p> City differences are more subtle. Mean prices across Cyberjaya, Kuala Lumpur, Petaling Jaya, and Serdang fall within a close range (RM 511K–RM 543K), so city choice may depend more on volatility, feature mix, and overpayment trends. </p> <p> For best returns, investors should look for Grade 8–10 homes with renovations in cities that show controlled overpayment and moderate price variability. Combining favorable features can help maximize return while reducing pricing risk. </p></div></article>
+    <article class="finding"><h3 class="fq">Recommended Price Range to Buy</h3><div class="ftext"><p> For most investors, the ideal price range for purchasing 2,000–2,500 sqft homes is between RM 450,000 and RM 600,000. This range: </p> <ul> <li> Falls within the densest part of the distribution curve (as seen in the KDE and histogram), </li> <li> Offers the best balance between affordability and resale potential, </li> <li> Avoids the overpayment zone while still securing properties above entry-level stock. </li> </ul></div></article>
+    <article class="finding"><h3 class="fq">Best Locations for Rental Yield and Resale Consistency</h3><div class="ftext"><p> Based on the price stability, overpayment behavior, and repeatability analysis: </p> <ul> <li> Cyberjaya and Kuala Lumpur offer the most consistent resale outcomes. These cities show: <ul> <li> Moderate average prices (~RM 510K–RM 520K), </li> <li> Lowest price variability (standard deviation &lt; RM 200K), </li> <li> Lowest overpayment rates (&lt; 6%). </li> </ul> These characteristics make them ideal for repeatable, low-risk investment strategies, where predictable price appreciation and easier resale are key. </li> <li> For rental income, Cyberjaya stands out due to its large student and tech worker population, high rental demand, and stable pricing. Its moderate property values paired with strong rental markets often lead to above-average rental yields, particularly for renovated or upgraded homes. </li> </ul></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> Based on the historical analysis, the expected price range for homes sized between 2,000–2,500 sqft lies between RM 320,000 and RM 740,000, which corresponds to one standard deviation (±1σ) around the mean price of RM 529,579. This range captures roughly 73% of all transactions, indicating strong clustering and high reliability in pricing for this segment. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

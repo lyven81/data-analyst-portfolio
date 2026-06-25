@@ -1,238 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Beyond the Price Tag | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/beyond-the-price-tag-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-    <!-- Agentic Workflow Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/beyond-the-price-tag.html">
-      AI Assistant
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/cover%20image.png"/>
-      <h1>
-       Beyond the Price Tag
-      </h1>
-      <p>
-       What 50,000 Reviews Say Buyers Want in a New Phone
-      </p>
-     </header>
-     <section>
-      <h2>
-       Executive Summary
-      </h2>
-      <p>
-       A smartphone brand competing across seven makers and eight markets wants to know what actually earns a good review. The common assumption is that a higher price signals a better phone and a happier buyer. The data says the opposite. Across 50,000 reviews, the five core features (battery, camera, performance, design and display) explain 86% of a phone's rating, while price has no measurable effect at all. The way to win is to amplify the features buyers already praise and fix the three that quietly sink reviews, not to move the price.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       Product and marketing leadership face one recurring decision: where to put the next dollar. Into feature development, into marketing copy, or into price positioning. Reviews are the clearest unfiltered voice of the buyer, so we read 50,000 of them to separate what buyers reward from what they ignore.
-      </p>
-      <p>
-       Two questions drive the analysis. Does a higher price buy happier customers, or is satisfaction earned through the product experience? And which specific features should the brand promote, and which should it fix? To answer honestly, we measured sentiment directly from the words in each review rather than trusting the star label, then tied that sentiment to features, price, brand and market.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Sources and Methodology
-      </h2>
-      <p>
-       We analysed 50,000 smartphone reviews spanning 7 brands, 22 models, 8 countries and 5 retail platforms, from October 2022 to October 2025. Each review carries a 1 to 5 star rating, the written text, five feature sub-ratings (battery, camera, performance, design and display), price, and buyer details. We measured sentiment ourselves from the review text using a transparent language tool (VADER), independent of any platform label, and tagged each review by the feature it discusses. Our derived sentiment matched the star ratings in direction and agreed with the platform's own labels 72% of the time, which confirms the signal is real and not an artefact of one label set. One caveat for transparency: the tool under-reads the word "overheats", so the Heat topic shows up milder than it truly is.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. Which features do buyers care about most?
-      </h2>
-      <img alt="Chart 1 - What buyers talk about most" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q1_feature_attention.png"/>
-      <p>
-       Value for money is the single most-discussed topic, raised in 22.5% of reviews, far ahead of any piece of hardware. Performance follows at 14.6%, then design and build at 13.4%, battery at 10.0% and camera at 9.8%. Niche topics like heat, customer service and sound each appear in only 2 to 4% of reviews.
-      </p>
-      <p>
-       Buyers frame the whole purchase through one lens: did I get my money's worth. Value is a verdict on the total experience, not a comment on the price tag. The hardware features that dominate the rest of the conversation, performance, design, battery and camera, are where buyer attention actually sits.
-      </p>
-      <p>
-       Lead messaging with the value story and the four features buyers genuinely talk about. Spec points that almost nobody mentions do not belong in the headline.
-      </p>
-     </section>
-     <section>
-      <h2>
-       2. Which features are we winning on?
-      </h2>
-      <img alt="Chart 2 - Feature sentiment scorecard" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q2_feature_scorecard.png"/>
-      <p>
-       Nine features carry strongly positive sentiment. Face unlock is universally praised at a net of +100, followed by design and build at +84, battery at +81, value for money at +80, display at +75 and charging at +73. Even the more contested features, camera at +52 and performance at +35, stay clearly in the positive.
-      </p>
-      <p>
-       These are the brand's proof points, the features that already earn goodwill in the buyer's own words. Value for money sitting at +80 is the headline result: buyers feel they got a fair deal, and that is exactly the sentiment that turns into recommendations.
-      </p>
-      <p>
-       Put the top strengths, build quality, battery and value, into ad copy and store pages, backed by real review language. They are credible precisely because customers already say them.
-      </p>
-     </section>
-     <section>
-      <h2>
-       3. Which features let buyers down?
-      </h2>
-      <img alt="Chart 3 - The three sore points" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q3_pain_points.png"/>
-      <p>
-       Three topics pull reviews into the red. Customer service is the worst by far, with 100% of its mentions negative. Sound is next, 44% negative for a net of -25. Heat is mixed and understated by the text tool, but it is a complaint-only topic whenever it is raised.
-      </p>
-      <p>
-       The weak points are not the core hardware, they are service and audio. A poor support experience or a tinny speaker is what converts an otherwise satisfied buyer into a one-star reviewer. These are also far cheaper to fix than redesigning a phone.
-      </p>
-      <p>
-       Prioritise customer service and speaker quality now, before a competitor markets against them. Fixing a single recurring pain point removes a standing source of negative reviews.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. Do better features actually win better reviews?
-      </h2>
-      <img alt="Chart 4 - Features and price effect on rating" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q4_features_vs_price.png"/>
-      <p>
-       Yes, decisively. The five feature ratings together explain 86% of the variation in star rating, and each feature carries almost identical weight, a standardized effect of about 0.28, every one highly significant. Price carries an effect of 0.001 and is not statistically significant at all (p = 0.52).
-      </p>
-      <p>
-       Satisfaction is built almost entirely on the product experience, and no single feature is a silver bullet. They matter about equally. A phone wins by being good across battery, camera, performance, design and display together, not by leading on one hero spec.
-      </p>
-      <p>
-       Invest in balanced feature quality rather than chasing one standout number. A weak link in any of the five pulls the rating down just as hard as any other.
-      </p>
-     </section>
-     <section>
-      <h2>
-       5. Does charging more buy happier customers?
-      </h2>
-      <img alt="Chart 5 - Average rating by price tier" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q5_price_tier_rating.png"/>
-      <p>
-       No. Average rating is flat across every price tier: 3.12 for budget phones, 3.13 for premium, with everything between within a rounding error. The difference is not statistically significant (p = 0.73), and price correlates with rating at 0.001, which is effectively zero.
-      </p>
-      <p>
-       Price and satisfaction are decoupled. A premium price does not earn a premium review, and a budget price does not depress one. Buyers judge the phone on what it does, not on what it cost them.
-      </p>
-      <p>
-       Stop treating price as a satisfaction lever. Price is a positioning and margin decision; it will not move review scores up or down.
-      </p>
-     </section>
-     <section>
-      <h2>
-       6. Is this the same across brands, prices and countries?
-      </h2>
-      <img alt="Chart 6 - Positive sentiment by brand" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q6_consistency.png"/>
-      <p>
-       Yes, the pattern is universal. Positive sentiment sits between 67.4% and 67.9% across all seven brands, a spread of just 0.6 points, holds across price tiers, and varies by only 1.6 points across eight countries. Sentiment is statistically independent of brand (p = 0.87).
-      </p>
-      <p>
-       "Features beat price" is not a quirk of one brand or one market. It is how smartphone buyers everywhere decide, which makes the finding safe to build a global strategy on.
-      </p>
-      <p>
-       Apply the same feature-first playbook across every market and brand line. There is no segment where price positioning rescues a weak feature experience.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion: What Buyers Really Want
-      </h2>
-      <p>
-       When buyers shop for a new phone, they are not buying a price, they are buying a feeling of value built from the experience the phone delivers. Across 50,000 reviews, the five core features explain 86% of satisfaction while price explains none, and the word buyers reach for most is not a spec, it is "worth it". Value, to a buyer, is what the phone does for them set against what they paid, and it is won on features.
-      </p>
-      <p>
-       Getting this wrong is expensive. A brand that pours budget into price promotions and premium positioning is spending against the one lever that does not move reviews, while the real drivers, build, battery, camera and a clean support experience, go under-funded. The opportunity is just as clear, because the same playbook works in every brand and every market we tested.
-      </p>
-      <p>
-       Compete on the feature experience, not the price tag. Amplify the features buyers already praise, fix the three that quietly sink reviews, and treat price as a margin decision rather than a satisfaction strategy.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Recommendations
-      </h2>
-      <p>
-       1. Lead marketing with value and the four most-discussed features. Build store pages and ads around the "worth it" story plus performance, design, battery and camera, using real review language. This aligns the message with what buyers actually raise in 22.5% of reviews and with features that all score net-positive.
-      </p>
-      <p>
-       2. Fix customer service and speaker quality first. Invest in support response and audio tuning before the next launch. These are the two largest recurring sources of negative reviews, with service 100% negative and sound 44% negative, and both are cheaper than any hardware redesign.
-      </p>
-      <p>
-       3. Fund balanced feature quality, not a hero spec. Hold all five core features to a high bar rather than over-investing in one. Each feature weighs about equally and together they explain 86% of the rating, so the rating is protected by removing weak links, not by chasing a single standout.
-      </p>
-      <p>
-       4. Stop using price as a satisfaction lever. Set price for positioning and margin, decoupled from any review-score target. Price has effectively zero effect on rating, so promotional spend aimed at satisfaction is wasted and better redirected to feature work.
-      </p>
-      <p>
-       5. Run one global feature-first playbook. Apply the same strategy across brands and markets rather than reinventing it locally. The pattern is statistically identical across brands and countries, so a single playbook avoids costly market-by-market duplication.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond the Price Tag | Data Stories Lab</title>
+<meta name="description" content="Find what really earns a good review">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2026 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Regression Analysis</span>
+    <span class="sep">/</span><span>Beyond the Price Tag</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/cover%20image.png" alt="Beyond the Price Tag">
+    <figcaption><span>What actually earns a smartphone a good review.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Product &amp; reviews</div>
+  <h1 class="title">Beyond the Price Tag</h1>
+  <p class="standfirst">Find what really earns a good review</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Smartphone reviews &middot; 7 brands</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/beyond-the-price-tag-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/beyond-the-price-tag.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> Product and marketing leadership face one recurring decision: where to put the next dollar. Into feature development, into marketing copy, or into price positioning. Reviews are the clearest unfiltered voice of the buyer, so we read 50,000 of them to separate what buyers reward from what they ignore. </p> <p> Two questions drive the analysis. Does a higher price buy happier customers, or is satisfaction earned through the product experience? And which specific features should the brand promote, and which should it fix? To answer honestly, we measured sentiment directly from the words in each review rather than trusting the star label, then tied that sentiment to features, price, brand and market. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">22.5%</div><div class="l">value mentions</div></div><div class="fig"><div class="n">86%</div><div class="l">rating explained</div></div><div class="fig"><div class="n">3.12 vs 3.13</div><div class="l">budget vs premium</div></div><div class="fig"><div class="n">Face unlock</div><div class="l">top feature</div></div></div>
+
+  <div class="pull"><p>&ldquo;When buyers shop for a new phone, they are not buying a price, they are buying a feeling of value built from the experience the phone delivers.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Executive Summary</h3><div class="ftext"><p> A smartphone brand competing across seven makers and eight markets wants to know what actually earns a good review. The common assumption is that a higher price signals a better phone and a happier buyer. The data says the opposite. Across 50,000 reviews, the five core features (battery, camera, performance, design and display) explain 86% of a phone's rating, while price has no measurable effect at all. The way to win is to amplify the features buyers already praise and fix the three that quietly sink reviews, not to move the price. </p></div></article>
+    <article class="finding"><h3 class="fq">1. Which features do buyers care about most?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q1_feature_attention.png" alt="chart"></figure> <p> Value for money is the single most-discussed topic, raised in 22.5% of reviews, far ahead of any piece of hardware. Performance follows at 14.6%, then design and build at 13.4%, battery at 10.0% and camera at 9.8%. Niche topics like heat, customer service and sound each appear in only 2 to 4% of reviews. </p> <p> Buyers frame the whole purchase through one lens: did I get my money's worth. Value is a verdict on the total experience, not a comment on the price tag. The hardware features that dominate the rest of the conversation, performance, design, battery and camera, are where buyer attention actually sits. </p> <p> Lead messaging with the value story and the four features buyers genuinely talk about. Spec points that almost nobody mentions do not belong in the headline. </p></div></article>
+    <article class="finding"><h3 class="fq">2. Which features are we winning on?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q2_feature_scorecard.png" alt="chart"></figure> <p> Nine features carry strongly positive sentiment. Face unlock is universally praised at a net of +100, followed by design and build at +84, battery at +81, value for money at +80, display at +75 and charging at +73. Even the more contested features, camera at +52 and performance at +35, stay clearly in the positive. </p> <p> These are the brand's proof points, the features that already earn goodwill in the buyer's own words. Value for money sitting at +80 is the headline result: buyers feel they got a fair deal, and that is exactly the sentiment that turns into recommendations. </p> <p> Put the top strengths, build quality, battery and value, into ad copy and store pages, backed by real review language. They are credible precisely because customers already say them. </p></div></article>
+    <article class="finding"><h3 class="fq">3. Which features let buyers down?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q3_pain_points.png" alt="chart"></figure> <p> Three topics pull reviews into the red. Customer service is the worst by far, with 100% of its mentions negative. Sound is next, 44% negative for a net of -25. Heat is mixed and understated by the text tool, but it is a complaint-only topic whenever it is raised. </p> <p> The weak points are not the core hardware, they are service and audio. A poor support experience or a tinny speaker is what converts an otherwise satisfied buyer into a one-star reviewer. These are also far cheaper to fix than redesigning a phone. </p> <p> Prioritise customer service and speaker quality now, before a competitor markets against them. Fixing a single recurring pain point removes a standing source of negative reviews. </p></div></article>
+    <article class="finding"><h3 class="fq">4. Do better features actually win better reviews?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q4_features_vs_price.png" alt="chart"></figure> <p> Yes, decisively. The five feature ratings together explain 86% of the variation in star rating, and each feature carries almost identical weight, a standardized effect of about 0.28, every one highly significant. Price carries an effect of 0.001 and is not statistically significant at all (p = 0.52). </p> <p> Satisfaction is built almost entirely on the product experience, and no single feature is a silver bullet. They matter about equally. A phone wins by being good across battery, camera, performance, design and display together, not by leading on one hero spec. </p> <p> Invest in balanced feature quality rather than chasing one standout number. A weak link in any of the five pulls the rating down just as hard as any other. </p></div></article>
+    <article class="finding"><h3 class="fq">5. Does charging more buy happier customers?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q5_price_tier_rating.png" alt="chart"></figure> <p> No. Average rating is flat across every price tier: 3.12 for budget phones, 3.13 for premium, with everything between within a rounding error. The difference is not statistically significant (p = 0.73), and price correlates with rating at 0.001, which is effectively zero. </p> <p> Price and satisfaction are decoupled. A premium price does not earn a premium review, and a budget price does not depress one. Buyers judge the phone on what it does, not on what it cost them. </p> <p> Stop treating price as a satisfaction lever. Price is a positioning and margin decision; it will not move review scores up or down. </p></div></article>
+    <article class="finding"><h3 class="fq">6. Is this the same across brands, prices and countries?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/beyond-the-price-tag/q6_consistency.png" alt="chart"></figure> <p> Yes, the pattern is universal. Positive sentiment sits between 67.4% and 67.9% across all seven brands, a spread of just 0.6 points, holds across price tiers, and varies by only 1.6 points across eight countries. Sentiment is statistically independent of brand (p = 0.87). </p> <p> "Features beat price" is not a quirk of one brand or one market. It is how smartphone buyers everywhere decide, which makes the finding safe to build a global strategy on. </p> <p> Apply the same feature-first playbook across every market and brand line. There is no segment where price positioning rescues a weak feature experience. </p></div></article>
+    <article class="finding"><h3 class="fq">Recommendations</h3><div class="ftext"><p> 1. Lead marketing with value and the four most-discussed features. Build store pages and ads around the "worth it" story plus performance, design, battery and camera, using real review language. This aligns the message with what buyers actually raise in 22.5% of reviews and with features that all score net-positive. </p> <p> 2. Fix customer service and speaker quality first. Invest in support response and audio tuning before the next launch. These are the two largest recurring sources of negative reviews, with service 100% negative and sound 44% negative, and both are cheaper than any hardware redesign. </p> <p> 3. Fund balanced feature quality, not a hero spec. Hold all five core features to a high bar rather than over-investing in one. Each feature weighs about equally and together they explain 86% of the rating, so the rating is protected by removing weak links, not by chasing a single standout. </p> <p> 4. Stop using price as a satisfaction lever. Set price for positioning and margin, decoupled from any review-score target. Price has effectively zero effect on rating, so promotional spend aimed at satisfaction is wasted and better redirected to feature work. </p> <p> 5. Run one global feature-first playbook. Apply the same strategy across brands and markets rather than reinventing it locally. The pattern is statistically identical across brands and countries, so a single playbook avoids costly market-by-market duplication. </p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p> We analysed 50,000 smartphone reviews spanning 7 brands, 22 models, 8 countries and 5 retail platforms, from October 2022 to October 2025. Each review carries a 1 to 5 star rating, the written text, five feature sub-ratings (battery, camera, performance, design and display), price, and buyer details. We measured sentiment ourselves from the review text using a transparent language tool (VADER), independent of any platform label, and tagged each review by the feature it discusses. Our derived sentiment matched the star ratings in direction and agreed with the platform's own labels 72% of the time, which confirms the signal is real and not an artefact of one label set. One caveat for transparency: the tool under-reads the word "overheats", so the Heat topic shows up milder than it truly is. </p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> When buyers shop for a new phone, they are not buying a price, they are buying a feeling of value built from the experience the phone delivers. Across 50,000 reviews, the five core features explain 86% of satisfaction while price explains none, and the word buyers reach for most is not a spec, it is "worth it". Value, to a buyer, is what the phone does for them set against what they paid, and it is won on features. </p> <p> Getting this wrong is expensive. A brand that pours budget into price promotions and premium positioning is spending against the one lever that does not move reviews, while the real drivers, build, battery, camera and a clean support experience, go under-funded. The opportunity is just as clear, because the same playbook works in every brand and every market we tested. </p> <p> Compete on the feature experience, not the price tag. Amplify the features buyers already praise, fix the three that quietly sink reviews, and treat price as a margin decision rather than a satisfaction strategy. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

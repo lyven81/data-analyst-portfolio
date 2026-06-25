@@ -1,202 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   High Performer, Under Target | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let’s work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/high-performance-under-target-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/cover%20images.png"/>
-      <h1>
-       High Performer, Under Target
-      </h1>
-      <p>
-       Diagnosing New York’s Sales Shortfall
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis was conducted to evaluate whether New York’s average total sales per invoice are underperforming relative to the company’s internal benchmark of $500,000. The question emerged as part of the broader goal to identify regional performance gaps that may warrant strategic adjustments, such as resource reallocation, revised sales targets, or enhanced operational support.
-      </p>
-      <p>
-       The VP of Sales, who oversees multi-city store performance, needs a clear, data-driven view of how New York compares to national expectations. Specifically, the analysis seeks to determine whether the shortfall is statistically significant, how large the performance gap is, and whether the results justify intervention. To support this, the report also explores how New York ranks relative to other cities, whether specific segments or time periods are contributing to the underperformance, and what underlying factors may be influencing these trends.
-      </p>
-      <p>
-       The findings are intended to help the VP make informed decisions on whether New York’s performance reflects a localized issue or broader structural challenges—and ultimately, to guide action that strengthens regional and national sales outcomes.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Question 1: Is New York’s average total sales per invoice statistically lower than $500,000?
-      </h2>
-      <p>
-       Yes, New York’s average total sales per invoice is statistically significantly lower than the benchmark of $500,000. Based on a sample of 216 invoices, the mean sales value for New York is $184,264.98—roughly $315,735 below the target. The statistical test confirms this result with a p-value of 0, which is well below the significance level of 0.05, meaning the difference is not due to random chance.
-      </p>
-      <p>
-       Visual analysis supports this finding. A box plot shows that New York’s median and interquartile range lie far below the benchmark line. The accompanying histogram reveals a heavily left-skewed distribution, with most invoice values falling far short of the target. Taken together, the statistical and visual evidence clearly show that New York’s performance is significantly under the expected threshold.
-      </p>
-      <img alt="Box Plot and Histogram" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%201.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 2: What is the size and direction of the difference?
-      </h2>
-      <p>
-       The difference is both negative and substantial. New York’s mean total sales per invoice is $184,264.98, which is $315,735.02 below the $500,000 benchmark. This negative gap is reinforced by a tight 95% confidence interval of $150,464.78 to $218,065.17, indicating the result is not due to sampling variability.
-      </p>
-      <p>
-       A bar chart with error bars further illustrates this, showing that the entire confidence interval lies well below the benchmark line. This confirms that New York’s underperformance is not only statistically significant but also practically meaningful.
-      </p>
-      <img alt="Bar Chart with Error Bars" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%202.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 3: Is the performance gap significant enough to justify intervention?
-      </h2>
-      <p>
-       Yes, the performance gap is large enough to require action. Based on 216 invoices, the total expected sales for New York would have been $108 million if it had met the benchmark. However, actual sales amounted to only $39.8 million, leading to a revenue shortfall of $68.2 million.
-      </p>
-      <p>
-       This also affected profitability. With a 30% expected profit margin, New York should have generated $32.4 million in profit, but actual profits totaled only $13.9 million—a loss of nearly $18.5 million. A line chart of the monthly revenue gap further shows that this shortfall has been consistent over time, indicating a persistent problem rather than a temporary fluctuation.
-      </p>
-      <p>
-       The scale and persistence of this gap clearly justify revisiting strategy, resource allocation, and operational execution in New York.
-      </p>
-      <img alt="Monthly Revenue Gap Line Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%203.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 4: How does New York’s total sales performance compare to other key cities?
-      </h2>
-      <p>
-       New York performs well when compared to other cities, ranking second in average total sales per invoice nationwide. With an average of $184,264.98 per invoice, it outpaces most peers, including Seattle and San Francisco. However, it still falls significantly below the $500,000 benchmark.
-      </p>
-      <p>
-       This means that while New York is not underperforming relative to other cities, it is underperforming relative to internal company goals. This discrepancy suggests the need to evaluate whether the $500,000 benchmark is realistic across all regions or should be adjusted based on localized expectations.
-      </p>
-      <img alt="City Comparison Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%204.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 5: Are there specific time periods, products, or sales methods driving this performance in New York?
-      </h2>
-      <p>
-       Yes, several segments within New York’s operations contribute to performance differences.
-      </p>
-      <p>
-       By time period, average total sales peaked between March and May 2020, with values above $200,000, but dropped sharply to $121,000 in July. This indicates stronger performance in Q2 and potential disruption or seasonality later in the year.
-      </p>
-      <img alt="Time Period Line Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%205%20-%20time%20period%20line%20chart.png"/>
-      <p>
-       By product, Men’s Street Footwear and Women’s Apparel lead in average sales per invoice, while Women’s Athletic Footwear underperforms. These variations suggest that product mix optimization could help close the performance gap.
-      </p>
-      <img alt="Product Sales Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%205%20-%20product%20bar%20chart.png"/>
-      <p>
-       By sales method, In-store sales perform exceptionally well, averaging over $506,000 per invoice and surpassing the benchmark. In contrast, online sales average just $13,560—significantly lower—and likely drag down the overall performance. This points to an opportunity to rethink online channel strategy or shift resources toward more successful in-store models.
-      </p>
-      <img alt="Sales Method Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%205%20-%20sales%20method%20bar%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 6: What factors may be contributing to the performance gap?
-      </h2>
-      <p>
-       An analysis of three key factors—product mix, price per unit, and operating margin—reveals the likely root causes.
-      </p>
-      <p>
-       Product mix is consistent between New York and the national average, with no meaningful differences in invoice share across product categories. This rules out mix as a contributor to underperformance.
-      </p>
-      <img alt="Product Mix Comparison Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%206%20-%20price%20mix%20bar%20chart.png"/>
-      <p>
-       Price per unit is actually slightly higher in New York ($47.94 vs. $45.15 nationally), indicating that pricing is not a weakness.
-      </p>
-      <p>
-       Operating margin, however, appears to be a contributing factor. New York’s average operating margin (0.00396) is lower than that of other cities (0.00424), and the distribution is narrower with fewer high-margin outliers. This suggests efficiency issues or cost-related pressures unique to New York that may be compressing margins.
-      </p>
-      <img alt="Operating Margin Box Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%206%20-%20operating%20margin%20box%20plot.png"/>
-      <p>
-       Improving operating efficiency, examining cost structures, and addressing margin variability could be critical to closing the performance gap.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       New York’s average total sales per invoice is significantly below the national benchmark of $500,000—both statistically and practically. With a mean of $184,264.98, the city falls short by over $315,000 per invoice. Statistical analysis confirms this result is not due to chance, with a p-value of 0 and a 95% confidence interval that does not come close to the benchmark.
-      </p>
-      <p>
-       While New York ranks among the top-performing cities nationwide, this strong relative standing does not translate to meeting internal performance expectations. The revenue and profit losses tied to this gap are substantial and consistent across time, pointing to a structural underperformance rather than a temporary dip.
-      </p>
-      <p>
-       In summary, New York is not underperforming when compared to peers—but it is significantly underdelivering against company goals. This underscores the need for targeted operational adjustments and strategic evaluation specific to the city’s context.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Performer, Under Target | Data Stories Lab</title>
+<meta name="description" content="See if New York sales miss the benchmark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Statistical Testing</span>
+    <span class="sep">/</span><span>High Performer, Under Target</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/cover%20images.png" alt="High Performer, Under Target">
+    <figcaption><span>Is New York really falling short of its target?</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Sales &amp; hypothesis testing</div>
+  <h1 class="title">High Performer, Under Target</h1>
+  <p class="standfirst">See if New York sales miss the benchmark</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Invoice sales &middot; vs benchmark</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/high-performance-under-target-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/high-performance-under-target.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis was conducted to evaluate whether New York’s average total sales per invoice are underperforming relative to the company’s internal benchmark of $500,000. The question emerged as part of the broader goal to identify regional performance gaps that may warrant strategic adjustments, such as resource reallocation, revised sales targets, or enhanced operational support. </p> <p> The VP of Sales, who oversees multi-city store performance, needs a clear, data-driven view of how New York compares to national expectations. Specifically, the analysis seeks to determine whether the shortfall is statistically significant, how large the performance gap is, and whether the results justify intervention. To support this, the report also explores how New York ranks relative to other cities, whether specific segments or time periods are contributing to the underperformance, and what underlying factors may be influencing these trends. </p> <p> The findings are intended to help the VP make informed decisions on whether New York’s performance reflects a localized issue or broader structural challenges, and ultimately, to guide action that strengthens regional and national sales outcomes. </p>
+  </div>
+
+  
+
+  <div class="pull"><p>&ldquo;New York’s average total sales per invoice is significantly below the national benchmark of $500,000, both statistically and practically.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Question 1: Is New York’s average total sales per invoice statistically lower than $500,000?</h3><div class="ftext"><p> Yes, New York’s average total sales per invoice is statistically significantly lower than the benchmark of $500,000. Based on a sample of 216 invoices, the mean sales value for New York is $184,264.98, roughly $315,735 below the target. The statistical test confirms this result with a p-value of 0, which is well below the significance level of 0.05, meaning the difference is not due to random chance. </p> <p> Visual analysis supports this finding. A box plot shows that New York’s median and interquartile range lie far below the benchmark line. The accompanying histogram reveals a heavily left-skewed distribution, with most invoice values falling far short of the target. Taken together, the statistical and visual evidence clearly show that New York’s performance is significantly under the expected threshold. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%201.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 2: What is the size and direction of the difference?</h3><div class="ftext"><p> The difference is both negative and substantial. New York’s mean total sales per invoice is $184,264.98, which is $315,735.02 below the $500,000 benchmark. This negative gap is reinforced by a tight 95% confidence interval of $150,464.78 to $218,065.17, indicating the result is not due to sampling variability. </p> <p> A bar chart with error bars further illustrates this, showing that the entire confidence interval lies well below the benchmark line. This confirms that New York’s underperformance is not only statistically significant but also practically meaningful. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%202.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 3: Is the performance gap significant enough to justify intervention?</h3><div class="ftext"><p> Yes, the performance gap is large enough to require action. Based on 216 invoices, the total expected sales for New York would have been $108 million if it had met the benchmark. However, actual sales amounted to only $39.8 million, leading to a revenue shortfall of $68.2 million. </p> <p> This also affected profitability. With a 30% expected profit margin, New York should have generated $32.4 million in profit, but actual profits totaled only $13.9 million, a loss of nearly $18.5 million. A line chart of the monthly revenue gap further shows that this shortfall has been consistent over time, indicating a persistent problem rather than a temporary fluctuation. </p> <p> The scale and persistence of this gap clearly justify revisiting strategy, resource allocation, and operational execution in New York. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%203.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 4: How does New York’s total sales performance compare to other key cities?</h3><div class="ftext"><p> New York performs well when compared to other cities, ranking second in average total sales per invoice nationwide. With an average of $184,264.98 per invoice, it outpaces most peers, including Seattle and San Francisco. However, it still falls significantly below the $500,000 benchmark. </p> <p> This means that while New York is not underperforming relative to other cities, it is underperforming relative to internal company goals. This discrepancy suggests the need to evaluate whether the $500,000 benchmark is realistic across all regions or should be adjusted based on localized expectations. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%204.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 5: Are there specific time periods, products, or sales methods driving this performance in New York?</h3><div class="ftext"><p> Yes, several segments within New York’s operations contribute to performance differences. </p> <p> By time period, average total sales peaked between March and May 2020, with values above $200,000, but dropped sharply to $121,000 in July. This indicates stronger performance in Q2 and potential disruption or seasonality later in the year. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%205%20-%20time%20period%20line%20chart.png" alt="chart"></figure> <p> By product, Men’s Street Footwear and Women’s Apparel lead in average sales per invoice, while Women’s Athletic Footwear underperforms. These variations suggest that product mix optimization could help close the performance gap. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%205%20-%20product%20bar%20chart.png" alt="chart"></figure> <p> By sales method, In-store sales perform exceptionally well, averaging over $506,000 per invoice and surpassing the benchmark. In contrast, online sales average just $13,560, significantly lower, and likely drag down the overall performance. This points to an opportunity to rethink online channel strategy or shift resources toward more successful in-store models. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%205%20-%20sales%20method%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 6: What factors may be contributing to the performance gap?</h3><div class="ftext"><p> An analysis of three key factors, product mix, price per unit, and operating margin, reveals the likely root causes. </p> <p> Product mix is consistent between New York and the national average, with no meaningful differences in invoice share across product categories. This rules out mix as a contributor to underperformance. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%206%20-%20price%20mix%20bar%20chart.png" alt="chart"></figure> <p> Price per unit is actually slightly higher in New York ($47.94 vs. $45.15 nationally), indicating that pricing is not a weakness. </p> <p> Operating margin, however, appears to be a contributing factor. New York’s average operating margin (0.00396) is lower than that of other cities (0.00424), and the distribution is narrower with fewer high-margin outliers. This suggests efficiency issues or cost-related pressures unique to New York that may be compressing margins. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-performance-under-target/chart%206%20-%20operating%20margin%20box%20plot.png" alt="chart"></figure> <p> Improving operating efficiency, examining cost structures, and addressing margin variability could be critical to closing the performance gap. </p></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> New York’s average total sales per invoice is significantly below the national benchmark of $500,000, both statistically and practically. With a mean of $184,264.98, the city falls short by over $315,000 per invoice. Statistical analysis confirms this result is not due to chance, with a p-value of 0 and a 95% confidence interval that does not come close to the benchmark. </p> <p> While New York ranks among the top-performing cities nationwide, this strong relative standing does not translate to meeting internal performance expectations. The revenue and profit losses tied to this gap are substantial and consistent across time, pointing to a structural underperformance rather than a temporary dip. </p> <p> In summary, New York is not underperforming when compared to peers, but it is significantly underdelivering against company goals. This underscores the need for targeted operational adjustments and strategic evaluation specific to the city’s context. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

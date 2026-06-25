@@ -1,270 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Which Suppliers Deliver More Than Just Volume? | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let’s work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/which-supplier-deliver-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <div class="right-column">
-    <div class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/cover%20image.png"/>
-      <h1>
-       Which Suppliers Deliver More Than Just Volume?
-      </h1>
-      <p>
-       <em>
-        A Case for Prioritizing Procurement Stability
-       </em>
-      </p>
-     </header>
-     <section>
-      <h2>
-       Understanding the Challenge
-      </h2>
-      <p>
-       Procurement teams often prioritize suppliers based on volume and cost. However, in environments where inventory planning, contract reliability, and cost predictability are key, stability in supplier performance becomes just as critical. This analysis addresses one central business question:
-      </p>
-      <p>
-       <strong>
-        Which suppliers consistently deliver predictable quantities—and which introduce variability that may disrupt operations?
-       </strong>
-      </p>
-      <p>
-       Our objective was to evaluate supplier performance through the lens of order quantity consistency, not just volume or spend. This case study supports strategic procurement decisions by identifying suppliers that combine volume contribution with reliability.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Key Insights
-      </h2>
-      <h3>
-       What is the average quantity ordered per supplier, and how consistent is it?
-      </h3>
-      <ul>
-       <li>
-        Furniworks Ltd. has the highest average quantity ordered per transaction at 10.75 units, but also exhibits high variability (standard deviation = 6.29), making its order pattern less predictable. Techmart Inc. is similarly inconsistent, with the highest standard deviation at 6.57.
-       </li>
-       <li>
-        Officesupplies Co., despite having the lowest average quantity at 8.95 units, demonstrates one of the most stable ordering patterns (standard deviation = 5.86), making it a strong candidate for predictable, low-risk procurement.
-       </li>
-      </ul>
-      <img alt="Chart 1 - Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%201%20-%20bar%20chart.png"/>
-      <h3>
-       What is the 95% confidence interval for mean quantity purchased from each supplier?
-      </h3>
-      <ul>
-       <li>
-        Furniworks Ltd., with the highest mean quantity of 10.75 units, also has the widest 95% confidence interval (9.48–12.03, width = 2.56), indicating greater uncertainty and variability in its order quantities. Techmart Inc. shows similar inconsistency with a CI width of 2.49.
-       </li>
-       <li>
-        Officesupplies Co. and Quickdeliver Ltd. demonstrate more predictable performance, with narrower confidence intervals (7.83–10.08 and 8.33–10.59 respectively), each with a width around 2.25–2.26, making them more reliable choices for stable procurement planning.
-       </li>
-      </ul>
-      <img alt="Chart 2 - Error Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%202%20-%20error%20chart.png"/>
-      <h3>
-       Which suppliers have the widest confidence intervals, indicating inconsistent performance?
-      </h3>
-      <ul>
-       <li>
-        Furniworks Ltd. (CI width = 2.56), Cloudsoft Corp. (2.55), and Techmart Inc. (2.49) have the widest 95% confidence intervals, indicating the least consistent ordering patterns and higher risk in procurement predictability.
-       </li>
-       <li>
-        In contrast, Officesupplies Co. (2.25) and Quickdeliver Ltd. (2.26) show the most stable performance, making them better suited for consistent inventory planning and lower operational risk.
-       </li>
-      </ul>
-      <img alt="Chart 3 - Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%203%20-%20bar%20chart.png"/>
-      <h3>
-       How do suppliers compare in terms of total transaction count and total volume supplied?
-      </h3>
-      <ul>
-       <li>
-        Quickdeliver Ltd. is the top supplier in both transaction count (112) and total volume supplied (1,060 units), followed by Techmart Inc. with 107 transactions and 1,023 units. These figures highlight their strong operational contribution and engagement.
-       </li>
-       <li>
-        Cloudsoft Corp. ranks the lowest, with only 84 transactions and 806 units supplied, while Furniworks Ltd., despite fewer transactions (93), delivers nearly 1,000 units, suggesting a larger average order size but potentially less frequent engagement.
-       </li>
-      </ul>
-      <img alt="Chart 4 - Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%204%20-%20bar%20chart.png"/>
-      <h3>
-       Are current top-spending suppliers also the most stable in terms of order quantity?
-      </h3>
-      <ul>
-       <li>
-        Techmart Inc., the highest spender at 328,762, has a CI width of 2.49, showing only moderate stability. Similarly, Furniworks Ltd. (202,811 spend, CI width = 2.56) and Cloudsoft Corp. (200,074 spend, CI width = 2.55) are top spenders with high variability, raising concerns about order predictability.
-       </li>
-       <li>
-        In contrast, Quickdeliver Ltd. (285,354 spend) and Officesupplies Co. (223,581 spend) offer a more favorable balance, combining high spend with greater consistency (CI widths of 2.26 and 2.25 respectively), making them more suitable for reliable procurement planning.
-       </li>
-      </ul>
-      <img alt="Chart 5 - Scatter Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%205%20-%20scatter%20plot.png"/>
-     </section>
-     <section>
-      <h2>
-       Why This Matters
-      </h2>
-      <p>
-       The goal of this analysis was to optimize procurement strategy by identifying which suppliers support reliable planning and which introduce risk. This directly supports several business priorities outlined in the problem statement:
-      </p>
-      <ul>
-       <li>
-        Improving procurement planning: Stable suppliers help forecast order volumes more accurately.
-       </li>
-       <li>
-        Cost efficiency: Reducing the impact of variability helps avoid overstocking or understocking costs.
-       </li>
-       <li>
-        Better negotiations: Data-backed performance metrics give procurement managers leverage in contract discussions.
-       </li>
-      </ul>
-      <p>
-       The findings support a segmentation strategy, where high-volume, stable suppliers are prioritized for long-term contracts, and less stable suppliers are re-evaluated or renegotiated.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Recommendations
-      </h2>
-      <h3>
-       Prioritize These Suppliers
-      </h3>
-      <ul>
-       <li>
-        <strong>
-         Quickdeliver Ltd.
-        </strong>
-        <br/>
-        High volume, high engagement, and reliable ordering patterns make this supplier a top strategic partner.
-        <br/>
-        <strong>
-         Action:
-        </strong>
-        Increase order allocation and consider long-term contracts.
-       </li>
-       <li>
-        <strong>
-         Officesupplies Co.
-        </strong>
-        <br/>
-        A model of consistency. While slightly lower in volume, this supplier supports forecasting and lean inventory strategies.
-        <br/>
-        <strong>
-         Action:
-        </strong>
-        Maintain or modestly increase order share for stable categories.
-       </li>
-      </ul>
-      <h3>
-       Negotiate or Reduce Intake
-      </h3>
-      <ul>
-       <li>
-        <strong>
-         Furniworks Ltd.
-        </strong>
-        <br/>
-        While attractive in average order size, variability is the highest.
-        <br/>
-        <strong>
-         Action:
-        </strong>
-        Renegotiate for smaller, more frequent orders or introduce service-level penalties.
-       </li>
-       <li>
-        <strong>
-         Cloudsoft Corp.
-        </strong>
-        <br/>
-        Low contribution and high inconsistency raise questions about its ongoing value.
-        <br/>
-        <strong>
-         Action:
-        </strong>
-        Review necessity. Consolidate or replace unless critical to a specific niche.
-       </li>
-      </ul>
-      <h3>
-       Maintain With Adjustments
-      </h3>
-      <ul>
-       <li>
-        <strong>
-         Techmart Inc.
-        </strong>
-        <br/>
-        A major contributor in spend and volume, but less consistent.
-        <br/>
-        <strong>
-         Action:
-        </strong>
-        Continue ordering but negotiate more structured delivery terms.
-       </li>
-      </ul>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       This analysis confirms that volume alone is not a sufficient measure of supplier performance. Procurement managers should use consistency metrics, such as confidence intervals, alongside spend and volume data to make more balanced decisions.
-      </p>
-      <p>
-       By identifying which suppliers deliver more than just volume, procurement leaders can build a more reliable, cost-effective, and strategic supplier base—empowering better inventory planning and stronger contract negotiations.
-      </p>
-     </section>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Suppliers Deliver More Than Just Volume? | Data Stories Lab</title>
+<meta name="description" content="Pick suppliers for stability, not just volume">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
     </div>
-   </div>
   </div>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Optimization Analysis</span>
+    <span class="sep">/</span><span>Which Suppliers Deliver More Than Just Volume?</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/cover%20image.png" alt="Which Suppliers Deliver More Than Just Volume?">
+    <figcaption><span>Choosing suppliers on reliability, not just the volume they ship.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Procurement &amp; supplier risk</div>
+  <h1 class="title">Which Suppliers Deliver More Than Just Volume?</h1>
+  <p class="standfirst">Pick suppliers for stability, not just volume</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Suppliers &middot; stability analysis</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/which-supplier-deliver-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/which-supplier-deliver.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p></p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">10.75</div><div class="l">Furniworks avg</div></div><div class="fig"><div class="n">2.56</div><div class="l">widest interval</div></div><div class="fig"><div class="n">1,060</div><div class="l">Quickdeliver units</div></div><div class="fig"><div class="n">112</div><div class="l">most transactions</div></div></div>
+
+  <div class="pull"><p>&ldquo;This analysis confirms that volume alone is not a sufficient measure of supplier performance.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Understanding the Challenge</h3><div class="ftext"><p> Procurement teams often prioritize suppliers based on volume and cost. However, in environments where inventory planning, contract reliability, and cost predictability are key, stability in supplier performance becomes just as critical. This analysis addresses one central business question: </p> <p> <strong> Which suppliers consistently deliver predictable quantities, and which introduce variability that may disrupt operations? </strong> </p> <p> Our objective was to evaluate supplier performance through the lens of order quantity consistency, not just volume or spend. This case study supports strategic procurement decisions by identifying suppliers that combine volume contribution with reliability. </p></div></article>
+    <article class="finding"><h3 class="fq">What is the average quantity ordered per supplier, and how consistent is it?</h3><div class="ftext"><ul> <li> Furniworks Ltd. has the highest average quantity ordered per transaction at 10.75 units, but also exhibits high variability (standard deviation = 6.29), making its order pattern less predictable. Techmart Inc. is similarly inconsistent, with the highest standard deviation at 6.57. </li> <li> Officesupplies Co., despite having the lowest average quantity at 8.95 units, demonstrates one of the most stable ordering patterns (standard deviation = 5.86), making it a strong candidate for predictable, low-risk procurement. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%201%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">What is the 95% confidence interval for mean quantity purchased from each supplier?</h3><div class="ftext"><ul> <li> Furniworks Ltd., with the highest mean quantity of 10.75 units, also has the widest 95% confidence interval (9.48–12.03, width = 2.56), indicating greater uncertainty and variability in its order quantities. Techmart Inc. shows similar inconsistency with a CI width of 2.49. </li> <li> Officesupplies Co. and Quickdeliver Ltd. demonstrate more predictable performance, with narrower confidence intervals (7.83–10.08 and 8.33–10.59 respectively), each with a width around 2.25–2.26, making them more reliable choices for stable procurement planning. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%202%20-%20error%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Which suppliers have the widest confidence intervals, indicating inconsistent performance?</h3><div class="ftext"><ul> <li> Furniworks Ltd. (CI width = 2.56), Cloudsoft Corp. (2.55), and Techmart Inc. (2.49) have the widest 95% confidence intervals, indicating the least consistent ordering patterns and higher risk in procurement predictability. </li> <li> In contrast, Officesupplies Co. (2.25) and Quickdeliver Ltd. (2.26) show the most stable performance, making them better suited for consistent inventory planning and lower operational risk. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%203%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">How do suppliers compare in terms of total transaction count and total volume supplied?</h3><div class="ftext"><ul> <li> Quickdeliver Ltd. is the top supplier in both transaction count (112) and total volume supplied (1,060 units), followed by Techmart Inc. with 107 transactions and 1,023 units. These figures highlight their strong operational contribution and engagement. </li> <li> Cloudsoft Corp. ranks the lowest, with only 84 transactions and 806 units supplied, while Furniworks Ltd., despite fewer transactions (93), delivers nearly 1,000 units, suggesting a larger average order size but potentially less frequent engagement. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%204%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Are current top-spending suppliers also the most stable in terms of order quantity?</h3><div class="ftext"><ul> <li> Techmart Inc., the highest spender at 328,762, has a CI width of 2.49, showing only moderate stability. Similarly, Furniworks Ltd. (202,811 spend, CI width = 2.56) and Cloudsoft Corp. (200,074 spend, CI width = 2.55) are top spenders with high variability, raising concerns about order predictability. </li> <li> In contrast, Quickdeliver Ltd. (285,354 spend) and Officesupplies Co. (223,581 spend) offer a more favorable balance, combining high spend with greater consistency (CI widths of 2.26 and 2.25 respectively), making them more suitable for reliable procurement planning. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/which-supplier-deliver/chart%205%20-%20scatter%20plot.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Why This Matters</h3><div class="ftext"><p> The goal of this analysis was to optimize procurement strategy by identifying which suppliers support reliable planning and which introduce risk. This directly supports several business priorities outlined in the problem statement: </p> <ul> <li> Improving procurement planning: Stable suppliers help forecast order volumes more accurately. </li> <li> Cost efficiency: Reducing the impact of variability helps avoid overstocking or understocking costs. </li> <li> Better negotiations: Data-backed performance metrics give procurement managers leverage in contract discussions. </li> </ul> <p> The findings support a segmentation strategy, where high-volume, stable suppliers are prioritized for long-term contracts, and less stable suppliers are re-evaluated or renegotiated. </p></div></article>
+    <article class="finding"><h3 class="fq">Recommendations</h3><div class="ftext"><p class="subhead"><strong> Prioritize These Suppliers </strong></p> <ul> <li> <strong> Quickdeliver Ltd. </strong> <br/> High volume, high engagement, and reliable ordering patterns make this supplier a top strategic partner. <br/> <strong> Action: </strong> Increase order allocation and consider long-term contracts. </li> <li> <strong> Officesupplies Co. </strong> <br/> A model of consistency. While slightly lower in volume, this supplier supports forecasting and lean inventory strategies. <br/> <strong> Action: </strong> Maintain or modestly increase order share for stable categories. </li> </ul> <p class="subhead"><strong> Negotiate or Reduce Intake </strong></p> <ul> <li> <strong> Furniworks Ltd. </strong> <br/> While attractive in average order size, variability is the highest. <br/> <strong> Action: </strong> Renegotiate for smaller, more frequent orders or introduce service-level penalties. </li> <li> <strong> Cloudsoft Corp. </strong> <br/> Low contribution and high inconsistency raise questions about its ongoing value. <br/> <strong> Action: </strong> Review necessity. Consolidate or replace unless critical to a specific niche. </li> </ul> <p class="subhead"><strong> Maintain With Adjustments </strong></p> <ul> <li> <strong> Techmart Inc. </strong> <br/> A major contributor in spend and volume, but less consistent. <br/> <strong> Action: </strong> Continue ordering but negotiate more structured delivery terms. </li> </ul></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> This analysis confirms that volume alone is not a sufficient measure of supplier performance. Procurement managers should use consistency metrics, such as confidence intervals, alongside spend and volume data to make more balanced decisions. </p> <p> By identifying which suppliers deliver more than just volume, procurement leaders can build a more reliable, cost-effective, and strategic supplier base, empowering better inventory planning and stronger contract negotiations. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

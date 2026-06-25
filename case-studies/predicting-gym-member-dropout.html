@@ -1,206 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Predicting Gym Member Drop-Off | Lee Yih Ven</title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
-</head>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predicting Gym Member Drop-Off | Data Stories Lab</title>
+<meta name="description" content="Spot gym members losing motivation before they quit">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
 <body>
-  <div class="container">
-    <!-- Left Column -->
-    <aside class="left-column">
-      <header>
-        <h1>Lee Yih Ven</h1>
-        <h2>Data Analytics Portfolio</h2>
-      </header>
-      <section class="intro">
-        <p>Data-driven insights to unlock business growth and innovation. Explore my case studies showcasing predictive modeling, statistical analysis, and strategic recommendations.</p>
-      </section>
-      <section class="home-link-section">
-        <a class="home-link-btn" href="/data-analyst-portfolio/index.html">Home</a>
-      </section>
-      <section class="contact">
-        <h2>Contact</h2>
-        <ul>
-          <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-          <li>Phone: +6014-9207099</li>
-        </ul>
-      </section>
-      <!-- Dashboard Link Button -->
-      <section class="dashboard-link-section">
-        <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/predicting-gym-member-dropout-dashboard.html">
-          View Dashboard
-        </a>
-      </section>
-      <!-- AI Assistant Link Button -->
-      <section class="dashboard-link-section">
-        <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/predicting-gym-member-dropout.html">
-          AI Assistant
-        </a>
-      </section>
-    </aside>
-
-    <!-- Right Column -->
-    <main class="right-column">
-      <section class="case-study-content">
-        <header>
-          <img alt="Predicting Gym Member Drop-Off Cover" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-gym-member-dropout/cover%20image.png"/>
-          <h1>Predicting Gym Member Drop-Off</h1>
-          <p>How to Spot Members Who Are Losing Motivation Before They Quit</p>
-        </header>
-
-        <section class="overview">
-          <h2>Overview</h2>
-          <p>This analysis helps fitness trainers understand which member habits show that someone may be losing motivation and could soon quit the gym. Instead of relying only on intuition, the report uses data from visit frequency, workout duration, calories burned, and age to highlight the behaviours that matter most. The aim is to give trainers a simple way to spot early warning signs and support members before they drop out.</p>
-
-          <p>The key question we answer is: <strong>Which workout behaviours can help trainers identify at-risk members, and how should they respond?</strong> The findings are written for fitness trainers who need practical guidance—who to check on this week, who may need a lighter or more engaging programme, and who might benefit from encouragement or a follow-up message.</p>
-        </section>
-
-        <section class="analysis-section">
-          <h2>1. Which habits are most strongly linked to quitting, and are any of them too similar?</h2>
-          <img alt="Correlation Analysis Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-gym-member-dropout/chart%201.png"/>
-          <p>The habit most closely linked to quitting is how often a member visits. Those who come less are far more likely to stop. The other behaviours—workout duration, calories burned, and age—have only very weak relationships with churn, so they are not strong warning signs on their own.</p>
-
-          <p>The four behaviours are not "too similar" to each other. Each one captures a different part of a member's training pattern, and none of them overlap. Visit frequency stands out as the most meaningful signal.</p>
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Watch attendance closely. A steady drop in visits is the clearest and earliest sign that a member is losing motivation.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>2. Which behaviours matter based on statistical testing?</h2>
-          <p>In this dataset, none of the behaviours pass the usual statistical significance test. This is not because the behaviours don't matter—it's because the model ran into a technical issue called complete separation. Members with very low visits almost always churn, while those with high visits almost never do, making the model unstable and unable to calculate proper p-values.</p>
-
-          <p>The failure of the statistical test is a limitation of the model, not the behaviours. The behavioural patterns in the dataset are still very strong and meaningful.</p>
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Even without statistical confirmation, the real-world signal is clear: visit frequency matters most. Workout duration and calories burned are secondary indicators of engagement.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>3. What combination of behaviours best predicts who might quit?</h2>
-          <p>The most useful combination of behaviours comes from the patterns in the data, not the unstable regression model. The strongest mix includes visit frequency, workout duration, and calories burned. Age adds little predictive value but can still help trainers personalise coaching.</p>
-
-          <p>This combination works because it reflects how members behave in real life. Attendance shows commitment, and workout duration and calories burned show how engaged a member is during each visit.</p>
-
-          <!-- Chart placeholder -->
-          <!-- <img alt="Feature Importance Chart" src="images/feature-importance.png"/> -->
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Look at both attendance and workout quality. Members who show up less and train with less focus are the ones most likely to drift away.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>4. What is the churn risk for each member?</h2>
-          <p>Most members have an extremely low risk of quitting. They visit regularly, spend adequate time training, and put in consistent effort. Their habits are stable, and they are unlikely to leave.</p>
-
-          <p>A smaller group shows near-maximum risk. These members rarely visit and have inconsistent workouts. Without early support, they are likely to drop off.</p>
-
-          <!-- Chart placeholder -->
-          <!-- <img alt="Churn Risk Distribution Chart" src="images/risk-distribution.png"/> -->
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Prioritise members with risk scores above 0.50. These individuals need encouragement, guidance, or a simple plan to get back on track.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>5. What is the churn risk for members 15, 66, 105, 130 and 150?</h2>
-          <p>Members 66 and 130 are at the highest level of risk. Their visit patterns and overall engagement strongly suggest they are close to quitting. Members 105 and 150 are at extremely low risk and appear steady and consistent.</p>
-
-          <p>Member 15 was not found in the output and may require a check in the original dataset.</p>
-
-          <!-- Chart placeholder -->
-          <!-- <img alt="Individual Member Risk Chart" src="images/member-risk-scores.png"/> -->
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Act quickly with members 66 and 130. A friendly check-in or simple routine may help them regain consistency. Members 105 and 150 are stable; continue supporting them as usual.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>6. How much does churn risk rise if a member visits three times less per month?</h2>
-          <p>The effect depends on how often they currently visit. Members who visit frequently see almost no meaningful change. Members who already visit very little remain at high risk because their score is already at the maximum.</p>
-
-          <p>The largest increase happens among members who visit moderately—around 8 to 12 times per month. A drop of three visits is a strong sign they are slipping out of routine.</p>
-
-          <!-- Chart placeholder -->
-          <!-- <img alt="Visit Frequency Impact Chart" src="images/visit-frequency-impact.png"/> -->
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Focus on the "middle group." These members are the most sensitive to changes in attendance and can often be saved with timely support.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>7. What happens if workout duration drops from 60 to 20 minutes?</h2>
-          <p>For most members, reducing session length does not dramatically change their churn risk because their overall habits are strong. Their motivation remains stable even with shorter workouts.</p>
-
-          <p>The picture changes for members who already visit infrequently. For them, shorter sessions are an added sign of disengagement, and their risk rises sharply.</p>
-
-          <!-- Chart placeholder -->
-          <!-- <img alt="Workout Duration Impact Chart" src="images/duration-impact.png"/> -->
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>A short workout is only a concern when paired with fewer visits. When both happen together, it signals a member who needs early encouragement and a simple, manageable plan.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>8. Is churn risk more sensitive to age or to workout behaviours?</h2>
-          <p>Churn risk responds far more to training habits than to age. Visit frequency has the strongest impact—almost 30 times stronger than age. Workout duration and calories burned also matter, but to a much smaller degree.</p>
-
-          <p>Age has only a minor effect. It is more useful for tailoring coaching style than predicting who might quit.</p>
-
-          <!-- Chart placeholder -->
-          <!-- <img alt="Sensitivity Analysis Chart" src="images/sensitivity-analysis.png"/> -->
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Base your follow-up decisions on behaviours, not age. Attendance and engagement tell you much more about someone's motivation level.</p>
-          </div>
-        </section>
-
-        <section class="analysis-section">
-          <h2>9. How accurate is the churn model, and can trainers rely on it?</h2>
-          <p>The model achieved perfect accuracy on this dataset—it predicted every case correctly with no false alarms. This is because the behaviour patterns in the dataset are exceptionally clear: members who visit rarely almost always quit, and those who visit regularly almost never do.</p>
-
-          <p>While the model is highly reliable for this dataset, real-world performance may be slightly lower because member behaviour is more varied outside controlled data.</p>
-
-          <!-- Chart placeholder -->
-          <!-- <img alt="Model Accuracy Metrics" src="images/model-accuracy.png"/> -->
-
-          <div class="key-takeaway">
-            <h3>What trainers should do:</h3>
-            <p>Use the model as a decision-support tool, especially for monitoring attendance. It gives dependable guidance on who needs early follow-up, but real-life judgement should always complement the predictions.</p>
-          </div>
-        </section>
-
-        <section class="conclusion">
-          <h2>Conclusion</h2>
-          <p>The analysis shows that how often a member comes to the gym is the strongest warning sign of whether they're losing motivation. When visit frequency drops—or when workouts become shorter or less focused—the risk of quitting rises quickly. Members who stay consistent are generally safe, while those with irregular attendance should be the trainer's first priority.</p>
-
-          <p>These insights help trainers decide what kind of support each member needs. Some may benefit from a simpler routine, more variety, or a programme that fits their schedule better. Others may just need a quick check-in or an invitation to a class to help them regain consistency. The goal is to match the coaching style to the member's current motivation.</p>
-
-          <p>The model also makes it easier to see who needs encouragement this week. A reminder, a small goal, or a friendly message can help at-risk members stay engaged. By focusing on key behaviour signals—especially visit frequency—trainers can step in early and keep members on track.</p>
-        </section>
-      </section>
-    </main>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Predictive Modeling</span>
+    <span class="sep">/</span><span>Predicting Gym Member Drop-Off</span>
   </div>
 
-  <footer>
-    <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-  </footer>
-</body>
-</html>
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-gym-member-dropout/cover%20image.png" alt="Predicting Gym Member Drop-Off">
+    <figcaption><span>Falling visits are the first sign a member is drifting away.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Retention &amp; engagement</div>
+  <h1 class="title">Predicting Gym Member Drop-Off</h1>
+  <p class="standfirst">Spot gym members losing motivation before they quit</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Member activity &middot; churn model</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/predicting-gym-member-dropout-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/predicting-gym-member-dropout.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>This analysis helps fitness trainers understand which member habits show that someone may be losing motivation and could soon quit the gym. Instead of relying only on intuition, the report uses data from visit frequency, workout duration, calories burned, and age to highlight the behaviours that matter most. The aim is to give trainers a simple way to spot early warning signs and support members before they drop out.</p> <p>The key question we answer is: <strong>Which workout behaviours can help trainers identify at-risk members, and how should they respond?</strong> The findings are written for fitness trainers who need practical guidance, who to check on this week, who may need a lighter or more engaging programme, and who might benefit from encouragement or a follow-up message.</p>
+  </div>
+
+  
+
+  <div class="pull"><p>&ldquo;The analysis shows that how often a member comes to the gym is the strongest warning sign of whether they're losing motivation.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. Which habits are most strongly linked to quitting, and are any of them too similar?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-gym-member-dropout/chart%201.png" alt="chart"></figure> <p>The habit most closely linked to quitting is how often a member visits. Those who come less are far more likely to stop. The other behaviours, workout duration, calories burned, and age, have only very weak relationships with churn, so they are not strong warning signs on their own.</p> <p>The four behaviours are not "too similar" to each other. Each one captures a different part of a member's training pattern, and none of them overlap. Visit frequency stands out as the most meaningful signal.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Watch attendance closely. A steady drop in visits is the clearest and earliest sign that a member is losing motivation.</p></div></article>
+    <article class="finding"><h3 class="fq">2. Which behaviours matter based on statistical testing?</h3><div class="ftext"><p>In this dataset, none of the behaviours pass the usual statistical significance test. This is not because the behaviours don't matter, it's because the model ran into a technical issue called complete separation. Members with very low visits almost always churn, while those with high visits almost never do, making the model unstable and unable to calculate proper p-values.</p> <p>The failure of the statistical test is a limitation of the model, not the behaviours. The behavioural patterns in the dataset are still very strong and meaningful.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Even without statistical confirmation, the real-world signal is clear: visit frequency matters most. Workout duration and calories burned are secondary indicators of engagement.</p></div></article>
+    <article class="finding"><h3 class="fq">3. What combination of behaviours best predicts who might quit?</h3><div class="ftext"><p>The most useful combination of behaviours comes from the patterns in the data, not the unstable regression model. The strongest mix includes visit frequency, workout duration, and calories burned. Age adds little predictive value but can still help trainers personalise coaching.</p> <p>This combination works because it reflects how members behave in real life. Attendance shows commitment, and workout duration and calories burned show how engaged a member is during each visit.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Look at both attendance and workout quality. Members who show up less and train with less focus are the ones most likely to drift away.</p></div></article>
+    <article class="finding"><h3 class="fq">4. What is the churn risk for each member?</h3><div class="ftext"><p>Most members have an extremely low risk of quitting. They visit regularly, spend adequate time training, and put in consistent effort. Their habits are stable, and they are unlikely to leave.</p> <p>A smaller group shows near-maximum risk. These members rarely visit and have inconsistent workouts. Without early support, they are likely to drop off.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Prioritise members with risk scores above 0.50. These individuals need encouragement, guidance, or a simple plan to get back on track.</p></div></article>
+    <article class="finding"><h3 class="fq">5. What is the churn risk for members 15, 66, 105, 130 and 150?</h3><div class="ftext"><p>Members 66 and 130 are at the highest level of risk. Their visit patterns and overall engagement strongly suggest they are close to quitting. Members 105 and 150 are at extremely low risk and appear steady and consistent.</p> <p>Member 15 was not found in the output and may require a check in the original dataset.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Act quickly with members 66 and 130. A friendly check-in or simple routine may help them regain consistency. Members 105 and 150 are stable; continue supporting them as usual.</p></div></article>
+    <article class="finding"><h3 class="fq">6. How much does churn risk rise if a member visits three times less per month?</h3><div class="ftext"><p>The effect depends on how often they currently visit. Members who visit frequently see almost no meaningful change. Members who already visit very little remain at high risk because their score is already at the maximum.</p> <p>The largest increase happens among members who visit moderately, around 8 to 12 times per month. A drop of three visits is a strong sign they are slipping out of routine.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Focus on the "middle group." These members are the most sensitive to changes in attendance and can often be saved with timely support.</p></div></article>
+    <article class="finding"><h3 class="fq">7. What happens if workout duration drops from 60 to 20 minutes?</h3><div class="ftext"><p>For most members, reducing session length does not dramatically change their churn risk because their overall habits are strong. Their motivation remains stable even with shorter workouts.</p> <p>The picture changes for members who already visit infrequently. For them, shorter sessions are an added sign of disengagement, and their risk rises sharply.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>A short workout is only a concern when paired with fewer visits. When both happen together, it signals a member who needs early encouragement and a simple, manageable plan.</p></div></article>
+    <article class="finding"><h3 class="fq">8. Is churn risk more sensitive to age or to workout behaviours?</h3><div class="ftext"><p>Churn risk responds far more to training habits than to age. Visit frequency has the strongest impact, almost 30 times stronger than age. Workout duration and calories burned also matter, but to a much smaller degree.</p> <p>Age has only a minor effect. It is more useful for tailoring coaching style than predicting who might quit.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Base your follow-up decisions on behaviours, not age. Attendance and engagement tell you much more about someone's motivation level.</p></div></article>
+    <article class="finding"><h3 class="fq">9. How accurate is the churn model, and can trainers rely on it?</h3><div class="ftext"><p>The model achieved perfect accuracy on this dataset, it predicted every case correctly with no false alarms. This is because the behaviour patterns in the dataset are exceptionally clear: members who visit rarely almost always quit, and those who visit regularly almost never do.</p> <p>While the model is highly reliable for this dataset, real-world performance may be slightly lower because member behaviour is more varied outside controlled data.</p> <p class="subhead"><strong>What trainers should do:</strong></p> <p>Use the model as a decision-support tool, especially for monitoring attendance. It gives dependable guidance on who needs early follow-up, but real-life judgement should always complement the predictions.</p></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>The analysis shows that how often a member comes to the gym is the strongest warning sign of whether they're losing motivation. When visit frequency drops, or when workouts become shorter or less focused, the risk of quitting rises quickly. Members who stay consistent are generally safe, while those with irregular attendance should be the trainer's first priority.</p> <p>These insights help trainers decide what kind of support each member needs. Some may benefit from a simpler routine, more variety, or a programme that fits their schedule better. Others may just need a quick check-in or an invitation to a class to help them regain consistency. The goal is to match the coaching style to the member's current motivation.</p> <p>The model also makes it easier to see who needs encouragement this week. A reminder, a small goal, or a friendly message can help at-risk members stay engaged. By focusing on key behaviour signals, especially visit frequency, trainers can step in early and keep members on track.</p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

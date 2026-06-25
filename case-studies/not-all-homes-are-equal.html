@@ -1,205 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Not All Homes Are Equal | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/dashboards/not-all-homes-are-equal-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-    <!-- Agentic Workflow Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="https://lyven81.github.io/data-analyst-portfolio/agentic_workflow/not-all-homes-are-equal.html">
-      AI Assistant
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/cover%20image.jpeg"/>
-      <h1>
-       Not All Homes Are Equal
-      </h1>
-      <p>
-       Price, Space, and Features Across Colorado's Property Market
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       Buying the right property at the right price is harder than it looks. Listing prices vary enormously across property types in the Colorado market, and a lower price tag does not always mean better value — sometimes it means less space at a higher cost per square foot. Investors who focus only on size and room count may still overpay if they overlook what the data says about which features actually move prices in their target segment.
-      </p>
-      <p>
-       This report analyses over 5,800 residential property listings from the Colorado real estate market in 2026 to answer two practical questions: which property types give investors the most for their money, and which physical features have the greatest impact on price. The findings are structured around three investor budget tiers — under $400,000, $400,000 to $900,000, and above $900,000 — to make the conclusions directly actionable regardless of where an investor is starting from.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Sources and Methodology
-      </h2>
-      <p>
-       We analysed a dataset of 8,362 residential property listings from the Colorado real estate market in 2026, covering six property types: single-family homes, condos, townhomes, multi-family units, mobile homes, and duplex/triplex properties. Our analysis focused on listing price, price per square foot, and five physical features — square footage, bedrooms, bathrooms, stories, and garage spaces. After removing duplicates, implausible prices, and land or farm listings that lacked structural data, the cleaned dataset contained 5,897 listings. Our goal was to identify which property types offer the best value per square foot and which physical features most significantly drive listing price — giving property investors a clearer basis for acquisition and improvement decisions.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. What is the median listing price and price per sqft for each property type?
-      </h2>
-      <img alt="Chart 1 - Median Price and Price per Sqft by Property Type" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q1%20chart.png"/>
-      <p>
-       The Colorado market spans a wide range by property type. Among mainstream residential types, multi-family homes have the highest median price at $648,000, followed by single-family at $619,000, townhomes at $508,000, condos at $380,000, and mobile homes at $125,000. Duplex/triplex sits far above all at $2.47M, but with only 26 listings it is too thin a market to rely on.
-      </p>
-      <p>
-       Price per sqft shifts the picture significantly. Condos cost $359 per sqft — the highest among affordable types — despite their lower absolute price. Single-family homes cost just $272 per sqft. Mobile homes are the cheapest at $112 per sqft. A condo that appears affordable at $380,000 is actually expensive on a per-sqft basis compared to single-family, which delivers more space for a lower cost per dollar.
-      </p>
-      <p>
-       For investors, the gap between absolute price and price per sqft is a critical lens. It separates properties that look affordable from those that actually are.
-      </p>
-     </section>
-     <section>
-      <h2>
-       2. Which property type offers the highest sqft per dollar — and which is the most expensive per sqft?
-      </h2>
-      <img alt="Chart 2 - Value Ranking by Property Type" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q2%20chart.png"/>
-      <p>
-       Mobile homes deliver the most space per dollar at $112 per sqft, returning 0.0089 sqft for every dollar spent — more than double the return of single-family homes at 0.0037 sqft per dollar. At the other end, duplex/triplex properties are the most expensive at $879 per sqft, returning just 0.0011 sqft per dollar.
-      </p>
-      <p>
-       Among mainstream types, single-family homes offer the strongest balance of value and scale. At $272 per sqft with a median of 2,411 sqft, they provide significantly more space than condos — which offer only 1,133 sqft at $359 per sqft — at a lower cost per dollar. Multi-family matches single-family on size at 2,410 sqft but costs slightly more per sqft at $289.
-      </p>
-      <p>
-       For investors focused on maximising space for their capital, mobile homes offer the sharpest efficiency, though they are smaller and less liquid. Single-family is the more practical choice for investors who need both scale and ease of exit.
-      </p>
-     </section>
-     <section>
-      <h2>
-       3. How much of listing price variation is explained by physical features?
-      </h2>
-      <img alt="Chart 3 - Explanatory Power of Physical Features" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q3%20chart.png"/>
-      <p>
-       Physical features — sqft, beds, baths, stories, and garage — explain only 25.6% of the variation in listing price across the Colorado market. The remaining 74.4% is likely driven by factors outside this dataset: location, neighbourhood quality, school districts, and property condition.
-      </p>
-      <p>
-       This does not make physical features irrelevant. It means they are a reliable baseline, not a complete picture. The same 3-bedroom home can command vastly different prices depending on where it sits in Colorado, and room counts alone will not capture that gap.
-      </p>
-      <p>
-       Investors should use physical features to screen and shortlist properties, but make final decisions with location in mind. Properties priced well above what their features predict may be justified by a strong location — or may be overpriced. Either way, the data flags them as worth a closer look.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. Which features have the strongest effect on listing price, and by how much per unit?
-      </h2>
-      <img alt="Chart 4 - Feature Impact on Listing Price" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q4%20chart.png"/>
-      <p>
-       Bathrooms and square footage are the two features most strongly linked to higher prices in the Colorado market. A one standard deviation increase in bathroom count is associated with an $823,508 rise in price; the same increase in sqft adds $646,911. These are the features investors should prioritise when evaluating renovation potential.
-      </p>
-      <p>
-       Bedrooms show a negative relationship at -$457,761 when all other features are held constant. This is a multicollinearity effect — when sqft and baths are already accounted for, adding bedrooms within the same space means smaller individual rooms, which buyers penalise. Garage spaces show a negative coefficient at -$112,409, reflecting the mix of property types where many higher-priced properties lack garages. Stories have minimal effect at -$8,953.
-      </p>
-      <p>
-       The takeaway for investors is straightforward: bathroom count and total sqft move prices the most. When assessing whether a renovation will pay off, focus on these two features first.
-      </p>
-     </section>
-     <section>
-      <h2>
-       5. Do price drivers differ in importance across property types?
-      </h2>
-      <p>
-       Yes — and the differences matter. Square footage is the dominant driver for single-family homes (+$857,935), condos (+$1,255,111), and townhomes (+$928,363). Condos are the most sensitive of all — a one standard deviation increase in sqft adds over $1.25M in price. In these segments, space is what buyers pay for.
-      </p>
-      <p>
-       Multi-family properties behave differently. Sqft impact drops to +$115,795, while bedrooms (+$104,012) and bathrooms (+$147,819) carry comparable weight. Buyers in this segment think about rental income and unit configuration rather than raw space. Mobile homes have the highest R² at 0.46, meaning physical features predict price more reliably here than in any other type. A garage adds +$98,802 in mobile homes — significant because garages are uncommon in this segment and treated as a premium.
-      </p>
-      <p>
-       Before spending money on improvements, investors need to know what type they own. Add bathrooms to a single-family home. Maximise sqft in a condo. Count rooms in a multi-family building. Add a garage to a mobile home. Renovation budget spent where buyers in that specific segment actually pay for it is the difference between a project that returns value and one that does not.
-      </p>
-     </section>
-     <section>
-      <h2>
-       6. Which property type is best for investors at each budget tier?
-      </h2>
-      <p>
-       For low-budget investors under $400,000, mobile homes offer the lowest cost at $103 per sqft but are small and less liquid. Multi-family at $153 per sqft and 2,169 sqft is the better value play, though only 14 listings fall in this range. Single-family is the most practical entry point — 541 listings at $229 per sqft — with enough market depth to find and exit deals without difficulty.
-      </p>
-      <p>
-       For medium-budget investors between $400,000 and $900,000, single-family is the clear choice. At $254 per sqft, 2,267 sqft, and 2,384 listings, it delivers the best combination of value, space, and liquidity in the Colorado market. Condos in this range cost $472 per sqft for just 1,150 sqft — nearly double the cost per sqft for less than half the space — making them a poor value proposition at this budget.
-      </p>
-      <p>
-       For high-budget investors above $900,000, single-family leads again at $379 per sqft with a median of 4,187 sqft across 995 listings — the largest properties at the most competitive price per sqft in this tier. Condos at $1,728 per sqft for 1,605 sqft carry a premium the features alone cannot justify. Across all three budget tiers, single-family homes consistently deliver the strongest combination of value, scale, and market depth.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       Before committing capital, investors should look beyond the listing price and focus on price per sqft — because the two do not always tell the same story. Across all three budget tiers in the Colorado market, single-family homes consistently offer the best combination of value, scale, and liquidity. Investors should also be clear on their renovation strategy before buying. Bathrooms and square footage are the features that move prices most across the market as a whole, but the right improvement depends on property type — adding sqft matters most in condos and single-family homes, room count matters more in multi-family, and a garage can add significant value in a mobile home segment where it is rare.
-      </p>
-      <p>
-       Investors should also set realistic expectations about what the data can and cannot tell them. Physical features explain only 26% of why one property is priced higher than another in Colorado. The remaining 74% comes down to location, condition, and neighbourhood factors that no listing spreadsheet fully captures. The most disciplined investors use data to shortlist and screen, then apply local knowledge to decide. A property that looks underpriced based on its features may be underpriced for a reason — and that reason is worth finding before any money changes hands.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Not All Homes Are Equal | Data Stories Lab</title>
+<meta name="description" content="Find the best-value property type and size">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Regression Analysis</span>
+    <span class="sep">/</span><span>Not All Homes Are Equal</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/cover%20image.jpeg" alt="Not All Homes Are Equal">
+    <figcaption><span>Why a lower price tag is not always better value.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Property &amp; valuation</div>
+  <h1 class="title">Not All Homes Are Equal</h1>
+  <p class="standfirst">Find the best-value property type and size</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Colorado homes &middot; regression</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/not-all-homes-are-equal-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/not-all-homes-are-equal.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> Buying the right property at the right price is harder than it looks. Listing prices vary enormously across property types in the Colorado market, and a lower price tag does not always mean better value, sometimes it means less space at a higher cost per square foot. Investors who focus only on size and room count may still overpay if they overlook what the data says about which features actually move prices in their target segment. </p> <p> This report analyses over 5,800 residential property listings from the Colorado real estate market in 2026 to answer two practical questions: which property types give investors the most for their money, and which physical features have the greatest impact on price. The findings are structured around three investor budget tiers, under $400,000, $400,000 to $900,000, and above $900,000, to make the conclusions directly actionable regardless of where an investor is starting from. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">$648k</div><div class="l">multi-family median</div></div><div class="fig"><div class="n">$112/sqft</div><div class="l">mobile-home value</div></div><div class="fig"><div class="n">25.6%</div><div class="l">price explained</div></div><div class="fig"><div class="n">Baths</div><div class="l">strongest driver</div></div></div>
+
+  <div class="pull"><p>&ldquo;Before committing capital, investors should look beyond the listing price and focus on price per sqft, because the two do not always tell the same story.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. What is the median listing price and price per sqft for each property type?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q1%20chart.png" alt="chart"></figure> <p> The Colorado market spans a wide range by property type. Among mainstream residential types, multi-family homes have the highest median price at $648,000, followed by single-family at $619,000, townhomes at $508,000, condos at $380,000, and mobile homes at $125,000. Duplex/triplex sits far above all at $2.47M, but with only 26 listings it is too thin a market to rely on. </p> <p> Price per sqft shifts the picture significantly. Condos cost $359 per sqft, the highest among affordable types, despite their lower absolute price. Single-family homes cost just $272 per sqft. Mobile homes are the cheapest at $112 per sqft. A condo that appears affordable at $380,000 is actually expensive on a per-sqft basis compared to single-family, which delivers more space for a lower cost per dollar. </p> <p> For investors, the gap between absolute price and price per sqft is a critical lens. It separates properties that look affordable from those that actually are. </p></div></article>
+    <article class="finding"><h3 class="fq">2. Which property type offers the highest sqft per dollar, and which is the most expensive per sqft?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q2%20chart.png" alt="chart"></figure> <p> Mobile homes deliver the most space per dollar at $112 per sqft, returning 0.0089 sqft for every dollar spent, more than double the return of single-family homes at 0.0037 sqft per dollar. At the other end, duplex/triplex properties are the most expensive at $879 per sqft, returning just 0.0011 sqft per dollar. </p> <p> Among mainstream types, single-family homes offer the strongest balance of value and scale. At $272 per sqft with a median of 2,411 sqft, they provide significantly more space than condos, which offer only 1,133 sqft at $359 per sqft, at a lower cost per dollar. Multi-family matches single-family on size at 2,410 sqft but costs slightly more per sqft at $289. </p> <p> For investors focused on maximising space for their capital, mobile homes offer the sharpest efficiency, though they are smaller and less liquid. Single-family is the more practical choice for investors who need both scale and ease of exit. </p></div></article>
+    <article class="finding"><h3 class="fq">3. How much of listing price variation is explained by physical features?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q3%20chart.png" alt="chart"></figure> <p> Physical features, sqft, beds, baths, stories, and garage, explain only 25.6% of the variation in listing price across the Colorado market. The remaining 74.4% is likely driven by factors outside this dataset: location, neighbourhood quality, school districts, and property condition. </p> <p> This does not make physical features irrelevant. It means they are a reliable baseline, not a complete picture. The same 3-bedroom home can command vastly different prices depending on where it sits in Colorado, and room counts alone will not capture that gap. </p> <p> Investors should use physical features to screen and shortlist properties, but make final decisions with location in mind. Properties priced well above what their features predict may be justified by a strong location, or may be overpriced. Either way, the data flags them as worth a closer look. </p></div></article>
+    <article class="finding"><h3 class="fq">4. Which features have the strongest effect on listing price, and by how much per unit?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/not-all-homes-are-equal/Q4%20chart.png" alt="chart"></figure> <p> Bathrooms and square footage are the two features most strongly linked to higher prices in the Colorado market. A one standard deviation increase in bathroom count is associated with an $823,508 rise in price; the same increase in sqft adds $646,911. These are the features investors should prioritise when evaluating renovation potential. </p> <p> Bedrooms show a negative relationship at -$457,761 when all other features are held constant. This is a multicollinearity effect, when sqft and baths are already accounted for, adding bedrooms within the same space means smaller individual rooms, which buyers penalise. Garage spaces show a negative coefficient at -$112,409, reflecting the mix of property types where many higher-priced properties lack garages. Stories have minimal effect at -$8,953. </p> <p> The takeaway for investors is straightforward: bathroom count and total sqft move prices the most. When assessing whether a renovation will pay off, focus on these two features first. </p></div></article>
+    <article class="finding"><h3 class="fq">5. Do price drivers differ in importance across property types?</h3><div class="ftext"><p> Yes, and the differences matter. Square footage is the dominant driver for single-family homes (+$857,935), condos (+$1,255,111), and townhomes (+$928,363). Condos are the most sensitive of all, a one standard deviation increase in sqft adds over $1.25M in price. In these segments, space is what buyers pay for. </p> <p> Multi-family properties behave differently. Sqft impact drops to +$115,795, while bedrooms (+$104,012) and bathrooms (+$147,819) carry comparable weight. Buyers in this segment think about rental income and unit configuration rather than raw space. Mobile homes have the highest R² at 0.46, meaning physical features predict price more reliably here than in any other type. A garage adds +$98,802 in mobile homes, significant because garages are uncommon in this segment and treated as a premium. </p> <p> Before spending money on improvements, investors need to know what type they own. Add bathrooms to a single-family home. Maximise sqft in a condo. Count rooms in a multi-family building. Add a garage to a mobile home. Renovation budget spent where buyers in that specific segment actually pay for it is the difference between a project that returns value and one that does not. </p></div></article>
+    <article class="finding"><h3 class="fq">6. Which property type is best for investors at each budget tier?</h3><div class="ftext"><p> For low-budget investors under $400,000, mobile homes offer the lowest cost at $103 per sqft but are small and less liquid. Multi-family at $153 per sqft and 2,169 sqft is the better value play, though only 14 listings fall in this range. Single-family is the most practical entry point, 541 listings at $229 per sqft, with enough market depth to find and exit deals without difficulty. </p> <p> For medium-budget investors between $400,000 and $900,000, single-family is the clear choice. At $254 per sqft, 2,267 sqft, and 2,384 listings, it delivers the best combination of value, space, and liquidity in the Colorado market. Condos in this range cost $472 per sqft for just 1,150 sqft, nearly double the cost per sqft for less than half the space, making them a poor value proposition at this budget. </p> <p> For high-budget investors above $900,000, single-family leads again at $379 per sqft with a median of 4,187 sqft across 995 listings, the largest properties at the most competitive price per sqft in this tier. Condos at $1,728 per sqft for 1,605 sqft carry a premium the features alone cannot justify. Across all three budget tiers, single-family homes consistently deliver the strongest combination of value, scale, and market depth. </p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p> We analysed a dataset of 8,362 residential property listings from the Colorado real estate market in 2026, covering six property types: single-family homes, condos, townhomes, multi-family units, mobile homes, and duplex/triplex properties. Our analysis focused on listing price, price per square foot, and five physical features, square footage, bedrooms, bathrooms, stories, and garage spaces. After removing duplicates, implausible prices, and land or farm listings that lacked structural data, the cleaned dataset contained 5,897 listings. Our goal was to identify which property types offer the best value per square foot and which physical features most significantly drive listing price, giving property investors a clearer basis for acquisition and improvement decisions. </p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> Before committing capital, investors should look beyond the listing price and focus on price per sqft, because the two do not always tell the same story. Across all three budget tiers in the Colorado market, single-family homes consistently offer the best combination of value, scale, and liquidity. Investors should also be clear on their renovation strategy before buying. Bathrooms and square footage are the features that move prices most across the market as a whole, but the right improvement depends on property type, adding sqft matters most in condos and single-family homes, room count matters more in multi-family, and a garage can add significant value in a mobile home segment where it is rare. </p> <p> Investors should also set realistic expectations about what the data can and cannot tell them. Physical features explain only 26% of why one property is priced higher than another in Colorado. The remaining 74% comes down to location, condition, and neighbourhood factors that no listing spreadsheet fully captures. The most disciplined investors use data to shortlist and screen, then apply local knowledge to decide. A property that looks underpriced based on its features may be underpriced for a reason, and that reason is worth finding before any money changes hands. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

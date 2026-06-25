@@ -1,242 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Who Really Drives Sales? | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
-  <style>
-   .cs-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:0.9rem;}
-   .cs-table th,.cs-table td{padding:8px 10px;border-bottom:1px solid #e3d6c2;text-align:left;}
-   .cs-table th{background:#4a3520;color:#fff;font-weight:600;}
-   .cs-table td.num{text-align:right;}
-   .cs-table tr:nth-child(even){background:#faf6ef;}
-   .v-promote{color:#3c6e47;font-weight:700;} .v-keep{color:#b08a1e;font-weight:700;} .v-dismiss{color:#c0563b;font-weight:700;}
-  </style>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's turn your data into actionable decisions.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/who-really-drives-sales-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-    <!-- AI Assistant Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/who-really-drives-sales.html">
-      AI Assistant
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Who Really Drives Sales cover" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/cover.png"/>
-      <h1>
-       Who Really Drives Sales?
-      </h1>
-      <p>
-       Ranking influencers fairly when effort and slots are equal
-      </p>
-     </header>
-     <section>
-      <h2>
-       Executive Summary
-      </h2>
-      <p>
-       A toy retailer ran a month of TikTok live selling in June 2024 with 10 influencers, each given the exact same airtime: 120 one-hour sessions. They earned $515,317 between them, but not evenly. The top seller brought in $59,837 and the bottom seller just $38,433, a $21,404 gap for identical effort, identical time slots, and similar-sized audiences.
-      </p>
-      <p>
-       The analysis shows this gap is the person, not their circumstances. Audience size and conversion rate do not predict who sells, and the only input that tracks revenue is engagement, which the influencer controls. We recommend promoting the four proven top sellers, keeping the four steady performers, and releasing the two clear laggards, then reallocating their 240 monthly hours to the people who convert them best.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       The retailer's question is simple and high-stakes: with a fixed roster and fixed airtime, who deserves more slots, who stays as is, and who should go? Getting this wrong is expensive in two directions. Keep a weak seller and you pour 120 hours a month into below-average returns. Cut the wrong person, say a high-audience influencer who actually sells well, and you lose revenue while feeling data-driven.
-      </p>
-      <p>
-       This report is written for the manager making that call. It works from the bottom up: first it proves everyone had an equal shot, then it ranks what each influencer actually sold, then it strips out luck (slot, crowd, product price) to isolate genuine selling ability, and finally it converts that into a defensible promote, keep, or dismiss verdict for each of the 10.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Sources and Methodology
-      </h2>
-      <p>
-       We analysed two June 2024 datasets from the retailer's TikTok live program: 1,200 hourly streaming sessions (audience size, engagement rate, conversion rate, and the toy featured per session) and 1,446 individual sales (units, price, and value). Both are complete, with no missing values. The 10 influencers split into two fixed rotas: Group a worked the 8pm, 10pm, 12am, and 2am slots, Group b the 9pm, 11pm, 1am, and 3am slots, both covering the same overnight window with the same 120 hours each. We focused on revenue per influencer as the outcome, with units, price, engagement, conversion, audience, and time slot as the explanatory factors. One note: individual sales carry a date but no clock time, so hour-level questions use session metrics (audience and conversion by slot) rather than dollar sales by hour.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. Is anyone outperforming just by streaming more?
-      </h2>
-      <p>
-       No. All 10 influencers ran exactly 120 one-hour sessions in June, identical airtime with no exceptions. Every dollar of the $515,317 total was earned on a level playing field of effort. That means any revenue gap is real performance, not extra stage time, so the roster can be compared like-for-like. This is the foundation that makes the whole verdict defensible: same hours for everyone, so the results are about how well each person used the time, nothing else.
-      </p>
-     </section>
-     <section>
-      <h2>
-       2. Who sold the most, and who sold the least?
-      </h2>
-      <img alt="Revenue by influencer, ranked and colored by verdict" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart1_revenue_ranking.png"/>
-      <p>
-       Influencer #3 led with $59,837, followed closely by #7 at $59,143, #4 at $55,730, and #1 at $54,725. At the bottom, #10 trailed badly at $38,433 and #5 at $45,699. The gap between best and worst is $21,404, meaning the top seller earned 1.56 times what the bottom one did for the same 120 hours. In revenue per hour, that is $499 against $320. This spread is wide enough to act on; it is not noise around an average, it is a clear separation between who works the slots well and who does not.
-      </p>
-     </section>
-     <section>
-      <h2>
-       3. Who sold the most units, and is that the same person who made the most money?
-      </h2>
-      <p>
-       Mostly the same people, with one telling exception. Influencer #3 leads on both units (518) and revenue, so the top performer is genuinely top on both counts. But #4 sold more units than #7 (500 against 477), yet #7 earned more money ($59,143 against $55,730), because #7 sold slightly pricier toys. So the leaderboard is driven mainly by volume, with a smaller assist from product mix. For ranking purposes, revenue and units tell almost the same story, which is reassuring: the top sellers are not a mirage created by one expensive item.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. Did the top sellers win on higher prices or more units?
-      </h2>
-      <img alt="Revenue vs units sold scatter with trend line" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart2_units_vs_revenue.png"/>
-      <p>
-       On units, clearly. Revenue tracks total units sold very tightly (correlation 0.94) and average price only moderately (0.49). In plain terms, the influencers who made the most money did it by moving more toys, not by being handed expensive ones. That matters for fairness: selling more units is a selling-skill signal, while a lucky high-price product mix would be circumstance. The data says the leaders earned their lead mostly through volume. Price helps at the margin, which is why a few rank positions shuffle, but it never overturns the volume story.
-      </p>
-     </section>
-     <section>
-      <h2>
-       5. Did the top sellers just get bigger audiences?
-      </h2>
-      <img alt="Correlation of each input metric with revenue" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart3_driver_correlations.png"/>
-      <p>
-       No, and this is the most important myth to retire. Bigger audiences do not lead to more sales: revenue and audience size actually move in opposite directions slightly (correlation negative 0.18), and audience per influencer is tightly clustered (474 to 565) because it is driven by the slot, not the person. So a manager who promotes on viewer counts would be rewarding the wrong thing. The top sellers did not win because more people showed up; they won because they sold better to whoever was there. Stop reading audience size as a performance metric.
-      </p>
-     </section>
-     <section>
-      <h2>
-       6. Does higher engagement lead to more sales?
-      </h2>
-      <p>
-       Weakly yes, and it is the only input metric that points the right way. Revenue rises with engagement (correlation 0.38), so the influencers who hold attention tend to sell more. But the link is loose: engagement explains only about 15% of the revenue gap, and there are exceptions. Influencer #8 has the highest engagement (46.4) yet only mid-table sales, while #2 has the lowest engagement (40.8) and still sells solidly. So engagement is a useful supporting signal, the best of the input metrics, but not a substitute for looking at what each person actually sold. Coach for engagement, but judge on revenue.
-      </p>
-     </section>
-     <section>
-      <h2>
-       7. Does a higher conversion rate lead to more revenue?
-      </h2>
-      <p>
-       No. Conversion rate, the share of viewers who buy in a session, does not track revenue at all (correlation negative 0.22). Conversion rates are nearly flat across the roster (4.4% to 5.1%), so they do not separate the strong sellers from the weak ones. This is counterintuitive, because conversion rate feels like the purest sales metric, but here it is a distraction: two influencers can convert at the same rate and earn very different amounts depending on basket size and volume. Do not rank or reward on conversion rate.
-      </p>
-     </section>
-     <section>
-      <h2>
-       8. Which hour draws the biggest audience, and is it also the most productive?
-      </h2>
-      <img alt="Audience and selling pressure by hour slot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart4_hour_slots.png"/>
-      <p>
-       The 3am slot draws the largest average audience (545 viewers) and also shows the highest selling pressure (audience times conversion, at 27.4 expected buyers per session), so the biggest-crowd hour is also the most productive one. But the headline is how little timing matters: across all eight hours, selling pressure ranges only from 22.8 to 27.4, a narrow band. No influencer is meaningfully helped or hurt by their slot. This reinforces the fairness case: a weak seller cannot blame a bad hour, because there is no bad hour.
-      </p>
-     </section>
-     <section>
-      <h2>
-       9. With the time slot held constant, do influencers still differ, the person or the slot?
-      </h2>
-      <img alt="Revenue spread within each group, same slots" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart5_within_group.png"/>
-      <p>
-       The person, decisively. Because all five influencers in a group work the identical four hours, any difference among them cannot be the slot. Yet within Group a, revenue still ranges 1.31 times (from $45,699 to $59,837), and within Group b it ranges 1.45 times (from $38,433 to $55,730). By contrast, the gap between the two groups' averages is small ($53,528 against $49,535, about 8%). So the differences within a shift dwarf the differences between shifts: the rota barely matters, the individual is what counts. This is the proof that promoting or releasing on revenue is fair, because the results follow the people, not their schedule.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Recommendation: Promote, Keep, Dismiss
-      </h2>
-      <p>
-       Each influencer is measured against the roster average of $51,532. At or above 1.05 times ($54,108) is Promote; at or below 0.90 times ($46,379) is Dismiss; in between is Keep. The rule is fair because effort, slots, and audiences are held constant, so revenue reflects the person.
-      </p>
-      <table class="cs-table">
-       <thead><tr><th>Rank</th><th>Influencer</th><th>Group</th><th>Revenue</th><th>Rev / hr</th><th>Units</th><th>vs Benchmark</th><th>Verdict</th></tr></thead>
-       <tbody>
-        <tr><td>1</td><td>#3</td><td>a</td><td class="num">$59,837</td><td class="num">$499</td><td class="num">518</td><td class="num">+16%</td><td class="v-promote">Promote</td></tr>
-        <tr><td>2</td><td>#7</td><td>a</td><td class="num">$59,143</td><td class="num">$493</td><td class="num">477</td><td class="num">+15%</td><td class="v-promote">Promote</td></tr>
-        <tr><td>3</td><td>#4</td><td>b</td><td class="num">$55,730</td><td class="num">$464</td><td class="num">500</td><td class="num">+8%</td><td class="v-promote">Promote</td></tr>
-        <tr><td>4</td><td>#1</td><td>a</td><td class="num">$54,725</td><td class="num">$456</td><td class="num">459</td><td class="num">+6%</td><td class="v-promote">Promote</td></tr>
-        <tr><td>5</td><td>#2</td><td>b</td><td class="num">$52,680</td><td class="num">$439</td><td class="num">430</td><td class="num">+2%</td><td class="v-keep">Keep</td></tr>
-        <tr><td>6</td><td>#8</td><td>b</td><td class="num">$51,393</td><td class="num">$428</td><td class="num">415</td><td class="num">0%</td><td class="v-keep">Keep</td></tr>
-        <tr><td>7</td><td>#6</td><td>b</td><td class="num">$49,438</td><td class="num">$412</td><td class="num">430</td><td class="num">-4%</td><td class="v-keep">Keep</td></tr>
-        <tr><td>8</td><td>#9</td><td>a</td><td class="num">$48,239</td><td class="num">$402</td><td class="num">416</td><td class="num">-6%</td><td class="v-keep">Keep</td></tr>
-        <tr><td>9</td><td>#5</td><td>a</td><td class="num">$45,699</td><td class="num">$381</td><td class="num">378</td><td class="num">-11%</td><td class="v-dismiss">Dismiss</td></tr>
-        <tr><td>10</td><td>#10</td><td>b</td><td class="num">$38,433</td><td class="num">$320</td><td class="num">353</td><td class="num">-25%</td><td class="v-dismiss">Dismiss</td></tr>
-       </tbody>
-      </table>
-      <ol>
-       <li><strong>Promote #3, #7, #4, #1.</strong> They each clear the benchmark by 6% to 16% for the same effort, and the two strongest (#3 and #7) also lead the roster on engagement. Give them the released slots first; they already earn up to $499 per hour against the roster's $429 average, so shifting hours toward this tier is the single highest-return move available.</li>
-       <li><strong>Keep #2, #8, #6, #9.</strong> They sit within 7% of the benchmark, steady and reliable with no case for change. Hold their slots and coach the upside: #8 in particular engages the best on the whole roster but converts it to only mid-table sales, so a small lift in closing could move them up a tier.</li>
-       <li><strong>Dismiss #5 and #10.</strong> They sell 11% and 25% below the benchmark despite identical hours, identical slots, and comparable audiences, so there is no circumstantial excuse. Release them and reallocate their 240 monthly hours to the Promote tier, recovering roughly $18,900 a month of below-average output.</li>
-       <li><strong>Change what you measure in reviews.</strong> Stop ranking influencers on audience size and conversion rate; neither predicts sales here (correlations negative 0.18 and negative 0.22). Rank on revenue and units sold, and use engagement (0.38) as the one supporting coaching signal, so every future promote, keep, or dismiss call stays grounded in what actually drives the business.</li>
-      </ol>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       The single most important finding is that this roster's results are earned, not inherited. Effort is equal, time slots are equal, audiences are similar, and timing barely moves sales, so the $21,404 spread between the best and worst seller is about how well each person sells, full stop. The metrics managers usually lean on, audience size and conversion rate, are noise here; the only honest scoreboard is revenue, supported loosely by engagement.
-      </p>
-      <p>
-       That makes the cost of inaction concrete. The two weakest influencers sell 11% and 25% below the roster average despite identical conditions, leaving roughly $18,900 a month of below-benchmark output sitting in 240 hours of prime airtime. Those hours are the asset. Redirected to proven top sellers, they convert to materially more revenue with no extra cost and no extra staff. Set the benchmark, promote the proven sellers, release the laggards, and the same airtime will earn more within a single month.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Really Drives Sales? | Data Stories Lab</title>
+<meta name="description" content="Find which live sellers actually drive sales">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2026 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Segmentation Analysis</span>
+    <span class="sep">/</span><span>Who Really Drives Sales?</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/cover.png" alt="Who Really Drives Sales?">
+    <figcaption><span>Which live sellers earn their slots, on equal airtime.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Influencer &amp; performance</div>
+  <h1 class="title">Who Really Drives Sales?</h1>
+  <p class="standfirst">Find which live sellers actually drive sales</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>TikTok live &middot; 10 influencers</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/who-really-drives-sales-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/who-really-drives-sales.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> The retailer's question is simple and high-stakes: with a fixed roster and fixed airtime, who deserves more slots, who stays as is, and who should go? Getting this wrong is expensive in two directions. Keep a weak seller and you pour 120 hours a month into below-average returns. Cut the wrong person, say a high-audience influencer who actually sells well, and you lose revenue while feeling data-driven. </p> <p> This report is written for the manager making that call. It works from the bottom up: first it proves everyone had an equal shot, then it ranks what each influencer actually sold, then it strips out luck (slot, crowd, product price) to isolate genuine selling ability, and finally it converts that into a defensible promote, keep, or dismiss verdict for each of the 10. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">10</div><div class="l">influencers</div></div><div class="fig"><div class="n">$59,837</div><div class="l">top seller</div></div><div class="fig"><div class="n">0.94</div><div class="l">units-revenue link</div></div><div class="fig"><div class="n">Audience</div><div class="l">does not sell</div></div></div>
+
+  <div class="pull"><p>&ldquo;The single most important finding is that this roster's results are earned, not inherited.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Executive Summary</h3><div class="ftext"><p> A toy retailer ran a month of TikTok live selling in June 2024 with 10 influencers, each given the exact same airtime: 120 one-hour sessions. They earned $515,317 between them, but not evenly. The top seller brought in $59,837 and the bottom seller just $38,433, a $21,404 gap for identical effort, identical time slots, and similar-sized audiences. </p> <p> The analysis shows this gap is the person, not their circumstances. Audience size and conversion rate do not predict who sells, and the only input that tracks revenue is engagement, which the influencer controls. We recommend promoting the four proven top sellers, keeping the four steady performers, and releasing the two clear laggards, then reallocating their 240 monthly hours to the people who convert them best. </p></div></article>
+    <article class="finding"><h3 class="fq">1. Is anyone outperforming just by streaming more?</h3><div class="ftext"><p> No. All 10 influencers ran exactly 120 one-hour sessions in June, identical airtime with no exceptions. Every dollar of the $515,317 total was earned on a level playing field of effort. That means any revenue gap is real performance, not extra stage time, so the roster can be compared like-for-like. This is the foundation that makes the whole verdict defensible: same hours for everyone, so the results are about how well each person used the time, nothing else. </p></div></article>
+    <article class="finding"><h3 class="fq">2. Who sold the most, and who sold the least?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart1_revenue_ranking.png" alt="chart"></figure> <p> Influencer #3 led with $59,837, followed closely by #7 at $59,143, #4 at $55,730, and #1 at $54,725. At the bottom, #10 trailed badly at $38,433 and #5 at $45,699. The gap between best and worst is $21,404, meaning the top seller earned 1.56 times what the bottom one did for the same 120 hours. In revenue per hour, that is $499 against $320. This spread is wide enough to act on; it is not noise around an average, it is a clear separation between who works the slots well and who does not. </p></div></article>
+    <article class="finding"><h3 class="fq">3. Who sold the most units, and is that the same person who made the most money?</h3><div class="ftext"><p> Mostly the same people, with one telling exception. Influencer #3 leads on both units (518) and revenue, so the top performer is genuinely top on both counts. But #4 sold more units than #7 (500 against 477), yet #7 earned more money ($59,143 against $55,730), because #7 sold slightly pricier toys. So the leaderboard is driven mainly by volume, with a smaller assist from product mix. For ranking purposes, revenue and units tell almost the same story, which is reassuring: the top sellers are not a mirage created by one expensive item. </p></div></article>
+    <article class="finding"><h3 class="fq">4. Did the top sellers win on higher prices or more units?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart2_units_vs_revenue.png" alt="chart"></figure> <p> On units, clearly. Revenue tracks total units sold very tightly (correlation 0.94) and average price only moderately (0.49). In plain terms, the influencers who made the most money did it by moving more toys, not by being handed expensive ones. That matters for fairness: selling more units is a selling-skill signal, while a lucky high-price product mix would be circumstance. The data says the leaders earned their lead mostly through volume. Price helps at the margin, which is why a few rank positions shuffle, but it never overturns the volume story. </p></div></article>
+    <article class="finding"><h3 class="fq">5. Did the top sellers just get bigger audiences?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart3_driver_correlations.png" alt="chart"></figure> <p> No, and this is the most important myth to retire. Bigger audiences do not lead to more sales: revenue and audience size actually move in opposite directions slightly (correlation negative 0.18), and audience per influencer is tightly clustered (474 to 565) because it is driven by the slot, not the person. So a manager who promotes on viewer counts would be rewarding the wrong thing. The top sellers did not win because more people showed up; they won because they sold better to whoever was there. Stop reading audience size as a performance metric. </p></div></article>
+    <article class="finding"><h3 class="fq">6. Does higher engagement lead to more sales?</h3><div class="ftext"><p> Weakly yes, and it is the only input metric that points the right way. Revenue rises with engagement (correlation 0.38), so the influencers who hold attention tend to sell more. But the link is loose: engagement explains only about 15% of the revenue gap, and there are exceptions. Influencer #8 has the highest engagement (46.4) yet only mid-table sales, while #2 has the lowest engagement (40.8) and still sells solidly. So engagement is a useful supporting signal, the best of the input metrics, but not a substitute for looking at what each person actually sold. Coach for engagement, but judge on revenue. </p></div></article>
+    <article class="finding"><h3 class="fq">7. Does a higher conversion rate lead to more revenue?</h3><div class="ftext"><p> No. Conversion rate, the share of viewers who buy in a session, does not track revenue at all (correlation negative 0.22). Conversion rates are nearly flat across the roster (4.4% to 5.1%), so they do not separate the strong sellers from the weak ones. This is counterintuitive, because conversion rate feels like the purest sales metric, but here it is a distraction: two influencers can convert at the same rate and earn very different amounts depending on basket size and volume. Do not rank or reward on conversion rate. </p></div></article>
+    <article class="finding"><h3 class="fq">8. Which hour draws the biggest audience, and is it also the most productive?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart4_hour_slots.png" alt="chart"></figure> <p> The 3am slot draws the largest average audience (545 viewers) and also shows the highest selling pressure (audience times conversion, at 27.4 expected buyers per session), so the biggest-crowd hour is also the most productive one. But the headline is how little timing matters: across all eight hours, selling pressure ranges only from 22.8 to 27.4, a narrow band. No influencer is meaningfully helped or hurt by their slot. This reinforces the fairness case: a weak seller cannot blame a bad hour, because there is no bad hour. </p></div></article>
+    <article class="finding"><h3 class="fq">9. With the time slot held constant, do influencers still differ, the person or the slot?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/who-really-drives-sales/chart5_within_group.png" alt="chart"></figure> <p> The person, decisively. Because all five influencers in a group work the identical four hours, any difference among them cannot be the slot. Yet within Group a, revenue still ranges 1.31 times (from $45,699 to $59,837), and within Group b it ranges 1.45 times (from $38,433 to $55,730). By contrast, the gap between the two groups' averages is small ($53,528 against $49,535, about 8%). So the differences within a shift dwarf the differences between shifts: the rota barely matters, the individual is what counts. This is the proof that promoting or releasing on revenue is fair, because the results follow the people, not their schedule. </p></div></article>
+    <article class="finding"><h3 class="fq">Recommendation: Promote, Keep, Dismiss</h3><div class="ftext"><p> Each influencer is measured against the roster average of $51,532. At or above 1.05 times ($54,108) is Promote; at or below 0.90 times ($46,379) is Dismiss; in between is Keep. The rule is fair because effort, slots, and audiences are held constant, so revenue reflects the person. </p> <table class="cs-table"> <thead><tr><th>Rank</th><th>Influencer</th><th>Group</th><th>Revenue</th><th>Rev / hr</th><th>Units</th><th>vs Benchmark</th><th>Verdict</th></tr></thead> <tbody> <tr><td>1</td><td>#3</td><td>a</td><td class="num">$59,837</td><td class="num">$499</td><td class="num">518</td><td class="num">+16%</td><td class="v-promote">Promote</td></tr> <tr><td>2</td><td>#7</td><td>a</td><td class="num">$59,143</td><td class="num">$493</td><td class="num">477</td><td class="num">+15%</td><td class="v-promote">Promote</td></tr> <tr><td>3</td><td>#4</td><td>b</td><td class="num">$55,730</td><td class="num">$464</td><td class="num">500</td><td class="num">+8%</td><td class="v-promote">Promote</td></tr> <tr><td>4</td><td>#1</td><td>a</td><td class="num">$54,725</td><td class="num">$456</td><td class="num">459</td><td class="num">+6%</td><td class="v-promote">Promote</td></tr> <tr><td>5</td><td>#2</td><td>b</td><td class="num">$52,680</td><td class="num">$439</td><td class="num">430</td><td class="num">+2%</td><td class="v-keep">Keep</td></tr> <tr><td>6</td><td>#8</td><td>b</td><td class="num">$51,393</td><td class="num">$428</td><td class="num">415</td><td class="num">0%</td><td class="v-keep">Keep</td></tr> <tr><td>7</td><td>#6</td><td>b</td><td class="num">$49,438</td><td class="num">$412</td><td class="num">430</td><td class="num">-4%</td><td class="v-keep">Keep</td></tr> <tr><td>8</td><td>#9</td><td>a</td><td class="num">$48,239</td><td class="num">$402</td><td class="num">416</td><td class="num">-6%</td><td class="v-keep">Keep</td></tr> <tr><td>9</td><td>#5</td><td>a</td><td class="num">$45,699</td><td class="num">$381</td><td class="num">378</td><td class="num">-11%</td><td class="v-dismiss">Dismiss</td></tr> <tr><td>10</td><td>#10</td><td>b</td><td class="num">$38,433</td><td class="num">$320</td><td class="num">353</td><td class="num">-25%</td><td class="v-dismiss">Dismiss</td></tr> </tbody> </table> <ol> <li><strong>Promote #3, #7, #4, #1.</strong> They each clear the benchmark by 6% to 16% for the same effort, and the two strongest (#3 and #7) also lead the roster on engagement. Give them the released slots first; they already earn up to $499 per hour against the roster's $429 average, so shifting hours toward this tier is the single highest-return move available.</li> <li><strong>Keep #2, #8, #6, #9.</strong> They sit within 7% of the benchmark, steady and reliable with no case for change. Hold their slots and coach the upside: #8 in particular engages the best on the whole roster but converts it to only mid-table sales, so a small lift in closing could move them up a tier.</li> <li><strong>Dismiss #5 and #10.</strong> They sell 11% and 25% below the benchmark despite identical hours, identical slots, and comparable audiences, so there is no circumstantial excuse. Release them and reallocate their 240 monthly hours to the Promote tier, recovering roughly $18,900 a month of below-average output.</li> <li><strong>Change what you measure in reviews.</strong> Stop ranking influencers on audience size and conversion rate; neither predicts sales here (correlations negative 0.18 and negative 0.22). Rank on revenue and units sold, and use engagement (0.38) as the one supporting coaching signal, so every future promote, keep, or dismiss call stays grounded in what actually drives the business.</li> </ol></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p> We analysed two June 2024 datasets from the retailer's TikTok live program: 1,200 hourly streaming sessions (audience size, engagement rate, conversion rate, and the toy featured per session) and 1,446 individual sales (units, price, and value). Both are complete, with no missing values. The 10 influencers split into two fixed rotas: Group a worked the 8pm, 10pm, 12am, and 2am slots, Group b the 9pm, 11pm, 1am, and 3am slots, both covering the same overnight window with the same 120 hours each. We focused on revenue per influencer as the outcome, with units, price, engagement, conversion, audience, and time slot as the explanatory factors. One note: individual sales carry a date but no clock time, so hour-level questions use session metrics (audience and conversion by slot) rather than dollar sales by hour. </p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> The single most important finding is that this roster's results are earned, not inherited. Effort is equal, time slots are equal, audiences are similar, and timing barely moves sales, so the $21,404 spread between the best and worst seller is about how well each person sells, full stop. The metrics managers usually lean on, audience size and conversion rate, are noise here; the only honest scoreboard is revenue, supported loosely by engagement. </p> <p> That makes the cost of inaction concrete. The two weakest influencers sell 11% and 25% below the roster average despite identical conditions, leaving roughly $18,900 a month of below-benchmark output sitting in 240 hours of prime airtime. Those hours are the asset. Redirected to proven top sellers, they convert to materially more revenue with no extra cost and no extra staff. Set the benchmark, promote the proven sellers, release the laggards, and the same airtime will earn more within a single month. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

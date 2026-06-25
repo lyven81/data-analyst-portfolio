@@ -1,240 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Finding Which Campaigns Work | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/finding-which-campaigns-work-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-    <!-- Agentic Workflow Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/finding_which_campaign_work.html">
-      AI Assistant
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/cover%20image.jpg"/>
-      <h1>
-       Finding Which Campaigns Work
-      </h1>
-      <p>
-       How Display, Paid Search, and Cross-Sell Strategies Convert New Customers
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis looks at how our past marketing campaigns performed so we can understand what actually works. We focus on expected uplift—the main signal of whether a campaign is effective—and compare performance across channels, customer segments, objectives, and timing. The goal is simple: help Marketing Managers see which campaign choices lead to stronger results and which ones do not.
-      </p>
-      <p>
-       The purpose of this report is to give Marketing Managers clear guidance for future planning. By identifying the channels to invest in, the segments most worth targeting, the objectives that perform best, and the months with higher response, this analysis supports smarter budgeting, better campaign design, and more confident decision-making.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Sources and Methodology
-      </h2>
-      <p>
-       We analyzed a dataset of 50 marketing campaigns covering different channels, customer segments, campaign objectives, and timing factors. The data included both new-customer campaigns and those aimed at existing users, and we used expected uplift as the main measure of effectiveness. To prepare the dataset for analysis, we cleaned and standardized all fields, created additional features such as campaign duration and launch month, and converted categorical variables like channel, segment, and objective into formats suitable for comparison.
-      </p>
-      <p>
-       Using this prepared dataset, we ran descriptive analyses to understand how uplift varies across channels, segments, objectives, and seasonal patterns. We also examined the impact of campaign duration and identified high-performing combinations of channel, segment, and objective. The goal of this methodology was to pinpoint the factors that most influence campaign performance and generate insights that Marketing Managers can directly apply to improve planning and decision-making.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. Are performance differences between channels statistically meaningful?
-      </h2>
-      <img alt="Chart 1 - Channel Performance Distribution" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%201.png"/>
-      <p>
-       Yes, the differences in uplift across channels are meaningful. Display (0.09435), Paid Search (0.09355), and Other channels (0.09864) perform clearly better than Social (0.07413) and Email (0.07491). These gaps are too big and consistent to be random, which means channel choice genuinely affects campaign results.
-      </p>
-      <p>
-       Even without running a formal statistical test, the pattern is strong enough to rely on. The top channels consistently sit well above the lower-performing ones, giving a solid basis for rethinking where budget and effort should go.
-      </p>
-      <p>
-       Because these differences appear throughout the dataset, channel selection should be treated as a major driver of performance and one of the first decisions considered when planning future campaigns.
-      </p>
-     </section>
-     <section>
-      <h2>
-       2. Which channels deliver the highest uplift, and what does this mean for budget allocation?
-      </h2>
-      <img alt="Chart 2 - Channel Uplift Comparison" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%202.png"/>
-      <p>
-       Display delivers the highest uplift at 0.09435, followed closely by Paid Search at 0.09355. Social performs moderately well at 0.08657, while Email is the weakest at 0.07491. This creates a clear ranking where Display and Paid Search lead, Social is in the middle, and Email consistently underperforms.
-      </p>
-      <p>
-       For Marketing Managers, this ranking provides a simple direction for budget decisions. Shifting more investment toward Display and Paid Search is likely to increase overall campaign impact because these channels have a proven record of delivering higher uplift.
-      </p>
-      <p>
-       Email can still be useful, but it should not carry the main load given its lower performance. Treating it as a supporting channel rather than a primary one will help raise average campaign effectiveness.
-      </p>
-     </section>
-     <section>
-      <h2>
-       3. Which customer segments are the most responsive?
-      </h2>
-      <img alt="Chart 3 - Customer Segment Response" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%203.png"/>
-      <p>
-       High Value customers respond the best, with an average uplift of 0.0913, followed closely by New Customers at 0.0904. These two groups deliver the strongest results and offer the highest return for each campaign run.
-      </p>
-      <p>
-       In comparison, Churn Risk customers average 0.0751 uplift, and Deal Seekers average 0.0714, making them more challenging to influence. These segments may require different messaging or more precise targeting to deliver stronger outcomes.
-      </p>
-      <p>
-       Given the clear difference in responsiveness, focusing more campaigns on High Value and New Customer groups is likely to improve returns without increasing budget.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. Which campaign objectives deliver the strongest results?
-      </h2>
-      <img alt="Chart 4 - Campaign Objective Performance" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%204.png"/>
-      <p>
-       Cross-sell and Retention are the strongest objectives, with uplift values of 0.09267 and 0.09233. They produce reliable results by encouraging additional purchases or strengthening relationships with active customers.
-      </p>
-      <p>
-       Reactivation performs lower at 0.08367, suggesting that bringing back inactive users requires more effort and delivers less uplift. This objective may still be important but should be used more selectively.
-      </p>
-      <p>
-       Directing more campaigns toward Cross-sell and Retention will likely generate stronger outcomes, especially when paired with highly responsive segments like High Value and New Customers.
-      </p>
-     </section>
-     <section>
-      <h2>
-       5. Do seasonal or timing patterns affect campaign performance?
-      </h2>
-      <img alt="Chart 5 - Seasonal Performance Patterns" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%205.png"/>
-      <p>
-       Yes, campaign performance changes across the year. February (0.10600) and November (0.11350) are the strongest months, while September (0.06200) is the weakest. This shows that customer responsiveness rises and falls in clear seasonal patterns.
-      </p>
-      <p>
-       These patterns matter for planning. High-impact campaigns should be scheduled in February and November, when customers are naturally more responsive. This allows stronger outcomes without increasing spend.
-      </p>
-      <p>
-       September is better suited for low-risk tests or brand-building activities. Using seasonal insights helps avoid spending heavily during low-response periods and maximizes results during peak months.
-      </p>
-     </section>
-     <section>
-      <h2>
-       6. Does campaign duration influence uplift?
-      </h2>
-      <img alt="Chart 6 - Duration vs Uplift Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%206.png"/>
-      <p>
-       No, campaign duration does not meaningfully influence uplift. High- and low-performing campaigns appear across all duration ranges, from very short to very long.
-      </p>
-      <p>
-       This means duration should not be treated as a performance lever. Marketing Managers can choose campaign length based on operational needs, creative cycles, or channel norms rather than expecting duration to improve results.
-      </p>
-      <p>
-       The factors that truly matter are channel, segment, and objective. Time is better spent optimizing those areas instead of adjusting campaign length.
-      </p>
-     </section>
-     <section>
-      <h2>
-       7. Are we investing in the right channels based on performance?
-      </h2>
-      <img alt="Chart 7 - Investment vs Performance Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%207.png"/>
-      <p>
-       Current investment does not match performance. Email has the highest number of campaigns (14) but delivers the lowest uplift (0.07491). Social has 12 campaigns but only mid-tier uplift (0.08300). Meanwhile, Display and Paid Search—two of the best-performing channels—have fewer campaigns at 11 and 10.
-      </p>
-      <p>
-       This shows a clear imbalance: too much effort is going into channels that deliver less impact, while the strongest ones are underused. Adjusting this mix would likely improve results without increasing budget.
-      </p>
-      <p>
-       Marketing Managers should reduce dependency on Email and expand the use of Display and Paid Search to better align effort with performance.
-      </p>
-     </section>
-     <section>
-      <h2>
-       8. What combinations of channel, objective, and segment produce the strongest results?
-      </h2>
-      <img alt="Chart 8 - High-Performing Combinations Heatmap" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%208.png"/>
-      <p>
-       The strongest results come from combinations that align a strong channel with a highly responsive audience. Social with Cross-sell for New Customers delivers the highest uplift at 0.144. Display with Retention for High Value customers also performs extremely well at 0.140.
-      </p>
-      <p>
-       Surprisingly, Email performs strongly when paired with Retention for New Customers (0.140), even though Email is weak on average. Paid Search also delivers high uplift (0.1275) when used for Cross-sell targeting High Value customers.
-      </p>
-      <p>
-       These combinations show that context matters. Matching the right channel with the right segment and objective can significantly lift performance and should be used as templates for future campaigns.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       This analysis shows that some channels, segments, and objectives consistently deliver stronger uplift than others. Display and Paid Search perform the best, while High Value and New Customer segments respond most strongly. Cross-sell and Retention also stand out as the most effective objectives. These patterns give Marketing Managers a reliable view of what works and provide clear direction for improving future campaigns.
-      </p>
-      <p>
-       To make the most of these insights, Marketing Managers should shift more budget toward high-performing channels, focus on the segments that offer the strongest response, and prioritize objectives with proven impact. Timing also matters: months like February and November are ideal for major campaigns, while September is better suited for testing. By aligning budget, targeting, objectives, and timing with the data, teams can run campaigns that deliver higher uplift and better overall returns.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding Which Campaigns Work | Data Stories Lab</title>
+<meta name="description" content="Find which marketing campaigns actually lift sales">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Optimization Analysis</span>
+    <span class="sep">/</span><span>Finding Which Campaigns Work</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/cover%20image.jpg" alt="Finding Which Campaigns Work">
+    <figcaption><span>Sorting the campaigns that lift sales from the ones that don't.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Marketing &amp; campaign ROI</div>
+  <h1 class="title">Finding Which Campaigns Work</h1>
+  <p class="standfirst">Find which marketing campaigns actually lift sales</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Campaigns &middot; uplift analysis</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/finding-which-campaigns-work-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/finding-which-campaigns-work.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis looks at how our past marketing campaigns performed so we can understand what actually works. We focus on expected uplift, the main signal of whether a campaign is effective, and compare performance across channels, customer segments, objectives, and timing. The goal is simple: help Marketing Managers see which campaign choices lead to stronger results and which ones do not. </p> <p> The purpose of this report is to give Marketing Managers clear guidance for future planning. By identifying the channels to invest in, the segments most worth targeting, the objectives that perform best, and the months with higher response, this analysis supports smarter budgeting, better campaign design, and more confident decision-making. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">Display</div><div class="l">highest uplift</div></div><div class="fig"><div class="n">Email</div><div class="l">lowest uplift</div></div><div class="fig"><div class="n">0.144</div><div class="l">best combo</div></div><div class="fig"><div class="n">Nov</div><div class="l">strongest month</div></div></div>
+
+  <div class="pull"><p>&ldquo;This analysis shows that some channels, segments, and objectives consistently deliver stronger uplift than others.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. Are performance differences between channels statistically meaningful?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%201.png" alt="chart"></figure> <p> Yes, the differences in uplift across channels are meaningful. Display (0.09435), Paid Search (0.09355), and Other channels (0.09864) perform clearly better than Social (0.07413) and Email (0.07491). These gaps are too big and consistent to be random, which means channel choice genuinely affects campaign results. </p> <p> Even without running a formal statistical test, the pattern is strong enough to rely on. The top channels consistently sit well above the lower-performing ones, giving a solid basis for rethinking where budget and effort should go. </p> <p> Because these differences appear throughout the dataset, channel selection should be treated as a major driver of performance and one of the first decisions considered when planning future campaigns. </p></div></article>
+    <article class="finding"><h3 class="fq">2. Which channels deliver the highest uplift, and what does this mean for budget allocation?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%202.png" alt="chart"></figure> <p> Display delivers the highest uplift at 0.09435, followed closely by Paid Search at 0.09355. Social performs moderately well at 0.08657, while Email is the weakest at 0.07491. This creates a clear ranking where Display and Paid Search lead, Social is in the middle, and Email consistently underperforms. </p> <p> For Marketing Managers, this ranking provides a simple direction for budget decisions. Shifting more investment toward Display and Paid Search is likely to increase overall campaign impact because these channels have a proven record of delivering higher uplift. </p> <p> Email can still be useful, but it should not carry the main load given its lower performance. Treating it as a supporting channel rather than a primary one will help raise average campaign effectiveness. </p></div></article>
+    <article class="finding"><h3 class="fq">3. Which customer segments are the most responsive?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%203.png" alt="chart"></figure> <p> High Value customers respond the best, with an average uplift of 0.0913, followed closely by New Customers at 0.0904. These two groups deliver the strongest results and offer the highest return for each campaign run. </p> <p> In comparison, Churn Risk customers average 0.0751 uplift, and Deal Seekers average 0.0714, making them more challenging to influence. These segments may require different messaging or more precise targeting to deliver stronger outcomes. </p> <p> Given the clear difference in responsiveness, focusing more campaigns on High Value and New Customer groups is likely to improve returns without increasing budget. </p></div></article>
+    <article class="finding"><h3 class="fq">4. Which campaign objectives deliver the strongest results?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%204.png" alt="chart"></figure> <p> Cross-sell and Retention are the strongest objectives, with uplift values of 0.09267 and 0.09233. They produce reliable results by encouraging additional purchases or strengthening relationships with active customers. </p> <p> Reactivation performs lower at 0.08367, suggesting that bringing back inactive users requires more effort and delivers less uplift. This objective may still be important but should be used more selectively. </p> <p> Directing more campaigns toward Cross-sell and Retention will likely generate stronger outcomes, especially when paired with highly responsive segments like High Value and New Customers. </p></div></article>
+    <article class="finding"><h3 class="fq">5. Do seasonal or timing patterns affect campaign performance?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%205.png" alt="chart"></figure> <p> Yes, campaign performance changes across the year. February (0.10600) and November (0.11350) are the strongest months, while September (0.06200) is the weakest. This shows that customer responsiveness rises and falls in clear seasonal patterns. </p> <p> These patterns matter for planning. High-impact campaigns should be scheduled in February and November, when customers are naturally more responsive. This allows stronger outcomes without increasing spend. </p> <p> September is better suited for low-risk tests or brand-building activities. Using seasonal insights helps avoid spending heavily during low-response periods and maximizes results during peak months. </p></div></article>
+    <article class="finding"><h3 class="fq">6. Does campaign duration influence uplift?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%206.png" alt="chart"></figure> <p> No, campaign duration does not meaningfully influence uplift. High- and low-performing campaigns appear across all duration ranges, from very short to very long. </p> <p> This means duration should not be treated as a performance lever. Marketing Managers can choose campaign length based on operational needs, creative cycles, or channel norms rather than expecting duration to improve results. </p> <p> The factors that truly matter are channel, segment, and objective. Time is better spent optimizing those areas instead of adjusting campaign length. </p></div></article>
+    <article class="finding"><h3 class="fq">7. Are we investing in the right channels based on performance?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%207.png" alt="chart"></figure> <p> Current investment does not match performance. Email has the highest number of campaigns (14) but delivers the lowest uplift (0.07491). Social has 12 campaigns but only mid-tier uplift (0.08300). Meanwhile, Display and Paid Search, two of the best-performing channels, have fewer campaigns at 11 and 10. </p> <p> This shows a clear imbalance: too much effort is going into channels that deliver less impact, while the strongest ones are underused. Adjusting this mix would likely improve results without increasing budget. </p> <p> Marketing Managers should reduce dependency on Email and expand the use of Display and Paid Search to better align effort with performance. </p></div></article>
+    <article class="finding"><h3 class="fq">8. What combinations of channel, objective, and segment produce the strongest results?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/finding-which-campaigns-work/chart%208.png" alt="chart"></figure> <p> The strongest results come from combinations that align a strong channel with a highly responsive audience. Social with Cross-sell for New Customers delivers the highest uplift at 0.144. Display with Retention for High Value customers also performs extremely well at 0.140. </p> <p> Surprisingly, Email performs strongly when paired with Retention for New Customers (0.140), even though Email is weak on average. Paid Search also delivers high uplift (0.1275) when used for Cross-sell targeting High Value customers. </p> <p> These combinations show that context matters. Matching the right channel with the right segment and objective can significantly lift performance and should be used as templates for future campaigns. </p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p> We analyzed a dataset of 50 marketing campaigns covering different channels, customer segments, campaign objectives, and timing factors. The data included both new-customer campaigns and those aimed at existing users, and we used expected uplift as the main measure of effectiveness. To prepare the dataset for analysis, we cleaned and standardized all fields, created additional features such as campaign duration and launch month, and converted categorical variables like channel, segment, and objective into formats suitable for comparison. </p> <p> Using this prepared dataset, we ran descriptive analyses to understand how uplift varies across channels, segments, objectives, and seasonal patterns. We also examined the impact of campaign duration and identified high-performing combinations of channel, segment, and objective. The goal of this methodology was to pinpoint the factors that most influence campaign performance and generate insights that Marketing Managers can directly apply to improve planning and decision-making. </p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> This analysis shows that some channels, segments, and objectives consistently deliver stronger uplift than others. Display and Paid Search perform the best, while High Value and New Customer segments respond most strongly. Cross-sell and Retention also stand out as the most effective objectives. These patterns give Marketing Managers a reliable view of what works and provide clear direction for improving future campaigns. </p> <p> To make the most of these insights, Marketing Managers should shift more budget toward high-performing channels, focus on the segments that offer the strongest response, and prioritize objectives with proven impact. Timing also matters: months like February and November are ideal for major campaigns, while September is better suited for testing. By aligning budget, targeting, objectives, and timing with the data, teams can run campaigns that deliver higher uplift and better overall returns. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

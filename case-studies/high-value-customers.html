@@ -1,193 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Where Are Your High-Value Customers? | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/high-value-customers-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-    <!-- AI Assistant Link Button -->
-    <section class="agentic-link-section">
-     <a class="agentic-link-btn" href="/data-analyst-portfolio/agentic_workflow/high-value-customers.html">
-      AI Assistant
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/cover%20image.png"/>
-      <h1>
-       Where Are Your High-Value Customers?
-      </h1>
-      <p>
-       Finding the Channels That Drive Long Term Loyal Customers
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis shows marketing managers which types of customers bring the most long-term value and which acquisition channels attract them. Instead of relying on assumptions, we use data to identify meaningful customer groups and pinpoint the channels that consistently bring in loyal, high-quality users. The goal is to improve acquisition efficiency, reduce wasted spend, and focus on customers who are most likely to convert, stay longer, or upgrade.
-      </p>
-      <p>
-       The insights help managers decide which segments to target, where to invest their budget, and how to tailor messages for different audiences. They also support better funnel management and smoother collaboration with product and CRM teams. Overall, this gives marketing a clear and practical view of who to prioritise and how to reach them effectively.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Sources and Methodology
-      </h2>
-      <img alt="Elbow Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q1%20elbow_chart.png"/>
-      <p>
-       We analysed 100,000 customers to understand how acquisition channels affect long-term value. The dataset included age, gender, country, loyalty tier, tenure, and the channel each customer came from. Before running the analysis, we cleaned the data and created useful features such as tenure, age groups, loyalty scores, and channel indicators.
-      </p>
-      <p>
-       To uncover customer segments, we used K-Means clustering based on age, loyalty, and acquisition channel. We validated the segments with statistical tests and reviewed their differences through summary tables and simple visualisations. This helped us see how the groups varied in loyalty, size, and channel composition.
-      </p>
-      <p>
-       The purpose of this approach was to identify which channels attract the strongest customers and how these groups behave over time. By linking customer value back to acquisition source, the analysis gives marketing a strong foundation for improving targeting, channel strategy, messaging, and retention efforts.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. What are the core customer segments?
-      </h2>
-      <img alt="Channel Composition by Segment" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q2%20channel_composition_segment.png"/>
-      <p>
-       The data shows that customers differ mainly by how they first discover the brand, not by who they are. Four clear segments emerge based on acquisition channel: Paid Search Specialists, Organic & Email Audience, Social Media Cohort, and Referral Advocates. These groups behave differently because each channel attracts customers with different levels of intent and trust.
-      </p>
-      <p>
-       This channel-driven segmentation gives marketing a reliable way to target, invest, and personalise engagement. Paid Search brings high-intent users, Organic and Email attract trust-based audiences, Social captures trend-driven users, and Referral brings in customers influenced by strong social proof.
-      </p>
-     </section>
-     <section>
-      <h2>
-       2. What characteristics define these segments?
-      </h2>
-      <img alt="Loyalty by Channel" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q3%20loyalty_by_channel.png"/>
-      <p>
-       Customer age and tenure are similar across all segments, confirming they are not useful for differentiation. The biggest differences lie in loyalty. Paid Search customers show the highest loyalty score at 1.582, followed closely by Referral at 1.579. Organic & Email performs slightly lower at 1.573, while Social Media has the lowest score at 1.566.
-      </p>
-      <p>
-       These loyalty patterns make it clear that the acquisition channel strongly predicts long-term value. Channels with higher intent or higher trust consistently deliver stronger customers.
-      </p>
-     </section>
-     <section>
-      <h2>
-       3. Which channels deliver the highest-value customers?
-      </h2>
-      <p>
-       Paid Search and Referral stand out as the most effective channels, both producing customers with the highest loyalty scores. Organic and Email perform moderately well, while Social Media attracts the least committed customers.
-      </p>
-      <p>
-       This ranking highlights the importance of focusing on channels where customers arrive with intent or trust. Paid Search users come with a defined need, and Referral users come with confidence built from another person's recommendation.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. How large and reachable is each segment?
-      </h2>
-      <img alt="Segment Sizes" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q4%20segment_sizes.png"/>
-      <p>
-       The Organic & Email Audience is the largest group at 45,103 customers, followed by Paid Search with 29,950. Social Media includes 14,979 customers, and Referral accounts for 9,968. This means the company must balance scale with value: organic and email grow efficiently at low cost, while paid search brings fewer but higher-value users.
-      </p>
-      <p>
-       Reachability varies by channel. Paid Search can be targeted directly with performance ads, Organic & Email scale through SEO and owned content, and Social and Referral require dedicated platform or advocacy strategies. Understanding both size and reach helps determine which segments offer the best growth potential.
-      </p>
-     </section>
-     <section>
-      <h2>
-       5. What messaging resonates with each segment?
-      </h2>
-      <p>
-       Paid Search customers respond best to direct, solution-focused messaging that aligns with their high-intent search behaviour. Organic & Email customers prefer educational, trust-building content that supports thoughtful decision-making. Social Media customers engage more with community-driven, conversational messaging shaped by trends and relatable content.
-      </p>
-      <p>
-       Referral customers value trust and shared experience, making testimonials, proof points, and dual-reward offers effective. These themes translate each segment's behaviour into practical communication strategies.
-      </p>
-     </section>
-     <section>
-      <h2>
-       6. What strategic actions should the company take?
-      </h2>
-      <p>
-       The strongest path to growth is investing more in Paid Search and Referral, both of which consistently bring the highest-value customers. Enhancing visibility, incentives, and conversion paths in these channels will deliver efficient, long-term gains.
-      </p>
-      <p>
-       Organic & Email should be scaled further because they provide large, low-cost reach. Improving SEO and refining email flows will increase their contribution to customer value. Social Media should be repositioned as a brand and engagement tool rather than a primary acquisition driver. Together, these actions shift resources toward the channels that reliably deliver loyal, high-quality customers.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       This analysis shows that acquisition channel is the main factor driving customer value, giving marketing a clear direction on where to focus. Paid Search and Referral consistently deliver the most loyal customers, while Organic and Email offer the largest and most cost-efficient base for long-term growth. Social Media remains useful for awareness but brings in lower-value customers and should be positioned accordingly. These insights help managers invest in the channels that reliably produce strong customers and reduce spend on those that do not.
-      </p>
-      <p>
-       With these segments clearly defined, campaign targeting becomes more effective. High-intent customers from Paid Search respond best to direct, solution-focused messages, while Organic and Email audiences engage with educational, trust-building content. Social Media users require community-driven communication, and Referral customers respond to messaging that reinforces trust and shared experience. Together, these findings support better funnel management and stronger collaboration with product and CRM teams, enabling marketing to refine strategies, strengthen retention, and build a more efficient, higher-value growth engine.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where Are Your High-Value Customers? | Data Stories Lab</title>
+<meta name="description" content="Find which channels bring high-value customers">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Segmentation Analysis</span>
+    <span class="sep">/</span><span>Where Are Your High-Value Customers?</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/cover%20image.png" alt="Where Are Your High-Value Customers?">
+    <figcaption><span>Which channels bring the customers worth keeping.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Marketing &amp; CLV</div>
+  <h1 class="title">Where Are Your High-Value Customers?</h1>
+  <p class="standfirst">Find which channels bring high-value customers</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Customer base &middot; segmentation</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/high-value-customers-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/high-value-customers.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis shows marketing managers which types of customers bring the most long-term value and which acquisition channels attract them. Instead of relying on assumptions, we use data to identify meaningful customer groups and pinpoint the channels that consistently bring in loyal, high-quality users. The goal is to improve acquisition efficiency, reduce wasted spend, and focus on customers who are most likely to convert, stay longer, or upgrade. </p> <p> The insights help managers decide which segments to target, where to invest their budget, and how to tailor messages for different audiences. They also support better funnel management and smoother collaboration with product and CRM teams. Overall, this gives marketing a clear and practical view of who to prioritise and how to reach them effectively. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">4 segments</div><div class="l">by channel</div></div><div class="fig"><div class="n">Paid Search</div><div class="l">highest value</div></div><div class="fig"><div class="n">Referral</div><div class="l">highest value</div></div><div class="fig"><div class="n">45,103</div><div class="l">largest segment</div></div></div>
+
+  <div class="pull"><p>&ldquo;This analysis shows that acquisition channel is the main factor driving customer value, giving marketing a clear direction on where to focus.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. What are the core customer segments?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q2%20channel_composition_segment.png" alt="chart"></figure> <p> The data shows that customers differ mainly by how they first discover the brand, not by who they are. Four clear segments emerge based on acquisition channel: Paid Search Specialists, Organic & Email Audience, Social Media Cohort, and Referral Advocates. These groups behave differently because each channel attracts customers with different levels of intent and trust. </p> <p> This channel-driven segmentation gives marketing a reliable way to target, invest, and personalise engagement. Paid Search brings high-intent users, Organic and Email attract trust-based audiences, Social captures trend-driven users, and Referral brings in customers influenced by strong social proof. </p></div></article>
+    <article class="finding"><h3 class="fq">2. What characteristics define these segments?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q3%20loyalty_by_channel.png" alt="chart"></figure> <p> Customer age and tenure are similar across all segments, confirming they are not useful for differentiation. The biggest differences lie in loyalty. Paid Search customers show the highest loyalty score at 1.582, followed closely by Referral at 1.579. Organic & Email performs slightly lower at 1.573, while Social Media has the lowest score at 1.566. </p> <p> These loyalty patterns make it clear that the acquisition channel strongly predicts long-term value. Channels with higher intent or higher trust consistently deliver stronger customers. </p></div></article>
+    <article class="finding"><h3 class="fq">3. Which channels deliver the highest-value customers?</h3><div class="ftext"><p> Paid Search and Referral stand out as the most effective channels, both producing customers with the highest loyalty scores. Organic and Email perform moderately well, while Social Media attracts the least committed customers. </p> <p> This ranking highlights the importance of focusing on channels where customers arrive with intent or trust. Paid Search users come with a defined need, and Referral users come with confidence built from another person's recommendation. </p></div></article>
+    <article class="finding"><h3 class="fq">4. How large and reachable is each segment?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q4%20segment_sizes.png" alt="chart"></figure> <p> The Organic & Email Audience is the largest group at 45,103 customers, followed by Paid Search with 29,950. Social Media includes 14,979 customers, and Referral accounts for 9,968. This means the company must balance scale with value: organic and email grow efficiently at low cost, while paid search brings fewer but higher-value users. </p> <p> Reachability varies by channel. Paid Search can be targeted directly with performance ads, Organic & Email scale through SEO and owned content, and Social and Referral require dedicated platform or advocacy strategies. Understanding both size and reach helps determine which segments offer the best growth potential. </p></div></article>
+    <article class="finding"><h3 class="fq">5. What messaging resonates with each segment?</h3><div class="ftext"><p> Paid Search customers respond best to direct, solution-focused messaging that aligns with their high-intent search behaviour. Organic & Email customers prefer educational, trust-building content that supports thoughtful decision-making. Social Media customers engage more with community-driven, conversational messaging shaped by trends and relatable content. </p> <p> Referral customers value trust and shared experience, making testimonials, proof points, and dual-reward offers effective. These themes translate each segment's behaviour into practical communication strategies. </p></div></article>
+    <article class="finding"><h3 class="fq">6. What strategic actions should the company take?</h3><div class="ftext"><p> The strongest path to growth is investing more in Paid Search and Referral, both of which consistently bring the highest-value customers. Enhancing visibility, incentives, and conversion paths in these channels will deliver efficient, long-term gains. </p> <p> Organic & Email should be scaled further because they provide large, low-cost reach. Improving SEO and refining email flows will increase their contribution to customer value. Social Media should be repositioned as a brand and engagement tool rather than a primary acquisition driver. Together, these actions shift resources toward the channels that reliably deliver loyal, high-quality customers. </p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/high-value-customers/Q1%20elbow_chart.png" alt="chart"></figure> <p> We analysed 100,000 customers to understand how acquisition channels affect long-term value. The dataset included age, gender, country, loyalty tier, tenure, and the channel each customer came from. Before running the analysis, we cleaned the data and created useful features such as tenure, age groups, loyalty scores, and channel indicators. </p> <p> To uncover customer segments, we used K-Means clustering based on age, loyalty, and acquisition channel. We validated the segments with statistical tests and reviewed their differences through summary tables and simple visualisations. This helped us see how the groups varied in loyalty, size, and channel composition. </p> <p> The purpose of this approach was to identify which channels attract the strongest customers and how these groups behave over time. By linking customer value back to acquisition source, the analysis gives marketing a strong foundation for improving targeting, channel strategy, messaging, and retention efforts. </p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> This analysis shows that acquisition channel is the main factor driving customer value, giving marketing a clear direction on where to focus. Paid Search and Referral consistently deliver the most loyal customers, while Organic and Email offer the largest and most cost-efficient base for long-term growth. Social Media remains useful for awareness but brings in lower-value customers and should be positioned accordingly. These insights help managers invest in the channels that reliably produce strong customers and reduce spend on those that do not. </p> <p> With these segments clearly defined, campaign targeting becomes more effective. High-intent customers from Paid Search respond best to direct, solution-focused messages, while Organic and Email audiences engage with educational, trust-building content. Social Media users require community-driven communication, and Referral customers respond to messaging that reinforces trust and shared experience. Together, these findings support better funnel management and stronger collaboration with product and CRM teams, enabling marketing to refine strategies, strengthen retention, and build a more efficient, higher-value growth engine. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

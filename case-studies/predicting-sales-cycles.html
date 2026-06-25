@@ -1,268 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Predicting Sales Cycles | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/Predicting Sales Cycles.html">
-      View Dashboard
-     </a>
-    </section>
-    <!-- AI Assistant Link Button -->
-    <section class="agentic-link-section">
-     <a class="agentic-link-btn" href="/data-analyst-portfolio/agentic_workflow/predicting-sales-cycles.html">
-      AI Assistant
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/cover%20image.png"/>
-      <h1>
-       Predicting Sales Cycles
-      </h1>
-      <p>
-       How e-commerce sellers use data analytics to improve business
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       E-commerce sellers often struggle with the ups and downs of weekly sales. Stocking too much during slow weeks ties up money, while running out of stock in peak weeks means lost revenue. These swings also make it harder to plan promotions and manage cash flow with confidence.
-      </p>
-      <p>
-       This analysis looks at sales patterns over time to show when revenue rises or falls. By identifying peak, normal, and slow weeks—and putting numbers on the differences—it helps sellers plan inventory, marketing, and finances more accurately for the future.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Sources and Methodology
-      </h2>
-      <p>
-       We analyzed a dataset of 34,500 transaction records spanning from September 2023 to September 2025 (a two-year period). Each record contained 17 columns of transactional and operational details, with no missing values, ensuring data integrity throughout the analysis.
-      </p>
-      <p>
-       Our analysis focused on key business performance variables, including:
-      </p>
-      <ul>
-       <li>Revenue (total_amount)</li>
-       <li>Profit margin</li>
-       <li>Discounts applied</li>
-       <li>Order count</li>
-       <li>Delivery time</li>
-       <li>Product returns</li>
-      </ul>
-      <p>
-       The transaction dates were converted into a datetime index, which allowed us to explore temporal trends such as seasonality, sales phases, and long-term revenue patterns. By structuring the dataset in this way, we were able to link operational factors (like delivery time and returns) with sales performance, and to identify clear revenue cycles.
-      </p>
-      <p>
-       The goal of this dataset analysis was to uncover how time and seasonality shape weekly revenue patterns, and to provide insights that e-commerce sellers can use to plan inventory, promotions, and cash flow with greater precision.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q1: Which part of my business should I track closely if I want to understand sales performance?
-      </h2>
-      <img alt="Q1 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q1_revenue_trend.png"/>
-      <p>
-       The strongest driver of sales performance is weekly revenue, as it directly reflects the ups and downs of the business. Revenue is highly responsive to seasonal phases, such as peak and slow periods, while the overall time index shows little relationship with sales. This means that tracking weekly revenue gives the clearest view of performance.
-      </p>
-      <p>
-       The revenue trend highlights noticeable spikes during peak weeks and drops during slow cycles. These repeating patterns confirm that sales are shaped by predictable seasonal cycles rather than random variation. For an e-commerce seller, the focus should be on monitoring weekly revenue trends and seasonal cycles instead of relying only on total orders or average order value. This enables better planning for promotions, inventory, and staffing.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q2: Do my sales really follow a pattern, or are they just random ups and downs?
-      </h2>
-      <img alt="Q2 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q2_decomposition.png"/>
-      <p>
-       Your sales follow clear and predictable patterns rather than random fluctuations. Seasonal cycles show that festive or peak weeks consistently lift revenue, while quieter weeks pull it down. The trend component remains relatively stable over time, while the seasonal component shows large swings – often several thousand units above or below the baseline.
-      </p>
-      <p>
-       The residual effect is relatively small, indicating that most of the variation in sales is explained by seasonality and trend, not randomness. This confirms that revenue is shaped by recurring cycles and can be anticipated, giving sellers the confidence to prepare for high and low demand periods instead of being caught off guard.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q3: Can I group my weeks into high sales, normal sales, and slow sales to plan inventory and promotions?
-      </h2>
-      <img alt="Q3 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q3_sales_phase.png"/>
-      <p>
-       Yes, your sales weeks can be grouped into clear phases that provide useful guidance for planning. Across the two-year dataset, about 41 weeks fall into a Moderate phase, 32 into Slow, and another 32 into Peak. This shows that revenue naturally falls into three categories that can be planned around.
-      </p>
-      <p>
-       This classification turns raw fluctuations into actionable sales cycles. For an e-commerce seller, this means promotions and stock-ups can be concentrated in Peak weeks, steady operations maintained in Moderate weeks, and cost-saving or targeted campaigns used in Slow weeks. Such grouping provides a structured way to align marketing and inventory strategies with actual demand cycles.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q4: Which factors really move my revenue up or down?
-      </h2>
-      <img alt="Q4 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q4_correlation.png"/>
-      <p>
-       The analysis shows that seasonality is the strongest factor affecting revenue. Peak Season weeks are strongly associated with higher revenue, while Slow Season weeks are linked with lower revenue. By comparison, the passage of time itself has almost no effect, showing that sales do not simply increase or decrease without seasonal influences.
-      </p>
-      <p>
-       For e-commerce sellers, this means the most reliable lever for revenue planning is seasonal timing. Preparing for peak weeks with promotions and inventory, while mitigating losses in slow weeks, is the most effective way to manage revenue fluctuations.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q5: How do I know if these patterns will hold in the future, not just in the past?
-      </h2>
-      <img alt="Q5 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q5_split.png"/>
-      <p>
-       The dataset was split chronologically, with the first 80% of weeks used for training and the last 20% reserved for testing. This ensures the model is validated on unseen data, mimicking how it would perform in real forecasting.
-      </p>
-      <p>
-       The test period covered about 21 weeks, which was long enough to confirm that seasonal cycles persist beyond the training period. The model's ability to capture peak and slow patterns in this test window proves that these cycles are not only historical but also predictive of future weeks. For sellers, this provides confidence that seasonal planning will remain valid going forward.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q6: Can I put numbers on how much more I earn in peak season, and how much I lose in slow season?
-      </h2>
-      <img alt="Q6 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q6%20regression%20model.png"/>
-      <p>
-       Yes – the regression results quantify the seasonal effects. On average, Peak Season weeks increase revenue by about RM8,430 compared to Moderate weeks, while Slow Season weeks reduce revenue by around RM7,914. These values are statistically significant and show the real financial impact of seasonal phases.
-      </p>
-      <p>
-       The fitted results closely track actual revenue, rising during peak weeks and dipping in slow weeks. For sellers, this provides concrete numbers: expect roughly RM8k more in strong periods and RM8k less in weak ones. This enables realistic target setting, advertising planning, and inventory alignment with expected demand.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q7: Can this model really predict my sales accurately enough to plan my business?
-      </h2>
-      <p>
-       The regression evaluation shows that the model is accurate enough for practical planning. It explains about 78% of weekly revenue variation, meaning most sales ups and downs are captured by the seasonal patterns it identifies. Both Peak and Slow Season effects are statistically significant, while the time trend is weak and not meaningful.
-      </p>
-      <p>
-       This proves that seasonality is the true driver of revenue, and the model consistently captures it. For e-commerce sellers, the model provides a reliable tool for forecasting and planning – not for exact week-to-week precision, but as a strong guide to when sales will rise or fall.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Prediction 1: What will my weekly sales look like over the next three months if nothing changes?
-      </h2>
-      <img alt="Prediction 1 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%201_forecast.png"/>
-      <p>
-       The baseline forecast shows that if pricing, seasonal cycles, and customer behavior stay the same, weekly sales will remain stable at around RM54k–55k over the next 12 weeks. Historical fluctuations show peaks and troughs, but the forecast levels into a steady trend.
-      </p>
-      <p>
-       These stable projections provide a reliable baseline for managing cash flow and promotions while being ready to capitalize when seasonal spikes occur.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Prediction 2: How much more can I earn if I turn a slow week into a normal week with promotions?
-      </h2>
-      <img alt="Prediction 2 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%202_whatif.png"/>
-      <p>
-       The what-if simulation quantifies the value of promotions. A slow week averages about RM47k, a moderate week RM55k, and a peak week RM63k. Shifting just one week from slow to moderate adds roughly RM8k, and moving two weeks adds around RM16k.
-      </p>
-      <p>
-       For an e-commerce seller, this shows that well-timed promotions during slow weeks can deliver meaningful revenue gains and make sales patterns more predictable, provided promotional costs are managed effectively.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Prediction 3: Can I trust this model to match my past sales closely enough to guide my decisions?
-      </h2>
-      <img alt="Prediction 3 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%203_fit.png"/>
-      <p>
-       Comparing actual versus predicted revenue shows that the model captures the general average but smooths over sharp peaks and troughs. Most predictions cluster around RM55k–57k, while actual sales range more widely from RM30k to RM65k.
-      </p>
-      <p>
-       This means the model is useful as a baseline for average revenue but less precise in extreme weeks. It works best for planning broad trends rather than exact week-to-week sales.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Prediction 4: How much did a past event, like a policy change or promotion, really affect my sales?
-      </h2>
-      <img alt="Prediction 4 Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%204_event_impact.png"/>
-      <p>
-       The event analysis reveals a temporary sales boost during the event period. Average weekly revenue rose to RM58,878 during the event, compared with RM55,726 before and RM55,029 after. This shows an uplift of around RM3,000 linked to the event.
-      </p>
-      <p>
-       For sellers, this demonstrates that events such as government subsidies, policy changes, or platform promotions can temporarily raise revenue but do not sustain long-term growth. These events should be treated as tactical opportunities, supported by stock-ups or marketing pushes, while maintaining strategies to manage sales once the boost ends.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       The analysis confirms that your sales follow clear seasonal cycles, giving you a predictable structure to plan around. Peak Season weeks consistently add about RM8,400 in revenue, while Slow Season weeks reduce sales by roughly RM7,900 compared to normal weeks. These numbers provide a reliable benchmark to guide how you manage stock, campaigns, and cash flow.
-      </p>
-      <p>
-       For inventory planning, the best time to stock up is ahead of Peak weeks, when demand reliably surges. Being cautious during Slow weeks prevents excess stock and tied-up capital. Promotions also work best in Peak weeks, where the return is strongest, while smaller targeted campaigns in Slow weeks help smooth out revenue dips without overspending.
-      </p>
-      <p>
-       The forecasting model explains around 78% of sales variation, offering both a solid baseline (about RM54k–55k per week under current conditions) and the ability to test what-if scenarios. This means you can plan not just for typical cycles but also simulate how promotions or events might change outcomes. In short, aligning stock, marketing, and finances with these seasonal patterns gives sellers a practical way to run the business with greater confidence and control.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predicting Sales Cycles | Data Stories Lab</title>
+<meta name="description" content="Plan ahead for your busy and slow weeks">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Time Series Analysis</span>
+    <span class="sep">/</span><span>Predicting Sales Cycles</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/cover%20image.png" alt="Predicting Sales Cycles">
+    <figcaption><span>Weekly revenue moves in predictable peak, normal and slow phases.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">E-commerce &amp; seasonality</div>
+  <h1 class="title">Predicting Sales Cycles</h1>
+  <p class="standfirst">Plan ahead for your busy and slow weeks</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>34,500 orders &middot; 2023&ndash;2025</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/Predicting%20Sales%20Cycles.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/predicting-sales-cycles.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> E-commerce sellers often struggle with the ups and downs of weekly sales. Stocking too much during slow weeks ties up money, while running out of stock in peak weeks means lost revenue. These swings also make it harder to plan promotions and manage cash flow with confidence. </p> <p> This analysis looks at sales patterns over time to show when revenue rises or falls. By identifying peak, normal, and slow weeks, and putting numbers on the differences, it helps sellers plan inventory, marketing, and finances more accurately for the future. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">+RM 8,430</div><div class="l">peak vs normal</div></div><div class="fig"><div class="n">&minus;RM 7,914</div><div class="l">slow vs normal</div></div><div class="fig"><div class="n">78%</div><div class="l">revenue swing explained</div></div><div class="fig"><div class="n">34,500</div><div class="l">transactions analysed</div></div></div>
+
+  <div class="pull"><p>&ldquo;The analysis confirms that your sales follow clear seasonal cycles, giving you a predictable structure to plan around.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Q1: Which part of my business should I track closely if I want to understand sales performance?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q1_revenue_trend.png" alt="chart"></figure> <p> The strongest driver of sales performance is weekly revenue, as it directly reflects the ups and downs of the business. Revenue is highly responsive to seasonal phases, such as peak and slow periods, while the overall time index shows little relationship with sales. This means that tracking weekly revenue gives the clearest view of performance. </p> <p> The revenue trend highlights noticeable spikes during peak weeks and drops during slow cycles. These repeating patterns confirm that sales are shaped by predictable seasonal cycles rather than random variation. For an e-commerce seller, the focus should be on monitoring weekly revenue trends and seasonal cycles instead of relying only on total orders or average order value. This enables better planning for promotions, inventory, and staffing. </p></div></article>
+    <article class="finding"><h3 class="fq">Q2: Do my sales really follow a pattern, or are they just random ups and downs?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q2_decomposition.png" alt="chart"></figure> <p> Your sales follow clear and predictable patterns rather than random fluctuations. Seasonal cycles show that festive or peak weeks consistently lift revenue, while quieter weeks pull it down. The trend component remains relatively stable over time, while the seasonal component shows large swings – often several thousand units above or below the baseline. </p> <p> The residual effect is relatively small, indicating that most of the variation in sales is explained by seasonality and trend, not randomness. This confirms that revenue is shaped by recurring cycles and can be anticipated, giving sellers the confidence to prepare for high and low demand periods instead of being caught off guard. </p></div></article>
+    <article class="finding"><h3 class="fq">Q3: Can I group my weeks into high sales, normal sales, and slow sales to plan inventory and promotions?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q3_sales_phase.png" alt="chart"></figure> <p> Yes, your sales weeks can be grouped into clear phases that provide useful guidance for planning. Across the two-year dataset, about 41 weeks fall into a Moderate phase, 32 into Slow, and another 32 into Peak. This shows that revenue naturally falls into three categories that can be planned around. </p> <p> This classification turns raw fluctuations into actionable sales cycles. For an e-commerce seller, this means promotions and stock-ups can be concentrated in Peak weeks, steady operations maintained in Moderate weeks, and cost-saving or targeted campaigns used in Slow weeks. Such grouping provides a structured way to align marketing and inventory strategies with actual demand cycles. </p></div></article>
+    <article class="finding"><h3 class="fq">Q4: Which factors really move my revenue up or down?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q4_correlation.png" alt="chart"></figure> <p> The analysis shows that seasonality is the strongest factor affecting revenue. Peak Season weeks are strongly associated with higher revenue, while Slow Season weeks are linked with lower revenue. By comparison, the passage of time itself has almost no effect, showing that sales do not simply increase or decrease without seasonal influences. </p> <p> For e-commerce sellers, this means the most reliable lever for revenue planning is seasonal timing. Preparing for peak weeks with promotions and inventory, while mitigating losses in slow weeks, is the most effective way to manage revenue fluctuations. </p></div></article>
+    <article class="finding"><h3 class="fq">Q5: How do I know if these patterns will hold in the future, not just in the past?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q5_split.png" alt="chart"></figure> <p> The dataset was split chronologically, with the first 80% of weeks used for training and the last 20% reserved for testing. This ensures the model is validated on unseen data, mimicking how it would perform in real forecasting. </p> <p> The test period covered about 21 weeks, which was long enough to confirm that seasonal cycles persist beyond the training period. The model's ability to capture peak and slow patterns in this test window proves that these cycles are not only historical but also predictive of future weeks. For sellers, this provides confidence that seasonal planning will remain valid going forward. </p></div></article>
+    <article class="finding"><h3 class="fq">Q6: Can I put numbers on how much more I earn in peak season, and how much I lose in slow season?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Q6%20regression%20model.png" alt="chart"></figure> <p> Yes – the regression results quantify the seasonal effects. On average, Peak Season weeks increase revenue by about RM8,430 compared to Moderate weeks, while Slow Season weeks reduce revenue by around RM7,914. These values are statistically significant and show the real financial impact of seasonal phases. </p> <p> The fitted results closely track actual revenue, rising during peak weeks and dipping in slow weeks. For sellers, this provides concrete numbers: expect roughly RM8k more in strong periods and RM8k less in weak ones. This enables realistic target setting, advertising planning, and inventory alignment with expected demand. </p></div></article>
+    <article class="finding"><h3 class="fq">Q7: Can this model really predict my sales accurately enough to plan my business?</h3><div class="ftext"><p> The regression evaluation shows that the model is accurate enough for practical planning. It explains about 78% of weekly revenue variation, meaning most sales ups and downs are captured by the seasonal patterns it identifies. Both Peak and Slow Season effects are statistically significant, while the time trend is weak and not meaningful. </p> <p> This proves that seasonality is the true driver of revenue, and the model consistently captures it. For e-commerce sellers, the model provides a reliable tool for forecasting and planning – not for exact week-to-week precision, but as a strong guide to when sales will rise or fall. </p></div></article>
+    <article class="finding"><h3 class="fq">Prediction 1: What will my weekly sales look like over the next three months if nothing changes?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%201_forecast.png" alt="chart"></figure> <p> The baseline forecast shows that if pricing, seasonal cycles, and customer behavior stay the same, weekly sales will remain stable at around RM54k–55k over the next 12 weeks. Historical fluctuations show peaks and troughs, but the forecast levels into a steady trend. </p> <p> These stable projections provide a reliable baseline for managing cash flow and promotions while being ready to capitalize when seasonal spikes occur. </p></div></article>
+    <article class="finding"><h3 class="fq">Prediction 2: How much more can I earn if I turn a slow week into a normal week with promotions?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%202_whatif.png" alt="chart"></figure> <p> The what-if simulation quantifies the value of promotions. A slow week averages about RM47k, a moderate week RM55k, and a peak week RM63k. Shifting just one week from slow to moderate adds roughly RM8k, and moving two weeks adds around RM16k. </p> <p> For an e-commerce seller, this shows that well-timed promotions during slow weeks can deliver meaningful revenue gains and make sales patterns more predictable, provided promotional costs are managed effectively. </p></div></article>
+    <article class="finding"><h3 class="fq">Prediction 3: Can I trust this model to match my past sales closely enough to guide my decisions?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%203_fit.png" alt="chart"></figure> <p> Comparing actual versus predicted revenue shows that the model captures the general average but smooths over sharp peaks and troughs. Most predictions cluster around RM55k–57k, while actual sales range more widely from RM30k to RM65k. </p> <p> This means the model is useful as a baseline for average revenue but less precise in extreme weeks. It works best for planning broad trends rather than exact week-to-week sales. </p></div></article>
+    <article class="finding"><h3 class="fq">Prediction 4: How much did a past event, like a policy change or promotion, really affect my sales?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-sales-cycles/Prediction%204_event_impact.png" alt="chart"></figure> <p> The event analysis reveals a temporary sales boost during the event period. Average weekly revenue rose to RM58,878 during the event, compared with RM55,726 before and RM55,029 after. This shows an uplift of around RM3,000 linked to the event. </p> <p> For sellers, this demonstrates that events such as government subsidies, policy changes, or platform promotions can temporarily raise revenue but do not sustain long-term growth. These events should be treated as tactical opportunities, supported by stock-ups or marketing pushes, while maintaining strategies to manage sales once the boost ends. </p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p> We analyzed a dataset of 34,500 transaction records spanning from September 2023 to September 2025 (a two-year period). Each record contained 17 columns of transactional and operational details, with no missing values, ensuring data integrity throughout the analysis. </p> <p> Our analysis focused on key business performance variables, including: </p> <ul> <li>Revenue (total_amount)</li> <li>Profit margin</li> <li>Discounts applied</li> <li>Order count</li> <li>Delivery time</li> <li>Product returns</li> </ul> <p> The transaction dates were converted into a datetime index, which allowed us to explore temporal trends such as seasonality, sales phases, and long-term revenue patterns. By structuring the dataset in this way, we were able to link operational factors (like delivery time and returns) with sales performance, and to identify clear revenue cycles. </p> <p> The goal of this dataset analysis was to uncover how time and seasonality shape weekly revenue patterns, and to provide insights that e-commerce sellers can use to plan inventory, promotions, and cash flow with greater precision. </p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> The analysis confirms that your sales follow clear seasonal cycles, giving you a predictable structure to plan around. Peak Season weeks consistently add about RM8,400 in revenue, while Slow Season weeks reduce sales by roughly RM7,900 compared to normal weeks. These numbers provide a reliable benchmark to guide how you manage stock, campaigns, and cash flow. </p> <p> For inventory planning, the best time to stock up is ahead of Peak weeks, when demand reliably surges. Being cautious during Slow weeks prevents excess stock and tied-up capital. Promotions also work best in Peak weeks, where the return is strongest, while smaller targeted campaigns in Slow weeks help smooth out revenue dips without overspending. </p> <p> The forecasting model explains around 78% of sales variation, offering both a solid baseline (about RM54k–55k per week under current conditions) and the ability to test what-if scenarios. This means you can plan not just for typical cycles but also simulate how promotions or events might change outcomes. In short, aligning stock, marketing, and finances with these seasonal patterns gives sellers a practical way to run the business with greater confidence and control. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

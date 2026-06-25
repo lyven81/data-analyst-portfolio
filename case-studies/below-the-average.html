@@ -1,122 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Below the Average | Lee Yih Ven</title>
-    <link rel="stylesheet" href="/data-analyst-portfolio/style.css">
-</head>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Below the Average | Data Stories Lab</title>
+<meta name="description" content="See if Selangor's footwear sales lag behind">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
 <body>
-    <div class="container">
-        <!-- Left Column -->
-        <aside class="left-column">
-            <header>
-                <h1>Lee Yih Ven</h1>
-                <h2>Data Analytics Portfolio</h2>
-            </header>
-            <section class="intro">
-                <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-            </section>
-
-            <!-- Home Navigation -->
-            <section class="home-nav">
-                <a href="/data-analyst-portfolio/index.html" class="home-link">← Home</a>
-            </section>
-
-            <section class="contact">
-                <h2>Contact</h2>
-                <p>Have a project in mind? Let’s work together to transform your data into actionable insights.</p>
-                <ul>
-                    <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-                    <li>Phone: +6014-9207099</li>
-                </ul>
-            </section>
-        </aside>
-
-        <!-- Right Column -->
-        <main class="right-column">
-            <section class="case-study-content">
-                <header>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/cover%20image.png" alt="Cover Image">
-                    <h1>Below the Average</h1>
-                    <p>Selangor Isn’t Keeping Pace in Men’s Footwear Sales</p>
-                </header>
-
-                <section>
-                    <h2>Overview</h2>
-                    <p>This case study evaluates Selangor’s sales performance in Men’s Athletic Footwear compared to other Malaysian states to support strategic decisions on resource allocation and regional sales planning. The analysis was conducted to determine whether Selangor’s performance is significantly different from the national average and whether any observed gap warrants business intervention. This is particularly important for the country sales manager.</p>
-                </section>
-
-                <section>
-                    <h2>Question 1: Is there a statistically significant difference in Men’s Athletic Footwear sales between Selangor and other states?</h2>
-                    <p>A statistical test was conducted to compare average sales between Selangor and other states. Selangor recorded a mean total sales of RM79,531 (n = 154), while other states recorded RM97,133 (n = 1,456). However, the test returned a p-value of 0.1159, which is greater than the 0.05 significance threshold. This means we fail to reject the null hypothesis.</p>
-                    <p>In simpler terms, the difference in average sales is not statistically significant and could be due to chance. This is further supported by the bar chart, which shows substantial overlap in error bars, and the histogram, which shows both groups have similar right-skewed distributions with overlapping shapes. Although the averages differ numerically, the variability within each group is too high to confirm a meaningful difference with confidence.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%201%20-%20histogram.png" alt="Histogram Chart">
-                </section>
-
-                <section>
-                    <h2>Question 2: Is Selangor above or below the national average?</h2>
-                    <p>The grouped sales data show that Selangor consistently performs below the national average. The mean total sales in Selangor is RM79,531, compared to RM97,133 in other states. The median values tell a similar story—RM8,292 for Selangor versus RM10,286 for other states. These figures suggest that both the typical and average sales in Selangor are lower than the national benchmark.</p>
-                    <p>The bar chart confirms this difference visually, with Selangor’s average bar visibly lower than that of other states. Although the error bars are wide, the gap in average height still reflects a performance gap worth noting.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%202%20-%20error%20bar%20chart.png" alt="Error Bar Chart">
-                </section>
-
-                <section>
-                    <h2>Question 3: Is the difference practically significant (Cohen’s d)?</h2>
-                    <p>To assess practical significance, Cohen’s d was calculated at −0.12. This effect size falls well below the commonly accepted threshold of 0.2 for a small effect. Despite the numerical difference in averages, the result suggests that the magnitude of this difference is too small to be meaningful in a business context.</p>
-                    <p>The visualization supports this finding. The error bar chart shows large standard deviations with significant overlap between the two groups. The annotation of Cohen’s d = −0.12 reinforces the interpretation that the difference, while measurable, is not impactful enough to drive strategic decisions on its own.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%203%20-%20error%20bar%20chart.png" alt="Error Bar Chart - Cohen's d">
-                </section>
-
-                <section>
-                    <h2>Question 4: What trends or patterns emerge when comparing monthly sales across Selangor and other states?</h2>
-                    <p>Monthly sales data reveal consistent underperformance by Selangor relative to other states. Selangor’s monthly sales remained modest throughout the period, with only small spikes in months like March 2020 and October 2021. In contrast, other states experienced robust sales growth, particularly in late 2020 and 2021, with a peak in August 2021 reaching nearly RM14 million.</p>
-                    <p>The line chart highlights these trends clearly. While the blue line (Other States) shows a dynamic pattern of growth and fluctuation, the orange line (Selangor) stays relatively flat and distant. Similarly, the stacked area chart illustrates that Selangor’s contribution to overall national sales is minimal and remains that way throughout the period.</p>
-                    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%204%20-%20line%20chart.png" alt="Line Chart - Monthly Sales Trends">
-                </section>
-
-                <section>
-                    <h2>Conclusion</h2>
-                    <p>The analysis across all four key questions consistently points to one clear finding: Selangor is underperforming relative to the national average in Men’s Athletic Footwear sales. Although the average sales in Selangor are lower than those in other states, this difference is not statistically significant and the practical impact is minimal based on the small effect size (Cohen’s d = −0.12).</p>
-                    <p>However, the monthly trend analysis reveals a persistent and notable performance gap. Other states show strong and accelerating sales growth, particularly throughout 2021, while Selangor’s sales remain relatively flat with minimal momentum. This long-term lag suggests underlying structural issues in Selangor’s sales operations that go beyond simple statistical comparison.</p>
-                </section>
-
-                <section>
-                    <h2>Recommendations</h2>
-                    <ul>
-                        <li><strong>Resource Allocation:</strong> Allocate resources strategically but cautiously to Selangor. Given the lack of current performance but the region’s potential due to its population size and economic significance, it would be worthwhile to:
-                            <ul>
-                                <li>Pilot local promotions, retailer incentives, or brand visibility campaigns.</li>
-                                <li>Increase store presence or digital channel outreach where customer access may be limited.</li>
-                            </ul>
-                            However, avoid overcommitting high-volume inventory or high-budget campaigns until concrete performance improvements are seen in early interventions.
-                        </li>
-                        <li><strong>Sales Targets:</strong> Set moderately aggressive but realistic targets for Selangor:
-                            <ul>
-                                <li>Focus on month-over-month growth rates rather than trying to immediately match the national average.</li>
-                                <li>Use relative KPIs, such as sales uplift post-campaign or customer acquisition per RM spent, to evaluate progress.</li>
-                                <li>Align targets with localized drivers—festivals, school reopening, or sports seasons—to exploit spikes.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Regional Strategy Alignment:</strong> Selangor may require a tailored regional strategy rather than adopting the same playbook used for high-performing states. Consider:
-                            <ul>
-                                <li>Localized market research to identify barriers—pricing, product fit, competitor dominance, or customer awareness.</li>
-                                <li>Partnerships with local retailers or influencers who resonate with Selangor’s demographic.</li>
-                                <li>Experimentation zones: Use Selangor as a testing ground for new formats, digital promotions, or bundling models before scaling nationwide.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Final Note</h2>
-                    <p>While Selangor is not dragging national performance down, it is clearly not contributing its fair share of growth. Closing this performance gap should be a strategic priority, starting with targeted, data-informed interventions, followed by careful monitoring before scaling investment.</p>
-                </section>
-            </section>
-        </main>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
     </div>
-    <footer>
-        <p>© 2025 Lee Yih Ven | Data-Driven Solutions</p>
-    </footer>
-</body>
-</html>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Statistical Testing</span>
+    <span class="sep">/</span><span>Below the Average</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/cover%20image.png" alt="Below the Average">
+    <figcaption><span>Is Selangor really underperforming on athletic footwear?</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Sales &amp; hypothesis testing</div>
+  <h1 class="title">Below the Average</h1>
+  <p class="standfirst">See if Selangor's footwear sales lag behind</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Footwear sales &middot; t-test</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/below-the-average-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/below-the-average.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>This case study evaluates Selangor’s sales performance in Men’s Athletic Footwear compared to other Malaysian states to support strategic decisions on resource allocation and regional sales planning. The analysis was conducted to determine whether Selangor’s performance is significantly different from the national average and whether any observed gap warrants business intervention. This is particularly important for the country sales manager.</p>
+  </div>
+
+  
+
+  <div class="pull"><p>&ldquo;The analysis across all four key questions consistently points to one clear finding: Selangor is underperforming relative to the national average in Men’s Athletic Footwear sales.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Question 1: Is there a statistically significant difference in Men’s Athletic Footwear sales between Selangor and other states?</h3><div class="ftext"><p>A statistical test was conducted to compare average sales between Selangor and other states. Selangor recorded a mean total sales of RM79,531 (n = 154), while other states recorded RM97,133 (n = 1,456). However, the test returned a p-value of 0.1159, which is greater than the 0.05 significance threshold. This means we fail to reject the null hypothesis.</p> <p>In simpler terms, the difference in average sales is not statistically significant and could be due to chance. This is further supported by the bar chart, which shows substantial overlap in error bars, and the histogram, which shows both groups have similar right-skewed distributions with overlapping shapes. Although the averages differ numerically, the variability within each group is too high to confirm a meaningful difference with confidence.</p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%201%20-%20histogram.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 2: Is Selangor above or below the national average?</h3><div class="ftext"><p>The grouped sales data show that Selangor consistently performs below the national average. The mean total sales in Selangor is RM79,531, compared to RM97,133 in other states. The median values tell a similar story, RM8,292 for Selangor versus RM10,286 for other states. These figures suggest that both the typical and average sales in Selangor are lower than the national benchmark.</p> <p>The bar chart confirms this difference visually, with Selangor’s average bar visibly lower than that of other states. Although the error bars are wide, the gap in average height still reflects a performance gap worth noting.</p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%202%20-%20error%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 3: Is the difference practically significant (Cohen’s d)?</h3><div class="ftext"><p>To assess practical significance, Cohen’s d was calculated at −0.12. This effect size falls well below the commonly accepted threshold of 0.2 for a small effect. Despite the numerical difference in averages, the result suggests that the magnitude of this difference is too small to be meaningful in a business context.</p> <p>The visualization supports this finding. The error bar chart shows large standard deviations with significant overlap between the two groups. The annotation of Cohen’s d = −0.12 reinforces the interpretation that the difference, while measurable, is not impactful enough to drive strategic decisions on its own.</p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%203%20-%20error%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 4: What trends or patterns emerge when comparing monthly sales across Selangor and other states?</h3><div class="ftext"><p>Monthly sales data reveal consistent underperformance by Selangor relative to other states. Selangor’s monthly sales remained modest throughout the period, with only small spikes in months like March 2020 and October 2021. In contrast, other states experienced robust sales growth, particularly in late 2020 and 2021, with a peak in August 2021 reaching nearly RM14 million.</p> <p>The line chart highlights these trends clearly. While the blue line (Other States) shows a dynamic pattern of growth and fluctuation, the orange line (Selangor) stays relatively flat and distant. Similarly, the stacked area chart illustrates that Selangor’s contribution to overall national sales is minimal and remains that way throughout the period.</p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/below-the-average/chart%204%20-%20line%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Recommendations</h3><div class="ftext"><ul> <li><strong>Resource Allocation:</strong> Allocate resources strategically but cautiously to Selangor. Given the lack of current performance but the region’s potential due to its population size and economic significance, it would be worthwhile to: <ul> <li>Pilot local promotions, retailer incentives, or brand visibility campaigns.</li> <li>Increase store presence or digital channel outreach where customer access may be limited.</li> </ul> However, avoid overcommitting high-volume inventory or high-budget campaigns until concrete performance improvements are seen in early interventions. </li> <li><strong>Sales Targets:</strong> Set moderately aggressive but realistic targets for Selangor: <ul> <li>Focus on month-over-month growth rates rather than trying to immediately match the national average.</li> <li>Use relative KPIs, such as sales uplift post-campaign or customer acquisition per RM spent, to evaluate progress.</li> <li>Align targets with localized drivers, festivals, school reopening, or sports seasons, to exploit spikes.</li> </ul> </li> <li><strong>Regional Strategy Alignment:</strong> Selangor may require a tailored regional strategy rather than adopting the same playbook used for high-performing states. Consider: <ul> <li>Localized market research to identify barriers, pricing, product fit, competitor dominance, or customer awareness.</li> <li>Partnerships with local retailers or influencers who resonate with Selangor’s demographic.</li> <li>Experimentation zones: Use Selangor as a testing ground for new formats, digital promotions, or bundling models before scaling nationwide.</li> </ul> </li> </ul></div></article>
+    <article class="finding"><h3 class="fq">Final Note</h3><div class="ftext"><p>While Selangor is not dragging national performance down, it is clearly not contributing its fair share of growth. Closing this performance gap should be a strategic priority, starting with targeted, data-informed interventions, followed by careful monitoring before scaling investment.</p></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>The analysis across all four key questions consistently points to one clear finding: Selangor is underperforming relative to the national average in Men’s Athletic Footwear sales. Although the average sales in Selangor are lower than those in other states, this difference is not statistically significant and the practical impact is minimal based on the small effect size (Cohen’s d = −0.12).</p> <p>However, the monthly trend analysis reveals a persistent and notable performance gap. Other states show strong and accelerating sales growth, particularly throughout 2021, while Selangor’s sales remain relatively flat with minimal momentum. This long-term lag suggests underlying structural issues in Selangor’s sales operations that go beyond simple statistical comparison.</p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

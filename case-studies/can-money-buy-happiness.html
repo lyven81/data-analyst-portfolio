@@ -1,213 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Can Money Buy Happiness? | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let’s work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/can-money-buy-happiness-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/cover.png"/>
-      <h1>
-       Can Money Buy Happiness?
-      </h1>
-      <p>
-       What We Learned from the 2019 World Happiness Report
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis explores how external conditions—particularly economic stability and personal autonomy—influence national happiness, offering practical insights for mental health professionals. As well-being is shaped by both personal and societal factors, understanding these broader drivers can help guide counseling priorities and support strategies.
-      </p>
-      <p>
-       Using global data, the study focuses on GDP per capita and freedom to make life choices, two variables shown to be the most statistically reliable and least overlapping predictors of happiness. The goal is to help counselors align interventions with what most strongly contributes to psychological well-being: financial security and a sense of personal control.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. What factors are most strongly linked to happiness, and do they overlap?
-      </h2>
-      <p>
-       The analysis shows that GDP per capita, healthy life expectancy, and social support are the three strongest external factors linked to happiness. Countries with higher income, better health outcomes, and stronger support systems tend to report higher happiness levels. However, these three factors are also closely related to each other. Because they rise and fall together, including all of them in the same model may blur their individual effects. To avoid this confusion, it’s better to include just one or two of these variables in a predictive model. In this case, the model uses GDP per capita and freedom to make life choices, which helps keep the analysis clear and focused.
-      </p>
-      <img alt="Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%201.png"/>
-     </section>
-     <section>
-      <h2>
-       2. Which predictors are most reliable for guiding interventions?
-      </h2>
-      <p>
-       Two predictors stand out as statistically reliable and meaningful: GDP per capita and freedom to make life choices. Both are strongly linked to higher happiness and have been confirmed as significant through regression testing. This means that when a country’s economy grows or when people feel more free to make decisions about their lives, happiness levels tend to rise. On the other hand, perceptions of corruption did not show a strong link and should not be prioritized in isolation when designing well-being interventions. For mental health professionals, this suggests focusing on economic empowerment and personal autonomy as core areas for support programs.
-      </p>
-      <img alt="Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%202.png"/>
-     </section>
-     <section>
-      <h2>
-       3. How do these factors combine to affect happiness?
-      </h2>
-      <p>
-       The regression model shows that both GDP per capita and freedom to make life choices have a measurable impact on happiness. For each one-point increase in GDP, happiness scores rise by about 1.89 points. For every one-point increase in perceived freedom, happiness increases by about 2.41 points. These values help us understand the weight of each factor. In total, about 71% of the variation in happiness scores across countries can be explained by these two factors. This confirms that financial stability and personal freedom are powerful influences on how people feel about their lives and should be central in any well-being strategy.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. What are the expected happiness scores based on GDP and freedom?
-      </h2>
-      <p>
-       By using GDP per capita and freedom to make life choices, the model can predict a country’s happiness score. In most cases, the predictions come close to the actual reported scores. However, in some countries, actual happiness is higher than expected, which suggests that other cultural or social factors may play a role. These predictions offer a helpful baseline for understanding what happiness might look like under different national conditions and can be used to identify which countries are doing better or worse than expected based on these two variables.
-      </p>
-      <img alt="Chart 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%204.png"/>
-     </section>
-     <section>
-      <h2>
-       5. How does the model perform for countries with extreme values?
-      </h2>
-      <p>
-       When testing the model on countries with extreme values, the results were mixed. For example, the model overestimated happiness in Qatar, which has high GDP but may face social or cultural factors that affect well-being. In contrast, it underestimated happiness in countries like Uzbekistan and Somalia, suggesting that community strength or resilience may be boosting happiness despite economic challenges. The prediction for Afghanistan, which has low freedom, was relatively close. These examples show that while the model is useful, it doesn’t capture all the unique influences on happiness, especially in countries with unusual or extreme situations.
-      </p>
-      <img alt="Chart 5" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%205.png"/>
-     </section>
-     <section>
-      <h2>
-       6. How would happiness change if GDP or freedom shifts by 50%?
-      </h2>
-      <p>
-       If a country’s GDP increased by 50%, its predicted happiness score would rise by about 0.85 points. A 50% decrease would lower happiness by roughly the same amount. Similarly, increasing freedom by 50% would result in a 0.57-point increase, while a 50% drop in freedom would reduce happiness by about 0.38 points. This suggests that both economic growth and personal freedom have meaningful effects on happiness, with GDP showing a slightly stronger immediate impact. Still, both should be considered important targets for improving national and community well-being.
-      </p>
-      <img alt="Chart 6" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%206.png"/>
-     </section>
-     <section>
-      <h2>
-       7. Is the model accurate and practical for real-world use?
-      </h2>
-      <p>
-       The model is fairly accurate. It has a strong correlation of 0.84 between predicted and actual scores, and its predictions are, on average, within half a point of actual happiness levels. This makes it a useful tool for understanding general well-being trends at the population level. However, it’s less suitable for individual-level work. It doesn’t capture personal history, emotional experiences, or cultural context—factors that are essential in therapeutic settings. For counselors and mental health professionals, the model offers a reliable overview but should always be paired with personal assessments and community knowledge when working directly with people.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       The analysis across multiple models and visualizations confirms that economic stability and personal autonomy are the two most impactful external factors influencing a population’s psychological well-being and overall life satisfaction. Specifically:
-      </p>
-      <ul>
-       <li>
-        GDP per capita is strongly correlated with happiness (r = 0.79) and statistically significant in the regression model, indicating that financial security and access to economic resources play a major role in well-being.
-       </li>
-       <li>
-        Freedom to make life choices has an even greater influence on predicted happiness (coefficient = 2.23), emphasizing the importance of autonomy, control, and self-determination in people's lives.
-       </li>
-       <li>
-        Other factors such as healthy life expectancy and social support are also positively linked to happiness but show high correlation with GDP and may reflect overlapping influences.
-       </li>
-       <li>
-        The model performs well in predicting happiness overall (R² = 0.713), but deviations in specific countries (e.g., Somalia, Qatar) show that cultural, emotional, or social resilience can moderate or amplify the impact of economic and political conditions.
-       </li>
-      </ul>
-     </section>
-     <section>
-      <h2>
-       Recommendations
-      </h2>
-      <p>
-       Based on the findings, mental health professionals—especially counselors and community practitioners—should focus on the following areas in their work:
-      </p>
-      <ul>
-       <li>
-        <strong>
-         Promote Personal Agency and Decision-Making Power:
-        </strong>
-        Support clients in regaining control over their lives. Encourage life planning, goal setting, and decision-making as therapeutic tools to strengthen autonomy.
-       </li>
-       <li>
-        <strong>
-         Address Financial Stress and Economic Insecurity:
-        </strong>
-        While counselors do not directly solve financial problems, integrating discussions about financial well-being, stability, and job-related stress into sessions can improve psychological outcomes. Referrals to support services or financial literacy programs can be valuable.
-       </li>
-       <li>
-        <strong>
-         Tailor Interventions to Context:
-        </strong>
-        In low-resource or high-stress environments (like Somalia or Afghanistan), build on community strengths and resilience rather than relying solely on economic metrics. Emotional connection, identity, and meaning-making should complement structural concerns.
-       </li>
-       <li>
-        <strong>
-         Empower Clients with Low Freedom Perception:
-        </strong>
-        For those feeling trapped by circumstances (e.g., rigid family roles, institutional control), therapy should aim to uncover areas where freedom and choice can be reclaimed—even in small steps.
-       </li>
-       <li>
-        <strong>
-         Advocate for Systemic Support:
-        </strong>
-        Encourage involvement in community or policy-level discussions that advocate for greater social freedom, equity, and access to resources, as these are long-term levers for population well-being.
-       </li>
-      </ul>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can Money Buy Happiness? | Data Stories Lab</title>
+<meta name="description" content="See what really drives national happiness">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Regression Analysis</span>
+    <span class="sep">/</span><span>Can Money Buy Happiness?</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/cover.png" alt="Can Money Buy Happiness?">
+    <figcaption><span>Which conditions lift a nation&rsquo;s happiness most.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Economics &amp; wellbeing</div>
+  <h1 class="title">Can Money Buy Happiness?</h1>
+  <p class="standfirst">See what really drives national happiness</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>World happiness &middot; regression</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/can-money-buy-happiness-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/can-money-buy-happiness.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis explores how external conditions, particularly economic stability and personal autonomy, influence national happiness, offering practical insights for mental health professionals. As well-being is shaped by both personal and societal factors, understanding these broader drivers can help guide counseling priorities and support strategies. </p> <p> Using global data, the study focuses on GDP per capita and freedom to make life choices, two variables shown to be the most statistically reliable and least overlapping predictors of happiness. The goal is to help counselors align interventions with what most strongly contributes to psychological well-being: financial security and a sense of personal control. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">GDP</div><div class="l">top driver</div></div><div class="fig"><div class="n">0.84</div><div class="l">model correlation</div></div><div class="fig"><div class="n">+0.85</div><div class="l">per 50% GDP</div></div><div class="fig"><div class="n">Freedom</div><div class="l">key factor</div></div></div>
+
+  <div class="pull"><p>&ldquo;The analysis across multiple models and visualizations confirms that economic stability and personal autonomy are the two most impactful external factors influencing a po&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. What factors are most strongly linked to happiness, and do they overlap?</h3><div class="ftext"><p> The analysis shows that GDP per capita, healthy life expectancy, and social support are the three strongest external factors linked to happiness. Countries with higher income, better health outcomes, and stronger support systems tend to report higher happiness levels. However, these three factors are also closely related to each other. Because they rise and fall together, including all of them in the same model may blur their individual effects. To avoid this confusion, it’s better to include just one or two of these variables in a predictive model. In this case, the model uses GDP per capita and freedom to make life choices, which helps keep the analysis clear and focused. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%201.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">2. Which predictors are most reliable for guiding interventions?</h3><div class="ftext"><p> Two predictors stand out as statistically reliable and meaningful: GDP per capita and freedom to make life choices. Both are strongly linked to higher happiness and have been confirmed as significant through regression testing. This means that when a country’s economy grows or when people feel more free to make decisions about their lives, happiness levels tend to rise. On the other hand, perceptions of corruption did not show a strong link and should not be prioritized in isolation when designing well-being interventions. For mental health professionals, this suggests focusing on economic empowerment and personal autonomy as core areas for support programs. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%202.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">3. How do these factors combine to affect happiness?</h3><div class="ftext"><p> The regression model shows that both GDP per capita and freedom to make life choices have a measurable impact on happiness. For each one-point increase in GDP, happiness scores rise by about 1.89 points. For every one-point increase in perceived freedom, happiness increases by about 2.41 points. These values help us understand the weight of each factor. In total, about 71% of the variation in happiness scores across countries can be explained by these two factors. This confirms that financial stability and personal freedom are powerful influences on how people feel about their lives and should be central in any well-being strategy. </p></div></article>
+    <article class="finding"><h3 class="fq">4. What are the expected happiness scores based on GDP and freedom?</h3><div class="ftext"><p> By using GDP per capita and freedom to make life choices, the model can predict a country’s happiness score. In most cases, the predictions come close to the actual reported scores. However, in some countries, actual happiness is higher than expected, which suggests that other cultural or social factors may play a role. These predictions offer a helpful baseline for understanding what happiness might look like under different national conditions and can be used to identify which countries are doing better or worse than expected based on these two variables. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%204.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">5. How does the model perform for countries with extreme values?</h3><div class="ftext"><p> When testing the model on countries with extreme values, the results were mixed. For example, the model overestimated happiness in Qatar, which has high GDP but may face social or cultural factors that affect well-being. In contrast, it underestimated happiness in countries like Uzbekistan and Somalia, suggesting that community strength or resilience may be boosting happiness despite economic challenges. The prediction for Afghanistan, which has low freedom, was relatively close. These examples show that while the model is useful, it doesn’t capture all the unique influences on happiness, especially in countries with unusual or extreme situations. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%205.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">6. How would happiness change if GDP or freedom shifts by 50%?</h3><div class="ftext"><p> If a country’s GDP increased by 50%, its predicted happiness score would rise by about 0.85 points. A 50% decrease would lower happiness by roughly the same amount. Similarly, increasing freedom by 50% would result in a 0.57-point increase, while a 50% drop in freedom would reduce happiness by about 0.38 points. This suggests that both economic growth and personal freedom have meaningful effects on happiness, with GDP showing a slightly stronger immediate impact. Still, both should be considered important targets for improving national and community well-being. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/can-money-buy-happiness/chart%206.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">7. Is the model accurate and practical for real-world use?</h3><div class="ftext"><p> The model is fairly accurate. It has a strong correlation of 0.84 between predicted and actual scores, and its predictions are, on average, within half a point of actual happiness levels. This makes it a useful tool for understanding general well-being trends at the population level. However, it’s less suitable for individual-level work. It doesn’t capture personal history, emotional experiences, or cultural context, factors that are essential in therapeutic settings. For counselors and mental health professionals, the model offers a reliable overview but should always be paired with personal assessments and community knowledge when working directly with people. </p></div></article>
+    <article class="finding"><h3 class="fq">Recommendations</h3><div class="ftext"><p> Based on the findings, mental health professionals, especially counselors and community practitioners, should focus on the following areas in their work: </p> <ul> <li> <strong> Promote Personal Agency and Decision-Making Power: </strong> Support clients in regaining control over their lives. Encourage life planning, goal setting, and decision-making as therapeutic tools to strengthen autonomy. </li> <li> <strong> Address Financial Stress and Economic Insecurity: </strong> While counselors do not directly solve financial problems, integrating discussions about financial well-being, stability, and job-related stress into sessions can improve psychological outcomes. Referrals to support services or financial literacy programs can be valuable. </li> <li> <strong> Tailor Interventions to Context: </strong> In low-resource or high-stress environments (like Somalia or Afghanistan), build on community strengths and resilience rather than relying solely on economic metrics. Emotional connection, identity, and meaning-making should complement structural concerns. </li> <li> <strong> Empower Clients with Low Freedom Perception: </strong> For those feeling trapped by circumstances (e.g., rigid family roles, institutional control), therapy should aim to uncover areas where freedom and choice can be reclaimed, even in small steps. </li> <li> <strong> Advocate for Systemic Support: </strong> Encourage involvement in community or policy-level discussions that advocate for greater social freedom, equity, and access to resources, as these are long-term levers for population well-being. </li> </ul></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> The analysis across multiple models and visualizations confirms that economic stability and personal autonomy are the two most impactful external factors influencing a population’s psychological well-being and overall life satisfaction. Specifically: </p> <ul> <li> GDP per capita is strongly correlated with happiness (r = 0.79) and statistically significant in the regression model, indicating that financial security and access to economic resources play a major role in well-being. </li> <li> Freedom to make life choices has an even greater influence on predicted happiness (coefficient = 2.23), emphasizing the importance of autonomy, control, and self-determination in people's lives. </li> <li> Other factors such as healthy life expectancy and social support are also positively linked to happiness but show high correlation with GDP and may reflect overlapping influences. </li> <li> The model performs well in predicting happiness overall (R² = 0.713), but deviations in specific countries (e.g., Somalia, Qatar) show that cultural, emotional, or social resilience can moderate or amplify the impact of economic and political conditions. </li> </ul></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

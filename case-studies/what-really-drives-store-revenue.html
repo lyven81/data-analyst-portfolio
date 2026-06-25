@@ -1,258 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   What Really Drives Store Revenue? | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/what-really-drives-store-revenue-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/cover%20image.png"/>
-      <h1>
-       What Really Drives Store Revenue?
-      </h1>
-      <p>
-       Uncovering the Subcategories That Shape Growth
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis helps merchandising managers see which product subcategories matter most for overall revenue. Not all categories contribute equally, so the challenge is knowing where to give more space, promotions, and budget to get the best return.
-      </p>
-      <p>
-       The goal is to identify the top drivers of sales, understand their seasonal patterns, and forecast how changes in subcategory sales affect total revenue. With these insights, managers can plan space, promotions, and inventory with confidence, focusing on the areas that truly grow the business.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Selection of Dependent Variable
-      </h2>
-      <p>
-       The dependent variable for this analysis is Total_Revenue, calculated on a weekly basis across all products. Weekly aggregation was chosen because it smooths out daily ups and downs and makes it easier to see longer-term patterns.
-      </p>
-      <p>
-       The goal was to understand what drives overall revenue growth and how changes in product mix or time affect sales performance. Weekly data also allows us to capture both seasonality and subcategory trends, making the insights more relevant for merchandising decisions.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Selection of Independent Variables
-      </h2>
-      <p>
-       Independent variables were chosen by looking at how strongly each subcategory correlated with total revenue. Subcategories with the highest correlation (above 0.97) were selected, while broader categories were excluded to avoid double-counting effects.
-      </p>
-      <p>
-       The final set includes Footwear, Sportswear, Kids Wear, Women's Wear, Wearable Accessories, Home Appliances, TVs & Audio, Laptops, and Storage, along with a Time_Index to capture trend effects. This ensures the analysis highlights where merchandising actions—like pricing, promotions, and space allocation—can have the most impact.
-      </p>
-      <p>
-       By narrowing the focus to subcategories instead of broad categories, the model balances statistical strength with practical business relevance, giving managers actionable insights rather than generic signals.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Evaluation of the Regression Model
-      </h2>
-      <pre style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.4;">
-                            OLS Regression Results
-==============================================================================
-Dep. Variable:                Revenue   R-squared:                       0.995
-Model:                            OLS   Adj. R-squared:                  0.995
-Method:                 Least Squares   F-statistic:                     1592.
-Date:                Wed, 01 Oct 2025   Prob (F-statistic):           4.07e-82
-Time:                        09:01:31   Log-Likelihood:                -1020.5
-No. Observations:                  85   AIC:                             2063.
-Df Residuals:                      74   BIC:                             2090.
-Df Model:                          10
-Covariance Type:            nonrobust
-===============================================================================
-                  coef    std err          t      P>|t|      [0.025      0.975]
--------------------------------------------------------------------------------
-const        7417.5617   1.34e+04      0.555      0.581   -1.92e+04    3.41e+04
-Time_Index    114.8134    193.893      0.592      0.556    -271.528     501.154
-Revenue_1.1     2.1745      0.785      2.771      0.007       0.611       3.738
-Revenue_1.2     3.2487      0.808      4.020      0.000       1.638       4.859
-Revenue_1.4     1.8244      0.949      1.921      0.059      -0.068       3.716
-Revenue_1.5     2.3832      0.882      2.701      0.009       0.625       4.141
-Revenue_2.1     6.7305      1.428      4.712      0.000       3.884       9.576
-Revenue_2.3     1.5945      0.488      3.265      0.002       0.621       2.568
-Revenue_2.4     1.2941      0.539      2.403      0.019       0.221       2.367
-Revenue_2.5     1.8399      0.323      5.697      0.000       1.196       2.483
-Revenue_3.4     2.6327      0.604      4.356      0.000       1.429       3.837
-==============================================================================
-Omnibus:                        2.044   Durbin-Watson:                   2.003
-Prob(Omnibus):                  0.360   Jarque-Bera (JB):                1.403
-Skew:                          -0.202   Prob(JB):                        0.496
-Kurtosis:                       3.482   Cond. No.                     5.93e+05
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 5.93e+05. This might indicate that there are
-strong multicollinearity or other numerical problems.
-      </pre>
-      <p>
-       The regression model performed very strongly, with an R² of 0.995, meaning it explains about 99.5% of the variation in weekly revenue. This gives high confidence that the selected subcategories are the true drivers of performance.
-      </p>
-      <p>
-       Most subcategories are statistically significant, including Sportswear, Women's Wear, Accessories, Home Appliances, Laptops, Storage, TVs & Audio, and Footwear. Two areas—Kids Wear and the Time Index—were not significant, showing that subcategory sales explain revenue better than simple time trends.
-      </p>
-      <p>
-       The coefficients also show how much each subcategory influences revenue. For example, Wearable Accessories has a very strong effect, amplifying total revenue by more than 6x for each unit increase, while Sportswear and Laptops also play powerful roles. Seasonal dummies such as holidays did not add much explanatory power, confirming that product mix and promotions matter more than calendar effects alone.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Q1. Which subcategories are the strongest drivers of total revenue, and how do they compare?
-      </h2>
-      <p>
-       The analysis shows that Wearable Accessories (Revenue_2.1) is the strongest driver of overall revenue, accounting for about 37% of the influence. This makes it the single most critical subcategory to focus on.
-      </p>
-      <p>
-       The next strongest contributors are Sportswear (Revenue_1.2) and Footwear (Revenue_1.1), together explaining nearly 30% of total impact. These categories consistently influence overall performance, though not at the same scale as Accessories.
-      </p>
-      <p>
-       Other subcategories, including Home Appliances, Kids Wear, and Women's Wear, contribute moderately, while Laptops, TVs & Audio, and Storage have the smallest effects. These smaller drivers may play supporting roles rather than acting as key growth levers.
-      </p>
-      <img alt="Subcategory Influence on Total Revenue" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q1%20subcategory_influence.png"/>
-     </section>
-     <section>
-      <h2>
-       Q2. If sales in a subcategory increase, how much would overall revenue rise?
-      </h2>
-      <p>
-       The impact of a +10% increase in sales varies across subcategories. Wearable Accessories again stand out, with a 10% rise generating an additional +0.52 units of total revenue.
-      </p>
-      <p>
-       The next strongest lifts come from Sportswear (+0.21 units) and Home Appliances (+0.12 units). Smaller but positive effects are seen in Women's Wear, Laptops, TVs & Audio, and Storage, each contributing modest gains between +0.05 and +0.09 units.
-      </p>
-      <p>
-       Interestingly, Footwear shows a negative effect (–0.20), suggesting possible cannibalization of revenue from other categories. Kids Wear shows almost no measurable impact, indicating limited ability to drive overall growth.
-      </p>
-      <img alt="Marginal Impact of Subcategory Sales on Total Revenue" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q2%20subcategory_marginal_impact.png"/>
-     </section>
-     <section>
-      <h2>
-       Q3. How is total revenue trending over time, and do subcategories amplify or smooth out this growth?
-      </h2>
-      <p>
-       Total revenue shows clear seasonal peaks in Q4, driven by holiday shopping, followed by declines in Q1. This pattern repeats across the two years in the dataset.
-      </p>
-      <p>
-       Subcategories such as Laptops (Revenue_2.5) and Women's Wear (Revenue_1.5) rise strongly during these same holiday peaks, amplifying total revenue growth. In contrast, Sportswear (Revenue_1.2) contributes more steadily, showing smaller fluctuations and acting as a stabilizer throughout the year.
-      </p>
-      <p>
-       This balance between seasonal amplifiers and steady performers helps merchandising managers plan inventory—relying on Sportswear for predictable sales, while maximizing peak demand with categories like Laptops and Women's Wear.
-      </p>
-      <img alt="Trend of Total Revenue vs. Key Subcategories" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q3%20trend_subcategories.png"/>
-     </section>
-     <section>
-      <h2>
-       Q4. What does the revenue outlook look like for the next season or year if trends continue?
-      </h2>
-      <p>
-       The forecast suggests stable revenue of about 1.35M per week on average in the coming year. The projection line is almost flat, with a narrow confidence band, showing little expected variation.
-      </p>
-      <p>
-       This contrasts with past data, where strong seasonal spikes occurred. The difference arises because the regression model captures average subcategory effects but does not fully reproduce holiday cycles.
-      </p>
-      <p>
-       For managers, this provides a baseline outlook for planning. Actual results are likely to exceed this flat forecast during holidays, promotions, or new launches. To capture seasonality more accurately, managers may consider pairing this baseline with a seasonal model such as ARIMA.
-      </p>
-      <img alt="Revenue Outlook Forecast" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q4%20revenue_forecast.png"/>
-     </section>
-     <section>
-      <h2>
-       Q5. What happens if we boost or cut sales in specific subcategories?
-      </h2>
-      <p>
-       The scenario simulation tested ±10% changes in subcategory sales. Boosting Wearable Accessories had the strongest positive impact, while categories such as Kids Wear and Laptops produced smaller shifts.
-      </p>
-      <p>
-       No single category dominates overall performance completely. The largest gains came when all subcategories were boosted together by 10%, showing that broad-based promotions or supplier negotiations are more effective than focusing on one subcategory alone.
-      </p>
-      <p>
-       This means merchandising managers should continue to prioritize top drivers like Accessories and Sportswear but also consider coordinated actions across multiple subcategories to maximize revenue growth.
-      </p>
-      <img alt="Scenario Simulation" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q5%20scenario_simulation.png"/>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       The analysis shows that Wearable Accessories, Sportswear, and Footwear are the subcategories with the strongest influence on overall revenue. Among these, Wearable Accessories is the clear leader and should be prioritized for shelf space, online visibility, and supplier negotiations. Sportswear provides reliable, year-round sales, making it ideal for steady promotions and inventory planning, while Footwear needs careful positioning to avoid taking sales away from other categories.
-      </p>
-      <p>
-       Seasonality also plays a major role. Laptops and Women's Wear drive sharp increases during holiday seasons, especially in Q4, while Sportswear delivers consistent revenue across the year. This means that promotions and discounts should be timed strategically—holiday-sensitive subcategories should get heavier marketing support during peak shopping periods, while steady performers like Sportswear should be supported with ongoing campaigns to sustain baseline revenue.
-      </p>
-      <p>
-       To maximize growth, merchandising managers should weight budgets toward the top-performing subcategories and coordinate across multiple areas to achieve a broader lift. Inventory and supplier planning should ensure that leading subcategories, especially Wearable Accessories and Sportswear, are never understocked during high demand. Aligning promotions, space allocation, and supplier partnerships with these insights will help secure consistent revenue while capturing seasonal surges more effectively.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Really Drives Store Revenue? | Data Stories Lab</title>
+<meta name="description" content="Find the few products that drive most revenue">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Time Series Analysis</span>
+    <span class="sep">/</span><span>What Really Drives Store Revenue?</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/cover%20image.png" alt="What Really Drives Store Revenue?">
+    <figcaption><span>A handful of subcategories move the whole store.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Retail &amp; merchandising</div>
+  <h1 class="title">What Really Drives Store Revenue?</h1>
+  <p class="standfirst">Find the few products that drive most revenue</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Weekly revenue &middot; two years</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/what-really-drives-store-revenue-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/what-really-drives-store-revenue.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis helps merchandising managers see which product subcategories matter most for overall revenue. Not all categories contribute equally, so the challenge is knowing where to give more space, promotions, and budget to get the best return. </p> <p> The goal is to identify the top drivers of sales, understand their seasonal patterns, and forecast how changes in subcategory sales affect total revenue. With these insights, managers can plan space, promotions, and inventory with confidence, focusing on the areas that truly grow the business. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">99.5%</div><div class="l">revenue variation explained</div></div><div class="fig"><div class="n">37%</div><div class="l">from accessories</div></div><div class="fig"><div class="n">+0.52</div><div class="l">accessories lift</div></div><div class="fig"><div class="n">&gt;0.97</div><div class="l">top-driver correlation</div></div></div>
+
+  <div class="pull"><p>&ldquo;The analysis shows that Wearable Accessories, Sportswear, and Footwear are the subcategories with the strongest influence on overall revenue.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Selection of Dependent Variable</h3><div class="ftext"><p> The dependent variable for this analysis is Total_Revenue, calculated on a weekly basis across all products. Weekly aggregation was chosen because it smooths out daily ups and downs and makes it easier to see longer-term patterns. </p> <p> The goal was to understand what drives overall revenue growth and how changes in product mix or time affect sales performance. Weekly data also allows us to capture both seasonality and subcategory trends, making the insights more relevant for merchandising decisions. </p></div></article>
+    <article class="finding"><h3 class="fq">Selection of Independent Variables</h3><div class="ftext"><p> Independent variables were chosen by looking at how strongly each subcategory correlated with total revenue. Subcategories with the highest correlation (above 0.97) were selected, while broader categories were excluded to avoid double-counting effects. </p> <p> The final set includes Footwear, Sportswear, Kids Wear, Women's Wear, Wearable Accessories, Home Appliances, TVs & Audio, Laptops, and Storage, along with a Time_Index to capture trend effects. This ensures the analysis highlights where merchandising actions, like pricing, promotions, and space allocation, can have the most impact. </p> <p> By narrowing the focus to subcategories instead of broad categories, the model balances statistical strength with practical business relevance, giving managers actionable insights rather than generic signals. </p></div></article>
+    <article class="finding"><h3 class="fq">Evaluation of the Regression Model</h3><div class="ftext"><pre style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.4;"> OLS Regression Results ============================================================================== Dep. Variable: Revenue R-squared: 0.995 Model: OLS Adj. R-squared: 0.995 Method: Least Squares F-statistic: 1592. Date: Wed, 01 Oct 2025 Prob (F-statistic): 4.07e-82 Time: 09:01:31 Log-Likelihood: -1020.5 No. Observations: 85 AIC: 2063. Df Residuals: 74 BIC: 2090. Df Model: 10 Covariance Type: nonrobust =============================================================================== coef std err t P>|t| [0.025 0.975] ------------------------------------------------------------------------------- const 7417.5617 1.34e+04 0.555 0.581 -1.92e+04 3.41e+04 Time_Index 114.8134 193.893 0.592 0.556 -271.528 501.154 Revenue_1.1 2.1745 0.785 2.771 0.007 0.611 3.738 Revenue_1.2 3.2487 0.808 4.020 0.000 1.638 4.859 Revenue_1.4 1.8244 0.949 1.921 0.059 -0.068 3.716 Revenue_1.5 2.3832 0.882 2.701 0.009 0.625 4.141 Revenue_2.1 6.7305 1.428 4.712 0.000 3.884 9.576 Revenue_2.3 1.5945 0.488 3.265 0.002 0.621 2.568 Revenue_2.4 1.2941 0.539 2.403 0.019 0.221 2.367 Revenue_2.5 1.8399 0.323 5.697 0.000 1.196 2.483 Revenue_3.4 2.6327 0.604 4.356 0.000 1.429 3.837 ============================================================================== Omnibus: 2.044 Durbin-Watson: 2.003 Prob(Omnibus): 0.360 Jarque-Bera (JB): 1.403 Skew: -0.202 Prob(JB): 0.496 Kurtosis: 3.482 Cond. No. 5.93e+05 ============================================================================== Notes: [1] Standard Errors assume that the covariance matrix of the errors is correctly specified. [2] The condition number is large, 5.93e+05. This might indicate that there are strong multicollinearity or other numerical problems. </pre> <p> The regression model performed very strongly, with an R² of 0.995, meaning it explains about 99.5% of the variation in weekly revenue. This gives high confidence that the selected subcategories are the true drivers of performance. </p> <p> Most subcategories are statistically significant, including Sportswear, Women's Wear, Accessories, Home Appliances, Laptops, Storage, TVs & Audio, and Footwear. Two areas, Kids Wear and the Time Index, were not significant, showing that subcategory sales explain revenue better than simple time trends. </p> <p> The coefficients also show how much each subcategory influences revenue. For example, Wearable Accessories has a very strong effect, amplifying total revenue by more than 6x for each unit increase, while Sportswear and Laptops also play powerful roles. Seasonal dummies such as holidays did not add much explanatory power, confirming that product mix and promotions matter more than calendar effects alone. </p></div></article>
+    <article class="finding"><h3 class="fq">Q1. Which subcategories are the strongest drivers of total revenue, and how do they compare?</h3><div class="ftext"><p> The analysis shows that Wearable Accessories (Revenue_2.1) is the strongest driver of overall revenue, accounting for about 37% of the influence. This makes it the single most critical subcategory to focus on. </p> <p> The next strongest contributors are Sportswear (Revenue_1.2) and Footwear (Revenue_1.1), together explaining nearly 30% of total impact. These categories consistently influence overall performance, though not at the same scale as Accessories. </p> <p> Other subcategories, including Home Appliances, Kids Wear, and Women's Wear, contribute moderately, while Laptops, TVs & Audio, and Storage have the smallest effects. These smaller drivers may play supporting roles rather than acting as key growth levers. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q1%20subcategory_influence.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Q2. If sales in a subcategory increase, how much would overall revenue rise?</h3><div class="ftext"><p> The impact of a +10% increase in sales varies across subcategories. Wearable Accessories again stand out, with a 10% rise generating an additional +0.52 units of total revenue. </p> <p> The next strongest lifts come from Sportswear (+0.21 units) and Home Appliances (+0.12 units). Smaller but positive effects are seen in Women's Wear, Laptops, TVs & Audio, and Storage, each contributing modest gains between +0.05 and +0.09 units. </p> <p> Interestingly, Footwear shows a negative effect (–0.20), suggesting possible cannibalization of revenue from other categories. Kids Wear shows almost no measurable impact, indicating limited ability to drive overall growth. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q2%20subcategory_marginal_impact.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Q3. How is total revenue trending over time, and do subcategories amplify or smooth out this growth?</h3><div class="ftext"><p> Total revenue shows clear seasonal peaks in Q4, driven by holiday shopping, followed by declines in Q1. This pattern repeats across the two years in the dataset. </p> <p> Subcategories such as Laptops (Revenue_2.5) and Women's Wear (Revenue_1.5) rise strongly during these same holiday peaks, amplifying total revenue growth. In contrast, Sportswear (Revenue_1.2) contributes more steadily, showing smaller fluctuations and acting as a stabilizer throughout the year. </p> <p> This balance between seasonal amplifiers and steady performers helps merchandising managers plan inventory, relying on Sportswear for predictable sales, while maximizing peak demand with categories like Laptops and Women's Wear. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q3%20trend_subcategories.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Q4. What does the revenue outlook look like for the next season or year if trends continue?</h3><div class="ftext"><p> The forecast suggests stable revenue of about 1.35M per week on average in the coming year. The projection line is almost flat, with a narrow confidence band, showing little expected variation. </p> <p> This contrasts with past data, where strong seasonal spikes occurred. The difference arises because the regression model captures average subcategory effects but does not fully reproduce holiday cycles. </p> <p> For managers, this provides a baseline outlook for planning. Actual results are likely to exceed this flat forecast during holidays, promotions, or new launches. To capture seasonality more accurately, managers may consider pairing this baseline with a seasonal model such as ARIMA. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q4%20revenue_forecast.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Q5. What happens if we boost or cut sales in specific subcategories?</h3><div class="ftext"><p> The scenario simulation tested ±10% changes in subcategory sales. Boosting Wearable Accessories had the strongest positive impact, while categories such as Kids Wear and Laptops produced smaller shifts. </p> <p> No single category dominates overall performance completely. The largest gains came when all subcategories were boosted together by 10%, showing that broad-based promotions or supplier negotiations are more effective than focusing on one subcategory alone. </p> <p> This means merchandising managers should continue to prioritize top drivers like Accessories and Sportswear but also consider coordinated actions across multiple subcategories to maximize revenue growth. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-really-drives-store-revenue/Q5%20scenario_simulation.png" alt="chart"></figure></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> The analysis shows that Wearable Accessories, Sportswear, and Footwear are the subcategories with the strongest influence on overall revenue. Among these, Wearable Accessories is the clear leader and should be prioritized for shelf space, online visibility, and supplier negotiations. Sportswear provides reliable, year-round sales, making it ideal for steady promotions and inventory planning, while Footwear needs careful positioning to avoid taking sales away from other categories. </p> <p> Seasonality also plays a major role. Laptops and Women's Wear drive sharp increases during holiday seasons, especially in Q4, while Sportswear delivers consistent revenue across the year. This means that promotions and discounts should be timed strategically, holiday-sensitive subcategories should get heavier marketing support during peak shopping periods, while steady performers like Sportswear should be supported with ongoing campaigns to sustain baseline revenue. </p> <p> To maximize growth, merchandising managers should weight budgets toward the top-performing subcategories and coordinate across multiple areas to achieve a broader lift. Inventory and supplier planning should ensure that leading subcategories, especially Wearable Accessories and Sportswear, are never understocked during high demand. Aligning promotions, space allocation, and supplier partnerships with these insights will help secure consistent revenue while capturing seasonal surges more effectively. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

@@ -1,237 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Predicting Product Sales | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let’s work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/predict-product-sales-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Predicting Product Sales Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/cover%20image.png"/>
-      <h1>
-       Predicting Product Sales
-      </h1>
-      <p>
-       Where Your Marketing Budget Works Hardest
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis was conducted to help marketing managers identify which advertising channels yield the highest return in product sales. The focus is on three key channels—affiliate marketing, billboards, and social media—with the goal of quantifying how much each dollar spent contributes to overall sales. By using regression analysis, the study aims to support data-driven budget planning and provide clarity on how to optimize advertising spend for better campaign outcomes.
-      </p>
-      <p>
-       The analysis addresses a practical business challenge: determining which channels drive the most sales and how reallocating budget could impact results. Marketing managers need to make informed decisions about where to invest to meet sales targets and maximize ROI. This report provides clear insights on each channel’s effectiveness, the reliability of the predictive model, and what to expect under different spending scenarios—all to guide smarter, performance-driven advertising strategies.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Question 1
-      </h2>
-      <p>
-       <strong>
-        How strongly is each marketing channel linked to product sales, and are any channels too similar to each other?
-       </strong>
-      </p>
-      <p>
-       The strength of the relationship between each marketing channel and product sales was measured using correlation. Affiliate Marketing showed the strongest link, followed by Billboards and Social Media, which had moderate influence. TV, Google Ads, and Influencer Marketing had weaker connections to sales.
-      </p>
-      <p>
-       We also checked whether any channels were too closely related to each other, which could cause duplication in the model. Based on the correlation analysis between channels, no such overlap was found. This means the channels included in the model—Affiliate Marketing, Billboards, and Social Media—are distinct enough to use together without causing interference.
-      </p>
-      <img alt="Correlation Scatter Plot" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%201%20-%20correlation%20scatter%20plot.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 2
-      </h2>
-      <p>
-       <strong>
-        Which advertising channels have a statistically significant impact on product sales?
-       </strong>
-      </p>
-      <p>
-       All six advertising channels were found to have a statistically significant impact on product sales. This means the likelihood that their influence is due to random chance is extremely low. The p-values for all channels were close to zero, confirming their importance in predicting outcomes. Because of this, these variables can be confidently included in the model to support marketing decisions.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Question 3
-      </h2>
-      <p>
-       <strong>
-        Can we trust this model to make predictions on new or future campaign data?
-       </strong>
-      </p>
-      <p>
-       Yes, the model demonstrates strong reliability. It explains about 78% of the variation in product sales, which indicates a high level of accuracy. The model also passed other important checks, such as a strong F-statistic and a Durbin-Watson value close to 2, which suggests that the prediction errors are randomly distributed and not biased. Together, these results show the model is well-suited for making forecasts about future campaigns based on planned ad spend.
-      </p>
-      <img alt="Model Fit Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%203%20-%20bar%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 4
-      </h2>
-      <p>
-       <strong>
-        How much does each dollar spent in a selected channel contribute to product sales?
-       </strong>
-      </p>
-      <p>
-       The model shows that every additional dollar spent on Affiliate Marketing is associated with approximately 3.92 more units sold. Billboards follow with about 3.01 units per dollar, and Social Media contributes around 2.43 units per dollar. This gives a clear view of which channels offer the best return for each marketing dollar and helps prioritize budget allocation to maximize sales outcomes.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Question 5
-      </h2>
-      <p>
-       <strong>
-        How accurate are the model’s predictions for individual campaigns, and where do the largest gaps appear?
-       </strong>
-      </p>
-      <p>
-       The model performs well when predicting product sales for individual campaigns. On average, the prediction differs from the actual sales by about 641 units, which is reasonable given that most campaigns have sales figures between 5,000 and 9,000 units. The correlation between predicted and actual sales is high, showing that the model generally follows the real sales trend.
-      </p>
-      <p>
-       However, there were a few campaigns with larger differences. For example, one campaign underpredicted sales by about 1,000 units, while another overpredicted by nearly the same amount. These gaps may be due to specific campaign factors such as timing, promotions, or competitor actions that were not included in the model. Still, overall accuracy remains strong and dependable for planning purposes.
-      </p>
-      <img alt="Prediction Accuracy Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%205%20-%20bar%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Question 6
-      </h2>
-      <p>
-       <strong>
-        What sales outcome can we expect under specific campaign scenarios with different ad spend levels?
-       </strong>
-      </p>
-      <p>
-       We simulated changes in ad spend by increasing one channel at a time while keeping the others unchanged. A 50% increase in Affiliate Marketing led to a predicted sale of about 7,981 units, while a 100% increase raised it to nearly 8,930 units. Similar increases in Billboards and Social Media spending also improved sales, though to a lesser extent.
-      </p>
-      <p>
-       These results suggest that Affiliate Marketing gives the most significant boost in product sales per dollar spent. Billboards provide solid improvements, and Social Media contributes meaningfully, though with smaller gains. This type of simulation helps marketing managers explore what-if scenarios and make informed decisions before launching a campaign.
-      </p>
-      <img alt="Simulation Scenario Bar Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%206%20-%20bar%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       The analysis confirms a strong and measurable relationship between advertising spend and product sales, with Affiliate Marketing consistently delivering the highest return—each additional dollar spent yields nearly four more units sold. Billboards and Social Media also have a positive impact, though to a lesser degree.
-      </p>
-      <p>
-       The regression model used is both statistically robust and practically useful, explaining 78% of the variation in sales and providing reliable predictions at both the overall and campaign levels. Scenario testing supports these insights, showing that increasing spend in Affiliate Marketing drives the most significant sales gains, followed by Billboards and Social Media. These findings offer a clear direction for optimizing ad budgets to maximize sales outcomes.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Recommendations
-      </h2>
-      <ul>
-       <li>
-        <strong>
-         Prioritize Affiliate Marketing for Budget Increases:
-        </strong>
-        Allocate a larger share of the ad budget to Affiliate Marketing, as it offers the highest return per dollar. This channel has the strongest correlation with product sales and consistently outperforms others in predictive scenarios.
-       </li>
-       <li>
-        <strong>
-         Maintain Moderate Investment in Billboards and Social Media:
-        </strong>
-        These channels are still valuable contributors to sales performance. Maintain or slightly increase investment where appropriate, particularly when targeting awareness or reach objectives.
-       </li>
-       <li>
-        <strong>
-         Use Predictive Modeling to Guide Budget Planning:
-        </strong>
-        Continue using the regression model to simulate campaign outcomes under different spending scenarios. This will help marketing managers forecast the impact of future campaigns and make informed allocation decisions.
-       </li>
-       <li>
-        <strong>
-         Monitor and Adjust Based on Campaign Performance:
-        </strong>
-        While the model is strong, some campaigns showed larger prediction gaps. Regularly compare predicted versus actual results and refine the model by incorporating new variables like seasonality, promotions, or competitive activity.
-       </li>
-       <li>
-        <strong>
-         Avoid Spreading Budget Thinly Across All Channels:
-        </strong>
-        Not all channels deliver equal value. Focus resources on those with proven impact instead of equally distributing across all platforms.
-       </li>
-       <li>
-        <strong>
-         Test Further Increases in High-Return Channels:
-        </strong>
-        Consider running controlled experiments to explore whether even greater gains can be achieved by further increasing spend in Affiliate Marketing, especially during high-demand periods.
-       </li>
-      </ul>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predicting Product Sales | Data Stories Lab</title>
+<meta name="description" content="Find which ad channels return the most sales">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Optimization Analysis</span>
+    <span class="sep">/</span><span>Predicting Product Sales</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/cover%20image.png" alt="Predicting Product Sales">
+    <figcaption><span>Which advertising dollars come back as product sales.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Marketing &amp; spend</div>
+  <h1 class="title">Predicting Product Sales</h1>
+  <p class="standfirst">Find which ad channels return the most sales</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Ad channels &middot; regression model</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/predict-product-sales-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/predict-product-sales.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis was conducted to help marketing managers identify which advertising channels yield the highest return in product sales. The focus is on three key channels, affiliate marketing, billboards, and social media, with the goal of quantifying how much each dollar spent contributes to overall sales. By using regression analysis, the study aims to support data-driven budget planning and provide clarity on how to optimize advertising spend for better campaign outcomes. </p> <p> The analysis addresses a practical business challenge: determining which channels drive the most sales and how reallocating budget could impact results. Marketing managers need to make informed decisions about where to invest to meet sales targets and maximize ROI. This report provides clear insights on each channel’s effectiveness, the reliability of the predictive model, and what to expect under different spending scenarios, all to guide smarter, performance-driven advertising strategies. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">78%</div><div class="l">sales explained</div></div><div class="fig"><div class="n">Affiliate</div><div class="l">best return</div></div><div class="fig"><div class="n">6</div><div class="l">ad channels</div></div><div class="fig"><div class="n">Per $1</div><div class="l">mapped to sales</div></div></div>
+
+  <div class="pull"><p>&ldquo;The analysis confirms a strong and measurable relationship between advertising spend and product sales, with Affiliate Marketing consistently delivering the highest retur&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">Question 1</h3><div class="ftext"><p> <strong> How strongly is each marketing channel linked to product sales, and are any channels too similar to each other? </strong> </p> <p> The strength of the relationship between each marketing channel and product sales was measured using correlation. Affiliate Marketing showed the strongest link, followed by Billboards and Social Media, which had moderate influence. TV, Google Ads, and Influencer Marketing had weaker connections to sales. </p> <p> We also checked whether any channels were too closely related to each other, which could cause duplication in the model. Based on the correlation analysis between channels, no such overlap was found. This means the channels included in the model, Affiliate Marketing, Billboards, and Social Media, are distinct enough to use together without causing interference. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%201%20-%20correlation%20scatter%20plot.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 2</h3><div class="ftext"><p> <strong> Which advertising channels have a statistically significant impact on product sales? </strong> </p> <p> All six advertising channels were found to have a statistically significant impact on product sales. This means the likelihood that their influence is due to random chance is extremely low. The p-values for all channels were close to zero, confirming their importance in predicting outcomes. Because of this, these variables can be confidently included in the model to support marketing decisions. </p></div></article>
+    <article class="finding"><h3 class="fq">Question 3</h3><div class="ftext"><p> <strong> Can we trust this model to make predictions on new or future campaign data? </strong> </p> <p> Yes, the model demonstrates strong reliability. It explains about 78% of the variation in product sales, which indicates a high level of accuracy. The model also passed other important checks, such as a strong F-statistic and a Durbin-Watson value close to 2, which suggests that the prediction errors are randomly distributed and not biased. Together, these results show the model is well-suited for making forecasts about future campaigns based on planned ad spend. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%203%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 4</h3><div class="ftext"><p> <strong> How much does each dollar spent in a selected channel contribute to product sales? </strong> </p> <p> The model shows that every additional dollar spent on Affiliate Marketing is associated with approximately 3.92 more units sold. Billboards follow with about 3.01 units per dollar, and Social Media contributes around 2.43 units per dollar. This gives a clear view of which channels offer the best return for each marketing dollar and helps prioritize budget allocation to maximize sales outcomes. </p></div></article>
+    <article class="finding"><h3 class="fq">Question 5</h3><div class="ftext"><p> <strong> How accurate are the model’s predictions for individual campaigns, and where do the largest gaps appear? </strong> </p> <p> The model performs well when predicting product sales for individual campaigns. On average, the prediction differs from the actual sales by about 641 units, which is reasonable given that most campaigns have sales figures between 5,000 and 9,000 units. The correlation between predicted and actual sales is high, showing that the model generally follows the real sales trend. </p> <p> However, there were a few campaigns with larger differences. For example, one campaign underpredicted sales by about 1,000 units, while another overpredicted by nearly the same amount. These gaps may be due to specific campaign factors such as timing, promotions, or competitor actions that were not included in the model. Still, overall accuracy remains strong and dependable for planning purposes. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%205%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Question 6</h3><div class="ftext"><p> <strong> What sales outcome can we expect under specific campaign scenarios with different ad spend levels? </strong> </p> <p> We simulated changes in ad spend by increasing one channel at a time while keeping the others unchanged. A 50% increase in Affiliate Marketing led to a predicted sale of about 7,981 units, while a 100% increase raised it to nearly 8,930 units. Similar increases in Billboards and Social Media spending also improved sales, though to a lesser extent. </p> <p> These results suggest that Affiliate Marketing gives the most significant boost in product sales per dollar spent. Billboards provide solid improvements, and Social Media contributes meaningfully, though with smaller gains. This type of simulation helps marketing managers explore what-if scenarios and make informed decisions before launching a campaign. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predict-product-sales/chart%206%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Recommendations</h3><div class="ftext"><ul> <li> <strong> Prioritize Affiliate Marketing for Budget Increases: </strong> Allocate a larger share of the ad budget to Affiliate Marketing, as it offers the highest return per dollar. This channel has the strongest correlation with product sales and consistently outperforms others in predictive scenarios. </li> <li> <strong> Maintain Moderate Investment in Billboards and Social Media: </strong> These channels are still valuable contributors to sales performance. Maintain or slightly increase investment where appropriate, particularly when targeting awareness or reach objectives. </li> <li> <strong> Use Predictive Modeling to Guide Budget Planning: </strong> Continue using the regression model to simulate campaign outcomes under different spending scenarios. This will help marketing managers forecast the impact of future campaigns and make informed allocation decisions. </li> <li> <strong> Monitor and Adjust Based on Campaign Performance: </strong> While the model is strong, some campaigns showed larger prediction gaps. Regularly compare predicted versus actual results and refine the model by incorporating new variables like seasonality, promotions, or competitive activity. </li> <li> <strong> Avoid Spreading Budget Thinly Across All Channels: </strong> Not all channels deliver equal value. Focus resources on those with proven impact instead of equally distributing across all platforms. </li> <li> <strong> Test Further Increases in High-Return Channels: </strong> Consider running controlled experiments to explore whether even greater gains can be achieved by further increasing spend in Affiliate Marketing, especially during high-demand periods. </li> </ul></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> The analysis confirms a strong and measurable relationship between advertising spend and product sales, with Affiliate Marketing consistently delivering the highest return, each additional dollar spent yields nearly four more units sold. Billboards and Social Media also have a positive impact, though to a lesser degree. </p> <p> The regression model used is both statistically robust and practically useful, explaining 78% of the variation in sales and providing reliable predictions at both the overall and campaign levels. Scenario testing supports these insights, showing that increasing spend in Affiliate Marketing drives the most significant sales gains, followed by Billboards and Social Media. These findings offer a clear direction for optimizing ad budgets to maximize sales outcomes. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

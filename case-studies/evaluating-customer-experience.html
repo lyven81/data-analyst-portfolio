@@ -1,215 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Evaluating Store Customer Experience | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/customer-journey-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-    <!-- Agentic Workflow Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/evaluating-customer-experience.html">
-      AI Assistant
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/cover-image.jpeg"/>
-      <h1>
-       Evaluating Store Customer Experience
-      </h1>
-      <p>
-       How Data Shows Where Managers Should Act
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       Regional managers oversee many stores, but problems are not always obvious. Some stores fall behind while others perform well, making it difficult to know where to focus time and effort. Without clear comparisons, managers risk checking every store instead of fixing the few that truly need attention.
-      </p>
-      <p>
-       This analysis shows which stores are underperforming, why it is happening, and what action will have the biggest impact. By comparing stores against regional averages and breaking results down by customer journey stage, it helps regional managers focus on the right issues, take targeted action, and improve performance efficiently.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Sources and Methodology
-      </h2>
-      <p>
-       This report is based on customer experience data from 43 retail stores across 7 regions in Malaysia, collected through structured mystery shopping visits. Each visit reviewed the full customer journey, from booking to checkout, using a consistent set of questions so that stores could be compared fairly across regions.
-      </p>
-      <p>
-       The analysis focuses on how well each store executes key parts of the customer journey. We examined overall experience scores, journey stage results, compliance and promotion execution, and how each store compares with its regional average. This makes it clear not only which stores are underperforming, but also the size of the gap.
-      </p>
-      <p>
-       The data comes from a single assessment period, so the focus is on relative performance rather than trends over time. Simple statistical techniques were used to separate normal variation from real problems, helping identify whether issues are isolated to specific stores or shared more broadly. The goal is to highlight where performance breaks down and where management effort will have the biggest impact.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. Where do we stand on customer experience across regions?
-      </h2>
-      <img alt="Chart 1 - Regional Performance Overview" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-1.png"/>
-      <p>
-       The overall average score is 72.9%, which sets a reasonable baseline across stores in Malaysia. George Town (Penang) and Melaka stand out clearly, both averaging 88.7%, with all stores in these locations performing consistently well. These two locations show what strong execution looks like and can be used as internal benchmarks for other regions.
-      </p>
-      <p>
-       Most other locations sit around the acceptable range. Petaling Jaya (75.5%) and Ipoh (70.7%) are broadly stable, while Kuala Lumpur (69.6%) and Other Locations (70.0%) fall slightly below the overall average. The bigger concern is inconsistency, especially within the "Other Locations" group, where store scores range from 93.3% down to 32.0%, suggesting uneven standards rather than a single shared issue. Kota Bharu, represented by a single store scoring 50.7%, is clearly underperforming and requires attention.
-      </p>
-      <p>
-       In practical terms, stores scoring above 80% are performing well and can serve as examples, 70-80% should be monitored, 60-70% need coaching, and anything below 60% signals the need for urgent action.
-      </p>
-     </section>
-     <section>
-      <h2>
-       2. Which stores need attention, and how widespread is the problem?
-      </h2>
-      <img alt="Chart 2 - Store Performance Distribution" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-2.png"/>
-      <p>
-       Only 4 stores (9% of the network) qualify as true statistical outliers, with performance gaps greater than 15 percentage points below their regional averages. The most severe case scores 32.0%, sitting 38 points below its regional benchmark. Several other stores fall below benchmark but remain within normal variation, suggesting performance drift rather than a complete breakdown.
-      </p>
-      <p>
-       At the other end, strong performers such as Suria KLCC (94.7%), Pavilion Kuala Lumpur (93.3%), and Mid Valley Megamall (93.3%) show that high-quality execution is achievable under current systems. Overall, 65% of stores perform within plus or minus 10% of their regional average, confirming that the network is largely stable and that poor performance is concentrated in a small number of locations rather than being widespread.
-      </p>
-      <p>
-       This means the issue is not one of scale, but of focus. A small set of stores requires immediate management attention, while most of the network is operating within acceptable limits and does not require heavy intervention.
-      </p>
-     </section>
-     <section>
-      <h2>
-       3. Are performance issues clustered by region or isolated?
-      </h2>
-      <img alt="Chart 3 - Geographic Distribution Analysis" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-3.png"/>
-      <p>
-       Statistical testing shows no meaningful geographic clustering of underperformance (p-value 0.807). In simple terms, weak performance is not driven by region or regional leadership. Even in areas with higher underperformance rates, such as Kuala Lumpur (20.0%) and Other Locations (20.8%), underperforming stores are spread out rather than concentrated in one place.
-      </p>
-      <p>
-       There is, however, one clear pattern that cuts across locations. Greeting and engagement is weak in 34.9% of stores, affecting 15 locations across five regions. This points to a company-wide behaviour issue, not a problem tied to any single city or region. Other weak stages, such as booking, promotion explanation, and product selection, appear inconsistently and vary from store to store.
-      </p>
-      <p>
-       The implication is straightforward. Most issues should be handled through targeted, store-level action, while greeting behaviour should be addressed through a single, company-wide improvement effort rather than regional fixes.
-      </p>
-     </section>
-     <section>
-      <h2>
-       4. What is actually driving performance gaps?
-      </h2>
-      <img alt="Chart 4 - Performance Gap Drivers" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-4.png"/>
-      <p>
-       Three stages account for around 20% of the total performance gap, making them the most important areas to focus on. The largest driver is Product Selection, which contributes 11.0% of the gap and affects 30% of stores, with an average shortfall of nearly 25 points. This points to weaknesses in consultative selling, such as clearly explaining options, linking products to customer needs, and avoiding overly aggressive upselling.
-      </p>
-      <p>
-       The second driver is Promotion Explanation, responsible for 4.1% of the gap. While fewer stores are affected (19%), this stage carries the highest weight in the scoring model, so mistakes here have a disproportionate impact on overall performance. The third driver is Booking, which contributes 5.0% of the gap and is mainly driven by process issues rather than staff behaviour.
-      </p>
-      <p>
-       Focusing improvement efforts on these three stages will deliver the fastest and most measurable results. Other stages contribute far less to underperformance and should be treated as lower priority once these key areas are addressed.
-      </p>
-     </section>
-     <section>
-      <h2>
-       5. Are the problems behavioural or process-related, and how should they be fixed?
-      </h2>
-      <img alt="Chart 5 - Behavioural vs Process Issues" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-5.png"/>
-      <p>
-       Across the network, behavioural issues (28%) are more common than process issues (16%). This difference is even clearer among the most critical stores, where 75% of severe underperformance is driven by behaviour. Common problems include weak customer engagement, poor explanation of promotions, and rushed consultations. Process issues exist, but they play a smaller role and are usually easier to fix.
-      </p>
-      <p>
-       Behavioural problems take longer to address because they involve changing habits and skills. They typically require coaching, role-play, and follow-up mystery shopping over 6-8 weeks. Process issues, such as booking procedures or compliance steps, can usually be resolved within 1-2 weeks through clearer guidelines and stronger accountability.
-      </p>
-      <p>
-       This distinction is important because it shows where effort should be focused. For critical and "needs attention" stores, most resources should go into behavioural coaching, with quick process fixes used to support and reinforce those improvements.
-      </p>
-     </section>
-     <section>
-      <h2>
-       6. Where should intervention start to deliver the fastest impact?
-      </h2>
-      <p>
-       The highest return comes from fixing the most severe outliers first, while clearly separating quick wins from longer-term work. Four stores require immediate action, including one scoring 32.0% due to promotion failures and another at 38.7% linked to booking and greeting issues. These stores should be prioritised in the first two weeks, with close oversight from regional management.
-      </p>
-      <p>
-       Beyond these urgent cases, a small number of low-effort, high-impact improvements can be addressed quickly through focused training. A few high-effort, high-impact cases also exist and should be planned carefully, as they require more time and support. Importantly, no high-effort, low-impact actions were identified, which means management effort is unlikely to be wasted if priorities are followed.
-      </p>
-      <p>
-       In summary, the data supports a targeted approach: stabilise the most critical stores immediately, roll out a company-wide improvement in greeting behaviour, and address remaining gaps through focused, store-level coaching rather than broad regional programmes.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       Overall performance across the network is stable, with 65% of stores meeting or exceeding acceptable standards. Poor performance is not widespread but limited to a small number of locations, with only four stores requiring urgent attention. This shows the core customer experience model is working, and the main challenge is focus rather than fixing the entire system.
-      </p>
-      <p>
-       The analysis also makes clear where improvements will matter most. Three customer journey stages account for about 20% of the total performance gap, giving managers a short and clear list of priorities. Most serious gaps are driven by staff behaviour, while process issues are fewer and quicker to fix. This helps ensure the right actions are taken for the right reasons.
-      </p>
-      <p>
-       The path forward is practical and achievable. By fixing the most critical stores first and rolling out focused training and coaching, the network can lift the average score from 72.9% to above 80% within a few months, and reach 85% or higher within six months by applying proven practices from top-performing regions. This approach balances quick wins with long-term improvement and supports consistent customer experience across all stores.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluating Store Customer Experience | Data Stories Lab</title>
+<meta name="description" content="Find which stores hurt your customer experience">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Optimization Analysis</span>
+    <span class="sep">/</span><span>Evaluating Store Customer Experience</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/cover-image.jpeg" alt="Evaluating Store Customer Experience">
+    <figcaption><span>A regional manager hunts the few stores dragging the network down.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Retail operations &amp; CX</div>
+  <h1 class="title">Evaluating Store Customer Experience</h1>
+  <p class="standfirst">Find which stores hurt your customer experience</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>44 stores &middot; Malaysia</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/evaluating-customer-experience-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/evaluating-customer-experience.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> Regional managers oversee many stores, but problems are not always obvious. Some stores fall behind while others perform well, making it difficult to know where to focus time and effort. Without clear comparisons, managers risk checking every store instead of fixing the few that truly need attention. </p> <p> This analysis shows which stores are underperforming, why it is happening, and what action will have the biggest impact. By comparing stores against regional averages and breaking results down by customer journey stage, it helps regional managers focus on the right issues, take targeted action, and improve performance efficiently. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">72.9%</div><div class="l">network average</div></div><div class="fig"><div class="n">4 stores</div><div class="l">true outliers</div></div><div class="fig"><div class="n">11.0%</div><div class="l">product-selection gap</div></div><div class="fig"><div class="n">p=0.807</div><div class="l">no clustering</div></div></div>
+
+  <div class="pull"><p>&ldquo;Overall performance across the network is stable, with 65% of stores meeting or exceeding acceptable standards.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. Where do we stand on customer experience across regions?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-1.png" alt="chart"></figure> <p> The overall average score is 72.9%, which sets a reasonable baseline across stores in Malaysia. George Town (Penang) and Melaka stand out clearly, both averaging 88.7%, with all stores in these locations performing consistently well. These two locations show what strong execution looks like and can be used as internal benchmarks for other regions. </p> <p> Most other locations sit around the acceptable range. Petaling Jaya (75.5%) and Ipoh (70.7%) are broadly stable, while Kuala Lumpur (69.6%) and Other Locations (70.0%) fall slightly below the overall average. The bigger concern is inconsistency, especially within the "Other Locations" group, where store scores range from 93.3% down to 32.0%, suggesting uneven standards rather than a single shared issue. Kota Bharu, represented by a single store scoring 50.7%, is clearly underperforming and requires attention. </p> <p> In practical terms, stores scoring above 80% are performing well and can serve as examples, 70-80% should be monitored, 60-70% need coaching, and anything below 60% signals the need for urgent action. </p></div></article>
+    <article class="finding"><h3 class="fq">2. Which stores need attention, and how widespread is the problem?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-2.png" alt="chart"></figure> <p> Only 4 stores (9% of the network) qualify as true statistical outliers, with performance gaps greater than 15 percentage points below their regional averages. The most severe case scores 32.0%, sitting 38 points below its regional benchmark. Several other stores fall below benchmark but remain within normal variation, suggesting performance drift rather than a complete breakdown. </p> <p> At the other end, strong performers such as Suria KLCC (94.7%), Pavilion Kuala Lumpur (93.3%), and Mid Valley Megamall (93.3%) show that high-quality execution is achievable under current systems. Overall, 65% of stores perform within plus or minus 10% of their regional average, confirming that the network is largely stable and that poor performance is concentrated in a small number of locations rather than being widespread. </p> <p> This means the issue is not one of scale, but of focus. A small set of stores requires immediate management attention, while most of the network is operating within acceptable limits and does not require heavy intervention. </p></div></article>
+    <article class="finding"><h3 class="fq">3. Are performance issues clustered by region or isolated?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-3.png" alt="chart"></figure> <p> Statistical testing shows no meaningful geographic clustering of underperformance (p-value 0.807). In simple terms, weak performance is not driven by region or regional leadership. Even in areas with higher underperformance rates, such as Kuala Lumpur (20.0%) and Other Locations (20.8%), underperforming stores are spread out rather than concentrated in one place. </p> <p> There is, however, one clear pattern that cuts across locations. Greeting and engagement is weak in 34.9% of stores, affecting 15 locations across five regions. This points to a company-wide behaviour issue, not a problem tied to any single city or region. Other weak stages, such as booking, promotion explanation, and product selection, appear inconsistently and vary from store to store. </p> <p> The implication is straightforward. Most issues should be handled through targeted, store-level action, while greeting behaviour should be addressed through a single, company-wide improvement effort rather than regional fixes. </p></div></article>
+    <article class="finding"><h3 class="fq">4. What is actually driving performance gaps?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-4.png" alt="chart"></figure> <p> Three stages account for around 20% of the total performance gap, making them the most important areas to focus on. The largest driver is Product Selection, which contributes 11.0% of the gap and affects 30% of stores, with an average shortfall of nearly 25 points. This points to weaknesses in consultative selling, such as clearly explaining options, linking products to customer needs, and avoiding overly aggressive upselling. </p> <p> The second driver is Promotion Explanation, responsible for 4.1% of the gap. While fewer stores are affected (19%), this stage carries the highest weight in the scoring model, so mistakes here have a disproportionate impact on overall performance. The third driver is Booking, which contributes 5.0% of the gap and is mainly driven by process issues rather than staff behaviour. </p> <p> Focusing improvement efforts on these three stages will deliver the fastest and most measurable results. Other stages contribute far less to underperformance and should be treated as lower priority once these key areas are addressed. </p></div></article>
+    <article class="finding"><h3 class="fq">5. Are the problems behavioural or process-related, and how should they be fixed?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/evaluating-customer-experience/chart-5.png" alt="chart"></figure> <p> Across the network, behavioural issues (28%) are more common than process issues (16%). This difference is even clearer among the most critical stores, where 75% of severe underperformance is driven by behaviour. Common problems include weak customer engagement, poor explanation of promotions, and rushed consultations. Process issues exist, but they play a smaller role and are usually easier to fix. </p> <p> Behavioural problems take longer to address because they involve changing habits and skills. They typically require coaching, role-play, and follow-up mystery shopping over 6-8 weeks. Process issues, such as booking procedures or compliance steps, can usually be resolved within 1-2 weeks through clearer guidelines and stronger accountability. </p> <p> This distinction is important because it shows where effort should be focused. For critical and "needs attention" stores, most resources should go into behavioural coaching, with quick process fixes used to support and reinforce those improvements. </p></div></article>
+    <article class="finding"><h3 class="fq">6. Where should intervention start to deliver the fastest impact?</h3><div class="ftext"><p> The highest return comes from fixing the most severe outliers first, while clearly separating quick wins from longer-term work. Four stores require immediate action, including one scoring 32.0% due to promotion failures and another at 38.7% linked to booking and greeting issues. These stores should be prioritised in the first two weeks, with close oversight from regional management. </p> <p> Beyond these urgent cases, a small number of low-effort, high-impact improvements can be addressed quickly through focused training. A few high-effort, high-impact cases also exist and should be planned carefully, as they require more time and support. Importantly, no high-effort, low-impact actions were identified, which means management effort is unlikely to be wasted if priorities are followed. </p> <p> In summary, the data supports a targeted approach: stabilise the most critical stores immediately, roll out a company-wide improvement in greeting behaviour, and address remaining gaps through focused, store-level coaching rather than broad regional programmes. </p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p> This report is based on customer experience data from 43 retail stores across 7 regions in Malaysia, collected through structured mystery shopping visits. Each visit reviewed the full customer journey, from booking to checkout, using a consistent set of questions so that stores could be compared fairly across regions. </p> <p> The analysis focuses on how well each store executes key parts of the customer journey. We examined overall experience scores, journey stage results, compliance and promotion execution, and how each store compares with its regional average. This makes it clear not only which stores are underperforming, but also the size of the gap. </p> <p> The data comes from a single assessment period, so the focus is on relative performance rather than trends over time. Simple statistical techniques were used to separate normal variation from real problems, helping identify whether issues are isolated to specific stores or shared more broadly. The goal is to highlight where performance breaks down and where management effort will have the biggest impact. </p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> Overall performance across the network is stable, with 65% of stores meeting or exceeding acceptable standards. Poor performance is not widespread but limited to a small number of locations, with only four stores requiring urgent attention. This shows the core customer experience model is working, and the main challenge is focus rather than fixing the entire system. </p> <p> The analysis also makes clear where improvements will matter most. Three customer journey stages account for about 20% of the total performance gap, giving managers a short and clear list of priorities. Most serious gaps are driven by staff behaviour, while process issues are fewer and quicker to fix. This helps ensure the right actions are taken for the right reasons. </p> <p> The path forward is practical and achievable. By fixing the most critical stores first and rolling out focused training and coaching, the network can lift the average score from 72.9% to above 80% within a few months, and reach 85% or higher within six months by applying proven practices from top-performing regions. This approach balances quick wins with long-term improvement and supports consistent customer experience across all stores. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

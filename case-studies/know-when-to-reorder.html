@@ -1,123 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Know When to Reorder | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>Lee Yih Ven</h1>
-     <h2>Data Analytics Portfolio</h2>
-    </header>
-    <section class="intro">
-     <p>Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.</p>
-    </section>
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">Home</a>
-    </section>
-    <section class="contact">
-     <h2>Contact</h2>
-     <p>Have a project in mind? Let's work together to transform your data into actionable insights.</p>
-     <ul>
-      <li>Email: <a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></li>
-      <li>Phone: +6014-9207099</li>
-     </ul>
-    </section>
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/know-when-to-reorder-dashboard.html">View Dashboard</a>
-    </section>
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/agentic_workflow/know-when-to-reorder.html">AI Assistant</a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/cover%20image.png"/>
-      <h1>Know When to Reorder</h1>
-      <p>How better stock timing recovers lost sales</p>
-     </header>
-     <section>
-      <h2>Overview</h2>
-      <p>This case study reads two years of sales for a Malaysian bookshop to answer one practical question for the store manager: is the right stock on the shelf at the right time? It covers 385 titles across books, school workbooks and stationery, sold through walk-in customers, online orders, and bulk orders from schools and tuition centres.</p>
-      <p>The shop is profitable, but money leaks two ways. When popular workbooks sell out before exams, the sale walks out the door; when slow titles overstay their welcome, cash sits frozen on the shelf. The analysis finds where both happen, by title and by season, and sets out exactly what to reorder, what to clear, and what the fix is worth.</p>
-     </section>
-     <section>
-      <h2>Data Sources and Methodology</h2>
-      <p>We analysed 101,980 sales lines across 385 titles over two years (January 2024 to December 2025), sold through walk-in, online and bulk school channels. The analysis examined demand by title and season, inventory turnover, stockouts and lost sales, and the cash tied in dead and overstocked stock, then set a reorder point, safety stock and order size for every title. One note on method: the source recorded sales only, so stock-on-hand was reconstructed by simulation calibrated to real sales under the shop's current ordering pattern, with all assumptions documented and adjustable, so the figures are well-grounded estimates rather than audited stock counts.</p>
-     </section>
-     <section>
-      <h2>1. Which books perform, which don't?</h2>
-      <img alt="Chart 1 - Stock value by performance group" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-1.png"/>
-      <p>Of 385 titles, 343 are healthy, but the action sits in two small groups. Twenty-eight stockout-prone titles, under 8% of the range, drive RM 3.06 million of sales (16% of revenue) yet keep running out, while a dozen dead or overstocked titles freeze cash on the shelf.</p>
-      <p>Performance is concentrated, so inventory effort should focus on those two short lists, the stockout-prone titles to protect and the dead stock to clear, rather than spread evenly across the healthy 343.</p>
-     </section>
-     <section>
-      <h2>2. When does each book sell most?</h2>
-      <img alt="Chart 2 - Monthly units by category" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-2.png"/>
-      <p>Demand is highly seasonal. January runs 52% above the average month and December 36% above, while June and July fall to about two-thirds of average. Workbooks swing hardest, around 44,900 units in a typical January against 19,700 across June and July.</p>
-      <p>Stock needs are uneven but predictable. Build stock ahead of January and December, not during them, and ease off ordering into the mid-year lull so cash is not tied up while the shop is quiet.</p>
-     </section>
-     <section>
-      <h2>3. Which books sell out often?</h2>
-      <img alt="Chart 3 - Top titles losing sales to stockouts" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-3.png"/>
-      <p>Running out cost an estimated RM 1.49 million in sales over two years, about 8% of revenue. Workbooks account for RM 860,000 of that, led by the SPM exam package and Form 5 English workbooks.</p>
-      <p>This is the largest and most fixable leak, and it is a timing problem: several of these titles carry plenty of stock most of the year, then empty out at the exam-season peak. Seasonal safety stock on the exam and back-to-school workbooks is where an extra buffer pays for itself.</p>
-     </section>
-     <section>
-      <h2>4. What stock should we clear?</h2>
-      <img alt="Chart 4 - Cash frozen in stock to clear" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-4.png"/>
-      <p>About RM 7,700 is frozen across 14 titles, led by discontinued UPSR exam books (an exam abolished in 2021) still on the shelf, two of them holding more than four years of supply, plus a few slow-selling fiction and stationery lines.</p>
-      <p>This cash is dead; it will not turn into sales. Clearing the UPSR books and the slowest fiction, and not reordering them, frees the cash and the shelf space for faster titles. The sum is small next to the stockout leak, but it is a quick win.</p>
-     </section>
-     <section>
-      <h2>5. How fast does stock turn?</h2>
-      <img alt="Chart 5 - Inventory turnover by category" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-5.png"/>
-      <p>Stock turns about 8.6 times a year overall, which is healthy. Workbooks turn fastest at 10.4 times, with stationery and books around 8 to 9, while dead stock barely moves at 0.8.</p>
-      <p>The core range is efficient; the drag is the slow tail. Faster turn means cash comes back sooner to buy the next batch, so protecting the fast movers and keeping the slow tail lean protects cash flow.</p>
-     </section>
-     <section>
-      <h2>6. Which books make the money?</h2>
-      <img alt="Chart 6 - Revenue concentration (Pareto)" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-6.png"/>
-      <p>Ninety-two titles, just under a quarter of the range, generate 80% of revenue. The middle 128 add 15%, and the long tail of 165 titles contributes only 5%.</p>
-      <p>Revenue is heavily concentrated, so a short list of titles funds the business. Never let one of these 92 run out; manage the long tail by exception, stocked thin and reordered only on demand.</p>
-     </section>
-     <section>
-      <h2>7. What, how much, and when to reorder?</h2>
-      <img alt="Chart 7 - Current stock vs reorder point" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-7.png"/>
-      <p>149 titles are at or below their recommended reorder point, including 10 of the top earners. For each title the analysis sets a reorder point (when to order), a safety-stock cushion, and an order size (how much), with supplier lead time built in.</p>
-      <p>This replaces guesswork with a simple per-title rule: order when stock crosses the reorder point, order the set quantity, and the new stock lands before the shelf empties. Lift the reorder points on seasonal lines ahead of January and exam season so the cushion is in place before the surge.</p>
-     </section>
-     <section>
-      <h2>8. Which channel needs which stock?</h2>
-      <img alt="Chart 8 - Units by channel and category" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-8.png"/>
-      <p>Bulk school and tuition-centre orders drive 81% of revenue, against 11% walk-in and 8% online, and those bulk orders are overwhelmingly workbooks and stationery. Walk-in and online sales, by contrast, are led by general books.</p>
-      <p>This is really two businesses on one shelf. Prioritise workbook and stationery depth for the bulk channel, especially before term starts, and size the general-book range for steady walk-in demand. Stock planning should follow the school calendar first.</p>
-     </section>
-     <section>
-      <h2>9. How much money can we gain?</h2>
-      <img alt="Chart 9 - The prize, revenue and profit uplift" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-9.png"/>
-      <p>Putting the recommendations together, recovering even half of the lost sales adds about RM 372,000 in revenue and RM 149,000 in profit every year, while clearing dead and overstocked titles frees RM 7,700 at once.</p>
-      <p>The prize is a recurring six-figure profit gain from better timing, not a bigger budget. Most of it comes from one move: keeping the high-demand workbooks in stock through the exam and back-to-school peaks. The 50% recovery is deliberately cautious, so even this conservative figure understates the upside.</p>
-     </section>
-     <section>
-      <h2>Conclusion</h2>
-      <p>The shop's biggest inventory problem is timing, not quantity. It loses about RM 1.49 million in sales over two years because high-demand workbooks run out at seasonal peaks, while only a small sum sits in genuinely dead stock. The shelves are not too empty or too full on average; they are full of the wrong thing at the wrong moment.</p>
-      <p>Left alone, the same leak reopens every peak season. The fix is cheap, a set of reorder rules and a seasonal calendar, and the upside is a recurring RM 149,000 in annual profit plus freed cash. The recommended direction is a demand-matched reorder policy: seasonal safety stock on the exam and back-to-school workbooks, firm reorder points on the 92 titles that make the money, and a one-time clear-out of dead stock.</p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Know When to Reorder | Data Stories Lab</title>
+<meta name="description" content="Reorder stock in time to stop losing sales">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>© 2026 Lee Yih Ven | Data-Driven Solutions</p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Time Series Analysis</span>
+    <span class="sep">/</span><span>Know When to Reorder</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/cover%20image.png" alt="Know When to Reorder">
+    <figcaption><span>A bookshop shelf runs low as the exam-season rush begins.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Inventory &amp; demand planning</div>
+  <h1 class="title">Know When to Reorder</h1>
+  <p class="standfirst">Reorder stock in time to stop losing sales</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>385 titles &middot; 2024&ndash;2025</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/know-when-to-reorder-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/know-when-to-reorder.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>This case study reads two years of sales for a Malaysian bookshop to answer one practical question for the store manager: is the right stock on the shelf at the right time? It covers 385 titles across books, school workbooks and stationery, sold through walk-in customers, online orders, and bulk orders from schools and tuition centres.</p> <p>The shop is profitable, but money leaks two ways. When popular workbooks sell out before exams, the sale walks out the door; when slow titles overstay their welcome, cash sits frozen on the shelf. The analysis finds where both happen, by title and by season, and sets out exactly what to reorder, what to clear, and what the fix is worth.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">RM 1.49m</div><div class="l">lost to stockouts</div></div><div class="fig"><div class="n">RM 149k</div><div class="l">annual profit uplift</div></div><div class="fig"><div class="n">149</div><div class="l">below reorder point</div></div><div class="fig"><div class="n">92</div><div class="l">drive 80% revenue</div></div></div>
+
+  <div class="pull"><p>&ldquo;The shop's biggest inventory problem is timing, not quantity.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. Which books perform, which don't?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-1.png" alt="chart"></figure> <p>Of 385 titles, 343 are healthy, but the action sits in two small groups. Twenty-eight stockout-prone titles, under 8% of the range, drive RM 3.06 million of sales (16% of revenue) yet keep running out, while a dozen dead or overstocked titles freeze cash on the shelf.</p> <p>Performance is concentrated, so inventory effort should focus on those two short lists, the stockout-prone titles to protect and the dead stock to clear, rather than spread evenly across the healthy 343.</p></div></article>
+    <article class="finding"><h3 class="fq">2. When does each book sell most?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-2.png" alt="chart"></figure> <p>Demand is highly seasonal. January runs 52% above the average month and December 36% above, while June and July fall to about two-thirds of average. Workbooks swing hardest, around 44,900 units in a typical January against 19,700 across June and July.</p> <p>Stock needs are uneven but predictable. Build stock ahead of January and December, not during them, and ease off ordering into the mid-year lull so cash is not tied up while the shop is quiet.</p></div></article>
+    <article class="finding"><h3 class="fq">3. Which books sell out often?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-3.png" alt="chart"></figure> <p>Running out cost an estimated RM 1.49 million in sales over two years, about 8% of revenue. Workbooks account for RM 860,000 of that, led by the SPM exam package and Form 5 English workbooks.</p> <p>This is the largest and most fixable leak, and it is a timing problem: several of these titles carry plenty of stock most of the year, then empty out at the exam-season peak. Seasonal safety stock on the exam and back-to-school workbooks is where an extra buffer pays for itself.</p></div></article>
+    <article class="finding"><h3 class="fq">4. What stock should we clear?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-4.png" alt="chart"></figure> <p>About RM 7,700 is frozen across 14 titles, led by discontinued UPSR exam books (an exam abolished in 2021) still on the shelf, two of them holding more than four years of supply, plus a few slow-selling fiction and stationery lines.</p> <p>This cash is dead; it will not turn into sales. Clearing the UPSR books and the slowest fiction, and not reordering them, frees the cash and the shelf space for faster titles. The sum is small next to the stockout leak, but it is a quick win.</p></div></article>
+    <article class="finding"><h3 class="fq">5. How fast does stock turn?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-5.png" alt="chart"></figure> <p>Stock turns about 8.6 times a year overall, which is healthy. Workbooks turn fastest at 10.4 times, with stationery and books around 8 to 9, while dead stock barely moves at 0.8.</p> <p>The core range is efficient; the drag is the slow tail. Faster turn means cash comes back sooner to buy the next batch, so protecting the fast movers and keeping the slow tail lean protects cash flow.</p></div></article>
+    <article class="finding"><h3 class="fq">6. Which books make the money?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-6.png" alt="chart"></figure> <p>Ninety-two titles, just under a quarter of the range, generate 80% of revenue. The middle 128 add 15%, and the long tail of 165 titles contributes only 5%.</p> <p>Revenue is heavily concentrated, so a short list of titles funds the business. Never let one of these 92 run out; manage the long tail by exception, stocked thin and reordered only on demand.</p></div></article>
+    <article class="finding"><h3 class="fq">7. What, how much, and when to reorder?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-7.png" alt="chart"></figure> <p>149 titles are at or below their recommended reorder point, including 10 of the top earners. For each title the analysis sets a reorder point (when to order), a safety-stock cushion, and an order size (how much), with supplier lead time built in.</p> <p>This replaces guesswork with a simple per-title rule: order when stock crosses the reorder point, order the set quantity, and the new stock lands before the shelf empties. Lift the reorder points on seasonal lines ahead of January and exam season so the cushion is in place before the surge.</p></div></article>
+    <article class="finding"><h3 class="fq">8. Which channel needs which stock?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-8.png" alt="chart"></figure> <p>Bulk school and tuition-centre orders drive 81% of revenue, against 11% walk-in and 8% online, and those bulk orders are overwhelmingly workbooks and stationery. Walk-in and online sales, by contrast, are led by general books.</p> <p>This is really two businesses on one shelf. Prioritise workbook and stationery depth for the bulk channel, especially before term starts, and size the general-book range for steady walk-in demand. Stock planning should follow the school calendar first.</p></div></article>
+    <article class="finding"><h3 class="fq">9. How much money can we gain?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/know-when-to-reorder/chart-9.png" alt="chart"></figure> <p>Putting the recommendations together, recovering even half of the lost sales adds about RM 372,000 in revenue and RM 149,000 in profit every year, while clearing dead and overstocked titles frees RM 7,700 at once.</p> <p>The prize is a recurring six-figure profit gain from better timing, not a bigger budget. Most of it comes from one move: keeping the high-demand workbooks in stock through the exam and back-to-school peaks. The 50% recovery is deliberately cautious, so even this conservative figure understates the upside.</p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>We analysed 101,980 sales lines across 385 titles over two years (January 2024 to December 2025), sold through walk-in, online and bulk school channels. The analysis examined demand by title and season, inventory turnover, stockouts and lost sales, and the cash tied in dead and overstocked stock, then set a reorder point, safety stock and order size for every title. One note on method: the source recorded sales only, so stock-on-hand was reconstructed by simulation calibrated to real sales under the shop's current ordering pattern, with all assumptions documented and adjustable, so the figures are well-grounded estimates rather than audited stock counts.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>The shop's biggest inventory problem is timing, not quantity. It loses about RM 1.49 million in sales over two years because high-demand workbooks run out at seasonal peaks, while only a small sum sits in genuinely dead stock. The shelves are not too empty or too full on average; they are full of the wrong thing at the wrong moment.</p> <p>Left alone, the same leak reopens every peak season. The fix is cheap, a set of reorder rules and a seasonal calendar, and the upside is a recurring RM 149,000 in annual profit plus freed cash. The recommended direction is a demand-matched reorder policy: seasonal safety stock on the exam and back-to-school workbooks, firm reorder points on the 92 titles that make the money, and a one-time clear-out of dead stock.</p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

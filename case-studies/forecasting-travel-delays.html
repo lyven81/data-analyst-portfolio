@@ -1,248 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Forecasting Travel Delays | Lee Yih Ven
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <!-- Left Column -->
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let's work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/forecasting-travel-delays-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <!-- Right Column -->
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/cover%20image.png"/>
-      <h1>
-       Forecasting Travel Delays
-      </h1>
-      <p>
-       How Holidays, Weekends, and Events Shape Daily Operations
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis looks at what causes travel delays and how they can be managed. Delays affect daily operations, disrupt schedules, and create frustration for passengers, especially on busy days like holidays, weekends, and big events.
-      </p>
-      <p>
-       The goal is to give operations managers practical insights they can use. By looking at past delay patterns, the analysis shows when and why delays happen, how big the impact is, and what to expect in the future. This helps managers plan resources, set realistic schedules, and keep passengers better informed.
-      </p>
-     </section>
-     <section>
-      <h2>
-       1. Are delays getting worse or better over time?
-      </h2>
-      <p>
-       Analysis shows a weak upward trend in delays over time. In practical terms, delays have been increasing slightly, but not strongly. The statistical measure (correlation of +0.30) confirms this as a weak positive trend.
-      </p>
-      <p>
-       The real story is that delays are mostly driven by holidays (+0.73 correlation) and events (+0.59 correlation), which have far stronger effects than the passing of time itself. So, while delays are slowly worsening, the main risks come from predictable seasonal and event-based pressures.
-      </p>
-      <img alt="Chart Q1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q1%20-%20Chart.png"/>
-     </section>
-     <section>
-      <h2>
-       2. Which days of the week are worst for delays?
-      </h2>
-      <p>
-       Delays are not evenly spread across the week. They are lowest midweek, averaging 12–13 minutes on Tuesday through Thursday, and peak on Fridays and Sundays at around 14.3–14.4 minutes.
-      </p>
-      <p>
-       This reflects both end-of-week commuting and weekend travel demand. For operations managers, this means Fridays and Sundays are the most critical days to watch, requiring more buffer time, extra staff, or added vehicles to keep services on track.
-      </p>
-      <img alt="Chart Q2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q2%20-%20Chart.png"/>
-     </section>
-     <section>
-      <h2>
-       3. Do holidays create a significant spike in delays?
-      </h2>
-      <p>
-       Yes. Holidays stand out as the single largest source of delay. Average delays rise to about 19.5 minutes, compared with 12–13 minutes on normal days.
-      </p>
-      <p>
-       This is a consistent and predictable effect. For managers, this means holiday timetables should always include larger buffers, more staff on duty, and early communication to passengers to manage expectations.
-      </p>
-      <img alt="Chart Q3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q3%20-%20Chart.png"/>
-     </section>
-     <section>
-      <h2>
-       4. How much do big events affect delays?
-      </h2>
-      <p>
-       Large events, such as concerts or sports matches, are moderately linked with delays, showing a correlation of +0.59. Bigger crowds generally mean longer delays, though the effect is less consistent than holidays.
-      </p>
-      <p>
-       Even so, events can create sudden spikes that disrupt normal schedules. Managers should monitor event calendars closely and adjust resources in advance when high attendance is expected.
-      </p>
-      <img alt="Chart Q4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q4%20-%20Chart.png"/>
-     </section>
-     <section>
-      <h2>
-       5. Which factors are truly significant after controlling for everything else?
-      </h2>
-      <p>
-       Regression analysis shows that holidays are the strongest driver of delays, adding almost half an hour compared to non-holidays. The statistical test (p = 0.007) confirms this effect is highly reliable.
-      </p>
-      <p>
-       Other factors, including events and the general time trend, were not statistically significant after controlling for weekday and holiday effects. This means holidays should remain the main planning priority.
-      </p>
-      <img alt="Chart Q5" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q5%20-%20Chart.png"/>
-     </section>
-     <section>
-      <h2>
-       6. Which type of model explains delays best?
-      </h2>
-      <p>
-       Linear regression performs best. It explains roughly one-tenth of the variation in delays, and although not perfect, it produces realistic forecasts in minutes. The statistical measure (R² = 0.095) supports this.
-      </p>
-      <p>
-       For operations managers, linear regression is far more practical. It translates into clear actions, such as "expect an extra 28 minutes on holidays," which can be used for planning and scheduling.
-      </p>
-      <img alt="Chart Q6" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q6%20-%20Chart.png"/>
-     </section>
-     <section>
-      <h2>
-       7. How accurate is the model in predicting delays?
-      </h2>
-      <p>
-       Linear regression is not highly accurate on its own, explaining only about 9.5% of variation. However, it does capture the baseline delay of 12–14 minutes and tracks average trends moderately well.
-      </p>
-      <p>
-       Logistic regression, on the other hand, failed to provide meaningful results and is not suitable here. Managers can use linear regression as a working tool, knowing it is most reliable when seasonality and holidays are factored in.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Prediction 1: Forecasting Future Periods
-      </h2>
-      <p>
-       Looking ahead, the model forecasts daily average delays of 12–14 minutes over the next two weeks under normal conditions. Unlike the past, where delays swung between 0 and 30 minutes, the projection is stable and moderate.
-      </p>
-      <p>
-       This gives managers a baseline to plan around. Schedules should include a buffer of 12–14 minutes, with adjustments only if holidays or special events are expected.
-      </p>
-      <img alt="Prediction 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%201%20-%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Prediction 2: What-If Scenario Simulation
-      </h2>
-      <p>
-       If a 10,000-attendee event falls on a holiday, the model predicts average delays will rise from 13.4 minutes on a normal day to 14.7 minutes. This is a 1.3 minute increase, or about 10%.
-      </p>
-      <p>
-       While the increase seems small per trip, the cumulative effect across hundreds of services is significant. Managers should prepare for longer delays when events and holidays overlap.
-      </p>
-      <img alt="Prediction 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%202%20-%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Prediction 3: In-Sample Fit Evaluation
-      </h2>
-      <p>
-       For the first three weeks of January, the model predicted average delays of 12–15 minutes, while actual delays ranged widely from 0 to 30 minutes. The correlation between actual and predicted was about 0.70, with an average error of 2.4 minutes.
-      </p>
-      <p>
-       The model captures normal conditions but misses extreme spikes. Managers can rely on it for everyday scheduling but should add buffers on holidays and unusual disruption days.
-      </p>
-      <img alt="Prediction 3" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%203%20-%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Prediction 4: Intervention Analysis
-      </h2>
-      <p>
-       During the fuel price increase week, delays were actually slightly shorter (–0.9 minutes) than in normal weeks. This effect was weak and not statistically significant (p = 0.056).
-      </p>
-      <p>
-       This suggests fuel policy changes do not strongly affect delays. In practice, managers should continue to prioritize holidays and events, which have much larger and more reliable impacts.
-      </p>
-      <img alt="Prediction 4" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%204%20-%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Conclusion for Operations Managers
-      </h2>
-      <p>
-       The analysis confirms that Multiple Linear Regression is the best method for explaining and forecasting delays. It gives managers the ability to forecast in minutes, test what-if scenarios, evaluate accuracy, and measure policy or event impacts.
-      </p>
-      <p>
-       The findings are clear: holidays and weekends are the strongest drivers of delays, with holidays adding almost half an hour. Events also create significant spikes, though less consistently, while fuel price changes have little effect. This model provides a decision-support tool to guide staffing, timetable design, and passenger communication.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Recommendations
-      </h2>
-      <p>
-       The regression model provides a practical tool to help managers plan and allocate resources more effectively. It allows delays to be forecast for upcoming days, what-if scenarios to be tested, model accuracy to be checked, and the impact of interventions or policy changes to be measured. This gives operations teams a structured way to anticipate challenges rather than only reacting to them.
-      </p>
-      <p>
-       The findings show that certain days and conditions consistently create more pressure on the system. Fridays, Sundays, and especially holidays see the highest delays, with holidays alone adding almost half an hour. Managers should use this insight to plan extra staff, vehicles, or buffer time into schedules. While events are not as predictable as holidays, high-attendance occasions still disrupt operations and should be monitored closely with contingency plans in place.
-      </p>
-      <p>
-       Equally important is how delay risks are communicated to passengers. Forecasts should be translated into simple categories such as "low," "moderate," or "high" risk, making them easy to understand. Advance warnings should be shared at least a week before holidays or major events, while real-time updates can help passengers make informed choices on the day of travel. Together, these steps will improve operational efficiency and strengthen passenger trust in the service.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forecasting Travel Delays | Data Stories Lab</title>
+<meta name="description" content="Know which days travel delays will spike">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Time Series Analysis</span>
+    <span class="sep">/</span><span>Forecasting Travel Delays</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/cover%20image.png" alt="Forecasting Travel Delays">
+    <figcaption><span>Holidays and weekends drive the biggest swings in travel delays.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Operations &amp; forecasting</div>
+  <h1 class="title">Forecasting Travel Delays</h1>
+  <p class="standfirst">Know which days travel delays will spike</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Daily delays &middot; regression model</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/forecasting-travel-delays-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/forecasting-travel-delays.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis looks at what causes travel delays and how they can be managed. Delays affect daily operations, disrupt schedules, and create frustration for passengers, especially on busy days like holidays, weekends, and big events. </p> <p> The goal is to give operations managers practical insights they can use. By looking at past delay patterns, the analysis shows when and why delays happen, how big the impact is, and what to expect in the future. This helps managers plan resources, set realistic schedules, and keep passengers better informed. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">19.5 min</div><div class="l">avg holiday delay</div></div><div class="fig"><div class="n">12&ndash;13 min</div><div class="l">midweek baseline</div></div><div class="fig"><div class="n">+0.73</div><div class="l">holiday correlation</div></div><div class="fig"><div class="n">~30 min</div><div class="l">extra holiday delay</div></div></div>
+
+  <div class="pull"><p>&ldquo;The analysis confirms that Multiple Linear Regression is the best method for explaining and forecasting delays.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. Are delays getting worse or better over time?</h3><div class="ftext"><p> Analysis shows a weak upward trend in delays over time. In practical terms, delays have been increasing slightly, but not strongly. The statistical measure (correlation of +0.30) confirms this as a weak positive trend. </p> <p> The real story is that delays are mostly driven by holidays (+0.73 correlation) and events (+0.59 correlation), which have far stronger effects than the passing of time itself. So, while delays are slowly worsening, the main risks come from predictable seasonal and event-based pressures. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q1%20-%20Chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">2. Which days of the week are worst for delays?</h3><div class="ftext"><p> Delays are not evenly spread across the week. They are lowest midweek, averaging 12–13 minutes on Tuesday through Thursday, and peak on Fridays and Sundays at around 14.3–14.4 minutes. </p> <p> This reflects both end-of-week commuting and weekend travel demand. For operations managers, this means Fridays and Sundays are the most critical days to watch, requiring more buffer time, extra staff, or added vehicles to keep services on track. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q2%20-%20Chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">3. Do holidays create a significant spike in delays?</h3><div class="ftext"><p> Yes. Holidays stand out as the single largest source of delay. Average delays rise to about 19.5 minutes, compared with 12–13 minutes on normal days. </p> <p> This is a consistent and predictable effect. For managers, this means holiday timetables should always include larger buffers, more staff on duty, and early communication to passengers to manage expectations. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q3%20-%20Chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">4. How much do big events affect delays?</h3><div class="ftext"><p> Large events, such as concerts or sports matches, are moderately linked with delays, showing a correlation of +0.59. Bigger crowds generally mean longer delays, though the effect is less consistent than holidays. </p> <p> Even so, events can create sudden spikes that disrupt normal schedules. Managers should monitor event calendars closely and adjust resources in advance when high attendance is expected. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q4%20-%20Chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">5. Which factors are truly significant after controlling for everything else?</h3><div class="ftext"><p> Regression analysis shows that holidays are the strongest driver of delays, adding almost half an hour compared to non-holidays. The statistical test (p = 0.007) confirms this effect is highly reliable. </p> <p> Other factors, including events and the general time trend, were not statistically significant after controlling for weekday and holiday effects. This means holidays should remain the main planning priority. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q5%20-%20Chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">6. Which type of model explains delays best?</h3><div class="ftext"><p> Linear regression performs best. It explains roughly one-tenth of the variation in delays, and although not perfect, it produces realistic forecasts in minutes. The statistical measure (R² = 0.095) supports this. </p> <p> For operations managers, linear regression is far more practical. It translates into clear actions, such as "expect an extra 28 minutes on holidays," which can be used for planning and scheduling. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Q6%20-%20Chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">7. How accurate is the model in predicting delays?</h3><div class="ftext"><p> Linear regression is not highly accurate on its own, explaining only about 9.5% of variation. However, it does capture the baseline delay of 12–14 minutes and tracks average trends moderately well. </p> <p> Logistic regression, on the other hand, failed to provide meaningful results and is not suitable here. Managers can use linear regression as a working tool, knowing it is most reliable when seasonality and holidays are factored in. </p></div></article>
+    <article class="finding"><h3 class="fq">Prediction 1: Forecasting Future Periods</h3><div class="ftext"><p> Looking ahead, the model forecasts daily average delays of 12–14 minutes over the next two weeks under normal conditions. Unlike the past, where delays swung between 0 and 30 minutes, the projection is stable and moderate. </p> <p> This gives managers a baseline to plan around. Schedules should include a buffer of 12–14 minutes, with adjustments only if holidays or special events are expected. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%201%20-%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Prediction 2: What-If Scenario Simulation</h3><div class="ftext"><p> If a 10,000-attendee event falls on a holiday, the model predicts average delays will rise from 13.4 minutes on a normal day to 14.7 minutes. This is a 1.3 minute increase, or about 10%. </p> <p> While the increase seems small per trip, the cumulative effect across hundreds of services is significant. Managers should prepare for longer delays when events and holidays overlap. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%202%20-%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Prediction 3: In-Sample Fit Evaluation</h3><div class="ftext"><p> For the first three weeks of January, the model predicted average delays of 12–15 minutes, while actual delays ranged widely from 0 to 30 minutes. The correlation between actual and predicted was about 0.70, with an average error of 2.4 minutes. </p> <p> The model captures normal conditions but misses extreme spikes. Managers can rely on it for everyday scheduling but should add buffers on holidays and unusual disruption days. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%203%20-%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Prediction 4: Intervention Analysis</h3><div class="ftext"><p> During the fuel price increase week, delays were actually slightly shorter (–0.9 minutes) than in normal weeks. This effect was weak and not statistically significant (p = 0.056). </p> <p> This suggests fuel policy changes do not strongly affect delays. In practice, managers should continue to prioritize holidays and events, which have much larger and more reliable impacts. </p> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/public-transport/Prediction%204%20-%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Recommendations</h3><div class="ftext"><p> The regression model provides a practical tool to help managers plan and allocate resources more effectively. It allows delays to be forecast for upcoming days, what-if scenarios to be tested, model accuracy to be checked, and the impact of interventions or policy changes to be measured. This gives operations teams a structured way to anticipate challenges rather than only reacting to them. </p> <p> The findings show that certain days and conditions consistently create more pressure on the system. Fridays, Sundays, and especially holidays see the highest delays, with holidays alone adding almost half an hour. Managers should use this insight to plan extra staff, vehicles, or buffer time into schedules. While events are not as predictable as holidays, high-attendance occasions still disrupt operations and should be monitored closely with contingency plans in place. </p> <p> Equally important is how delay risks are communicated to passengers. Forecasts should be translated into simple categories such as "low," "moderate," or "high" risk, making them easy to understand. Advance warnings should be shared at least a week before holidays or major events, while real-time updates can help passengers make informed choices on the day of travel. Together, these steps will improve operational efficiency and strengthen passenger trust in the service. </p></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> The analysis confirms that Multiple Linear Regression is the best method for explaining and forecasting delays. It gives managers the ability to forecast in minutes, test what-if scenarios, evaluate accuracy, and measure policy or event impacts. </p> <p> The findings are clear: holidays and weekends are the strongest drivers of delays, with holidays adding almost half an hour. Events also create significant spikes, though less consistently, while fuel price changes have little effect. This model provides a decision-support tool to guide staffing, timetable design, and passenger communication. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

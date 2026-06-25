@@ -1,218 +1,173 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Breaking the Pattern | Case Study
-  </title>
-  <link href="/data-analyst-portfolio/style.css" rel="stylesheet"/>
- </head>
- <body>
-  <div class="container">
-   <aside class="left-column">
-    <header>
-     <h1>
-      Lee Yih Ven
-     </h1>
-     <h2>
-      Data Analytics Portfolio
-     </h2>
-    </header>
-    <section class="intro">
-     <p>
-      Data-driven insights to unlock business growth and innovation. Specializing in helping businesses make smarter, faster decisions.
-     </p>
-    </section>
-    <!-- Home Link Button -->
-    <section class="home-link-section">
-     <a class="home-link-btn" href="/data-analyst-portfolio/index.html">
-      Home
-     </a>
-    </section>
-    <section class="contact">
-     <h2>
-      Contact
-     </h2>
-     <p>
-      Have a project in mind? Let’s work together to transform your data into actionable insights.
-     </p>
-     <ul>
-      <li>
-       Email:
-       <a href="mailto:director@pinnacleslearning.com">
-        director@pinnacleslearning.com
-       </a>
-      </li>
-      <li>
-       Phone: +6014-9207099
-      </li>
-     </ul>
-    </section>
-    <!-- Dashboard Link Button -->
-    <section class="dashboard-link-section">
-     <a class="dashboard-link-btn" href="/data-analyst-portfolio/dashboards/breaking-the-pattern-dashboard.html">
-      View Dashboard
-     </a>
-    </section>
-   </aside>
-   <main class="right-column">
-    <section class="case-study-content">
-     <header>
-      <img alt="Cover Image" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/cover%20images.png"/>
-      <h1>
-       Breaking the Pattern
-      </h1>
-      <p>
-       Investigating Airline On-Time Performance Declines in 2022
-      </p>
-     </header>
-     <section>
-      <h2>
-       Overview
-      </h2>
-      <p>
-       This analysis investigates airline on-time performance trends from 2004 to 2025, with a focus on identifying when and where punctuality faltered most. The primary challenge addressed is operational inefficiency in 2022, as measured by falling departure and arrival on-time rates. This study aims to help Airline Operations Managers detect systemic issues, anticipate performance dips, and better manage scheduling and resource planning.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Key Results
-      </h2>
-      <h3>
-       1. Which year recorded the lowest average on-time departure and arrival rates?
-      </h3>
-      <ul>
-       <li>
-        2022 had the lowest airline punctuality on record, with a departure on-time rate of 66.96% and an arrival on-time rate of 68.03%, marking a clear deviation from historical norms between 2004 and 2025.
-       </li>
-       <li>
-        Visual analysis confirmed 2022 as the worst-performing year, with the year highlighted in red and positioned far left in bar charts, clearly below all other years in on-time performance.
-       </li>
-      </ul>
-      <img alt="Arrival On Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20arrival%20on%20time%20rate.png"/>
-      <img alt="Departure On Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20departure%20on%20time%20rate.png"/>
-      <h3>
-       2. What are the monthly trends in on-time departures and arrivals in 2022?
-      </h3>
-      <ul>
-       <li>
-        On-time performance declined sharply in the first half of 2022, hitting a low in July with departure and arrival on-time rates of 51.46% and 53.04% respectively, reflecting peak operational strain.
-       </li>
-       <li>
-        Performance began recovering from August, ending the year in December with rates of 69.77% for departures and 70.30% for arrivals—still below the typical 80% industry benchmark.
-       </li>
-      </ul>
-      <img alt="Monthly Departure On-Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%201.png"/>
-      <img alt="Monthly Arrival On-Time Rate Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%202.png"/>
-      <h3>
-       3. Are there specific months associated with high delay rates in 2022?
-      </h3>
-      <ul>
-       <li>
-        July was the peak month for delays in 2022, with a departure delay rate of 48.54% and arrival delay rate of 46.96%, followed closely by June (41.49% and 39.76%) and August (37.24% and 35.06%).
-       </li>
-       <li>
-        A sustained rise in delays from March to July indicates a clear mid-year operational stress period, reinforcing the need for targeted planning during these high-risk months.
-       </li>
-      </ul>
-      <img alt="Delay Rates Chart 1" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%201.png"/>
-      <img alt="Delay Rates Chart 2" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%202.png"/>
-      <h3>
-       4. Which routes or airports consistently experience delays?
-      </h3>
-      <ul>
-       <li>
-        The Melbourne–Sydney and Sydney–Melbourne routes had the lowest schedule fulfillment in 2022, both at 89.09%, while Canberra–Sydney and Sydney–Canberra followed at around 92.5%, indicating repeated delays on high-traffic corridors.
-       </li>
-       <li>
-        Sydney Airport appeared in 7 of the 10 most delayed routes, and Melbourne in 4, highlighting persistent congestion and scheduling inefficiencies at these major hubs.
-       </li>
-      </ul>
-      <img alt="Schedule Fulfillment Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%204%20-%20bar%20chart.png"/>
-      <h3>
-       5. Is there a mismatch between scheduled vs. actual sectors flown in 2022?
-      </h3>
-      <ul>
-       <li>
-        Schedule fulfillment remained consistently high in 2022, with most months exceeding 95% and the lowest at 90.86% in January—well above the common 90% alert threshold.
-       </li>
-       <li>
-        Even during peak delay periods from April to July, fulfillment rates stayed above 94.6%, indicating that delays were due to timing inefficiencies, not cancellations or missed operations.
-       </li>
-      </ul>
-      <img alt="Route Delay Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%203%20-%20line%20chart.png"/>
-      <h3>
-       6. Are there early warning signals of operational stress in 2022?
-      </h3>
-      <ul>
-       <li>
-        Between April and July 2022, departure delay rates surged from 38.53% to 48.54%, while on-time performance fell to a low of 51.46%, signaling a period of significant operational stress well below the 70% industry threshold.
-       </li>
-       <li>
-        Despite elevated delays through November, schedule fulfillment stayed above 94%, confirming that flights continued as scheduled but faced severe punctuality issues, highlighting the need for early detection and mitigation planning.
-       </li>
-      </ul>
-      <img alt="Operational Stress Chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%205%20-%20bar%20chart.png"/>
-     </section>
-     <section>
-      <h2>
-       Goals Alignment
-      </h2>
-      <p>
-       The identified trends directly relate to the airline's goal of maximizing operational efficiency by maintaining high on-time performance. Discovering that 2022 saw such significant performance declines, especially on core high-traffic routes, underscores the need for strategic adjustments.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Impact
-      </h2>
-      <p>
-       Understanding which months and routes are most susceptible to delays allows operations managers to proactively allocate resources, adjust staffing, and fine-tune fleet scheduling. The data also helps support compliance with industry benchmarks and enhances the passenger experience by minimizing disruptions.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Data Interpretation
-      </h2>
-      <p>
-       The steep decline in performance from April to July 2022 suggests that internal operational stress coincided with external demand surges. Delay rates exceeded 48% in July, while on-time rates dipped below 60%, a signal of compounding inefficiencies. Despite these challenges, flights were still being flown as scheduled, confirming that core operations continued but with reduced efficiency.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Contextual Factors
-      </h2>
-      <p>
-       This mid-year operational strain likely stems from a combination of seasonal peaks, staffing shortages, or airport congestion, particularly at major hubs like Sydney and Melbourne. Recovery trends from August to December suggest that mitigating actions may have been taken late in the year but were insufficient to fully restore historical performance levels.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Recommendation
-      </h2>
-      <p>
-       The sharp dip and delayed recovery in punctuality highlight the importance of early detection and proactive mitigation. High-risk periods, particularly mid-year, require tighter scheduling control, more flexible staffing models, and better route-specific performance monitoring.
-      </p>
-      <p>
-       Operations teams should implement early warning systems that flag rising delay rates by route and month. Additional investment in crew management systems and AI-powered schedule optimizers may help preempt future performance dips. Focused efforts to decongest Sydney and Melbourne corridors—through schedule staggering or backup aircraft planning—could also alleviate peak-period stress.
-      </p>
-     </section>
-     <section>
-      <h2>
-       Conclusion
-      </h2>
-      <p>
-       The analysis confirms that 2022 represented a critical deviation from historical punctuality patterns, especially during the April–July window. While operational stress did not prevent flights from being fulfilled, it significantly affected timing reliability. Moving forward, the airline can make data-driven decisions to address route-specific bottlenecks, optimize peak-period performance, and restore service consistency across its network.
-      </p>
-     </section>
-    </section>
-   </main>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breaking the Pattern | Data Stories Lab</title>
+<meta name="description" content="See when and where airline punctuality broke down">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style></head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
   </div>
-  <footer>
-   <p>
-    © 2025 Lee Yih Ven | Data-Driven Solutions
-   </p>
-  </footer>
- </body>
-</html>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Optimization Analysis</span>
+    <span class="sep">/</span><span>Breaking the Pattern</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/cover%20images.png" alt="Breaking the Pattern">
+    <figcaption><span>Tracing the year airline punctuality fell off a cliff.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Operations &amp; punctuality</div>
+  <h1 class="title">Breaking the Pattern</h1>
+  <p class="standfirst">See when and where airline punctuality broke down</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Airline data &middot; 2004&ndash;2025</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/breaking-the-pattern-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/breaking-the-pattern.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p> This analysis investigates airline on-time performance trends from 2004 to 2025, with a focus on identifying when and where punctuality faltered most. The primary challenge addressed is operational inefficiency in 2022, as measured by falling departure and arrival on-time rates. This study aims to help Airline Operations Managers detect systemic issues, anticipate performance dips, and better manage scheduling and resource planning. </p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">2022</div><div class="l">worst year</div></div><div class="fig"><div class="n">66.96%</div><div class="l">on-time departures</div></div><div class="fig"><div class="n">51.46%</div><div class="l">July low</div></div><div class="fig"><div class="n">Apr&ndash;Jul</div><div class="l">stress window</div></div></div>
+
+  <div class="pull"><p>&ldquo;The analysis confirms that 2022 represented a critical deviation from historical punctuality patterns, especially during the April–July window.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+  
+    <article class="finding"><h3 class="fq">1. Which year recorded the lowest average on-time departure and arrival rates?</h3><div class="ftext"><ul> <li> 2022 had the lowest airline punctuality on record, with a departure on-time rate of 66.96% and an arrival on-time rate of 68.03%, marking a clear deviation from historical norms between 2004 and 2025. </li> <li> Visual analysis confirmed 2022 as the worst-performing year, with the year highlighted in red and positioned far left in bar charts, clearly below all other years in on-time performance. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20arrival%20on%20time%20rate.png" alt="chart"></figure> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%200%20-%20departure%20on%20time%20rate.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">2. What are the monthly trends in on-time departures and arrivals in 2022?</h3><div class="ftext"><ul> <li> On-time performance declined sharply in the first half of 2022, hitting a low in July with departure and arrival on-time rates of 51.46% and 53.04% respectively, reflecting peak operational strain. </li> <li> Performance began recovering from August, ending the year in December with rates of 69.77% for departures and 70.30% for arrivals, still below the typical 80% industry benchmark. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%201.png" alt="chart"></figure> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%201%20-%20bar%20chart%202.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">3. Are there specific months associated with high delay rates in 2022?</h3><div class="ftext"><ul> <li> July was the peak month for delays in 2022, with a departure delay rate of 48.54% and arrival delay rate of 46.96%, followed closely by June (41.49% and 39.76%) and August (37.24% and 35.06%). </li> <li> A sustained rise in delays from March to July indicates a clear mid-year operational stress period, reinforcing the need for targeted planning during these high-risk months. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%201.png" alt="chart"></figure> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%202%20-%20bar%20chart%202.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">4. Which routes or airports consistently experience delays?</h3><div class="ftext"><ul> <li> The Melbourne–Sydney and Sydney–Melbourne routes had the lowest schedule fulfillment in 2022, both at 89.09%, while Canberra–Sydney and Sydney–Canberra followed at around 92.5%, indicating repeated delays on high-traffic corridors. </li> <li> Sydney Airport appeared in 7 of the 10 most delayed routes, and Melbourne in 4, highlighting persistent congestion and scheduling inefficiencies at these major hubs. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%204%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">5. Is there a mismatch between scheduled vs. actual sectors flown in 2022?</h3><div class="ftext"><ul> <li> Schedule fulfillment remained consistently high in 2022, with most months exceeding 95% and the lowest at 90.86% in January, well above the common 90% alert threshold. </li> <li> Even during peak delay periods from April to July, fulfillment rates stayed above 94.6%, indicating that delays were due to timing inefficiencies, not cancellations or missed operations. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%203%20-%20line%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">6. Are there early warning signals of operational stress in 2022?</h3><div class="ftext"><ul> <li> Between April and July 2022, departure delay rates surged from 38.53% to 48.54%, while on-time performance fell to a low of 51.46%, signaling a period of significant operational stress well below the 70% industry threshold. </li> <li> Despite elevated delays through November, schedule fulfillment stayed above 94%, confirming that flights continued as scheduled but faced severe punctuality issues, highlighting the need for early detection and mitigation planning. </li> </ul> <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/breaking-the-pattern/chart%205%20-%20bar%20chart.png" alt="chart"></figure></div></article>
+    <article class="finding"><h3 class="fq">Goals Alignment</h3><div class="ftext"><p> The identified trends directly relate to the airline's goal of maximizing operational efficiency by maintaining high on-time performance. Discovering that 2022 saw such significant performance declines, especially on core high-traffic routes, underscores the need for strategic adjustments. </p></div></article>
+    <article class="finding"><h3 class="fq">Impact</h3><div class="ftext"><p> Understanding which months and routes are most susceptible to delays allows operations managers to proactively allocate resources, adjust staffing, and fine-tune fleet scheduling. The data also helps support compliance with industry benchmarks and enhances the passenger experience by minimizing disruptions. </p></div></article>
+    <article class="finding"><h3 class="fq">Data Interpretation</h3><div class="ftext"><p> The steep decline in performance from April to July 2022 suggests that internal operational stress coincided with external demand surges. Delay rates exceeded 48% in July, while on-time rates dipped below 60%, a signal of compounding inefficiencies. Despite these challenges, flights were still being flown as scheduled, confirming that core operations continued but with reduced efficiency. </p></div></article>
+    <article class="finding"><h3 class="fq">Contextual Factors</h3><div class="ftext"><p> This mid-year operational strain likely stems from a combination of seasonal peaks, staffing shortages, or airport congestion, particularly at major hubs like Sydney and Melbourne. Recovery trends from August to December suggest that mitigating actions may have been taken late in the year but were insufficient to fully restore historical performance levels. </p></div></article>
+    <article class="finding"><h3 class="fq">Recommendation</h3><div class="ftext"><p> The sharp dip and delayed recovery in punctuality highlight the importance of early detection and proactive mitigation. High-risk periods, particularly mid-year, require tighter scheduling control, more flexible staffing models, and better route-specific performance monitoring. </p> <p> Operations teams should implement early warning systems that flag rising delay rates by route and month. Additional investment in crew management systems and AI-powered schedule optimizers may help preempt future performance dips. Focused efforts to decongest Sydney and Melbourne corridors, through schedule staggering or backup aircraft planning, could also alleviate peak-period stress. </p></div></article>
+
+  
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p> The analysis confirms that 2022 represented a critical deviation from historical punctuality patterns, especially during the April–July window. While operational stress did not prevent flights from being fulfilled, it significantly affected timing reliability. Moving forward, the airline can make data-driven decisions to address route-specific bottlenecks, optimize peak-period performance, and restore service consistency across its network. </p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>
