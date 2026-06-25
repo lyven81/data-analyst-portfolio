@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selling the Right Products, Dashboard | Data Stories Lab</title>
+<meta name="description" content="Product profitability, live: a small group of hero products drives most of the profit while a long tail stays busy but thin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#002D55; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* House chrome */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Title block (shared crown) */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  /* Instrument switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  /* Dashboard tool */
+  .tool{ padding:22px 0 8px; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.6rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .kpi .s{ font-size:.66rem; font-weight:700; margin-top:5px; }
+  .pos{ color:#2E7D6F; } .neg{ color:#B5503C; } .warn{ color:#004B87; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:300px; margin-top:14px; }
+  .ccard .cwrap.lg{ height:360px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+
+  table.pl{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  table.pl th{ text-align:right; color:#fff; background:#222; padding:9px 12px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  table.pl th:first-child{ text-align:left; }
+  table.pl td{ padding:8px 12px; border-bottom:1px solid #eef1f4; text-align:right; }
+  table.pl td:first-child{ text-align:left; }
+  table.pl tr:hover{ background:#f4f7fb; }
+
+  .loading{ text-align:center; padding:60px 20px; font-size:.95rem; color:var(--mute); }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Selling the Right Products</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/selling-the-right-products/cover-image.jpeg" alt="Selling the Right Products">
+        <figcaption><span>A busy sales team, and the few products worth their time.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Sales &amp; product mix</span>
+      <h1 class="title">Selling the Right Products</h1>
+      <p class="standfirst">Focus selling on the few products that profit</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>Product portfolio &middot; Pareto</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/selling-the-right-products.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+          <a class="sw" href="/data-analyst-portfolio/agentic_workflow/selling-the-right-products.html">AI Assistant</a>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Revenue &amp; Profit</button>
+        <button class="pbtn" data-p="2">Concentration Risk</button>
+        <button class="pbtn" data-p="3">Category Trends</button>
+        <button class="pbtn" data-p="4">Products to Fix</button>
+      </div>
+
+      <div id="loading" class="loading">Loading data...</div>
+
+      <!-- P1 Revenue & Profit -->
+      <div class="page active" id="p1">
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="totalRevenue">-</div><div class="l">Total revenue</div></div>
+          <div class="kpi"><div class="v" id="totalProfit">-</div><div class="l">Total profit</div></div>
+          <div class="kpi"><div class="v" id="avgMargin">-</div><div class="l">Average profit margin</div></div>
+          <div class="kpi"><div class="v" id="totalQuantity">-</div><div class="l">Total products sold</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Top 10 products by revenue</div><div class="cs">The products that bring in the most sales dollars</div><div class="cwrap lg"><canvas id="revenueChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised at product level.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Top 10 products by profit</div><div class="cs">Profit rank, which is what actually carries the business</div><div class="cwrap lg"><canvas id="profitChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised at product level.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Product performance table</div><div class="cs">Top products by revenue, with profit, quantity and margin</div>
+            <div style="overflow-x:auto; max-height:400px"><table class="pl" id="productTable"><thead><tr><th>Product</th><th>Revenue</th><th>Profit</th><th>Quantity</th><th>Profit margin</th></tr></thead><tbody></tbody></table></div>
+            <div class="csrc">Source: product sales transactions, summarised at product level.</div></div>
+        </div>
+      </div>
+
+      <!-- P2 Concentration Risk -->
+      <div class="page" id="p2">
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="top5Share">-</div><div class="l">Top 5 products revenue share</div></div>
+          <div class="kpi"><div class="v" id="bikesShare">-</div><div class="l">Bikes category profit share</div></div>
+          <div class="kpi"><div class="v" id="totalSKUs">-</div><div class="l">Total product SKUs</div></div>
+          <div class="kpi"><div class="v" id="lowMarginCount">-</div><div class="l">Low margin products</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue share: top products vs others</div><div class="cs">How much of revenue the top 5 products account for</div><div class="cwrap lg"><canvas id="concentrationChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised at product level.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Profit by category</div><div class="cs">Where the profit sits across product categories</div><div class="cwrap lg"><canvas id="categoryProfitChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised by category.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">High volume, low margin products</div><div class="cs">Order quantity against profit margin, the busy-but-thin zone sits bottom right</div><div class="cwrap lg"><canvas id="scatterChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised at product level.</div></div>
+        </div>
+      </div>
+
+      <!-- P3 Category Trends -->
+      <div class="page" id="p3">
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Category revenue performance over time</div><div class="cs">Monthly revenue trend by product category</div><div class="cwrap lg"><canvas id="trendChart"></canvas></div><div class="csrc">Source: monthly sales trends by category.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue by category</div><div class="cs">Total revenue across product categories</div><div class="cwrap"><canvas id="categoryRevenueChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised by category.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Top models by profit</div><div class="cs">The product models that contribute the most profit</div><div class="cwrap"><canvas id="modelProfitChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised by model.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Monthly profit trend by category</div><div class="cs">How profit moves month to month within each category</div><div class="cwrap"><canvas id="profitTrendChart"></canvas></div><div class="csrc">Source: monthly sales trends by category.</div></div>
+        </div>
+      </div>
+
+      <!-- P4 Products to Fix -->
+      <div class="page" id="p4">
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="fixCount">-</div><div class="l">Products below avg margin</div></div>
+          <div class="kpi"><div class="v" id="revenueAtRisk">-</div><div class="l">Revenue at risk</div></div>
+          <div class="kpi"><div class="v" id="potentialGain">-</div><div class="l">Potential profit improvement</div></div>
+          <div class="kpi"><div class="v" id="marginGap">-</div><div class="l">Avg margin gap</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Products to deprioritize</div><div class="cs">The lowest-profit products, candidates to sell less of</div><div class="cwrap lg"><canvas id="deprioritizeChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised at product level.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Margin distribution</div><div class="cs">How products spread across profit-margin bands</div><div class="cwrap lg"><canvas id="marginDistChart"></canvas></div><div class="csrc">Source: product sales transactions, summarised at product level.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Products to fix first</div><div class="cs">High revenue, low margin, ranked by priority for a margin fix</div>
+            <div style="overflow-x:auto"><table class="pl" id="fixTable"><thead><tr><th>Product</th><th>Revenue</th><th>Profit</th><th>Quantity</th><th>Profit margin</th><th>Priority</th></tr></thead><tbody></tbody></table></div>
+            <div class="csrc">Source: products-to-fix shortlist (below-average margin, meaningful revenue).</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  // Scheme E chart palette (blue family + semantic green/red for genuine pos/neg)
+  const COL = { dark:'#001F3F', gold:'#004B87', brown:'#6A9BD1', green:'#2E7D6F', red:'#B5503C', sand:'#AEC2D6' };
+  const GRID = '#E8ECF1';
+
+  // ===== DATA: loaded LIVE via PapaParse from the source CSVs (ported verbatim from the source dashboard) =====
+  let productSummary = [];
+  let categorySummary = [];
+  let monthlyTrends = [];
+  let modelSummary = [];
+  let countrySummary = [];
+  let kpis = {};
+  let productsToFix = [];
+  let charts = {};
+
+  async function loadData() {
+    const baseUrl = 'https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/dashboards/data/selling-the-right-products/';
+    try {
+      const [products, categories, monthly, models, countries, kpiData, toFix] = await Promise.all([
+        loadCSV(baseUrl + 'product_summary.csv'),
+        loadCSV(baseUrl + 'category_summary.csv'),
+        loadCSV(baseUrl + 'monthly_trends.csv'),
+        loadCSV(baseUrl + 'model_summary.csv'),
+        loadCSV(baseUrl + 'country_summary.csv'),
+        loadCSV(baseUrl + 'kpis.csv'),
+        loadCSV(baseUrl + 'products_to_fix.csv')
+      ]);
+
+      productSummary = products;
+      categorySummary = categories;
+      monthlyTrends = monthly;
+      modelSummary = models;
+      countrySummary = countries;
+      kpis = kpiData[0] || {};
+      productsToFix = toFix;
+
+      updateDashboard();
+      document.getElementById('loading').style.display = 'none';
+      postH();
+    } catch (error) {
+      console.error('Error loading data:', error);
+      document.getElementById('loading').innerHTML = 'Error loading data. Please check console.';
+    }
+  }
+
+  function loadCSV(url) {
+    return new Promise((resolve, reject) => {
+      Papa.parse(url, {
+        download: true,
+        header: true,
+        dynamicTyping: true,
+        complete: (results) => resolve(results.data.filter(row => Object.values(row).some(v => v !== null && v !== ''))),
+        error: (error) => reject(error)
+      });
+    });
+  }
+
+  function updateDashboard() {
+    updateKPIs();
+    updatePage1Charts();
+    updatePage2Charts();
+    updatePage3Charts();
+    updatePage4Charts();
+  }
+
+  function updateKPIs() {
+    // Page 1 KPIs
+    document.getElementById('totalRevenue').textContent = '$' + (kpis.total_revenue || 0).toLocaleString(undefined, {maximumFractionDigits: 0});
+    document.getElementById('totalProfit').textContent = '$' + (kpis.total_profit || 0).toLocaleString(undefined, {maximumFractionDigits: 0});
+    document.getElementById('avgMargin').textContent = (kpis.avg_profit_margin || 0).toFixed(1) + '%';
+    document.getElementById('totalQuantity').textContent = (kpis.total_quantity || 0).toLocaleString();
+
+    // Page 2 KPIs
+    document.getElementById('top5Share').textContent = (kpis.top5_revenue_share || 0).toFixed(1) + '%';
+    const bikesData = categorySummary.find(c => c.category === 'Bikes');
+    const bikesShare = bikesData ? (bikesData.total_profit / kpis.total_profit * 100).toFixed(1) : 0;
+    document.getElementById('bikesShare').textContent = bikesShare + '%';
+    document.getElementById('totalSKUs').textContent = kpis.total_products || productSummary.length;
+
+    const avgMargin = kpis.avg_profit_margin / 100;
+    const lowMarginProducts = productSummary.filter(p => p.avg_profit_margin < avgMargin);
+    document.getElementById('lowMarginCount').textContent = lowMarginProducts.length;
+
+    // Page 4 KPIs
+    document.getElementById('fixCount').textContent = productsToFix.length;
+    const revenueAtRisk = productsToFix.reduce((sum, p) => sum + (p.total_revenue || 0), 0);
+    document.getElementById('revenueAtRisk').textContent = '$' + revenueAtRisk.toLocaleString(undefined, {maximumFractionDigits: 0});
+    document.getElementById('potentialGain').textContent = '+5-10%';
+    document.getElementById('marginGap').textContent = '10-20%';
+  }
+
+  function updatePage1Charts() {
+    // Top 10 by Revenue
+    const top10Revenue = productSummary.slice(0, 10);
+    updateChart('revenueChart', {
+      type: 'bar',
+      data: {
+        labels: top10Revenue.map(p => p.product.substring(0, 25)),
+        datasets: [{
+          label: 'Revenue ($)',
+          data: top10Revenue.map(p => p.total_revenue),
+          backgroundColor: COL.gold
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x:{ grid:{color:GRID} }, y:{ grid:{display:false} } }
+      }
+    });
+
+    // Top 10 by Profit
+    const top10Profit = [...productSummary].sort((a, b) => b.total_profit - a.total_profit).slice(0, 10);
+    updateChart('profitChart', {
+      type: 'bar',
+      data: {
+        labels: top10Profit.map(p => p.product.substring(0, 25)),
+        datasets: [{
+          label: 'Profit ($)',
+          data: top10Profit.map(p => p.total_profit),
+          backgroundColor: COL.dark
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x:{ grid:{color:GRID} }, y:{ grid:{display:false} } }
+      }
+    });
+
+    // Product Table
+    const tableBody = document.querySelector('#productTable tbody');
+    tableBody.innerHTML = '';
+    productSummary.slice(0, 20).forEach(p => {
+      const marginClass = p.avg_profit_margin > 0.4 ? 'pos' : p.avg_profit_margin < 0.3 ? 'neg' : 'warn';
+      const row = tableBody.insertRow();
+      row.innerHTML = `
+        <td><strong>${p.product}</strong></td>
+        <td>$${p.total_revenue.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+        <td>$${p.total_profit.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+        <td>${p.total_quantity}</td>
+        <td><span class="${marginClass}">${(p.avg_profit_margin * 100).toFixed(1)}%</span></td>
+      `;
+    });
+  }
+
+  function updatePage2Charts() {
+    // Concentration donut
+    const top5Revenue = productSummary.slice(0, 5).reduce((sum, p) => sum + p.total_revenue, 0);
+    const othersRevenue = kpis.total_revenue - top5Revenue;
+
+    updateChart('concentrationChart', {
+      type: 'doughnut',
+      data: {
+        labels: ['Top 5 Products', 'Other Products'],
+        datasets: [{
+          data: [top5Revenue, othersRevenue],
+          backgroundColor: [COL.gold, COL.sand]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+
+    // Category profit
+    updateChart('categoryProfitChart', {
+      type: 'bar',
+      data: {
+        labels: categorySummary.map(c => c.category),
+        datasets: [{
+          label: 'Profit ($)',
+          data: categorySummary.map(c => c.total_profit),
+          backgroundColor: [COL.dark, COL.gold, COL.brown]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y:{ grid:{color:GRID} }, x:{ grid:{display:false} } }
+      }
+    });
+
+    // Scatter plot
+    updateChart('scatterChart', {
+      type: 'scatter',
+      data: {
+        datasets: [{
+          label: 'Products',
+          data: productSummary.map(p => ({
+            x: p.total_quantity,
+            y: p.avg_profit_margin * 100,
+            label: p.product
+          })),
+          backgroundColor: productSummary.map(p =>
+            p.avg_profit_margin < 0.3 ? COL.red :
+            p.avg_profit_margin < 0.4 ? COL.brown : COL.green
+          ),
+          pointRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { title: { display: true, text: 'Order Quantity' }, grid:{color:GRID} },
+          y: { title: { display: true, text: 'Profit Margin (%)' }, grid:{color:GRID} }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const p = productSummary[context.dataIndex];
+                return `${p.product}: Qty=${p.total_quantity}, Margin=${(p.avg_profit_margin * 100).toFixed(1)}%`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function updatePage3Charts() {
+    // Monthly trends by category
+    const months = [...new Set(monthlyTrends.map(m => m.year_month))].sort();
+    const categories = [...new Set(monthlyTrends.map(m => m.category))];
+
+    const trendDatasets = categories.map((cat, i) => ({
+      label: cat,
+      data: months.map(month => {
+        const entry = monthlyTrends.find(m => m.year_month === month && m.category === cat);
+        return entry ? entry.revenue : 0;
+      }),
+      borderColor: [COL.dark, COL.gold, COL.brown][i],
+      backgroundColor: ['rgba(0,31,63,0.10)', 'rgba(0,75,135,0.10)', 'rgba(106,155,209,0.10)'][i],
+      fill: true,
+      tension: 0.4
+    }));
+
+    updateChart('trendChart', {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: trendDatasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'top' } },
+        scales: { y:{ grid:{color:GRID} }, x:{ grid:{display:false} } }
+      }
+    });
+
+    // Category revenue bar
+    updateChart('categoryRevenueChart', {
+      type: 'bar',
+      data: {
+        labels: categorySummary.map(c => c.category),
+        datasets: [{
+          label: 'Revenue ($)',
+          data: categorySummary.map(c => c.total_revenue),
+          backgroundColor: [COL.dark, COL.gold, COL.brown]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y:{ grid:{color:GRID} }, x:{ grid:{display:false} } }
+      }
+    });
+
+    // Top models by profit
+    const topModels = modelSummary.slice(0, 8);
+    updateChart('modelProfitChart', {
+      type: 'bar',
+      data: {
+        labels: topModels.map(m => m.model),
+        datasets: [{
+          label: 'Profit ($)',
+          data: topModels.map(m => m.total_profit),
+          backgroundColor: COL.dark
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x:{ grid:{color:GRID} }, y:{ grid:{display:false} } }
+      }
+    });
+
+    // Profit trend
+    const profitDatasets = categories.map((cat, i) => ({
+      label: cat,
+      data: months.map(month => {
+        const entry = monthlyTrends.find(m => m.year_month === month && m.category === cat);
+        return entry ? entry.profit : 0;
+      }),
+      borderColor: [COL.dark, COL.gold, COL.brown][i],
+      tension: 0.4
+    }));
+
+    updateChart('profitTrendChart', {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: profitDatasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'top' } },
+        scales: { y:{ grid:{color:GRID} }, x:{ grid:{display:false} } }
+      }
+    });
+  }
+
+  function updatePage4Charts() {
+    // Products to deprioritize (lowest profit)
+    const lowestProfit = [...productSummary].sort((a, b) => a.total_profit - b.total_profit).slice(0, 10);
+    updateChart('deprioritizeChart', {
+      type: 'bar',
+      data: {
+        labels: lowestProfit.map(p => p.product.substring(0, 20)),
+        datasets: [{
+          label: 'Profit ($)',
+          data: lowestProfit.map(p => p.total_profit),
+          backgroundColor: COL.red
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x:{ grid:{color:GRID} }, y:{ grid:{display:false} } }
+      }
+    });
+
+    // Margin distribution
+    const marginBuckets = {
+      'Below 30%': productSummary.filter(p => p.avg_profit_margin < 0.3).length,
+      '30-40%': productSummary.filter(p => p.avg_profit_margin >= 0.3 && p.avg_profit_margin < 0.4).length,
+      '40-50%': productSummary.filter(p => p.avg_profit_margin >= 0.4 && p.avg_profit_margin < 0.5).length,
+      'Above 50%': productSummary.filter(p => p.avg_profit_margin >= 0.5).length
+    };
+
+    updateChart('marginDistChart', {
+      type: 'pie',
+      data: {
+        labels: Object.keys(marginBuckets),
+        datasets: [{
+          data: Object.values(marginBuckets),
+          backgroundColor: [COL.red, COL.brown, COL.sand, COL.green]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+
+    // Fix table
+    const fixTableBody = document.querySelector('#fixTable tbody');
+    fixTableBody.innerHTML = '';
+    productsToFix.forEach((p, i) => {
+      const priority = i < 3 ? 'High' : i < 6 ? 'Medium' : 'Low';
+      const priorityClass = i < 3 ? 'neg' : i < 6 ? 'warn' : '';
+      const row = fixTableBody.insertRow();
+      row.innerHTML = `
+        <td><strong>${p.product}</strong></td>
+        <td>$${p.total_revenue.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+        <td>$${p.total_profit.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+        <td>${p.total_quantity}</td>
+        <td><span class="neg">${(p.avg_profit_margin * 100).toFixed(1)}%</span></td>
+        <td><span class="${priorityClass}">${priority}</span></td>
+      `;
+    });
+  }
+
+  function updateChart(id, config) {
+    if (charts[id]) { charts[id].destroy(); }
+    const ctx = document.getElementById(id);
+    if (ctx) { charts[id] = new Chart(ctx, config); }
+  }
+
+  // page-switch handler (template scaffolding)
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    setTimeout(postH,60);
+  });
+
+  // Initialize (load data live, like the source)
+  function start(){ loadData(); postH(); }
+  if (window.Chart) start(); else window.addEventListener('load', ()=>{ if(window.Chart) start(); else setTimeout(start,200); });
+  window.addEventListener('load', ()=>setTimeout(postH, 400));
+</script>
+</body>
+</html>

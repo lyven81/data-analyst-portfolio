@@ -1,1254 +1,922 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicting Gym Member Drop-Off - Churn Prevention Dashboard | Lee Yih Ven</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --primary-color: #403B36;
-            --secondary-color: #CBA135;
-            --background-color: #FCF9F2;
-            --text-color: #2C2C2C;
-            --card-background: #FFFFFF;
-            --shadow: 0 4px 20px rgba(64, 59, 54, 0.1);
-            --gradient: linear-gradient(135deg, #403B36 0%, #5A524B 100%);
-            --gold-gradient: linear-gradient(135deg, #CBA135 0%, #E8C55A 100%);
-            --high-risk-color: #C62828;
-            --medium-risk-color: #F57C00;
-            --low-risk-color: #2E7D32;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predicting Gym Member Drop-Off: Dashboard | Data Stories Lab</title>
+<meta name="description" content="Spot gym members losing motivation before they quit: visit frequency is the strongest churn signal, live across 150 members.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#002D55; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  /* House chrome */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+  /* Title block (shared crown) */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+  /* Instrument switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
 
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+  /* Dashboard tool */
+  .tool{ padding:22px 0 8px; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #403B36 0%, #2C2822 100%);
-            color: #FCF9F2;
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
+  /* Filters */
+  .filters{ border:1px solid var(--hair); padding:18px 16px; margin-bottom:18px; background:#fff; }
+  .filters .ft{ font-size:.78rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; }
+  .filters .fs{ font-size:.74rem; color:var(--mute); margin-top:3px; }
+  .filters-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:14px; }
+  .filter-group{ display:flex; flex-direction:column; }
+  .filter-group label{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-bottom:6px; }
+  .filter-group select{ padding:9px 10px; border:1px solid var(--hair); background:#fff; font-family:Arial, Helvetica, sans-serif; font-size:.86rem; color:var(--ink); cursor:pointer; }
+  .filter-group select:focus{ outline:none; border-color:var(--accent); }
 
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.6rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .kpi .s{ font-size:.66rem; font-weight:700; margin-top:5px; color:var(--accent); }
+  .pos{ color:#2E7D6F; } .neg{ color:#B5503C; }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:300px; margin-top:14px; }
+  .ccard .cwrap.lg{ height:360px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
 
-        /* CTA Buttons */
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
+  table.pl{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  table.pl th{ text-align:right; color:#fff; background:#222; padding:9px 12px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  table.pl th:first-child{ text-align:left; }
+  table.pl td{ padding:8px 12px; border-bottom:1px solid #eef1f4; text-align:right; }
+  table.pl td:first-child{ text-align:left; }
+  table.pl tbody tr:hover{ background:#f4f8fc; }
+  .badge{ padding:4px 10px; border-radius:20px; font-weight:700; font-size:.72rem; display:inline-block; }
+  .b-high{ background:#F6E3DE; color:#B5503C; }
+  .b-low{ background:#E2EFE9; color:#2E7D6F; }
+  .b-yes{ background:#F6E3DE; color:#B5503C; }
+  .b-no{ background:#E2EFE9; color:#2E7D6F; }
 
-        .cta-button {
-            padding: 12px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
 
-        .cta-primary {
-            background: linear-gradient(135deg, #CBA135 0%, #B8903A 100%);
-            color: #403B36;
-        }
-
-        .cta-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(203, 161, 53, 0.4);
-        }
-
-        .cta-secondary {
-            background: transparent;
-            border: 2px solid #CBA135;
-            color: #FCF9F2;
-        }
-
-        .cta-secondary:hover {
-            background: rgba(203, 161, 53, 0.1);
-        }
-
-        /* Filters Section */
-        .filters-section {
-            background: white;
-            padding: 30px;
-            margin: 30px auto;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .filter-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--primary-color);
-        }
-
-        .filter-group select {
-            padding: 12px;
-            border: 2px solid #E0E0E0;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            background-color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-group select:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-        }
-
-        /* Page Navigation */
-        .page-navigation {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px auto;
-            flex-wrap: wrap;
-        }
-
-        .page-btn {
-            padding: 12px 24px;
-            background: white;
-            border: 2px solid var(--secondary-color);
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .page-btn.active {
-            background: var(--gold-gradient);
-            color: white;
-            border-color: var(--secondary-color);
-        }
-
-        .page-btn:hover:not(.active) {
-            background: rgba(203, 161, 53, 0.1);
-        }
-
-        /* Dashboard Page */
-        .dashboard-page {
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .dashboard-page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* KPI Cards */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px auto;
-        }
-
-        .kpi-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: all 0.3s ease;
-            border-top: 4px solid var(--secondary-color);
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(64, 59, 54, 0.15);
-        }
-
-        .kpi-card h3 {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .kpi-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .kpi-subtitle {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-
-        /* Chart Grid */
-        .chart-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 30px;
-            margin: 30px auto;
-        }
-
-        .chart-container {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        .chart-container h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-        }
-
-        .chart-container.full-width {
-            grid-column: 1 / -1;
-        }
-
-        /* Table Styles */
-        .table-container {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            margin: 30px auto;
-            overflow-x: auto;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        .data-table thead {
-            background: var(--gradient);
-            color: white;
-        }
-
-        .data-table th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .data-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #E0E0E0;
-        }
-
-        .data-table tbody tr:hover {
-            background-color: rgba(203, 161, 53, 0.1);
-        }
-
-        .risk-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: inline-block;
-        }
-
-        .risk-high {
-            background: #FFEBEE;
-            color: var(--high-risk-color);
-        }
-
-        .risk-low {
-            background: #E8F5E9;
-            color: var(--low-risk-color);
-        }
-
-        .churn-yes {
-            background: #FFEBEE;
-            color: var(--high-risk-color);
-        }
-
-        .churn-no {
-            background: #E8F5E9;
-            color: var(--low-risk-color);
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        .footer p {
-            margin: 5px 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .chart-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .kpi-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-
-            .filters-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .grid{ grid-template-columns:1fr; } }
+</style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Header -->
-        <div class="header">
-            <h1>Predicting Gym Member Drop-Off</h1>
-            <p>Churn Prediction Dashboard - Identify At-Risk Members and Prevent Churn Through Data-Driven Retention Strategies</p>
-            <div class="cta-buttons">
-                <a href="https://lyven81.github.io/data-analyst-portfolio/index.html" class="cta-button cta-secondary">Home</a>
-                <a href="https://lyven81.github.io/data-analyst-portfolio/case-studies/predicting-gym-member-dropout.html" class="cta-button cta-secondary">View Full Case Study</a>
-                <a href="https://lyven81.github.io/data-analyst-portfolio/interactive-dashboard.html" class="cta-button cta-secondary">More Interactive Dashboards</a>
-            </div>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Predicting Gym Member Drop-Off</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/predicting-gym-member-dropout/cover%20image.png" alt="Predicting Gym Member Drop-Off">
+        <figcaption><span>Falling visits are the first sign a member is drifting away.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Retention &amp; engagement</span>
+      <h1 class="title">Predicting Gym Member Drop-Off</h1>
+      <p class="standfirst">Spot gym members losing motivation before they quit</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>Member activity &middot; churn model</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/predicting-gym-member-dropout.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+          <a class="sw" href="/data-analyst-portfolio/agentic_workflow/predicting-gym-member-dropout.html">AI Assistant</a>
         </div>
-
-    <!-- Filters Section -->
-    <div class="container">
-        <div class="filters-section">
-            <h2 style="color: var(--primary-color); margin-bottom: 10px;">Dashboard Filters</h2>
-            <p style="color: #666; margin-bottom: 20px;">Filter members to explore specific segments and risk profiles</p>
-            <div class="filters-grid">
-                <div class="filter-group">
-                    <label for="membershipFilter">Membership Type</label>
-                    <select id="membershipFilter">
-                        <option value="all">All Memberships</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="ageFilter">Age Group</label>
-                    <select id="ageFilter">
-                        <option value="all">All Age Groups</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="activityFilter">Activity Level</label>
-                    <select id="activityFilter">
-                        <option value="all">All Activity Levels</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="churnFilter">Churn Status</label>
-                    <select id="churnFilter">
-                        <option value="all">All Members</option>
-                        <option value="Yes">Churned</option>
-                        <option value="No">Active</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page Navigation -->
-        <div class="page-navigation">
-            <button class="page-btn active" onclick="showPage(1)">Member Retention Overview</button>
-            <button class="page-btn" onclick="showPage(2)">Activity & Engagement</button>
-            <button class="page-btn" onclick="showPage(3)">Behavioral Trends</button>
-            <button class="page-btn" onclick="showPage(4)">Risk Segmentation</button>
-        </div>
-
-        <!-- Page 1: Member Retention Overview -->
-        <div id="page1" class="dashboard-page active">
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <h3>Total Members</h3>
-                    <div class="kpi-value" id="kpi-total">0</div>
-                    <div class="kpi-subtitle">Members Analyzed</div>
-                </div>
-                <div class="kpi-card">
-                    <h3>Overall Churn Rate</h3>
-                    <div class="kpi-value" id="kpi-churn-rate">0%</div>
-                    <div class="kpi-subtitle">Members Who Left</div>
-                </div>
-                <div class="kpi-card">
-                    <h3>At-Risk Members</h3>
-                    <div class="kpi-value" id="kpi-at-risk">0</div>
-                    <div class="kpi-subtitle">Require Attention</div>
-                </div>
-                <div class="kpi-card">
-                    <h3>Avg Visits/Month</h3>
-                    <div class="kpi-value" id="kpi-avg-visits">0</div>
-                    <div class="kpi-subtitle">Member Engagement</div>
-                </div>
-            </div>
-
-            <div class="chart-grid">
-                <div class="chart-container">
-                    <h3>Churn Distribution</h3>
-                    <canvas id="churnPieChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3>Churn Rate by Membership Type</h3>
-                    <canvas id="membershipChurnChart"></canvas>
-                </div>
-                <div class="chart-container full-width">
-                    <h3>Churn Rate by Age Group</h3>
-                    <canvas id="ageChurnChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page 2: Activity & Engagement Analysis -->
-        <div id="page2" class="dashboard-page">
-            <div class="chart-grid">
-                <div class="chart-container full-width">
-                    <h3>Visits Per Month by Membership Type (Churned vs Retained)</h3>
-                    <canvas id="visitsComparisonChart"></canvas>
-                </div>
-            </div>
-
-            <div class="table-container">
-                <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.3rem; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px;">Activity Level Breakdown</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Activity Level</th>
-                            <th>Total Members</th>
-                            <th>Churned Members</th>
-                            <th>Churn Rate</th>
-                            <th>Avg Visits/Month</th>
-                        </tr>
-                    </thead>
-                    <tbody id="activityTableBody">
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="chart-grid">
-                <div class="chart-container full-width">
-                    <h3>Visits vs Workout Duration (Colored by Churn)</h3>
-                    <canvas id="scatterChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page 3: Behavioral Trends -->
-        <div id="page3" class="dashboard-page">
-            <div class="chart-grid">
-                <div class="chart-container">
-                    <h3>Favorite Exercise Distribution</h3>
-                    <canvas id="exerciseChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3>Churn Rate by Favorite Exercise</h3>
-                    <canvas id="exerciseChurnChart"></canvas>
-                </div>
-                <div class="chart-container full-width">
-                    <h3>Days Since Last Visit vs Membership Tenure (Colored by Churn)</h3>
-                    <canvas id="tenureScatterChart"></canvas>
-                </div>
-                <div class="chart-container full-width">
-                    <h3>Workout Duration Distribution by Churn Status</h3>
-                    <canvas id="durationDistChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page 4: Risk Segmentation -->
-        <div id="page4" class="dashboard-page">
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <h3>High-Risk Members</h3>
-                    <div class="kpi-value" id="kpi-high-risk">0</div>
-                    <div class="kpi-subtitle">Visits <10 OR Days >30</div>
-                </div>
-                <div class="kpi-card">
-                    <h3>Retention Opportunities</h3>
-                    <div class="kpi-value" id="kpi-retention-opp">0</div>
-                    <div class="kpi-subtitle">At-Risk But Active</div>
-                </div>
-            </div>
-
-            <div class="chart-grid">
-                <div class="chart-container full-width">
-                    <h3>Churn Rate Heatmap: Age Group vs Membership Type</h3>
-                    <canvas id="heatmapChart"></canvas>
-                </div>
-            </div>
-
-            <div class="table-container">
-                <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.3rem; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px;">Top 20 At-Risk Members</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Member ID</th>
-                            <th>Age</th>
-                            <th>Membership</th>
-                            <th>Visits/Month</th>
-                            <th>Days Since Last Visit</th>
-                            <th>Risk Status</th>
-                            <th>Churn</th>
-                        </tr>
-                    </thead>
-                    <tbody id="atRiskTableBody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
     </div>
 
-    <!-- Footer -->
-        <!-- Footer -->
-        <div class="footer">
-            <p>&copy; 2025 Lee Yih Ven | Data-Driven Solutions</p>
+    <div class="tool">
+      <div class="filters">
+        <div class="ft">Dashboard filters</div>
+        <div class="fs">Filter members to explore specific segments and risk profiles</div>
+        <div class="filters-grid">
+          <div class="filter-group">
+            <label for="membershipFilter">Membership Type</label>
+            <select id="membershipFilter"><option value="all">All Memberships</option></select>
+          </div>
+          <div class="filter-group">
+            <label for="ageFilter">Age Group</label>
+            <select id="ageFilter"><option value="all">All Age Groups</option></select>
+          </div>
+          <div class="filter-group">
+            <label for="activityFilter">Activity Level</label>
+            <select id="activityFilter"><option value="all">All Activity Levels</option></select>
+          </div>
+          <div class="filter-group">
+            <label for="churnFilter">Churn Status</label>
+            <select id="churnFilter"><option value="all">All Members</option><option value="Yes">Churned</option><option value="No">Active</option></select>
+          </div>
         </div>
+      </div>
+
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Member Retention Overview</button>
+        <button class="pbtn" data-p="2">Activity &amp; Engagement</button>
+        <button class="pbtn" data-p="3">Behavioral Trends</button>
+        <button class="pbtn" data-p="4">Risk Segmentation</button>
+      </div>
+
+      <!-- P1 Member Retention Overview -->
+      <div class="page active" id="p1">
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="kpi-total">0</div><div class="l">Total Members</div><div class="s">Members Analyzed</div></div>
+          <div class="kpi"><div class="v" id="kpi-churn-rate">0%</div><div class="l">Overall Churn Rate</div><div class="s">Members Who Left</div></div>
+          <div class="kpi"><div class="v" id="kpi-at-risk">0</div><div class="l">At-Risk Members</div><div class="s">Require Attention</div></div>
+          <div class="kpi"><div class="v" id="kpi-avg-visits">0</div><div class="l">Avg Visits / Month</div><div class="s">Member Engagement</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Churn distribution</div><div class="cs">Churned vs active members across the current selection</div><div class="cwrap"><canvas id="churnPieChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Churn rate by membership type</div><div class="cs">Which plans lose members the fastest</div><div class="cwrap"><canvas id="membershipChurnChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Churn rate by age group</div><div class="cs">Drop-off across age bands</div><div class="cwrap"><canvas id="ageChurnChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+      </div>
+
+      <!-- P2 Activity & Engagement -->
+      <div class="page" id="p2">
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Visits per month by membership type</div><div class="cs">Average monthly visits, churned vs retained members</div><div class="cwrap lg"><canvas id="visitsComparisonChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Activity level breakdown</div><div class="cs">Member count, churn and engagement by activity tier</div>
+            <div style="overflow-x:auto"><table class="pl"><thead><tr><th>Activity Level</th><th>Total Members</th><th>Churned Members</th><th>Churn Rate</th><th>Avg Visits/Month</th></tr></thead><tbody id="activityTableBody"></tbody></table></div>
+            <div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Visits vs workout duration</div><div class="cs">Each point is a member, coloured by churn status</div><div class="cwrap lg"><canvas id="scatterChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+      </div>
+
+      <!-- P3 Behavioral Trends -->
+      <div class="page" id="p3">
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Favorite exercise distribution</div><div class="cs">How members split across exercise types</div><div class="cwrap"><canvas id="exerciseChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Churn rate by favorite exercise</div><div class="cs">Drop-off rate within each exercise group</div><div class="cwrap"><canvas id="exerciseChurnChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Days since last visit vs membership tenure</div><div class="cs">Each point is a member, coloured by churn status</div><div class="cwrap lg"><canvas id="tenureScatterChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Workout duration distribution by churn status</div><div class="cs">Member count per duration band, churned vs active</div><div class="cwrap lg"><canvas id="durationDistChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+      </div>
+
+      <!-- P4 Risk Segmentation -->
+      <div class="page" id="p4">
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="kpi-high-risk">0</div><div class="l">High-Risk Members</div><div class="s">At risk, still active</div></div>
+          <div class="kpi"><div class="v" id="kpi-retention-opp">0</div><div class="l">Retention Opportunities</div><div class="s">At risk but visiting 10+ / month</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Churn rate: age group vs membership type</div><div class="cs">Churn rate by age band, split by plan</div><div class="cwrap lg"><canvas id="heatmapChart"></canvas></div><div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Top 20 at-risk members</div><div class="cs">Lowest engagement first: the members to check on this week</div>
+            <div style="overflow-x:auto"><table class="pl"><thead><tr><th>Member ID</th><th>Age</th><th>Membership</th><th>Visits/Month</th><th>Days Since Last Visit</th><th>Risk Status</th><th>Churn</th></tr></thead><tbody id="atRiskTableBody"></tbody></table></div>
+            <div class="csrc">Source: gym member activity dataset (150 members).</div></div>
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <script>
-        // Member Data (Embedded from dataset - 150 members)
-        const memberData = [
-            {id:1,name:"Unknown",age:19,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Pull-ups",duration:93,calories:214,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36.6,days_since:1010},
-            {id:2,name:"Shanza",age:19,age_group:"18-25",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Squats",duration:37,calories:436,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20.2,days_since:542},
-            {id:3,name:"Ubaidullah",age:52,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:4,activity:"Low",exercise:"Bench Press",duration:98,calories:523,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:10.8,days_since:245},
-            {id:4,name:"Mansoor Ahmed",age:52,age_group:"46-55",gender:"Male",membership:"Monthly",visits:24,activity:"High",exercise:"Pull-ups",duration:66,calories:282,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.1,days_since:166},
-            {id:5,name:"Hanzala",age:32,age_group:"26-35",gender:"Male",membership:"Monthly",visits:18,activity:"Medium",exercise:"Bench Press",duration:32,calories:522,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:37.8,days_since:981},
-            {id:6,name:"Arsalan Zafar",age:53,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:23,activity:"High",exercise:"Deadlift",duration:102,calories:250,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38.1,days_since:1062},
-            {id:7,name:"Kumail",age:46,age_group:"46-55",gender:"Male",membership:"Monthly",visits:7,activity:"Low",exercise:"Squats",duration:33,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:26.9,days_since:761},
-            {id:8,name:"Jahanzaib",age:36,age_group:"36-45",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Deadlift",duration:112,calories:722,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:42,days_since:1191},
-            {id:9,name:"M. Talha",age:41,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:22,activity:"High",exercise:"Squats",duration:42,calories:226,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:35.5,days_since:717},
-            {id:10,name:"Ayesha",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:19,activity:"Medium",exercise:"Pull-ups",duration:74,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.5,days_since:1140},
-            {id:11,name:"Ammad",age:23,age_group:"18-25",gender:"Male",membership:"Yearly",visits:11,activity:"Medium",exercise:"Bench Press",duration:56,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38,days_since:1114},
-            {id:12,name:"Hammad Arif",age:22,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:5,activity:"Low",exercise:"Deadlift",duration:77,calories:529,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:34,days_since:857},
-            {id:13,name:"Eman",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:15,activity:"Medium",exercise:"Squats",duration:60,calories:436,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.6,days_since:473},
-            {id:14,name:"Laiba",age:22,age_group:"18-25",gender:"Female",membership:"Yearly",visits:17,activity:"Medium",exercise:"Treadmill",duration:37,calories:597,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.5,days_since:41},
-            {id:15,name:"Saeed Mchboob",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:19,activity:"Medium",exercise:"Treadmill",duration:31,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:33.4,days_since:936},
-            {id:16,name:"Laraib",age:49,age_group:"46-55",gender:"Female",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Treadmill",duration:86,calories:542,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.9,days_since:525},
-            {id:17,name:"Usman (Bekhri)",age:29,age_group:"26-35",gender:"Male",membership:"Yearly",visits:15,activity:"Medium",exercise:"Pull-ups",duration:34,calories:413,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.5,days_since:136},
-            {id:18,name:"Sidra",age:36,age_group:"36-45",gender:"Female",membership:"Yearly",visits:21,activity:"High",exercise:"Squats",duration:76,calories:376,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:41,days_since:896},
-            {id:19,name:"Amcer Taimoor",age:45,age_group:"36-45",gender:"Male",membership:"Yearly",visits:12,activity:"Medium",exercise:"Deadlift",duration:112,calories:508,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13,days_since:355},
-            {id:20,name:"Aiman",age:28,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:17,activity:"Medium",exercise:"Squats",duration:44,calories:371,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:281},
-            {id:21,name:"Lubna",age:34,age_group:"26-35",gender:"Female",membership:"Monthly",visits:24,activity:"High",exercise:"Cycling",duration:43,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.5,days_since:369},
-            {id:22,name:"Humayun Shahzad",age:39,age_group:"36-45",gender:"Male",membership:"Yearly",visits:23,activity:"High",exercise:"Treadmill",duration:58,calories:453,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28.9,days_since:492},
-            {id:23,name:"Aena",age:20,age_group:"18-25",gender:"Female",membership:"Yearly",visits:24,activity:"High",exercise:"Pull-ups",duration:47,calories:625,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.3,days_since:375},
-            {id:24,name:"Isfahan",age:27,age_group:"26-35",gender:"Male",membership:"Yearly",visits:17,activity:"Medium",exercise:"Squats",duration:49,calories:613,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:33.6,days_since:837},
-            {id:25,name:"Shehnaz",age:null,age_group:"56+",gender:"Female",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Squats",duration:30,calories:256,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.5,days_since:79},
-            {id:26,name:"Qasim Mughal",age:39,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Deadlift",duration:114,calories:574,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:26.1,days_since:613},
-            {id:27,name:"Alisha",age:25,age_group:"18-25",gender:"Female",membership:"Monthly",visits:14,activity:"Medium",exercise:"Pull-ups",duration:71,calories:518,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.9,days_since:241},
-            {id:28,name:"Adeel Abbas",age:29,age_group:"26-35",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Cycling",duration:109,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28.3,days_since:757},
-            {id:29,name:"Daim",age:29,age_group:"26-35",gender:"Male",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Treadmill",duration:33,calories:492,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:21,days_since:405},
-            {id:30,name:"M.Fahad",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:14,activity:"Medium",exercise:"Treadmill",duration:91,calories:469,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:41.2,days_since:1128},
-            {id:31,name:"Fozia",age:51,age_group:"46-55",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Treadmill",duration:113,calories:748,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:12.7,days_since:168},
-            {id:32,name:"Kamran Abbas",age:null,age_group:"56+",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Cycling",duration:109,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:39.5,days_since:985},
-            {id:33,name:"Kanwal",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:19,activity:"Medium",exercise:"Bench Press",duration:33,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.7,days_since:309},
-            {id:34,name:"Ali Hassan",age:54,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Squats",duration:80,calories:374,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34.3,days_since:1030},
-            {id:35,name:"M. Hamza",age:39,age_group:"36-45",gender:"Male",membership:"Monthly",visits:4,activity:"Low",exercise:"Squats",duration:78,calories:505,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:23.8,days_since:582},
-            {id:36,name:"Azan Butt",age:47,age_group:"46-55",gender:"Male",membership:"Monthly",visits:6,activity:"Low",exercise:"Bench Press",duration:53,calories:377,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.2,days_since:206},
-            {id:37,name:"Tayyaba",age:53,age_group:"46-55",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Bench Press",duration:104,calories:529,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:37.1,days_since:941},
-            {id:38,name:"Zareen",age:44,age_group:"36-45",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Deadlift",duration:82,calories:575,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:31.2,days_since:828},
-            {id:39,name:"Ayat",age:36,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Cycling",duration:87,calories:481,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.4,days_since:274},
-            {id:40,name:"Unknown",age:51,age_group:"46-55",gender:"Male",membership:"Monthly",visits:20,activity:"Medium",exercise:"Deadlift",duration:89,calories:261,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.8,days_since:210},
-            {id:41,name:"Ali Hamza",age:43,age_group:"36-45",gender:"Male",membership:"Monthly",visits:19,activity:"Medium",exercise:"Pull-ups",duration:58,calories:767,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:23.4,days_since:585},
-            {id:42,name:"Ali Tanveer",age:44,age_group:"36-45",gender:"Male",membership:"Yearly",visits:13,activity:"Medium",exercise:"Treadmill",duration:37,calories:474,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28,days_since:851},
-            {id:43,name:"Maryam",age:42,age_group:"36-45",gender:"Female",membership:"Monthly",visits:24,activity:"High",exercise:"Deadlift",duration:43,calories:263,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.4,days_since:401},
-            {id:44,name:"Aalia",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:13,activity:"Medium",exercise:"Cycling",duration:106,calories:292,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:16.8,days_since:152},
-            {id:45,name:"Zara",age:20,age_group:"18-25",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Deadlift",duration:108,calories:627,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.2,days_since:657},
-            {id:46,name:"Unknown",age:null,age_group:"56+",gender:"Male",membership:"Quarterly",visits:6,activity:"Low",exercise:"Treadmill",duration:74,calories:209,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:42.6,days_since:1092},
-            {id:47,name:"Khadija",age:34,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:14,activity:"Medium",exercise:"Pull-ups",duration:53,calories:590,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:33.6,days_since:705},
-            {id:48,name:"Fatima",age:54,age_group:"46-55",gender:"Female",membership:"Quarterly",visits:6,activity:"Low",exercise:"Treadmill",duration:55,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:30.6,days_since:663},
-            {id:49,name:"Unknown",age:43,age_group:"36-45",gender:"Male",membership:"Yearly",visits:8,activity:"Low",exercise:"Squats",duration:95,calories:315,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:199},
-            {id:50,name:"Asma",age:28,age_group:"26-35",gender:"Female",membership:"Yearly",visits:23,activity:"High",exercise:"Squats",duration:71,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:12.7,days_since:370},
-            {id:51,name:"Uzma",age:41,age_group:"36-45",gender:"Female",membership:"Monthly",visits:6,activity:"Low",exercise:"Bench Press",duration:30,calories:471,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:34,days_since:637},
-            {id:52,name:"Nadia",age:43,age_group:"36-45",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Treadmill",duration:78,calories:390,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38.9,days_since:1117},
-            {id:53,name:"Bilal Ahmed",age:null,age_group:"56+",gender:"Male",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:57,calories:323,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36.7,days_since:1067},
-            {id:54,name:"Unknown",age:33,age_group:"26-35",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Squats",duration:80,calories:448,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:42.9,days_since:1040},
-            {id:55,name:"Hafsa",age:35,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:12,activity:"Medium",exercise:"Squats",duration:117,calories:274,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.2,days_since:177},
-            {id:56,name:"Kanzal Hussain",age:45,age_group:"36-45",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Deadlift",duration:69,calories:662,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:35.6,days_since:1016},
-            {id:57,name:"Bilal Abbas",age:53,age_group:"46-55",gender:"Male",membership:"Yearly",visits:23,activity:"High",exercise:"Deadlift",duration:37,calories:405,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38.9,days_since:1057},
-            {id:58,name:"Rida",age:53,age_group:"46-55",gender:"Female",membership:"Quarterly",visits:7,activity:"Low",exercise:"Pull-ups",duration:59,calories:342,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:168},
-            {id:59,name:"M-Umer",age:19,age_group:"18-25",gender:"Male",membership:"Yearly",visits:8,activity:"Low",exercise:"Pull-ups",duration:61,calories:642,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38,days_since:846},
-            {id:60,name:"Inaya",age:27,age_group:"26-35",gender:"Female",membership:"Yearly",visits:14,activity:"Medium",exercise:"Treadmill",duration:67,calories:747,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.8,days_since:349},
-            {id:61,name:"Afzal Hussain",age:46,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Squats",duration:40,calories:210,at_risk:0,at_risk_status:"Not At Risk",churn:"No",tenure:12.2,days_since:30},
-            {id:62,name:"Naila",age:34,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:4,activity:"Low",exercise:"Treadmill",duration:50,calories:638,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.5,days_since:336},
-            {id:63,name:"Hammad Zameer",age:47,age_group:"46-55",gender:"Male",membership:"Monthly",visits:7,activity:"Low",exercise:"Deadlift",duration:84,calories:236,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:12.7,days_since:184},
-            {id:64,name:"Unknown",age:23,age_group:"18-25",gender:"Male",membership:"Yearly",visits:19,activity:"Medium",exercise:"Deadlift",duration:77,calories:297,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20.7,days_since:281},
-            {id:65,name:"Kiran",age:53,age_group:"46-55",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Treadmill",duration:54,calories:754,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.1,days_since:1001},
-            {id:66,name:"Saad Ali",age:53,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:7,activity:"Low",exercise:"Deadlift",duration:104,calories:404,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:37.1,days_since:1109},
-            {id:67,name:"Jawaria",age:52,age_group:"46-55",gender:"Female",membership:"Monthly",visits:16,activity:"Medium",exercise:"Pull-ups",duration:33,calories:332,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.2,days_since:284},
-            {id:68,name:"Farah",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:15,activity:"Medium",exercise:"Cycling",duration:93,calories:267,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.6,days_since:149},
-            {id:69,name:"Fareeha",age:27,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:4,activity:"Low",exercise:"Deadlift",duration:81,calories:546,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:12.9,days_since:321},
-            {id:70,name:"Hassan Ali",age:25,age_group:"18-25",gender:"Male",membership:"Yearly",visits:19,activity:"Medium",exercise:"Cycling",duration:53,calories:773,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:23.4,days_since:639},
-            {id:71,name:"Qazi Umais.",age:23,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Bench Press",duration:108,calories:702,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.6,days_since:174},
-            {id:72,name:"M. Ehsan.",age:48,age_group:"46-55",gender:"Male",membership:"Monthly",visits:null,activity:"Low",exercise:"Bench Press",duration:68,calories:322,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:17.9,days_since:318},
-            {id:73,name:"Faheem Ashraf",age:18,age_group:"18-25",gender:"Male",membership:"Yearly",visits:null,activity:"Low",exercise:"Pull-ups",duration:84,calories:569,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.9,days_since:274},
-            {id:74,name:"Eshal",age:36,age_group:"36-45",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Deadlift",duration:33,calories:596,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:12.8,days_since:35},
-            {id:75,name:"M. Tayyab",age:22,age_group:"18-25",gender:"Male",membership:"Monthly",visits:24,activity:"High",exercise:"Pull-ups",duration:60,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:319},
-            {id:76,name:"Bisma",age:24,age_group:"18-25",gender:"Female",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Deadlift",duration:40,calories:628,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:35.5,days_since:685},
-            {id:77,name:"Unknown",age:49,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:12,activity:"Medium",exercise:"Squats",duration:58,calories:773,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:30.8,days_since:777},
-            {id:78,name:"Adeena",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:5,activity:"Low",exercise:"Bench Press",duration:61,calories:632,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:25.7,days_since:676},
-            {id:79,name:"Aneesa",age:40,age_group:"36-45",gender:"Female",membership:"Monthly",visits:22,activity:"High",exercise:"Cycling",duration:104,calories:533,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36.3,days_since:721},
-            {id:80,name:"Batool",age:21,age_group:"18-25",gender:"Female",membership:"Quarterly",visits:19,activity:"Medium",exercise:"Treadmill",duration:113,calories:266,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18,days_since:499},
-            {id:81,name:"Daniya",age:19,age_group:"18-25",gender:"Female",membership:"Monthly",visits:18,activity:"Medium",exercise:"Bench Press",duration:92,calories:359,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:27.6,days_since:477},
-            {id:82,name:"Dr Mustafa",age:39,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:23,activity:"High",exercise:"Squats",duration:90,calories:504,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:24.8,days_since:448},
-            {id:83,name:"Malik Mohsin",age:38,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Squats",duration:83,calories:229,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:16.8,days_since:509},
-            {id:84,name:"Farah",age:40,age_group:"36-45",gender:"Female",membership:"Monthly",visits:22,activity:"High",exercise:"Treadmill",duration:109,calories:486,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:27.6,days_since:574},
-            {id:85,name:"Noman Butt",age:32,age_group:"26-35",gender:"Male",membership:"Yearly",visits:7,activity:"Low",exercise:"Deadlift",duration:79,calories:723,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:41.1,days_since:1046},
-            {id:86,name:"Ghania",age:47,age_group:"46-55",gender:"Female",membership:"Monthly",visits:18,activity:"Medium",exercise:"Squats",duration:115,calories:662,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.5,days_since:690},
-            {id:87,name:"Noman Tariq.",age:null,age_group:"56+",gender:"Male",membership:"Monthly",visits:20,activity:"Medium",exercise:"Squats",duration:72,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:901},
-            {id:88,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:23,activity:"High",exercise:"Cycling",duration:78,calories:426,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:16.2,days_since:465},
-            {id:89,name:"Zohaib Raza",age:33,age_group:"26-35",gender:"Male",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:69,calories:690,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:27.4,days_since:613},
-            {id:90,name:"Habiba",age:19,age_group:"18-25",gender:"Female",membership:"Monthly",visits:14,activity:"Medium",exercise:"Deadlift",duration:51,calories:353,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36,days_since:890},
-            {id:91,name:"Hajra",age:37,age_group:"36-45",gender:"Female",membership:"Monthly",visits:6,activity:"Low",exercise:"Pull-ups",duration:114,calories:268,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:733},
-            {id:92,name:"Jannat",age:19,age_group:"18-25",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Cycling",duration:30,calories:417,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.8,days_since:483},
-            {id:93,name:"Imaan",age:32,age_group:"26-35",gender:"Female",membership:"Monthly",visits:16,activity:"Medium",exercise:"Deadlift",duration:97,calories:365,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:41.4,days_since:1034},
-            {id:94,name:"Izza",age:18,age_group:"18-25",gender:"Female",membership:"Monthly",visits:23,activity:"High",exercise:"Pull-ups",duration:78,calories:568,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.4,days_since:417},
-            {id:95,name:"Ayeza",age:43,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:4,activity:"Low",exercise:"Pull-ups",duration:110,calories:214,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:39.5,days_since:987},
-            {id:96,name:"Sara",age:50,age_group:"46-55",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Squats",duration:119,calories:503,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:732},
-            {id:97,name:"Sajjal",age:45,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Bench Press",duration:103,calories:267,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.4,days_since:279},
-            {id:98,name:"Mahira",age:29,age_group:"26-35",gender:"Female",membership:"Yearly",visits:11,activity:"Medium",exercise:"Treadmill",duration:82,calories:580,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:1180},
-            {id:99,name:"Jamila",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Treadmill",duration:61,calories:372,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:39,days_since:976},
-            {id:100,name:"Kalsoom",age:30,age_group:"26-35",gender:"Female",membership:"Monthly",visits:24,activity:"High",exercise:"Bench Press",duration:62,calories:415,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34,days_since:773},
-            {id:101,name:"Unknown",age:41,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Deadlift",duration:65,calories:308,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20.9,days_since:547},
-            {id:102,name:"Saim (small)",age:46,age_group:"46-55",gender:"Male",membership:"Yearly",visits:7,activity:"Low",exercise:"Pull-ups",duration:30,calories:617,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:305},
-            {id:103,name:"Kanwal",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:18,activity:"Medium",exercise:"Bench Press",duration:75,calories:718,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:31.9,days_since:934},
-            {id:104,name:"Kiswa",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Treadmill",duration:108,calories:666,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:21,days_since:597},
-            {id:105,name:"Qazi Iqbal",age:31,age_group:"26-35",gender:"Male",membership:"Yearly",visits:20,activity:"Medium",exercise:"Deadlift",duration:79,calories:560,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.7,days_since:596},
-            {id:106,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Monthly",visits:4,activity:"Low",exercise:"Treadmill",duration:67,calories:279,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:35.3,days_since:939},
-            {id:107,name:"Hanan",age:27,age_group:"26-35",gender:"Male",membership:"Quarterly",visits:16,activity:"Medium",exercise:"Bench Press",duration:46,calories:550,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.3,days_since:1132},
-            {id:108,name:"Khaula",age:23,age_group:"18-25",gender:"Female",membership:"Yearly",visits:5,activity:"Low",exercise:"Pull-ups",duration:51,calories:779,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:14.5,days_since:186},
-            {id:109,name:"Dr Ehtesham",age:50,age_group:"46-55",gender:"Male",membership:"Monthly",visits:14,activity:"Medium",exercise:"Squats",duration:68,calories:663,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34.7,days_since:1038},
-            {id:110,name:"Shaista",age:22,age_group:"18-25",gender:"Female",membership:"Quarterly",visits:11,activity:"Medium",exercise:"Deadlift",duration:84,calories:230,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.5,days_since:839},
-            {id:111,name:"Unknown",age:53,age_group:"46-55",gender:"Male",membership:"Monthly",visits:6,activity:"Low",exercise:"Pull-ups",duration:35,calories:706,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:13.6,days_since:354},
-            {id:112,name:"Laraib",age:23,age_group:"18-25",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:48,calories:778,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.2,days_since:656},
-            {id:113,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Monthly",visits:4,activity:"Low",exercise:"Pull-ups",duration:41,calories:341,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:29.2,days_since:881},
-            {id:114,name:"Unknown",age:46,age_group:"46-55",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Squats",duration:112,calories:628,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:304},
-            {id:115,name:"Noor",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:5,activity:"Low",exercise:"Pull-ups",duration:69,calories:703,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.7,days_since:496},
-            {id:116,name:"Unknown",age:20,age_group:"18-25",gender:"Female",membership:"Monthly",visits:17,activity:"Medium",exercise:"Cycling",duration:74,calories:349,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:43,days_since:1238},
-            {id:117,name:"Ahsan",age:39,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:7,activity:"Low",exercise:"Pull-ups",duration:83,calories:788,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:29.7,days_since:894},
-            {id:118,name:"Jamila",age:52,age_group:"46-55",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Treadmill",duration:54,calories:689,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.6,days_since:149},
-            {id:119,name:"Nadia",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:59,calories:465,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:478},
-            {id:120,name:"Unknown",age:null,age_group:"56+",gender:"Male",membership:"Monthly",visits:20,activity:"Medium",exercise:"Bench Press",duration:56,calories:537,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:24.4,days_since:724},
-            {id:121,name:"Jack",age:23,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Squats",duration:61,calories:293,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:22.1,days_since:369},
-            {id:122,name:"Qamar",age:52,age_group:"46-55",gender:"Female",membership:"Yearly",visits:12,activity:"Medium",exercise:"Bench Press",duration:98,calories:432,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:22.3,days_since:680},
-            {id:123,name:"Unknown",age:39,age_group:"36-45",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Treadmill",duration:106,calories:600,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:24.2,days_since:448},
-            {id:124,name:"Sakina",age:52,age_group:"46-55",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Pull-ups",duration:41,calories:249,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:1051},
-            {id:125,name:"Unknown",age:48,age_group:"46-55",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Treadmill",duration:118,calories:420,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:28.8,days_since:544},
-            {id:126,name:"Unknown",age:21,age_group:"18-25",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Cycling",duration:81,calories:540,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:41.5,days_since:979},
-            {id:127,name:"Thanos",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:17,activity:"Medium",exercise:"Treadmill",duration:95,calories:244,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34.8,days_since:809},
-            {id:128,name:"Saiyadda",age:20,age_group:"18-25",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Treadmill",duration:118,calories:690,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:26.4,days_since:724},
-            {id:129,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Yearly",visits:null,activity:"Low",exercise:"Pull-ups",duration:115,calories:478,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:23.7,days_since:436},
-            {id:130,name:"Salma",age:38,age_group:"36-45",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Deadlift",duration:86,calories:759,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.2,days_since:149},
-            {id:131,name:"Vicky",age:33,age_group:"26-35",gender:"Male",membership:"Monthly",visits:6,activity:"Low",exercise:"Deadlift",duration:65,calories:769,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:350},
-            {id:132,name:"Unknown",age:44,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:5,activity:"Low",exercise:"Deadlift",duration:74,calories:246,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:39.1,days_since:1023},
-            {id:133,name:"Sam",age:39,age_group:"36-45",gender:"Male",membership:"Yearly",visits:20,activity:"Medium",exercise:"Deadlift",duration:101,calories:652,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:17.6,days_since:226},
-            {id:134,name:"Aizaz",age:48,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Deadlift",duration:46,calories:759,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.9,days_since:476},
-            {id:135,name:"Tahira",age:37,age_group:"36-45",gender:"Female",membership:"Monthly",visits:4,activity:"Low",exercise:"Deadlift",duration:41,calories:267,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:20.9,days_since:397},
-            {id:136,name:"Wafa",age:38,age_group:"36-45",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Deadlift",duration:87,calories:655,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:30.7,days_since:710},
-            {id:137,name:"Wajeeha",age:31,age_group:"26-35",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Pull-ups",duration:98,calories:682,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:21.4,days_since:541},
-            {id:138,name:"Unknown",age:29,age_group:"26-35",gender:"Male",membership:"Yearly",visits:12,activity:"Medium",exercise:"Pull-ups",duration:74,calories:502,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.3,days_since:115},
-            {id:139,name:"Zainab",age:24,age_group:"18-25",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Cycling",duration:69,calories:257,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:23.3,days_since:575},
-            {id:140,name:"Kawish",age:40,age_group:"36-45",gender:"Male",membership:"Monthly",visits:7,activity:"Low",exercise:"Bench Press",duration:110,calories:601,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:16.8,days_since:396},
-            {id:141,name:"Unknown",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:8,activity:"Low",exercise:"Deadlift",duration:86,calories:274,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:10.5,days_since:123},
-            {id:142,name:"Tasneem",age:23,age_group:"18-25",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Bench Press",duration:58,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:32.5,days_since:708},
-            {id:143,name:"Nawal",age:36,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Cycling",duration:49,calories:338,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.5,days_since:86},
-            {id:144,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Yearly",visits:9,activity:"Low",exercise:"Squats",duration:113,calories:538,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:12.7,days_since:307},
-            {id:145,name:"Sajid",age:22,age_group:"18-25",gender:"Male",membership:"Yearly",visits:6,activity:"Low",exercise:"Squats",duration:116,calories:441,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:27.5,days_since:652},
-            {id:146,name:"Mohammed",age:54,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:14,activity:"Medium",exercise:"Pull-ups",duration:64,calories:733,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20,days_since:469},
-            {id:147,name:"Haseena",age:45,age_group:"36-45",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Bench Press",duration:95,calories:641,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.9,days_since:860},
-            {id:148,name:"Hassaan",age:54,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:14,activity:"Medium",exercise:"Deadlift",duration:80,calories:471,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28.4,days_since:611},
-            {id:149,name:"Najat",age:26,age_group:"26-35",gender:"Female",membership:"Monthly",visits:4,activity:"Low",exercise:"Bench Press",duration:50,calories:473,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:27.2,days_since:501},
-            {id:150,name:"Nuha",age:43,age_group:"36-45",gender:"Male",membership:"Yearly",visits:22,activity:"High",exercise:"Squats",duration:78,calories:608,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.2,days_since:79}
-        ];
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
 
-        let filteredData = [...memberData];
-        let charts = {};
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            populateFilters();
-            attachFilterListeners();
-            updateDashboard();
-        });
+  // Scheme E chart palette (blue family + semantic green/red for churn / risk)
+  const COL = { dark:'#001F3F', gold:'#004B87', brown:'#6A9BD1', green:'#2E7D6F', red:'#B5503C', sand:'#AEC2D6' };
+  const GRID = '#E8ECF1';
 
-        function populateFilters() {
-            const memberships = [...new Set(memberData.map(m => m.membership))].sort();
-            const ageGroups = [...new Set(memberData.map(m => m.age_group))].sort();
-            const activities = [...new Set(memberData.map(m => m.activity))].sort();
+  // ===== DATA (gym member activity dataset, 150 members), ported verbatim from the source dashboard =====
+  const memberData = [
+    {id:1,name:"Unknown",age:19,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Pull-ups",duration:93,calories:214,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36.6,days_since:1010},
+    {id:2,name:"Shanza",age:19,age_group:"18-25",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Squats",duration:37,calories:436,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20.2,days_since:542},
+    {id:3,name:"Ubaidullah",age:52,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:4,activity:"Low",exercise:"Bench Press",duration:98,calories:523,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:10.8,days_since:245},
+    {id:4,name:"Mansoor Ahmed",age:52,age_group:"46-55",gender:"Male",membership:"Monthly",visits:24,activity:"High",exercise:"Pull-ups",duration:66,calories:282,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.1,days_since:166},
+    {id:5,name:"Hanzala",age:32,age_group:"26-35",gender:"Male",membership:"Monthly",visits:18,activity:"Medium",exercise:"Bench Press",duration:32,calories:522,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:37.8,days_since:981},
+    {id:6,name:"Arsalan Zafar",age:53,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:23,activity:"High",exercise:"Deadlift",duration:102,calories:250,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38.1,days_since:1062},
+    {id:7,name:"Kumail",age:46,age_group:"46-55",gender:"Male",membership:"Monthly",visits:7,activity:"Low",exercise:"Squats",duration:33,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:26.9,days_since:761},
+    {id:8,name:"Jahanzaib",age:36,age_group:"36-45",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Deadlift",duration:112,calories:722,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:42,days_since:1191},
+    {id:9,name:"M. Talha",age:41,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:22,activity:"High",exercise:"Squats",duration:42,calories:226,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:35.5,days_since:717},
+    {id:10,name:"Ayesha",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:19,activity:"Medium",exercise:"Pull-ups",duration:74,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.5,days_since:1140},
+    {id:11,name:"Ammad",age:23,age_group:"18-25",gender:"Male",membership:"Yearly",visits:11,activity:"Medium",exercise:"Bench Press",duration:56,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38,days_since:1114},
+    {id:12,name:"Hammad Arif",age:22,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:5,activity:"Low",exercise:"Deadlift",duration:77,calories:529,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:34,days_since:857},
+    {id:13,name:"Eman",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:15,activity:"Medium",exercise:"Squats",duration:60,calories:436,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.6,days_since:473},
+    {id:14,name:"Laiba",age:22,age_group:"18-25",gender:"Female",membership:"Yearly",visits:17,activity:"Medium",exercise:"Treadmill",duration:37,calories:597,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.5,days_since:41},
+    {id:15,name:"Saeed Mchboob",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:19,activity:"Medium",exercise:"Treadmill",duration:31,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:33.4,days_since:936},
+    {id:16,name:"Laraib",age:49,age_group:"46-55",gender:"Female",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Treadmill",duration:86,calories:542,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.9,days_since:525},
+    {id:17,name:"Usman (Bekhri)",age:29,age_group:"26-35",gender:"Male",membership:"Yearly",visits:15,activity:"Medium",exercise:"Pull-ups",duration:34,calories:413,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.5,days_since:136},
+    {id:18,name:"Sidra",age:36,age_group:"36-45",gender:"Female",membership:"Yearly",visits:21,activity:"High",exercise:"Squats",duration:76,calories:376,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:41,days_since:896},
+    {id:19,name:"Amcer Taimoor",age:45,age_group:"36-45",gender:"Male",membership:"Yearly",visits:12,activity:"Medium",exercise:"Deadlift",duration:112,calories:508,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13,days_since:355},
+    {id:20,name:"Aiman",age:28,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:17,activity:"Medium",exercise:"Squats",duration:44,calories:371,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:281},
+    {id:21,name:"Lubna",age:34,age_group:"26-35",gender:"Female",membership:"Monthly",visits:24,activity:"High",exercise:"Cycling",duration:43,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.5,days_since:369},
+    {id:22,name:"Humayun Shahzad",age:39,age_group:"36-45",gender:"Male",membership:"Yearly",visits:23,activity:"High",exercise:"Treadmill",duration:58,calories:453,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28.9,days_since:492},
+    {id:23,name:"Aena",age:20,age_group:"18-25",gender:"Female",membership:"Yearly",visits:24,activity:"High",exercise:"Pull-ups",duration:47,calories:625,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.3,days_since:375},
+    {id:24,name:"Isfahan",age:27,age_group:"26-35",gender:"Male",membership:"Yearly",visits:17,activity:"Medium",exercise:"Squats",duration:49,calories:613,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:33.6,days_since:837},
+    {id:25,name:"Shehnaz",age:null,age_group:"56+",gender:"Female",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Squats",duration:30,calories:256,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.5,days_since:79},
+    {id:26,name:"Qasim Mughal",age:39,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Deadlift",duration:114,calories:574,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:26.1,days_since:613},
+    {id:27,name:"Alisha",age:25,age_group:"18-25",gender:"Female",membership:"Monthly",visits:14,activity:"Medium",exercise:"Pull-ups",duration:71,calories:518,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.9,days_since:241},
+    {id:28,name:"Adeel Abbas",age:29,age_group:"26-35",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Cycling",duration:109,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28.3,days_since:757},
+    {id:29,name:"Daim",age:29,age_group:"26-35",gender:"Male",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Treadmill",duration:33,calories:492,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:21,days_since:405},
+    {id:30,name:"M.Fahad",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:14,activity:"Medium",exercise:"Treadmill",duration:91,calories:469,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:41.2,days_since:1128},
+    {id:31,name:"Fozia",age:51,age_group:"46-55",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Treadmill",duration:113,calories:748,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:12.7,days_since:168},
+    {id:32,name:"Kamran Abbas",age:null,age_group:"56+",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Cycling",duration:109,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:39.5,days_since:985},
+    {id:33,name:"Kanwal",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:19,activity:"Medium",exercise:"Bench Press",duration:33,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.7,days_since:309},
+    {id:34,name:"Ali Hassan",age:54,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Squats",duration:80,calories:374,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34.3,days_since:1030},
+    {id:35,name:"M. Hamza",age:39,age_group:"36-45",gender:"Male",membership:"Monthly",visits:4,activity:"Low",exercise:"Squats",duration:78,calories:505,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:23.8,days_since:582},
+    {id:36,name:"Azan Butt",age:47,age_group:"46-55",gender:"Male",membership:"Monthly",visits:6,activity:"Low",exercise:"Bench Press",duration:53,calories:377,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.2,days_since:206},
+    {id:37,name:"Tayyaba",age:53,age_group:"46-55",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Bench Press",duration:104,calories:529,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:37.1,days_since:941},
+    {id:38,name:"Zareen",age:44,age_group:"36-45",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Deadlift",duration:82,calories:575,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:31.2,days_since:828},
+    {id:39,name:"Ayat",age:36,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Cycling",duration:87,calories:481,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.4,days_since:274},
+    {id:40,name:"Unknown",age:51,age_group:"46-55",gender:"Male",membership:"Monthly",visits:20,activity:"Medium",exercise:"Deadlift",duration:89,calories:261,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.8,days_since:210},
+    {id:41,name:"Ali Hamza",age:43,age_group:"36-45",gender:"Male",membership:"Monthly",visits:19,activity:"Medium",exercise:"Pull-ups",duration:58,calories:767,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:23.4,days_since:585},
+    {id:42,name:"Ali Tanveer",age:44,age_group:"36-45",gender:"Male",membership:"Yearly",visits:13,activity:"Medium",exercise:"Treadmill",duration:37,calories:474,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28,days_since:851},
+    {id:43,name:"Maryam",age:42,age_group:"36-45",gender:"Female",membership:"Monthly",visits:24,activity:"High",exercise:"Deadlift",duration:43,calories:263,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.4,days_since:401},
+    {id:44,name:"Aalia",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:13,activity:"Medium",exercise:"Cycling",duration:106,calories:292,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:16.8,days_since:152},
+    {id:45,name:"Zara",age:20,age_group:"18-25",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Deadlift",duration:108,calories:627,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.2,days_since:657},
+    {id:46,name:"Unknown",age:null,age_group:"56+",gender:"Male",membership:"Quarterly",visits:6,activity:"Low",exercise:"Treadmill",duration:74,calories:209,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:42.6,days_since:1092},
+    {id:47,name:"Khadija",age:34,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:14,activity:"Medium",exercise:"Pull-ups",duration:53,calories:590,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:33.6,days_since:705},
+    {id:48,name:"Fatima",age:54,age_group:"46-55",gender:"Female",membership:"Quarterly",visits:6,activity:"Low",exercise:"Treadmill",duration:55,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:30.6,days_since:663},
+    {id:49,name:"Unknown",age:43,age_group:"36-45",gender:"Male",membership:"Yearly",visits:8,activity:"Low",exercise:"Squats",duration:95,calories:315,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:199},
+    {id:50,name:"Asma",age:28,age_group:"26-35",gender:"Female",membership:"Yearly",visits:23,activity:"High",exercise:"Squats",duration:71,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:12.7,days_since:370},
+    {id:51,name:"Uzma",age:41,age_group:"36-45",gender:"Female",membership:"Monthly",visits:6,activity:"Low",exercise:"Bench Press",duration:30,calories:471,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:34,days_since:637},
+    {id:52,name:"Nadia",age:43,age_group:"36-45",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Treadmill",duration:78,calories:390,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38.9,days_since:1117},
+    {id:53,name:"Bilal Ahmed",age:null,age_group:"56+",gender:"Male",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:57,calories:323,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36.7,days_since:1067},
+    {id:54,name:"Unknown",age:33,age_group:"26-35",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Squats",duration:80,calories:448,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:42.9,days_since:1040},
+    {id:55,name:"Hafsa",age:35,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:12,activity:"Medium",exercise:"Squats",duration:117,calories:274,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.2,days_since:177},
+    {id:56,name:"Kanzal Hussain",age:45,age_group:"36-45",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Deadlift",duration:69,calories:662,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:35.6,days_since:1016},
+    {id:57,name:"Bilal Abbas",age:53,age_group:"46-55",gender:"Male",membership:"Yearly",visits:23,activity:"High",exercise:"Deadlift",duration:37,calories:405,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38.9,days_since:1057},
+    {id:58,name:"Rida",age:53,age_group:"46-55",gender:"Female",membership:"Quarterly",visits:7,activity:"Low",exercise:"Pull-ups",duration:59,calories:342,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:168},
+    {id:59,name:"M-Umer",age:19,age_group:"18-25",gender:"Male",membership:"Yearly",visits:8,activity:"Low",exercise:"Pull-ups",duration:61,calories:642,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:38,days_since:846},
+    {id:60,name:"Inaya",age:27,age_group:"26-35",gender:"Female",membership:"Yearly",visits:14,activity:"Medium",exercise:"Treadmill",duration:67,calories:747,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.8,days_since:349},
+    {id:61,name:"Afzal Hussain",age:46,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Squats",duration:40,calories:210,at_risk:0,at_risk_status:"Not At Risk",churn:"No",tenure:12.2,days_since:30},
+    {id:62,name:"Naila",age:34,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:4,activity:"Low",exercise:"Treadmill",duration:50,calories:638,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.5,days_since:336},
+    {id:63,name:"Hammad Zameer",age:47,age_group:"46-55",gender:"Male",membership:"Monthly",visits:7,activity:"Low",exercise:"Deadlift",duration:84,calories:236,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:12.7,days_since:184},
+    {id:64,name:"Unknown",age:23,age_group:"18-25",gender:"Male",membership:"Yearly",visits:19,activity:"Medium",exercise:"Deadlift",duration:77,calories:297,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20.7,days_since:281},
+    {id:65,name:"Kiran",age:53,age_group:"46-55",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Treadmill",duration:54,calories:754,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.1,days_since:1001},
+    {id:66,name:"Saad Ali",age:53,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:7,activity:"Low",exercise:"Deadlift",duration:104,calories:404,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:37.1,days_since:1109},
+    {id:67,name:"Jawaria",age:52,age_group:"46-55",gender:"Female",membership:"Monthly",visits:16,activity:"Medium",exercise:"Pull-ups",duration:33,calories:332,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.2,days_since:284},
+    {id:68,name:"Farah",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:15,activity:"Medium",exercise:"Cycling",duration:93,calories:267,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.6,days_since:149},
+    {id:69,name:"Fareeha",age:27,age_group:"26-35",gender:"Female",membership:"Quarterly",visits:4,activity:"Low",exercise:"Deadlift",duration:81,calories:546,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:12.9,days_since:321},
+    {id:70,name:"Hassan Ali",age:25,age_group:"18-25",gender:"Male",membership:"Yearly",visits:19,activity:"Medium",exercise:"Cycling",duration:53,calories:773,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:23.4,days_since:639},
+    {id:71,name:"Qazi Umais.",age:23,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Bench Press",duration:108,calories:702,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:13.6,days_since:174},
+    {id:72,name:"M. Ehsan.",age:48,age_group:"46-55",gender:"Male",membership:"Monthly",visits:null,activity:"Low",exercise:"Bench Press",duration:68,calories:322,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:17.9,days_since:318},
+    {id:73,name:"Faheem Ashraf",age:18,age_group:"18-25",gender:"Male",membership:"Yearly",visits:null,activity:"Low",exercise:"Pull-ups",duration:84,calories:569,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.9,days_since:274},
+    {id:74,name:"Eshal",age:36,age_group:"36-45",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Deadlift",duration:33,calories:596,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:12.8,days_since:35},
+    {id:75,name:"M. Tayyab",age:22,age_group:"18-25",gender:"Male",membership:"Monthly",visits:24,activity:"High",exercise:"Pull-ups",duration:60,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:319},
+    {id:76,name:"Bisma",age:24,age_group:"18-25",gender:"Female",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Deadlift",duration:40,calories:628,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:35.5,days_since:685},
+    {id:77,name:"Unknown",age:49,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:12,activity:"Medium",exercise:"Squats",duration:58,calories:773,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:30.8,days_since:777},
+    {id:78,name:"Adeena",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:5,activity:"Low",exercise:"Bench Press",duration:61,calories:632,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:25.7,days_since:676},
+    {id:79,name:"Aneesa",age:40,age_group:"36-45",gender:"Female",membership:"Monthly",visits:22,activity:"High",exercise:"Cycling",duration:104,calories:533,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36.3,days_since:721},
+    {id:80,name:"Batool",age:21,age_group:"18-25",gender:"Female",membership:"Quarterly",visits:19,activity:"Medium",exercise:"Treadmill",duration:113,calories:266,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18,days_since:499},
+    {id:81,name:"Daniya",age:19,age_group:"18-25",gender:"Female",membership:"Monthly",visits:18,activity:"Medium",exercise:"Bench Press",duration:92,calories:359,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:27.6,days_since:477},
+    {id:82,name:"Dr Mustafa",age:39,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:23,activity:"High",exercise:"Squats",duration:90,calories:504,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:24.8,days_since:448},
+    {id:83,name:"Malik Mohsin",age:38,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Squats",duration:83,calories:229,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:16.8,days_since:509},
+    {id:84,name:"Farah",age:40,age_group:"36-45",gender:"Female",membership:"Monthly",visits:22,activity:"High",exercise:"Treadmill",duration:109,calories:486,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:27.6,days_since:574},
+    {id:85,name:"Noman Butt",age:32,age_group:"26-35",gender:"Male",membership:"Yearly",visits:7,activity:"Low",exercise:"Deadlift",duration:79,calories:723,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:41.1,days_since:1046},
+    {id:86,name:"Ghania",age:47,age_group:"46-55",gender:"Female",membership:"Monthly",visits:18,activity:"Medium",exercise:"Squats",duration:115,calories:662,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.5,days_since:690},
+    {id:87,name:"Noman Tariq.",age:null,age_group:"56+",gender:"Male",membership:"Monthly",visits:20,activity:"Medium",exercise:"Squats",duration:72,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:901},
+    {id:88,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:23,activity:"High",exercise:"Cycling",duration:78,calories:426,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:16.2,days_since:465},
+    {id:89,name:"Zohaib Raza",age:33,age_group:"26-35",gender:"Male",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:69,calories:690,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:27.4,days_since:613},
+    {id:90,name:"Habiba",age:19,age_group:"18-25",gender:"Female",membership:"Monthly",visits:14,activity:"Medium",exercise:"Deadlift",duration:51,calories:353,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:36,days_since:890},
+    {id:91,name:"Hajra",age:37,age_group:"36-45",gender:"Female",membership:"Monthly",visits:6,activity:"Low",exercise:"Pull-ups",duration:114,calories:268,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:733},
+    {id:92,name:"Jannat",age:19,age_group:"18-25",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Cycling",duration:30,calories:417,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.8,days_since:483},
+    {id:93,name:"Imaan",age:32,age_group:"26-35",gender:"Female",membership:"Monthly",visits:16,activity:"Medium",exercise:"Deadlift",duration:97,calories:365,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:41.4,days_since:1034},
+    {id:94,name:"Izza",age:18,age_group:"18-25",gender:"Female",membership:"Monthly",visits:23,activity:"High",exercise:"Pull-ups",duration:78,calories:568,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.4,days_since:417},
+    {id:95,name:"Ayeza",age:43,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:4,activity:"Low",exercise:"Pull-ups",duration:110,calories:214,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:39.5,days_since:987},
+    {id:96,name:"Sara",age:50,age_group:"46-55",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Squats",duration:119,calories:503,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:732},
+    {id:97,name:"Sajjal",age:45,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Bench Press",duration:103,calories:267,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:18.4,days_since:279},
+    {id:98,name:"Mahira",age:29,age_group:"26-35",gender:"Female",membership:"Yearly",visits:11,activity:"Medium",exercise:"Treadmill",duration:82,calories:580,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:1180},
+    {id:99,name:"Jamila",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Treadmill",duration:61,calories:372,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:39,days_since:976},
+    {id:100,name:"Kalsoom",age:30,age_group:"26-35",gender:"Female",membership:"Monthly",visits:24,activity:"High",exercise:"Bench Press",duration:62,calories:415,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34,days_since:773},
+    {id:101,name:"Unknown",age:41,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:20,activity:"Medium",exercise:"Deadlift",duration:65,calories:308,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20.9,days_since:547},
+    {id:102,name:"Saim (small)",age:46,age_group:"46-55",gender:"Male",membership:"Yearly",visits:7,activity:"Low",exercise:"Pull-ups",duration:30,calories:617,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:305},
+    {id:103,name:"Kanwal",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:18,activity:"Medium",exercise:"Bench Press",duration:75,calories:718,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:31.9,days_since:934},
+    {id:104,name:"Kiswa",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Treadmill",duration:108,calories:666,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:21,days_since:597},
+    {id:105,name:"Qazi Iqbal",age:31,age_group:"26-35",gender:"Male",membership:"Yearly",visits:20,activity:"Medium",exercise:"Deadlift",duration:79,calories:560,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.7,days_since:596},
+    {id:106,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Monthly",visits:4,activity:"Low",exercise:"Treadmill",duration:67,calories:279,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:35.3,days_since:939},
+    {id:107,name:"Hanan",age:27,age_group:"26-35",gender:"Male",membership:"Quarterly",visits:16,activity:"Medium",exercise:"Bench Press",duration:46,calories:550,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.3,days_since:1132},
+    {id:108,name:"Khaula",age:23,age_group:"18-25",gender:"Female",membership:"Yearly",visits:5,activity:"Low",exercise:"Pull-ups",duration:51,calories:779,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:14.5,days_since:186},
+    {id:109,name:"Dr Ehtesham",age:50,age_group:"46-55",gender:"Male",membership:"Monthly",visits:14,activity:"Medium",exercise:"Squats",duration:68,calories:663,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34.7,days_since:1038},
+    {id:110,name:"Shaista",age:22,age_group:"18-25",gender:"Female",membership:"Quarterly",visits:11,activity:"Medium",exercise:"Deadlift",duration:84,calories:230,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:40.5,days_since:839},
+    {id:111,name:"Unknown",age:53,age_group:"46-55",gender:"Male",membership:"Monthly",visits:6,activity:"Low",exercise:"Pull-ups",duration:35,calories:706,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:13.6,days_since:354},
+    {id:112,name:"Laraib",age:23,age_group:"18-25",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:48,calories:778,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.2,days_since:656},
+    {id:113,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Monthly",visits:4,activity:"Low",exercise:"Pull-ups",duration:41,calories:341,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:29.2,days_since:881},
+    {id:114,name:"Unknown",age:46,age_group:"46-55",gender:"Male",membership:"Monthly",visits:16,activity:"Medium",exercise:"Squats",duration:112,calories:628,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:19.3,days_since:304},
+    {id:115,name:"Noor",age:null,age_group:"56+",gender:"Female",membership:"Monthly",visits:5,activity:"Low",exercise:"Pull-ups",duration:69,calories:703,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.7,days_since:496},
+    {id:116,name:"Unknown",age:20,age_group:"18-25",gender:"Female",membership:"Monthly",visits:17,activity:"Medium",exercise:"Cycling",duration:74,calories:349,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:43,days_since:1238},
+    {id:117,name:"Ahsan",age:39,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:7,activity:"Low",exercise:"Pull-ups",duration:83,calories:788,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:29.7,days_since:894},
+    {id:118,name:"Jamila",age:52,age_group:"46-55",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Treadmill",duration:54,calories:689,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.6,days_since:149},
+    {id:119,name:"Nadia",age:50,age_group:"46-55",gender:"Female",membership:"Monthly",visits:11,activity:"Medium",exercise:"Bench Press",duration:59,calories:465,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:478},
+    {id:120,name:"Unknown",age:null,age_group:"56+",gender:"Male",membership:"Monthly",visits:20,activity:"Medium",exercise:"Bench Press",duration:56,calories:537,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:24.4,days_since:724},
+    {id:121,name:"Jack",age:23,age_group:"18-25",gender:"Male",membership:"Quarterly",visits:10,activity:"Medium",exercise:"Squats",duration:61,calories:293,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:22.1,days_since:369},
+    {id:122,name:"Qamar",age:52,age_group:"46-55",gender:"Female",membership:"Yearly",visits:12,activity:"Medium",exercise:"Bench Press",duration:98,calories:432,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:22.3,days_since:680},
+    {id:123,name:"Unknown",age:39,age_group:"36-45",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Treadmill",duration:106,calories:600,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:24.2,days_since:448},
+    {id:124,name:"Sakina",age:52,age_group:"46-55",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Pull-ups",duration:41,calories:249,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:null,days_since:1051},
+    {id:125,name:"Unknown",age:48,age_group:"46-55",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Treadmill",duration:118,calories:420,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:28.8,days_since:544},
+    {id:126,name:"Unknown",age:21,age_group:"18-25",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Cycling",duration:81,calories:540,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:41.5,days_since:979},
+    {id:127,name:"Thanos",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:17,activity:"Medium",exercise:"Treadmill",duration:95,calories:244,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:34.8,days_since:809},
+    {id:128,name:"Saiyadda",age:20,age_group:"18-25",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Treadmill",duration:118,calories:690,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:26.4,days_since:724},
+    {id:129,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Yearly",visits:null,activity:"Low",exercise:"Pull-ups",duration:115,calories:478,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:23.7,days_since:436},
+    {id:130,name:"Salma",age:38,age_group:"36-45",gender:"Female",membership:"Monthly",visits:7,activity:"Low",exercise:"Deadlift",duration:86,calories:759,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:17.2,days_since:149},
+    {id:131,name:"Vicky",age:33,age_group:"26-35",gender:"Male",membership:"Monthly",visits:6,activity:"Low",exercise:"Deadlift",duration:65,calories:769,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:null,days_since:350},
+    {id:132,name:"Unknown",age:44,age_group:"36-45",gender:"Male",membership:"Quarterly",visits:5,activity:"Low",exercise:"Deadlift",duration:74,calories:246,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:39.1,days_since:1023},
+    {id:133,name:"Sam",age:39,age_group:"36-45",gender:"Male",membership:"Yearly",visits:20,activity:"Medium",exercise:"Deadlift",duration:101,calories:652,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:17.6,days_since:226},
+    {id:134,name:"Aizaz",age:48,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:24,activity:"High",exercise:"Deadlift",duration:46,calories:759,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:15.9,days_since:476},
+    {id:135,name:"Tahira",age:37,age_group:"36-45",gender:"Female",membership:"Monthly",visits:4,activity:"Low",exercise:"Deadlift",duration:41,calories:267,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:20.9,days_since:397},
+    {id:136,name:"Wafa",age:38,age_group:"36-45",gender:"Female",membership:"Monthly",visits:null,activity:"Low",exercise:"Deadlift",duration:87,calories:655,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:30.7,days_since:710},
+    {id:137,name:"Wajeeha",age:31,age_group:"26-35",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Pull-ups",duration:98,calories:682,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:21.4,days_since:541},
+    {id:138,name:"Unknown",age:29,age_group:"26-35",gender:"Male",membership:"Yearly",visits:12,activity:"Medium",exercise:"Pull-ups",duration:74,calories:502,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:11.3,days_since:115},
+    {id:139,name:"Zainab",age:24,age_group:"18-25",gender:"Female",membership:"Yearly",visits:null,activity:"Low",exercise:"Cycling",duration:69,calories:257,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:23.3,days_since:575},
+    {id:140,name:"Kawish",age:40,age_group:"36-45",gender:"Male",membership:"Monthly",visits:7,activity:"Low",exercise:"Bench Press",duration:110,calories:601,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:16.8,days_since:396},
+    {id:141,name:"Unknown",age:27,age_group:"26-35",gender:"Male",membership:"Monthly",visits:8,activity:"Low",exercise:"Deadlift",duration:86,calories:274,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:10.5,days_since:123},
+    {id:142,name:"Tasneem",age:23,age_group:"18-25",gender:"Female",membership:"Monthly",visits:21,activity:"High",exercise:"Bench Press",duration:58,calories:496,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:32.5,days_since:708},
+    {id:143,name:"Nawal",age:36,age_group:"36-45",gender:"Female",membership:"Quarterly",visits:18,activity:"Medium",exercise:"Cycling",duration:49,calories:338,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.5,days_since:86},
+    {id:144,name:"Unknown",age:18,age_group:"18-25",gender:"Male",membership:"Yearly",visits:9,activity:"Low",exercise:"Squats",duration:113,calories:538,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:12.7,days_since:307},
+    {id:145,name:"Sajid",age:22,age_group:"18-25",gender:"Male",membership:"Yearly",visits:6,activity:"Low",exercise:"Squats",duration:116,calories:441,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:27.5,days_since:652},
+    {id:146,name:"Mohammed",age:54,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:14,activity:"Medium",exercise:"Pull-ups",duration:64,calories:733,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:20,days_since:469},
+    {id:147,name:"Haseena",age:45,age_group:"36-45",gender:"Female",membership:"Monthly",visits:12,activity:"Medium",exercise:"Bench Press",duration:95,calories:641,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:29.9,days_since:860},
+    {id:148,name:"Hassaan",age:54,age_group:"46-55",gender:"Male",membership:"Quarterly",visits:14,activity:"Medium",exercise:"Deadlift",duration:80,calories:471,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:28.4,days_since:611},
+    {id:149,name:"Najat",age:26,age_group:"26-35",gender:"Female",membership:"Monthly",visits:4,activity:"Low",exercise:"Bench Press",duration:50,calories:473,at_risk:1,at_risk_status:"At Risk",churn:"Yes",tenure:27.2,days_since:501},
+    {id:150,name:"Nuha",age:43,age_group:"36-45",gender:"Male",membership:"Yearly",visits:22,activity:"High",exercise:"Squats",duration:78,calories:608,at_risk:1,at_risk_status:"At Risk",churn:"No",tenure:14.2,days_since:79}
+  ];
 
-            const membershipFilter = document.getElementById('membershipFilter');
-            const ageFilter = document.getElementById('ageFilter');
-            const activityFilter = document.getElementById('activityFilter');
+  let filteredData = [...memberData];
+  let charts = {};
 
-            memberships.forEach(m => {
-                membershipFilter.innerHTML += `<option value="${m}">${m}</option>`;
-            });
+  function destroyChart(id){ if (charts[id]) charts[id].destroy(); }
 
-            ageGroups.forEach(ag => {
-                ageFilter.innerHTML += `<option value="${ag}">${ag}</option>`;
-            });
+  // Initialize
+  function start(){
+    populateFilters();
+    attachFilterListeners();
+    updateDashboard();
+    postH();
+  }
 
-            activities.forEach(act => {
-                activityFilter.innerHTML += `<option value="${act}">${act}</option>`;
-            });
+  function populateFilters() {
+    const memberships = [...new Set(memberData.map(m => m.membership))].sort();
+    const ageGroups = [...new Set(memberData.map(m => m.age_group))].sort();
+    const activities = [...new Set(memberData.map(m => m.activity))].sort();
+
+    const membershipFilter = document.getElementById('membershipFilter');
+    const ageFilter = document.getElementById('ageFilter');
+    const activityFilter = document.getElementById('activityFilter');
+
+    memberships.forEach(m => { membershipFilter.innerHTML += `<option value="${m}">${m}</option>`; });
+    ageGroups.forEach(ag => { ageFilter.innerHTML += `<option value="${ag}">${ag}</option>`; });
+    activities.forEach(act => { activityFilter.innerHTML += `<option value="${act}">${act}</option>`; });
+  }
+
+  function attachFilterListeners() {
+    ['membershipFilter', 'ageFilter', 'activityFilter', 'churnFilter'].forEach(id => {
+      document.getElementById(id).addEventListener('change', applyFilters);
+    });
+  }
+
+  function applyFilters() {
+    const membership = document.getElementById('membershipFilter').value;
+    const ageGroup = document.getElementById('ageFilter').value;
+    const activity = document.getElementById('activityFilter').value;
+    const churn = document.getElementById('churnFilter').value;
+
+    filteredData = memberData.filter(m => {
+      return (membership === 'all' || m.membership === membership) &&
+             (ageGroup === 'all' || m.age_group === ageGroup) &&
+             (activity === 'all' || m.activity === activity) &&
+             (churn === 'all' || m.churn === churn);
+    });
+
+    updateDashboard();
+    setTimeout(postH,60);
+  }
+
+  function updateDashboard() {
+    updateKPIs();
+    updatePage1Charts();
+    updatePage2();
+    updatePage3Charts();
+    updatePage4();
+  }
+
+  function updateKPIs() {
+    // Page 1 KPIs
+    const totalMembers = filteredData.length;
+    const churnedMembers = filteredData.filter(m => m.churn === "Yes").length;
+    const churnRate = totalMembers > 0 ? (churnedMembers / totalMembers * 100) : 0;
+    const atRiskMembers = filteredData.filter(m => m.at_risk === 1).length;
+    const validVisits = filteredData.filter(m => m.visits !== null);
+    const avgVisits = validVisits.length > 0 ?
+      validVisits.reduce((sum, m) => sum + m.visits, 0) / validVisits.length : 0;
+
+    document.getElementById('kpi-total').textContent = totalMembers;
+    document.getElementById('kpi-churn-rate').textContent = churnRate.toFixed(1) + '%';
+    document.getElementById('kpi-at-risk').textContent = atRiskMembers;
+    document.getElementById('kpi-avg-visits').textContent = avgVisits.toFixed(1);
+
+    // Page 4 KPIs
+    const highRisk = filteredData.filter(m =>
+      m.at_risk === 1 && m.churn === "No"
+    ).length;
+    const retentionOpp = filteredData.filter(m =>
+      m.at_risk === 1 && m.churn === "No" && (m.visits || 0) >= 10
+    ).length;
+
+    document.getElementById('kpi-high-risk').textContent = highRisk;
+    document.getElementById('kpi-retention-opp').textContent = retentionOpp;
+  }
+
+  function updatePage1Charts() {
+    // Churn Pie Chart
+    const churnCounts = {
+      "Yes": filteredData.filter(m => m.churn === "Yes").length,
+      "No": filteredData.filter(m => m.churn === "No").length
+    };
+
+    destroyChart('churnPieChart');
+    charts.churnPieChart = new Chart(document.getElementById('churnPieChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Churned', 'Active'],
+        datasets: [{
+          data: [churnCounts["Yes"], churnCounts["No"]],
+          backgroundColor: [COL.red, COL.green]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: {position: 'bottom'} }
+      }
+    });
+
+    // Membership Churn Chart
+    const membershipStats = {};
+    filteredData.forEach(m => {
+      if (!membershipStats[m.membership])
+        membershipStats[m.membership] = {total: 0, churned: 0};
+      membershipStats[m.membership].total++;
+      if (m.churn === "Yes") membershipStats[m.membership].churned++;
+    });
+    const memberships = Object.keys(membershipStats).sort();
+    const churnRates = memberships.map(mem =>
+      membershipStats[mem].total > 0 ?
+      (membershipStats[mem].churned / membershipStats[mem].total * 100) : 0
+    );
+
+    destroyChart('membershipChurnChart');
+    charts.membershipChurnChart = new Chart(document.getElementById('membershipChurnChart'), {
+      type: 'bar',
+      data: {
+        labels: memberships,
+        datasets: [{
+          label: 'Churn Rate (%)',
+          data: churnRates,
+          backgroundColor: COL.gold,
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {legend: {display: false}},
+        scales: { y: {beginAtZero: true, max: 100, grid:{color:GRID}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} }
+      }
+    });
+
+    // Age Churn Chart
+    const ageStats = {};
+    filteredData.forEach(m => {
+      if (!ageStats[m.age_group])
+        ageStats[m.age_group] = {total: 0, churned: 0};
+      ageStats[m.age_group].total++;
+      if (m.churn === "Yes") ageStats[m.age_group].churned++;
+    });
+    const ages = Object.keys(ageStats).sort();
+    const ageChurnRates = ages.map(age =>
+      ageStats[age].total > 0 ?
+      (ageStats[age].churned / ageStats[age].total * 100) : 0
+    );
+
+    destroyChart('ageChurnChart');
+    charts.ageChurnChart = new Chart(document.getElementById('ageChurnChart'), {
+      type: 'bar',
+      data: {
+        labels: ages,
+        datasets: [{
+          label: 'Churn Rate (%)',
+          data: ageChurnRates,
+          backgroundColor: COL.dark,
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {legend: {display: false}},
+        scales: { y: {beginAtZero: true, max: 100, grid:{color:GRID}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} }
+      }
+    });
+  }
+
+  function updatePage2() {
+    // Visits Comparison by Membership
+    const membershipVisits = {};
+    filteredData.forEach(m => {
+      if (m.visits === null) return;
+      if (!membershipVisits[m.membership])
+        membershipVisits[m.membership] = {churned: [], active: []};
+      if (m.churn === "Yes") {
+        membershipVisits[m.membership].churned.push(m.visits);
+      } else {
+        membershipVisits[m.membership].active.push(m.visits);
+      }
+    });
+
+    const memberships = Object.keys(membershipVisits).sort();
+    const churnedAvgs = memberships.map(mem => {
+      const arr = membershipVisits[mem].churned;
+      return arr.length > 0 ? arr.reduce((a,b) => a+b, 0) / arr.length : 0;
+    });
+    const activeAvgs = memberships.map(mem => {
+      const arr = membershipVisits[mem].active;
+      return arr.length > 0 ? arr.reduce((a,b) => a+b, 0) / arr.length : 0;
+    });
+
+    destroyChart('visitsComparisonChart');
+    charts.visitsComparisonChart = new Chart(document.getElementById('visitsComparisonChart'), {
+      type: 'bar',
+      data: {
+        labels: memberships,
+        datasets: [
+          { label: 'Churned Members', data: churnedAvgs, backgroundColor: COL.red, borderRadius: 5 },
+          { label: 'Active Members', data: activeAvgs, backgroundColor: COL.green, borderRadius: 5 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: {position: 'top'} },
+        scales: { y: {beginAtZero: true, grid:{color:GRID}, title: {display: true, text: 'Avg Visits/Month'}}, x:{grid:{display:false}} }
+      }
+    });
+
+    // Activity Table
+    const activityStats = {};
+    filteredData.forEach(m => {
+      if (!activityStats[m.activity])
+        activityStats[m.activity] = {total: 0, churned: 0, visits: []};
+      activityStats[m.activity].total++;
+      if (m.churn === "Yes") activityStats[m.activity].churned++;
+      if (m.visits !== null) activityStats[m.activity].visits.push(m.visits);
+    });
+
+    const tbody = document.getElementById('activityTableBody');
+    tbody.innerHTML = '';
+    Object.keys(activityStats).sort().forEach(act => {
+      const stats = activityStats[act];
+      const churnRate = stats.total > 0 ? (stats.churned / stats.total * 100) : 0;
+      const avgVisits = stats.visits.length > 0 ?
+        stats.visits.reduce((a,b) => a+b, 0) / stats.visits.length : 0;
+      tbody.innerHTML += `<tr>
+        <td>${act}</td>
+        <td>${stats.total}</td>
+        <td>${stats.churned}</td>
+        <td>${churnRate.toFixed(1)}%</td>
+        <td>${avgVisits.toFixed(1)}</td>
+      </tr>`;
+    });
+
+    // Scatter Chart
+    const scatterData = filteredData
+      .filter(m => m.visits !== null && m.duration !== null)
+      .map(m => ({ x: m.visits, y: m.duration, churn: m.churn }));
+
+    const churnedPoints = scatterData.filter(d => d.churn === "Yes");
+    const activePoints = scatterData.filter(d => d.churn === "No");
+
+    destroyChart('scatterChart');
+    charts.scatterChart = new Chart(document.getElementById('scatterChart'), {
+      type: 'scatter',
+      data: {
+        datasets: [
+          { label: 'Churned', data: churnedPoints, backgroundColor: 'rgba(181, 80, 60, 0.6)', pointRadius: 5 },
+          { label: 'Active', data: activePoints, backgroundColor: 'rgba(46, 125, 111, 0.6)', pointRadius: 5 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: {position: 'top'} },
+        scales: {
+          x: {title: {display: true, text: 'Visits Per Month'}, grid:{color:GRID}},
+          y: {title: {display: true, text: 'Avg Workout Duration (min)'}, grid:{color:GRID}}
         }
+      }
+    });
+  }
 
-        function attachFilterListeners() {
-            ['membershipFilter', 'ageFilter', 'activityFilter', 'churnFilter'].forEach(id => {
-                document.getElementById(id).addEventListener('change', applyFilters);
-            });
+  function updatePage3Charts() {
+    // Exercise Distribution
+    const exerciseCounts = {};
+    filteredData.forEach(m => {
+      exerciseCounts[m.exercise] = (exerciseCounts[m.exercise] || 0) + 1;
+    });
+    const exercises = Object.keys(exerciseCounts).sort();
+
+    destroyChart('exerciseChart');
+    charts.exerciseChart = new Chart(document.getElementById('exerciseChart'), {
+      type: 'bar',
+      data: {
+        labels: exercises,
+        datasets: [{
+          label: 'Member Count',
+          data: exercises.map(e => exerciseCounts[e]),
+          backgroundColor: COL.gold,
+          borderRadius: 5
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {legend: {display: false}},
+        scales: { x:{grid:{color:GRID}}, y:{grid:{display:false}} }
+      }
+    });
+
+    // Exercise Churn
+    const exerciseStats = {};
+    filteredData.forEach(m => {
+      if (!exerciseStats[m.exercise])
+        exerciseStats[m.exercise] = {total: 0, churned: 0};
+      exerciseStats[m.exercise].total++;
+      if (m.churn === "Yes") exerciseStats[m.exercise].churned++;
+    });
+    const exerciseChurnRates = exercises.map(e =>
+      exerciseStats[e].total > 0 ?
+      (exerciseStats[e].churned / exerciseStats[e].total * 100) : 0
+    );
+
+    destroyChart('exerciseChurnChart');
+    charts.exerciseChurnChart = new Chart(document.getElementById('exerciseChurnChart'), {
+      type: 'bar',
+      data: {
+        labels: exercises,
+        datasets: [{
+          label: 'Churn Rate (%)',
+          data: exerciseChurnRates,
+          backgroundColor: COL.dark,
+          borderRadius: 5
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {legend: {display: false}},
+        scales: { x: {beginAtZero: true, max: 100, grid:{color:GRID}, ticks:{callback:v=>v+'%'}}, y:{grid:{display:false}} }
+      }
+    });
+
+    // Tenure Scatter
+    const tenureData = filteredData
+      .filter(m => m.days_since !== null && m.tenure !== null)
+      .map(m => ({ x: m.tenure, y: m.days_since, churn: m.churn }));
+
+    const tenureChurned = tenureData.filter(d => d.churn === "Yes");
+    const tenureActive = tenureData.filter(d => d.churn === "No");
+
+    destroyChart('tenureScatterChart');
+    charts.tenureScatterChart = new Chart(document.getElementById('tenureScatterChart'), {
+      type: 'scatter',
+      data: {
+        datasets: [
+          { label: 'Churned', data: tenureChurned, backgroundColor: 'rgba(181, 80, 60, 0.6)', pointRadius: 5 },
+          { label: 'Active', data: tenureActive, backgroundColor: 'rgba(46, 125, 111, 0.6)', pointRadius: 5 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: {position: 'top'} },
+        scales: {
+          x: {title: {display: true, text: 'Membership Tenure (months)'}, grid:{color:GRID}},
+          y: {title: {display: true, text: 'Days Since Last Visit'}, grid:{color:GRID}}
         }
+      }
+    });
 
-        function applyFilters() {
-            const membership = document.getElementById('membershipFilter').value;
-            const ageGroup = document.getElementById('ageFilter').value;
-            const activity = document.getElementById('activityFilter').value;
-            const churn = document.getElementById('churnFilter').value;
+    // Duration Distribution
+    const durationBins = [0, 30, 60, 90, 120];
+    const durationLabels = ['0-30', '31-60', '61-90', '91-120'];
+    const durationChurned = Array(durationLabels.length).fill(0);
+    const durationActive = Array(durationLabels.length).fill(0);
 
-            filteredData = memberData.filter(m => {
-                return (membership === 'all' || m.membership === membership) &&
-                       (ageGroup === 'all' || m.age_group === ageGroup) &&
-                       (activity === 'all' || m.activity === activity) &&
-                       (churn === 'all' || m.churn === churn);
-            });
+    filteredData.forEach(m => {
+      if (m.duration === null) return;
+      let binIndex = durationBins.findIndex((val, idx) =>
+        m.duration >= val && (idx === durationBins.length - 1 || m.duration < durationBins[idx + 1])
+      );
+      if (binIndex >= 0 && binIndex < durationLabels.length) {
+        if (m.churn === "Yes") durationChurned[binIndex]++;
+        else durationActive[binIndex]++;
+      }
+    });
 
-            updateDashboard();
+    destroyChart('durationDistChart');
+    charts.durationDistChart = new Chart(document.getElementById('durationDistChart'), {
+      type: 'bar',
+      data: {
+        labels: durationLabels,
+        datasets: [
+          { label: 'Churned', data: durationChurned, backgroundColor: COL.red, borderRadius: 5 },
+          { label: 'Active', data: durationActive, backgroundColor: COL.green, borderRadius: 5 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: {position: 'top'} },
+        scales: {
+          x: {title: {display: true, text: 'Workout Duration (minutes)'}, grid:{display:false}},
+          y: {beginAtZero: true, grid:{color:GRID}, title: {display: true, text: 'Member Count'}}
         }
+      }
+    });
+  }
 
-        function updateDashboard() {
-            updateKPIs();
-            updatePage1Charts();
-            updatePage2();
-            updatePage3Charts();
-            updatePage4();
+  function updatePage4() {
+    // Heatmap: Churn Rate by Age Group x Membership Type
+    const heatmapData = {};
+    filteredData.forEach(m => {
+      const key = `${m.age_group}|${m.membership}`;
+      if (!heatmapData[key]) heatmapData[key] = {total: 0, churned: 0};
+      heatmapData[key].total++;
+      if (m.churn === "Yes") heatmapData[key].churned++;
+    });
+
+    const ageGroups = [...new Set(filteredData.map(m => m.age_group))].sort();
+    const memberships = [...new Set(filteredData.map(m => m.membership))].sort();
+    const memColors = [COL.dark, COL.gold, COL.brown, COL.sand];
+
+    const heatmapDatasets = memberships.map((mem, i) => ({
+      label: mem,
+      data: ageGroups.map(age => {
+        const key = `${age}|${mem}`;
+        const stats = heatmapData[key];
+        return stats && stats.total > 0 ?
+          (stats.churned / stats.total * 100) : 0;
+      }),
+      backgroundColor: memColors[i % memColors.length],
+      borderRadius: 4
+    }));
+
+    destroyChart('heatmapChart');
+    charts.heatmapChart = new Chart(document.getElementById('heatmapChart'), {
+      type: 'bar',
+      data: {
+        labels: ageGroups,
+        datasets: heatmapDatasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: {position: 'top'} },
+        scales: {
+          x: {title: {display: true, text: 'Age Group'}, grid:{display:false}},
+          y: {beginAtZero: true, max: 100, grid:{color:GRID}, title: {display: true, text: 'Churn Rate (%)'}, ticks:{callback:v=>v+'%'}}
         }
+      }
+    });
 
-        function updateKPIs() {
-            // Page 1 KPIs
-            const totalMembers = filteredData.length;
-            const churnedMembers = filteredData.filter(m => m.churn === "Yes").length;
-            const churnRate = totalMembers > 0 ? (churnedMembers / totalMembers * 100) : 0;
-            const atRiskMembers = filteredData.filter(m => m.at_risk === 1).length;
-            const validVisits = filteredData.filter(m => m.visits !== null);
-            const avgVisits = validVisits.length > 0 ?
-                validVisits.reduce((sum, m) => sum + m.visits, 0) / validVisits.length : 0;
+    // At-Risk Table
+    const atRisk = filteredData
+      .filter(m => m.at_risk === 1)
+      .sort((a, b) => {
+        const scoreA = (a.visits || 0) - (a.days_since || 0) / 10;
+        const scoreB = (b.visits || 0) - (b.days_since || 0) / 10;
+        return scoreA - scoreB;
+      })
+      .slice(0, 20);
 
-            document.getElementById('kpi-total').textContent = totalMembers;
-            document.getElementById('kpi-churn-rate').textContent = churnRate.toFixed(1) + '%';
-            document.getElementById('kpi-at-risk').textContent = atRiskMembers;
-            document.getElementById('kpi-avg-visits').textContent = avgVisits.toFixed(1);
+    const atRiskBody = document.getElementById('atRiskTableBody');
+    atRiskBody.innerHTML = '';
+    atRisk.forEach(m => {
+      atRiskBody.innerHTML += `<tr>
+        <td>${m.id}</td>
+        <td>${m.age || 'N/A'}</td>
+        <td>${m.membership}</td>
+        <td>${m.visits !== null ? m.visits : 'N/A'}</td>
+        <td>${m.days_since !== null ? m.days_since : 'N/A'}</td>
+        <td><span class="badge b-${m.at_risk === 1 ? 'high' : 'low'}">${m.at_risk_status}</span></td>
+        <td><span class="badge b-${m.churn.toLowerCase() === 'yes' ? 'yes' : 'no'}">${m.churn}</span></td>
+      </tr>`;
+    });
+  }
 
-            // Page 4 KPIs
-            const highRisk = filteredData.filter(m =>
-                m.at_risk === 1 && m.churn === "No"
-            ).length;
-            const retentionOpp = filteredData.filter(m =>
-                m.at_risk === 1 && m.churn === "No" && (m.visits || 0) >= 10
-            ).length;
+  // page-switch handler
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    setTimeout(postH,60);
+  });
 
-            document.getElementById('kpi-high-risk').textContent = highRisk;
-            document.getElementById('kpi-retention-opp').textContent = retentionOpp;
-        }
-
-        function updatePage1Charts() {
-            // Churn Pie Chart
-            const churnCounts = {
-                "Yes": filteredData.filter(m => m.churn === "Yes").length,
-                "No": filteredData.filter(m => m.churn === "No").length
-            };
-
-            destroyChart('churnPieChart');
-            charts.churnPie = new Chart(document.getElementById('churnPieChart'), {
-                type: 'pie',
-                data: {
-                    labels: ['Churned', 'Active'],
-                    datasets: [{
-                        data: [churnCounts["Yes"], churnCounts["No"]],
-                        backgroundColor: ['#C62828', '#2E7D32']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {position: 'bottom'}
-                    }
-                }
-            });
-
-            // Membership Churn Chart
-            const membershipStats = {};
-            filteredData.forEach(m => {
-                if (!membershipStats[m.membership])
-                    membershipStats[m.membership] = {total: 0, churned: 0};
-                membershipStats[m.membership].total++;
-                if (m.churn === "Yes") membershipStats[m.membership].churned++;
-            });
-            const memberships = Object.keys(membershipStats).sort();
-            const churnRates = memberships.map(mem =>
-                membershipStats[mem].total > 0 ?
-                (membershipStats[mem].churned / membershipStats[mem].total * 100) : 0
-            );
-
-            destroyChart('membershipChurnChart');
-            charts.membershipChurn = new Chart(document.getElementById('membershipChurnChart'), {
-                type: 'bar',
-                data: {
-                    labels: memberships,
-                    datasets: [{
-                        label: 'Churn Rate (%)',
-                        data: churnRates,
-                        backgroundColor: '#CBA135'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {legend: {display: false}},
-                    scales: {
-                        y: {beginAtZero: true, max: 100}
-                    }
-                }
-            });
-
-            // Age Churn Chart
-            const ageStats = {};
-            filteredData.forEach(m => {
-                if (!ageStats[m.age_group])
-                    ageStats[m.age_group] = {total: 0, churned: 0};
-                ageStats[m.age_group].total++;
-                if (m.churn === "Yes") ageStats[m.age_group].churned++;
-            });
-            const ages = Object.keys(ageStats).sort();
-            const ageChurnRates = ages.map(age =>
-                ageStats[age].total > 0 ?
-                (ageStats[age].churned / ageStats[age].total * 100) : 0
-            );
-
-            destroyChart('ageChurnChart');
-            charts.ageChurn = new Chart(document.getElementById('ageChurnChart'), {
-                type: 'bar',
-                data: {
-                    labels: ages,
-                    datasets: [{
-                        label: 'Churn Rate (%)',
-                        data: ageChurnRates,
-                        backgroundColor: '#403B36'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {legend: {display: false}},
-                    scales: {
-                        y: {beginAtZero: true, max: 100}
-                    }
-                }
-            });
-        }
-
-        function updatePage2() {
-            // Visits Comparison by Membership
-            const membershipVisits = {};
-            filteredData.forEach(m => {
-                if (m.visits === null) return;
-                if (!membershipVisits[m.membership])
-                    membershipVisits[m.membership] = {churned: [], active: []};
-                if (m.churn === "Yes") {
-                    membershipVisits[m.membership].churned.push(m.visits);
-                } else {
-                    membershipVisits[m.membership].active.push(m.visits);
-                }
-            });
-
-            const memberships = Object.keys(membershipVisits).sort();
-            const churnedAvgs = memberships.map(mem => {
-                const arr = membershipVisits[mem].churned;
-                return arr.length > 0 ? arr.reduce((a,b) => a+b, 0) / arr.length : 0;
-            });
-            const activeAvgs = memberships.map(mem => {
-                const arr = membershipVisits[mem].active;
-                return arr.length > 0 ? arr.reduce((a,b) => a+b, 0) / arr.length : 0;
-            });
-
-            destroyChart('visitsComparisonChart');
-            charts.visitsComparison = new Chart(document.getElementById('visitsComparisonChart'), {
-                type: 'bar',
-                data: {
-                    labels: memberships,
-                    datasets: [
-                        {
-                            label: 'Churned Members',
-                            data: churnedAvgs,
-                            backgroundColor: '#C62828'
-                        },
-                        {
-                            label: 'Active Members',
-                            data: activeAvgs,
-                            backgroundColor: '#2E7D32'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {beginAtZero: true, title: {display: true, text: 'Avg Visits/Month'}}
-                    }
-                }
-            });
-
-            // Activity Table
-            const activityStats = {};
-            filteredData.forEach(m => {
-                if (!activityStats[m.activity])
-                    activityStats[m.activity] = {total: 0, churned: 0, visits: []};
-                activityStats[m.activity].total++;
-                if (m.churn === "Yes") activityStats[m.activity].churned++;
-                if (m.visits !== null) activityStats[m.activity].visits.push(m.visits);
-            });
-
-            const tbody = document.getElementById('activityTableBody');
-            tbody.innerHTML = '';
-            Object.keys(activityStats).sort().forEach(act => {
-                const stats = activityStats[act];
-                const churnRate = stats.total > 0 ? (stats.churned / stats.total * 100) : 0;
-                const avgVisits = stats.visits.length > 0 ?
-                    stats.visits.reduce((a,b) => a+b, 0) / stats.visits.length : 0;
-                const row = `<tr>
-                    <td>${act}</td>
-                    <td>${stats.total}</td>
-                    <td>${stats.churned}</td>
-                    <td>${churnRate.toFixed(1)}%</td>
-                    <td>${avgVisits.toFixed(1)}</td>
-                </tr>`;
-                tbody.innerHTML += row;
-            });
-
-            // Scatter Chart
-            const scatterData = filteredData
-                .filter(m => m.visits !== null && m.duration !== null)
-                .map(m => ({
-                    x: m.visits,
-                    y: m.duration,
-                    churn: m.churn
-                }));
-
-            const churnedPoints = scatterData.filter(d => d.churn === "Yes");
-            const activePoints = scatterData.filter(d => d.churn === "No");
-
-            destroyChart('scatterChart');
-            charts.scatter = new Chart(document.getElementById('scatterChart'), {
-                type: 'scatter',
-                data: {
-                    datasets: [
-                        {
-                            label: 'Churned',
-                            data: churnedPoints,
-                            backgroundColor: 'rgba(198, 40, 40, 0.6)',
-                            pointRadius: 5
-                        },
-                        {
-                            label: 'Active',
-                            data: activePoints,
-                            backgroundColor: 'rgba(46, 125, 50, 0.6)',
-                            pointRadius: 5
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {title: {display: true, text: 'Visits Per Month'}},
-                        y: {title: {display: true, text: 'Avg Workout Duration (min)'}}
-                    }
-                }
-            });
-        }
-
-        function updatePage3Charts() {
-            // Exercise Distribution
-            const exerciseCounts = {};
-            filteredData.forEach(m => {
-                exerciseCounts[m.exercise] = (exerciseCounts[m.exercise] || 0) + 1;
-            });
-            const exercises = Object.keys(exerciseCounts).sort();
-
-            destroyChart('exerciseChart');
-            charts.exercise = new Chart(document.getElementById('exerciseChart'), {
-                type: 'bar',
-                data: {
-                    labels: exercises,
-                    datasets: [{
-                        label: 'Member Count',
-                        data: exercises.map(e => exerciseCounts[e]),
-                        backgroundColor: '#CBA135'
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    plugins: {legend: {display: false}}
-                }
-            });
-
-            // Exercise Churn
-            const exerciseStats = {};
-            filteredData.forEach(m => {
-                if (!exerciseStats[m.exercise])
-                    exerciseStats[m.exercise] = {total: 0, churned: 0};
-                exerciseStats[m.exercise].total++;
-                if (m.churn === "Yes") exerciseStats[m.exercise].churned++;
-            });
-            const exerciseChurnRates = exercises.map(e =>
-                exerciseStats[e].total > 0 ?
-                (exerciseStats[e].churned / exerciseStats[e].total * 100) : 0
-            );
-
-            destroyChart('exerciseChurnChart');
-            charts.exerciseChurn = new Chart(document.getElementById('exerciseChurnChart'), {
-                type: 'bar',
-                data: {
-                    labels: exercises,
-                    datasets: [{
-                        label: 'Churn Rate (%)',
-                        data: exerciseChurnRates,
-                        backgroundColor: '#403B36'
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    plugins: {legend: {display: false}},
-                    scales: {
-                        x: {beginAtZero: true, max: 100}
-                    }
-                }
-            });
-
-            // Tenure Scatter
-            const tenureData = filteredData
-                .filter(m => m.days_since !== null && m.tenure !== null)
-                .map(m => ({
-                    x: m.tenure,
-                    y: m.days_since,
-                    churn: m.churn
-                }));
-
-            const tenureChurned = tenureData.filter(d => d.churn === "Yes");
-            const tenureActive = tenureData.filter(d => d.churn === "No");
-
-            destroyChart('tenureScatterChart');
-            charts.tenureScatter = new Chart(document.getElementById('tenureScatterChart'), {
-                type: 'scatter',
-                data: {
-                    datasets: [
-                        {
-                            label: 'Churned',
-                            data: tenureChurned,
-                            backgroundColor: 'rgba(198, 40, 40, 0.6)',
-                            pointRadius: 5
-                        },
-                        {
-                            label: 'Active',
-                            data: tenureActive,
-                            backgroundColor: 'rgba(46, 125, 50, 0.6)',
-                            pointRadius: 5
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {title: {display: true, text: 'Membership Tenure (months)'}},
-                        y: {title: {display: true, text: 'Days Since Last Visit'}}
-                    }
-                }
-            });
-
-            // Duration Distribution
-            const durationBins = [0, 30, 60, 90, 120];
-            const durationLabels = ['0-30', '31-60', '61-90', '91-120'];
-            const durationChurned = Array(durationLabels.length).fill(0);
-            const durationActive = Array(durationLabels.length).fill(0);
-
-            filteredData.forEach(m => {
-                if (m.duration === null) return;
-                let binIndex = durationBins.findIndex((val, idx) =>
-                    m.duration >= val && (idx === durationBins.length - 1 || m.duration < durationBins[idx + 1])
-                );
-                if (binIndex >= 0 && binIndex < durationLabels.length) {
-                    if (m.churn === "Yes") durationChurned[binIndex]++;
-                    else durationActive[binIndex]++;
-                }
-            });
-
-            destroyChart('durationDistChart');
-            charts.durationDist = new Chart(document.getElementById('durationDistChart'), {
-                type: 'bar',
-                data: {
-                    labels: durationLabels,
-                    datasets: [
-                        {
-                            label: 'Churned',
-                            data: durationChurned,
-                            backgroundColor: '#C62828'
-                        },
-                        {
-                            label: 'Active',
-                            data: durationActive,
-                            backgroundColor: '#2E7D32'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {title: {display: true, text: 'Workout Duration (minutes)'}},
-                        y: {beginAtZero: true, title: {display: true, text: 'Member Count'}}
-                    }
-                }
-            });
-        }
-
-        function updatePage4() {
-            // Heatmap: Churn Rate by Age Group x Membership Type
-            const heatmapData = {};
-            filteredData.forEach(m => {
-                const key = `${m.age_group}|${m.membership}`;
-                if (!heatmapData[key]) heatmapData[key] = {total: 0, churned: 0};
-                heatmapData[key].total++;
-                if (m.churn === "Yes") heatmapData[key].churned++;
-            });
-
-            const ageGroups = [...new Set(filteredData.map(m => m.age_group))].sort();
-            const memberships = [...new Set(filteredData.map(m => m.membership))].sort();
-
-            const heatmapDatasets = memberships.map(mem => ({
-                label: mem,
-                data: ageGroups.map(age => {
-                    const key = `${age}|${mem}`;
-                    const stats = heatmapData[key];
-                    return stats && stats.total > 0 ?
-                        (stats.churned / stats.total * 100) : 0;
-                }),
-                backgroundColor: '#CBA135',
-                borderColor: '#403B36',
-                borderWidth: 1
-            }));
-
-            destroyChart('heatmapChart');
-            charts.heatmap = new Chart(document.getElementById('heatmapChart'), {
-                type: 'bar',
-                data: {
-                    labels: ageGroups,
-                    datasets: heatmapDatasets
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {title: {display: true, text: 'Age Group'}},
-                        y: {beginAtZero: true, max: 100, title: {display: true, text: 'Churn Rate (%)'}}
-                    }
-                }
-            });
-
-            // At-Risk Table
-            const atRisk = filteredData
-                .filter(m => m.at_risk === 1)
-                .sort((a, b) => {
-                    const scoreA = (a.visits || 0) - (a.days_since || 0) / 10;
-                    const scoreB = (b.visits || 0) - (b.days_since || 0) / 10;
-                    return scoreA - scoreB;
-                })
-                .slice(0, 20);
-
-            const atRiskBody = document.getElementById('atRiskTableBody');
-            atRiskBody.innerHTML = '';
-            atRisk.forEach(m => {
-                const row = `<tr>
-                    <td>${m.id}</td>
-                    <td>${m.age || 'N/A'}</td>
-                    <td>${m.membership}</td>
-                    <td>${m.visits !== null ? m.visits : 'N/A'}</td>
-                    <td>${m.days_since !== null ? m.days_since : 'N/A'}</td>
-                    <td><span class="risk-badge risk-${m.at_risk === 1 ? 'high' : 'low'}">${m.at_risk_status}</span></td>
-                    <td><span class="risk-badge churn-${m.churn.toLowerCase()}">${m.churn}</span></td>
-                </tr>`;
-                atRiskBody.innerHTML += row;
-            });
-        }
-
-        function destroyChart(chartId) {
-            const chartKey = chartId.replace('Chart', '').replace('Pie', 'Pie');
-            if (charts[chartKey]) {
-                charts[chartKey].destroy();
-            }
-        }
-
-        function showPage(pageNum) {
-            document.querySelectorAll('.dashboard-page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.page-btn').forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById(`page${pageNum}`).classList.add('active');
-            document.querySelectorAll('.page-btn')[pageNum - 1].classList.add('active');
-
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-    </script>
+  if (window.Chart) start(); else window.addEventListener('load', ()=>{ if(window.Chart) start(); else setTimeout(start,200); });
+  window.addEventListener('load', ()=>setTimeout(()=>{ if(window.Chart && !charts.churnPieChart) start(); postH(); }, 250));
+</script>
 </body>
 </html>
