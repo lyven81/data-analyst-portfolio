@@ -1,198 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About This Work | Data Stories Lab</title>
-    <meta name="description" content="The philosophy behind Data Stories Lab — practical analytics, plain language, decisions you can act on.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/data-analyst-portfolio/data-stories.css">
-    <style>
-        .about-layout {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 3rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
-            align-items: start;
-        }
-        .about-aside {
-            position: sticky;
-            top: 6rem;
-            text-align: center;
-            background: #fff;
-            border: 1px solid var(--border);
-            padding: 2rem 1.5rem;
-            border-radius: 4px;
-        }
-        .about-aside img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--cream-alt);
-            margin-bottom: 1.2rem;
-        }
-        .about-aside .name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--navy);
-            font-weight: 700;
-            margin: 0 0 0.4rem 0;
-        }
-        .about-aside .role {
-            font-size: 0.78rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--gold);
-            font-weight: 700;
-            margin: 0 0 1.2rem 0;
-        }
-        .about-aside .blurb {
-            font-size: 0.92rem;
-            color: var(--text-soft);
-            line-height: 1.55;
-            margin: 0 0 1.5rem 0;
-        }
-        .about-aside .contact-line {
-            font-size: 0.85rem;
-            color: var(--text);
-            margin: 0.4rem 0;
-        }
-        .about-aside .contact-line a {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .about-aside .contact-line a:hover { text-decoration: underline; }
-        .about-aside .divider {
-            border: 0;
-            border-top: 1px solid var(--cream-alt);
-            margin: 1.5rem 0;
-        }
-        .about-main {
-            min-width: 0;
-        }
-        .about-main .about-eyebrow {
-            font-size: 0.75rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--gold);
-            font-weight: 700;
-            margin: 0 0 1rem 0;
-        }
-        .about-main h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 2.6rem);
-            line-height: 1.15;
-            color: var(--navy);
-            font-weight: 900;
-            margin: 0 0 2rem 0;
-        }
-        .about-main h1 em { color: var(--gold); font-style: normal; }
-        .about-main p {
-            font-size: 1.02rem;
-            color: var(--text);
-            line-height: 1.75;
-            margin: 0 0 1.4rem 0;
-        }
-        .about-main .pull-quote {
-            position: relative;
-            background: var(--cream-alt);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--gold);
-            padding: 1.6rem 1.8rem 1.6rem 2rem;
-            margin: 2.4rem 0;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            font-style: italic;
-            color: var(--navy);
-            line-height: 1.45;
-            border-radius: 2px;
-        }
-        .about-main .pull-quote::before {
-            content: 'Principle';
-            display: block;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 700;
-            font-style: normal;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 0.6rem;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About This Work | Data Stories Lab</title>
+<meta name="description" content="The philosophy behind Data Stories Lab: practical analytics, plain language, decisions you can act on.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#222; --paper:#fff; --hair:#dddddd; --gray:#555; --accent:#B8860B; --navy:#1E3A5F; --panel:#fbfbf8; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
 
-        @media (max-width: 768px) {
-            .about-layout {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 2rem 1.2rem 2.5rem;
-            }
-            .about-aside {
-                position: static;
-                max-width: 320px;
-                margin: 0 auto;
-            }
-            .about-main h1 { font-size: 1.7rem; }
-            .about-main p { font-size: 0.98rem; }
-            .about-main .pull-quote { font-size: 1.1rem; padding-left: 1rem; }
-        }
-    </style>
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+
+  .tab{ display:inline-block; background:#222; color:#fff; font-weight:700; font-size:.66rem; letter-spacing:2px; text-transform:uppercase; padding:6px 12px; }
+
+  .page-head{ max-width:90%; margin:0 auto; padding:28px 28px 6px; }
+  .page-head .tab{ margin-bottom:14px; }
+  .page-head h1{ font-size:2.6rem; font-weight:900; line-height:1.04; letter-spacing:-.005em; }
+  .page-head h1 em{ color:var(--accent); font-style:normal; }
+  .page-head p{ color:var(--gray); max-width:78ch; margin-top:10px; }
+
+  .about-wrap{ max-width:90%; margin:0 auto; padding:22px 28px 44px; }
+  .about-grid{ display:grid; grid-template-columns:300px 1fr; gap:48px; align-items:start; }
+
+  .about-aside{ position:sticky; top:24px; border:1px solid var(--hair); background:#fff; padding:28px 24px; text-align:center; }
+  .about-aside img{ width:140px; height:140px; border-radius:50%; object-fit:cover; border:4px solid var(--panel); outline:1px solid var(--hair); margin-bottom:16px; }
+  .about-aside .name{ font-size:1.3rem; font-weight:900; color:var(--navy); margin-bottom:6px; }
+  .about-aside .role{ font-size:.62rem; letter-spacing:1.8px; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:14px; }
+  .about-aside .blurb{ font-size:.9rem; color:var(--gray); line-height:1.55; }
+  .about-aside .divider{ border:0; border-top:1px solid var(--hair); margin:18px 0; }
+  .about-aside .contact-line{ font-size:.85rem; color:#333; margin:5px 0; }
+  .about-aside .contact-line a{ color:var(--accent); font-weight:600; }
+  .about-aside .contact-line a:hover{ text-decoration:underline; }
+  .about-aside .start a{ font-size:.62rem; letter-spacing:1.4px; text-transform:uppercase; font-weight:700; color:var(--accent); }
+  .about-aside .start a:hover{ text-decoration:underline; }
+
+  .about-main{ min-width:0; }
+  .about-main p{ font-size:1.02rem; color:#333; line-height:1.75; margin-bottom:1.3rem; max-width:72ch; }
+  .principle{ background:var(--panel); border:1px solid var(--hair); border-left:4px solid var(--accent); padding:22px 26px; margin:28px 0; max-width:72ch; }
+  .principle .kicker{ display:block; font-size:.62rem; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+  .principle p{ font-style:italic; font-weight:700; color:var(--navy); font-size:1.25rem; line-height:1.45; margin:0; max-width:none; }
+
+  footer{ background:#222; max-width:90%; margin:30px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; }
+  .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  @media (max-width:768px){
+    .about-grid{ grid-template-columns:1fr; gap:28px; }
+    .about-aside{ position:static; max-width:340px; margin:0 auto; }
+    .mast-nav{ display:none; }
+    .hamburger{ display:flex; }
+    .masthead{ padding:12px 16px; }
+    .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; }
+    .page-head h1{ font-size:2rem; }
+    .principle p{ font-size:1.1rem; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="navbar">
-        <div class="brand"><a href="/data-analyst-portfolio/index.html">Data Stories Lab</a></div>
-        <div class="topnav">
-            <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
-            <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
-            <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
-            <a href="/data-analyst-portfolio/about-this-work.html">About</a>
-            <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+
+  <div class="page-head">
+    <span class="tab">About</span>
+    <h1>About <em>This Work</em></h1>
+    <p>Practical analytics, plain language, decisions you can act on.</p>
+  </div>
+
+  <div class="about-wrap">
+    <div class="about-grid">
+
+      <aside class="about-aside">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/about-me.png" alt="Lee Yih Ven">
+        <div class="name">Lee Yih Ven</div>
+        <div class="role">Data Analyst</div>
+        <p class="blurb">Practical analytics for business owners: segmentation, forecasting, dashboards, AI assistants.</p>
+        <hr class="divider">
+        <p class="contact-line"><a href="mailto:yven81@gmail.com">yven81@gmail.com</a></p>
+        <p class="contact-line">+60 14-920 7099</p>
+        <hr class="divider">
+        <p class="contact-line start"><a href="/data-analyst-portfolio/contact.html">Start a project &rarr;</a></p>
+      </aside>
+
+      <main class="about-main">
+        <p>I believe data should make life easier, not more complicated. The mission is to help businesses and teams use data in a way that feels natural, practical, and genuinely useful, so decisions aren't guesses, but informed steps forward.</p>
+
+        <p>Data can feel overwhelming, but it doesn't have to be. The approach here is simple: take what you already have, uncover patterns that matter, and turn them into clear insights you can act on.</p>
+
+        <div class="principle">
+          <span class="kicker">Principle</span>
+          <p>Solve real problems. Frame the analysis from the reader's point of view, not the analyst's.</p>
         </div>
-    </div>
 
-    <div class="about-layout">
+        <p>Whether the question is keeping customers from leaving, planning stock more confidently, setting the right prices, or finding out which products bring the best returns, each analysis is framed from your perspective. Marketing campaigns, product design, customer relationships, your context, not generic templates.</p>
 
-        <aside class="about-aside">
-            <img src="images/about-me.png" alt="Lee Yih Ven">
-            <p class="name">Lee Yih Ven</p>
-            <p class="role">Data analyst</p>
-            <p class="blurb">Practical analytics for business owners — segmentation, forecasting, dashboards, AI assistants.</p>
-            <hr class="divider">
-            <p class="contact-line"><a href="mailto:director@pinnacleslearning.com">director@pinnacleslearning.com</a></p>
-            <p class="contact-line">+60 14-920 7099</p>
-            <hr class="divider">
-            <p class="contact-line"><a href="/data-analyst-portfolio/contact.html">Start a project →</a></p>
-        </aside>
+        <p>Dashboards, reports, and workflows are built to be practical and easy to understand, without the jargon. The goal isn't numbers on a page, but clarity that helps you act with confidence and see results.</p>
 
-        <main class="about-main">
-            <p class="about-eyebrow">The philosophy</p>
-            <h1>About <em>This Work</em></h1>
-
-            <p>I believe data should make life easier, not more complicated. The mission is to help businesses and teams use data in a way that feels natural, practical, and genuinely useful — so decisions aren't guesses, but informed steps forward.</p>
-
-            <p>Data can feel overwhelming, but it doesn't have to be. The approach here is simple: take what you already have, uncover patterns that matter, and turn them into clear insights you can act on.</p>
-
-            <p class="pull-quote">Solve real problems. Frame the analysis from the reader's point of view, not the analyst's.</p>
-
-            <p>Whether the question is keeping customers from leaving, planning stock more confidently, setting the right prices, or finding out which products bring the best returns — each analysis is framed from your perspective. Marketing campaigns, product design, customer relationships — your context, not generic templates.</p>
-
-            <p>Dashboards, reports, and workflows are built to be practical and easy to understand, without the jargon. The goal isn't numbers on a page, but clarity that helps you act with confidence and see results.</p>
-
-            <p>At the end of the day, this isn't about big data talk. It's about working with what's already in front of us — your data — to make better decisions and move the business forward.</p>
-        </main>
+        <p>At the end of the day, this isn't about big data talk. It's about working with what's already in front of us (your data) to make better decisions and move the business forward.</p>
+      </main>
 
     </div>
+  </div>
 
-    <footer>
-        <p>@2026. Lee Yih Ven. Data Stories Lab</p>
-    </footer>
+  <footer>&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
 
+<script>
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+</script>
 </body>
 </html>
