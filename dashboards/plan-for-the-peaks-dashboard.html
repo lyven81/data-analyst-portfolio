@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan for the Peaks Dashboard | Data Stories Lab</title>
+<meta name="description" content="A monthly planner for a Langkawi resort: see the pattern, group months into seasons, forecast next year, and plan staff, price and promotions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a1a1a; --gray:#555; --mute:#6b7280; --hair:#e2e2e2; --accent:#B8860B; --navy:#1E3A5F; --paper:#fff;
+         --teal:#2E7D6F; --blue:#4A7FB5; --red:#B85450; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); }
+  .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+  @media(max-width:560px){ .sw{ padding:11px 12px; } .sw:first-child{ padding-left:0; } }
+  .tool{ padding:22px 0 8px; }
+  .filter{ display:flex; gap:18px; flex-wrap:wrap; align-items:center; border:1px solid var(--hair); padding:13px 16px; margin-bottom:18px; }
+  .filter label{ font-size:.58rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-right:6px; }
+  .filter select{ padding:6px 8px; border:1px solid var(--hair); font-family:inherit; font-size:.85rem; }
+  .filter .reset{ font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); background:none; border:1px solid var(--hair); padding:7px 12px; cursor:pointer; }
+  .filter .note{ font-size:.72rem; color:var(--gray); font-style:italic; margin-left:auto; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.7rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:300px; margin-top:14px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+  table{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  th{ text-align:left; color:var(--navy); border-bottom:2px solid var(--accent); padding:8px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  td{ padding:8px; border-bottom:1px solid #eee; } td.r{ text-align:right; font-variant-numeric:tabular-nums; }
+  .pill{ display:inline-block; font-size:.62rem; font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:#fff; border-radius:20px; padding:2px 9px; }
+  .guide{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:6px; }
+  .gcard{ border:1px solid var(--hair); border-top:4px solid var(--accent); padding:15px 16px; background:#fff; }
+  .gcard h4{ font-size:.95rem; color:var(--navy); margin-bottom:4px; }
+  .gcard .mo{ font-size:.7rem; color:var(--mute); font-weight:700; letter-spacing:.4px; text-transform:uppercase; margin-bottom:8px; }
+  .gcard p{ font-size:.82rem; color:var(--gray); }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){
+    .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; }
+    .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; }
+  }
+  @media(max-width:760px){ .kpis{ grid-template-columns:1fr 1fr; } .grid{ grid-template-columns:1fr; } .guide{ grid-template-columns:1fr; } }
+  @media print{
+    *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .masthead,.rule-top,.crumb,.switch,.filter,.pagenav,footer.site,.drawer,.overlay,.hamburger{ display:none !important; }
+    .page{ display:block !important; page-break-before:always; }
+    .page:first-of-type{ page-break-before:avoid; }
+    .ccard,.kpi,.kpis,table,.gcard{ break-inside:avoid; page-break-inside:avoid; }
+    .ph{ display:block !important; }
+  }
+  .ph{ display:none; font-size:1.1rem; font-weight:800; color:var(--navy); margin:6px 0 12px; }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Plan for the Peaks</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/plan-for-the-peaks/cover%20image.jpeg" alt="A Langkawi resort pool, full in peak season and quiet in the off months">
+        <figcaption><span>One resort, two businesses: nearly full in the peaks, half empty in the quiet months.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Resort demand planner</span>
+      <h1 class="title">Plan for the peaks</h1>
+      <p class="standfirst">Bookings double by season, with no yearly growth</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Monthly planner</span><span>120 rooms &middot; Langkawi</span><span>2022&ndash;2024 + 2025 forecast</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/plan-for-the-peaks.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="filter">
+        <span><label>Year</label><select id="f_year"><option value="all">All 3 years</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option></select></span>
+        <span><label>Season</label><select id="f_season"><option value="all">All seasons</option><option value="Peak">Peak</option><option value="Mid">Mid</option><option value="Quiet">Quiet</option></select></span>
+        <button class="reset" id="reset">Reset</button>
+        <span class="note" id="fnote">Showing all months</span>
+      </div>
+
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Overview</button>
+        <button class="pbtn" data-p="2">Seasons</button>
+        <button class="pbtn" data-p="3">Forecast</button>
+        <button class="pbtn" data-p="4">Plan</button>
+      </div>
+
+      <!-- P1 Overview -->
+      <div class="page active" id="p1">
+        <div class="ph">Overview</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k1a">-</div><div class="l">average occupancy</div></div>
+          <div class="kpi"><div class="v" id="k1b">-</div><div class="l">fullest month</div></div>
+          <div class="kpi"><div class="v" id="k1c">-</div><div class="l">emptiest month</div></div>
+          <div class="kpi"><div class="v" id="k1d">-</div><div class="l">busy vs quiet month</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">The same busy and quiet pattern every year</div><div class="cs">How full the resort has been, month by month</div><div class="cwrap"><canvas id="c_wave"></canvas></div><div class="csrc">Source: 36 months of bookings, 2022 to 2024. Occupancy = rooms booked against rooms available.</div></div>
+        </div>
+      </div>
+
+      <!-- P2 Seasons -->
+      <div class="page" id="p2">
+        <div class="ph">Seasons</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k2a">-</div><div class="l">peak months</div></div>
+          <div class="kpi"><div class="v" id="k2b">-</div><div class="l">mid months</div></div>
+          <div class="kpi"><div class="v" id="k2c">-</div><div class="l">quiet months</div></div>
+          <div class="kpi"><div class="v" id="k2d">-</div><div class="l">peak vs quiet, how full</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Three peak, five mid, four quiet months</div><div class="cs">Average occupancy by calendar month, coloured by season</div><div class="cwrap"><canvas id="c_monthocc"></canvas></div><div class="csrc">Source: 2022 to 2024 average for each calendar month.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">The peaks carry the year</div><div class="cs">Share of yearly bookings by season</div><div class="cwrap"><canvas id="c_share"></canvas></div><div class="csrc">Source: 2022 to 2024 room-nights, grouped by season.</div></div>
+        </div>
+      </div>
+
+      <!-- P3 Forecast -->
+      <div class="page" id="p3">
+        <div class="ph">Forecast</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k3a">-</div><div class="l">2025 room-nights forecast</div></div>
+          <div class="kpi"><div class="v" id="k3b">-</div><div class="l">busiest month (2025)</div></div>
+          <div class="kpi"><div class="v" id="k3c">-</div><div class="l">quietest month (2025)</div></div>
+          <div class="kpi"><div class="v">2.5%</div><div class="l">forecast tested within</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">If the same pattern continues, this is next year</div><div class="cs">Monthly room-nights: 2022 to 2024 actual, then the 2025 forecast</div><div class="cwrap"><canvas id="c_histfc"></canvas></div><div class="csrc">Source: seasonal pattern carried forward at today's level (no growth assumed). Tested within 2.5% on a hidden year.</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">How full each month will be in 2025</div><div class="cs">Expected occupancy by month, coloured by season</div><div class="cwrap"><canvas id="c_fcocc"></canvas></div><div class="csrc">Source: 2025 forecast. Peak runs near full; quiet months sit close to half empty.</div></div>
+        </div>
+      </div>
+
+      <!-- P4 Plan -->
+      <div class="page" id="p4">
+        <div class="ph">Plan</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k4a">-</div><div class="l">peak months: protect</div></div>
+          <div class="kpi"><div class="v" id="k4b">-</div><div class="l">quiet months: improve</div></div>
+          <div class="kpi"><div class="v" id="k4c">-</div><div class="l">2025 average occupancy</div></div>
+          <div class="kpi"><div class="v">~55%</div><div class="l">quiet-month team vs peak</div></div>
+        </div>
+        <div class="guide">
+          <div class="gcard" style="border-top-color:#B85450"><h4>Peak: protect the money</h4><div class="mo" id="g_peak">Jun, Jul, Dec</div><p>Hold or raise rates, full team, no discounting. The rooms are nearly full, so price is the only way to earn more.</p></div>
+          <div class="gcard" style="border-top-color:#4A7FB5"><h4>Mid: run as normal</h4><div class="mo" id="g_mid">Mar, Apr, May, Aug, Nov</div><p>Normal rates and team. Watch bookings and tilt toward peak or quiet actions as the month firms up.</p></div>
+          <div class="gcard" style="border-top-color:#2E7D6F"><h4>Quiet: improve the empties</h4><div class="mo" id="g_quiet">Jan, Feb, Sep, Oct</div><p>Run promotions and packages, smaller team (about 55%), and do repairs. These are the only months with rooms to fill.</p></div>
+        </div>
+        <div class="ccard full" style="margin-top:18px"><span class="tab"></span><div class="ct">Your month-by-month plan for 2025</div><div class="cs">Expected bookings, how full, season and what to do</div>
+          <table><thead><tr><th>Month</th><th class="r">Expected room-nights</th><th class="r">How full</th><th>Season</th><th>What to do</th></tr></thead><tbody id="planbody"></tbody></table>
+          <div class="csrc">Source: 2025 forecast plus the seasonal action guide. Check against real bookings as they come in.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  // ACT row = [year, mnum, room_nights, occ] ; FC row = [mnum, room_nights, occ]
+  const ACT = [[2022,1,1892,50.9],[2022,2,1686,50.2],[2022,3,2152,57.8],[2022,4,2396,66.6],[2022,5,2231,60.0],[2022,6,3023,84.0],[2022,7,2985,80.2],[2022,8,2280,61.3],[2022,9,1868,51.9],[2022,10,1912,51.4],[2022,11,2391,66.4],[2022,12,3516,94.5],[2023,1,1874,50.4],[2023,2,1839,54.7],[2023,3,2129,57.2],[2023,4,2230,61.9],[2023,5,2455,66.0],[2023,6,3067,85.2],[2023,7,3074,82.6],[2023,8,2305,62.0],[2023,9,1856,51.6],[2023,10,1926,51.8],[2023,11,2422,67.3],[2023,12,3388,91.1],[2024,1,1837,49.4],[2024,2,1735,49.9],[2024,3,2134,57.4],[2024,4,2343,65.1],[2024,5,2459,66.1],[2024,6,3244,90.1],[2024,7,3224,86.7],[2024,8,2272,61.1],[2024,9,1831,50.9],[2024,10,1915,51.5],[2024,11,2366,65.7],[2024,12,3563,95.8]];
+  const FC  = [[1,1868,50.2],[2,1753,52.2],[3,2138,57.5],[4,2323,64.5],[5,2382,64.0],[6,3111,86.4],[7,3094,83.2],[8,2286,61.4],[9,1852,51.4],[10,1918,51.6],[11,2393,66.5],[12,3489,93.8]];
+  const NAVY='#1E3A5F', GOLD='#B8860B', TEAL='#2E7D6F', BLUE='#4A7FB5', RED='#B85450', GREY='#9aa3ad', GRID='#e8e8e8';
+  const FONT={ family:'Arial', size:11 };
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const charts={};
+  function season(m){ return (m===6||m===7||m===12)?'Peak':((m===1||m===2||m===9||m===10)?'Quiet':'Mid'); }
+  const SCOL={ Peak:RED, Mid:BLUE, Quiet:TEAL };
+  function actionFor(s){ return s==='Peak'?'Hold or raise rates, full team, no discounting'
+      : s==='Quiet'?'Run promotions and packages, smaller team, do repairs'
+      : 'Normal rates and team, watch bookings'; }
+  function val(id){ return document.getElementById(id).value; }
+  function destroy(id){ if(charts[id]){ charts[id].destroy(); delete charts[id]; } }
+  function mk(id,cfg){ destroy(id); const el=document.getElementById(id); if(el) charts[id]=new Chart(el,cfg); }
+  function axes(opts){ return Object.assign({ responsive:true, maintainAspectRatio:false, animation:false, plugins:{ legend:{ display:false } } }, opts); }
+  const yOcc = { grid:{color:GRID}, border:{display:false}, ticks:{ color:'#555', font:FONT, callback:v=>v+'%' }, beginAtZero:true, max:100 };
+  const yRN  = { grid:{color:GRID}, border:{display:false}, ticks:{ color:'#555', font:FONT, callback:v=>(v/1000).toFixed(1)+'k' }, beginAtZero:true };
+  const xCat = { grid:{display:false}, border:{color:'#c4c4c4'}, ticks:{ color:'#555', font:FONT } };
+  function setTxt(id,v){ document.getElementById(id).textContent=v; }
+  function mean(a){ return a.length? a.reduce((s,x)=>s+x,0)/a.length : NaN; }
+
+  let AF=[...ACT], FF=[...FC];
+  function applyFilters(){
+    const fy=val('f_year'), fs=val('f_season');
+    AF=ACT.filter(r=>(fy==='all'||r[0]===+fy)&&(fs==='all'||season(r[1])===fs));
+    FF=FC.filter(r=>(fs==='all'||season(r[0])===fs));
+    document.getElementById('fnote').textContent=(fy==='all'&&fs==='all')?'Showing all months':
+      'Showing '+(fy==='all'?'all years':fy)+(fs==='all'?'':' / '+fs+' season');
+    renderAll();
+  }
+
+  function renderAll(){
+    // ----- P1 Overview (KPIs by calendar-month average, matching the report) -----
+    setTxt('k1a', AF.length? mean(AF.map(r=>r[3])).toFixed(0)+'%':'n/a');
+    const byM={}; AF.forEach(r=>{ (byM[r[1]]=byM[r[1]]||[]).push(r); });
+    const ms=Object.keys(byM).map(Number);
+    const mOcc=m=>mean(byM[m].map(r=>r[3])), mRN=m=>mean(byM[m].map(r=>r[2]));
+    if(ms.length){
+      let hm=ms[0],lm=ms[0],hr=ms[0],lr=ms[0];
+      ms.forEach(m=>{ if(mOcc(m)>mOcc(hm))hm=m; if(mOcc(m)<mOcc(lm))lm=m; if(mRN(m)>mRN(hr))hr=m; if(mRN(m)<mRN(lr))lr=m; });
+      setTxt('k1b', MON[hm-1]+'  '+mOcc(hm).toFixed(0)+'%');
+      setTxt('k1c', MON[lm-1]+'  '+mOcc(lm).toFixed(0)+'%');
+      setTxt('k1d', (mRN(hr)/mRN(lr)).toFixed(2)+'x');
+    } else { setTxt('k1b','n/a'); setTxt('k1c','n/a'); setTxt('k1d','n/a'); }
+    mk('c_wave',{ type:'line',
+      data:{ labels:AF.map(r=>MON[r[1]-1]+" '"+String(r[0]).slice(2)), datasets:[{ data:AF.map(r=>r[3]), borderColor:NAVY, backgroundColor:'rgba(30,58,95,.08)', fill:true, tension:.32, pointRadius:2, borderWidth:2.4 }] },
+      options:axes({ scales:{ y:yOcc, x:xCat } }) });
+
+    // ----- P2 Seasons -----
+    const calMonths=[...new Set(AF.map(r=>r[1]))].sort((a,b)=>a-b);
+    const seasonsPresent=s=>calMonths.filter(m=>season(m)===s).length;
+    setTxt('k2a', seasonsPresent('Peak')); setTxt('k2b', seasonsPresent('Mid')); setTxt('k2c', seasonsPresent('Quiet'));
+    const pOcc=AF.filter(r=>season(r[1])==='Peak').map(r=>r[3]), qOcc=AF.filter(r=>season(r[1])==='Quiet').map(r=>r[3]);
+    setTxt('k2d', (pOcc.length&&qOcc.length)? mean(pOcc).toFixed(0)+'% / '+mean(qOcc).toFixed(0)+'%':'n/a');
+    const avgByMonth=calMonths.map(m=>{ const v=AF.filter(r=>r[1]===m).map(r=>r[3]); return v.length?mean(v):0; });
+    mk('c_monthocc',{ type:'bar',
+      data:{ labels:calMonths.map(m=>MON[m-1]), datasets:[{ data:avgByMonth, backgroundColor:calMonths.map(m=>SCOL[season(m)]) }] },
+      options:axes({ scales:{ y:yOcc, x:xCat } }) });
+    const shareData=['Peak','Mid','Quiet'].map(s=>AF.filter(r=>season(r[1])===s).reduce((t,r)=>t+r[2],0));
+    mk('c_share',{ type:'doughnut',
+      data:{ labels:['Peak','Mid','Quiet'], datasets:[{ data:shareData, backgroundColor:[RED,BLUE,TEAL], borderWidth:0 }] },
+      options:axes({ cutout:'58%', plugins:{ legend:{ display:true, position:'right', labels:{ font:FONT, boxWidth:10, padding:10, color:'#444' } } } }) });
+
+    // ----- P3 Forecast -----
+    setTxt('k3a', (FF.reduce((t,r)=>t+r[1],0)/1000).toFixed(1)+'k');
+    if(FF.length){ let hi=FF[0],lo=FF[0]; FF.forEach(r=>{ if(r[2]>hi[2])hi=r; if(r[2]<lo[2])lo=r; });
+      setTxt('k3b', MON[hi[0]-1]+'  '+hi[2].toFixed(0)+'%'); setTxt('k3c', MON[lo[0]-1]+'  '+lo[2].toFixed(0)+'%');
+    } else { setTxt('k3b','n/a'); setTxt('k3c','n/a'); }
+    // history + forecast continuity (respects filters: AF actual then FF forecast)
+    const histLabels=AF.map(r=>MON[r[1]-1]+" '"+String(r[0]).slice(2));
+    const fcLabels=FF.map(r=>MON[r[0]-1]+" '25");
+    const histData=AF.map(r=>r[2]).concat(FF.map(()=>null));
+    const fcData=AF.map(()=>null); if(AF.length) fcData[fcData.length-1]=AF[AF.length-1][2];
+    FF.forEach(r=>fcData.push(r[1]));
+    mk('c_histfc',{ type:'line',
+      data:{ labels:histLabels.concat(fcLabels), datasets:[
+        { label:'Actual', data:histData, borderColor:NAVY, backgroundColor:NAVY, tension:.3, pointRadius:0, borderWidth:2.4, spanGaps:false },
+        { label:'2025 forecast', data:fcData, borderColor:GOLD, backgroundColor:GOLD, borderDash:[6,4], tension:.3, pointRadius:0, borderWidth:2.4, spanGaps:true }]},
+      options:axes({ plugins:{ legend:{ display:true, position:'top', align:'start', labels:{ font:FONT, boxWidth:10, padding:12, color:'#444' } } }, scales:{ y:yRN, x:xCat } }) });
+    mk('c_fcocc',{ type:'bar',
+      data:{ labels:FF.map(r=>MON[r[0]-1]), datasets:[{ data:FF.map(r=>r[2]), backgroundColor:FF.map(r=>SCOL[season(r[0])]) }] },
+      options:axes({ scales:{ y:yOcc, x:xCat } }) });
+
+    // ----- P4 Plan -----
+    setTxt('k4a', FF.filter(r=>season(r[0])==='Peak').length);
+    setTxt('k4b', FF.filter(r=>season(r[0])==='Quiet').length);
+    setTxt('k4c', FF.length? mean(FF.map(r=>r[2])).toFixed(0)+'%':'n/a');
+    const pb=document.getElementById('planbody'); pb.innerHTML='';
+    FF.forEach(r=>{ const s=season(r[0]); const tr=document.createElement('tr');
+      tr.innerHTML='<td>'+MON[r[0]-1]+' 2025</td><td class="r">'+r[1].toLocaleString()+'</td><td class="r">'+r[2].toFixed(0)+'%</td>'+
+        '<td><span class="pill" style="background:'+SCOL[s]+'">'+s+'</span></td><td>'+actionFor(s)+'</td>';
+      pb.appendChild(tr); });
+
+    setTimeout(postH,30);
+  }
+
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    Object.values(charts).forEach(c=>{ try{c.resize();}catch(e){} });
+    setTimeout(postH,40);
+  });
+  ['f_year','f_season'].forEach(id=>document.getElementById(id).addEventListener('change', applyFilters));
+  document.getElementById('reset').addEventListener('click', ()=>{ document.getElementById('f_year').value='all'; document.getElementById('f_season').value='all'; applyFilters(); });
+  window.addEventListener('beforeprint', ()=>{ Object.values(charts).forEach(c=>{ try{c.resize();}catch(e){} }); });
+
+  function boot(){ if(window.Chart){ renderAll(); } else { setTimeout(boot,150); } }
+  boot();
+  window.addEventListener('load', ()=>setTimeout(()=>{ if(window.Chart && !charts.c_wave) renderAll(); postH(); }, 250));
+</script>
+</body>
+</html>
