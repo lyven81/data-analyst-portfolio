@@ -240,6 +240,8 @@
        7 Lower-right top      8 Lower-right bottom   -> drop
      ============================================================ */
   const items = [
+    {t:"Plan for the Peaks", c:"Time Series Analysis", img:"plan-for-the-peaks/cover%20image.jpeg", s:"plan-for-the-peaks", d:"", a:"",
+     dek:"Bookings double by season, with no yearly growth"},
     {t:"Know When to Reorder", c:"Time Series Analysis", img:"know-when-to-reorder/cover%20image.png", s:"know-when-to-reorder", d:"know-when-to-reorder-dashboard", a:"know-when-to-reorder",
      dek:"Reorder stock in time to stop losing sales"},
     {t:"Right Price, Right Season", c:"Optimization Analysis", img:"right-price-right-season/cover.png", s:"right-price-right-season", d:"right-price-right-season-dashboard", a:"right-price-right-season",
@@ -255,9 +257,7 @@
     {t:"Fixing the Sales Leaks", c:"Optimization Analysis", img:"fixing-the-sales-leaks/cover%20image.jpeg", s:"fixing-the-sales-leaks", d:"fixing-the-sales-leaks-dashboard", a:"fixing-the-sales-leaks",
      dek:"Find where your online store loses buyers"},
     {t:"Not All Homes Are Equal", c:"Regression Analysis", img:"not-all-homes-are-equal/cover%20image.jpeg", s:"not-all-homes-are-equal", d:"not-all-homes-are-equal-dashboard", a:"not-all-homes-are-equal",
-     dek:"Find the best-value property type and size"},
-    {t:"Where the Money Is", c:"Segmentation Analysis", img:"where-the-money-is/cover%20image.png", s:"where-the-money-is", d:"where-the-money-is-dashboard", a:"where-the-money-is",
-     dek:"See which products and regions drive revenue"}
+     dek:"Find the best-value property type and size"}
   ];
 
   const categories = [
@@ -271,6 +271,14 @@
 
   /* Full search database (every case study; never pruned). Used by the search bar only. */
   const caseStudies = [
+  {
+    "title": "Plan for the Peaks",
+    "description": "Bookings double by season, with no yearly growth",
+    "caseStudyUrl": "/data-analyst-portfolio/case-studies/plan-for-the-peaks.html",
+    "dashboardUrl": "",
+    "agenticUrl": "",
+    "category": "Time Series Analysis"
+  },
   {
     "title": "Forecasting Travel Delays",
     "description": "Know which days travel delays will spike",
