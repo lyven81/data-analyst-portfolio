@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riding the Growth Curve Dashboard | Data Stories Lab</title>
+<meta name="description" content="A growth planner for a fast-growing online store: the climb, the festive lift, the 2025 forecast, and a month-by-month buying and cash plan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a1a1a; --gray:#555; --mute:#6b7280; --hair:#e2e2e2; --accent:#B8860B; --navy:#1E3A5F; --paper:#fff;
+         --teal:#2E7D6F; --blue:#4A7FB5; --red:#B85450; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); }
+  .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+  @media(max-width:560px){ .sw{ padding:11px 12px; } .sw:first-child{ padding-left:0; } }
+  .tool{ padding:22px 0 8px; }
+  .filter{ display:flex; gap:18px; flex-wrap:wrap; align-items:center; border:1px solid var(--hair); padding:13px 16px; margin-bottom:18px; }
+  .filter label{ font-size:.58rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-right:6px; }
+  .filter select{ padding:6px 8px; border:1px solid var(--hair); font-family:inherit; font-size:.85rem; }
+  .filter .reset{ font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); background:none; border:1px solid var(--hair); padding:7px 12px; cursor:pointer; }
+  .filter .note{ font-size:.72rem; color:var(--gray); font-style:italic; margin-left:auto; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.7rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:300px; margin-top:14px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+  table{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  th{ text-align:left; color:var(--navy); border-bottom:2px solid var(--accent); padding:8px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  td{ padding:8px; border-bottom:1px solid #eee; } td.r{ text-align:right; font-variant-numeric:tabular-nums; }
+  .pill{ display:inline-block; font-size:.62rem; font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:#fff; border-radius:20px; padding:2px 9px; }
+  .guide{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:6px; }
+  .gcard{ border:1px solid var(--hair); border-top:4px solid var(--accent); padding:15px 16px; background:#fff; }
+  .gcard h4{ font-size:.95rem; color:var(--navy); margin-bottom:4px; }
+  .gcard .mo{ font-size:.7rem; color:var(--mute); font-weight:700; letter-spacing:.4px; text-transform:uppercase; margin-bottom:8px; }
+  .gcard p{ font-size:.82rem; color:var(--gray); }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){
+    .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; }
+    .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; }
+  }
+  @media(max-width:760px){ .kpis{ grid-template-columns:1fr 1fr; } .grid{ grid-template-columns:1fr; } .guide{ grid-template-columns:1fr; } }
+  @media print{
+    *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .masthead,.rule-top,.crumb,.switch,.filter,.pagenav,footer.site,.drawer,.overlay,.hamburger{ display:none !important; }
+    .page{ display:block !important; page-break-before:always; }
+    .page:first-of-type{ page-break-before:avoid; }
+    .ccard,.kpi,.kpis,table,.gcard{ break-inside:avoid; page-break-inside:avoid; }
+    .ph{ display:block !important; }
+  }
+  .ph{ display:none; font-size:1.1rem; font-weight:800; color:var(--navy); margin:6px 0 12px; }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><span class="sep">/</span><span>Riding the Growth Curve</span></div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/riding-the-growth-curve/cover%20image.jpeg" alt="An online store's orders climbing toward a year-end peak">
+        <figcaption><span>Fast growth, with a clear year-end festive lift on top.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Online store growth planner</span>
+      <h1 class="title">Riding the growth curve</h1>
+      <p class="standfirst">Fast growth, with a clear year-end festive lift</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Growth planner</span><span>Online retail</span><span>2022&ndash;2024 + 2025 forecast</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/riding-the-growth-curve.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="filter">
+        <span><label>Year</label><select id="f_year"><option value="all">All 3 years</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option></select></span>
+        <span><label>Period</label><select id="f_period"><option value="all">All periods</option><option value="Festive">Festive peak</option><option value="Steady">Steady</option><option value="Post-festive">Post-festive dip</option></select></span>
+        <button class="reset" id="reset">Reset</button>
+        <span class="note" id="fnote">Showing all months</span>
+      </div>
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Overview</button>
+        <button class="pbtn" data-p="2">Growth &amp; Festive</button>
+        <button class="pbtn" data-p="3">Forecast</button>
+        <button class="pbtn" data-p="4">Plan</button>
+      </div>
+
+      <div class="page active" id="p1">
+        <div class="ph">Overview</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k1a">-</div><div class="l">revenue in view</div></div>
+          <div class="kpi"><div class="v" id="k1b">-</div><div class="l">first year to last</div></div>
+          <div class="kpi"><div class="v" id="k1c">-</div><div class="l">avg growth per month</div></div>
+          <div class="kpi"><div class="v" id="k1d">-</div><div class="l">biggest month</div></div>
+        </div>
+        <div class="grid"><div class="ccard full"><span class="tab"></span><div class="ct">Revenue climbs month after month</div><div class="cs">Monthly revenue, 2022 to 2024</div><div class="cwrap"><canvas id="c_climb"></canvas></div><div class="csrc">Source: 36 months of online-store revenue.</div></div></div>
+      </div>
+
+      <div class="page" id="p2">
+        <div class="ph">Growth &amp; Festive</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k2a">-</div><div class="l">avg growth per year</div></div>
+          <div class="kpi"><div class="v" id="k2b">-</div><div class="l">biggest year</div></div>
+          <div class="kpi"><div class="v">Nov, Dec</div><div class="l">festive peak</div></div>
+          <div class="kpi"><div class="v">Jan, Feb</div><div class="l">post-festive dip</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Each year far larger than the last</div><div class="cs">Total revenue by year</div><div class="cwrap"><canvas id="c_year"></canvas></div><div class="csrc">Source: 2022 to 2024 revenue.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Growth and a year-end lift, stacked</div><div class="cs">Revenue by month, each year a line</div><div class="cwrap"><canvas id="c_overlay"></canvas></div><div class="csrc">Source: each year rises toward the Nov to Dec festive peak.</div></div>
+        </div>
+      </div>
+
+      <div class="page" id="p3">
+        <div class="ph">Forecast</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k3a">-</div><div class="l">2025 revenue forecast</div></div>
+          <div class="kpi"><div class="v" id="k3b">-</div><div class="l">vs last year</div></div>
+          <div class="kpi"><div class="v" id="k3c">-</div><div class="l">biggest month (2025)</div></div>
+          <div class="kpi"><div class="v">14.1%</div><div class="l">forecast tested within</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">The climb continues into 2025</div><div class="cs">Monthly revenue: 2022 to 2024 actual, then the 2025 forecast</div><div class="cwrap"><canvas id="c_histfc"></canvas></div><div class="csrc">Source: growth and festive pattern carried forward. Refresh each quarter.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Following the growth keeps the forecast close</div><div class="cs">Forecast error: growth-aware vs ignoring the growth</div><div class="cwrap"><canvas id="c_acc"></canvas></div><div class="csrc">Source: backtest on a hidden year. Lower is better.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Every month above the year before</div><div class="cs">2025 forecast revenue by month</div><div class="cwrap"><canvas id="c_fcbars"></canvas></div><div class="csrc">Source: 2025 forecast, coloured by period.</div></div>
+        </div>
+      </div>
+
+      <div class="page" id="p4">
+        <div class="ph">Plan</div>
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="k4a">-</div><div class="l">festive months: secure early</div></div>
+          <div class="kpi"><div class="v" id="k4b">-</div><div class="l">post-festive: clear stock</div></div>
+          <div class="kpi"><div class="v" id="k4c">-</div><div class="l">2025 revenue forecast</div></div>
+          <div class="kpi"><div class="v" id="k4d">-</div><div class="l">biggest jump vs last year</div></div>
+        </div>
+        <div class="guide">
+          <div class="gcard" style="border-top-color:#B85450"><h4>Festive peak: win it early</h4><div class="mo">Nov, Dec</div><p>Secure stock and book advertising before the peak lands. December is the biggest month of the year, so being stocked and visible early is what wins it.</p></div>
+          <div class="gcard" style="border-top-color:#4A7FB5"><h4>Steady: plan bigger each month</h4><div class="mo">Mar to Oct</div><p>Budget every month for a business about 56% larger than last year. Keep cash ahead of the stock you must buy before the sales arrive.</p></div>
+          <div class="gcard" style="border-top-color:#2E7D6F"><h4>Post-festive: clear and reset</h4><div class="mo">Jan, Feb</div><p>Spending dips after the festive peak. Trim buying, run clearance, and reset stock and plans for the year ahead.</p></div>
+        </div>
+        <div class="ccard full" style="margin-top:18px"><span class="tab"></span><div class="ct">Your month-by-month plan for 2025</div><div class="cs">Forecast revenue, how much more than last year, and what to do</div>
+          <table><thead><tr><th>Month</th><th class="r">Forecast revenue</th><th class="r">vs last year</th><th>Period</th><th>What to do</th></tr></thead><tbody id="planbody"></tbody></table>
+          <div class="csrc">Source: 2025 forecast plus the period action guide. Refresh against real sales each quarter.</div></div>
+      </div>
+    </div>
+  </div>
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  const ACT = [[2022,1,47836,608,464],[2022,2,50116,589,465],[2022,3,51371,619,484],[2022,4,55135,644,505],[2022,5,59575,724,568],[2022,6,60950,800,618],[2022,7,61626,775,600],[2022,8,68251,869,694],[2022,9,64815,803,628],[2022,10,74765,881,701],[2022,11,81139,1012,806],[2022,12,91391,1188,899],[2023,1,79157,942,737],[2023,2,85091,1059,829],[2023,3,90562,1121,884],[2023,4,91049,1130,872],[2023,5,95463,1137,876],[2023,6,101480,1209,953],[2023,7,108123,1324,1021],[2023,8,110512,1468,1102],[2023,9,111169,1425,1122],[2023,10,121216,1506,1213],[2023,11,137571,1619,1232],[2023,12,154922,1981,1531],[2024,1,141529,1884,1485],[2024,2,142384,1788,1342],[2024,3,151079,1891,1483],[2024,4,157640,1783,1382],[2024,5,162762,1967,1542],[2024,6,179049,2098,1651],[2024,7,187667,2429,1863],[2024,8,182643,2270,1708],[2024,9,200060,2466,1850],[2024,10,204870,2460,1960],[2024,11,249950,2668,2103],[2024,12,256511,3491,2741]];  // [year, mnum, revenue, orders, customers]
+  const FC  = [[1,233706,65.1],[2,241245,69.4],[3,254370,68.4],[4,258014,63.7],[5,264741,62.7],[6,281085,57.0],[7,284884,51.8],[8,299074,63.7],[9,288077,44.0],[10,318227,55.3],[11,348055,39.2],[12,385631,50.3]];   // [mnum, revenue, vs_pct]
+  const NAVY='#1E3A5F', GOLD='#B8860B', TEAL='#2E7D6F', BLUE='#4A7FB5', RED='#B85450', GREY='#9aa3ad', GRID='#e8e8e8';
+  const FONT={ family:'Arial', size:11 };
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const charts={};
+  function period(m){ return (m===11||m===12)?'Festive':((m===1||m===2)?'Post-festive':'Steady'); }
+  const PCOL={ Festive:RED, Steady:BLUE, 'Post-festive':TEAL };
+  function noteFor(p){ return p==='Festive'?'Festive peak: secure stock and ads early'
+      : p==='Post-festive'?'Post-festive dip: trim spend, clear stock' : 'Steady growth month'; }
+  function val(id){ return document.getElementById(id).value; }
+  function destroy(id){ if(charts[id]){ charts[id].destroy(); delete charts[id]; } }
+  function mk(id,cfg){ destroy(id); const el=document.getElementById(id); if(el) charts[id]=new Chart(el,cfg); }
+  function axes(opts){ return Object.assign({ responsive:true, maintainAspectRatio:false, animation:false, plugins:{ legend:{ display:false } } }, opts); }
+  const yRM = { grid:{color:GRID}, border:{display:false}, ticks:{ color:'#555', font:FONT, callback:v=>'RM'+(v/1000).toFixed(0)+'k' }, beginAtZero:true };
+  const yPct= { grid:{color:GRID}, border:{display:false}, ticks:{ color:'#555', font:FONT, callback:v=>v+'%' }, beginAtZero:true };
+  const xCat = { grid:{display:false}, border:{color:'#c4c4c4'}, ticks:{ color:'#555', font:FONT } };
+  function setTxt(id,v){ document.getElementById(id).textContent=v; }
+  function mean(a){ return a.length? a.reduce((s,x)=>s+x,0)/a.length : NaN; }
+  function rm(v){ return v>=1e6? 'RM '+(v/1e6).toFixed(2)+'m' : v>=1e3? 'RM '+(v/1e3).toFixed(0)+'k' : 'RM '+Math.round(v); }
+
+  let AF=[...ACT], FF=[...FC];
+  function applyFilters(){
+    const fy=val('f_year'), fp=val('f_period');
+    AF=ACT.filter(r=>(fy==='all'||r[0]===+fy)&&(fp==='all'||period(r[1])===fp));
+    FF=FC.filter(r=>(fp==='all'||period(r[0])===fp));
+    document.getElementById('fnote').textContent=(fy==='all'&&fp==='all')?'Showing all months':
+      'Showing '+(fy==='all'?'all years':fy)+(fp==='all'?'':' / '+fp);
+    renderAll();
+  }
+
+  function renderAll(){
+    const sorted=[...AF].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+    // P1 KPIs
+    setTxt('k1a', AF.length? rm(AF.reduce((t,r)=>t+r[2],0)) : 'n/a');
+    const yrs=[...new Set(AF.map(r=>r[0]))].sort((a,b)=>a-b);
+    if(yrs.length>=2){ const tot=y=>AF.filter(r=>r[0]===y).reduce((t,r)=>t+r[2],0); setTxt('k1b',(tot(yrs[yrs.length-1])/tot(yrs[0])).toFixed(1)+'x'); }
+    else if(sorted.length>=2){ setTxt('k1b',(sorted[sorted.length-1][2]/sorted[0][2]).toFixed(1)+'x'); } else setTxt('k1b','n/a');
+    if(sorted.length>=2){ const gr=Math.pow(sorted[sorted.length-1][2]/sorted[0][2],1/(sorted.length-1))-1; setTxt('k1c','+'+(gr*100).toFixed(1)+'%'); } else setTxt('k1c','n/a');
+    if(AF.length){ let hi=AF[0]; AF.forEach(r=>{ if(r[2]>hi[2])hi=r; }); setTxt('k1d', MON[hi[1]-1]+" '"+String(hi[0]).slice(2)); } else setTxt('k1d','n/a');
+    mk('c_climb',{ type:'line', data:{ labels:sorted.map(r=>MON[r[1]-1]+" '"+String(r[0]).slice(2)), datasets:[{ data:sorted.map(r=>r[2]), borderColor:NAVY, backgroundColor:'rgba(30,58,95,.08)', fill:true, tension:.3, pointRadius:1.5, borderWidth:2.4 }] }, options:axes({ scales:{ y:yRM, x:xCat } }) });
+
+    // P2
+    const tot=y=>AF.filter(r=>r[0]===y).reduce((t,r)=>t+r[2],0);
+    if(yrs.length>=2){ let s=0,c=0; for(let i=1;i<yrs.length;i++){ s+=tot(yrs[i])/tot(yrs[i-1])-1; c++; } setTxt('k2a','+'+(s/c*100).toFixed(0)+'%'); } else setTxt('k2a','n/a');
+    if(yrs.length){ let by=yrs[0]; yrs.forEach(y=>{ if(tot(y)>tot(by))by=y; }); setTxt('k2b', rm(tot(by))); } else setTxt('k2b','n/a');
+    mk('c_year',{ type:'bar', data:{ labels:yrs.map(String), datasets:[{ data:yrs.map(tot), backgroundColor:yrs.map((_,i)=>[GREY,BLUE,NAVY][i]||GOLD) }] }, options:axes({ scales:{ y:yRM, x:xCat } }) });
+    const calM=[...new Set(AF.map(r=>r[1]))].sort((a,b)=>a-b);
+    const yrCol={2022:GREY,2023:BLUE,2024:GOLD};
+    mk('c_overlay',{ type:'line', data:{ labels:calM.map(m=>MON[m-1]), datasets:yrs.map(y=>({ label:String(y), data:calM.map(m=>{ const f=AF.find(r=>r[0]===y&&r[1]===m); return f?f[2]:null; }), borderColor:yrCol[y]||NAVY, backgroundColor:yrCol[y]||NAVY, tension:.3, pointRadius:0, borderWidth:2.2, spanGaps:true })) }, options:axes({ plugins:{ legend:{ display:true, position:'top', align:'start', labels:{ font:FONT, boxWidth:10, padding:12, color:'#444' } } }, scales:{ y:yRM, x:xCat } }) });
+
+    // P3
+    setTxt('k3a', rm(FF.reduce((t,r)=>t+r[1],0)));
+    const vly=()=>{ if(!FF.length) return null; const ms=new Set(FF.map(r=>r[0])); const f=FF.reduce((t,r)=>t+r[1],0); const l=ACT.filter(r=>r[0]===2024&&ms.has(r[1])).reduce((t,r)=>t+r[2],0); return l?(f/l-1)*100:null; };
+    { const v=vly(); setTxt('k3b', v==null?'n/a':'+'+v.toFixed(0)+'%'); }
+    if(FF.length){ let hi=FF[0]; FF.forEach(r=>{ if(r[1]>hi[1])hi=r; }); setTxt('k3c', MON[hi[0]-1]+'  '+rm(hi[1])); } else setTxt('k3c','n/a');
+    const hl=sorted.map(r=>MON[r[1]-1]+" '"+String(r[0]).slice(2));
+    const fl=FF.map(r=>MON[r[0]-1]+" '25");
+    const hd=sorted.map(r=>r[2]).concat(FF.map(()=>null));
+    const fd=sorted.map(()=>null); if(sorted.length) fd[fd.length-1]=sorted[sorted.length-1][2]; FF.forEach(r=>fd.push(r[1]));
+    mk('c_histfc',{ type:'line', data:{ labels:hl.concat(fl), datasets:[
+      { label:'Actual', data:hd, borderColor:NAVY, backgroundColor:NAVY, tension:.3, pointRadius:0, borderWidth:2.4 },
+      { label:'2025 forecast', data:fd, borderColor:GOLD, backgroundColor:GOLD, borderDash:[6,4], tension:.3, pointRadius:0, borderWidth:2.4, spanGaps:true }]},
+      options:axes({ plugins:{ legend:{ display:true, position:'top', align:'start', labels:{ font:FONT, boxWidth:10, padding:12, color:'#444' } } }, scales:{ y:yRM, x:xCat } }) });
+    mk('c_acc',{ type:'bar', data:{ labels:['Follows growth','Ignores growth'], datasets:[{ data:[14.1,53.6], backgroundColor:[TEAL,RED] }] }, options:axes({ scales:{ y:yPct, x:xCat } }) });
+    mk('c_fcbars',{ type:'bar', data:{ labels:FF.map(r=>MON[r[0]-1]), datasets:[{ data:FF.map(r=>r[1]), backgroundColor:FF.map(r=>PCOL[period(r[0])]) }] }, options:axes({ scales:{ y:yRM, x:xCat } }) });
+
+    // P4
+    setTxt('k4a', FF.filter(r=>period(r[0])==='Festive').length);
+    setTxt('k4b', FF.filter(r=>period(r[0])==='Post-festive').length);
+    setTxt('k4c', rm(FF.reduce((t,r)=>t+r[1],0)));
+    setTxt('k4d', FF.length? '+'+Math.max(...FF.map(r=>r[2])).toFixed(0)+'%':'n/a');
+    const pb=document.getElementById('planbody'); pb.innerHTML='';
+    FF.forEach(r=>{ const p=period(r[0]); const tr=document.createElement('tr');
+      tr.innerHTML='<td>'+MON[r[0]-1]+' 2025</td><td class="r">'+rm(r[1])+'</td><td class="r">+'+r[2].toFixed(0)+'%</td>'+
+        '<td><span class="pill" style="background:'+PCOL[p]+'">'+p+'</span></td><td>'+noteFor(p)+'</td>';
+      pb.appendChild(tr); });
+    setTimeout(postH,30);
+  }
+
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    Object.values(charts).forEach(c=>{ try{c.resize();}catch(e){} });
+    setTimeout(postH,40);
+  });
+  ['f_year','f_period'].forEach(id=>document.getElementById(id).addEventListener('change', applyFilters));
+  document.getElementById('reset').addEventListener('click', ()=>{ document.getElementById('f_year').value='all'; document.getElementById('f_period').value='all'; applyFilters(); });
+  window.addEventListener('beforeprint', ()=>{ Object.values(charts).forEach(c=>{ try{c.resize();}catch(e){} }); });
+  function boot(){ if(window.Chart){ renderAll(); } else { setTimeout(boot,150); } }
+  boot();
+  window.addEventListener('load', ()=>setTimeout(()=>{ if(window.Chart && !charts.c_climb) renderAll(); postH(); }, 250));
+</script>
+</body>
+</html>
