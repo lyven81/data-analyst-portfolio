@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What a Ringgit Returns, AI Assistant | Data Stories Lab</title>
+<meta name="description" content="Ask the ad-spend and sales study in plain language. Answers come only from a fixed set of approved, read-only tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a2230; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff;
+         --panel:#F4F7FA; --green:#2E7D6F; --red:#B5503C; --amber:#92400e; --green-soft:#e6f1ee;
+         --gold:#004B87; --gold-soft:#EAF1F8; --steel:#6A9BD1; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* House chrome (crown) */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Title block */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  /* Switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  /* Assistant tool */
+  .assistant{ display:flex; border:1px solid var(--hair); height:min(640px,74vh); min-height:480px; margin:22px 0 4px; }
+  .side{ width:280px; flex-shrink:0; border-right:1px solid var(--hair); background:var(--panel); padding:20px 18px; overflow-y:auto; }
+  .side .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:12px; }
+  .bn{ font-weight:800; color:var(--navy); font-size:1.05rem; }
+  .bs{ font-size:.58rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-top:2px; }
+  .status{ border:1px solid var(--hair); background:#fff; padding:12px; margin:16px 0; }
+  .st-t{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-bottom:8px; }
+  .pill{ display:flex; align-items:center; gap:8px; color:#333; font-size:.78rem; padding:3px 0; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); } .dot.lock{ background:var(--accent); } .dot.loading{ background:var(--steel); }
+  .th{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin:14px 0 8px; display:flex; justify-content:space-between; }
+  .tools{ list-style:none; font-family:"Courier New", monospace; font-size:.72rem; color:var(--navy); }
+  .tools li{ padding:3px 0; } .tools li::before{ content:"\25aa"; color:var(--accent); margin-right:7px; }
+  .gov{ font-size:.7rem; color:var(--mute); border-top:1px solid var(--hair); margin-top:16px; padding-top:12px; line-height:1.5; }
+
+  .main{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .thread{ flex:1; overflow-y:auto; padding:22px 26px; display:flex; flex-direction:column; gap:16px; }
+  .row{ display:flex; gap:10px; max-width:720px; } .row.user{ margin-left:auto; flex-direction:row-reverse; }
+  .av{ width:30px; height:30px; flex-shrink:0; display:grid; place-items:center; font-size:.68rem; font-weight:700; }
+  .av.bot{ background:var(--navy); color:#fff; } .av.bot svg{ width:17px; height:17px; } .av.me{ background:#e7ecf2; color:var(--navy); }
+  .bubble{ font-size:.9rem; line-height:1.55; } .row.user .bubble{ background:var(--navy); color:#eef2f6; padding:10px 13px; }
+  .lead{ margin-bottom:10px; } .lead b{ color:var(--navy); font-weight:600; }
+  .badge{ display:inline-flex; align-items:center; gap:6px; font-family:"Courier New", monospace; font-size:.66rem; color:var(--navy); background:var(--gold-soft); border:1px solid #cdddf0; padding:3px 9px; margin-bottom:9px; }
+  .badge svg{ width:12px; height:12px; } .badge .lbl{ color:var(--mute); }
+  .card{ border:1px solid var(--hair); padding:13px; margin-top:4px; background:#fff; max-width:600px; }
+  .card h4{ font-size:.92rem; color:var(--navy); font-weight:700; margin-bottom:3px; }
+  .card .cap{ font-size:.75rem; color:var(--mute); margin-bottom:12px; }
+  .kpis{ display:flex; gap:10px; flex-wrap:wrap; }
+  .kpi{ flex:1; min-width:104px; background:var(--panel); border:1px solid var(--hair); padding:13px; text-align:center; }
+  .kpi .v{ font-size:1.5rem; font-weight:800; color:var(--navy); } .kpi.good .v{ color:var(--green); } .kpi.bad .v{ color:var(--red); }
+  .kpi .l{ font-size:.66rem; color:var(--mute); margin-top:3px; }
+  table{ width:100%; border-collapse:collapse; font-size:.78rem; }
+  th{ text-align:left; color:var(--mute); font-weight:600; font-size:.6rem; text-transform:uppercase; letter-spacing:.3px; padding:6px 8px; border-bottom:1px solid var(--hair); }
+  td{ padding:7px 8px; border-bottom:1px solid #eef1f4; } td.nm{ font-weight:600; color:var(--ink); } td.r{ text-align:right; }
+  .scroll{ max-height:340px; overflow-y:auto; }
+  .st{ display:inline-block; font-size:.62rem; font-weight:700; padding:2px 8px; border-radius:20px; background:#f0f3f6; color:var(--mute); }
+  .st.spend{ background:#eef3f8; color:var(--amber); }
+  .st.sales{ background:var(--green-soft); color:var(--green); }
+  .note{ font-size:.68rem; color:var(--mute); margin-top:12px; display:flex; align-items:center; gap:6px; } .note svg{ width:12px; height:12px; flex-shrink:0; }
+  .refuse{ background:var(--gold-soft); border:1px solid #cdddf0; padding:16px 18px; max-width:600px; }
+  .refuse .rh{ display:flex; align-items:center; gap:9px; margin-bottom:7px; } .refuse .rh svg{ width:17px; height:17px; }
+  .refuse .rh span{ font-weight:600; color:var(--accent); font-size:.86rem; }
+  .refuse p{ font-size:.84rem; line-height:1.55; color:#3a4a5a; }
+  .refuse .why{ font-size:.66rem; color:var(--mute); margin-top:10px; font-family:"Courier New", monospace; }
+  .think{ display:flex; align-items:center; gap:8px; color:var(--mute); font-size:.82rem; }
+  .think .tdot{ width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.2s infinite; }
+  .think .tdot:nth-child(2){ animation-delay:.2s; } .think .tdot:nth-child(3){ animation-delay:.4s; }
+  @keyframes pulse{ 0%,100%{ opacity:.25; transform:scale(.8); } 50%{ opacity:1; transform:scale(1); } }
+  .composer{ border-top:1px solid var(--hair); padding:12px 26px; background:var(--panel); }
+  .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-bottom:10px; }
+  .chip{ font-size:.74rem; border:1px solid var(--hair); background:#fff; padding:6px 11px; color:var(--navy); cursor:pointer; }
+  .chip:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .chip.warn{ border-color:#ebd8ae; color:#b07d27; background:#fcf6e9; }
+  .inputbar{ display:flex; align-items:center; gap:9px; background:#fff; border:1px solid var(--hair); padding:5px 5px 5px 14px; }
+  .inputbar input{ flex:1; border:none; outline:none; font-size:.85rem; padding:7px 0; font-family:inherit; }
+  .send{ width:34px; height:34px; border:none; background:var(--navy); color:#fff; cursor:pointer; display:grid; place-items:center; } .send svg{ width:17px; height:17px; }
+  .disclaimer{ text-align:center; font-size:.66rem; color:var(--mute); margin-top:10px; }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:680px){ .side{ display:none; } .assistant{ height:min(560px,76vh); } }
+  /* Maximize control */
+  .assistant{ position:relative; }
+  .maxbtn{ position:absolute; top:10px; right:10px; z-index:6; width:30px; height:30px; border:1px solid var(--hair); background:#fff; color:var(--navy); cursor:pointer; display:grid; place-items:center; padding:0; }
+  .maxbtn:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .maxbtn svg{ width:15px; height:15px; }
+  .assistant.maxed{ position:fixed; inset:0; width:auto; height:auto; max-height:none; min-height:0; margin:0; z-index:9999; border:none; background:#fff; }
+  body.maxed-lock{ overflow:hidden; }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>What a Ringgit Returns</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-a-ringgit-returns/cover%20image.jpeg" alt="What a Ringgit Returns">
+        <figcaption><span>Ad spend turning into store sales.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Marketing ROI</span>
+      <h1 class="title">What a Ringgit Returns</h1>
+      <p class="standfirst">Every RM1 of ad spend returns about RM3.21</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>AI assistant</span><span>120 campaigns &middot; Meta, Google, TikTok</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/what-a-ringgit-returns.html">Analyst Report</a>
+          <a class="sw" href="/data-analyst-portfolio/dashboards/what-a-ringgit-returns-dashboard.html">Dashboard</a>
+          <span class="sw active" aria-current="page">AI Assistant</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="assistant">
+      <button class="maxbtn" id="maxbtn" type="button" aria-label="Expand to full screen" title="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+      <aside class="side">
+        <span class="tab"></span>
+        <div class="bn">AI Marketing Assistant</div>
+        <div class="bs">What a Ringgit Returns</div>
+        <div class="status">
+          <div class="st-t">Asset status</div>
+          <div class="pill"><span class="dot"></span> Read-only access</div>
+          <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+          <div class="pill"><span class="dot loading" id="dbdot"></span> <span id="dbstat">Loading database...</span></div>
+        </div>
+        <div class="th"><span>Approved tools</span><span>8 &middot; fixed</span></div>
+        <ul class="tools">
+          <li>spend_sales_link</li><li>return_per_ringgit</li><li>estimate_sales</li><li>channel_compare</li>
+          <li>campaign_overview</li><li>top_by_sales</li><li>top_by_spend</li><li>spend_vs_sales</li>
+        </ul>
+        <div class="gov">120 ad campaigns across Meta, Google and TikTok, queried live in your browser. The assistant runs only pre-written, parameterized queries; it cannot author SQL, set a budget, launch or pause a campaign, or move money. Illustrative model on sample data, for portfolio demonstration.</div>
+      </aside>
+
+      <main class="main">
+        <div class="thread" id="thread">
+          <div class="row bot">
+            <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+            <div class="bubble"><div class="lead">I can answer questions about these <b>120 ad campaigns</b>: how strongly ad spend drives sales, what each ringgit returns, how the channels compare, what sales a given budget should bring, and how far that can be trusted. Ask in plain language, or tap a prompt below.</div></div>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="chips" id="chips">
+            <button class="chip" data-key="link">Does spending more on ads bring more sales?</button>
+            <button class="chip" data-key="channels">Does the pattern hold across channels?</button>
+            <button class="chip" data-key="bestchannel">Which channel gives the best return?</button>
+            <button class="chip" data-key="overview">What is the average spend and sales per campaign?</button>
+            <button class="chip" data-key="topsales">Which campaigns brought the most sales?</button>
+            <button class="chip" data-key="topspend">Which campaigns spent the most?</button>
+            <button class="chip" data-key="spendvssales">Did the highest-spend campaign bring the most sales?</button>
+            <button class="chip" data-key="trust">Can these predictions be trusted?</button>
+            <button class="chip" data-key="estimate">What would a RM 10,000 budget bring?</button>
+            <button class="chip warn" data-key="refuse">Set next month's ad budget to RM 8,000</button>
+          </div>
+          <div class="inputbar">
+            <input id="input" type="text" placeholder="Ask about the return per ringgit, the channels, or a budget...">
+            <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+          <div class="disclaimer">The assistant explains and estimates campaign returns for you to plan against. It does not set budgets, launch campaigns, or move money.</div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  document.getElementById('hamburger').addEventListener('click',()=>{drawer.classList.add('open');overlay.classList.add('open');});
+  const _cl=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+  document.getElementById('drawerClose').addEventListener('click',_cl);
+  overlay.addEventListener('click',_cl);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',_cl));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')_cl(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script src="what-a-ringgit-returns.db.js"></script>
+<script>
+let db=null, dbReady=false;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const rm=v=>'RM'+Math.round(Number(v)).toLocaleString();
+
+const SQL={
+  model_fit:`SELECT metric, value FROM model_fit`,
+  return_per_ringgit:`SELECT slope FROM model`,
+  estimate_sales:`SELECT ROUND(intercept + slope*:b) sales FROM model`,
+  channel_compare:`SELECT channel, COUNT(*) n, ROUND(SUM(sales)*1.0/SUM(ad_spend),2) roas, ROUND(AVG(ad_spend)) avg_spend FROM campaigns GROUP BY channel ORDER BY roas DESC`,
+  campaign_overview:`SELECT COUNT(*) n, ROUND(AVG(ad_spend)) avg_spend, ROUND(AVG(sales)) avg_sales, ROUND(SUM(sales)*1.0/SUM(ad_spend),2) roas FROM campaigns`,
+  top_by_sales:`SELECT campaign_id, channel, ad_spend, sales FROM campaigns ORDER BY sales DESC LIMIT 5`,
+  top_by_spend:`SELECT campaign_id, channel, ad_spend, sales FROM campaigns ORDER BY ad_spend DESC LIMIT 5`,
+  spend_vs_sales:`SELECT * FROM (SELECT 'Most spent' kind, campaign_id, channel, ad_spend, sales FROM campaigns ORDER BY ad_spend DESC LIMIT 1) UNION ALL SELECT * FROM (SELECT 'Most sales' kind, campaign_id, channel, ad_spend, sales FROM campaigns ORDER BY sales DESC LIMIT 1)`
+};
+function run(sql,params){const st=db.prepare(sql);if(params)st.bind(params);const o=[];while(st.step())o.push(st.getAsObject());st.free();return o;}
+function val(k){return (run(SQL.model_fit).find(r=>r.metric.indexOf(k)>=0)||{}).value;}
+
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const info=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const noteEl=t=>`<div class="note">${info} ${t}</div>`;
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+function tbl(head,body){return `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;}
+
+const responses={
+  link(){
+    const r2=val('explained')||'95%', slope=run(SQL.return_per_ringgit)[0].slope;
+    return badge('spend_sales_link')+
+      `<div class="lead">Yes, very clearly. Across the 120 campaigns, differences in ad spend explain about <b>${r2}</b> of the difference in sales, an unusually tight link, and each <b>RM 1</b> spent brings back about <b>RM ${slope.toFixed(2)}</b>. Spend is the main lever, not one of many murky factors.</div>
+      <div class="card"><div class="kpis">
+        <div class="kpi good"><div class="v">${r2}</div><div class="l">of sales explained by spend</div></div>
+        <div class="kpi good"><div class="v">RM ${slope.toFixed(2)}</div><div class="l">sales per RM 1 spent</div></div>
+      </div>${noteEl('Treat the ad budget as the primary dial for sales.')}</div>`;
+  },
+  channels(){
+    const d=run(SQL.channel_compare);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.channel)}</td><td class="r">${x.n}</td><td class="r"><b>${x.roas}x</b></td><td class="r">${rm(x.avg_spend)}</td></tr>`).join('');
+    return badge('channel_compare')+
+      `<div class="lead">It does. Meta, Google and TikTok all sit on the same line: at a given spend they return about the same sales, between ${d[d.length-1].roas}x and ${d[0].roas}x. No channel stands clearly apart in this data.</div>
+      <div class="card"><h4>The pattern by channel</h4><div class="cap">Return per ringgit, campaigns and average spend</div>
+      ${tbl('<th>Channel</th><th class="r">Campaigns</th><th class="r">Return</th><th class="r">Avg spend</th>',body)}</div>`;
+  },
+  bestchannel(){
+    const d=run(SQL.channel_compare), gap=(d[0].roas-d[d.length-1].roas).toFixed(2);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.channel)}</td><td class="r"><b>${x.roas}x</b></td></tr>`).join('');
+    return badge('channel_compare')+
+      `<div class="lead">No single channel really wins. The best, <b>${d[0].channel}</b> at ${d[0].roas}x, is barely ahead of the lowest at ${d[d.length-1].roas}x, a gap of just ${gap}x. The practical message: how much you spend matters more than which platform you spend it on.</div>
+      <div class="card"><h4>Return by channel</h4><div class="cap">Sales per RM 1, best first</div>
+      ${tbl('<th>Channel</th><th class="r">Return per RM 1</th>',body)}
+      ${noteEl('Split budget across channels for reach; decide on the total spend, not the platform.')}</div>`;
+  },
+  overview(){
+    const r=run(SQL.campaign_overview)[0];
+    return badge('campaign_overview')+
+      `<div class="lead">Across <b>${r.n} campaigns</b>, the average campaign spent about <b>${rm(r.avg_spend)}</b> and brought in about <b>${rm(r.avg_sales)}</b>, an overall return of ${r.roas}x on every ringgit.</div>
+      <div class="card"><h4>Campaign overview</h4><div class="cap">Averages across all campaigns</div>
+      <div class="kpis">
+        <div class="kpi"><div class="v">${rm(r.avg_spend)}</div><div class="l">avg spend</div></div>
+        <div class="kpi good"><div class="v">${rm(r.avg_sales)}</div><div class="l">avg sales</div></div>
+        <div class="kpi good"><div class="v">${r.roas}x</div><div class="l">overall return</div></div>
+      </div></div>`;
+  },
+  topsales(){
+    const d=run(SQL.top_by_sales);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.campaign_id)}</td><td>${esc(x.channel)}</td><td class="r">${rm(x.ad_spend)}</td><td class="r"><b>${rm(x.sales)}</b></td></tr>`).join('');
+    return badge('top_by_sales')+
+      `<div class="lead">The five campaigns that brought in the most sales, led by <b>${esc(d[0].campaign_id)}</b> at ${rm(d[0].sales)}. They are all big-budget campaigns, as the tight spend-to-sales link would predict.</div>
+      <div class="card"><h4>Most sales</h4><div class="cap">Top 5 campaigns by sales</div>
+      ${tbl('<th>Campaign</th><th>Channel</th><th class="r">Spend</th><th class="r">Sales</th>',body)}</div>`;
+  },
+  topspend(){
+    const d=run(SQL.top_by_spend);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.campaign_id)}</td><td>${esc(x.channel)}</td><td class="r"><b>${rm(x.ad_spend)}</b></td><td class="r">${rm(x.sales)}</td></tr>`).join('');
+    return badge('top_by_spend')+
+      `<div class="lead">The five campaigns with the biggest ad budgets, led by <b>${esc(d[0].campaign_id)}</b> at ${rm(d[0].ad_spend)}. Heavy spenders, though as the next question shows, the biggest budget is not always the biggest seller.</div>
+      <div class="card"><h4>Most spent</h4><div class="cap">Top 5 campaigns by ad spend</div>
+      ${tbl('<th>Campaign</th><th>Channel</th><th class="r">Spend</th><th class="r">Sales</th>',body)}</div>`;
+  },
+  spendvssales(){
+    const d=run(SQL.spend_vs_sales), sp=d.find(x=>x.kind==='Most spent'), sa=d.find(x=>x.kind==='Most sales');
+    const same=sp.campaign_id===sa.campaign_id;
+    const body=d.map(x=>`<tr><td><span class="st ${x.kind==='Most spent'?'spend':'sales'}">${x.kind}</span></td><td class="nm">${esc(x.campaign_id)}</td><td>${esc(x.channel)}</td><td class="r">${rm(x.ad_spend)}</td><td class="r">${rm(x.sales)}</td></tr>`).join('');
+    return badge('spend_vs_sales')+
+      `<div class="lead"><b>${same?'Yes':'No'}.</b> The biggest spender (<b>${esc(sp.campaign_id)}</b>, ${rm(sp.ad_spend)} spent for ${rm(sp.sales)}) was ${same?'also':'not'} the top seller (<b>${esc(sa.campaign_id)}</b>, ${rm(sa.sales)} from ${rm(sa.ad_spend)}). Spend explains about 95% of sales, not all of it, so the heaviest budget is not always the best result.</div>
+      <div class="card"><h4>Most spent vs most sales</h4><div class="cap">The single biggest spender against the single biggest seller</div>
+      ${tbl('<th></th><th>Campaign</th><th>Channel</th><th class="r">Spend</th><th class="r">Sales</th>',body)}</div>`;
+  },
+  trust(){
+    const acc=val('error')||'14.3%';
+    return badge('model_fit')+
+      `<div class="lead">Yes. Tested on campaigns held back from the analysis, the predictions came within about <b>${acc}</b> of actual sales, with no habit of running too high or too low and no hidden curve. That is close enough to set budgets and sales targets with confidence.</div>
+      <div class="card"><div class="kpis">
+        <div class="kpi good"><div class="v">${acc}</div><div class="l">typical prediction error</div></div>
+        <div class="kpi"><div class="v">${val('explained')||'95%'}</div><div class="l">of sales explained</div></div>
+      </div>${noteEl('Reliable across the tested budget range (about RM 660 to RM 11,900 per campaign).')}</div>`;
+  },
+  estimate(){
+    const b=10000, s=run(SQL.estimate_sales,{':b':b})[0].sales;
+    return badge('estimate_sales')+
+      `<div class="lead">A <b>${rm(b)}</b> campaign budget should bring in about <b>${rm(s)}</b> in sales, a return of around ${(s/b).toFixed(1)}x. This is within the tested budget range, so it is a safe planning figure.</div>
+      <div class="card"><h4>Estimate: a RM 10,000 budget</h4><div class="cap">Expected sales from the spend-to-sales pattern</div>
+      <div class="kpis">
+        <div class="kpi"><div class="v">${rm(b)}</div><div class="l">ad budget</div></div>
+        <div class="kpi good"><div class="v">${rm(s)}</div><div class="l">expected sales</div></div>
+        <div class="kpi good"><div class="v">${(s/b).toFixed(1)}x</div><div class="l">return</div></div>
+      </div>${noteEl('The agent supplies only the budget; the estimate is computed from the fixed model.')}</div>`;
+  },
+  refuse(){
+    return `<div class="refuse">
+      <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="#004B87" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 18h.01"/></svg><span>Outside my approved tools</span></div>
+      <p>I can't set the ad budget. Committing a budget is a business decision with money attached, and I have no approved tool that writes or commits anything; I work read-only through a fixed set of queries that explain and estimate returns.</p>
+      <p style="margin-top:9px">What I can do: estimate the <b>sales a RM 8,000 budget</b> would bring and show the <b>return per ringgit</b>, so you have the numbers to set the budget yourself.</p>
+      <div class="why">no_tool_matched &middot; setting a budget is a decision, not defined &middot; access = read-only</div></div>`;
+  }
+};
+
+const userText={link:"Does spending more on ads bring more sales?",channels:"Does the pattern hold across channels?",bestchannel:"Which channel gives the best return?",overview:"What is the average spend and sales per campaign?",topsales:"Which campaigns brought the most sales?",topspend:"Which campaigns spent the most?",spendvssales:"Did the highest-spend campaign bring the most sales?",trust:"Can these predictions be trusted?",estimate:"What would a RM 10,000 budget bring?",refuse:"Set next month's ad budget to RM 8,000"};
+const thinkLabel={link:"spend_sales_link",channels:"channel_compare",bestchannel:"channel_compare",overview:"campaign_overview",topsales:"top_by_sales",topspend:"top_by_spend",spendvssales:"spend_vs_sales",trust:"model_fit",estimate:"estimate_sales",refuse:"checking approved tools"};
+
+function addUser(t){thread.insertAdjacentHTML('beforeend',`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div>`);scroll();}
+function respond(key,arg){
+  const id='t'+thread.children.length;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${thinkLabel[key]}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=responses[key](arg);scroll();postH();},760);
+}
+// Each new question REPLACES the previous exchange (no endless scroll).
+function ask(key,arg){thread.innerHTML='';addUser(userText[key]);setTimeout(()=>respond(key,arg),220);}
+
+function notReady(){thread.innerHTML='<div class="row bot">'+botAv+'<div class="bubble"><div class="lead">The campaign database is still loading. If it does not finish, open this page over http (a local server or the live site), not directly from a file, because browsers block database access on file://.</div></div></div>';scroll();postH();}
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;if(!dbReady){notReady();return;}ask(b.dataset.key);});
+const input=document.getElementById('input');
+function route(){
+  const t=input.value.trim();if(!t)return;if(!dbReady){notReady();return;}input.value='';const q=t.toLowerCase();let key=null;
+  if(/set.*budget|next month.*budget|launch a campaign|move budget|pause|approve|allocate|raw sql|select \*|dump|export|delete|insert|update.*campaign/.test(q))key='refuse';
+  else if(/what would|expect.*budget|budget.*bring|budget of|estimate.*sales|if i spend|sales (from|for) rm|rm ?\d[\d,]*.*(budget|bring|spend)/.test(q))key='estimate';
+  else if(/trust|reliable|accurate|accuracy|how close|believe|confiden/.test(q))key='trust';
+  else if(/highest.?spend.*(most |biggest )?sales|biggest spender|most sales.*spend|spend.*also.*sales|same campaign/.test(q))key='spendvssales';
+  else if(/most sales|top (sales|earner|earning)|biggest sales|highest sales|best.*sales/.test(q))key='topsales';
+  else if(/most spent|spent the most|biggest budget|highest spend|top spend/.test(q))key='topspend';
+  else if(/best (channel|return)|which channel|top channel|channel.*best/.test(q))key='bestchannel';
+  else if(/across channels|pattern.*channel|channel.*(hold|same|compare)|by channel|meta|google|tiktok/.test(q))key='channels';
+  else if(/overview|average|avg|per campaign|summary|how many campaign|total (spend|sales)/.test(q))key='overview';
+  else if(/spend.*more.*sales|does spending|bring more sales|relationship|explain.*sales|main (driver|lever)|how strong/.test(q))key='link';
+  thread.innerHTML=''; addUser(t);
+  if(key)setTimeout(()=>respond(key),220);
+  else setTimeout(()=>{thread.insertAdjacentHTML('beforeend',`<div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Try a suggested prompt to see it answer live from the campaign data.</div></div></div>`);scroll();postH();},220);
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')route();});
+
+function b64bytes(s){const bin=atob(s);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
+initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`})
+  .then(S=>{
+    db=new S.Database(b64bytes(window.__DB_B64__));dbReady=true;
+    document.getElementById('dbdot').className='dot';
+    document.getElementById('dbstat').textContent='Database ready';
+  })
+  .catch(e=>{document.getElementById('dbstat').textContent='Engine failed to load';console.error(e);});
+</script>
+<script>
+/* Maximize / restore the chat interface. Esc also restores. */
+(function(){
+  var panel=document.querySelector('.assistant'); if(!panel)return;
+  var btn=document.getElementById('maxbtn'); if(!btn)return;
+  var EXP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>', RES='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3a2 2 0 0 0 2-2V3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M21 16h-3a2 2 0 0 0-2 2v3"/></svg>';
+  btn.innerHTML=EXP;
+  function toggle(){
+    var on=panel.classList.toggle('maxed');
+    document.body.classList.toggle('maxed-lock',on);
+    btn.innerHTML=on?RES:EXP;
+    btn.title=on?'Restore':'Full screen';
+    btn.setAttribute('aria-label',on?'Restore size':'Expand to full screen');
+    if(typeof postH==='function')postH();
+  }
+  btn.addEventListener('click',toggle);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&panel.classList.contains('maxed'))toggle(); });
+})();
+</script>
+</body>
+</html>
