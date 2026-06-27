@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What a Car's Worth, AI Assistant | Data Stories Lab</title>
+<meta name="description" content="Ask the used-car pricing study in plain language. Answers come only from a fixed set of approved, read-only tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a2230; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff;
+         --panel:#F4F7FA; --green:#2E7D6F; --red:#B5503C; --amber:#92400e; --green-soft:#e6f1ee;
+         --gold:#004B87; --gold-soft:#EAF1F8; --steel:#6A9BD1; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* House chrome (crown) */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Title block */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  /* Switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  /* Assistant tool */
+  .assistant{ display:flex; border:1px solid var(--hair); height:min(640px,74vh); min-height:480px; margin:22px 0 4px; }
+  .side{ width:280px; flex-shrink:0; border-right:1px solid var(--hair); background:var(--panel); padding:20px 18px; overflow-y:auto; }
+  .side .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:12px; }
+  .bn{ font-weight:800; color:var(--navy); font-size:1.05rem; }
+  .bs{ font-size:.58rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-top:2px; }
+  .status{ border:1px solid var(--hair); background:#fff; padding:12px; margin:16px 0; }
+  .st-t{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin-bottom:8px; }
+  .pill{ display:flex; align-items:center; gap:8px; color:#333; font-size:.78rem; padding:3px 0; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--green); } .dot.lock{ background:var(--accent); } .dot.loading{ background:var(--steel); }
+  .th{ font-size:.55rem; letter-spacing:1px; text-transform:uppercase; color:var(--mute); margin:14px 0 8px; display:flex; justify-content:space-between; }
+  .tools{ list-style:none; font-family:"Courier New", monospace; font-size:.72rem; color:var(--navy); }
+  .tools li{ padding:3px 0; } .tools li::before{ content:"\25aa"; color:var(--accent); margin-right:7px; }
+  .gov{ font-size:.7rem; color:var(--mute); border-top:1px solid var(--hair); margin-top:16px; padding-top:12px; line-height:1.5; }
+
+  .main{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .thread{ flex:1; overflow-y:auto; padding:22px 26px; display:flex; flex-direction:column; gap:16px; }
+  .row{ display:flex; gap:10px; max-width:720px; } .row.user{ margin-left:auto; flex-direction:row-reverse; }
+  .av{ width:30px; height:30px; flex-shrink:0; display:grid; place-items:center; font-size:.68rem; font-weight:700; }
+  .av.bot{ background:var(--navy); color:#fff; } .av.bot svg{ width:17px; height:17px; } .av.me{ background:#e7ecf2; color:var(--navy); }
+  .bubble{ font-size:.9rem; line-height:1.55; } .row.user .bubble{ background:var(--navy); color:#eef2f6; padding:10px 13px; }
+  .lead{ margin-bottom:10px; } .lead b{ color:var(--navy); font-weight:600; }
+  .badge{ display:inline-flex; align-items:center; gap:6px; font-family:"Courier New", monospace; font-size:.66rem; color:var(--navy); background:var(--gold-soft); border:1px solid #cdddf0; padding:3px 9px; margin-bottom:9px; }
+  .badge svg{ width:12px; height:12px; } .badge .lbl{ color:var(--mute); }
+  .card{ border:1px solid var(--hair); padding:13px; margin-top:4px; background:#fff; max-width:600px; }
+  .card h4{ font-size:.92rem; color:var(--navy); font-weight:700; margin-bottom:3px; }
+  .card .cap{ font-size:.75rem; color:var(--mute); margin-bottom:12px; }
+  .kpis{ display:flex; gap:10px; flex-wrap:wrap; }
+  .kpi{ flex:1; min-width:104px; background:var(--panel); border:1px solid var(--hair); padding:13px; text-align:center; }
+  .kpi .v{ font-size:1.5rem; font-weight:800; color:var(--navy); } .kpi.good .v{ color:var(--green); } .kpi.bad .v{ color:var(--red); }
+  .kpi .l{ font-size:.66rem; color:var(--mute); margin-top:3px; }
+  table{ width:100%; border-collapse:collapse; font-size:.78rem; }
+  th{ text-align:left; color:var(--mute); font-weight:600; font-size:.6rem; text-transform:uppercase; letter-spacing:.3px; padding:6px 8px; border-bottom:1px solid var(--hair); }
+  td{ padding:7px 8px; border-bottom:1px solid #eef1f4; } td.nm{ font-weight:600; color:var(--ink); } td.r{ text-align:right; }
+  .scroll{ max-height:340px; overflow-y:auto; }
+  .est{ display:flex; gap:10px; flex-wrap:wrap; }
+  .estcard{ flex:1; min-width:150px; background:var(--panel); border:1px solid var(--hair); border-top:3px solid var(--accent); padding:13px; }
+  .estcard .tier{ font-size:.6rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:var(--mute); }
+  .estcard .spec{ font-size:.72rem; color:var(--ink); margin:5px 0 9px; line-height:1.4; }
+  .estcard .price{ font-size:1.45rem; font-weight:800; color:var(--navy); }
+  .up{ color:var(--green); font-weight:700; } .down{ color:var(--red); font-weight:700; }
+  .note{ font-size:.68rem; color:var(--mute); margin-top:12px; display:flex; align-items:center; gap:6px; } .note svg{ width:12px; height:12px; flex-shrink:0; }
+  .refuse{ background:var(--gold-soft); border:1px solid #cdddf0; padding:16px 18px; max-width:600px; }
+  .refuse .rh{ display:flex; align-items:center; gap:9px; margin-bottom:7px; } .refuse .rh svg{ width:17px; height:17px; }
+  .refuse .rh span{ font-weight:600; color:var(--accent); font-size:.86rem; }
+  .refuse p{ font-size:.84rem; line-height:1.55; color:#3a4a5a; }
+  .refuse .why{ font-size:.66rem; color:var(--mute); margin-top:10px; font-family:"Courier New", monospace; }
+  .think{ display:flex; align-items:center; gap:8px; color:var(--mute); font-size:.82rem; }
+  .think .tdot{ width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.2s infinite; }
+  .think .tdot:nth-child(2){ animation-delay:.2s; } .think .tdot:nth-child(3){ animation-delay:.4s; }
+  @keyframes pulse{ 0%,100%{ opacity:.25; transform:scale(.8); } 50%{ opacity:1; transform:scale(1); } }
+  .composer{ border-top:1px solid var(--hair); padding:12px 26px; background:var(--panel); }
+  .chips{ display:flex; gap:7px; flex-wrap:wrap; margin-bottom:10px; }
+  .chip{ font-size:.74rem; border:1px solid var(--hair); background:#fff; padding:6px 11px; color:var(--navy); cursor:pointer; }
+  .chip:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .chip.warn{ border-color:#ebd8ae; color:#b07d27; background:#fcf6e9; }
+  .inputbar{ display:flex; align-items:center; gap:9px; background:#fff; border:1px solid var(--hair); padding:5px 5px 5px 14px; }
+  .inputbar input{ flex:1; border:none; outline:none; font-size:.85rem; padding:7px 0; font-family:inherit; }
+  .send{ width:34px; height:34px; border:none; background:var(--navy); color:#fff; cursor:pointer; display:grid; place-items:center; } .send svg{ width:17px; height:17px; }
+  .disclaimer{ text-align:center; font-size:.66rem; color:var(--mute); margin-top:10px; }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:680px){ .side{ display:none; } .assistant{ height:min(560px,76vh); } }
+  /* Maximize control */
+  .assistant{ position:relative; }
+  .maxbtn{ position:absolute; top:10px; right:10px; z-index:6; width:30px; height:30px; border:1px solid var(--hair); background:#fff; color:var(--navy); cursor:pointer; display:grid; place-items:center; padding:0; }
+  .maxbtn:hover{ border-color:var(--accent); background:var(--gold-soft); }
+  .maxbtn svg{ width:15px; height:15px; }
+  .assistant.maxed{ position:fixed; inset:0; width:auto; height:auto; max-height:none; min-height:0; margin:0; z-index:9999; border:none; background:#fff; }
+  body.maxed-lock{ overflow:hidden; }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>What a Car's Worth</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/what-a-cars-worth/cover%20image.jpeg" alt="What a Car's Worth">
+        <figcaption><span>A used-car forecourt priced by the numbers.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Pricing analysis</span>
+      <h1 class="title">What a Car's Worth</h1>
+      <p class="standfirst">Mileage, age and brand set the fair price</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>AI assistant</span><span>400 cars &middot; 5 brands</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/what-a-cars-worth.html">Analyst Report</a>
+          <a class="sw" href="/data-analyst-portfolio/dashboards/what-a-cars-worth-dashboard.html">Dashboard</a>
+          <span class="sw active" aria-current="page">AI Assistant</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="assistant">
+      <button class="maxbtn" id="maxbtn" type="button" aria-label="Expand to full screen" title="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+      <aside class="side">
+        <span class="tab"></span>
+        <div class="bn">AI Pricing Assistant</div>
+        <div class="bs">What a Car's Worth</div>
+        <div class="status">
+          <div class="st-t">Asset status</div>
+          <div class="pill"><span class="dot"></span> Read-only access</div>
+          <div class="pill"><span class="dot lock"></span> Approved tools only</div>
+          <div class="pill"><span class="dot loading" id="dbdot"></span> <span id="dbstat">Loading database...</span></div>
+        </div>
+        <div class="th"><span>Approved tools</span><span>8 &middot; fixed</span></div>
+        <ul class="tools">
+          <li>model_fit</li><li>pricing_factors</li><li>brand_effect</li><li>avg_price_by_brand</li>
+          <li>cheapest_priciest</li><li>estimate_price</li><li>best_bargains</li><li>overpriced</li>
+        </ul>
+        <div class="gov">400 used cars priced by a fitted model, queried live in your browser. The assistant runs only pre-written, parameterized queries; it cannot author SQL, buy or sell a car, change a price, or edit the inventory. Illustrative model on sample data, for portfolio demonstration.</div>
+      </aside>
+
+      <main class="main">
+        <div class="thread" id="thread">
+          <div class="row bot">
+            <div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>
+            <div class="bubble"><div class="lead">I can answer questions about these <b>400 used cars</b>: what sets a car's price, how much age, mileage and brand are each worth, what a given car should fairly sell for, and which cars look like bargains or overpriced. Ask in plain language, or tap a prompt below.</div></div>
+          </div>
+        </div>
+        <div class="composer">
+          <div class="chips" id="chips">
+            <button class="chip" data-key="drivers">What sets a used car's price?</button>
+            <button class="chip" data-key="age">How much does each year of age take off?</button>
+            <button class="chip" data-key="mileage">How much does every 10,000 km take off?</button>
+            <button class="chip" data-key="brand">How much is the brand worth?</button>
+            <button class="chip" data-key="brandavg">What is the average price by brand?</button>
+            <button class="chip" data-key="extremes">What are the cheapest and most expensive cars?</button>
+            <button class="chip" data-key="reliable">Can a fair price be estimated reliably?</button>
+            <button class="chip" data-key="estimate">What is a car worth? (three example cars)</button>
+            <button class="chip" data-key="bargains">Which cars are the best bargains?</button>
+            <button class="chip" data-key="overpriced">Which cars look overpriced?</button>
+            <button class="chip warn" data-key="refuse">Delete a car from the inventory</button>
+          </div>
+          <div class="inputbar">
+            <input id="input" type="text" placeholder="Ask what sets the price, what a car is worth, or which are bargains...">
+            <button class="send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+          <div class="disclaimer">The assistant estimates and explains prices for you to act on. It does not buy, sell, list, or re-price any car.</div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  document.getElementById('hamburger').addEventListener('click',()=>{drawer.classList.add('open');overlay.classList.add('open');});
+  const _cl=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+  document.getElementById('drawerClose').addEventListener('click',_cl);
+  overlay.addEventListener('click',_cl);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',_cl));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')_cl(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script src="what-a-cars-worth.db.js"></script>
+<script>
+let db=null, dbReady=false;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const rm=v=>'RM'+Math.round(Number(v)).toLocaleString();
+const rn=v=>Number(v).toLocaleString();
+
+const SQL={
+  model_fit:`SELECT metric, value FROM model_fit`,
+  pricing_factors:`SELECT factor, effect, how FROM pricing_factors WHERE factor NOT LIKE 'Brand%'`,
+  brand_effect:`SELECT brand, effect FROM brand_effect ORDER BY effect DESC`,
+  avg_price_by_brand:`SELECT brand, COUNT(*) n, ROUND(AVG(price)) avg_price, ROUND(AVG(age_years),1) avg_age FROM cars GROUP BY brand ORDER BY avg_price DESC`,
+  cheapest_priciest:`SELECT * FROM (SELECT 'Cheapest' kind, car_id, brand, age_years, mileage, price FROM cars ORDER BY price ASC LIMIT 3) UNION ALL SELECT * FROM (SELECT 'Priciest' kind, car_id, brand, age_years, mileage, price FROM cars ORDER BY price DESC LIMIT 3)`,
+  estimate_price:`SELECT ROUND(m.intercept + m.age_coef*:age + (m.mileage_coef10k/10000.0)*:mileage + m.owner_coef*:owners + (m.engine_coef100/100.0)*:engine + b.effect) price FROM model m JOIN brand_effect b ON b.brand=:brand`,
+  best_bargains:`SELECT car_id, brand, age_years, mileage, price, pred, resid_pct FROM cars ORDER BY resid_pct ASC LIMIT 6`,
+  overpriced:`SELECT car_id, brand, age_years, mileage, price, pred, resid_pct FROM cars ORDER BY resid_pct DESC LIMIT 6`
+};
+function run(sql,params){const st=db.prepare(sql);if(params)st.bind(params);const o=[];while(st.step())o.push(st.getAsObject());st.free();return o;}
+function val(metric){return (run(SQL.model_fit).find(r=>r.metric.indexOf(metric)>=0)||{}).value;}
+
+const gear=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>`;
+const info=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+const botAv=`<div class="av bot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><rect x="7" y="11" width="10" height="9" rx="3"/><circle cx="10" cy="15" r="1"/><circle cx="14" cy="15" r="1"/></svg></div>`;
+const badge=t=>`<div class="badge">${gear}<span>${t}</span><span class="lbl">&middot; approved tool</span></div>`;
+const noteEl=t=>`<div class="note">${info} ${t}</div>`;
+const thread=document.getElementById('thread');
+const scroll=()=>thread.scrollTop=thread.scrollHeight;
+function tbl(head,body){return `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;}
+function estPrice(c){return run(SQL.estimate_price,{':age':c.age,':mileage':c.mileage,':owners':c.owners,':engine':c.engine,':brand':c.brand})[0].price;}
+
+const PRESETS=[
+  {tier:'Budget',brand:'Perodua',age:9,mileage:140000,engine:1300,owners:2},
+  {tier:'Mid-range',brand:'Honda',age:5,mileage:60000,engine:1600,owners:1},
+  {tier:'Premium',brand:'BMW',age:3,mileage:30000,engine:2000,owners:1}
+];
+
+const responses={
+  drivers(){
+    return badge('model_fit')+
+      `<div class="lead">A car's price comes down to just four things: the <b>brand</b>, how <b>old</b> it is, how far it has been <b>driven</b>, and the <b>engine size</b>. Together these explain about <b>94%</b> of why one car costs more than another, so there is very little left to guesswork or haggling.</div>
+      <div class="card"><div class="kpis">
+        <div class="kpi good"><div class="v">94%</div><div class="l">of the price difference explained</div></div>
+        <div class="kpi"><div class="v">4</div><div class="l">things that set the price</div></div>
+      </div><div class="cap" style="margin-top:11px;margin-bottom:0">Brand, age, mileage and engine size, in plain order of weight.</div></div>`;
+  },
+  age(){
+    const r=run(SQL.pricing_factors).find(x=>x.factor.toLowerCase().indexOf('age')>=0);
+    return badge('pricing_factors')+
+      `<div class="lead">Every extra year of age takes about <b>${rm(-r.effect)}</b> off the price, on its own. A five-year-old car carries roughly ${rm(-r.effect*5)} of age-related drop, separate from its mileage.</div>
+      <div class="card"><div class="kpis"><div class="kpi bad"><div class="v">${rm(r.effect)}</div><div class="l">per extra year of age</div></div></div>
+      ${noteEl(esc(r.how)+'.')}</div>`;
+  },
+  mileage(){
+    const r=run(SQL.pricing_factors).find(x=>x.factor.toLowerCase().indexOf('mileage')>=0);
+    return badge('pricing_factors')+
+      `<div class="lead">Every 10,000 km on the clock takes about <b>${rm(-r.effect)}</b> off the price. A car with 100,000 km is worth roughly ${rm(-r.effect*10)} less than the same car barely driven.</div>
+      <div class="card"><div class="kpis"><div class="kpi bad"><div class="v">${rm(r.effect)}</div><div class="l">per 10,000 km</div></div></div>
+      ${noteEl(esc(r.how)+'.')}</div>`;
+  },
+  brand(){
+    const d=run(SQL.brand_effect), base=d[0], low=d[d.length-1];
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.brand)}</td><td class="r">${x.effect===0?'<b>base</b>':'<span class="down">'+rm(x.effect)+'</span>'}</td></tr>`).join('');
+    return badge('brand_effect')+
+      `<div class="lead">Brand is the single biggest factor. Holding age and mileage equal, a <b>${base.brand}</b> is worth about <b>${rm(-low.effect)}</b> more than a ${low.brand}. Two identical-age, identical-mileage cars can be tens of thousands apart on the badge alone.</div>
+      <div class="card"><h4>What the brand is worth</h4><div class="cap">Price difference vs the ${base.brand} (the base), holding age and mileage equal</div>
+      ${tbl('<th>Brand</th><th class="r">vs base</th>',body)}</div>`;
+  },
+  brandavg(){
+    const d=run(SQL.avg_price_by_brand);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.brand)}</td><td class="r">${x.n}</td><td class="r"><b>${rm(x.avg_price)}</b></td><td class="r">${x.avg_age}</td></tr>`).join('');
+    return badge('avg_price_by_brand')+
+      `<div class="lead">Average selling price by brand across the lot, led by <b>${d[0].brand}</b> at ${rm(d[0].avg_price)}. This is the raw average; the brand's true premium (holding age and mileage equal) is in the brand-worth view.</div>
+      <div class="card"><h4>Average price by brand</h4><div class="cap">Mean selling price, car count and average age</div>
+      ${tbl('<th>Brand</th><th class="r">Cars</th><th class="r">Avg price</th><th class="r">Avg age</th>',body)}</div>`;
+  },
+  extremes(){
+    const d=run(SQL.cheapest_priciest);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.kind)}</td><td>${esc(x.brand)}</td><td class="r">${x.age_years}</td><td class="r">${rn(x.mileage)}</td><td class="r"><b>${rm(x.price)}</b></td></tr>`).join('');
+    return badge('cheapest_priciest')+
+      `<div class="lead">The cheapest three and priciest three cars on the lot. The range runs from old, high-mileage mass-market cars at the bottom to near-new premium ones at the top.</div>
+      <div class="card"><h4>Cheapest and most expensive</h4><div class="cap">Three at each end, by selling price</div>
+      ${tbl('<th></th><th>Brand</th><th class="r">Age</th><th class="r">km</th><th class="r">Price</th>',body)}</div>`;
+  },
+  reliable(){
+    const acc=val('error')||'9.0%';
+    return badge('model_fit')+
+      `<div class="lead">Yes. The estimated price usually lands within about <b>${acc}</b> of what the car actually sells for, with no habit of guessing too high or too low. For most cars that is a couple of thousand ringgit out, not tens of thousands, close enough to trust as a starting price for a trade-in or a sticker.</div>
+      <div class="card"><div class="kpis">
+        <div class="kpi good"><div class="v">${acc}</div><div class="l">typical estimate error</div></div>
+        <div class="kpi"><div class="v">${val('explained')||'94%'}</div><div class="l">of price explained</div></div>
+      </div>${noteEl('Tested on cars held back from the analysis, so it is not just fitting its own data.')}</div>`;
+  },
+  estimate(){
+    const cards=PRESETS.map(c=>{
+      const p=estPrice(c);
+      return `<div class="estcard"><div class="tier">${c.tier}</div><div class="spec">${c.age}-yr ${esc(c.brand)} &middot; ${rn(c.mileage)} km<br>${(c.engine/1000).toFixed(1)}L &middot; ${c.owners} owner${c.owners>1?'s':''}</div><div class="price">${rm(p)}</div></div>`;
+    }).join('');
+    return badge('estimate_price')+
+      `<div class="lead">The same method prices any car from its details: start from the brand, then subtract for age, mileage and owners, and add for a bigger engine. Three examples across the range, priced live:</div>
+      <div class="card"><h4>What a car is worth</h4><div class="cap">Estimated fair price for three example cars</div>
+      <div class="est">${cards}</div>
+      ${noteEl('The agent supplies only the car details; the price is computed from the fixed pricing model.')}</div>`;
+  },
+  bargains(){
+    const d=run(SQL.best_bargains);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.car_id)}</td><td>${esc(x.brand)}</td><td class="r">${x.age_years}</td><td class="r">${rm(x.price)}</td><td class="r">${rm(x.pred)}</td><td class="r"><span class="down">${x.resid_pct}%</span></td></tr>`).join('');
+    return badge('best_bargains')+
+      `<div class="lead">The cars priced furthest <b>below</b> their fair estimate, the best bargains to buy. ${esc(d[0].car_id)} (a ${esc(d[0].brand)}) is listed about ${Math.abs(d[0].resid_pct)}% under its estimate. A big gap below is worth a closer look before buying.</div>
+      <div class="card"><h4>Best bargains</h4><div class="cap">Priced below the fair estimate (actual vs estimate)</div>
+      ${tbl('<th>Car</th><th>Brand</th><th class="r">Age</th><th class="r">Listed</th><th class="r">Estimate</th><th class="r">Gap</th>',body)}</div>`;
+  },
+  overpriced(){
+    const d=run(SQL.overpriced);
+    const body=d.map(x=>`<tr><td class="nm">${esc(x.car_id)}</td><td>${esc(x.brand)}</td><td class="r">${x.age_years}</td><td class="r">${rm(x.price)}</td><td class="r">${rm(x.pred)}</td><td class="r"><span class="up">+${x.resid_pct}%</span></td></tr>`).join('');
+    return badge('overpriced')+
+      `<div class="lead">The cars priced furthest <b>above</b> their fair estimate. ${esc(d[0].car_id)} (a ${esc(d[0].brand)}) is listed about ${d[0].resid_pct}% over its estimate, either a price to revisit or a car with something extra not in the data.</div>
+      <div class="card"><h4>Looks overpriced</h4><div class="cap">Priced above the fair estimate (actual vs estimate)</div>
+      ${tbl('<th>Car</th><th>Brand</th><th class="r">Age</th><th class="r">Listed</th><th class="r">Estimate</th><th class="r">Gap</th>',body)}</div>`;
+  },
+  refuse(){
+    return `<div class="refuse">
+      <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="#004B87" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 21h20L12 2z"/><path d="M12 9v5M12 18h.01"/></svg><span>Outside my approved tools</span></div>
+      <p>I can't delete a car, or change the inventory in any way. Editing records is a write action, and I have no approved tool that writes or removes anything; I work read-only through a fixed set of queries that estimate and explain prices.</p>
+      <p style="margin-top:9px">What I can do: show a car's <b>fair estimated price</b> and flag the ones that look <b>overpriced</b> or like <b>bargains</b>, so you can decide what to do in your own system.</p>
+      <div class="why">no_tool_matched &middot; editing inventory is a write action, not defined &middot; access = read-only</div></div>`;
+  }
+};
+
+const userText={drivers:"What sets a used car's price?",age:"How much does each year of age take off?",mileage:"How much does every 10,000 km take off?",brand:"How much is the brand worth?",brandavg:"What is the average price by brand?",extremes:"What are the cheapest and most expensive cars?",reliable:"Can a fair price be estimated reliably?",estimate:"What is a car worth? (three example cars)",bargains:"Which cars are the best bargains?",overpriced:"Which cars look overpriced?",refuse:"Delete a car from the inventory"};
+const thinkLabel={drivers:"model_fit",age:"pricing_factors",mileage:"pricing_factors",brand:"brand_effect",brandavg:"avg_price_by_brand",extremes:"cheapest_priciest",reliable:"model_fit",estimate:"estimate_price",bargains:"best_bargains",overpriced:"overpriced",refuse:"checking approved tools"};
+
+function addUser(t){thread.insertAdjacentHTML('beforeend',`<div class="row user"><div class="av me">You</div><div class="bubble">${esc(t)}</div></div>`);scroll();}
+function respond(key,arg){
+  const id='t'+thread.children.length;
+  thread.insertAdjacentHTML('beforeend',`<div class="row bot" id="${id}">${botAv}<div class="bubble"><div class="think"><span>Selecting tool &middot; ${thinkLabel[key]}</span><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div></div></div>`);
+  scroll();
+  setTimeout(()=>{document.getElementById(id).querySelector('.bubble').innerHTML=responses[key](arg);scroll();postH();},760);
+}
+// Each new question REPLACES the previous exchange (no endless scroll).
+function ask(key,arg){thread.innerHTML='';addUser(userText[key]);setTimeout(()=>respond(key,arg),220);}
+
+function notReady(){thread.innerHTML='<div class="row bot">'+botAv+'<div class="bubble"><div class="lead">The pricing database is still loading. If it does not finish, open this page over http (a local server or the live site), not directly from a file, because browsers block database access on file://.</div></div></div>';scroll();postH();}
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;if(!dbReady){notReady();return;}ask(b.dataset.key);});
+const input=document.getElementById('input');
+function route(){
+  const t=input.value.trim();if(!t)return;if(!dbReady){notReady();return;}input.value='';const q=t.toLowerCase();let key=null;
+  if(/delete|remove.*(car|inventory)|buy this|trade.?in offer|make.*offer|list.*(for sale|on the website)|update.*price|set.*price|negotiate|sell this|add.*car|raw sql|select \*|dump|export|every (car|record)|insert/.test(q))key='refuse';
+  else if(/car.*worth|worth.*car|estimate.*car|car.*estimate|price (a|this|my|the) car|value (a|this|my|the) car|example car|how much is a car|what'?s a car worth/.test(q))key='estimate';
+  else if(/reliable|reliably|accurate|accuracy|trust|how close|how good|confiden/.test(q))key='reliable';
+  else if(/bargain|underpriced|under-priced|below estimate|good (deal|buy)|best buy|cheap.*deal/.test(q))key='bargains';
+  else if(/overpriced|over-priced|above estimate|too expensive|priced too high/.test(q))key='overpriced';
+  else if(/cheapest|most expensive|priciest|dearest|highest price|lowest price/.test(q))key='extremes';
+  else if(/(average|avg).*brand|price by brand|brand.*(average|avg)/.test(q))key='brandavg';
+  else if(/brand|badge|make of car|bmw|honda|perodua|proton|toyota/.test(q))key='brand';
+  else if(/age|years? old|how old|older/.test(q))key='age';
+  else if(/mileage|odometer|\bkm\b|kilometre|driven|how far/.test(q))key='mileage';
+  else if(/what (sets|drives|decides|determines|affects)|main factor|biggest factor|explain.*price|what makes.*price|how is.*priced/.test(q))key='drivers';
+  thread.innerHTML=''; addUser(t);
+  if(key)setTimeout(()=>respond(key),220);
+  else setTimeout(()=>{thread.insertAdjacentHTML('beforeend',`<div class="row bot">${botAv}<div class="bubble"><div class="lead">I'd route that to one of my approved tools. Try a suggested prompt to see it answer live from the pricing data.</div></div></div>`);scroll();postH();},220);
+}
+document.getElementById('send').addEventListener('click',route);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')route();});
+
+function b64bytes(s){const bin=atob(s);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
+initSqlJs({locateFile:f=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`})
+  .then(S=>{
+    db=new S.Database(b64bytes(window.__DB_B64__));dbReady=true;
+    document.getElementById('dbdot').className='dot';
+    document.getElementById('dbstat').textContent='Database ready';
+  })
+  .catch(e=>{document.getElementById('dbstat').textContent='Engine failed to load';console.error(e);});
+</script>
+<script>
+/* Maximize / restore the chat interface. Esc also restores. */
+(function(){
+  var panel=document.querySelector('.assistant'); if(!panel)return;
+  var btn=document.getElementById('maxbtn'); if(!btn)return;
+  var EXP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>', RES='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3a2 2 0 0 0 2-2V3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M21 16h-3a2 2 0 0 0-2 2v3"/></svg>';
+  btn.innerHTML=EXP;
+  function toggle(){
+    var on=panel.classList.toggle('maxed');
+    document.body.classList.toggle('maxed-lock',on);
+    btn.innerHTML=on?RES:EXP;
+    btn.title=on?'Restore':'Full screen';
+    btn.setAttribute('aria-label',on?'Restore size':'Expand to full screen');
+    if(typeof postH==='function')postH();
+  }
+  btn.addEventListener('click',toggle);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&panel.classList.contains('maxed'))toggle(); });
+})();
+</script>
+</body>
+</html>
