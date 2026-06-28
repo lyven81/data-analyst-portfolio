@@ -103,9 +103,9 @@
 
   /* ---------- EXPLORE BY METHOD ---------- */
   .method{ max-width:1240px; margin:0 auto; padding:8px 28px 36px; }
-  .method-grid{ display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid var(--hair); }
-  .method-tile{ padding:18px 18px 22px; border-right:1px solid var(--hair); }
-  .method-tile:last-child{ border-right:none; }
+  .method-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); }
+  .method-tile{ padding:18px 18px 22px; background:#fff; }
+  .method-tile:first-child{ grid-column:span 2; }
   .method-tile .rubric{ margin-bottom:10px; font-size:.54rem; letter-spacing:.3px; white-space:nowrap; }
   .method-tile h4{ font-size:1.18rem; font-weight:700; line-height:1.1; margin-bottom:8px; }
   .method-tile p{ font-family:Arial, Helvetica, sans-serif; font-size:.6rem; letter-spacing:.5px; line-height:1.5; color:var(--gray); margin-bottom:12px; }
@@ -127,9 +127,7 @@
     font-family:Arial, Helvetica, sans-serif; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
 
   @media (max-width:1000px){
-    .method-grid{ grid-template-columns:repeat(3,1fr); }
-    .method-tile{ border-bottom:1px solid var(--hair); }
-    .method-tile:nth-child(3n){ border-right:none; }
+    .method-grid{ grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width:900px){
     .grid{ grid-template-columns:1fr; }
@@ -152,9 +150,8 @@
     .lower-card:last-child{ border-bottom:none; }
   }
   @media (max-width:560px){
-    .method-grid{ grid-template-columns:repeat(2,1fr); }
-    .method-tile:nth-child(3n){ border-right:1px solid var(--hair); }
-    .method-tile:nth-child(2n){ border-right:none; }
+    .method-grid{ grid-template-columns:1fr; }
+    .method-tile:first-child{ grid-column:auto; }
   }
 </style>
 </head>
@@ -240,6 +237,8 @@
        7 Lower-right top      8 Lower-right bottom   -> drop
      ============================================================ */
   const items = [
+    {t:"Behind the Sushi Counter", c:"Financial Statement Analysis", img:"empire-sushi-pl-analysis/cover%20image.jpeg", s:"empire-sushi-pl-analysis", d:"empire-sushi-pl-analysis-dashboard", a:"",
+     dek:"A 26% rise, and where the margin went"},
     {t:"Before They Leave", c:"Predictive Modeling", img:"before-they-leave/cover%20image.jpeg", s:"before-they-leave", d:"before-they-leave-dashboard", a:"before-they-leave",
      dek:"Support calls and inactivity flag who will leave"},
     {t:"What a Car's Worth", c:"Regression Analysis", img:"what-a-cars-worth/cover%20image.jpeg", s:"what-a-cars-worth", d:"what-a-cars-worth-dashboard", a:"what-a-cars-worth",
@@ -255,22 +254,29 @@
     {t:"Know When to Reorder", c:"Time Series Analysis", img:"know-when-to-reorder/cover%20image.png", s:"know-when-to-reorder", d:"know-when-to-reorder-dashboard", a:"know-when-to-reorder",
      dek:"Reorder stock in time to stop losing sales"},
     {t:"Right Price, Right Season", c:"Optimization Analysis", img:"right-price-right-season/cover%20image.jpeg", s:"right-price-right-season", d:"right-price-right-season-dashboard", a:"right-price-right-season",
-     dek:"Price each Airbnb listing right for each season"},
-    {t:"Where Value Comes From", c:"Optimization Analysis", img:"where-value-comes-from/cover.jpeg", s:"where-value-comes-from", d:"where-value-comes-from-dashboard", a:"where-value-comes-from",
-     dek:"See which customers and offers create lasting value"}
+     dek:"Price each Airbnb listing right for each season"}
   ];
 
   const categories = [
-    {c:"Time Series Analysis", url:"time-series-analysis.html", p:"Forecasting trends and patterns over time."},
     {c:"Optimization Analysis", url:"optimization-analysis.html", p:"Finding the best choice under real limits."},
-    {c:"Regression Analysis", url:"regression-analysis.html", p:"What drives a number, and by how much."},
     {c:"Segmentation Analysis", url:"segmentation-analysis.html", p:"Grouping and comparing to find what stands out."},
-    {c:"Predictive Modeling", url:"predictive-modeling.html", p:"Predicting outcomes and flagging risk from data."},
-    {c:"Statistical Testing", url:"statistical-testing.html", p:"Testing whether a difference is real or chance."}
+    {c:"Regression Analysis", url:"regression-analysis.html", p:"What drives a number, and by how much."},
+    {c:"Time Series Analysis", url:"time-series-analysis.html", p:"Forecasting trends and patterns over time."},
+    {c:"Statistical Testing", url:"statistical-testing.html", p:"Testing whether a difference is real or chance."},
+    {c:"Financial Statement Analysis", url:"financial-analysis.html", p:"Reading the story inside a company's financials."},
+    {c:"Predictive Modeling", url:"predictive-modeling.html", p:"Predicting outcomes and flagging risk from data."}
   ];
 
   /* Full search database (every case study; never pruned). Used by the search bar only. */
   const caseStudies = [
+  {
+    "title": "Behind the Sushi Counter",
+    "description": "A 26% rise, and where the margin went",
+    "caseStudyUrl": "/data-analyst-portfolio/case-studies/empire-sushi-pl-analysis.html",
+    "dashboardUrl": "/data-analyst-portfolio/dashboards/empire-sushi-pl-analysis-dashboard.html",
+    "agenticUrl": "",
+    "category": "Financial Statement Analysis"
+  },
   {
     "title": "Before They Leave",
     "description": "Support calls and inactivity flag who will leave",
