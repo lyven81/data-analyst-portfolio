@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When the Jackpot Hits | Data Stories Lab</title>
+<meta name="description" content="Why more jackpot wins meant lower sales">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;--gold:#B8860B;--red:#C0392B;--sand:#D8C9A3;--green:#2E7D5B;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .lead p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:3px;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;color:var(--accent);margin:4px 0 0;}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .chartbox{margin:18px 0 6px;border:1px solid var(--hair);border-radius:8px;padding:14px 14px 8px;background:#fbfcfd;}
+  .chartbox .ct{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.92rem;color:var(--ink);margin-bottom:2px;}
+  .chartbox .cs{font-family:Arial,Helvetica,sans-serif;font-size:.74rem;color:var(--mute);margin-bottom:10px;}
+  .cwrap{position:relative;height:300px;}
+  .csrc{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;color:#9aa3ad;margin-top:8px;}
+  .body p{font-size:1.06rem;margin-top:.85rem;}
+  ul{margin:.6rem 0 .2rem 1.2rem;} li{font-size:1.04rem;margin-top:.5rem;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;color:#fff;text-align:center;}
+
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  .hero{margin:0 0 4px;line-height:0;} .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay, body.embed .switch{display:none;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a> <span class="sep">/</span> <a href="/data-analyst-portfolio/financial-analysis.html">Financial Statement Analysis</a> <span class="sep">/</span> When the Jackpot Hits</div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/magnum-pl-analysis/cover%20image.jpeg" alt="When the Jackpot Hits">
+    <figcaption><span>Sales fell 11% as more players won. The profit fell further.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Earnings analysis</div>
+  <h1 class="title">When the Jackpot Hits</h1>
+  <p class="standfirst">Why more jackpot wins meant lower sales</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>1Q FY2026 &middot; RM&rsquo;000</span></div>
+
+    <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/magnum-pl-analysis-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead">
+    <p>Magnum's sales fell more than a tenth in the first quarter of 2026 against the same quarter a year earlier. The reason is not weak demand for its product in the usual sense: it is that more players actually won. This report lifts the lid on the statement to show how a run of lucky draws trimmed the top line, and how the profit fell faster than the sales, and leaves the why beyond the numbers to those who run the business.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs">
+    <div class="fig"><div class="n">&minus;11.4%</div><div class="l">revenue change</div></div>
+    <div class="fig"><div class="n">16.7%</div><div class="l">gross margin (+0.2 ppt)</div></div>
+    <div class="fig"><div class="n">&minus;16.8%</div><div class="l">profit before tax</div></div>
+    <div class="fig"><div class="n">5 vs 1</div><div class="l">jackpot 1 hits, this vs last year</div></div>
+  </div>
+
+  <div class="pull"><p>&ldquo;Sales fell 11% while the margin on each sale held. The profit fell further, because the running costs did not fall with the sales.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+
+  <article class="finding"><h3 class="fq">What we found</h3><div class="ftext">
+    <p>Magnum Berhad is one of a small number of licensed number-forecast (4D lottery) operators in Malaysia. In the quarter to 31 March 2026 its revenue fell 11.4%, from RM648.9M to RM575.2M, against the same quarter a year earlier. The margin it earns on each sale barely moved, yet profit before tax fell 16.8%, faster than sales.</p>
+    <p>Two threads explain the gap. The fall in sales traces to how the game played out (fewer draws and an unusually lucky run of jackpot wins), and the steeper fall in profit traces to running costs that stayed flat while sales shrank. The lid lifts on both below.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">1. A decline, amplified</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Profit fell faster than sales</div><div class="cs">Year-on-year change, by line</div><div class="cwrap"><canvas id="c1"></canvas></div><div class="csrc">Source: Magnum Berhad, 1Q FY2026 interim report.</div></div>
+    <p>Revenue fell 11.4% and gross profit a similar 10.5%, so the cost of the product moved almost exactly with sales. But profit before tax fell 16.8%, well ahead of the sales drop. When the bottom line falls faster than the top line, the cause sits in the costs that do not shrink when sales do.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">2. The margin on each sale held</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Gross margin steady, operating margin down</div><div class="cs">Margin at each level of the statement, this quarter vs a year ago</div><div class="cwrap"><canvas id="c2"></canvas></div><div class="csrc">Source: Magnum Berhad, 1Q FY2026 interim report.</div></div>
+    <p>Gross margin actually edged up, from 16.5% to 16.7%: the direct cost of running the games, which is mostly prize payouts and gaming duty, fell in step with sales. The gap opens below that line. Operating margin slipped from 12.4% to 11.9%, because the running costs between gross profit and operating profit did not fall with revenue.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">3. Where the margin moved</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Direct costs fell with sales, overhead did not</div><div class="cs">Each cost as a share of revenue, this quarter vs a year ago</div><div class="cwrap"><canvas id="c3"></canvas></div><div class="csrc">Source: Magnum Berhad, 1Q FY2026 interim report.</div></div>
+    <p>Reading each line as a share of revenue locates the squeeze. Cost of sales held near 83% of revenue. But administrative and other expenses were almost unchanged in ringgit (RM10.6M and RM19.8M, barely a whisker below last year), so as revenue shrank they took a larger share: administrative cost rose from 1.6% to 1.8% of revenue, and other expenses from 3.1% to 3.4%. Fixed costs do not flex with a softer quarter, and that is the whole of the extra profit fall.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">4. Why the sales fell: the luck of the draw</h3><div class="ftext">
+    <p>The sales drop is not the usual story of weaker demand. The company points to two mechanics. First, there was one fewer draw in the quarter (41 against 42 a year earlier). Second, and more telling, there were five 4D Jackpot 1 wins this quarter against just one a year earlier. Each win resets the jackpot to its floor, so a run of wins keeps the headline prize small. A smaller accumulating jackpot is less of a draw for players, and ticket sales soften with it.</p>
+    <p>It is a counter-intuitive shape: more winners meant lower sales. The thing that makes the product exciting, a large rolling jackpot, is exactly the thing that a lucky quarter takes away.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">5. From a ringgit of sales to net profit</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Revenue to net profit bridge</div><div class="cs">How RM575.2M of revenue becomes RM44.5M of net profit (RM&rsquo;000)</div><div class="cwrap"><canvas id="c4"></canvas></div><div class="csrc">Source: Magnum Berhad, 1Q FY2026 interim report.</div></div>
+    <p>The bridge shows where each ringgit goes. Cost of sales, mostly prizes and duty, takes much the largest bite, leaving RM96.0M of gross profit; running costs and finance costs remove most of the rest, and tax takes the final slice, leaving RM44.5M. For this business, the size of that first bar is the point: most of every sales ringgit is paid straight back out in prizes and tax.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">6. One business, and a quieter sequel</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Pre-tax profit by division</div><div class="cs">Gaming carries the group; the investment arm slipped to a small loss (RM&rsquo;000)</div><div class="cwrap"><canvas id="c5"></canvas></div><div class="csrc">Source: Magnum Berhad, 1Q FY2026 interim report, segmental note.</div></div>
+    <p>Almost all of the group's revenue is gaming; a small investment-holdings arm earns negligible outside revenue and swung from a small profit to a RM2.6M loss this quarter, on fair-value losses and lower interest income. So the group's result is, in practice, the gaming result.</p>
+    <div class="chartbox" style="margin-top:18px"><div class="ct">A softer year, but a stronger quarter</div><div class="cs">Revenue and pre-tax profit, last three reported quarters (RM&rsquo;000)</div><div class="cwrap"><canvas id="c6"></canvas></div><div class="csrc">Source: Magnum Berhad, 1Q FY2026 interim report.</div></div>
+    <p>The year-on-year fall also hides a sequential recovery. Against the immediately preceding quarter (the three months to December 2025), revenue actually rose 5% and pre-tax profit rose 27%, helped by Chinese New Year sales and a lower prize payout. The latest quarter is softer than a year ago, but firmer than the one just before it.</p>
+  </div></article>
+
+  <div class="skicker">What the numbers reveal</div>
+  <div class="body">
+    <p>Put together, the quarter tells one clear factual story. Sales fell 11% for reasons rooted in how the games played out, not in the cost of running them: the margin on each sale held. Profit fell further than sales because the fixed running costs did not shrink with a softer quarter, the ordinary arithmetic of operating leverage working in reverse. Underneath the year-on-year decline, the business was already recovering against the prior quarter.</p>
+    <p>The shape of the bridge is worth keeping in view. Most of every sales ringgit leaves again as prizes and duty, so the business keeps a thin slice of a large turnover; that slice is steady, but it amplifies any swing in sales by the time it reaches profit. Whether this quarter's softer sales were a run of bad luck on the jackpots or the start of something more durable is the question the numbers here cannot settle.</p>
+  </div>
+
+  <div class="skicker">Questions the numbers raise</div>
+  <div class="body"><ul>
+    <li>Were the five jackpot wins simply a statistically unlucky quarter for sales that should revert, or is the softer ticket demand part of a longer trend the company also flags (illegal operators, cautious spending)?</li>
+    <li>If sales stay soft, can the fixed running costs be flexed, or will operating leverage keep amplifying every dip into profit?</li>
+    <li>The sequential quarter improved; is that the start of a recovery, or a seasonal Chinese New Year lift that fades?</li>
+  </ul></div>
+
+  <div class="skicker">Method &amp; data</div>
+  <div class="body"><p>Built from Magnum Berhad's unaudited interim report for the first quarter ended 31 March 2026, read against the same quarter a year earlier. From the profit and loss statement it computes vertical analysis (each line as a share of revenue), horizontal analysis (the year-on-year change), the margin ladder, the revenue-to-net-profit bridge, and the split by division. The quarterly trend uses pre-tax profit, the profit measure the company discloses for all three quarters shown. The investment-holdings division earns almost no outside revenue, so its profit contribution is shown rather than a margin. Figures in RM'000.</p></div>
+</div>
+
+<footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  (function(){
+    const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+    const open=()=>{drawer.classList.add('open');overlay.classList.add('open');};
+    const close=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+    document.getElementById('hamburger').addEventListener('click',open);
+    document.getElementById('drawerClose').addEventListener('click',close);
+    overlay.addEventListener('click',close);
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+    function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+    window.addEventListener('load',postH);window.addEventListener('resize',postH);setTimeout(postH,600);setTimeout(postH,1600);
+  })();
+Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
+Chart.defaults.font.size = 12;
+const NAVY='#002D55', ACC='#004B87', GOLD='#B8860B', SAND='#D8C9A3', RED='#C0392B', GREEN='#2E7D5B';
+const pct=v=>v+'%';
+new Chart(c1,{type:'bar',data:{labels:['Revenue','Gross profit','Profit before tax'],datasets:[{label:'YoY change %',data:[-11.4,-10.5,-16.8],backgroundColor:[ACC,GOLD,RED],borderRadius:6}]},options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:pct},title:{display:true,text:'Year-on-year change'}}},maintainAspectRatio:false}});
+new Chart(c2,{type:'bar',data:{labels:['Gross margin','Operating margin','Net margin'],datasets:[{label:'1Q FY2025',data:[16.5,12.4,7.8],backgroundColor:SAND,borderRadius:5},{label:'1Q FY2026',data:[16.7,11.9,7.7],backgroundColor:NAVY,borderRadius:5}]},options:{scales:{y:{ticks:{callback:pct}}},maintainAspectRatio:false}});
+new Chart(c3,{type:'bar',data:{labels:['Cost of sales','Administrative','Other expenses'],datasets:[{label:'1Q FY2025',data:[83.5,1.6,3.1],backgroundColor:SAND,borderRadius:5},{label:'1Q FY2026',data:[83.3,1.8,3.4],backgroundColor:GOLD,borderRadius:5}]},options:{scales:{y:{ticks:{callback:pct},title:{display:true,text:'% of revenue'}}},maintainAspectRatio:false}});
+const steps=[{l:'Revenue',v:575206,t:'total'},{l:'Cost of sales',v:-479204,t:'dec'},{l:'Other income',v:3078,t:'inc'},{l:'Admin',v:-10611,t:'dec'},{l:'Other expenses',v:-19829,t:'dec'},{l:'Finance costs',v:-9061,t:'dec'},{l:'Tax',v:-15122,t:'dec'},{l:'Net profit',v:44457,t:'total'}];
+let run=0; const bars=[], cols=[];
+steps.forEach(s=>{ if(s.t==='total'){bars.push([0,s.v]); cols.push(NAVY); run=s.v;} else {const a=run; run+=s.v; bars.push([Math.min(a,run),Math.max(a,run)]); cols.push(s.v<0?RED:GREEN);} });
+new Chart(c4,{type:'bar',data:{labels:steps.map(s=>s.l),datasets:[{data:bars,backgroundColor:cols,borderRadius:3}]},options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>(v/1000)+'M'}},x:{ticks:{maxRotation:60,minRotation:45}}},maintainAspectRatio:false}});
+new Chart(c5,{type:'bar',data:{labels:['Gaming','Investment holdings & others'],datasets:[{label:'1Q FY2025',data:[73220,-1588],backgroundColor:SAND,borderRadius:5},{label:'1Q FY2026',data:[62148,-2569],backgroundColor:NAVY,borderRadius:5}]},options:{scales:{y:{ticks:{callback:v=>(v/1000)+'M'},title:{display:true,text:'Pre-tax profit'}}},maintainAspectRatio:false}});
+new Chart(c6,{type:'bar',data:{labels:["Mar'25","Dec'25","Mar'26"],datasets:[{type:'bar',label:'Revenue',data:[648870,548040,575206],backgroundColor:SAND,borderRadius:5,yAxisID:'y'},{type:'line',label:'Profit before tax',data:[71632,47040,59579],borderColor:ACC,backgroundColor:ACC,tension:.3,pointRadius:5,yAxisID:'y1'}]},options:{scales:{y:{position:'left',ticks:{callback:v=>(v/1000)+'M'},title:{display:true,text:'Revenue'}},y1:{position:'right',ticks:{callback:v=>(v/1000)+'M'},grid:{drawOnChartArea:false},title:{display:true,text:'PBT'}}},maintainAspectRatio:false}});
+</script>
+</body></html>

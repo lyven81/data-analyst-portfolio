@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth, Yield, Turnaround | Data Stories Lab</title>
+<meta name="description" content="Each offers one thing, not all three">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;--gold:#B8860B;--red:#C0392B;--sand:#D8C9A3;--green:#2E7D5B;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.65;}
+  .wrap{max-width:780px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.7rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.3rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .lead p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.3rem;font-weight:800;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.1rem;color:var(--navy);white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:3px;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.45rem;line-height:1.25;color:var(--navy);}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.3rem;line-height:1.16;color:var(--accent);margin:4px 0 0;}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  table.cmp{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9rem;}
+  table.cmp th,table.cmp td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--hair);}
+  table.cmp thead th{font-family:Arial,sans-serif;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--navy);}
+  table.cmp td.c{text-align:center;white-space:nowrap;}
+  table.cmp tbody tr:nth-child(even){background:#fbfcfe;}
+  .chartbox{margin:18px 0 6px;border:1px solid var(--hair);border-radius:8px;padding:14px 14px 8px;background:#fbfcfd;}
+  .chartbox .ct{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.92rem;color:var(--ink);margin-bottom:2px;}
+  .chartbox .cs{font-family:Arial,Helvetica,sans-serif;font-size:.74rem;color:var(--mute);margin-bottom:10px;}
+  .cwrap{position:relative;height:300px;}
+  .csrc{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;color:#9aa3ad;margin-top:8px;}
+  .body p{font-size:1.06rem;margin-top:.85rem;}
+  ul{margin:.6rem 0 .2rem 1.2rem;} li{font-size:1.04rem;margin-top:.5rem;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;color:#fff;text-align:center;}
+
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  .hero{margin:0 0 4px;line-height:0;} .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay, body.embed .switch{display:none;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a> <span class="sep">/</span> <a href="/data-analyst-portfolio/financial-analysis.html">Financial Statement Analysis</a> <span class="sep">/</span> Growth, Yield, Turnaround</div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/growth-yield-turnaround/cover%20image.jpeg" alt="Growth, Yield, Turnaround">
+    <figcaption><span>Three businesses, three different profit engines, one lens.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Comparative screen &middot; Batch 1</div>
+  <h1 class="title">Growth, Yield, Turnaround</h1>
+  <p class="standfirst">Each offers one thing, not all three</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Comparative analysis</span><span>1Q&ndash;FY2026 &middot; RM</span></div>
+
+    <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/growth-yield-turnaround-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead">
+    <p>Three very different Malaysian businesses, read on the same seven-point yardstick: Empire Sushi, a fast-growing grab-and-go sushi chain; Magnum, a licensed 4D lottery operator in gentle decline; and MyNews, a thin-margin convenience-store chain investing to expand. Put side by side, they sort cleanly into a quality story, a value story, and a weakest-of-the-three, and no two of them are strong for the same reason. This report compares what the numbers say about each, and leaves the why to those who run the businesses.</p>
+  </div>
+
+  <div class="skicker">The spread</div>
+  <div class="figs">
+    <div class="fig"><div class="n">+26% to &minus;11%</div><div class="l">revenue growth range</div></div>
+    <div class="fig"><div class="n">10x to 40x</div><div class="l">earnings multiple range</div></div>
+    <div class="fig"><div class="n">0.7x to 4.8x</div><div class="l">price-to-book range</div></div>
+    <div class="fig"><div class="n">3 sectors</div><div class="l">food, gaming, retail</div></div>
+  </div>
+
+  <div class="pull"><p>&ldquo;The best business is the dearest, the cheapest business is shrinking, and the cheapest-looking margin hides the weakest moat.&rdquo;</p></div>
+
+  <div class="skicker">How they compare</div>
+  <table class="cmp">
+    <thead><tr><th>Measure</th><th>Empire Sushi</th><th>Magnum</th><th>MyNews</th></tr></thead>
+    <tbody>
+      <tr><td>Business</td><td>Grab-and-go sushi</td><td>4D lottery</td><td>Convenience stores</td></tr>
+      <tr><td>Price</td><td class="c">RM0.99</td><td class="c">RM1.26</td><td class="c">RM0.44</td></tr>
+      <tr><td>Revenue change</td><td class="c">+26.1%</td><td class="c">&minus;11.4%</td><td class="c">+11.6%</td></tr>
+      <tr><td>Net margin</td><td class="c">15.4%</td><td class="c">7.7%</td><td class="c">~0%</td></tr>
+      <tr><td>Return on equity</td><td class="c">high*</td><td class="c">~7%</td><td class="c">~4%</td></tr>
+      <tr><td>Earnings multiple (PE)</td><td class="c">~24x</td><td class="c">~10x</td><td class="c">~35x*</td></tr>
+      <tr><td>Price to book</td><td class="c">~4.8x</td><td class="c">~0.7x</td><td class="c">~1.3x</td></tr>
+      <tr><td>Dividend yield</td><td class="c">low</td><td class="c">~8%</td><td class="c">~2%</td></tr>
+      <tr><td>Moat</td><td class="c">niche scale</td><td class="c">licence</td><td class="c">thin</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.86rem;color:var(--mute)">*Empire's ROE is flattered by a thin post-merger equity base; MyNews's PE is high because its latest-quarter profit was near zero.</p>
+
+  <div class="skicker">What the data shows</div>
+
+  <article class="finding"><h3 class="fq">1. Quality and price pull in opposite directions</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Business quality vs the price paid for it</div><div class="cs">Business-quality score (out of 5) and price-to-book</div><div class="cwrap"><canvas id="c1"></canvas></div><div class="csrc">Source: company 1Q/FY2026 interim reports; quality score on a seven-point yardstick.</div></div>
+    <p>On the quality scorecard, Empire Sushi is the strongest of the three: it is profitable, asset-backed and growing, scoring four of five. Magnum and MyNews each score three. But quality and price run opposite ways. Empire trades at about 4.8 times book and 24 times earnings, the most expensive of the three; Magnum at 0.7 times book and 10 times earnings, the cheapest. The market is already paying up for Empire's quality and marking down Magnum's decline.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">2. One is growing, one is shrinking, one is standing still</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Growth, and how much of each sale becomes profit</div><div class="cs">Revenue change and net margin</div><div class="cwrap"><canvas id="c2"></canvas></div><div class="csrc">Source: company 1Q/FY2026 interim reports.</div></div>
+    <p>The three are at different points. Empire grew revenue 26% and keeps the fattest margin (15% of each sale reaches net profit). MyNews grew sales 12% but keeps almost nothing, its net margin is below 1%, so even a small cost slip nearly erases its profit. Magnum's revenue fell 11% as a lucky run of jackpot wins trimmed ticket sales, but it still keeps a healthy 8% net margin. Growth and margin do not travel together here.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">3. The moats are not equal</h3><div class="ftext">
+    <p>The most durable advantage belongs to Magnum: it is one of only a handful of licensed number-forecast operators in Malaysia, a regulatory barrier no competitor can simply step over. Empire has a softer moat, scale and brand in a defined niche (grab-and-go sushi), with improving margins but no licence. MyNews has the weakest position: convenience retail is crowded and its sub-1% margin signals little pricing power. The cheapest business on the page, Magnum, also has the widest moat; the dearest, Empire, a narrower one.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">4. Where the income is</h3><div class="ftext">
+    <p>For an income lens, Magnum stands apart: at about an 8% dividend yield, its cash generation funds a high payout that the other two cannot match. Empire paid out almost all of its profit before listing, but that was a one-off; MyNews pays a modest dividend while it spends on new stores. So the three offer three different propositions: Empire is growth, Magnum is yield, and MyNews is a turnaround-in-progress.</p>
+  </div></article>
+
+  <div class="skicker">What the numbers reveal</div>
+  <div class="body">
+    <p>Put side by side, the three sort cleanly and for different reasons. Empire is the highest-quality business but the most expensive, priced for its growth. Magnum is the cheapest and carries the widest moat and the best yield, but its sales are slipping. MyNews is the weakest of the three: it is growing, but on a margin so thin that quality and pricing power are hard to find, and its earnings multiple looks high because its latest profit was close to zero. No one of them is strong on every measure; each leads on one and lags on others.</p>
+    <p>The discipline this comparison rewards is matching the business to the question being asked. A buyer who wants quality and growth looks first at Empire and then at the price; one who wants value and income looks first at Magnum and then at the decline; and MyNews asks the hardest question of the three, whether a thin-margin retailer can grow its way to a margin worth owning. Which of those questions matters most is the part the numbers here cannot settle.</p>
+  </div>
+
+  <div class="skicker">Method &amp; data</div>
+  <div class="body"><p>Built from each company's most recent interim report (Empire Sushi FY2026, Magnum and MyNews 1Q/2Q FY2026), read against the prior year, and screened on a seven-point yardstick covering profitability, financial health, valuation, cash flow and dividend safety, business moat, management, and size. Prices are as supplied: Empire RM0.99, Magnum RM1.26, MyNews RM0.44. Valuation figures are provisional for Empire (recently listed) and read with care for MyNews (a seasonally depressed latest quarter). Figures in RM.</p></div>
+</div>
+
+<footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  (function(){
+    const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+    const open=()=>{drawer.classList.add('open');overlay.classList.add('open');};
+    const close=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+    document.getElementById('hamburger').addEventListener('click',open);
+    document.getElementById('drawerClose').addEventListener('click',close);
+    overlay.addEventListener('click',close);
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+    function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+    window.addEventListener('load',postH);window.addEventListener('resize',postH);setTimeout(postH,600);setTimeout(postH,1600);
+  })();
+Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
+Chart.defaults.font.size = 12;
+const NAVY='#002D55', ACC='#004B87', GOLD='#B8860B', SAND='#D8C9A3', RED='#C0392B', GREEN='#2E7D5B';
+new Chart(c1,{data:{labels:['Empire Sushi','Magnum','MyNews'],datasets:[
+  {type:'bar',label:'Business-quality score (of 5)',data:[4,3,3],backgroundColor:NAVY,borderRadius:5,yAxisID:'y'},
+  {type:'bar',label:'Price to book (x)',data:[4.8,0.7,1.3],backgroundColor:GOLD,borderRadius:5,yAxisID:'y1'}]},
+  options:{scales:{y:{position:'left',max:6,title:{display:true,text:'Quality score'}},y1:{position:'right',max:6,grid:{drawOnChartArea:false},title:{display:true,text:'Price to book (x)'}}},maintainAspectRatio:false}});
+new Chart(c2,{type:'bar',data:{labels:['Empire Sushi','Magnum','MyNews'],datasets:[
+  {label:'Revenue change %',data:[26.1,-11.4,11.6],backgroundColor:ACC,borderRadius:5},
+  {label:'Net margin %',data:[15.4,7.7,0.03],backgroundColor:GOLD,borderRadius:5}]},
+  options:{scales:{y:{ticks:{callback:v=>v+'%'}}},maintainAspectRatio:false}});
+</script>
+</body></html>

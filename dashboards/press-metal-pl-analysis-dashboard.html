@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hedge Paradox, Dashboard | Data Stories Lab</title>
+<meta name="description" content="Press Metal 1Q FY2026 P&L, live: profit up 41% on a widened spread, while hedges lost RM511M in equity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#002D55; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* House chrome */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Title block (shared crown) */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  /* Instrument switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  /* Dashboard tool */
+  .tool{ padding:22px 0 8px; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.6rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .kpi .s{ font-size:.66rem; font-weight:700; margin-top:5px; }
+  .kpi .s.flat{ color:var(--mute); }
+  .pos{ color:#2E7D6F; } .neg{ color:#B5503C; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:300px; margin-top:14px; }
+  .ccard .cwrap.lg{ height:360px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+
+  table.pl{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  table.pl th{ text-align:right; color:#fff; background:#222; padding:9px 12px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  table.pl th:first-child{ text-align:left; }
+  table.pl td{ padding:8px 12px; border-bottom:1px solid #eef1f4; text-align:right; }
+  table.pl td:first-child{ text-align:left; }
+  table.pl tr.subtotal{ background:#eef3f8; font-weight:700; color:var(--navy); }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .grid{ grid-template-columns:1fr; } }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Financial Analysis</span>
+    <span class="sep">/</span><span>The Hedge Paradox</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/press-metal-pl-analysis/cover%20image.jpeg" alt="The Hedge Paradox">
+        <figcaption><span>Profit jumped on a widened spread; the hedges lost RM511M.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Earnings analysis</span>
+      <h1 class="title">The Hedge Paradox</h1>
+      <p class="standfirst">See how profit jumped and total income fell at once</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>1Q FY2026 &middot; RM&rsquo;000</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/press-metal-pl-analysis.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Overview</button>
+        <button class="pbtn" data-p="2">Statement</button>
+        <button class="pbtn" data-p="3">Margins</button>
+        <button class="pbtn" data-p="4">Segments</button>
+      </div>
+
+      <!-- P1 Overview -->
+      <div class="page active" id="p1">
+        <div class="kpis">
+          <div class="kpi"><div class="v">RM4.10bn</div><div class="l">Revenue (1Q FY26)</div><div class="s pos">+5.2% YoY</div></div>
+          <div class="kpi"><div class="v">RM864.7M</div><div class="l">Operating profit</div><div class="s pos">+73.7% YoY</div></div>
+          <div class="kpi"><div class="v">RM774.2M</div><div class="l">Profit after tax</div><div class="s pos">+41.4% YoY</div></div>
+          <div class="kpi"><div class="v">21.1%</div><div class="l">Operating margin</div><div class="s pos">+8.3 ppt YoY</div></div>
+          <div class="kpi"><div class="v">18.9%</div><div class="l">Net margin</div><div class="s pos">+4.9 ppt YoY</div></div>
+          <div class="kpi"><div class="v neg">&minus;RM511M</div><div class="l">Hedge loss (in equity)</div><div class="s flat">total income fell 56%</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Why pre-tax profit rose RM243M on barely higher sales</div><div class="cs">What changed between 1Q FY25 (RM629.4M) and 1Q FY26 (RM872.5M) pre-tax profit, by driver (RM&rsquo;000). The widened smelting spread did almost all of it; a sharp fall in associate income clawed some back</div><div class="cwrap lg"><canvas id="driverChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 interim report. Volume effect = revenue change at last year&rsquo;s cost ratio; spread/efficiency is the residual tying to the change in the cost base.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard"><span class="tab"></span><div class="ct">How a rising profit became a falling total income</div><div class="cs">From net profit to total comprehensive income, 1Q FY2026 (RM&rsquo;000). The cash-flow hedge loss, recognised in equity, is the swing</div><div class="cwrap"><canvas id="hedgeChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 statement of comprehensive income and derivatives note. Hedge loss approx RM511M; other comprehensive income is the balance to reported total comprehensive income.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Smelting is the engine</div><div class="cs">Pre-tax profit or loss by segment (RM millions)</div><div class="cwrap"><canvas id="segProfitChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 segmental note.</div></div>
+        </div>
+      </div>
+
+      <!-- P2 Statement -->
+      <div class="page" id="p2">
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Income statement</div><div class="cs">1Q FY2025 vs 1Q FY2026. RM&rsquo;000, YoY % and % of revenue. Subtotals in bold; costs as reported</div>
+            <div style="overflow-x:auto"><table class="pl" id="plTable"><thead><tr><th>Line item</th><th>1Q FY25</th><th>1Q FY26</th><th>YoY %</th><th>% of Rev (FY26)</th></tr></thead><tbody id="plTableBody"></tbody></table></div>
+            <div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 interim report. Operating expenses are reported as one line, so there is no separate gross profit.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue to net profit bridge</div><div class="cs">How RM4.10bn of revenue becomes RM774M of net profit</div><div class="cwrap lg"><canvas id="waterfallChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 interim report.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Cost &amp; profit structure</div><div class="cs">Operating expenses took a far smaller share of revenue, widening every level below</div><div class="cwrap lg"><canvas id="structureChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 interim report.</div></div>
+        </div>
+      </div>
+
+      <!-- P3 Margins -->
+      <div class="page" id="p3">
+        <div class="kpis">
+          <div class="kpi"><div class="v">21.1%</div><div class="l">Operating margin</div><div class="s pos">+8.3 ppt vs 12.8%</div></div>
+          <div class="kpi"><div class="v">18.9%</div><div class="l">Net margin</div><div class="s pos">+4.9 ppt vs 14.0%</div></div>
+          <div class="kpi"><div class="v">79.4%</div><div class="l">Operating cost, % of revenue</div><div class="s pos">&minus;8.0 ppt vs 87.4%</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Margins FY25 vs FY26</div><div class="cs">The operating margin roughly doubled on a 5% rise in sales</div><div class="cwrap"><canvas id="marginsChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 interim report. No separate gross margin is reported.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Margin change since last year</div><div class="cs">The widened spread lifted the margin at every level (ppt)</div><div class="cwrap"><canvas id="marginChangeChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 interim report.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Operating cost as % of revenue</div><div class="cs">Down 8.0 ppt as alumina cost less, the spread that drove the quarter</div><div class="cwrap"><canvas id="costChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 interim report.</div></div>
+        </div>
+      </div>
+
+      <!-- P4 Segments -->
+      <div class="page" id="p4">
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue by segment</div><div class="cs">Smelting, the upstream business, is about 85% of revenue</div><div class="cwrap lg"><canvas id="mixChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 segmental note.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Segment revenue (RM&rsquo;000)</div><div class="cs">1Q FY2026 revenue by business</div><div class="cwrap lg"><canvas id="segRevChart"></canvas></div><div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 segmental note.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Segment scorecard (1Q FY26)</div><div class="cs">Revenue, profit, margin and share by business. Smelting earns a 25% margin and essentially all of group profit</div>
+            <div style="overflow-x:auto"><table class="pl" id="segTable"><thead><tr><th>Segment</th><th>Revenue (RM&rsquo;000)</th><th>Profit/(loss) (RM&rsquo;000)</th><th>Margin %</th><th>Share of revenue</th></tr></thead><tbody id="segTableBody"></tbody></table></div>
+            <div class="csrc">Source: Press Metal Aluminium Holdings, 1Q FY2026 segmental note.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  // ===== DATA (Press Metal Aluminium Holdings, 1Q FY2026 vs 1Q FY2025, RM'000) =====
+  // Costs stored negative for the bridge; the table reads magnitudes so cost change shows as reported.
+  const pl = [
+    {item:'Revenue', sub:false, fy25:3897248, fy26:4098422},
+    {item:'Operating Expenses', sub:false, fy25:-3407684, fy26:-3255540},
+    {item:'Other Operating Income', sub:false, fy25:8346, fy26:21788},
+    {item:'Operating Profit', sub:true, fy25:497910, fy26:864670},
+    {item:'Net Finance Costs', sub:false, fy25:-38179, fy26:-29535},
+    {item:'Share of Profit from Associates', sub:false, fy25:169648, fy26:37402},
+    {item:'Profit Before Tax', sub:true, fy25:629379, fy26:872537},
+    {item:'Taxation', sub:false, fy25:-81949, fy26:-98307},
+    {item:'Profit After Tax', sub:true, fy25:547430, fy26:774230}
+  ];
+  const REV26 = 4098422;
+  // Hedge paradox: profit vs total comprehensive income (hedge loss recognised in equity)
+  const hedge = { labels:['1Q FY2025','1Q FY2026'], np:[547430,774230], tci:[566135,249733] };
+  // Segments (RM'000): smelting carries the group; no prior-year segment split disclosed
+  const segments = [
+    {name:'Smelting', rev:3492186, pft:873178},
+    {name:'Extrusion', rev:526713, pft:10165},
+    {name:'Refinery', rev:67934, pft:-3755},
+    {name:'Investment holding & others', rev:11589, pft:-14918}
+  ];
+
+  // Scheme E chart palette (blue family + semantic green/red for up/down)
+  const COL = { dark:'#001F3F', gold:'#004B87', brown:'#6A9BD1', green:'#2E7D6F', red:'#B5503C', sand:'#AEC2D6' };
+  const MARGIN_LINE = '#B8860B';
+  const SEGCOL = ['#002D55','#B8860B','#2E7D6F','#B5503C'];
+  const GRID = '#E8ECF1';
+  const charts = {};
+  function mkChart(id, config){ if (charts[id]) charts[id].destroy(); const c=document.getElementById(id); if(c) charts[id]=new Chart(c, config); }
+  function fmtRM(v){ const a=Math.abs(v); let s; if(a>=1000000) s='RM'+(a/1000000).toFixed(2)+'bn'; else if(a>=1000) s='RM'+(a/1000).toFixed(1)+'M'; else s='RM'+a+'K'; return (v<0?'-':'')+s; }
+  function fmtK(v){ return v.toLocaleString(); }
+
+  function renderPage1(){
+    // Profit-driver bridge: decompose the YoY change in PBT into ranked causes (reconciles to 872,537)
+    const dsteps=[ {l:'PBT 1Q FY25',v:629379,type:'total'},{l:'Revenue growth',v:25272,type:'inc'},{l:'Spread / cost efficiency',v:328046,type:'inc'},{l:'Other income',v:13442,type:'inc'},{l:'Net finance costs',v:8644,type:'inc'},{l:'Associates',v:-132246,type:'dec'},{l:'PBT 1Q FY26',v:872537,type:'total'} ];
+    let drun=0; const dbars=[], dcol=[];
+    dsteps.forEach(s=>{ if(s.type==='total'){ dbars.push([0,s.v]); dcol.push(COL.dark); drun=s.v; } else { const a=drun,b=drun+s.v; dbars.push([Math.min(a,b),Math.max(a,b)]); dcol.push(s.v>=0?COL.green:COL.red); drun=b; } });
+    mkChart('driverChart', { type:'bar', data:{ labels:dsteps.map(s=>s.l), datasets:[{ data:dbars, backgroundColor:dcol, borderRadius:4 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=dsteps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'Pre-tax profit (RM\'000)'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{maxRotation:30, minRotation:0, font:{size:10}}} } } });
+    // Hedge bridge: how net profit becomes total comprehensive income via OCI (reconciles to 249,733)
+    const hsteps=[ {l:'Net profit',v:774230,type:'total'},{l:'Cash flow hedge loss',v:-511000,type:'dec'},{l:'Other comprehensive income',v:-13497,type:'dec'},{l:'Total comprehensive income',v:249733,type:'total'} ];
+    let hrun=0; const hbars=[], hcol=[];
+    hsteps.forEach(s=>{ if(s.type==='total'){ hbars.push([0,s.v]); hcol.push(COL.dark); hrun=s.v; } else { const a=hrun,b=hrun+s.v; hbars.push([Math.min(a,b),Math.max(a,b)]); hcol.push(s.v>=0?COL.green:COL.red); hrun=b; } });
+    mkChart('hedgeChart', { type:'bar', data:{ labels:hsteps.map(s=>s.l), datasets:[{ data:hbars, backgroundColor:hcol, borderRadius:4 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=hsteps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'RM\'000'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{maxRotation:30, minRotation:0, font:{size:10}}} } } });
+    const prof=[...segments].sort((a,b)=>b.pft-a.pft);
+    mkChart('segProfitChart', { type:'bar',
+      data:{ labels:prof.map(s=>s.name), datasets:[{ label:'Pre-tax profit/(loss) (RM millions)', data:prof.map(s=>+(s.pft/1000).toFixed(1)), backgroundColor:prof.map(s=>s.pft>=0?COL.green:COL.red), borderRadius:5 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y>=0?'':'-'}RM${Math.abs(ctx.parsed.y).toFixed(1)}M`}} },
+        scales:{ y:{grid:{color:GRID}, title:{display:true,text:'RM millions'}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+  }
+
+  function renderPage2(){
+    document.getElementById('plTableBody').innerHTML = pl.map(r=>{
+      const yoy=(Math.abs(r.fy26)-Math.abs(r.fy25))/Math.abs(r.fy25)*100, av=Math.abs(r.fy26)/REV26*100;
+      const yoyTxt=(yoy>=0?'+':'')+yoy.toFixed(1)+'%', yoyCls=yoy>=0?'pos':'neg';
+      return `<tr class="${r.sub?'subtotal':''}"><td>${r.item}</td><td>${fmtK(r.fy25)}</td><td>${fmtK(r.fy26)}</td><td class="${yoyCls}">${yoyTxt}</td><td>${av.toFixed(1)}%</td></tr>`;
+    }).join('');
+    const steps=[ {l:'Revenue',v:4098422,type:'total'},{l:'Operating expenses',v:-3255540,type:'dec'},{l:'Other income',v:21788,type:'inc'},{l:'Net finance costs',v:-29535,type:'dec'},{l:'Associates',v:37402,type:'inc'},{l:'Tax',v:-98307,type:'dec'},{l:'Net profit',v:774230,type:'total'} ];
+    let run=0; const bars=[], colors=[];
+    steps.forEach(s=>{ if(s.type==='total'){ bars.push([0,s.v]); colors.push(COL.dark); run=s.v; } else { const start=run,end=run+s.v; bars.push([Math.min(start,end),Math.max(start,end)]); colors.push(s.v>=0?COL.green:COL.red); run=end; } });
+    mkChart('waterfallChart', { type:'bar', data:{ labels:steps.map(s=>s.l), datasets:[{ label:'RM\'000', data:bars, backgroundColor:colors, borderRadius:4 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=steps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+    mkChart('structureChart', { type:'bar',
+      data:{ labels:['Operating expenses','Operating profit','Profit before tax','Profit after tax'], datasets:[ {label:'1Q FY25', data:[87.4,12.8,16.1,14.0], backgroundColor:COL.sand, borderRadius:5}, {label:'1Q FY26', data:[79.4,21.1,21.3,18.9], backgroundColor:COL.gold, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}% of revenue`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+  }
+
+  function renderPage3(){
+    mkChart('marginsChart', { type:'bar',
+      data:{ labels:['Operating Margin','Net Margin'], datasets:[ {label:'1Q FY25', data:[12.8,14.0], backgroundColor:COL.sand, borderRadius:5}, {label:'1Q FY26', data:[21.1,18.9], backgroundColor:COL.dark, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}%`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+    const mchg=[ {l:'Operating margin', v:+(21.1-12.8).toFixed(1)}, {l:'Net margin', v:+(18.9-14.0).toFixed(1)} ];
+    mkChart('marginChangeChart', { type:'bar',
+      data:{ labels:mchg.map(m=>m.l), datasets:[{ label:'Change (ppt)', data:mchg.map(m=>m.v), backgroundColor:mchg.map(m=>m.v>=0?COL.green:COL.red), borderRadius:5 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y>=0?'+':''}${ctx.parsed.y} ppt`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'Change since 1Q FY25 (ppt)'}, ticks:{callback:v=>(v>0?'+':'')+v}}, x:{grid:{display:false}} } } });
+    mkChart('costChart', { type:'bar',
+      data:{ labels:['1Q FY25','1Q FY26'], datasets:[{ label:'Operating cost (% of Revenue)', data:[87.4,79.4], backgroundColor:[COL.sand,COL.green], borderRadius:6, barThickness:90 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y}% of revenue`}} },
+        scales:{ y:{beginAtZero:false, min:70, max:95, grid:{color:GRID}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+  }
+
+  function renderPage4(){
+    const tot=segments.reduce((a,s)=>a+s.rev,0);
+    mkChart('mixChart', { type:'doughnut',
+      data:{ labels:segments.map(s=>s.name), datasets:[{ data:segments.map(s=>s.rev), backgroundColor:SEGCOL, borderWidth:2, borderColor:'#fff' }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'right'}, tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${fmtRM(ctx.parsed)} (${(ctx.parsed/tot*100).toFixed(1)}%)`}} } } });
+    mkChart('segRevChart', { type:'bar',
+      data:{ labels:segments.map(s=>s.name), datasets:[{ label:'FY2026 revenue', data:segments.map(s=>s.rev), backgroundColor:SEGCOL, borderRadius:6 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>fmtRM(ctx.parsed.y)}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+    const tot2=segments.reduce((a,s)=>a+s.rev,0);
+    document.getElementById('segTableBody').innerHTML = segments.map(s=>{
+      const m=s.rev>0 ? s.pft/s.rev*100 : null;
+      const mTxt = (m===null) ? 'n/a' : m.toFixed(1)+'%';
+      const share=(s.rev/tot2*100).toFixed(1)+'%';
+      const pCls=s.pft>=0?'':'neg';
+      return `<tr><td>${s.name}</td><td>${fmtK(s.rev)}</td><td class="${pCls}">${fmtK(s.pft)}</td><td>${mTxt}</td><td>${share}</td></tr>`; }).join('');
+  }
+
+  const rendered={};
+  function render(n){ if(!rendered[n]){ rendered[n]=true; ({1:renderPage1,2:renderPage2,3:renderPage3,4:renderPage4})[n](); } }
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    render(+b.dataset.p); setTimeout(postH,60);
+  });
+  function start(){ render(1); postH(); }
+  if (window.Chart) start(); else window.addEventListener('load', ()=>{ if(window.Chart) start(); else setTimeout(start,200); });
+  window.addEventListener('load', ()=>setTimeout(()=>{ if(window.Chart && !charts.driverChart) start(); postH(); }, 250));
+</script>
+</body>
+</html>

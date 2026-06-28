@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whose Profit Is It?, Dashboard | Data Stories Lab</title>
+<meta name="description" content="DRB-HICOM 1Q FY2026 P&L, live: group profit up 141% while the parent's own shareholders kept 29% of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#002D55; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* House chrome */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Title block (shared crown) */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  /* Instrument switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  /* Dashboard tool */
+  .tool{ padding:22px 0 8px; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.6rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .kpi .s{ font-size:.66rem; font-weight:700; margin-top:5px; }
+  .kpi .s.flat{ color:var(--mute); }
+  .pos{ color:#2E7D6F; } .neg{ color:#B5503C; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:300px; margin-top:14px; }
+  .ccard .cwrap.lg{ height:360px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+
+  table.pl{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  table.pl th{ text-align:right; color:#fff; background:#222; padding:9px 12px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  table.pl th:first-child{ text-align:left; }
+  table.pl td{ padding:8px 12px; border-bottom:1px solid #eef1f4; text-align:right; }
+  table.pl td:first-child{ text-align:left; }
+  table.pl tr.subtotal{ background:#eef3f8; font-weight:700; color:var(--navy); }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .grid{ grid-template-columns:1fr; } }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Financial Analysis</span>
+    <span class="sep">/</span><span>Whose Profit Is It?</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/drb-hicom-pl-analysis/cover%20image.jpeg" alt="Whose Profit Is It?">
+        <figcaption><span>Group profit nearly tripled. The parent's own shareholders kept under a third.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Earnings analysis</span>
+      <h1 class="title">Whose Profit Is It?</h1>
+      <p class="standfirst">See how the profit was made, and who actually keeps it</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>1Q FY2026 &middot; RM&rsquo;000</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/drb-hicom-pl-analysis.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Overview</button>
+        <button class="pbtn" data-p="2">Statement</button>
+        <button class="pbtn" data-p="3">Margins</button>
+        <button class="pbtn" data-p="4">Segments</button>
+      </div>
+
+      <!-- P1 Overview -->
+      <div class="page active" id="p1">
+        <div class="kpis">
+          <div class="kpi"><div class="v">RM4.76bn</div><div class="l">Revenue (1Q FY26)</div><div class="s pos">+15.7% YoY</div></div>
+          <div class="kpi"><div class="v">RM264.9M</div><div class="l">Operating profit</div><div class="s pos">+94.7% YoY</div></div>
+          <div class="kpi"><div class="v">RM153.7M</div><div class="l">Group profit after tax</div><div class="s pos">+141% YoY</div></div>
+          <div class="kpi"><div class="v">5.6%</div><div class="l">Operating margin</div><div class="s pos">+2.3 ppt YoY</div></div>
+          <div class="kpi"><div class="v">3.2%</div><div class="l">Net margin</div><div class="s pos">+1.7 ppt YoY</div></div>
+          <div class="kpi"><div class="v">RM45.0M</div><div class="l">Net profit to owners</div><div class="s flat">29% of the group</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Why pre-tax profit more than doubled</div><div class="cs">What changed between 1Q FY25 (RM92.6M) and 1Q FY26 (RM192.4M), by driver (RM&rsquo;000). A falling cost base, not revenue growth, did most of the work; weaker associates pulled the other way</div><div class="cwrap lg"><canvas id="driverChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report. Volume effect = revenue change at last year&rsquo;s cost ratio; cost efficiency is the residual tying to the change in the cost base.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue vs net margin</div><div class="cs">Revenue climbed and the net margin doubled off a thin base</div><div class="cwrap"><canvas id="revVsMarginChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Who keeps the profit?</div><div class="cs">Group net profit split by who receives it (RM&rsquo;000)</div><div class="cwrap"><canvas id="ownerChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+        </div>
+      </div>
+
+      <!-- P2 Statement -->
+      <div class="page" id="p2">
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Profit &amp; loss statement</div><div class="cs">1Q FY2025 vs 1Q FY2026. RM&rsquo;000, YoY % and % of revenue. Subtotals in bold; costs as reported</div>
+            <div style="overflow-x:auto"><table class="pl" id="plTable"><thead><tr><th>Line item</th><th>1Q FY25</th><th>1Q FY26</th><th>YoY %</th><th>% of Rev (FY26)</th></tr></thead><tbody id="plTableBody"></tbody></table></div>
+            <div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report. Cost of sales and operating expenses are reported as one line, so there is no separate gross profit.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue to net profit bridge</div><div class="cs">How RM4.76bn of revenue becomes RM153.7M of net profit</div><div class="cwrap lg"><canvas id="waterfallChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Cost &amp; profit structure</div><div class="cs">The cost base eased from 98.3% to 96.5% of revenue, lifting every level below it</div><div class="cwrap lg"><canvas id="structureChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+        </div>
+      </div>
+
+      <!-- P3 Margins -->
+      <div class="page" id="p3">
+        <div class="kpis">
+          <div class="kpi"><div class="v">5.6%</div><div class="l">Operating margin</div><div class="s pos">+2.3 ppt vs 3.3%</div></div>
+          <div class="kpi"><div class="v">3.2%</div><div class="l">Net margin</div><div class="s pos">+1.7 ppt vs 1.5%</div></div>
+          <div class="kpi"><div class="v">96.5%</div><div class="l">Cost base, % of revenue</div><div class="s pos">&minus;1.8 ppt vs 98.3%</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Margins FY25 vs FY26</div><div class="cs">Operating and net margins both roughly doubled</div><div class="cwrap"><canvas id="marginsChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report. No separate gross margin is reported.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Margin trend</div><div class="cs">Operating and net margin, this quarter vs a year ago</div><div class="cwrap"><canvas id="marginTrendChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad interim reports.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Cost base as % of revenue</div><div class="cs">Down 1.8 ppt, the reason the margin widened at every level</div><div class="cwrap"><canvas id="cogsChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+        </div>
+      </div>
+
+      <!-- P4 Segments -->
+      <div class="page" id="p4">
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue mix by segment</div><div class="cs">Mobility (Proton and the wider auto business) is about three-quarters of revenue</div><div class="cwrap lg"><canvas id="mixChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 segmental note.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Segment revenue FY25 vs FY26</div><div class="cs">Mobility up 19.6%; Properties fell 70% (RM&rsquo;000)</div><div class="cwrap lg"><canvas id="segRevChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 segmental note.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard"><span class="tab"></span><div class="ct">Where the profit is made</div><div class="cs">Pre-tax profit or loss by segment (RM millions). Cars and the bank carry the group</div><div class="cwrap lg"><canvas id="segProfitChart"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 segmental note.</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">Segment scorecard (1Q FY26)</div><div class="cs">Revenue, profit, margin and YoY growth by business segment</div>
+            <div style="overflow-x:auto"><table class="pl" id="segTable"><thead><tr><th>Segment</th><th>Revenue (RM&rsquo;000)</th><th>Profit (RM&rsquo;000)</th><th>Margin %</th><th>Revenue YoY %</th></tr></thead><tbody id="segTableBody"></tbody></table></div>
+            <div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 segmental note.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  // ===== DATA (DRB-HICOM 1Q FY2026, RM'000), from the computed lens CSVs =====
+  // Costs stored negative for the bridge; the table reads magnitudes so cost growth shows as reported.
+  const pl = [
+    {item:'Revenue', sub:false, fy25:4113977, fy26:4761414},
+    {item:'Cost of Sales & Operating Expenses', sub:false, fy25:-4044241, fy26:-4594418},
+    {item:'Other Income', sub:false, fy25:90137, fy26:124734},
+    {item:'Other Expenses', sub:false, fy25:-23799, fy26:-26822},
+    {item:'Operating Profit', sub:true, fy25:136074, fy26:264908},
+    {item:'Finance Costs', sub:false, fy25:-130177, fy26:-131210},
+    {item:'Share of Results of JV', sub:false, fy25:37223, fy26:31783},
+    {item:'Share of Results of Associates', sub:false, fy25:49501, fy26:26919},
+    {item:'Profit Before Tax', sub:true, fy25:92621, fy26:192400},
+    {item:'Taxation', sub:false, fy25:-28867, fy26:-38666},
+    {item:'Profit After Tax', sub:true, fy25:63754, fy26:153734}
+  ];
+  const REV26 = 4761414;
+  const trend = {
+    labels: ["Mar'25 (1Q FY25)","Mar'26 (1Q FY26)"],
+    revenue: [4113977,4761414], om: [3.3,5.6], nm: [1.5,3.2]
+  };
+  // Profit attribution: who receives the group net profit (RM'000)
+  const owners = { labels:['Owners of the Company (29%)','Non-controlling interests (65%)','Perpetual sukuk (6%)'], data:[45000,99580,9154] };
+  // Segments (RM'000). Prior-year segment profit is not disclosed, so the bubble (margin change) is replaced by a profit/(loss) bar.
+  const segments = [
+    {name:'Mobility', rev25:3025808, rev26:3620179, pft26:180291},
+    {name:'Banking', rev25:533087, rev26:583361, pft26:79188},
+    {name:'Postal', rev25:457071, rev26:493250, pft26:-10039},
+    {name:'Services', rev25:51370, rev26:50732, pft26:-2763},
+    {name:'Properties', rev25:46641, rev26:13892, pft26:7913},
+    {name:'Investment Holding & Others', rev25:0, rev26:0, pft26:684}
+  ];
+
+  // Scheme E chart palette (blue family + semantic green/red for up/down)
+  const COL = { dark:'#001F3F', gold:'#004B87', brown:'#6A9BD1', green:'#2E7D6F', red:'#B5503C', sand:'#AEC2D6' };
+  const SEGCOL = ['#002D55','#B8860B','#2E7D6F','#B5503C','#6A9BD1','#9aa9bd'];
+  const MARGIN_LINE = '#B8860B';
+  const GRID = '#E8ECF1';
+  const charts = {};
+  function mkChart(id, config){ if (charts[id]) charts[id].destroy(); const c=document.getElementById(id); if(c) charts[id]=new Chart(c, config); }
+  function fmtRM(v){ const a=Math.abs(v); let s; if(a>=1000000) s='RM'+(a/1000000).toFixed(2)+'bn'; else if(a>=1000) s='RM'+(a/1000).toFixed(1)+'M'; else s='RM'+a+'K'; return (v<0?'-':'')+s; }
+  function fmtK(v){ return v.toLocaleString(); }
+
+  function renderPage1(){
+    mkChart('revVsMarginChart', {
+      type:'bar',
+      data:{ labels:trend.labels, datasets:[
+        { type:'bar', label:"Revenue (RM'000)", data:trend.revenue, backgroundColor:COL.dark, borderRadius:6, yAxisID:'y', order:2 },
+        { type:'line', label:'Net Margin %', data:trend.nm, borderColor:MARGIN_LINE, backgroundColor:MARGIN_LINE, borderWidth:3, tension:0.35, pointRadius:6, pointHoverRadius:7, pointBackgroundColor:MARGIN_LINE, yAxisID:'y1', fill:false, order:0 } ] },
+      options:{ responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{position:'top'}, tooltip:{ callbacks:{ label:ctx=> ctx.dataset.yAxisID==='y1' ? `${ctx.dataset.label}: ${ctx.parsed.y}%` : `${ctx.dataset.label}: ${fmtRM(ctx.parsed.y)}` } } },
+        scales:{ y:{ position:'left', grid:{color:GRID}, title:{display:true,text:"Revenue (RM'000)"}, ticks:{callback:v=>fmtRM(v)} },
+                 y1:{ position:'right', grid:{display:false}, min:0, max:8, title:{display:true,text:'Net Margin %'}, ticks:{callback:v=>v+'%'} }, x:{ grid:{display:false} } } } });
+    // Profit-driver bridge: decompose the YoY change in PBT into ranked causes (reconciles to 192,400)
+    const dsteps=[ {l:'PBT 1Q FY25',v:92621,type:'total'},{l:'Revenue growth',v:10974,type:'inc'},{l:'Cost efficiency',v:86286,type:'inc'},{l:'Other income',v:34597,type:'inc'},{l:'Other expenses',v:-3023,type:'dec'},{l:'Finance costs',v:-1033,type:'dec'},{l:'Associates & JV',v:-28022,type:'dec'},{l:'PBT 1Q FY26',v:192400,type:'total'} ];
+    let drun=0; const dbars=[], dcol=[];
+    dsteps.forEach(s=>{ if(s.type==='total'){ dbars.push([0,s.v]); dcol.push(COL.dark); drun=s.v; } else { const a=drun,b=drun+s.v; dbars.push([Math.min(a,b),Math.max(a,b)]); dcol.push(s.v>=0?COL.green:COL.red); drun=b; } });
+    mkChart('driverChart', { type:'bar', data:{ labels:dsteps.map(s=>s.l), datasets:[{ data:dbars, backgroundColor:dcol, borderRadius:4 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=dsteps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'Pre-tax profit (RM\'000)'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{maxRotation:30, minRotation:0, font:{size:10}}} } } });
+    mkChart('ownerChart', { type:'doughnut',
+      data:{ labels:owners.labels, datasets:[{ data:owners.data, backgroundColor:[COL.dark, COL.gold, COL.sand], borderWidth:2, borderColor:'#fff' }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'bottom'}, tooltip:{callbacks:{label:ctx=>`${ctx.label.replace(/\s*\(\d+%\)$/,'')}: ${fmtRM(ctx.parsed)}`}} } } });
+  }
+
+  function renderPage2(){
+    document.getElementById('plTableBody').innerHTML = pl.map(r=>{
+      const yoy=(Math.abs(r.fy26)-Math.abs(r.fy25))/Math.abs(r.fy25)*100, av=Math.abs(r.fy26)/REV26*100;
+      const yoyTxt=(yoy>=0?'+':'')+yoy.toFixed(1)+'%', yoyCls=yoy>=0?'pos':'neg';
+      return `<tr class="${r.sub?'subtotal':''}"><td>${r.item}</td><td>${fmtK(r.fy25)}</td><td>${fmtK(r.fy26)}</td><td class="${yoyCls}">${yoyTxt}</td><td>${av.toFixed(1)}%</td></tr>`;
+    }).join('');
+    const steps=[ {l:'Revenue',v:4761414,type:'total'},{l:'Cost of sales & opex',v:-4594418,type:'dec'},{l:'Other income',v:124734,type:'inc'},{l:'Other expenses',v:-26822,type:'dec'},{l:'Finance costs',v:-131210,type:'dec'},{l:'JV & associates',v:58702,type:'inc'},{l:'Tax',v:-38666,type:'dec'},{l:'Net profit',v:153734,type:'total'} ];
+    let run=0; const bars=[], colors=[];
+    steps.forEach(s=>{ if(s.type==='total'){ bars.push([0,s.v]); colors.push(COL.dark); run=s.v; } else { const start=run,end=run+s.v; bars.push([Math.min(start,end),Math.max(start,end)]); colors.push(s.v>=0?COL.green:COL.red); run=end; } });
+    mkChart('waterfallChart', { type:'bar', data:{ labels:steps.map(s=>s.l), datasets:[{ label:'RM\'000', data:bars, backgroundColor:colors, borderRadius:4 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=steps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+    mkChart('structureChart', { type:'bar',
+      data:{ labels:['Cost base','Operating profit','Profit before tax','Profit after tax'], datasets:[ {label:'FY25', data:[98.3,3.3,2.3,1.5], backgroundColor:COL.sand, borderRadius:5}, {label:'FY26', data:[96.5,5.6,4.0,3.2], backgroundColor:COL.gold, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}% of revenue`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+  }
+
+  function renderPage3(){
+    mkChart('marginsChart', { type:'bar',
+      data:{ labels:['Operating Margin','Net Margin'], datasets:[ {label:'FY25', data:[3.3,1.5], backgroundColor:COL.sand, borderRadius:5}, {label:'FY26', data:[5.6,3.2], backgroundColor:COL.dark, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}%`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+    mkChart('marginTrendChart', { type:'line',
+      data:{ labels:trend.labels, datasets:[ {label:'Operating Margin %', data:trend.om, borderColor:COL.dark, backgroundColor:'rgba(0,31,63,0.08)', tension:0.35, pointRadius:5, fill:false}, {label:'Net Margin %', data:trend.nm, borderColor:COL.gold, backgroundColor:'rgba(0,75,135,0.12)', tension:0.35, pointRadius:5, fill:false} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}%`}} },
+        scales:{ y:{min:0, max:8, grid:{color:GRID}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+    mkChart('cogsChart', { type:'bar',
+      data:{ labels:['1Q FY25','1Q FY26'], datasets:[{ label:'Cost base (% of Revenue)', data:[98.3,96.5], backgroundColor:[COL.sand,COL.green], borderRadius:6, barThickness:90 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y}% of revenue`}} },
+        scales:{ y:{beginAtZero:false, min:90, max:100, grid:{color:GRID}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+  }
+
+  function renderPage4(){
+    const tot26=segments.reduce((a,s)=>a+s.rev26,0);
+    const mixSegs=segments.filter(s=>s.rev26>0);
+    mkChart('mixChart', { type:'doughnut',
+      data:{ labels:mixSegs.map(s=>s.name), datasets:[{ data:mixSegs.map(s=>s.rev26), backgroundColor:mixSegs.map(s=>SEGCOL[segments.indexOf(s)]), borderWidth:2, borderColor:'#fff' }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'right'}, tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${fmtRM(ctx.parsed)} (${(ctx.parsed/tot26*100).toFixed(1)}%)`}} } } });
+    mkChart('segRevChart', { type:'bar',
+      data:{ labels:segments.map(s=>s.name), datasets:[ {label:'FY25', data:segments.map(s=>s.rev25), backgroundColor:COL.sand, borderRadius:5}, {label:'FY26', data:segments.map(s=>s.rev26), backgroundColor:COL.dark, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${fmtRM(ctx.parsed.y)}`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+    const prof = [...segments].sort((a,b)=>b.pft26-a.pft26);
+    mkChart('segProfitChart', { type:'bar',
+      data:{ labels:prof.map(s=>s.name), datasets:[{ label:'Pre-tax profit/(loss) (RM millions)', data:prof.map(s=>+(s.pft26/1000).toFixed(1)), backgroundColor:prof.map(s=>s.pft26>=0?COL.green:COL.red), borderRadius:5 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y>=0?'':'-'}RM${Math.abs(ctx.parsed.y).toFixed(1)}M`}} },
+        scales:{ y:{grid:{color:GRID}, title:{display:true,text:'RM millions'}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+    document.getElementById('segTableBody').innerHTML = segments.map(s=>{
+      const g = s.rev25>0 ? (s.rev26-s.rev25)/s.rev25*100 : null;
+      const m = s.rev26>0 ? s.pft26/s.rev26*100 : null;
+      const gTxt = g===null ? 'n/a' : `<span class="${g>=0?'pos':'neg'}">${(g>=0?'+':'')+g.toFixed(1)}%</span>`;
+      const mTxt = m===null ? 'n/a' : m.toFixed(1)+'%';
+      const pCls = s.pft26>=0?'':'neg';
+      return `<tr><td>${s.name}</td><td>${fmtK(s.rev26)}</td><td class="${pCls}">${fmtK(s.pft26)}</td><td>${mTxt}</td><td>${gTxt}</td></tr>`; }).join('');
+  }
+
+  const rendered={};
+  function render(n){ if(!rendered[n]){ rendered[n]=true; ({1:renderPage1,2:renderPage2,3:renderPage3,4:renderPage4})[n](); } }
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    render(+b.dataset.p); setTimeout(postH,60);
+  });
+  function start(){ render(1); postH(); }
+  if (window.Chart) start(); else window.addEventListener('load', ()=>{ if(window.Chart) start(); else setTimeout(start,200); });
+  window.addEventListener('load', ()=>setTimeout(()=>{ if(window.Chart && !charts.revVsMarginChart) start(); postH(); }, 250));
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whose Profit Is It? | Data Stories Lab</title>
+<meta name="description" content="Group profit nearly tripled; owners kept a sliver">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;--gold:#B8860B;--red:#C0392B;--sand:#D8C9A3;--green:#2E7D5B;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .lead p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:3px;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;color:var(--accent);margin:4px 0 0;}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .chartbox{margin:18px 0 6px;border:1px solid var(--hair);border-radius:8px;padding:14px 14px 8px;background:#fbfcfd;}
+  .chartbox .ct{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.92rem;color:var(--ink);margin-bottom:2px;}
+  .chartbox .cs{font-family:Arial,Helvetica,sans-serif;font-size:.74rem;color:var(--mute);margin-bottom:10px;}
+  .cwrap{position:relative;height:300px;}
+  .csrc{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;color:#9aa3ad;margin-top:8px;}
+  .body p{font-size:1.06rem;margin-top:.85rem;}
+  ul{margin:.6rem 0 .2rem 1.2rem;} li{font-size:1.04rem;margin-top:.5rem;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;color:#fff;text-align:center;}
+
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  .hero{margin:0 0 4px;line-height:0;} .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay, body.embed .switch{display:none;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a> <span class="sep">/</span> <a href="/data-analyst-portfolio/financial-analysis.html">Financial Statement Analysis</a> <span class="sep">/</span> Whose Profit Is It?</div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/drb-hicom-pl-analysis/cover%20image.jpeg" alt="Whose Profit Is It?">
+    <figcaption><span>Group profit nearly tripled. Owners kept under a third.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Earnings analysis</div>
+  <h1 class="title">Whose Profit Is It?</h1>
+  <p class="standfirst">Group profit nearly tripled; owners kept a sliver</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>1Q FY2026 &middot; RM&rsquo;000</span></div>
+
+    <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/drb-hicom-pl-analysis-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead">
+    <p>DRB-HICOM's group profit more than doubled in the first quarter of 2026, helped by a surge in Proton sales and costs that grew slower than revenue. It looks like a clean recovery. But two things sit under the headline: how the profit was made, and who actually receives it. This report lifts the lid on a sprawling conglomerate to show both, and leaves the why to those who run the business.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs">
+    <div class="fig"><div class="n">+15.7%</div><div class="l">revenue growth</div></div>
+    <div class="fig"><div class="n">+94.7%</div><div class="l">operating profit</div></div>
+    <div class="fig"><div class="n">+141%</div><div class="l">group net profit</div></div>
+    <div class="fig"><div class="n">29%</div><div class="l">of net profit to owners</div></div>
+  </div>
+
+  <div class="pull"><p>&ldquo;The group's profit nearly tripled. Of every three ringgit of it, the parent's own shareholders kept barely one.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+
+  <article class="finding"><h3 class="fq">What we found</h3><div class="ftext">
+    <p>DRB-HICOM is one of Malaysia's largest conglomerates, spanning Proton and the wider automotive business, Pos Malaysia, Bank Muamalat, aerospace, vehicle services and property. In the quarter to 31 March 2026 group revenue grew 15.7%, to RM4.76 billion, and net profit grew far faster, up 141% to RM153.7 million.</p>
+    <p>Two threads run under that. The profit grew faster than sales because costs grew slower than revenue, a recovery driven mainly by Proton. And because so much of the group is owned jointly with others, most of that profit does not belong to the parent's own shareholders. The lid lifts on both below.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">1. Profit grew far faster than sales</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Operating leverage, working in the group's favour</div><div class="cs">Year-on-year change, by line</div><div class="cwrap"><canvas id="c1"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+    <p>Revenue rose 15.7%, but profit from operations rose 94.7% and net profit 141%. When the bottom line rises much faster than the top, the cause is the cost base: it grew more slowly than sales. The group's combined cost of sales and operating expenses grew 13.6%, two points below the revenue rise, so more of each extra ringgit of sales dropped through to profit.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">2. A wider margin on each ringgit</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">The operating margin widened</div><div class="cs">Margin at each level, this quarter vs a year ago</div><div class="cwrap"><canvas id="c2"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report. The group reports cost of sales and operating expenses as one line, so there is no separate gross margin.</div></div>
+    <p>The operating margin widened from 3.3% to 5.6%, and the net margin from 1.5% to 3.2%, both roughly doubling. The group reports its cost of sales and running costs as a single line, so there is no gross margin to read here; the story is simply that the whole cost base grew slower than sales, lifting the margin at every level below it.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">3. Where the profit came from</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Cars and the bank carry the group</div><div class="cs">Pre-tax profit or loss by segment (RM millions)</div><div class="cwrap"><canvas id="c3"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report, segmental note.</div></div>
+    <p>Split by business, the result is uneven. Mobility, three-quarters of group revenue and home to Proton (whose unit sales rose about 40% in the quarter), contributed RM180M of segment profit. Banking added RM79M. Against that, Postal lost RM10M and Services RM3M, both still working through their own difficulties. The group's profit is really the car and banking businesses carrying the rest.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">4. From a ringgit of sales to net profit</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Revenue to net profit bridge</div><div class="cs">How RM4.76bn of revenue becomes RM153.7M of net profit (RM&rsquo;000)</div><div class="cwrap"><canvas id="c4"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+    <p>The bridge shows how thin the overall margin is, even after the improvement: the combined cost base takes almost all of the RM4.76 billion of revenue, and finance costs take another large slice, before the contributions from joint ventures and associates nudge the result back up to RM192M of pre-tax profit and RM154M after tax.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">5. Whose profit is it?</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">Most of the profit belongs to others</div><div class="cs">Group net profit split by who receives it (RM&rsquo;000)</div><div class="cwrap" style="height:280px"><canvas id="c5"></canvas></div><div class="csrc">Source: DRB-HICOM Berhad, 1Q FY2026 interim report.</div></div>
+    <p>This is the part the headline hides. Of the RM153.7M group net profit, the parent's own shareholders received only RM45.0M, about 29%. Non-controlling interests, the outside shareholders of part-owned subsidiaries such as the bank and the postal business, took RM99.6M, about 65%, and holders of a perpetual sukuk took RM9.2M. So the per-share earnings the owners see, 2.33 sen, rose strongly too, but off a much smaller base than the group figure suggests. When a group owns big businesses jointly, the headline profit and the owners' profit are two different numbers.</p>
+  </div></article>
+
+  <div class="skicker">What the numbers reveal</div>
+  <div class="body">
+    <p>Put together, the quarter tells one clear factual story. Group profit nearly tripled because revenue grew while the cost base grew more slowly, an improvement led by Proton and supported by the bank, even as the postal and services arms kept losing money. But most of that profit belongs to the minority shareholders of the part-owned businesses, so the parent's own shareholders kept under a third of it. The recovery is real; the share of it that reaches the top is smaller than the headline implies.</p>
+    <p>One more thing keeps the quarter in context. The immediately preceding quarter showed a much larger pre-tax profit, but that figure was lifted by a one-off accounting gain of about RM334M on an aerospace acquisition; stripping it out, this quarter is an underlying improvement, not a fall. Whether the Proton-led momentum holds, and whether the loss-making arms turn, are the questions the numbers here cannot settle.</p>
+  </div>
+
+  <div class="skicker">Questions the numbers raise</div>
+  <div class="body"><ul>
+    <li>Is the Proton sales surge (units up about 40%, led by electric models) a durable shift, or a strong quarter that normalises?</li>
+    <li>Will the Postal and Services arms, still loss-making, turn under their transformation plans, or keep diluting the group result?</li>
+    <li>Given how much profit flows to minority shareholders, what reaches the parent's owners as the part-owned businesses grow?</li>
+  </ul></div>
+
+  <div class="skicker">Method &amp; data</div>
+  <div class="body"><p>Built from DRB-HICOM Berhad's unaudited interim report for the first quarter ended 31 March 2026, read against the same quarter a year earlier. From the profit and loss statement it computes vertical analysis (each line as a share of revenue), horizontal analysis (the year-on-year change), the margin ladder, the revenue-to-net-profit bridge, and the split by segment and by who receives the profit. The group reports cost of sales and operating expenses as a single line, so there is no separate gross margin. The group also consolidates a bank (Bank Muamalat), so its balance sheet and cash flows mix industrial and banking activity. Figures in RM'000.</p></div>
+</div>
+
+<footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  (function(){
+    const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+    const open=()=>{drawer.classList.add('open');overlay.classList.add('open');};
+    const close=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+    document.getElementById('hamburger').addEventListener('click',open);
+    document.getElementById('drawerClose').addEventListener('click',close);
+    overlay.addEventListener('click',close);
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+    function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+    window.addEventListener('load',postH);window.addEventListener('resize',postH);setTimeout(postH,600);setTimeout(postH,1600);
+  })();
+Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
+Chart.defaults.font.size = 12;
+const NAVY='#002D55', ACC='#004B87', GOLD='#B8860B', SAND='#D8C9A3', RED='#C0392B', GREEN='#2E7D5B', BROWN='#7A5B33';
+const pct=v=>v+'%';
+new Chart(c1,{type:'bar',data:{labels:['Revenue','Operating profit','Profit before tax','Net profit'],datasets:[{label:'YoY change %',data:[15.7,94.7,107.7,141.1],backgroundColor:[ACC,GOLD,GOLD,NAVY],borderRadius:6}]},options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:pct},title:{display:true,text:'Year-on-year change'}}},maintainAspectRatio:false}});
+new Chart(c2,{type:'bar',data:{labels:['Operating margin','Net margin'],datasets:[{label:'1Q FY2025',data:[3.3,1.5],backgroundColor:SAND,borderRadius:5},{label:'1Q FY2026',data:[5.6,3.2],backgroundColor:NAVY,borderRadius:5}]},options:{scales:{y:{ticks:{callback:pct}}},maintainAspectRatio:false}});
+new Chart(c3,{type:'bar',data:{labels:['Mobility','Banking','Properties','Inv. Holding','Services','Postal'],datasets:[{label:'Segment pre-tax profit/(loss)',data:[180.3,79.2,7.9,0.7,-2.8,-10.0],backgroundColor:['#2E7D5B','#2E7D5B','#2E7D5B','#2E7D5B','#C0392B','#C0392B'],borderRadius:5}]},options:{plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'RM millions'}}},maintainAspectRatio:false}});
+const steps=[{l:'Revenue',v:4761414,t:'total'},{l:'Cost of sales & opex',v:-4594418,t:'dec'},{l:'Other income',v:124734,t:'inc'},{l:'Other expenses',v:-26822,t:'dec'},{l:'Finance costs',v:-131210,t:'dec'},{l:'JV & associates',v:58702,t:'inc'},{l:'Tax',v:-38666,t:'dec'},{l:'Net profit',v:153734,t:'total'}];
+let run=0; const bars=[], cols=[];
+steps.forEach(s=>{ if(s.t==='total'){bars.push([0,s.v]); cols.push(NAVY); run=s.v;} else {const a=run; run+=s.v; bars.push([Math.min(a,run),Math.max(a,run)]); cols.push(s.v<0?RED:GREEN);} });
+new Chart(c4,{type:'bar',data:{labels:steps.map(s=>s.l),datasets:[{data:bars,backgroundColor:cols,borderRadius:3}]},options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>(v/1000000).toFixed(1)+'bn'}},x:{ticks:{maxRotation:60,minRotation:45}}},maintainAspectRatio:false}});
+new Chart(c5,{type:'doughnut',data:{labels:['Owners of the Company (29%)','Non-controlling interests (65%)','Perpetual Sukuk (6%)'],datasets:[{data:[45000,99580,9154],backgroundColor:[NAVY,GOLD,SAND]}]},options:{plugins:{legend:{position:'bottom'}},maintainAspectRatio:false}});
+</script>
+</body></html>

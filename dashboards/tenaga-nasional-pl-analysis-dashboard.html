@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pass-Through, Dashboard | Data Stories Lab</title>
+<meta name="description" content="Tenaga Nasional 1Q FY2026 P&L, live: revenue up 6.6% but profit flat, as a finance-income drop offset operating growth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#002D55; --gray:#555; --mute:#6b7280; --hair:#C9D6E5; --accent:#004B87; --navy:#002D55; --paper:#fff; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* House chrome */
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  /* Title block (shared crown) */
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  /* Instrument switcher */
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  /* Dashboard tool */
+  .tool{ padding:22px 0 8px; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.6rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .kpi .s{ font-size:.66rem; font-weight:700; margin-top:5px; }
+  .kpi .s.flat{ color:var(--mute); }
+  .pos{ color:#2E7D6F; } .neg{ color:#B5503C; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:300px; margin-top:14px; }
+  .ccard .cwrap.lg{ height:360px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+
+  table.pl{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  table.pl th{ text-align:right; color:#fff; background:#222; padding:9px 12px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  table.pl th:first-child{ text-align:left; }
+  table.pl td{ padding:8px 12px; border-bottom:1px solid #eef1f4; text-align:right; }
+  table.pl td:first-child{ text-align:left; }
+  table.pl tr.subtotal{ background:#eef3f8; font-weight:700; color:var(--navy); }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .grid{ grid-template-columns:1fr; } }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>Financial Analysis</span>
+    <span class="sep">/</span><span>The Pass-Through</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/tenaga-nasional-pl-analysis/cover%20image.jpeg" alt="The Pass-Through">
+        <figcaption><span>Revenue rose RM1.1 billion; profit before tax rose RM11 million.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Earnings analysis</span>
+      <h1 class="title">The Pass-Through</h1>
+      <p class="standfirst">See why a utility's revenue growth is not profit growth</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>1Q FY2026 &middot; RM million</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/tenaga-nasional-pl-analysis.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Overview</button>
+        <button class="pbtn" data-p="2">Statement</button>
+        <button class="pbtn" data-p="3">Margins</button>
+        <button class="pbtn" data-p="4">Revenue Mix</button>
+      </div>
+
+      <!-- P1 Overview -->
+      <div class="page active" id="p1">
+        <div class="kpis">
+          <div class="kpi"><div class="v">RM17.10bn</div><div class="l">Revenue (1Q FY26)</div><div class="s pos">+6.6% YoY</div></div>
+          <div class="kpi"><div class="v">RM2.45bn</div><div class="l">Operating profit</div><div class="s pos">+5.6% YoY</div></div>
+          <div class="kpi"><div class="v">RM1.09bn</div><div class="l">Profit after tax</div><div class="s pos">+4.4% YoY</div></div>
+          <div class="kpi"><div class="v">14.3%</div><div class="l">Operating margin</div><div class="s flat">broadly flat (&minus;0.2 ppt)</div></div>
+          <div class="kpi"><div class="v">RM862M</div><div class="l">Fuel returned to customers</div><div class="s flat">5&times; last year&rsquo;s RM175M</div></div>
+          <div class="kpi"><div class="v neg">&minus;82%</div><div class="l">Finance income</div><div class="s neg">held profit flat</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Why profit stayed flat while revenue rose 6.6%</div><div class="cs">What changed between 1Q FY25 (RM1.55bn) and 1Q FY26 (RM1.57bn) pre-tax profit, by driver (RM million). Operating profit grew with demand, but a sharp drop in finance income almost exactly offset it</div><div class="cwrap lg"><canvas id="driverChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">A growing slice of revenue is fuel returned to customers</div><div class="cs">Headline revenue split into what the utility keeps and the fuel over-recovery passed back under the regulated mechanism (RM million)</div><div class="cwrap lg"><canvas id="passChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report. The automatic fuel adjustment over-recovery is returned to customers; it rose as fuel prices fell.</div></div>
+        </div>
+      </div>
+
+      <!-- P2 Statement -->
+      <div class="page" id="p2">
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Income statement</div><div class="cs">1Q FY2025 vs 1Q FY2026. RM million, YoY % and % of revenue. Subtotals in bold; costs as reported</div>
+            <div style="overflow-x:auto"><table class="pl" id="plTable"><thead><tr><th>Line item</th><th>1Q FY25</th><th>1Q FY26</th><th>YoY %</th><th>% of Rev (FY26)</th></tr></thead><tbody id="plTableBody"></tbody></table></div>
+            <div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report. Operating expenses are reported as one line, so there is no separate gross profit; the fuel over-recovery is a regulated pass-through returned to customers.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue to net profit bridge</div><div class="cs">How RM17.1bn of revenue becomes RM1.09bn of net profit. Finance costs are the largest deduction below operating profit</div><div class="cwrap lg"><canvas id="waterfallChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report. Smaller income and cost lines are grouped.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Cost &amp; profit structure</div><div class="cs">Operating costs eased as a share of revenue, yet the margins held steady</div><div class="cwrap lg"><canvas id="structureChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report.</div></div>
+        </div>
+      </div>
+
+      <!-- P3 Margins -->
+      <div class="page" id="p3">
+        <div class="kpis">
+          <div class="kpi"><div class="v">14.3%</div><div class="l">Operating margin</div><div class="s flat">&minus;0.2 ppt vs 14.5%</div></div>
+          <div class="kpi"><div class="v">6.4%</div><div class="l">Net margin</div><div class="s flat">&minus;0.1 ppt vs 6.5%</div></div>
+          <div class="kpi"><div class="v">~40%</div><div class="l">Interest as share of operating profit</div><div class="s flat">the debt-funded grid</div></div>
+        </div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Margins FY25 vs FY26</div><div class="cs">The signature of a regulated business: the margin barely moves</div><div class="cwrap"><canvas id="marginsChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report. No separate gross margin is reported.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Margin change since last year</div><div class="cs">Operating and net margin held within a whisker (ppt)</div><div class="cwrap"><canvas id="marginChangeChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">The flat margin hides two offsetting moves</div><div class="cs">Contribution to the change in operating margin (ppt): operating costs eased, but more fuel was returned to customers</div><div class="cwrap"><canvas id="marginBridgeChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 interim report. Each line&rsquo;s change as a share of revenue, signed for its effect on the operating margin.</div></div>
+        </div>
+      </div>
+
+      <!-- P4 Revenue Mix -->
+      <div class="page" id="p4">
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Revenue by type</div><div class="cs">About 96% of revenue is electricity: in practice a single business</div><div class="cwrap lg"><canvas id="mixChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 revenue note.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">The small lines grew fastest</div><div class="cs">YoY growth by revenue type. The minor lines rose quickly off small bases; electricity, the bulk, grew with demand</div><div class="cwrap lg"><canvas id="typeGrowthChart"></canvas></div><div class="csrc">Source: Tenaga Nasional, 1Q FY2026 revenue note.</div></div>
+        </div>
+        <div class="grid" style="margin-top:18px">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Revenue by type (1Q FY26)</div><div class="cs">Current and prior-year revenue, growth and share by type (RM million)</div>
+            <div style="overflow-x:auto"><table class="pl" id="typeTable"><thead><tr><th>Revenue type</th><th>1Q FY25</th><th>1Q FY26</th><th>YoY %</th><th>Share</th></tr></thead><tbody id="typeTableBody"></tbody></table></div>
+            <div class="csrc">Source: Tenaga Nasional, 1Q FY2026 revenue note.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  // embed toggle + drawer + iframe height
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  // ===== DATA (Tenaga Nasional, 1Q FY2026 vs 1Q FY2025, RM MILLION) =====
+  // Costs stored negative for the bridge; the table reads magnitudes so cost change shows as reported.
+  const pl = [
+    {item:'Revenue', sub:false, fy25:16038.7, fy26:17103.7},
+    {item:'Fuel over-recovery (returned to customers)', sub:false, fy25:-175.2, fy26:-861.7},
+    {item:'Operating Expenses', sub:false, fy25:-13704.5, fy26:-13920.6},
+    {item:'Impairment of Financial Instruments', sub:false, fy25:-18.6, fy26:-56.7},
+    {item:'Other Operating Income', sub:false, fy25:181.3, fy26:187.4},
+    {item:'Operating Profit', sub:true, fy25:2321.7, fy26:2452.1},
+    {item:'Foreign Exchange Gains', sub:false, fy25:38.9, fy26:31.1},
+    {item:'Share of JV and Associates', sub:false, fy25:19.6, fy26:27.2},
+    {item:'Finance Income', sub:false, fy25:170.4, fy26:31.4},
+    {item:'Finance Costs', sub:false, fy25:-969.9, fy26:-980.6},
+    {item:'Fair Value Changes', sub:false, fy25:-26.5, fy26:3.8},
+    {item:'Profit Before Tax', sub:true, fy25:1554.2, fy26:1565.0},
+    {item:'Taxation and Zakat', sub:false, fy25:-513.4, fy26:-478.1},
+    {item:'Profit After Tax', sub:true, fy25:1040.8, fy26:1086.9}
+  ];
+  const REV26 = 17103.7;
+  // Pass-through: revenue kept vs fuel over-recovery returned (RM million)
+  const pass = { labels:['1Q FY2025','1Q FY2026'], kept:[15863.5,16242.0], returned:[175.2,861.7] };
+  // Revenue by type (RM million)
+  const types = [
+    {name:'Electricity', fy25:15603.1, fy26:16464.2},
+    {name:'Goods & services', fy25:297.3, fy26:361.1},
+    {name:"Customers' contributions", fy25:74.5, fy26:150.1},
+    {name:'Insurance', fy25:34.4, fy26:97.5},
+    {name:'Construction contracts', fy25:29.4, fy26:30.8}
+  ];
+
+  // Scheme E chart palette (blue family + semantic green/red for up/down)
+  const COL = { dark:'#001F3F', gold:'#004B87', brown:'#6A9BD1', green:'#2E7D6F', red:'#B5503C', sand:'#AEC2D6' };
+  const MARGIN_LINE = '#B8860B';
+  const SEGCOL = ['#002D55','#B8860B','#2E7D6F','#B5503C','#6A9BD1'];
+  const GRID = '#E8ECF1';
+  const charts = {};
+  function mkChart(id, config){ if (charts[id]) charts[id].destroy(); const c=document.getElementById(id); if(c) charts[id]=new Chart(c, config); }
+  // Values are in RM million
+  function fmtRM(v){ const a=Math.abs(v); let s; if(a>=1000) s='RM'+(a/1000).toFixed(2)+'bn'; else s='RM'+a.toFixed(0)+'M'; return (v<0?'-':'')+s; }
+  function fmtK(v){ return v.toLocaleString(); }
+
+  function renderPage1(){
+    // Profit-driver bridge: decompose the YoY change in PBT into ranked causes (reconciles to 1565.0)
+    const dsteps=[ {l:'PBT 1Q FY25',v:1554.2,type:'total'},{l:'Operating profit growth',v:130.4,type:'inc'},{l:'Finance income drop',v:-139.0,type:'dec'},{l:'Fair value swing',v:30.3,type:'inc'},{l:'Finance costs',v:-10.7,type:'dec'},{l:'FX & associates',v:-0.2,type:'dec'},{l:'PBT 1Q FY26',v:1565.0,type:'total'} ];
+    let drun=0; const dbars=[], dcol=[];
+    dsteps.forEach(s=>{ if(s.type==='total'){ dbars.push([0,s.v]); dcol.push(COL.dark); drun=s.v; } else { const a=drun,b=drun+s.v; dbars.push([Math.min(a,b),Math.max(a,b)]); dcol.push(s.v>=0?COL.green:COL.red); drun=b; } });
+    mkChart('driverChart', { type:'bar', data:{ labels:dsteps.map(s=>s.l), datasets:[{ data:dbars, backgroundColor:dcol, borderRadius:4 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=dsteps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+        scales:{ y:{beginAtZero:false, grid:{color:GRID}, title:{display:true,text:'Pre-tax profit (RM million)'}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{maxRotation:30, minRotation:0, font:{size:10}}} } } });
+    mkChart('passChart', { type:'bar',
+      data:{ labels:pass.labels, datasets:[ {label:'Revenue kept', data:pass.kept, backgroundColor:COL.dark, borderRadius:5}, {label:'Fuel returned to customers', data:pass.returned, backgroundColor:MARGIN_LINE, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${fmtRM(ctx.parsed.y)}`}} },
+        scales:{ x:{stacked:true, grid:{display:false}}, y:{stacked:true, beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'Revenue (RM million)'}, ticks:{callback:v=>fmtRM(v)}} } } });
+  }
+
+  function renderPage2(){
+    document.getElementById('plTableBody').innerHTML = pl.map(r=>{
+      const yoy=(Math.abs(r.fy26)-Math.abs(r.fy25))/Math.abs(r.fy25)*100, av=Math.abs(r.fy26)/REV26*100;
+      const yoyTxt=(yoy>=0?'+':'')+yoy.toFixed(1)+'%', yoyCls=yoy>=0?'pos':'neg';
+      return `<tr class="${r.sub?'subtotal':''}"><td>${r.item}</td><td>${fmtK(r.fy25)}</td><td>${fmtK(r.fy26)}</td><td class="${yoyCls}">${yoyTxt}</td><td>${av.toFixed(1)}%</td></tr>`;
+    }).join('');
+    const steps=[ {l:'Revenue',v:17103.7,type:'total'},{l:'Fuel pass-through',v:-861.7,type:'dec'},{l:'Operating expenses',v:-13920.6,type:'dec'},{l:'Other operating',v:130.7,type:'inc'},{l:'Assoc. & other income',v:62.1,type:'inc'},{l:'Net finance cost',v:-949.2,type:'dec'},{l:'Tax & zakat',v:-478.1,type:'dec'},{l:'Net profit',v:1086.9,type:'total'} ];
+    let run=0; const bars=[], colors=[];
+    steps.forEach(s=>{ if(s.type==='total'){ bars.push([0,s.v]); colors.push(COL.dark); run=s.v; } else { const start=run,end=run+s.v; bars.push([Math.min(start,end),Math.max(start,end)]); colors.push(s.v>=0?COL.green:COL.red); run=end; } });
+    mkChart('waterfallChart', { type:'bar', data:{ labels:steps.map(s=>s.l), datasets:[{ label:'RM million', data:bars, backgroundColor:colors, borderRadius:4 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{ label:ctx=>{ const s=steps[ctx.dataIndex]; return (s.type==='total'? s.l+': '+fmtRM(s.v) : (s.v>=0?'+':'')+fmtRM(s.v)); } }} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>fmtRM(v)}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+    mkChart('structureChart', { type:'bar',
+      data:{ labels:['Operating expenses','Operating profit','Profit before tax','Profit after tax'], datasets:[ {label:'1Q FY25', data:[85.4,14.5,9.7,6.5], backgroundColor:COL.sand, borderRadius:5}, {label:'1Q FY26', data:[81.4,14.3,9.2,6.4], backgroundColor:COL.gold, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}% of revenue`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'% of Revenue'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+  }
+
+  function renderPage3(){
+    mkChart('marginsChart', { type:'bar',
+      data:{ labels:['Operating Margin','Net Margin'], datasets:[ {label:'1Q FY25', data:[14.5,6.5], backgroundColor:COL.sand, borderRadius:5}, {label:'1Q FY26', data:[14.3,6.4], backgroundColor:COL.dark, borderRadius:5} ] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'top'}, tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}%`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}} } } });
+    const mchg=[ {l:'Operating margin', v:+(14.3-14.5).toFixed(1)}, {l:'Net margin', v:+(6.4-6.5).toFixed(1)} ];
+    mkChart('marginChangeChart', { type:'bar',
+      data:{ labels:mchg.map(m=>m.l), datasets:[{ label:'Change (ppt)', data:mchg.map(m=>m.v), backgroundColor:mchg.map(m=>m.v>=0?COL.green:COL.red), borderRadius:5 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y>=0?'+':''}${ctx.parsed.y} ppt`}} },
+        scales:{ y:{grid:{color:GRID}, title:{display:true,text:'Change since 1Q FY25 (ppt)'}, ticks:{callback:v=>(v>0?'+':'')+v}}, x:{grid:{display:false}} } } });
+    // What moved the operating margin (ppt): a flat margin hiding offsetting moves
+    const mb=[ {l:'Operating costs eased', v:4.1}, {l:'More fuel returned', v:-3.9}, {l:'Impairment', v:-0.2}, {l:'Other', v:-0.2} ];
+    mkChart('marginBridgeChart', { type:'bar',
+      data:{ labels:mb.map(m=>m.l), datasets:[{ label:'Contribution to operating margin (ppt)', data:mb.map(m=>m.v), backgroundColor:mb.map(m=>m.v>=0?COL.green:COL.red), borderRadius:5 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y>=0?'+':''}${ctx.parsed.y} ppt`}} },
+        scales:{ y:{grid:{color:GRID}, title:{display:true,text:'Effect on operating margin (ppt)'}, ticks:{callback:v=>(v>0?'+':'')+v}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+  }
+
+  function renderPage4(){
+    const tot=types.reduce((a,t)=>a+t.fy26,0);
+    mkChart('mixChart', { type:'doughnut',
+      data:{ labels:types.map(t=>t.name), datasets:[{ data:types.map(t=>t.fy26), backgroundColor:SEGCOL, borderWidth:2, borderColor:'#fff' }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'right'}, tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${fmtRM(ctx.parsed)} (${(ctx.parsed/tot*100).toFixed(1)}%)`}} } } });
+    const g=[...types].map(t=>({name:t.name, g:(t.fy26-t.fy25)/t.fy25*100})).sort((a,b)=>b.g-a.g);
+    mkChart('typeGrowthChart', { type:'bar',
+      data:{ labels:g.map(x=>x.name), datasets:[{ label:'YoY growth %', data:g.map(x=>+x.g.toFixed(1)), backgroundColor:COL.dark, borderRadius:5 }] },
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>`+${ctx.parsed.y}% YoY`}} },
+        scales:{ y:{beginAtZero:true, grid:{color:GRID}, title:{display:true,text:'YoY growth %'}, ticks:{callback:v=>v+'%'}}, x:{grid:{display:false}, ticks:{font:{size:10}}} } } });
+    const tot2=types.reduce((a,t)=>a+t.fy26,0);
+    document.getElementById('typeTableBody').innerHTML = types.map(t=>{
+      const yoy=(t.fy26-t.fy25)/t.fy25*100, share=t.fy26/tot2*100;
+      return `<tr><td>${t.name}</td><td>${fmtK(t.fy25)}</td><td>${fmtK(t.fy26)}</td><td class="pos">+${yoy.toFixed(1)}%</td><td>${share.toFixed(1)}%</td></tr>`; }).join('');
+  }
+
+  const rendered={};
+  function render(n){ if(!rendered[n]){ rendered[n]=true; ({1:renderPage1,2:renderPage2,3:renderPage3,4:renderPage4})[n](); } }
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    render(+b.dataset.p); setTimeout(postH,60);
+  });
+  function start(){ render(1); postH(); }
+  if (window.Chart) start(); else window.addEventListener('load', ()=>{ if(window.Chart) start(); else setTimeout(start,200); });
+  window.addEventListener('load', ()=>setTimeout(()=>{ if(window.Chart && !charts.driverChart) start(); postH(); }, 250));
+</script>
+</body>
+</html>

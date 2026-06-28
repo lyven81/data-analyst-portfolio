@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good and Fairly Priced | Data Stories Lab</title>
+<meta name="description" content="Only one of three giants is both">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;--gold:#B8860B;--red:#C0392B;--sand:#D8C9A3;--green:#2E7D5B;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.65;}
+  .wrap{max-width:780px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.7rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.3rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .lead p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.3rem;font-weight:800;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.1rem;color:var(--navy);white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:3px;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.45rem;line-height:1.25;color:var(--navy);}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.3rem;line-height:1.16;color:var(--accent);margin:4px 0 0;}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  table.cmp{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9rem;}
+  table.cmp th,table.cmp td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--hair);}
+  table.cmp thead th{font-family:Arial,sans-serif;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--navy);}
+  table.cmp td.c{text-align:center;white-space:nowrap;}
+  table.cmp tbody tr:nth-child(even){background:#fbfcfe;}
+  .chartbox{margin:18px 0 6px;border:1px solid var(--hair);border-radius:8px;padding:14px 14px 8px;background:#fbfcfd;}
+  .chartbox .ct{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.92rem;color:var(--ink);margin-bottom:2px;}
+  .chartbox .cs{font-family:Arial,Helvetica,sans-serif;font-size:.74rem;color:var(--mute);margin-bottom:10px;}
+  .cwrap{position:relative;height:300px;}
+  .csrc{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;color:#9aa3ad;margin-top:8px;}
+  .body p{font-size:1.06rem;margin-top:.85rem;}
+  ul{margin:.6rem 0 .2rem 1.2rem;} li{font-size:1.04rem;margin-top:.5rem;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;color:#fff;text-align:center;}
+
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  .hero{margin:0 0 4px;line-height:0;} .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay, body.embed .switch{display:none;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a> <span class="sep">/</span> <a href="/data-analyst-portfolio/financial-analysis.html">Financial Statement Analysis</a> <span class="sep">/</span> Good and Fairly Priced</div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/good-and-fairly-priced/cover%20image.jpeg" alt="Good and Fairly Priced">
+    <figcaption><span>The best business is the dearest; the cheapest, the weakest.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Comparative screen &middot; Batch 2</div>
+  <h1 class="title">Good and Fairly Priced</h1>
+  <p class="standfirst">Only one of three giants is both</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Comparative analysis</span><span>1Q FY2026 &middot; RM</span></div>
+
+    <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/good-and-fairly-priced-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead">
+    <p>Three of Bursa Malaysia's largest companies, read on the same seven-point yardstick: DRB-HICOM, a sprawling conglomerate; Press Metal, the region's largest aluminium smelter; and Tenaga Nasional, the national electricity utility. They span the full range of the trade every investor makes, between how good a business is and how much its shares cost. One is the cheapest and the weakest, one is the best and the dearest, and one sits in the middle on both. This report compares what the numbers say about each, and leaves the why to those who run the businesses.</p>
+  </div>
+
+  <div class="skicker">The spread</div>
+  <div class="figs">
+    <div class="fig"><div class="n">3 to 5</div><div class="l">business-quality scores (of 5)</div></div>
+    <div class="fig"><div class="n">0.26x to 6.8x</div><div class="l">price-to-book range</div></div>
+    <div class="fig"><div class="n">2% to 27%</div><div class="l">return-on-equity range</div></div>
+    <div class="fig"><div class="n">11x to 25x</div><div class="l">earnings multiple range</div></div>
+  </div>
+
+  <div class="pull"><p>&ldquo;The best business costs nearly seven times book; the cheapest earns barely 2% on equity. Only one is both good and fairly priced.&rdquo;</p></div>
+
+  <div class="skicker">How they compare</div>
+  <table class="cmp">
+    <thead><tr><th>Measure</th><th>DRB-HICOM</th><th>Press Metal</th><th>Tenaga Nasional</th></tr></thead>
+    <tbody>
+      <tr><td>Business</td><td>Conglomerate</td><td>Aluminium smelter</td><td>Electric utility</td></tr>
+      <tr><td>Price</td><td class="c">RM1.03</td><td class="c">RM7.70</td><td class="c">RM14.34</td></tr>
+      <tr><td>Revenue change</td><td class="c">+15.7%</td><td class="c">+5.2%</td><td class="c">+6.6%</td></tr>
+      <tr><td>Net profit change</td><td class="c">+141%</td><td class="c">+41%</td><td class="c">+4.4%</td></tr>
+      <tr><td>Return on equity</td><td class="c">~2%*</td><td class="c">~27%</td><td class="c">~9%</td></tr>
+      <tr><td>Earnings multiple (PE)</td><td class="c">~11x</td><td class="c">~25x</td><td class="c">~19x</td></tr>
+      <tr><td>Price to book</td><td class="c">~0.26x</td><td class="c">~6.8x</td><td class="c">~1.7x</td></tr>
+      <tr><td>Moat</td><td class="c">national assets</td><td class="c">low-cost smelter</td><td class="c">regulated monopoly</td></tr>
+      <tr><td>Quality score</td><td class="c">3 / 5</td><td class="c">5 / 5</td><td class="c">4 / 5</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.86rem;color:var(--mute)">*DRB-HICOM's return is measured at the owner level; most of the group's profit goes to minority shareholders of its part-owned subsidiaries.</p>
+
+  <div class="skicker">What the data shows</div>
+
+  <article class="finding"><h3 class="fq">1. Quality and price, neatly inverted</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">The better the business, the higher the price</div><div class="cs">Business-quality score (out of 5) and price-to-book</div><div class="cwrap"><canvas id="c1"></canvas></div><div class="csrc">Source: company 1Q FY2026 interim reports; quality score on a seven-point yardstick.</div></div>
+    <p>The three line up almost perfectly along the quality-price trade. Press Metal scores a clean five of five, the strongest business of the set, and the market charges for it: nearly seven times book. DRB-HICOM scores three, the weakest, and trades at about a quarter of book, the deepest discount. Tenaga sits between them on both, four of five at about 1.7 times book. You can buy the best business or the cheapest one, but not the same one.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">2. The returns tell the same story from a different angle</h3><div class="ftext">
+    <div class="chartbox"><div class="ct">How hard each business works its equity</div><div class="cs">Return on equity, and net-profit growth this quarter</div><div class="cwrap"><canvas id="c2"></canvas></div><div class="csrc">Source: company 1Q FY2026 interim reports.</div></div>
+    <p>Press Metal earns about 27% on equity, a genuinely high return that explains its premium. Tenaga earns a steady ~9%, the modest but dependable return of a regulated utility. DRB-HICOM earns only about 2% at the owner level, because so much of its profit flows to the minority shareholders of its part-owned banking and postal businesses, which is why it trades so cheaply. High profit growth this quarter (DRB's +141%) is not the same as a high return on the capital employed.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">3. Three different propositions</h3><div class="ftext">
+    <p>Each giant offers a distinct shape. DRB-HICOM is a deep-value, sum-of-parts bet: cheap on assets, with real national franchises (Proton, a bank, the postal service), but low returns and a complex, heavily minority-owned structure. Press Metal is a high-quality grower: a low-cost smelter compounding at a high return, but its earnings are commodity-cyclical and its price already assumes the quality continues. Tenaga is a defensive income holding: a regulated monopoly with predictable earnings and a ~3.5% yield, fairly rather than cheaply priced.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">4. Only one is both good and fairly priced</h3><div class="ftext">
+    <p>Read across the scorecard, Tenaga is the one company here that clears the bar on both halves of the trade: a strong, wide-moat business and a fair, not stretched, valuation. Press Metal is the higher-quality business, but the price already reflects it; DRB-HICOM is the cheaper share, but the business and the owner-level returns are weaker. The exercise is a reminder that the strongest screen result is not the best business or the cheapest share on its own, but the place where good quality and a sensible price meet.</p>
+  </div></article>
+
+  <div class="skicker">What the numbers reveal</div>
+  <div class="body">
+    <p>Put side by side, the three map the whole spectrum of the quality-price trade. Press Metal is the best business and the dearest; DRB-HICOM is the cheapest and the weakest, its low price the market's verdict on low owner-level returns and complexity; and Tenaga sits in the middle on quality and price, the only one that is both a strong business and a reasonable valuation at once. Each is large, durable and well-run in its own way; they differ in what an owner pays for that, and in what return the equity earns.</p>
+    <p>The discipline this comparison rewards is separating the two questions a price contains: how good is the business, and how much am I paying for it. Press Metal answers the first question best and the second worst; DRB-HICOM the reverse; Tenaga answers both adequately. Whether to pay up for the best, wait for the dearest to cheapen, or own the steady middle is the part the numbers here cannot settle.</p>
+  </div>
+
+  <div class="skicker">Method &amp; data</div>
+  <div class="body"><p>Built from each company's 1Q FY2026 interim report, read against the same quarter a year earlier, and screened on a seven-point yardstick covering profitability, financial health, valuation, cash flow and dividend safety, business moat, management, and size. Prices are as supplied: DRB-HICOM RM1.03, Press Metal RM7.70, Tenaga RM14.34. Two of the three carry features that the standard ratios read with care: DRB-HICOM consolidates a bank and is heavily minority-owned, and Tenaga is a regulated utility whose revenue includes a fuel pass-through. Figures in RM.</p></div>
+</div>
+
+<footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  (function(){
+    const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+    const open=()=>{drawer.classList.add('open');overlay.classList.add('open');};
+    const close=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+    document.getElementById('hamburger').addEventListener('click',open);
+    document.getElementById('drawerClose').addEventListener('click',close);
+    overlay.addEventListener('click',close);
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+    function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+    window.addEventListener('load',postH);window.addEventListener('resize',postH);setTimeout(postH,600);setTimeout(postH,1600);
+  })();
+Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
+Chart.defaults.font.size = 12;
+const NAVY='#002D55', ACC='#004B87', GOLD='#B8860B', SAND='#D8C9A3', RED='#C0392B', GREEN='#2E7D5B';
+new Chart(c1,{data:{labels:['DRB-HICOM','Press Metal','Tenaga'],datasets:[
+  {type:'bar',label:'Business-quality score (of 5)',data:[3,5,4],backgroundColor:NAVY,borderRadius:5,yAxisID:'y'},
+  {type:'bar',label:'Price to book (x)',data:[0.26,6.75,1.66],backgroundColor:GOLD,borderRadius:5,yAxisID:'y1'}]},
+  options:{scales:{y:{position:'left',max:6,title:{display:true,text:'Quality score'}},y1:{position:'right',max:8,grid:{drawOnChartArea:false},title:{display:true,text:'Price to book (x)'}}},maintainAspectRatio:false}});
+new Chart(c2,{type:'bar',data:{labels:['DRB-HICOM','Press Metal','Tenaga'],datasets:[
+  {label:'Return on equity %',data:[2.3,26.6,8.7],backgroundColor:ACC,borderRadius:5},
+  {label:'Net-profit growth %',data:[141,41,4.4],backgroundColor:SAND,borderRadius:5}]},
+  options:{scales:{y:{ticks:{callback:v=>v+'%'}}},maintainAspectRatio:false}});
+</script>
+</body></html>
