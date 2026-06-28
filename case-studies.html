@@ -185,7 +185,7 @@
     const FIN = cat.heading === 'Financial Statement Analysis';
     const ps = FIN ? [...cat.projects].sort((a,b)=>(b.date||'').localeCompare(a.date||'')) : cat.projects;
     const lead = ps[0];
-    const rail = ps.slice(1, FIN ? 3 : 5);   // Financial: 3 most recent total; others: hero + 4
+    const rail = ps.slice(1, 5);   // hero + 4 = 5 (Financial sorted most-recent first)
     const leadHtml = `
       <div class="lead">
         <a class="lead-cover" href="${lead.cs}" style="background-image:url('${lead.img}')" aria-label="${esc(lead.name)}"></a>
