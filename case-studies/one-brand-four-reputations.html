@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One Brand, Four Reputations | Data Stories Lab</title>
-<meta name="description" content="Benchmarking one coffee brand across four platforms">
+<meta name="description" content="What 500 customer reviews reveal about a coffee shop's reputation across four platforms">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
@@ -112,82 +112,93 @@
 
   <figure class="hero">
     <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/cover.jpeg" alt="A coffee cup on a cafe counter surrounded by positive and negative review panels">
-    <figcaption><span>One coffee brand, benchmarked across four social platforms.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+    <figcaption><span>One coffee shop, four platform reputations.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
   </figure>
 
-  <div class="kicker">Restaurant reputation benchmarking</div>
+  <div class="kicker">Coffee shop customer sentiment</div>
   <h1 class="title">One Brand, Four Reputations</h1>
-  <p class="standfirst">Benchmarking one coffee brand across four platforms</p>
-  <div class="dateline"><span class="red">Data Stories Lab</span><span>Reputation benchmark</span><span>500 reviews &middot; 4 platforms &middot; Q1 2024</span></div>
+  <p class="standfirst">What 500 customer reviews reveal about a coffee shop</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Customer sentiment review</span><span>500 reviews &middot; 4 platforms &middot; Jan&ndash;Mar 2024</span></div>
 
-  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/one-brand-four-reputations-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
 
   <div class="lead body">
-    <p>This benchmark reads 500 customer reviews of a coffee brand across Google, Facebook, Instagram and Twitter to quantify how its reputation performs: where it leads, where it lags, and what moves it. The same framework applies to any restaurant brand, which is what makes it useful to the chains, investors, agencies and franchise groups that compare performance across a portfolio.</p> <p>The headline is fragmentation. Aggregate sentiment looks neutral, yet the brand's standing splits sharply by platform and by product, so a single reputation score hides more than it reveals. This report isolates the gaps a benchmark exists to surface, and ranks where they matter most.</p>
+    <p>This review reads 500 customer reviews of a coffee shop across Google, Facebook, Instagram and Twitter to show how the shop is seen: where it wins, where it leaks, and what to do next. Overall the shop sits almost even, 252 happy reviews against 248 unhappy, a net score of just +0.8%. Net sentiment here simply means the share of happy reviews minus the share of unhappy ones, so zero is an even split.</p> <p>That flat average hides the real story. The shop looks strong on Google but weak on Facebook, the same business with two very different reputations, and most of the unhappiness traces back to a short list of items and two recurring issues, price and service. The good news is that the problems are concentrated, so a few focused changes move the score more than a broad overhaul.</p>
   </div>
 
   <div class="skicker">The numbers</div>
-  <div class="figs"><div class="fig"><div class="n">+0.8%</div><div class="l">brand net sentiment</div></div><div class="fig"><div class="n">20 pts</div><div class="l">top vs bottom platform</div></div><div class="fig"><div class="n">-33%</div><div class="l">worst product (banana bread)</div></div><div class="fig"><div class="n">+8.3%</div><div class="l">March momentum</div></div></div>
+  <div class="figs"><div class="fig"><div class="n">+0.8%</div><div class="l">overall net sentiment</div></div><div class="fig"><div class="n">20 pts</div><div class="l">gap, best vs worst platform</div></div><div class="fig"><div class="n">-33%</div><div class="l">worst item (banana bread)</div></div><div class="fig"><div class="n">+8.3%</div><div class="l">March, turning up</div></div></div>
 
-  <div class="pull"><p>&ldquo;On reputation the brand leads on Google by the same 20 points it lags on Facebook.&rdquo;</p></div>
+  <div class="pull"><p>&ldquo;The same shop reads as a leader on Google and a laggard on Facebook, 20 points apart.&rdquo;</p></div>
 
-  <div class="skicker">Top reputation risks</div>
-  <div class="body"><p>Reputation risk is concentrated, not spread evenly across the menu. Ranked by review volume and sentiment, ten products carry most of the brand's negative perception. This is the short list a benchmark would flag first, ahead of any broad menu review.</p></div>
+  <div class="skicker">Items to fix first</div>
+  <div class="body"><p>The damage is concentrated, not spread evenly across the menu. Ranked by how often they are reviewed and how poorly they score, ten items carry most of the negative reviews. This is the short list to fix first, ahead of any broad menu change.</p></div>
   <table class="risks">
-    <thead><tr><th>Rank</th><th>Product</th><th>Category</th><th class="num">Net sentiment</th><th class="num">Reviews</th><th>Priority</th></tr></thead>
+    <thead><tr><th>Rank</th><th>Item</th><th>Menu group</th><th class="num">Net sentiment</th><th class="num">Reviews</th><th>Priority</th></tr></thead>
     <tbody>
       <tr><td class="rk">1</td><td>Banana Bread</td><td>Pastries</td><td class="num">-33%</td><td class="num">24</td><td><span class="pri c">Critical</span></td></tr>
-      <tr><td class="rk">2</td><td>Muffin</td><td>Pastries</td><td class="num">-40%</td><td class="num">10</td><td><span class="pri c">Critical</span></td></tr>
-      <tr><td class="rk">3</td><td>Veggie Wrap</td><td>Light Meals</td><td class="num">-40%</td><td class="num">10</td><td><span class="pri c">Critical</span></td></tr>
-      <tr><td class="rk">4</td><td>Flat White</td><td>Hot Coffee</td><td class="num">-40%</td><td class="num">10</td><td><span class="pri c">Critical</span></td></tr>
-      <tr><td class="rk">5</td><td>Breakfast Sandwich</td><td>Light Meals</td><td class="num">-23%</td><td class="num">13</td><td><span class="pri h">High</span></td></tr>
-      <tr><td class="rk">6</td><td>Matcha Latte</td><td>Non-Coffee</td><td class="num">-20%</td><td class="num">15</td><td><span class="pri h">High</span></td></tr>
-      <tr><td class="rk">7</td><td>Mocha</td><td>Hot Coffee</td><td class="num">-33%</td><td class="num">9</td><td><span class="pri h">High</span></td></tr>
-      <tr><td class="rk">8</td><td>Coffee Milkshake</td><td>Cold Coffee</td><td class="num">-43%</td><td class="num">7</td><td><span class="pri h">High</span></td></tr>
-      <tr><td class="rk">9</td><td>Biscotti</td><td>Pastries</td><td class="num">-60%</td><td class="num">5</td><td><span class="pri h">High</span></td></tr>
-      <tr><td class="rk">10</td><td>Iced Mocha</td><td>Cold Coffee</td><td class="num">-20%</td><td class="num">10</td><td><span class="pri e">Elevated</span></td></tr>
+      <tr><td class="rk">2</td><td>Matcha Latte</td><td>Non-Coffee</td><td class="num">-20%</td><td class="num">15</td><td><span class="pri h">High</span></td></tr>
+      <tr><td class="rk">3</td><td>Breakfast Sandwich</td><td>Light Meals</td><td class="num">-23%</td><td class="num">13</td><td><span class="pri h">High</span></td></tr>
+      <tr><td class="rk">4</td><td>Muffin</td><td>Pastries</td><td class="num">-40%</td><td class="num">10</td><td><span class="pri c">Critical</span></td></tr>
+      <tr><td class="rk">5</td><td>Veggie Wrap</td><td>Light Meals</td><td class="num">-40%</td><td class="num">10</td><td><span class="pri c">Critical</span></td></tr>
+      <tr><td class="rk">6</td><td>Flat White</td><td>Hot Coffee</td><td class="num">-40%</td><td class="num">10</td><td><span class="pri c">Critical</span></td></tr>
+      <tr><td class="rk">7</td><td>Iced Mocha</td><td>Cold Coffee</td><td class="num">-20%</td><td class="num">10</td><td><span class="pri h">High</span></td></tr>
+      <tr><td class="rk">8</td><td>Mocha</td><td>Hot Coffee</td><td class="num">-33%</td><td class="num">9</td><td><span class="pri h">High</span></td></tr>
+      <tr><td class="rk">9</td><td>Coffee Milkshake</td><td>Cold Coffee</td><td class="num">-43%</td><td class="num">7</td><td><span class="pri h">High</span></td></tr>
+      <tr><td class="rk">10</td><td>Herbal Tea</td><td>Non-Coffee</td><td class="num">-33%</td><td class="num">6</td><td><span class="pri h">High</span></td></tr>
     </tbody>
   </table>
 
-  <div class="skicker">Strategic implications</div>
+  <div class="skicker">What this means</div>
   <div class="impl">
-    <p>Although overall sentiment appears neutral, reputation is highly fragmented across platforms, which suggests perception is shaped less by the brand itself than by where consumers encounter it.</p>
-    <p>Negative perception concentrates in a few products and in two complaint types, price and service, so reputation gains come from targeted operational fixes rather than broad menu change.</p>
-    <p>Because the same measures (net sentiment, platform gap, product liability, momentum) apply to any brand, this benchmark scales across a portfolio for competitive comparison.</p>
+    <p>The shop does not have one reputation; it has four, one per platform, and the flat overall score hides that. A customer checking Google sees a well-liked shop, while a customer checking Facebook sees a poorly rated one.</p>
+    <p>The unhappiness is about price and service, not taste or quality. So the gains come from practical fixes to pricing and service on a short list of items, not from changing recipes.</p>
+    <p>The strengths are just as clear. A handful of well-loved items and an all-positive read on taste and quality are ready to carry the marketing.</p>
   </div>
 
-  <div class="skicker">What the data shows</div>
+  <div class="skicker">What the reviews show</div>
 
-    <article class="finding"><h3 class="fq">1. How does the brand benchmark overall?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart1.png" alt="Overall sentiment: 252 positive against 248 negative reviews"></figure> <p>On a net-sentiment basis the brand sits at +0.8% (252 positive against 248 negative), effectively parity: neither a reputation leader nor in clear decline. There is no advocacy surplus to absorb a shock, so the aggregate score is fragile.</p> <p>The more useful read is that this single number is misleading. Parity at the brand level masks wide divergence by platform and product, which is exactly the signal a benchmark is built to expose.</p></div></article>
-    <article class="finding"><h3 class="fq">2. Platform benchmark: where does the brand lead and lag?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart2.png" alt="Net sentiment by platform: Google plus 10, Instagram plus 4, Twitter flat, Facebook minus 10"></figure> <p>Google is the top-performing platform at +10.3 net sentiment and Facebook the lowest at -10.0, a 20-point reputation gap; Instagram is mildly positive (+4.1) and Twitter flat. The same brand reads as a leader in one venue and a laggard in another.</p> <p>The gap itself, not its direction, is the finding. It warrants further investigation into audience mix, customer intent, response times and review-moderation practices, drivers the review text alone cannot isolate. The implication for any client is that platform-level tracking is essential; a single-source reputation read will mislead.</p></div></article>
-    <article class="finding"><h3 class="fq">3. Hypothesis: is the core product the main drag?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart3.png" alt="Net sentiment by category: food categories positive, coffee categories negative"></figure> <p class="hyp">Hypothesis: core beverage quality, not food, is the primary driver of negative brand perception.</p> <p>The category benchmark supports it. Food leads (sandwiches +5.1, pastries +2.7) while both coffee lines trail (hot -1.0, cold -3.3, the lowest of five). For a coffee brand, a core product that underperforms the periphery is a structural reputation risk, not a menu detail. Category-level sentiment points to where reputation investment earns the highest return, here the core line rather than the edges.</p></div></article>
-    <article class="finding"><h3 class="fq">4. Hypothesis: is negative perception concentrated in a few products?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart4.png" alt="Top advocates and liabilities by net sentiment, banana bread the biggest drag"></figure> <p class="hyp">Hypothesis: a small set of products accounts for a disproportionate share of negative perception.</p> <p>The data confirms it. Banana bread is the most-discussed item (24 reviews) and strongly negative at -33, and the five lowest-rated products concentrate the brand's negativity, while genuine advocates (scone +60, soup +38.5, affogato +23) go under-amplified. Based on review volume and sentiment, banana bread appears the single highest-priority reputation risk. For the client, the pattern matters more than the item: product-specific issues drive a disproportionate share of negative brand perception, so targeted operational fixes produce larger reputation gains than broad menu changes.</p></div></article>
-    <article class="finding"><h3 class="fq">5. What drives the negatives: product, price or service?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart5.png" alt="Negative review drivers: would not recommend, price, then service"></figure> <p>Among the 248 negative reviews the split is blunt rejection 91, price and value 80, and service 77, while positives are led by quality and taste. The drag is value perception and experience, not the product itself.</p> <p>That reframes the reputation problem as operational, pricing and service consistency, rather than culinary. For chains and franchise groups, it points to process levers that scale across sites rather than recipe changes.</p></div></article>
-    <article class="finding"><h3 class="fq">6. Momentum: is reputation rising or falling?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart6.png" alt="Net sentiment by month: negative in January and February, plus 8 in March"></figure> <p>Momentum is positive. Net sentiment moved from -3.0 in January and -4.0 in February to +8.3 in March, the strongest month of the quarter. On a benchmark, the brand is trending up.</p> <p>The signal is provisional: the recovery is one month old and weekly figures stay volatile. It warrants tracking against a benchmark to confirm the shift is structural rather than seasonal noise.</p></div></article>
+    <article class="finding"><h3 class="fq">How is the shop doing?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart1.png" alt="Overall sentiment: 252 happy against 248 unhappy reviews"></figure> <p>The shop is balanced, not winning or losing. Out of 500 reviews, 252 are happy and 248 are unhappy, a net score of +0.8%. That is close to a coin flip, so there is no cushion of goodwill to absorb a bad week.</p> <p>This single number is also misleading on its own. A near-even average hides wide swings by platform and by item, which is where the real opportunities and risks sit.</p></div></article>
+    <article class="finding"><h3 class="fq">How do the four platforms compare?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart2.png" alt="Net sentiment by platform: Google plus 10, Instagram plus 4, Twitter flat, Facebook minus 10"></figure> <p>The same shop reads very differently depending on where people look. Google is strongly positive at +10.3 and Instagram mildly positive at +4.1, while Twitter is flat at -0.7 and Facebook clearly negative at -10.0. The distance between the best and worst platform is 20 points.</p> <p>This is why one overall score misleads. The gap shows where reputation is leaking (Facebook) and where it is already strong enough to build on (Google and Instagram), which is exactly where marketing should focus.</p></div></article>
+    <article class="finding"><h3 class="fq">What are customers unhappy about?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart5.png" alt="Drivers of unhappy reviews: would not recommend, price, then service"></figure> <p>The complaints are about money and service, not the food and drink. Among the 248 unhappy reviews, the issues split into general "would not recommend" (91), price and value (80), and service (77). Taste and quality draw zero complaints.</p> <p>That reframes the problem as operational rather than culinary. The fixes are practical: review portion-for-price on the worst items, and tighten service where speed and consistency draw complaints.</p></div></article>
+    <article class="finding"><h3 class="fq">Which menu groups do best?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart3.png" alt="Net sentiment by menu group: food groups positive, coffee groups negative"></figure> <p>Food does better than drinks. Sandwiches and light meals lead at +5.1 and pastries at +2.7, while the coffee lines trail (hot coffee -1.0, cold coffee and iced drinks -3.3, the lowest of five groups).</p> <p>For a coffee shop, a coffee line that scores below the food is worth a closer look. The issue is not taste, it is price and consistency on the drinks, so the lever is operational rather than a new menu.</p></div></article>
+    <article class="finding"><h3 class="fq">Which items to fix or promote?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart4.png" alt="Best-loved and worst-rated items by net sentiment"></figure> <p>The list cuts both ways. Banana bread is the loudest problem, the single most-reviewed item (24 reviews) and strongly negative at -33%, alongside muffin, veggie wrap and flat white at -40% each. Fixing this short list lifts the score more than any broad change.</p> <p>The winners are just as clear and often under-featured: chai latte at +71%, scone and pain au chocolat at +60%, fresh juice at +50% and soup of the day at +38% on a healthy 13 reviews. These are proven favourites, ready to promote.</p></div></article>
+    <article class="finding"><h3 class="fq">Is the reputation improving?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart6.png" alt="Net sentiment by month: negative in January and February, plus 8 in March"></figure> <p>The trend is positive. Net sentiment moved from -3.0 in January and -4.0 in February to +8.3 in March, the best month of the quarter.</p> <p>The signal is new, so it is worth watching. One strong month is not yet a habit, but it is the right moment to launch marketing while sentiment is rising rather than fighting a slump.</p></div></article>
 
-  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
-  <div class="body"><p>We analysed 500 customer reviews of a coffee brand collected across Google, Facebook, Instagram and Twitter between 1 January and 31 March 2024. Each review carries the product, product category, platform, date and a short verbatim comment, which we classified into positive or negative sentiment and into a theme (taste, quality, price, service, or overall advocacy). We measured net sentiment, positive minus negative as a share of reviews, overall and benchmarked by platform, category, product and month. This is a demonstration build on realistic sample data; the review wording follows a small set of standard phrases, and the same measures apply directly to live, multi-source review feeds.</p></div>
+  <div class="skicker">Marketing takeaways</div>
+  <div class="impl">
+    <p><strong>Lead on Google and Instagram.</strong> These are the platforms where customers already speak positively, so review-request nudges and paid promotion work with the grain. Repair Facebook before spending there.</p>
+    <p><strong>Feature the favourites.</strong> Build posts and offers around the proven winners, chai latte, scone, fresh juice and soup of the day, rather than the items still being fixed.</p>
+    <p><strong>Use real taste and quality quotes.</strong> Every taste and quality review is positive, so genuine customer lines make ready-made, believable campaign copy.</p>
+    <p><strong>Time it to the upswing.</strong> March already turned positive, so launching now rides the momentum.</p>
+  </div>
 
   <div class="skicker" style="margin-top:42px">Conclusion</div>
-  <div class="body"><p>The brand's reputation is not one number but four, one per platform, and the aggregate hides that. Overall sentiment is neutral, yet the brand leads on Google by the same margin it trails on Facebook, its core coffee line underperforms its food, and a short list of products carries most of the damage.</p> <p>The strategic implication is that perception here is determined less by the brand than by where consumers encounter it and which products they discuss. Reputation gains will come from targeted, evidence-led fixes, the Facebook gap, the concentrated product liabilities, the core beverage line, not from broad change. Tracked monthly against a benchmark, the March upturn becomes a test of whether those fixes hold.</p></div>
+  <div class="body"><p>The shop leads on Google by almost the same margin it trails on Facebook, its coffee line slightly underperforms its food, and a short list of items carries most of the negative reviews. The cause is consistent: price and service, not taste or quality.</p> <p>This is a workable position, not a crisis. Fixing the worst items, closing the Facebook gap, and marketing the favourites on the platforms that already work would turn the March upswing into a steady climb. Tracked month by month, that recovery becomes a trend rather than a one-off.</p></div>
 
-  <div class="skicker" style="margin-top:42px">Appendix: product reputation action list</div>
-  <div class="body"><p>The full action list ranks every product by the weight of action it warrants, the risks to fix and the advocates to amplify, so the finding converts directly into a worklist. The highest-priority items are shown below; the complete 50-product list ships as a companion CSV.</p></div>
+  <div class="skicker" style="margin-top:42px">Appendix: action list by item</div>
+  <div class="body"><p>Every reviewed item sorted into fix-first and promote, with its score, review count and main issue, so the findings convert straight into a worklist. The highest-priority items are shown below; the complete 50-item list ships as a companion CSV.</p></div>
   <table class="risks">
-    <thead><tr><th>Product</th><th>Category</th><th class="num">Reviews</th><th class="num">Net sentiment</th><th>Top complaint</th><th>Action</th></tr></thead>
+    <thead><tr><th>Item</th><th>Menu group</th><th class="num">Reviews</th><th class="num">Net sentiment</th><th>Main issue</th><th>Action</th></tr></thead>
     <tbody>
       <tr><td>Banana Bread</td><td>Pastries</td><td class="num">24</td><td class="num">-33%</td><td>Price / value</td><td><span class="pri c">Fix now</span></td></tr>
+      <tr><td>Matcha Latte</td><td>Non-Coffee</td><td class="num">15</td><td class="num">-20%</td><td>Would not recommend</td><td><span class="pri c">Fix now</span></td></tr>
+      <tr><td>Breakfast Sandwich</td><td>Light Meals</td><td class="num">13</td><td class="num">-23%</td><td>Would not recommend</td><td><span class="pri c">Fix now</span></td></tr>
       <tr><td>Muffin</td><td>Pastries</td><td class="num">10</td><td class="num">-40%</td><td>Price / value</td><td><span class="pri c">Fix now</span></td></tr>
       <tr><td>Veggie Wrap</td><td>Light Meals</td><td class="num">10</td><td class="num">-40%</td><td>Service</td><td><span class="pri c">Fix now</span></td></tr>
       <tr><td>Flat White</td><td>Hot Coffee</td><td class="num">10</td><td class="num">-40%</td><td>Service</td><td><span class="pri c">Fix now</span></td></tr>
-      <tr><td>Breakfast Sandwich</td><td>Light Meals</td><td class="num">13</td><td class="num">-23%</td><td>Overall advocacy</td><td><span class="pri c">Fix now</span></td></tr>
-      <tr><td>Matcha Latte</td><td>Non-Coffee</td><td class="num">15</td><td class="num">-20%</td><td>Overall advocacy</td><td><span class="pri c">Fix now</span></td></tr>
-      <tr><td>Mocha</td><td>Hot Coffee</td><td class="num">9</td><td class="num">-33%</td><td>Overall advocacy</td><td><span class="pri c">Fix now</span></td></tr>
-      <tr><td>Scone</td><td>Pastries</td><td class="num">10</td><td class="num">+60%</td><td>-</td><td><span class="pri p">Promote</span></td></tr>
+      <tr><td>Iced Mocha</td><td>Cold Coffee</td><td class="num">10</td><td class="num">-20%</td><td>Would not recommend</td><td><span class="pri c">Fix now</span></td></tr>
+      <tr><td>Mocha</td><td>Hot Coffee</td><td class="num">9</td><td class="num">-33%</td><td>Would not recommend</td><td><span class="pri c">Fix now</span></td></tr>
+      <tr><td>Biscotti</td><td>Pastries</td><td class="num">5</td><td class="num">-60%</td><td>Price / value</td><td><span class="pri w">Watch</span></td></tr>
       <tr><td>Soup of the Day</td><td>Light Meals</td><td class="num">13</td><td class="num">+38%</td><td>-</td><td><span class="pri p">Promote</span></td></tr>
       <tr><td>Doughnut</td><td>Pastries</td><td class="num">16</td><td class="num">+25%</td><td>-</td><td><span class="pri p">Promote</span></td></tr>
+      <tr><td>Scone</td><td>Pastries</td><td class="num">10</td><td class="num">+60%</td><td>-</td><td><span class="pri p">Promote</span></td></tr>
+      <tr><td>Chai Latte</td><td>Non-Coffee</td><td class="num">7</td><td class="num">+71%</td><td>-</td><td><span class="pri p">Promote</span></td></tr>
     </tbody>
   </table>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>This review covers 500 customer reviews of a coffee shop, collected across Google, Facebook, Instagram and Twitter between 1 January and 31 March 2024. Each review carries the item, menu group, platform, date and a short comment, sorted into happy or unhappy and into a theme (taste, quality, price, service, or general recommendation). Net sentiment is the share of happy reviews minus the share of unhappy ones, measured overall and by platform, menu group, item and month. This is a demonstration build on realistic sample data; the review wording follows a small set of standard phrases, and the same measures apply directly to live review feeds.</p></div>
 
 </div>
 
