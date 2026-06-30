@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Brand, Four Reputations | Data Stories Lab</title>
+<meta name="description" content="How four platforms rate one coffee shop">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/segmentation-analysis.html">Segmentation Analysis</a>
+    <span class="sep">/</span><span>One Brand, Four Reputations</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/cover.jpeg" alt="A coffee cup on a cafe counter surrounded by happy and unhappy review panels">
+    <figcaption><span>One coffee shop, judged in opposite ways across four social platforms.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Social media &amp; reputation</div>
+  <h1 class="title">One Brand, Four Reputations</h1>
+  <p class="standfirst">How four platforms rate one coffee shop</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>500 reviews &middot; 4 platforms &middot; Q1 2024</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>This case study reads 500 customer reviews of a coffee shop chain to answer one question its owner could not settle from a vague sense that "reviews are mixed": is the brand actually liked online, and where is its reputation strong or leaking? The reviews span Google, Facebook, Instagram and Twitter over the first quarter of 2024, across five product categories from hot coffee to light meals.</p> <p>The reviews split almost evenly, so the brand carries no real cushion of goodwill. The analysis pins down exactly where the negatives sit, by platform, by product and by month, so marketing and operations can act on evidence rather than the loudest recent comment.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">50.4%</div><div class="l">positive reviews</div></div><div class="fig"><div class="n">+0.8%</div><div class="l">overall net sentiment</div></div><div class="fig"><div class="n">20 pts</div><div class="l">Google vs Facebook gap</div></div><div class="fig"><div class="n">+8.3%</div><div class="l">March net, a recovery</div></div></div>
+
+  <div class="pull"><p>&ldquo;The same coffee shop reads +10 on Google and -10 on Facebook.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+
+    <article class="finding"><h3 class="fq">1. Is the brand's online reputation actually positive?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart1.png" alt="Overall sentiment: 252 positive against 248 negative reviews"></figure> <p>Barely. Of 500 reviews, 252 are positive and 248 negative, a net sentiment of +0.8%. That is a coin flip, not a fan base, and a prospect who checks the brand online has close to even odds of landing on a complaint.</p> <p>A near-even score is fragile. With almost half of all comments negative, one weak month tips the brand into negative territory and there is no goodwill to absorb a service slip or a price rise. Reputation here needs to be managed against a target, and the rest of this report shows where the score can actually be moved.</p></div></article>
+    <article class="finding"><h3 class="fq">2. Which platform shapes the brand's reputation, and do they agree?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart2.png" alt="Net sentiment by platform: Google plus 10, Instagram plus 4, Twitter flat, Facebook minus 10"></figure> <p>They disagree sharply. Google leads at +10.3 net sentiment (55% positive) and Instagram at +4.1, while Twitter is flat at -0.7 and Facebook is clearly negative at -10.0. That is a 20-point spread on the same shop.</p> <p>Reputation here is platform-specific. An owner watching only Google would believe the brand is well-liked and miss the Facebook problem entirely, yet wherever a given customer looks first decides the impression they form. Facebook is the single largest drag on the average, so the fast win is to apply on Facebook whatever is already working on Google.</p></div></article>
+    <article class="finding"><h3 class="fq">3. Which product categories win or lose sentiment?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart3.png" alt="Net sentiment by category: food categories positive, coffee categories negative"></figure> <p>Food beats drinks. Sandwiches and light meals lead at +5.1 net sentiment and pastries at +2.7, non-coffee drinks sit flat, and the two coffee categories trail: hot coffee at -1.0 and cold coffee and iced drinks at -3.3, the worst of the five.</p> <p>For a coffee shop, that is a strategic red flag. The core product, the reason customers walk in, is rated below the side items, so the brand's reputation is being carried by its food rather than its coffee. Auditing coffee quality and consistency moves the score more than fixing any niche item, because it is the highest-traffic category.</p></div></article>
+    <article class="finding"><h3 class="fq">4. Which products are the brand's advocates, and which are liabilities?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart4.png" alt="Top advocates and liabilities by net sentiment, Banana Bread the biggest drag"></figure> <p>The clear advocates are the scone (+60), soup of the day (+38.5), doughnut (+25), affogato (+23) and salad bowl (+20). The liabilities are the flat white, veggie wrap and muffin (all -40), the breakfast sandwich (-23) and, most importantly, banana bread at -33.</p> <p>Banana bread is the single biggest reputation risk: it is the most-discussed product in the dataset, 24 reviews, and strongly negative, so it shapes the brand impression more than any other item. The advocates, by contrast, are loved but quietly under-marketed. The move is to fix or pull banana bread and put the scone, soup and affogato in front of customers.</p></div></article>
+    <article class="finding"><h3 class="fq">5. What are customers actually complaining about?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart5.png" alt="Negative review drivers: would not recommend, price, then service"></figure> <p>Among the 248 negative reviews, the breakdown is blunt rejection ("would not recommend") 91 times, price and value 80 times, and service 77 times. On the positive side, customers praise overall quality and taste, so the food itself is not the core problem.</p> <p>The complaints cluster on value perception and experience, not the recipe. Customers broadly like the product but balk at what they pay and how they are served, and those are operational levers rather than kitchen ones. Reviewing pricing on the worst-value items and tightening service consistency targets the two complaints that appear most.</p></div></article>
+    <article class="finding"><h3 class="fq">6. Is the brand's reputation improving or declining?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/one-brand-four-reputations/chart6.png" alt="Net sentiment by month: negative in January and February, plus 8 in March"></figure> <p>It is turning up. Net sentiment was negative in January (-3.0) and February (-4.0), then recovered to +8.3 in March, when 54% of reviews were positive. The brand exited the quarter on its best month.</p> <p>Something in March worked, and identifying it matters more than the score itself. The recovery is real but young, and week-to-week numbers stay volatile, so it is not yet a settled trend. Pin down what changed in March, standardize it, and track net sentiment monthly against a target so the gain holds instead of slipping back.</p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>We analysed 500 customer reviews of a coffee shop chain collected across Google, Facebook, Instagram and Twitter between 1 January and 31 March 2024. Each review carries the product, product category, platform, date and a short verbatim comment, which we classified into positive or negative sentiment and into a theme (taste, quality, price, service, or overall advocacy). We measured net sentiment, positive minus negative as a share of reviews, overall and broken down by platform, category, product and month, to show where the brand's reputation is strong, where it leaks, and which way it is moving. The dataset was complete with no missing values, and the review wording follows a small set of standard phrases, so this is a demonstration build on realistic sample data.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>The headline is one brand with four reputations. The same coffee shop reads +10 on Google and -10 on Facebook, its overall score is a coin flip, and the average is dragged down by its own coffee and by price complaints rather than by the food itself.</p> <p>A near-even, platform-split reputation is a growth ceiling: prospects who check the wrong platform see a worse business, the core product underperforms the sides, and with half of all reviews negative the brand sits one bad month from a negative score. The recommended direction is targeted, not total. Close the Facebook gap, fix or pull the highest-volume liabilities starting with banana bread, audit coffee quality and pricing, and amplify the quiet advocates. The March recovery shows the score responds quickly when the right levers are pulled.</p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>
