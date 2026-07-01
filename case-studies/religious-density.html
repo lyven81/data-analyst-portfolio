@@ -1,142 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Mosques, Crime and Drugs | Lee Yih Ven</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mosques, Crime and Drugs | Data Stories Lab</title>
+<meta name="description" content="What Malaysia's districts reveal about religion and poverty">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-  :root{--ink:#1f2d3d;--gold:#c19a3e;--red:#b5482e;--green:#2e7d5b;--grey:#6b7280;--line:#e6e6e6;}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#faf9f7;line-height:1.65}
-  .wrap{max-width:900px;margin:0 auto;padding:32px 22px 80px}
-  header.top{border-bottom:3px solid var(--gold);padding-bottom:14px;margin-bottom:8px}
-  header.top h1{margin:0;font-size:1.15rem;letter-spacing:.5px}
-  header.top p{margin:2px 0 0;color:var(--grey);font-size:.9rem}
-  h1.title{font-size:2.1rem;line-height:1.2;margin:26px 0 6px}
-  h2.sub{font-size:1.12rem;font-weight:500;color:var(--grey);margin:0 0 22px}
-  h3{font-size:1.28rem;margin:34px 0 8px;border-left:4px solid var(--gold);padding-left:12px}
-  h4{font-size:1.05rem;margin:22px 0 4px;color:var(--ink)}
-  p{margin:10px 0}
-  img.chart{width:100%;height:auto;margin:18px 0 6px;border:1px solid var(--line);border-radius:6px}
-  .cap{color:var(--grey);font-size:.85rem;margin:0 0 18px}
-  .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0}
-  .kpi{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:6px;padding:14px}
-  .kpi .n{font-size:1.5rem;font-weight:700}
-  .kpi .l{font-size:.82rem;color:var(--grey)}
-  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.94rem}
-  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
-  th{background:#f3efe6}
-  td.num{text-align:right;font-variant-numeric:tabular-nums}
-  .callout{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);padding:14px 16px;border-radius:6px;margin:20px 0}
-  .callout.note{border-left-color:var(--gold)}
-  .faq{background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 18px;margin:16px 0}
-  .faq .q{font-weight:700;margin:16px 0 2px}
-  .faq .a{margin:0 0 14px}
-  .action{background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px 18px;margin:14px 0}
-  footer{margin-top:50px;border-top:1px solid var(--line);padding-top:14px;color:var(--grey);font-size:.85rem}
-  a{color:var(--red)}
-</style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .qa{margin-top:14px;} .qa dt{font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:1.02rem;margin-top:16px;} .qa dd{font-size:1.05rem;margin-top:3px;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
 </head>
 <body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/statistical-testing.html">Statistical Testing</a>
+    <span class="sep">/</span><span>Mosques, Crime and Drugs</span>
+  </div>
+
 <div class="wrap">
-  <header class="top">
-    <h1>Lee Yih Ven — Data Analytics Portfolio</h1>
-    <p>Turning public data into decisions that survive scrutiny.</p>
-  </header>
 
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/cover%20image.jpeg" alt="A Malaysian city skyline on the left giving way to a rural kampung, mosque and mountains on the right.">
+    <figcaption><span>Where Malaysia's religious institutions cluster, and what the social numbers do there.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Religion and society</div>
   <h1 class="title">Mosques, Crime and Drugs</h1>
-  <h2 class="sub">What Malaysia's districts reveal about religion and poverty.</h2>
+  <p class="standfirst">What Malaysia's districts reveal about religion and poverty</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>149 districts &middot; 16 states</span></div>
 
-  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/cover%20image.jpeg" alt="Illustrated panorama: a Malaysian city skyline on the left giving way to a rural kampung, mosque and mountains on the right" style="max-height:380px;object-fit:cover;">
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/religious-density-dashboard.html">Dashboard</a><a class="sw" href="/data-analyst-portfolio/agentic_workflow/religious-density.html">AI Assistant</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
 
-  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/05%20state_high_vs_low.png" alt="High versus low religiosity states across drug rate, income and poverty">
-  <p class="cap">Malaysia's most religious states, measured by mosque density, next to their drug, income and poverty levels.</p>
-
-  <h3>The question</h3>
-  <p>Many people believe that more religious areas have more social problems: more crime, more drugs. Others believe the opposite, that faith keeps people out of trouble. Most of the argument runs on anecdotes. Malaysia has enough open data to check it, so this study does.</p>
-  <p>The answer splits in two. Areas with more mosques do <strong>not</strong> have more crime. They have less. But they do have more drug cases. And both results come down to the same fact: high-mosque areas are the poorer, rural, Malay-majority parts of the country. That, not faith, is what drives the numbers.</p>
-
-  <div class="kpis">
-    <div class="kpi"><div class="n">+0.48</div><div class="l">mosques vs drug rate (districts, p&lt;0.001)</div></div>
-    <div class="kpi"><div class="n">&minus;0.26</div><div class="l">mosques vs crime rate (p=0.006)</div></div>
-    <div class="kpi"><div class="n">+0.36</div><div class="l">drug link after controls</div></div>
-    <div class="kpi"><div class="n">115</div><div class="l">districts analysed</div></div>
+  <div class="lead body">
+    <p>A common belief holds that more religious or conservative places have more social trouble: more crime, more drugs. Others hold the opposite, that faith keeps people in line. Most of the argument runs on anecdotes. Malaysia publishes enough open data to test it, so this report reads 149 districts and 16 states to see what the numbers actually say.</p> <p>The answer splits in two. Areas with more mosques do not have more crime; they have less. But they do record more drug cases. And both results come down to the same fact: high-mosque areas are the poorer, rural, Malay-majority parts of the country. That, not faith, is what the numbers follow.</p>
   </div>
 
-  <h3>How we measured religiosity</h3>
-  <p>You cannot count personal faith from the outside, so we use a simple stand-in: mosques per 100,000 people in each district, from the national mosque register (6,585 mosques). More mosques per person means a larger, more settled religious community. The range is wide, from under 4 per 100,000 in Kuala Lumpur to over 40 in Terengganu, so there is plenty to compare.</p>
-  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/01%20religiosity_density_distribution.png" alt="Distribution of mosque density across districts">
-  <p class="cap">Districts split into thirds by mosque density. We compare the top third (high) with the bottom third (low).</p>
-  <p>One caveat up front: this measures the size of the religious community, which closely tracks being Malay-Muslim and rural. It does not measure how devout people are. That caveat turns out to be the whole story.</p>
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">+0.48</div><div class="l">mosques vs drug rate, districts</div></div><div class="fig"><div class="n">&minus;0.26</div><div class="l">mosques vs crime rate</div></div><div class="fig"><div class="n">+0.36</div><div class="l">drug link after ethnicity, age and income</div></div><div class="fig"><div class="n">149</div><div class="l">districts analysed</div></div></div>
 
-  <h3>Finding 1. Religious areas have less crime, not more</h3>
-  <p>Start with the 16 states. Rank them by mosque density and compare the top five with the bottom five.</p>
-  <table>
-    <tr><th>Per 100,000 people</th><th class="num">High-religiosity states</th><th class="num">Low-religiosity states</th></tr>
-    <tr><td>Violent + property crime</td><td class="num">113</td><td class="num">207</td></tr>
-    <tr><td>Drug users and addicts</td><td class="num">746</td><td class="num">379</td></tr>
-  </table>
-  <p>High-religiosity states have about half the crime rate. Crime sits in the rich, urban, low-religiosity states, not the religious ones. Now the proper test, at district level, with 115 districts.</p>
-  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/03%20density_vs_crime.png" alt="Scatter of mosque density versus crime rate">
-  <p class="cap">Each dot is a district. More mosques per person goes with less recorded crime (r = &minus;0.26, p = 0.006).</p>
-  <p>The link is real and holds after we account for who lives there (partial r = &minus;0.28 controlling for ethnicity). This is the opposite of the "more religion, more crime" claim.</p>
+  <div class="pull"><p>&ldquo;More mosques means less crime but more drug cases, and both track poverty and geography, not faith.&rdquo;</p></div>
 
-  <h3>Finding 2. Religious areas do have more drug cases</h3>
-  <p>Drugs go the other way. The high-religiosity states carry almost double the drug rate, and at district level the link is clear and strong.</p>
-  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/02%20density_vs_drug.png" alt="Scatter of mosque density versus drug rate">
-  <p class="cap">The same districts. More mosques per person goes with more recorded drug cases (r = +0.48, p &lt; 0.001).</p>
-  <p>So the two outcomes point in opposite directions, and both are statistically solid. Denser mosque provision goes with more drug cases and less crime. Any claim that treats "crime and drugs" as one moral outcome is already wrong here.</p>
+  <div class="skicker">How religiosity was measured</div>
+  <div class="body"><p>Personal faith cannot be counted from the outside, so this report uses a physical stand-in: the number of mosques per 100,000 people in each district, from the national mosque register of 6,585 mosques. Denser mosque provision marks a larger, more settled religious community. The range is wide, from under 4 mosques per 100,000 in Kuala Lumpur to over 40 in Terengganu, so there is plenty to compare.</p>
+  <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/01%20religiosity_density_distribution.png" alt="Distribution of mosque density across districts, split into thirds"></figure>
+  <p>One caveat sits at the front: this measures the size of the religious community, which closely tracks being Malay-Muslim and rural. It is not a measure of how devout individuals are. That caveat turns out to be the whole story.</p></div>
 
-  <h3>Finding 3. The drug link is not just poverty</h3>
-  <p>The obvious objection: high-mosque districts are Malay-majority, younger, and poorer, and each of those shapes drug figures by itself. If the drug link were only that, it would vanish once we hold those factors constant. It does not.</p>
-  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/04%20drug_link_controls.png" alt="Drug link before and after controls">
-  <p class="cap">The drug link shrinks as we remove each factor, but it does not disappear. It holds at +0.36 after controlling for ethnicity, age and income together.</p>
-  <p>This is the part a quick look would miss. Who lives there and how poor they are explains some of the drug link, the number falls from 0.48 to 0.36, but a real link remains. Mosque density still tracks drug cases after the usual explanations are removed.</p>
-  <div class="callout note">
-    <strong>More drug cases does not mean religion causes drugs.</strong> This is an area-level link, not proof of cause, and the arrow could run either way. The east-coast Malay belt (Kelantan, Terengganu) has both the most mosques per person and Malaysia's long-standing heroin and meth problem, driven by trafficking routes, rural joblessness and youth. Dense mosque provision marks that region; it does not cause its addiction. Read the drug number as "this is where Malaysia's drug burden sits," not "faith breeds addiction."
-  </div>
+  <div class="skicker">What the data shows</div>
+    <article class="finding"><h3 class="fq">1. Do areas with more mosques have more crime?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/03%20density_vs_crime.png" alt="Scatter of mosque density versus crime rate, sloping down"></figure> <p>No, the opposite. Across districts, more mosques per person goes with less recorded crime, a clear negative link (correlation of &minus;0.26, statistically real). At state level the most religious states record about 113 crimes per 100,000 against 207 in the least religious ones.</p> <p>Everyday crime is an urban, wealthier-state pattern. The highest recorded crime sits in Kuala Lumpur, Penang and Selangor, not in the religious rural belt, and the link holds after accounting for who lives there.</p> <p>This is the reverse of the popular claim. On general crime, denser religious provision goes with a safer record, not a more dangerous one.</p></div></article>
+    <article class="finding"><h3 class="fq">2. Do areas with more mosques have more drug cases?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/02%20density_vs_drug.png" alt="Scatter of mosque density versus drug rate, sloping up"></figure> <p>Here, yes. More mosques per person goes with more recorded drug abuse, a strong positive link (correlation of +0.48). The most religious states carry almost double the drug rate of the least religious ones.</p> <p>So the two outcomes point in opposite directions, and both are statistically solid. Anything that lumps crime and drugs together as one moral outcome is already wrong here.</p> <p>The drug pattern maps onto Malaysia's poor rural east-coast belt, Kelantan, Terengganu and Pahang, and its long-standing trafficking geography, not onto personal devotion.</p></div></article>
+    <article class="finding"><h3 class="fq">3. Is the drug link just poverty?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/04%20drug_link_controls.png" alt="The drug correlation shrinking but surviving as controls are added"></figure> <p>Partly, but not only. High-mosque districts are Malay-majority, younger and poorer, and each shapes drug figures on its own. Yet after holding ethnicity, age structure and income constant together, the drug link only falls from 0.48 to 0.36. It does not disappear.</p> <p>This is the part a quick look would miss. Who lives in a district and how poor it is explains some of the drug pattern, but a real link remains once the usual explanations are removed.</p> <p>It stays an area-level association, not proof of cause, and the arrow could run either way. Dense mosque provision marks the region carrying Malaysia's drug burden; it does not, on this evidence, create it.</p></div></article>
+    <article class="finding"><h3 class="fq">4. Are religious areas poorer, or more unequal?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/05%20state_high_vs_low.png" alt="High versus low religiosity states across drug rate, income and poverty"></figure> <p>Poorer, but not more unequal. Households in the most religious states earn about half what those in the least religious states earn (RM 4,707 against RM 8,736), and their poverty rate is roughly six times higher. Across districts, more mosques goes with lower income.</p> <p>Inequality is the exception, and it matters. The Gini score is almost identical in both groups, 0.35 against 0.36. The gap is about the level of income, not how evenly it is shared.</p> <p>This is why the income control matters: when the drug link survives it, the finding survives the single largest difference between these places. Religious density, in this data, is a marker of the poorer, rural half of the country.</p></div></article>
 
-  <h3>Finding 4. Religious areas are poorer, but not more unequal</h3>
-  <p>This is where the pattern resolves. High-religiosity states are much poorer.</p>
-  <table>
-    <tr><th>Measure</th><th class="num">High-religiosity states</th><th class="num">Low-religiosity states</th></tr>
-    <tr><td>Median monthly household income</td><td class="num">RM 4,707</td><td class="num">RM 8,736</td></tr>
-    <tr><td>Poverty rate</td><td class="num">9.9%</td><td class="num">1.5%</td></tr>
-    <tr><td>Inequality (Gini)</td><td class="num">0.35</td><td class="num">0.36</td></tr>
-  </table>
-  <p>Households in the most religious states earn about half what households in the least religious states earn, and their poverty rate is roughly six times higher. Districts show the same slope: more mosques, lower income (r = &minus;0.24).</p>
-  <p>Inequality is the exception, and it matters. The Gini score is almost the same in both groups (0.35 versus 0.36). So the gap is about the <em>level</em> of income, not how evenly it is shared. Rich and poor states spread their income about equally inside themselves; they just sit at different rungs of the ladder.</p>
+  <div class="skicker" style="margin-top:42px">Quick answers</div>
+  <div class="body"><dl class="qa">
+    <dt>What is the crime rate in high-religiosity areas?</dt><dd>Lower. About 113 crimes per 100,000 against 207 in low-religiosity states. More mosques goes with less crime.</dd>
+    <dt>What is the drug rate in high-religiosity areas?</dt><dd>Higher. About 746 drug users and addicts per 100,000 against 379, roughly double.</dd>
+    <dt>What is the income in high-religiosity areas?</dt><dd>Lower. Median household income is RM 4,707 a month against RM 8,736, a little over half.</dd>
+    <dt>What is the poverty rate in high-religiosity areas?</dt><dd>Higher. About 9.9% against 1.5%, roughly six times as high.</dd>
+    <dt>What is the inequality in high-religiosity areas?</dt><dd>About the same. Gini is 0.35 against 0.36; the difference is in income level, not how evenly income is shared.</dd>
+    <dt>What about GDP?</dt><dd>We used household income as the measure of economic level, because reliable district GDP was not available across all states. On income, high-religiosity areas earn about half as much.</dd>
+    <dt>So does religion cause crime or drugs?</dt><dd>No. These are links between places, not proof of cause. More mosques marks poorer, rural areas, and it is that poverty and geography the crime and drug numbers follow.</dd>
+  </dl></div>
 
-  <h3>What this means</h3>
-  <p><strong>On crime, the claim is backwards.</strong> More religious areas record less crime, and it holds after controls. Everyday crime is an urban, richer-state pattern.</p>
-  <p><strong>On drugs, the claim looks right but for the wrong reason.</strong> More religious areas do record more drug cases, and it is a real pattern. But it maps onto the poor rural east coast and its trafficking geography, not onto personal faith.</p>
-  <p><strong>The one fact under both results is poverty.</strong> "High mosque density" and "poor and rural" describe almost the same places. Once you see that, neither result is really about religion. They are about where Malaysia's wealth, its cities, and its drug burden happen to sit. Next time you meet this claim, ask what else is true of those places before you credit the faith.</p>
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>Religiosity is mosques per 100,000 from the national register, matched to districts by a name crosswalk that resolved all but one record. Drug figures are AADK's 2024 bulletin (users and addicts by administrative district, 2023). Crime is police-recorded violent and property offences by district, 2023. Population, ethnicity and age are the 2023 district series; income, poverty and inequality are the latest state series. Relationships are measured as correlations with significance tests, and confounders are removed by partial correlation, taking ethnicity, young-male share and income out of both variables. These are area-level links, so they describe places, not people, and cannot prove cause or direction. Recorded drug and crime counts also reflect how much a place reports and polices, not only underlying behaviour, so read every finding as association weighed against these limits.</p></div>
 
-  <h3>Quick answers</h3>
-  <div class="faq">
-    <p class="q">What is the crime rate in high-religiosity areas?</p>
-    <p class="a">Lower. High-religiosity states record 113 crimes per 100,000, against 207 in low-religiosity states. Across districts, more mosques means less crime.</p>
-    <p class="q">What is the drug rate in high-religiosity areas?</p>
-    <p class="a">Higher. About 746 drug users and addicts per 100,000, against 379 in low-religiosity states, roughly double.</p>
-    <p class="q">What is the income in high-religiosity areas?</p>
-    <p class="a">Lower. Median household income is RM 4,707 a month, against RM 8,736 in low-religiosity states, a little over half.</p>
-    <p class="q">What is the poverty rate in high-religiosity areas?</p>
-    <p class="a">Higher. About 9.9%, against 1.5% in low-religiosity states, roughly six times as high.</p>
-    <p class="q">What is the inequality in high-religiosity areas?</p>
-    <p class="a">About the same. Gini is 0.35, against 0.36 elsewhere. The difference is in income level, not how evenly income is shared.</p>
-    <p class="q">What about GDP?</p>
-    <p class="a">We used household income as the measure of economic level, because reliable district GDP was not available across all states. On income, high-religiosity areas earn about half as much.</p>
-    <p class="q">So does religion cause crime or drugs?</p>
-    <p class="a">No. These are links between places, not proof of cause. More mosques marks poorer, rural areas, and it is that poverty and geography, not faith, that the crime and drug numbers follow.</p>
-  </div>
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>The popular claim breaks in a specific, useful way. On crime it is backwards: more religious areas record less, not more. On drugs it looks right but for the wrong reason: the burden is real, yet it sits in the poor rural east coast and its trafficking geography, not in personal faith.</p> <p>The one fact under both results is poverty. High mosque density and poor and rural describe almost the same places, and once you see that, neither result is really about religion. They are about where Malaysia's wealth, its cities, and its drug burden happen to sit.</p> <p>For anyone weighing this claim in future, an area-level link between religion and vice is almost always standing in for income and geography. Ask what else is true of those places before you credit the faith.</p></div>
 
-  <h3>How the analysis was done</h3>
-  <p>Religiosity is mosques per 100,000 from the national register, matched to districts by a name crosswalk that resolved all but one record. Drug figures are AADK's 2024 bulletin (users and addicts by district, 2023). Crime is police-recorded violent and property offences by district, 2023. Population, ethnicity and age are the 2023 district series. Income, poverty and inequality are the latest state series. We use Pearson correlations with significance tests, and remove confounders by partial correlation (taking out ethnicity, young-male share and income from both variables).</p>
-  <div class="callout">
-    <strong>Limits, stated plainly.</strong> These are area-level links, so they describe places, not people, and cannot prove cause or direction. Recorded drug and crime counts partly reflect how hard an area polices and reports, not only real behaviour. Mosque density stands in for religious-community size, not personal faith. Income enters as a state-level control, which captures the big gap between states but not finer gaps within them.
-  </div>
-
-  <footer>© 2026 Lee Yih Ven | Data-Driven Solutions. Sources: JAKIM mosque register, AADK Maklumat Dadah 2024, PDRM crime statistics, DOSM population, income, poverty and inequality series.</footer>
+  <hr class="endrule">
+  <div class="colophon">Sources: JAKIM mosque register, AADK Maklumat Dadah 2024, PDRM crime statistics, DOSM population, income, poverty and inequality series. Analysis and illustration by Data Stories Lab.</div>
 </div>
-</body>
-</html>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>
