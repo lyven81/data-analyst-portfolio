@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mosques, Crime and Drugs | Lee Yih Ven</title>
+<style>
+  :root{--ink:#1f2d3d;--gold:#c19a3e;--red:#b5482e;--green:#2e7d5b;--grey:#6b7280;--line:#e6e6e6;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#faf9f7;line-height:1.65}
+  .wrap{max-width:900px;margin:0 auto;padding:32px 22px 80px}
+  header.top{border-bottom:3px solid var(--gold);padding-bottom:14px;margin-bottom:8px}
+  header.top h1{margin:0;font-size:1.15rem;letter-spacing:.5px}
+  header.top p{margin:2px 0 0;color:var(--grey);font-size:.9rem}
+  h1.title{font-size:2.1rem;line-height:1.2;margin:26px 0 6px}
+  h2.sub{font-size:1.12rem;font-weight:500;color:var(--grey);margin:0 0 22px}
+  h3{font-size:1.28rem;margin:34px 0 8px;border-left:4px solid var(--gold);padding-left:12px}
+  h4{font-size:1.05rem;margin:22px 0 4px;color:var(--ink)}
+  p{margin:10px 0}
+  img.chart{width:100%;height:auto;margin:18px 0 6px;border:1px solid var(--line);border-radius:6px}
+  .cap{color:var(--grey);font-size:.85rem;margin:0 0 18px}
+  .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0}
+  .kpi{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:6px;padding:14px}
+  .kpi .n{font-size:1.5rem;font-weight:700}
+  .kpi .l{font-size:.82rem;color:var(--grey)}
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.94rem}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+  th{background:#f3efe6}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .callout{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);padding:14px 16px;border-radius:6px;margin:20px 0}
+  .callout.note{border-left-color:var(--gold)}
+  .faq{background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 18px;margin:16px 0}
+  .faq .q{font-weight:700;margin:16px 0 2px}
+  .faq .a{margin:0 0 14px}
+  .action{background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px 18px;margin:14px 0}
+  footer{margin-top:50px;border-top:1px solid var(--line);padding-top:14px;color:var(--grey);font-size:.85rem}
+  a{color:var(--red)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Lee Yih Ven — Data Analytics Portfolio</h1>
+    <p>Turning public data into decisions that survive scrutiny.</p>
+  </header>
+
+  <h1 class="title">Mosques, Crime and Drugs</h1>
+  <h2 class="sub">What Malaysia's districts reveal about religion and poverty.</h2>
+
+  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/cover%20image.jpeg" alt="Illustrated panorama: a Malaysian city skyline on the left giving way to a rural kampung, mosque and mountains on the right" style="max-height:380px;object-fit:cover;">
+
+  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/05%20state_high_vs_low.png" alt="High versus low religiosity states across drug rate, income and poverty">
+  <p class="cap">Malaysia's most religious states, measured by mosque density, next to their drug, income and poverty levels.</p>
+
+  <h3>The question</h3>
+  <p>Many people believe that more religious areas have more social problems: more crime, more drugs. Others believe the opposite, that faith keeps people out of trouble. Most of the argument runs on anecdotes. Malaysia has enough open data to check it, so this study does.</p>
+  <p>The answer splits in two. Areas with more mosques do <strong>not</strong> have more crime. They have less. But they do have more drug cases. And both results come down to the same fact: high-mosque areas are the poorer, rural, Malay-majority parts of the country. That, not faith, is what drives the numbers.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">+0.48</div><div class="l">mosques vs drug rate (districts, p&lt;0.001)</div></div>
+    <div class="kpi"><div class="n">&minus;0.26</div><div class="l">mosques vs crime rate (p=0.006)</div></div>
+    <div class="kpi"><div class="n">+0.36</div><div class="l">drug link after controls</div></div>
+    <div class="kpi"><div class="n">115</div><div class="l">districts analysed</div></div>
+  </div>
+
+  <h3>How we measured religiosity</h3>
+  <p>You cannot count personal faith from the outside, so we use a simple stand-in: mosques per 100,000 people in each district, from the national mosque register (6,585 mosques). More mosques per person means a larger, more settled religious community. The range is wide, from under 4 per 100,000 in Kuala Lumpur to over 40 in Terengganu, so there is plenty to compare.</p>
+  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/01%20religiosity_density_distribution.png" alt="Distribution of mosque density across districts">
+  <p class="cap">Districts split into thirds by mosque density. We compare the top third (high) with the bottom third (low).</p>
+  <p>One caveat up front: this measures the size of the religious community, which closely tracks being Malay-Muslim and rural. It does not measure how devout people are. That caveat turns out to be the whole story.</p>
+
+  <h3>Finding 1. Religious areas have less crime, not more</h3>
+  <p>Start with the 16 states. Rank them by mosque density and compare the top five with the bottom five.</p>
+  <table>
+    <tr><th>Per 100,000 people</th><th class="num">High-religiosity states</th><th class="num">Low-religiosity states</th></tr>
+    <tr><td>Violent + property crime</td><td class="num">113</td><td class="num">207</td></tr>
+    <tr><td>Drug users and addicts</td><td class="num">746</td><td class="num">379</td></tr>
+  </table>
+  <p>High-religiosity states have about half the crime rate. Crime sits in the rich, urban, low-religiosity states, not the religious ones. Now the proper test, at district level, with 115 districts.</p>
+  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/03%20density_vs_crime.png" alt="Scatter of mosque density versus crime rate">
+  <p class="cap">Each dot is a district. More mosques per person goes with less recorded crime (r = &minus;0.26, p = 0.006).</p>
+  <p>The link is real and holds after we account for who lives there (partial r = &minus;0.28 controlling for ethnicity). This is the opposite of the "more religion, more crime" claim.</p>
+
+  <h3>Finding 2. Religious areas do have more drug cases</h3>
+  <p>Drugs go the other way. The high-religiosity states carry almost double the drug rate, and at district level the link is clear and strong.</p>
+  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/02%20density_vs_drug.png" alt="Scatter of mosque density versus drug rate">
+  <p class="cap">The same districts. More mosques per person goes with more recorded drug cases (r = +0.48, p &lt; 0.001).</p>
+  <p>So the two outcomes point in opposite directions, and both are statistically solid. Denser mosque provision goes with more drug cases and less crime. Any claim that treats "crime and drugs" as one moral outcome is already wrong here.</p>
+
+  <h3>Finding 3. The drug link is not just poverty</h3>
+  <p>The obvious objection: high-mosque districts are Malay-majority, younger, and poorer, and each of those shapes drug figures by itself. If the drug link were only that, it would vanish once we hold those factors constant. It does not.</p>
+  <img class="chart" src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/04%20drug_link_controls.png" alt="Drug link before and after controls">
+  <p class="cap">The drug link shrinks as we remove each factor, but it does not disappear. It holds at +0.36 after controlling for ethnicity, age and income together.</p>
+  <p>This is the part a quick look would miss. Who lives there and how poor they are explains some of the drug link, the number falls from 0.48 to 0.36, but a real link remains. Mosque density still tracks drug cases after the usual explanations are removed.</p>
+  <div class="callout note">
+    <strong>More drug cases does not mean religion causes drugs.</strong> This is an area-level link, not proof of cause, and the arrow could run either way. The east-coast Malay belt (Kelantan, Terengganu) has both the most mosques per person and Malaysia's long-standing heroin and meth problem, driven by trafficking routes, rural joblessness and youth. Dense mosque provision marks that region; it does not cause its addiction. Read the drug number as "this is where Malaysia's drug burden sits," not "faith breeds addiction."
+  </div>
+
+  <h3>Finding 4. Religious areas are poorer, but not more unequal</h3>
+  <p>This is where the pattern resolves. High-religiosity states are much poorer.</p>
+  <table>
+    <tr><th>Measure</th><th class="num">High-religiosity states</th><th class="num">Low-religiosity states</th></tr>
+    <tr><td>Median monthly household income</td><td class="num">RM 4,707</td><td class="num">RM 8,736</td></tr>
+    <tr><td>Poverty rate</td><td class="num">9.9%</td><td class="num">1.5%</td></tr>
+    <tr><td>Inequality (Gini)</td><td class="num">0.35</td><td class="num">0.36</td></tr>
+  </table>
+  <p>Households in the most religious states earn about half what households in the least religious states earn, and their poverty rate is roughly six times higher. Districts show the same slope: more mosques, lower income (r = &minus;0.24).</p>
+  <p>Inequality is the exception, and it matters. The Gini score is almost the same in both groups (0.35 versus 0.36). So the gap is about the <em>level</em> of income, not how evenly it is shared. Rich and poor states spread their income about equally inside themselves; they just sit at different rungs of the ladder.</p>
+
+  <h3>What this means</h3>
+  <p><strong>On crime, the claim is backwards.</strong> More religious areas record less crime, and it holds after controls. Everyday crime is an urban, richer-state pattern.</p>
+  <p><strong>On drugs, the claim looks right but for the wrong reason.</strong> More religious areas do record more drug cases, and it is a real pattern. But it maps onto the poor rural east coast and its trafficking geography, not onto personal faith.</p>
+  <p><strong>The one fact under both results is poverty.</strong> "High mosque density" and "poor and rural" describe almost the same places. Once you see that, neither result is really about religion. They are about where Malaysia's wealth, its cities, and its drug burden happen to sit. Next time you meet this claim, ask what else is true of those places before you credit the faith.</p>
+
+  <h3>Quick answers</h3>
+  <div class="faq">
+    <p class="q">What is the crime rate in high-religiosity areas?</p>
+    <p class="a">Lower. High-religiosity states record 113 crimes per 100,000, against 207 in low-religiosity states. Across districts, more mosques means less crime.</p>
+    <p class="q">What is the drug rate in high-religiosity areas?</p>
+    <p class="a">Higher. About 746 drug users and addicts per 100,000, against 379 in low-religiosity states, roughly double.</p>
+    <p class="q">What is the income in high-religiosity areas?</p>
+    <p class="a">Lower. Median household income is RM 4,707 a month, against RM 8,736 in low-religiosity states, a little over half.</p>
+    <p class="q">What is the poverty rate in high-religiosity areas?</p>
+    <p class="a">Higher. About 9.9%, against 1.5% in low-religiosity states, roughly six times as high.</p>
+    <p class="q">What is the inequality in high-religiosity areas?</p>
+    <p class="a">About the same. Gini is 0.35, against 0.36 elsewhere. The difference is in income level, not how evenly income is shared.</p>
+    <p class="q">What about GDP?</p>
+    <p class="a">We used household income as the measure of economic level, because reliable district GDP was not available across all states. On income, high-religiosity areas earn about half as much.</p>
+    <p class="q">So does religion cause crime or drugs?</p>
+    <p class="a">No. These are links between places, not proof of cause. More mosques marks poorer, rural areas, and it is that poverty and geography, not faith, that the crime and drug numbers follow.</p>
+  </div>
+
+  <h3>How the analysis was done</h3>
+  <p>Religiosity is mosques per 100,000 from the national register, matched to districts by a name crosswalk that resolved all but one record. Drug figures are AADK's 2024 bulletin (users and addicts by district, 2023). Crime is police-recorded violent and property offences by district, 2023. Population, ethnicity and age are the 2023 district series. Income, poverty and inequality are the latest state series. We use Pearson correlations with significance tests, and remove confounders by partial correlation (taking out ethnicity, young-male share and income from both variables).</p>
+  <div class="callout">
+    <strong>Limits, stated plainly.</strong> These are area-level links, so they describe places, not people, and cannot prove cause or direction. Recorded drug and crime counts partly reflect how hard an area polices and reports, not only real behaviour. Mosque density stands in for religious-community size, not personal faith. Income enters as a state-level control, which captures the big gap between states but not finer gaps within them.
+  </div>
+
+  <footer>© 2026 Lee Yih Ven | Data-Driven Solutions. Sources: JAKIM mosque register, AADK Maklumat Dadah 2024, PDRM crime statistics, DOSM population, income, poverty and inequality series.</footer>
+</div>
+</body>
+</html>

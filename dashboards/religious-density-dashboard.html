@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mosques, Crime and Drugs | Data Stories Lab</title>
+<meta name="description" content="Explore how religious density relates to crime, drugs, income and poverty across 149 Malaysian districts and 16 states.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a1a1a; --gray:#555; --mute:#6b7280; --hair:#e2e2e2; --accent:#B8860B; --navy:#1E3A5F; --paper:#fff;
+         --teal:#2E7D6F; --blue:#4A7FB5; --red:#B85450; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); }
+  .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+  @media(max-width:560px){ .sw{ padding:11px 12px; } .sw:first-child{ padding-left:0; } }
+  .tool{ padding:22px 0 8px; }
+  .filter{ display:flex; gap:18px; flex-wrap:wrap; align-items:center; border:1px solid var(--hair); padding:13px 16px; margin-bottom:18px; }
+  .filter label{ font-size:.58rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-right:6px; }
+  .filter select{ padding:6px 8px; border:1px solid var(--hair); font-family:inherit; font-size:.85rem; }
+  .filter .note{ font-size:.72rem; color:var(--gray); font-style:italic; margin-left:auto; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.7rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:264px; margin-top:14px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+  table{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  th{ text-align:left; color:var(--navy); border-bottom:2px solid var(--accent); padding:8px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  td{ padding:8px; border-bottom:1px solid #eee; } td.r{ text-align:right; font-variant-numeric:tabular-nums; }
+  .badge{ font-size:.58rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase; padding:2px 7px; border-radius:2px; }
+  .badge.High{ background:#f3e6c6; color:#7a5c1e; } .badge.Medium{ background:#e6eef5; color:#345; } .badge.Low{ background:#eef2f0; color:#2E7D6F; }
+  .verdict{ font-weight:800; } .verdict.t{ color:#B85450; } .verdict.f{ color:#2E7D6F; }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .kpis{ grid-template-columns:1fr 1fr; } .grid{ grid-template-columns:1fr; } }
+  @media print{ *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } .page{ display:block !important; } .pagenav,.filter{ display:none !important; } .ccard,.kpi,table{ break-inside:avoid; page-break-inside:avoid; } }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><span class="sep">/</span><span>Mosques, Crime and Drugs</span></div>
+
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/religious-density/cover%20image.jpeg" alt="Map of Malaysia shaded by mosque density beside rising and falling data lines">
+        <figcaption><span>Where Malaysia's religious institutions cluster, and what the social numbers do there.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Religion &amp; society</span>
+      <h1 class="title">Mosques, Crime and Drugs</h1>
+      <p class="standfirst">What Malaysia's districts reveal about religion and poverty</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>149 districts &middot; 16 states &middot; 2023</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/religious-density.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+          <a class="sw" href="/data-analyst-portfolio/agentic_workflow/religious-density.html">AI Assistant</a>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="filter">
+        <span><label>State</label><select id="fState"><option>All</option></select></span>
+        <span><label>Religious density</label><select id="fTier"><option>All</option><option>High</option><option>Medium</option><option>Low</option></select></span>
+        <span class="note">Filters update every view. Density = mosques per 100,000 people.</span>
+      </div>
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">Overview</button>
+        <button class="pbtn" data-p="2">Crime</button>
+        <button class="pbtn" data-p="3">Drugs</button>
+        <button class="pbtn" data-p="4">The profile</button>
+      </div>
+
+      <div class="page active" id="p1">
+        <div class="kpis" id="k1"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Which states are most religious</div><div class="cs">Mosques per 100,000 people, by state</div><div class="cwrap"><canvas id="c_state"></canvas></div><div class="csrc">Source: JAKIM mosque register; DOSM population 2023.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">The most religious districts</div><div class="cs">Top districts by mosque density (respects filters)</div><div class="cwrap"><canvas id="c_topdist"></canvas></div><div class="csrc">Source: JAKIM mosque register; DOSM population 2023.</div></div>
+        </div>
+      </div>
+
+      <div class="page" id="p2">
+        <div class="kpis" id="k2"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">More mosques, less crime</div><div class="cs">Each dot is a district: density vs crime rate</div><div class="cwrap"><canvas id="c_crime"></canvas></div><div class="csrc">Source: PDRM crime 2023; DOSM population. r = &minus;0.26 (p=0.006).</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Highest-crime districts</div><div class="cs">Are they religious-dense? Check the badge</div><div id="t_crime"></div><div class="csrc">Source: PDRM crime 2023 (violent + property).</div></div>
+        </div>
+      </div>
+
+      <div class="page" id="p3">
+        <div class="kpis" id="k3"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">More mosques, more drug cases</div><div class="cs">Each dot is a district: density vs drug rate</div><div class="cwrap"><canvas id="c_drug"></canvas></div><div class="csrc">Source: AADK 2024 (users &amp; addicts, 2023); DOSM population. r = +0.48 (p&lt;0.001).</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Highest drug-burden districts</div><div class="cs">Most are high-density, and poor</div><div id="t_drug"></div><div class="csrc">Source: AADK Maklumat Dadah 2024.</div></div>
+        </div>
+      </div>
+
+      <div class="page" id="p4">
+        <div class="kpis" id="k4"></div>
+        <div class="grid">
+          <div class="ccard full"><span class="tab"></span><div class="ct">Drugs rise, crime falls, as density climbs</div><div class="cs">District averages by religious-density tier</div><div class="cwrap" style="height:300px"><canvas id="c_profile"></canvas></div><div class="csrc">Source: AADK, PDRM, DOSM 2023. Bars: drug rate. Line: crime rate.</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">Is a high-religious-density area "backward, poor, high-crime"?</div><div class="cs">The stereotype, checked against the data</div><div id="t_profile"></div><div class="csrc">High vs low density tiers. Verdict from 2023 figures.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  const DATA = {"districts":[{"state":"Johor","district":"BATU PAHAT","pop":504000,"mosque_per100k":37.7,"drug":351.8,"crime":74.0,"rape":3.77,"malay":63.4,"youngmale":15.4,"income":6879.0,"tier":"Medium"},{"state":"Johor","district":"JOHOR BAHRU","pop":1761600,"mosque_per100k":6.58,"drug":345.9,"crime":null,"rape":null,"malay":47.0,"youngmale":14.6,"income":6879.0,"tier":"Low"},{"state":"Johor","district":"KLUANG","pop":328700,"mosque_per100k":20.69,"drug":309.7,"crime":110.7,"rape":4.26,"malay":52.4,"youngmale":16.8,"income":6879.0,"tier":"Medium"},{"state":"Johor","district":"KOTA TINGGI","pop":229300,"mosque_per100k":34.02,"drug":568.7,"crime":109.0,"rape":6.11,"malay":81.2,"youngmale":15.5,"income":6879.0,"tier":"Medium"},{"state":"Johor","district":"KULAI","pop":340300,"mosque_per100k":9.11,"drug":139.9,"crime":null,"rape":null,"malay":46.2,"youngmale":16.4,"income":6879.0,"tier":"Low"},{"state":"Johor","district":"MERSING","pop":80100,"mosque_per100k":44.94,"drug":752.8,"crime":108.6,"rape":14.98,"malay":81.0,"youngmale":15.2,"income":6879.0,"tier":"High"},{"state":"Johor","district":"MUAR","pop":318700,"mosque_per100k":26.36,"drug":476.6,"crime":104.2,"rape":7.53,"malay":55.6,"youngmale":16.7,"income":6879.0,"tier":"Medium"},{"state":"Johor","district":"PONTIAN","pop":175800,"mosque_per100k":51.19,"drug":782.7,"crime":130.8,"rape":5.12,"malay":66.3,"youngmale":15.7,"income":6879.0,"tier":"High"},{"state":"Johor","district":"SEGAMAT","pop":201600,"mosque_per100k":32.74,"drug":560.5,"crime":90.3,"rape":3.47,"malay":53.0,"youngmale":15.5,"income":6879.0,"tier":"Medium"},{"state":"Johor","district":"TANGKAK","pop":167100,"mosque_per100k":37.7,"drug":387.8,"crime":null,"rape":null,"malay":62.8,"youngmale":15.2,"income":6879.0,"tier":"Medium"},{"state":"Kedah","district":"BALING","pop":146700,"mosque_per100k":44.99,"drug":706.2,"crime":199.0,"rape":7.5,"malay":90.2,"youngmale":14.6,"income":4402.0,"tier":"High"},{"state":"Kedah","district":"BANDAR BAHARU","pop":45100,"mosque_per100k":35.48,"drug":1292.7,"crime":99.8,"rape":6.65,"malay":81.6,"youngmale":14.6,"income":4402.0,"tier":"Medium"},{"state":"Kedah","district":"KOTA SETAR","pop":379300,"mosque_per100k":25.05,"drug":834.4,"crime":309.3,"rape":11.86,"malay":72.5,"youngmale":13.9,"income":4402.0,"tier":"Medium"},{"state":"Kedah","district":"KUALA MUDA","pop":560300,"mosque_per100k":13.56,"drug":345.4,"crime":235.2,"rape":5.0,"malay":67.2,"youngmale":15.4,"income":4402.0,"tier":"Low"},{"state":"Kedah","district":"KUBANG PASU","pop":251500,"mosque_per100k":32.6,"drug":662.0,"crime":160.2,"rape":10.74,"malay":87.9,"youngmale":13.8,"income":4402.0,"tier":"Medium"},{"state":"Kedah","district":"KULIM","pop":346400,"mosque_per100k":10.97,"drug":288.4,"crime":179.3,"rape":7.22,"malay":65.8,"youngmale":15.1,"income":4402.0,"tier":"Low"},{"state":"Kedah","district":"LANGKAWI","pop":98000,"mosque_per100k":29.59,"drug":1053.1,"crime":249.0,"rape":17.35,"malay":87.6,"youngmale":14.9,"income":4402.0,"tier":"Medium"},{"state":"Kedah","district":"PADANG TERAP","pop":67100,"mosque_per100k":50.67,"drug":1348.7,"crime":180.3,"rape":10.43,"malay":87.5,"youngmale":15.1,"income":4402.0,"tier":"High"},{"state":"Kedah","district":"PENDANG","pop":100700,"mosque_per100k":49.65,"drug":1588.9,"crime":199.6,"rape":14.9,"malay":89.2,"youngmale":14.8,"income":4402.0,"tier":"High"},{"state":"Kedah","district":"POKOK SENA","pop":50500,"mosque_per100k":61.39,"drug":null,"crime":null,"rape":null,"malay":87.5,"youngmale":16.0,"income":4402.0,"tier":"High"},{"state":"Kedah","district":"SIK","pop":69300,"mosque_per100k":43.29,"drug":681.1,"crime":76.5,"rape":1.44,"malay":91.2,"youngmale":14.7,"income":4402.0,"tier":"High"},{"state":"Kedah","district":"YAN","pop":74300,"mosque_per100k":45.76,"drug":783.3,"crime":129.2,"rape":6.73,"malay":95.3,"youngmale":14.4,"income":4402.0,"tier":"High"},{"state":"Kelantan","district":"BACHOK","pop":163100,"mosque_per100k":34.95,"drug":1112.8,"crime":98.1,"rape":6.74,"malay":97.9,"youngmale":15.1,"income":3614.0,"tier":"Medium"},{"state":"Kelantan","district":"GUA MUSANG","pop":107200,"mosque_per100k":33.58,"drug":993.5,"crime":108.2,"rape":10.26,"malay":76.9,"youngmale":14.1,"income":3614.0,"tier":"Medium"},{"state":"Kelantan","district":"JELI","pop":56900,"mosque_per100k":38.66,"drug":1729.3,"crime":77.3,"rape":3.51,"malay":94.9,"youngmale":17.2,"income":3614.0,"tier":"Medium"},{"state":"Kelantan","district":"KECIL LOJING","pop":11100,"mosque_per100k":18.02,"drug":null,"crime":null,"rape":null,"malay":18.9,"youngmale":16.2,"income":3614.0,"tier":"Low"},{"state":"Kelantan","district":"KOTA BHARU","pop":575800,"mosque_per100k":23.27,"drug":360.5,"crime":141.5,"rape":7.64,"malay":94.1,"youngmale":15.3,"income":3614.0,"tier":"Medium"},{"state":"Kelantan","district":"KUALA KRAI","pop":109400,"mosque_per100k":46.62,"drug":883.0,"crime":57.6,"rape":10.97,"malay":91.5,"youngmale":14.1,"income":3614.0,"tier":"High"},{"state":"Kelantan","district":"MACHANG","pop":115300,"mosque_per100k":37.29,"drug":995.7,"crime":91.9,"rape":2.6,"malay":96.9,"youngmale":14.9,"income":3614.0,"tier":"Medium"},{"state":"Kelantan","district":"PASIR MAS","pop":237500,"mosque_per100k":37.89,"drug":853.1,"crime":58.5,"rape":8.42,"malay":96.9,"youngmale":13.8,"income":3614.0,"tier":"Medium"},{"state":"Kelantan","district":"PASIR PUTEH","pop":141000,"mosque_per100k":45.39,"drug":905.0,"crime":127.0,"rape":10.64,"malay":98.2,"youngmale":14.3,"income":3614.0,"tier":"High"},{"state":"Kelantan","district":"TANAH MERAH","pop":156100,"mosque_per100k":28.83,"drug":784.1,"crime":119.2,"rape":1.92,"malay":93.1,"youngmale":14.9,"income":3614.0,"tier":"Medium"},{"state":"Kelantan","district":"TUMPAT","pop":186500,"mosque_per100k":24.66,"drug":715.8,"crime":99.7,"rape":4.83,"malay":91.8,"youngmale":13.2,"income":3614.0,"tier":"Medium"},{"state":"Melaka","district":"ALOR GAJAH","pop":256300,"mosque_per100k":25.75,"drug":607.1,"crime":111.2,"rape":6.24,"malay":73.0,"youngmale":16.4,"income":6210.0,"tier":"Medium"},{"state":"Melaka","district":"JASIN","pop":154500,"mosque_per100k":31.07,"drug":512.0,"crime":121.7,"rape":4.53,"malay":75.0,"youngmale":16.0,"income":6210.0,"tier":"Medium"},{"state":"Melaka","district":"MELAKA TENGAH","pop":617500,"mosque_per100k":12.31,"drug":511.4,"crime":159.4,"rape":8.58,"malay":60.6,"youngmale":13.1,"income":6210.0,"tier":"Low"},{"state":"Negeri Sembilan","district":"JELEBU","pop":47500,"mosque_per100k":58.95,"drug":1621.1,"crime":126.3,"rape":0.0,"malay":58.5,"youngmale":12.8,"income":5226.0,"tier":"High"},{"state":"Negeri Sembilan","district":"JEMPOL","pop":129500,"mosque_per100k":33.2,"drug":560.6,"crime":158.3,"rape":5.41,"malay":64.2,"youngmale":10.9,"income":5226.0,"tier":"Medium"},{"state":"Negeri Sembilan","district":"KUALA PILAH","pop":71400,"mosque_per100k":95.24,"drug":945.4,"crime":161.1,"rape":8.4,"malay":76.2,"youngmale":13.0,"income":5226.0,"tier":"High"},{"state":"Negeri Sembilan","district":"PORT DICKSON","pop":132700,"mosque_per100k":18.09,"drug":620.9,"crime":162.8,"rape":7.54,"malay":51.4,"youngmale":15.1,"income":5226.0,"tier":"Low"},{"state":"Negeri Sembilan","district":"REMBAU","pop":48500,"mosque_per100k":86.6,"drug":1047.4,"crime":132.0,"rape":2.06,"malay":80.8,"youngmale":15.5,"income":5226.0,"tier":"High"},{"state":"Negeri Sembilan","district":"SEREMBAN","pop":705500,"mosque_per100k":7.94,"drug":394.6,"crime":108.0,"rape":3.26,"malay":56.1,"youngmale":13.0,"income":5226.0,"tier":"Low"},{"state":"Negeri Sembilan","district":"TAMPIN","pop":89800,"mosque_per100k":35.63,"drug":869.7,"crime":71.3,"rape":2.23,"malay":57.6,"youngmale":12.0,"income":5226.0,"tier":"Medium"},{"state":"Pahang","district":"BENTONG","pop":119600,"mosque_per100k":22.58,"drug":842.8,"crime":205.7,"rape":8.36,"malay":53.8,"youngmale":15.4,"income":4753.0,"tier":"Medium"},{"state":"Pahang","district":"BERA","pop":100100,"mosque_per100k":33.97,"drug":703.3,"crime":119.9,"rape":6.99,"malay":56.4,"youngmale":14.8,"income":4753.0,"tier":"Medium"},{"state":"Pahang","district":"CAMERON HIGHLANDS","pop":40900,"mosque_per100k":12.22,"drug":null,"crime":122.2,"rape":12.22,"malay":21.3,"youngmale":16.9,"income":4753.0,"tier":"Low"},{"state":"Pahang","district":"JERANTUT","pop":98600,"mosque_per100k":53.75,"drug":802.2,"crime":119.7,"rape":12.17,"malay":75.8,"youngmale":14.3,"income":4753.0,"tier":"High"},{"state":"Pahang","district":"KUANTAN","pop":565800,"mosque_per100k":15.55,"drug":662.2,"crime":106.2,"rape":5.83,"malay":79.5,"youngmale":13.6,"income":4753.0,"tier":"Low"},{"state":"Pahang","district":"LIPIS","pop":100100,"mosque_per100k":71.93,"drug":null,"crime":null,"rape":null,"malay":67.5,"youngmale":15.4,"income":4753.0,"tier":"High"},{"state":"Pahang","district":"MARAN","pop":117000,"mosque_per100k":64.1,"drug":1000.0,"crime":111.1,"rape":7.69,"malay":88.5,"youngmale":14.4,"income":4753.0,"tier":"High"},{"state":"Pahang","district":"PEKAN","pop":125900,"mosque_per100k":42.89,"drug":987.3,"crime":77.8,"rape":5.56,"malay":78.4,"youngmale":18.0,"income":4753.0,"tier":"High"},{"state":"Pahang","district":"RAUB","pop":98800,"mosque_per100k":46.56,"drug":1222.7,"crime":97.2,"rape":5.06,"malay":51.9,"youngmale":14.3,"income":4753.0,"tier":"High"},{"state":"Pahang","district":"ROMPIN","pop":101600,"mosque_per100k":58.07,"drug":820.9,"crime":130.9,"rape":8.86,"malay":73.3,"youngmale":14.2,"income":4753.0,"tier":"High"},{"state":"Pahang","district":"TEMERLOH","pop":174700,"mosque_per100k":45.79,"drug":706.4,"crime":117.3,"rape":6.3,"malay":71.2,"youngmale":12.8,"income":4753.0,"tier":"High"},{"state":"Perak","district":"BATANG PADANG","pop":126200,"mosque_per100k":22.19,"drug":583.2,"crime":null,"rape":null,"malay":52.9,"youngmale":14.2,"income":4494.0,"tier":"Medium"},{"state":"Perak","district":"HILIR PERAK","pop":142100,"mosque_per100k":55.59,"drug":null,"crime":295.6,"rape":7.04,"malay":52.1,"youngmale":14.9,"income":4494.0,"tier":"High"},{"state":"Perak","district":"HULU PERAK","pop":97100,"mosque_per100k":51.49,"drug":1404.7,"crime":null,"rape":null,"malay":72.9,"youngmale":14.2,"income":4494.0,"tier":"High"},{"state":"Perak","district":"KAMPAR","pop":98900,"mosque_per100k":18.2,"drug":541.0,"crime":92.0,"rape":3.03,"malay":34.6,"youngmale":15.8,"income":4494.0,"tier":"Low"},{"state":"Perak","district":"KERIAN","pop":168500,"mosque_per100k":42.14,"drug":498.5,"crime":105.6,"rape":5.93,"malay":75.4,"youngmale":14.2,"income":4494.0,"tier":"High"},{"state":"Perak","district":"KINTA","pop":909100,"mosque_per100k":8.8,"drug":313.5,"crime":null,"rape":null,"malay":44.8,"youngmale":13.0,"income":4494.0,"tier":"Low"},{"state":"Perak","district":"KUALA KANGSAR","pop":178300,"mosque_per100k":42.62,"drug":550.2,"crime":55.5,"rape":4.49,"malay":59.3,"youngmale":14.3,"income":4494.0,"tier":"High"},{"state":"Perak","district":"LARUT DAN MATANG","pop":275400,"mosque_per100k":26.51,"drug":null,"crime":null,"rape":null,"malay":63.5,"youngmale":12.7,"income":4494.0,"tier":"Medium"},{"state":"Perak","district":"MANJUNG","pop":252300,"mosque_per100k":19.02,"drug":258.8,"crime":111.0,"rape":6.74,"malay":53.9,"youngmale":14.9,"income":4494.0,"tier":"Medium"},{"state":"Perak","district":"MUALLIM","pop":78600,"mosque_per100k":21.63,"drug":426.2,"crime":null,"rape":null,"malay":67.6,"youngmale":18.6,"income":4494.0,"tier":"Medium"},{"state":"Perak","district":"PERAK TENGAH","pop":97200,"mosque_per100k":74.07,"drug":656.4,"crime":147.1,"rape":7.2,"malay":89.7,"youngmale":17.4,"income":4494.0,"tier":"High"},{"state":"Perak","district":"SELAMA","pop":34800,"mosque_per100k":54.6,"drug":null,"crime":129.3,"rape":5.75,"malay":89.1,"youngmale":13.8,"income":4494.0,"tier":"High"},{"state":"Perlis","district":"PERLIS","pop":293100,"mosque_per100k":35.82,"drug":null,"crime":null,"rape":null,"malay":85.6,"youngmale":16.2,"income":4713.0,"tier":"Medium"},{"state":"Pulau Pinang","district":"BARAT DAYA","pop":244200,"mosque_per100k":10.65,"drug":556.9,"crime":166.7,"rape":2.46,"malay":53.2,"youngmale":12.7,"income":6502.0,"tier":"Low"},{"state":"Pulau Pinang","district":"SEBERANG PERAI SELATAN","pop":186800,"mosque_per100k":13.38,"drug":517.1,"crime":179.3,"rape":11.24,"malay":42.5,"youngmale":12.6,"income":6502.0,"tier":"Low"},{"state":"Pulau Pinang","district":"SEBERANG PERAI TENGAH","pop":433500,"mosque_per100k":11.07,"drug":554.3,"crime":213.4,"rape":5.54,"malay":43.9,"youngmale":15.0,"income":6502.0,"tier":"Low"},{"state":"Pulau Pinang","district":"SEBERANG PERAI UTARA","pop":346600,"mosque_per100k":21.35,"drug":590.9,"crime":200.8,"rape":4.33,"malay":60.1,"youngmale":13.2,"income":6502.0,"tier":"Medium"},{"state":"Pulau Pinang","district":"TIMUR LAUT","pop":561600,"mosque_per100k":6.41,"drug":526.7,"crime":221.0,"rape":5.7,"malay":21.5,"youngmale":13.3,"income":6502.0,"tier":"Low"},{"state":"Sabah","district":"BEAUFORT","pop":77000,"mosque_per100k":72.73,"drug":729.9,"crime":77.9,"rape":3.9,"malay":23.2,"youngmale":14.8,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"BELURAN","pop":83900,"mosque_per100k":52.44,"drug":203.8,"crime":100.1,"rape":9.54,"malay":3.0,"youngmale":19.0,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"KENINGAU","pop":156100,"mosque_per100k":24.34,"drug":262.0,"crime":92.9,"rape":12.81,"malay":3.3,"youngmale":15.1,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"KINABATANGAN","pop":149100,"mosque_per100k":44.27,"drug":null,"crime":null,"rape":null,"malay":2.5,"youngmale":23.1,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"KOTA BELUD","pop":109600,"mosque_per100k":59.31,"drug":267.3,"crime":31.9,"rape":10.95,"malay":2.1,"youngmale":14.5,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"KOTA KINABALU","pop":525700,"mosque_per100k":10.65,"drug":298.3,"crime":189.5,"rape":2.47,"malay":13.2,"youngmale":15.8,"income":4577.0,"tier":"Low"},{"state":"Sabah","district":"KOTA MARUDU","pop":72400,"mosque_per100k":73.2,"drug":372.9,"crime":110.5,"rape":16.57,"malay":2.5,"youngmale":14.2,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"KUALA PENYU","pop":24200,"mosque_per100k":86.78,"drug":null,"crime":null,"rape":null,"malay":29.8,"youngmale":14.9,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"KUDAT","pop":90700,"mosque_per100k":27.56,"drug":327.5,"crime":61.7,"rape":5.51,"malay":6.2,"youngmale":15.1,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"KUNAK","pop":76200,"mosque_per100k":57.74,"drug":210.0,"crime":63.0,"rape":3.94,"malay":2.9,"youngmale":20.2,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"LAHAD DATU","pop":242100,"mosque_per100k":48.33,"drug":116.1,"crime":84.7,"rape":8.67,"malay":5.3,"youngmale":18.4,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"NABAWAN","pop":30100,"mosque_per100k":13.29,"drug":null,"crime":null,"rape":null,"malay":0.7,"youngmale":15.0,"income":4577.0,"tier":"Low"},{"state":"Sabah","district":"PAPAR","pop":154800,"mosque_per100k":14.21,"drug":495.5,"crime":97.5,"rape":8.4,"malay":24.5,"youngmale":15.8,"income":4577.0,"tier":"Low"},{"state":"Sabah","district":"PENAMPANG","pop":165900,"mosque_per100k":1.81,"drug":312.2,"crime":156.7,"rape":15.07,"malay":7.9,"youngmale":16.2,"income":4577.0,"tier":"Low"},{"state":"Sabah","district":"PITAS","pop":38000,"mosque_per100k":36.84,"drug":null,"crime":null,"rape":null,"malay":2.1,"youngmale":15.0,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"PUTATAN","pop":70200,"mosque_per100k":22.79,"drug":null,"crime":null,"rape":null,"malay":19.7,"youngmale":15.5,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"RANAU","pop":87500,"mosque_per100k":33.14,"drug":305.1,"crime":90.3,"rape":4.57,"malay":8.2,"youngmale":14.6,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"SANDAKAN","pop":470400,"mosque_per100k":15.94,"drug":213.0,"crime":115.0,"rape":4.04,"malay":10.8,"youngmale":17.0,"income":4577.0,"tier":"Low"},{"state":"Sabah","district":"SEMPORNA","pop":186000,"mosque_per100k":71.51,"drug":90.9,"crime":118.3,"rape":5.91,"malay":2.2,"youngmale":17.6,"income":4577.0,"tier":"High"},{"state":"Sabah","district":"SIPITANG","pop":39400,"mosque_per100k":30.46,"drug":566.0,"crime":55.8,"rape":7.61,"malay":27.9,"youngmale":15.0,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"TAMBUNAN","pop":32700,"mosque_per100k":30.58,"drug":null,"crime":null,"rape":null,"malay":0.9,"youngmale":14.1,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"TAWAU","pop":394200,"mosque_per100k":34.25,"drug":242.3,"crime":201.7,"rape":5.83,"malay":8.2,"youngmale":17.5,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"TELUPID","pop":30300,"mosque_per100k":13.2,"drug":null,"crime":null,"rape":null,"malay":1.7,"youngmale":18.8,"income":4577.0,"tier":"Low"},{"state":"Sabah","district":"TENOM","pop":52900,"mosque_per100k":30.25,"drug":249.5,"crime":104.0,"rape":17.01,"malay":7.4,"youngmale":14.6,"income":4577.0,"tier":"Medium"},{"state":"Sabah","district":"TONGOD","pop":44000,"mosque_per100k":15.91,"drug":null,"crime":null,"rape":null,"malay":0.9,"youngmale":18.4,"income":4577.0,"tier":"Low"},{"state":"Sabah","district":"TUARAN","pop":140000,"mosque_per100k":26.43,"drug":285.0,"crime":49.3,"rape":3.57,"malay":10.1,"youngmale":14.8,"income":4577.0,"tier":"Medium"},{"state":"Sarawak","district":"ASAJAYA","pop":34500,"mosque_per100k":84.06,"drug":null,"crime":null,"rape":null,"malay":86.1,"youngmale":13.0,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"BAU","pop":53600,"mosque_per100k":44.78,"drug":375.0,"crime":141.8,"rape":7.46,"malay":9.0,"youngmale":13.4,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"BELURU","pop":27700,"mosque_per100k":3.61,"drug":null,"crime":null,"rape":null,"malay":10.5,"youngmale":16.2,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"BETONG","pop":36800,"mosque_per100k":38.04,"drug":804.3,"crime":209.2,"rape":8.15,"malay":41.6,"youngmale":11.7,"income":4978.0,"tier":"Medium"},{"state":"Sarawak","district":"BINTULU","pop":185200,"mosque_per100k":4.86,"drug":420.1,"crime":201.9,"rape":6.48,"malay":13.7,"youngmale":15.1,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"DALAT","pop":21600,"mosque_per100k":41.67,"drug":213.0,"crime":50.9,"rape":0.0,"malay":3.7,"youngmale":13.4,"income":4978.0,"tier":"Medium"},{"state":"Sarawak","district":"DARO","pop":19900,"mosque_per100k":90.45,"drug":null,"crime":null,"rape":null,"malay":4.5,"youngmale":13.6,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"JULAU","pop":15500,"mosque_per100k":6.45,"drug":71.0,"crime":122.6,"rape":12.9,"malay":1.3,"youngmale":11.6,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"KABONG","pop":18800,"mosque_per100k":53.19,"drug":null,"crime":null,"rape":null,"malay":49.5,"youngmale":11.2,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"KANOWIT","pop":24900,"mosque_per100k":4.02,"drug":60.2,"crime":32.1,"rape":0.0,"malay":4.0,"youngmale":11.2,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"KAPIT","pop":36600,"mosque_per100k":13.66,"drug":262.3,"crime":90.2,"rape":5.46,"malay":3.6,"youngmale":12.3,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"KUCHING","pop":621300,"mosque_per100k":10.3,"drug":452.8,"crime":136.2,"rape":2.09,"malay":37.4,"youngmale":13.4,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"LAWAS","pop":37700,"mosque_per100k":31.83,"drug":583.6,"crime":87.5,"rape":2.65,"malay":39.5,"youngmale":12.7,"income":4978.0,"tier":"Medium"},{"state":"Sarawak","district":"LIMBANG","pop":46100,"mosque_per100k":19.52,"drug":895.9,"crime":47.7,"rape":4.34,"malay":28.2,"youngmale":12.8,"income":4978.0,"tier":"Medium"},{"state":"Sarawak","district":"LUNDU","pop":34200,"mosque_per100k":52.63,"drug":239.8,"crime":184.2,"rape":2.92,"malay":32.2,"youngmale":13.5,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"MARADONG","pop":20700,"mosque_per100k":14.49,"drug":null,"crime":null,"rape":null,"malay":15.5,"youngmale":12.6,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"MARUDI","pop":18700,"mosque_per100k":10.7,"drug":459.9,"crime":406.4,"rape":21.39,"malay":13.4,"youngmale":14.4,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"MATU","pop":16500,"mosque_per100k":42.42,"drug":null,"crime":null,"rape":null,"malay":4.2,"youngmale":13.3,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"MIRI","pop":254400,"mosque_per100k":5.11,"drug":411.6,"crime":114.8,"rape":5.9,"malay":19.3,"youngmale":14.3,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"MUKAH","pop":42700,"mosque_per100k":14.05,"drug":536.3,"crime":117.1,"rape":4.68,"malay":7.7,"youngmale":14.3,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"PUSA","pop":20000,"mosque_per100k":50.0,"drug":null,"crime":null,"rape":null,"malay":90.5,"youngmale":11.0,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"SAMARAHAN","pop":134600,"mosque_per100k":18.57,"drug":null,"crime":null,"rape":null,"malay":44.9,"youngmale":16.5,"income":4978.0,"tier":"Medium"},{"state":"Sarawak","district":"SARATOK","pop":23400,"mosque_per100k":12.82,"drug":98.3,"crime":209.4,"rape":0.0,"malay":27.4,"youngmale":10.3,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"SARIKEI","pop":44700,"mosque_per100k":8.95,"drug":966.4,"crime":161.1,"rape":2.24,"malay":16.8,"youngmale":12.5,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"SEBAUH","pop":31200,"mosque_per100k":9.62,"drug":null,"crime":null,"rape":null,"malay":3.8,"youngmale":14.4,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"SERIAN","pop":86900,"mosque_per100k":26.47,"drug":426.9,"crime":134.6,"rape":10.36,"malay":11.7,"youngmale":12.3,"income":4978.0,"tier":"Medium"},{"state":"Sarawak","district":"SIBU","pop":252900,"mosque_per100k":5.14,"drug":302.9,"crime":204.8,"rape":4.74,"malay":10.0,"youngmale":14.2,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"SIMUNJAN","pop":36900,"mosque_per100k":84.01,"drug":111.1,"crime":124.7,"rape":5.42,"malay":54.2,"youngmale":12.5,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"SRI AMAN","pop":61300,"mosque_per100k":21.21,"drug":567.7,"crime":137.0,"rape":1.63,"malay":23.3,"youngmale":12.1,"income":4978.0,"tier":"Medium"},{"state":"Sarawak","district":"SUBIS","pop":56000,"mosque_per100k":16.07,"drug":null,"crime":null,"rape":null,"malay":12.0,"youngmale":14.6,"income":4978.0,"tier":"Low"},{"state":"Sarawak","district":"TANJUNG MANIS","pop":8000,"mosque_per100k":62.5,"drug":null,"crime":null,"rape":null,"malay":11.3,"youngmale":12.5,"income":4978.0,"tier":"High"},{"state":"Sarawak","district":"TATAU","pop":32100,"mosque_per100k":6.23,"drug":null,"crime":56.1,"rape":6.23,"malay":4.4,"youngmale":13.4,"income":4978.0,"tier":"Low"},{"state":"Selangor","district":"GOMBAK","pop":966200,"mosque_per100k":4.97,"drug":121.4,"crime":183.4,"rape":3.73,"malay":59.6,"youngmale":12.7,"income":9983.0,"tier":"Low"},{"state":"Selangor","district":"KLANG","pop":1134000,"mosque_per100k":4.59,"drug":171.8,"crime":null,"rape":null,"malay":48.3,"youngmale":14.0,"income":9983.0,"tier":"Low"},{"state":"Selangor","district":"KUALA LANGAT","pop":320700,"mosque_per100k":10.6,"drug":302.5,"crime":145.9,"rape":5.3,"malay":64.4,"youngmale":12.4,"income":9983.0,"tier":"Low"},{"state":"Selangor","district":"KUALA SELANGOR","pop":293200,"mosque_per100k":19.78,"drug":280.4,"crime":167.8,"rape":2.73,"malay":77.9,"youngmale":12.6,"income":9983.0,"tier":"Medium"},{"state":"Selangor","district":"PETALING","pop":2334700,"mosque_per100k":3.73,"drug":138.6,"crime":null,"rape":null,"malay":47.5,"youngmale":13.1,"income":9983.0,"tier":"Low"},{"state":"Selangor","district":"SABAK BERNAM","pop":109200,"mosque_per100k":43.04,"drug":727.1,"crime":150.2,"rape":8.24,"malay":73.4,"youngmale":12.5,"income":9983.0,"tier":"High"},{"state":"Selangor","district":"SEPANG","pop":339200,"mosque_per100k":8.55,"drug":334.0,"crime":209.9,"rape":6.49,"malay":61.1,"youngmale":13.4,"income":9983.0,"tier":"Low"},{"state":"Selangor","district":"ULU LANGAT","pop":1460300,"mosque_per100k":3.42,"drug":null,"crime":null,"rape":null,"malay":56.6,"youngmale":13.1,"income":9983.0,"tier":"Low"},{"state":"Selangor","district":"ULU SELANGOR","pop":252200,"mosque_per100k":9.91,"drug":null,"crime":null,"rape":null,"malay":69.5,"youngmale":12.9,"income":9983.0,"tier":"Low"},{"state":"Terengganu","district":"BESUT","pop":162600,"mosque_per100k":51.66,"drug":1168.5,"crime":141.5,"rape":8.0,"malay":96.1,"youngmale":14.5,"income":5878.0,"tier":"High"},{"state":"Terengganu","district":"DUNGUN","pop":165300,"mosque_per100k":30.25,"drug":1069.6,"crime":104.7,"rape":2.42,"malay":95.4,"youngmale":14.8,"income":5878.0,"tier":"Medium"},{"state":"Terengganu","district":"HULU TERENGGANU","pop":73700,"mosque_per100k":108.55,"drug":1899.6,"crime":127.5,"rape":4.07,"malay":92.1,"youngmale":14.7,"income":5878.0,"tier":"High"},{"state":"Terengganu","district":"KEMAMAN","pop":226700,"mosque_per100k":20.29,"drug":846.9,"crime":139.0,"rape":10.15,"malay":91.2,"youngmale":13.2,"income":5878.0,"tier":"Medium"},{"state":"Terengganu","district":"KUALA TERENGGANU","pop":241000,"mosque_per100k":56.43,"drug":null,"crime":172.6,"rape":12.86,"malay":94.6,"youngmale":13.7,"income":5878.0,"tier":"High"},{"state":"Terengganu","district":"MARANG","pop":124200,"mosque_per100k":41.87,"drug":973.4,"crime":82.1,"rape":6.44,"malay":96.6,"youngmale":13.9,"income":5878.0,"tier":"High"},{"state":"Terengganu","district":"SETIU","pop":62900,"mosque_per100k":82.67,"drug":1628.0,"crime":63.6,"rape":6.36,"malay":96.7,"youngmale":14.8,"income":5878.0,"tier":"High"},{"state":"W.P. Kuala Lumpur","district":"W.P. KUALA LUMPUR","pop":2005700,"mosque_per100k":3.69,"drug":null,"crime":null,"rape":null,"malay":42.2,"youngmale":11.4,"income":10234.0,"tier":"Low"},{"state":"W.P. Labuan","district":"W.P. LABUAN","pop":99000,"mosque_per100k":15.15,"drug":null,"crime":null,"rape":null,"malay":25.1,"youngmale":12.4,"income":6904.0,"tier":"Low"},{"state":"W.P. Putrajaya","district":"W.P. PUTRAJAYA","pop":118800,"mosque_per100k":1.68,"drug":null,"crime":null,"rape":null,"malay":92.8,"youngmale":8.2,"income":10056.0,"tier":"Low"}],"states":[{"state":"Terengganu","mosque_per100k":41.82,"drug":996.7,"crime":113.2,"rape":7.11,"income":5878.0,"gini":0.326,"poverty":6.2,"prison":412.1,"tier":"High"},{"state":"Pahang","mosque_per100k":37.19,"drug":790.7,"crime":114.1,"rape":7.24,"income":4753.0,"gini":0.308,"poverty":6.3,"prison":363.8,"tier":"High"},{"state":"Perlis","mosque_per100k":35.82,"drug":955.6,"crime":115.7,"rape":9.55,"income":4713.0,"gini":0.336,"poverty":4.0,"prison":null,"tier":"High"},{"state":"Kelantan","mosque_per100k":31.72,"drug":748.2,"crime":107.2,"rape":6.99,"income":3614.0,"gini":0.385,"poverty":13.2,"prison":429.4,"tier":"High"},{"state":"Sabah","mosque_per100k":30.67,"drug":238.2,"crime":114.5,"rape":6.26,"income":4577.0,"gini":0.395,"poverty":19.7,"prison":233.9,"tier":"High"},{"state":"Kedah","mosque_per100k":26.59,"drug":638.3,"crime":208.6,"rape":8.4,"income":4402.0,"gini":0.359,"poverty":9.0,"prison":410.2,"tier":"High"},{"state":"Perak","mosque_per100k":25.14,"drug":462.2,"crime":140.6,"rape":4.49,"income":4494.0,"gini":0.368,"poverty":7.5,"prison":325.7,"tier":"Medium"},{"state":"Negeri Sembilan","mosque_per100k":23.92,"drug":577.0,"crime":154.7,"rape":5.14,"income":5226.0,"gini":0.369,"poverty":4.4,"prison":222.2,"tier":"Medium"},{"state":"Johor","mosque_per100k":20.16,"drug":388.1,"crime":129.8,"rape":4.72,"income":6879.0,"gini":0.366,"poverty":4.6,"prison":210.2,"tier":"Medium"},{"state":"Melaka","mosque_per100k":18.48,"drug":535.3,"crime":141.7,"rape":7.39,"income":6210.0,"gini":0.37,"poverty":4.2,"prison":513.6,"tier":"Medium"},{"state":"Sarawak","mosque_per100k":16.27,"drug":385.4,"crime":161.7,"rape":4.84,"income":4978.0,"gini":0.382,"poverty":10.8,"prison":243.3,"tier":"Medium"},{"state":"W.P. Labuan","mosque_per100k":15.15,"drug":457.6,"crime":null,"rape":null,"income":6904.0,"gini":0.3,"poverty":2.5,"prison":null,"tier":"Low"},{"state":"Pulau Pinang","mosque_per100k":11.79,"drug":549.2,"crime":203.3,"rape":5.53,"income":6502.0,"gini":0.371,"poverty":2.0,"prison":377.9,"tier":"Low"},{"state":"Selangor","mosque_per100k":5.96,"drug":203.0,"crime":190.6,"rape":5.2,"income":9983.0,"gini":0.361,"poverty":1.5,"prison":385.1,"tier":"Low"},{"state":"W.P. Kuala Lumpur","mosque_per100k":3.74,"drug":300.6,"crime":226.4,"rape":5.04,"income":10234.0,"gini":0.38,"poverty":1.4,"prison":null,"tier":"Low"},{"state":"W.P. Putrajaya","mosque_per100k":1.68,"drug":386.4,"crime":null,"rape":null,"income":10056.0,"gini":0.368,"poverty":0.1,"prison":null,"tier":"Low"}],"cuts":{"dist_low":18.6,"dist_high":41.9}};
+  const D = DATA.districts, S = DATA.states;
+  const NAVY='#1E3A5F', GOLD='#B8860B', TEAL='#2E7D6F', BLUE='#4A7FB5', RED='#B85450', GREY='#9aa3ad', GRID='#e8e8e8';
+  const FONT={ family:'Arial', size:11 };
+  const tierColor={High:GOLD, Medium:BLUE, Low:TEAL};
+  const charts={};
+  let fState='All', fTier='All', active='1';
+
+  function fdist(){ return D.filter(d=> (fState==='All'||d.state===fState) && (fTier==='All'||d.tier===fTier)); }
+  function avg(arr,k){ const v=arr.map(x=>x[k]).filter(x=>x!=null); return v.length? v.reduce((a,b)=>a+b,0)/v.length : null; }
+  function num(x,d){ return x==null?'&ndash;':Number(x).toLocaleString('en',{maximumFractionDigits:d==null?0:d}); }
+  function kpi(v,l){ return '<div class="kpi"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>'; }
+  function baseOpts(o){ return Object.assign({ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }, o); }
+  function destroyAll(){ Object.keys(charts).forEach(k=>{ charts[k].destroy(); delete charts[k]; }); }
+  function mk(id,cfg){ const el=document.getElementById(id); if(el) charts[id]=new Chart(el,cfg); }
+
+  function buildOverview(fs){
+    const topStateArr=[...S].filter(s=>s.mosque_per100k!=null).sort((a,b)=>b.mosque_per100k-a.mosque_per100k);
+    const topState=topStateArr[0];
+    document.getElementById('k1').innerHTML =
+      kpi(fs.length,'districts in view')+kpi(S.length,'states')+
+      kpi(topState.state.replace('W.P. ',''),'most religious state ('+num(topState.mosque_per100k,0)+'/100k)')+
+      kpi(num(avg(fs,'mosque_per100k'),1),'avg mosques /100k (view)');
+    const ss=[...S].filter(s=>s.mosque_per100k!=null).sort((a,b)=>a.mosque_per100k-b.mosque_per100k);
+    mk('c_state',{ type:'bar',
+      data:{ labels:ss.map(s=>s.state.replace('W.P. ','')), datasets:[{ data:ss.map(s=>s.mosque_per100k), backgroundColor:ss.map(s=>tierColor[s.tier]) }] },
+      options:baseOpts({ indexAxis:'y', scales:{ x:{grid:{color:GRID},border:{display:false},ticks:{color:'#555',font:FONT}}, y:{grid:{display:false},ticks:{autoSkip:false,color:'#555',font:{family:'Arial',size:9}}} } }) });
+    const td=[...fs].sort((a,b)=>b.mosque_per100k-a.mosque_per100k).slice(0,12);
+    mk('c_topdist',{ type:'bar',
+      data:{ labels:td.map(d=>d.district), datasets:[{ data:td.map(d=>d.mosque_per100k), backgroundColor:td.map(d=>tierColor[d.tier]) }] },
+      options:baseOpts({ indexAxis:'y', scales:{ x:{grid:{color:GRID},border:{display:false},ticks:{color:'#555',font:FONT}}, y:{grid:{display:false},ticks:{color:'#555',font:{family:'Arial',size:10}}} } }) });
+  }
+
+  function scatterFit(fs,key){ const p=fs.filter(d=>d[key]!=null).map(d=>({x:d.mosque_per100k,y:d[key],t:d.tier}));
+    const n=p.length, mx=p.reduce((a,b)=>a+b.x,0)/n, my=p.reduce((a,b)=>a+b.y,0)/n;
+    const b=p.reduce((a,q)=>a+(q.x-mx)*(q.y-my),0)/p.reduce((a,q)=>a+(q.x-mx)*(q.x-mx),0), a0=my-b*mx;
+    const xs=[Math.min(...p.map(q=>q.x)),Math.max(...p.map(q=>q.x))];
+    return {p,line:xs.map(x=>({x,y:a0+b*x}))}; }
+
+  function buildCrime(fs){
+    const hi=D.filter(d=>d.tier==='High'), lo=D.filter(d=>d.tier==='Low');
+    const top=[...fs].filter(d=>d.crime!=null).sort((a,b)=>b.crime-a.crime)[0];
+    document.getElementById('k2').innerHTML =
+      kpi(num(avg(hi,'crime'),0),'crime /100k, high-density')+kpi(num(avg(lo,'crime'),0),'crime /100k, low-density')+
+      kpi('&minus;0.26','density vs crime (r)')+kpi(top?top.district:'&ndash;','highest-crime district in view');
+    const f=scatterFit(fs,'crime');
+    mk('c_crime',{ data:{ datasets:[
+        { type:'scatter', data:f.p, parsing:false, pointRadius:4, backgroundColor:f.p.map(q=>tierColor[q.t]) },
+        { type:'line', data:f.line, parsing:false, borderColor:NAVY, borderWidth:2, pointRadius:0 } ] },
+      options:baseOpts({ scales:{ x:{title:{display:true,text:'Mosques /100k',font:FONT,color:'#555'},grid:{color:GRID},ticks:{color:'#555',font:FONT}}, y:{title:{display:true,text:'Crime /100k',font:FONT,color:'#555'},grid:{color:GRID},ticks:{color:'#555',font:FONT}} } }) });
+    const rows=[...fs].filter(d=>d.crime!=null).sort((a,b)=>b.crime-a.crime).slice(0,8);
+    document.getElementById('t_crime').innerHTML='<table><thead><tr><th>District</th><th>State</th><th class="r">Crime /100k</th><th>Density</th></tr></thead><tbody>'+
+      rows.map(d=>'<tr><td>'+d.district+'</td><td>'+d.state.replace('W.P. ','')+'</td><td class="r">'+num(d.crime,0)+'</td><td><span class="badge '+d.tier+'">'+d.tier+'</span></td></tr>').join('')+'</tbody></table>';
+  }
+
+  function buildDrugs(fs){
+    const hi=D.filter(d=>d.tier==='High'), lo=D.filter(d=>d.tier==='Low');
+    const top=[...fs].filter(d=>d.drug!=null).sort((a,b)=>b.drug-a.drug)[0];
+    document.getElementById('k3').innerHTML =
+      kpi(num(avg(hi,'drug'),0),'drug /100k, high-density')+kpi(num(avg(lo,'drug'),0),'drug /100k, low-density')+
+      kpi('+0.48','density vs drugs (r)')+kpi(top?top.district:'&ndash;','highest drug district in view');
+    const f=scatterFit(fs,'drug');
+    mk('c_drug',{ data:{ datasets:[
+        { type:'scatter', data:f.p, parsing:false, pointRadius:4, backgroundColor:f.p.map(q=>tierColor[q.t]) },
+        { type:'line', data:f.line, parsing:false, borderColor:RED, borderWidth:2, pointRadius:0 } ] },
+      options:baseOpts({ scales:{ x:{title:{display:true,text:'Mosques /100k',font:FONT,color:'#555'},grid:{color:GRID},ticks:{color:'#555',font:FONT}}, y:{title:{display:true,text:'Drug /100k',font:FONT,color:'#555'},grid:{color:GRID},ticks:{color:'#555',font:FONT}} } }) });
+    const rows=[...fs].filter(d=>d.drug!=null).sort((a,b)=>b.drug-a.drug).slice(0,8);
+    document.getElementById('t_drug').innerHTML='<table><thead><tr><th>District</th><th>State</th><th class="r">Drug /100k</th><th>Density</th></tr></thead><tbody>'+
+      rows.map(d=>'<tr><td>'+d.district+'</td><td>'+d.state.replace('W.P. ','')+'</td><td class="r">'+num(d.drug,0)+'</td><td><span class="badge '+d.tier+'">'+d.tier+'</span></td></tr>').join('')+'</tbody></table>';
+  }
+
+  function buildProfile(){
+    const tiers=['Low','Medium','High'];
+    const byT=t=>D.filter(d=>d.tier===t);
+    const dg=tiers.map(t=>avg(byT(t),'drug'));
+    const cr=tiers.map(t=>avg(byT(t),'crime'));
+    const hi=byT('High'), lo=byT('Low');
+    const hiDrug=avg(hi,'drug'), loDrug=avg(lo,'drug'), hiCrime=avg(hi,'crime'), loCrime=avg(lo,'crime');
+    const incH=avg(hi,'income'), incL=avg(lo,'income');
+    const Sh=S.filter(s=>s.tier==='High'), Sl=S.filter(s=>s.tier==='Low');
+    const povH=avg(Sh,'poverty'), povL=avg(Sl,'poverty'), gH=avg(Sh,'gini'), gL=avg(Sl,'gini');
+    document.getElementById('k4').innerHTML =
+      kpi('RM '+num(incH,0),'income, high-density')+kpi('RM '+num(incL,0),'income, low-density')+
+      kpi(num(povH,1)+'%','poverty, high-density states')+kpi(num(povL,1)+'%','poverty, low-density states');
+    mk('c_profile',{ data:{ labels:tiers, datasets:[
+        { type:'bar', label:'Drug /100k', data:dg, backgroundColor:GOLD, yAxisID:'y' },
+        { type:'line', label:'Crime /100k', data:cr, borderColor:NAVY, backgroundColor:NAVY, borderWidth:2.6, tension:.25, yAxisID:'y1' } ] },
+      options:baseOpts({ plugins:{legend:{display:true,position:'top',align:'start',labels:{font:FONT,boxWidth:10,padding:12,color:'#444'}}},
+        scales:{ x:{grid:{display:false},ticks:{color:'#555',font:FONT}},
+          y:{position:'left',grid:{color:GRID},ticks:{color:'#555',font:FONT},title:{display:true,text:'Drug /100k',font:FONT}},
+          y1:{position:'right',grid:{display:false},ticks:{color:'#555',font:FONT},title:{display:true,text:'Crime /100k',font:FONT}} } }) });
+    const V=(b)=>'<span class="verdict '+(b?'t':'f')+'">'+(b?'TRUE':'FALSE')+'</span>';
+    document.getElementById('t_profile').innerHTML='<table><thead><tr><th>The claim</th><th>What the data shows</th><th>Verdict</th></tr></thead><tbody>'+
+      '<tr><td>Poorer</td><td>Income RM '+num(incH,0)+' vs RM '+num(incL,0)+'</td><td>'+V(incH<incL)+'</td></tr>'+
+      '<tr><td>More poverty / rural</td><td>Poverty '+num(povH,1)+'% vs '+num(povL,1)+'%</td><td>'+V(povH>povL)+'</td></tr>'+
+      '<tr><td>More drug burden</td><td>Drug '+num(hiDrug,0)+' vs '+num(loDrug,0)+' /100k</td><td>'+V(hiDrug>loDrug)+'</td></tr>'+
+      '<tr><td>More crime</td><td>Crime '+num(hiCrime,0)+' vs '+num(loCrime,0)+' /100k</td><td>'+V(hiCrime>loCrime)+'</td></tr>'+
+      '<tr><td>More unequal</td><td>Gini '+num(gH,2)+' vs '+num(gL,2)+'</td><td>'+V(gH>gL)+'</td></tr>'+
+      '</tbody></table>'+
+      '<p style="margin-top:14px;font-family:\'Source Serif 4\',Georgia,serif;font-size:1.02rem;color:#3a3a3a;line-height:1.5">'+
+      '<strong>The verdict:</strong> high-mosque areas are poorer and carry more of the drug burden, but they are not more criminal and not more unequal. '+
+      'The through-line is poverty and geography, not faith.</p>';
+  }
+
+  function refresh(){ destroyAll(); const fs=fdist();
+    if(active==='1') buildOverview(fs); else if(active==='2') buildCrime(fs); else if(active==='3') buildDrugs(fs); else buildProfile();
+    setTimeout(postH,40); }
+
+  // populate state filter
+  (function(){ const sel=document.getElementById('fState'); [...S].map(s=>s.state).sort().forEach(n=>{ const o=document.createElement('option'); o.value=n; o.textContent=n; sel.appendChild(o); }); })();
+  document.getElementById('fState').addEventListener('change',e=>{ fState=e.target.value; refresh(); });
+  document.getElementById('fTier').addEventListener('change',e=>{ fTier=e.target.value; refresh(); });
+  document.querySelector('.pagenav').addEventListener('click', e=>{ const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById('p'+b.dataset.p).classList.add('active');
+    active=b.dataset.p; refresh(); });
+
+  function boot(){ if(window.Chart){ refresh(); } else { setTimeout(boot,150); } }
+  boot();
+</script>
+</body>
+</html>
