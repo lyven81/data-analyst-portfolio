@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Blooms Arrive Late | Data Stories Lab</title>
+<meta name="description" content="How late deliveries drain a florist's margin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  table.appendix{font-family:Arial,Helvetica,sans-serif;width:100%;border-collapse:collapse;font-size:.82rem;margin:14px 0 4px;}
+  table.appendix th,table.appendix td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--hair);vertical-align:top;}
+  table.appendix th{background:var(--navy);color:#fff;font-size:.66rem;letter-spacing:.5px;text-transform:uppercase;}
+  table.appendix td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/optimization-analysis.html">Optimization Analysis</a>
+    <span class="sep">/</span><span>When Blooms Arrive Late</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/cover.jpeg" alt="A florist delivery rider racing through Kuala Lumpur streets with a fresh bouquet">
+    <figcaption><span>A florist rider races the clock through the city with a fresh bouquet.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Fulfillment operations</div>
+  <h1 class="title">When Blooms Arrive Late</h1>
+  <p class="standfirst">How late deliveries drain a florist's margin</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>2,409 orders &middot; Jan&ndash;Jun 2026</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>This case study reads six months of deliveries for Bloom House Concierge, a Petaling Jaya online florist, to answer one question for the fulfillment manager: are orders arriving on time, and when they do not, what does it cost? It covers 2,409 orders across Klang Valley and outstation states, sold for birthdays, anniversaries, condolences, and grand openings, and delivered by in-house riders and third-party couriers.</p>
+    <p>The shop looks healthy on the surface, delivering on time 88% of the time. The money tells a different story. Refunds cost RM 30,513 over six months, and most of that sits on orders that ran late, hidden behind refund tags that blame damage and wrong bouquets. This report finds where delivery breaks, how lateness turns into refunds, and which few conditions drain most of the money.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">88%</div><div class="l">delivered on time</div></div><div class="fig"><div class="n">RM 30.5k</div><div class="l">refunded in six months</div></div><div class="fig"><div class="n">70%</div><div class="l">of refund money on late orders</div></div><div class="fig"><div class="n">47%</div><div class="l">on-time on the busiest days</div></div></div>
+
+  <div class="pull"><p>&ldquo;Delay drives 70% of refund cost, but the shop's own records blame it for barely 20%.&rdquo;</p></div>
+
+  <div class="skicker">The delivery standard</div>
+  <div class="body"><p>Every order is judged against one promise. An order is on time (positive) if it meets its standard, and late (negative) if it goes beyond. Klang Valley orders should arrive within one day, outstation orders within two days, and same-day orders within one hour of the requested time. Every finding below measures performance against this yardstick.</p></div>
+
+  <h2 class="subsection">Part 1. How often, where, and who</h2>
+
+  <article class="finding"><h3 class="fq">1. How often do we deliver on time?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-1.png" alt="On-time rate by delivery service"></figure>
+  <p>Bloom House meets its delivery standard on 88% of orders. The weak spot is same-day: only 80% of same-day orders arrive within an hour of the requested time, against 96.5% for scheduled orders that customers book ahead. Same-day is the tightest promise and the one that slips most.</p>
+  <p>The headline number is comfortable, but the same-day tier carries hidden risk. Watch same-day reliability as a distinct metric, not buried inside the overall rate.</p></div></article>
+
+  <article class="finding"><h3 class="fq">2. Which area is late most often?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-2.png" alt="On-time rate by delivery zone"></figure>
+  <p>Klang Valley is the strongest at 89.4% on time. The outstation states are worse: other states sit at 80.1% and Penang at 84.2%. Distance and courier handoffs, not the shop, drive the gap.</p>
+  <p>The two-day outstation standard is the right promise to make; the shop simply cannot hold outstation to the same reliability as its in-city riders. Set customer expectations by zone rather than promising one blanket speed.</p></div></article>
+
+  <article class="finding"><h3 class="fq">3. Which courier is most reliable?</h3><div class="ftext">
+  <p>The in-house rider leads at 89.9% on time, with Lalamove close behind at 89.8%. Ninja Van is the weakest at 82.1%. For same-day specifically, the in-house rider again wins, landing 81% of same-day orders within the hour.</p>
+  <p>Keep same-day volume on the in-house rider and Lalamove where possible. The outstation couriers are the reliability drag and the place to renegotiate or replace.</p></div></article>
+
+  <article class="finding"><h3 class="fq">4. Which product type gets delayed most?</h3><div class="ftext">
+  <p>Delay barely moves by product. On-time rates run 87% to 91% across every category, and once Klang Valley is held constant the differences shrink further. A bouquet and a hamper to the same address travel at the same speed.</p>
+  <p>Do not chase product-level delivery fixes. Delay is a zone and workload problem, not a product problem. The product only matters later, for how badly a late delivery is punished.</p></div></article>
+
+  <article class="finding"><h3 class="fq">5. Do fresh flowers arrive on time, and still fresh?</h3><div class="ftext">
+  <p>Fresh-flower orders arrive on time at the same rate as everything else, 88%. Freshness is a separate risk: 2% of fresh orders come back as wilted-flower refunds, a failure that only fresh stock can suffer. On time is necessary but not sufficient for fresh flowers.</p>
+  <p>Track wilting as its own quality metric. A fresh bouquet that arrives on time but wilted still costs a refund, and cold-chain or handling, not speed, is the lever.</p></div></article>
+
+  <h2 class="subsection">Part 2. Why it breaks</h2>
+
+  <article class="finding"><h3 class="fq">6. How busy before deliveries fall behind?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-3.png" alt="On-time rate by daily order volume"></figure>
+  <p>There is a clear tipping point. On-time delivery holds at 92% up to about 35 orders a day, then falls off a cliff: 67.5% at 36 to 50 orders, and 47.4% once volume passes 50. Failure is not gradual, it is a breakpoint the shop crosses on peak days like Valentine's and Mother's Day.</p>
+  <p>This is the single most controllable driver of delay. Forecast daily volume and roster extra picking and delivery capacity before the count crosses 35, not after the orders pile up.</p></div></article>
+
+  <article class="finding"><h3 class="fq">7. Is the delay ours or the courier's?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-4.png" alt="Share of late-order delay, our handling versus courier"></figure>
+  <p>It depends on the zone, and the answer is counterintuitive. For Klang Valley late orders, 76% of the delay is internal: the shop dispatched too late for the slot, not the courier running slow. For outstation, 82% of the delay is the courier's transit. The instinct to blame couriers is only right outside the city.</p>
+  <p>Split the fix by zone. In Klang Valley, tighten your own dispatch cut-offs; this costs nothing and recovers most of the delay. Outstation is where courier renegotiation or a buffer day earns its keep.</p></div></article>
+
+  <h2 class="subsection">Part 3. From delay to refund</h2>
+
+  <article class="finding"><h3 class="fq">8. What causes most of our refunds?</h3><div class="ftext">
+  <p>By the tag on the refund, damaged flowers leads with 57 cases and late delivery follows with 48. But the tags mislead. When refunds are re-checked against actual delivery times, 70% of refund money sits on orders that were genuinely late, while only 20% of refunds are labelled late. Late orders get tagged with the visible symptom, damaged or wilted, so the log understates delay.</p>
+  <p>Stop trusting the reason field alone. Delay is the largest driver of refund cost by a wide margin, and the shop has been treating it as a minor one.</p></div></article>
+
+  <article class="finding"><h3 class="fq">9. How late before customers demand refunds?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-5.png" alt="Refund rate by how late the order was"></figure>
+  <p>Refunds do not rise smoothly with lateness, they jump. An on-time order refunds 4.8% of the time. Push past the requested slot and it climbs to 13.5% at one to six hours late, then 37.4% at six to twenty-four hours, then 80% once the order misses its day entirely. The danger zone is the six-hour mark.</p>
+  <p>Set an internal escalation trigger before that cliff. Any order tracking more than a few hours late should get a proactive call, re-delivery, or apology gift before it turns into a refund demand.</p></div></article>
+
+  <h2 class="subsection">Part 4. Who and what drives the refunds</h2>
+
+  <article class="finding"><h3 class="fq">10. Which product gets the most delay refunds?</h3><div class="ftext">
+  <p>Delay refunds track order volume, not a single culprit product. The bestsellers carry the most cases, the Baby Breath and Classic Red Rose bouquets at 23 each, at rates of 7% to 10% of their orders. The sympathy bouquet has the highest rate relative to its small volume, because condolence orders are the least forgiving of delay.</p>
+  <p>There is no bad product to cut. Protect the high-volume bouquets from delay, and give condolence orders special handling regardless of the flower.</p></div></article>
+
+  <article class="finding"><h3 class="fq">11. Which courier causes the most refund cases?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-6.png" alt="Delay-refund rate by courier"></figure>
+  <p>The outstation couriers are the refund engine. Pos Laju turns 16.4% of its orders into delay refunds, Ninja Van 15.5%, and J&amp;T 13.5%. The Klang Valley couriers sit far below, between 2.8% and 4.9%. A late outstation delivery is three to five times more likely to end in a refund.</p>
+  <p>This is the clearest single lever in the report. Reducing outstation courier failures, by switching provider, penalising misses, or padding the promised date, directly removes the largest block of refund cost.</p></div></article>
+
+  <article class="finding"><h3 class="fq">12. Which occasions can't tolerate a late delivery?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-7.png" alt="Refund rate when late, by occasion"></figure>
+  <p>Occasion decides how badly delay hurts. A late condolence order is refunded 72.7% of the time and a late anniversary 52.2%, against 24% for a late congratulations. Hard-date occasions, where the flowers are worthless the day after, refund at 51% when late versus 35% for flexible ones. The moment matters more than the money.</p>
+  <p>Flag hard-date orders in the queue and pick them first. A one-day slip on a birthday is recoverable; on a funeral it is a lost customer and a reputation hit.</p></div></article>
+
+  <h2 class="subsection">Part 5. The hidden warning and the money</h2>
+
+  <article class="finding"><h3 class="fq">13. Which warning complaints did we miss?</h3><div class="ftext">
+  <p>86 customers complained but were never refunded, and 63% of them had genuinely late orders. These are unresolved warnings: unhappy customers the shop logged and then let go without recovery. Complaints are a leading signal that arrives before the refund and before the customer quietly stops ordering.</p>
+  <p>Treat every complaint on a late order as a save opportunity. A small gesture at the complaint stage is far cheaper than the refund, and cheaper still than the lost repeat customer.</p></div></article>
+
+  <article class="finding"><h3 class="fq">14. Where does most refund money leak?</h3><div class="ftext"><figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/when-blooms-arrive-late/chart-8.png" alt="Share of orders versus share of refund money"></figure>
+  <p>The refund money is highly concentrated. Fresh-flower orders are 81% of volume but 90% of refund cost. Outstation is 26% of orders but 44% of the money. The busiest days, above 35 orders, are 13% of orders but 29% of the refund cost. A small set of conditions drives the loss.</p>
+  <p>Aim the fixes at the concentration, not the average. Protecting fresh flowers on outstation lanes and peak days targets the exact orders where the money actually leaks.</p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>We analysed 2,409 order-level fulfillment records from Bloom House Concierge, a Petaling Jaya online florist, covering January to June 2026. Each record carries order, requested, dispatch, and delivery timestamps, plus delivery zone, courier, service, occasion, product, freshness, daily order volume, order value, and refund outcome. The data is complete and internally consistent, with every order's timeline correctly ordered and no missing operational values. The analysis measured on-time performance against a zone-based standard, split delay between internal handling and courier transit, found the point at which lateness converts into refunds, and traced where refund cost concentrates. This is an illustrative case study built on a simulated operational dataset calibrated to realistic florist behaviour.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>The most important finding is that delay drives 70% of refund cost while the shop's own records blame it for barely 20%. Bloom House has been fighting the wrong fire, tightening packing and blaming damage, while late deliveries quietly took the money. The delay is real, it is measurable, and it is concentrated in a handful of conditions.</p>
+  <p>Doing nothing keeps RM 30,000 a year leaking from outstation lanes, peak days, and fresh-flower orders, and keeps losing hard-date customers whose one late funeral or anniversary delivery is unforgivable. Acting on the concentration, three levers, not thirty, recovers most of it. The largest, outstation courier reliability, alone accounts for RM 12,514. The recommended direction is simple: fix the delay where it concentrates, in order of value, and stop reading refund cost off a reason field that hides the real cause.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Recommendations</div>
+  <div class="body"><ul>
+    <li><strong>Fix outstation courier reliability.</strong> Switch or penalise the worst performers (Pos Laju 16.4% and Ninja Van 15.5% delay-refund rates) and add a one-day buffer to the outstation promise. This is the single largest lever, RM 12,514 or 41% of refund cost.</li>
+    <li><strong>Staff before the volume cliff.</strong> On-time delivery collapses once daily orders pass roughly 35. Forecast peak days and roster extra picking and delivery capacity ahead of the spike. Peak-day delay carries RM 5,522 or 18% of refund cost.</li>
+    <li><strong>Tighten Klang Valley dispatch.</strong> 76% of Klang Valley delay is internal, not the courier. Pull forward dispatch cut-offs and protect same-day picking. This lever is free to pull and removes delay the shop currently blames on others.</li>
+    <li><strong>Prioritise fresh and hard-date orders.</strong> Pick condolence and anniversary orders first and handle fresh stock for cold-chain, not just speed. A late condolence refunds 73% of the time and 2% of fresh orders wilt.</li>
+    <li><strong>Rescue complaints and re-tag refunds.</strong> Act on the 86 unresolved complaints on late orders, and record actual lateness alongside the reason field so delay stops hiding behind damage.</li>
+  </ul></div>
+
+  <div class="skicker" style="margin-top:42px">Appendix: refund-leak fix list</div>
+  <div class="body"><p>Every refund assigned to one lever by priority, ranked by the refund money at stake. Work it top down and stop when capacity runs out.</p>
+  <table class="appendix">
+    <tr><th>#</th><th>Lever to fix</th><th class="num">Cases</th><th class="num">Refund RM</th><th class="num">Share</th></tr>
+    <tr><td>1</td><td>Outstation courier reliability</td><td class="num">95</td><td class="num">12,514</td><td class="num">41.0%</td></tr>
+    <tr><td>2</td><td>Handling &amp; quality control (non-delay)</td><td class="num">79</td><td class="num">9,171</td><td class="num">30.1%</td></tr>
+    <tr><td>3</td><td>Peak-day capacity (Klang Valley)</td><td class="num">39</td><td class="num">5,522</td><td class="num">18.1%</td></tr>
+    <tr><td>4</td><td>Klang Valley routine dispatch</td><td class="num">26</td><td class="num">2,719</td><td class="num">8.9%</td></tr>
+    <tr><td>5</td><td>Hard-date order prioritization</td><td class="num">4</td><td class="num">586</td><td class="num">1.9%</td></tr>
+  </table></div>
+
+  <hr class="endrule">
+  <div class="colophon">Data Stories Lab &middot; Fulfillment operations analysis &middot; Bloom House Concierge, an illustrative case study on a simulated operational dataset.</div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>
