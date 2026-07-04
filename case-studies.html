@@ -13,6 +13,8 @@
   a:hover h2, a:hover h3, a:hover h4{ color:var(--accent); }
 
   /* Masthead (shared with index) */
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
   .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
   .mast-left{ display:flex; align-items:center; gap:20px; }
   .logo{ background:#222; color:#fff; font-family:Arial, Helvetica, sans-serif; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
@@ -134,6 +136,7 @@
     <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a>
   </nav>
 
+  <div class="topbar">
   <div class="masthead">
     <div class="mast-left">
       <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -147,6 +150,7 @@
     </div>
   </div>
   <hr class="rule-top">
+  </div>
 
   <div class="page-head">
     <span class="tab">Case Studies</span>
