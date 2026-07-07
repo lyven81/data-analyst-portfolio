@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Quiet Slide Dashboard | Data Stories Lab</title>
+<meta name="description" content="Explore a burger and pizza shop's six-month health on a delivery app: sales, growth, funnel, relationships, risks and priorities, filtered by product.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a1a1a; --gray:#555; --mute:#6b7280; --hair:#e2e2e2; --accent:#B8860B; --navy:#1E3A5F; --paper:#fff;
+         --teal:#2E7D6F; --blue:#4A7FB5; --red:#B85450; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:70ch; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; }
+  a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); }
+  .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+
+  .tool{ padding:22px 0 8px; }
+  .filter{ display:flex; gap:18px; flex-wrap:wrap; align-items:center; border:1px solid var(--hair); padding:13px 16px; margin-bottom:18px; }
+  .filter label{ font-size:.58rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-right:6px; }
+  .filter select{ padding:6px 8px; border:1px solid var(--hair); font-family:inherit; font-size:.85rem; }
+  .filter .note{ font-size:.72rem; color:var(--gray); font-style:italic; margin-left:auto; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); }
+  .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.6rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .kpi .d{ font-size:.62rem; font-weight:700; margin-top:5px; }
+  .up{ color:#2E7D6F; } .down{ color:#B85450; } .flat{ color:#6b7280; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:264px; margin-top:14px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  th{ text-align:left; color:var(--navy); border-bottom:2px solid var(--accent); padding:8px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  td{ padding:8px; border-bottom:1px solid #eee; } td.r{ text-align:right; font-variant-numeric:tabular-nums; }
+  .pill{ font-size:.58rem; font-weight:700; padding:2px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:.4px; }
+  .pill.h{ background:#f6e0dd; color:#B85450; } .pill.m{ background:#f3e9d3; color:#8a6510; } .pill.l{ background:#e8eef4; color:#4A7FB5; }
+
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+
+  @media print{
+    .pbtn, .filter{ display:none !important; }
+    .page{ display:block !important; page-break-before:always; }
+    .ccard, .kpi, table{ break-inside:avoid; page-break-inside:avoid; }
+  }
+  @media(max-width:820px){
+    .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; }
+    .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; }
+  }
+  @media(max-width:760px){ .kpis{ grid-template-columns:1fr 1fr; } .grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><span>The Quiet Slide</span>
+  </div>
+
+  <div class="wrap">
+    <div class="head">
+      <span class="kicker">Delivery-app seller &middot; Business health check</span>
+      <h1 class="title">The Quiet Slide</h1>
+      <p class="standfirst">Why higher average order value can mislead</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>Burger &amp; Pizza shop &middot; Jan&ndash;Jun 2026</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/the-quiet-slide.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+          <a class="sw" href="/data-analyst-portfolio/agentic_workflow/the-quiet-slide.html">AI Assistant</a>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+
+    <div class="tool">
+      <div class="filter">
+        <span><label>Product</label>
+          <select id="fProduct">
+            <option value="both">Both products</option>
+            <option value="Burger">Burger</option>
+            <option value="Pizza">Pizza</option>
+          </select>
+        </span>
+        <span class="note">Monthly data, Jan to Jun 2026. Section 4 relationships are read with care (short window).</span>
+      </div>
+
+      <div class="pagenav">
+        <button class="pbtn active" data-p="1">1 &middot; What happened</button>
+        <button class="pbtn" data-p="2">2 &middot; Growth engine</button>
+        <button class="pbtn" data-p="3">3 &middot; Customer journey</button>
+        <button class="pbtn" data-p="4">4 &middot; What moves what</button>
+        <button class="pbtn" data-p="5">5 &middot; Hidden risks</button>
+        <button class="pbtn" data-p="6">6 &middot; What to do</button>
+      </div>
+
+      <!-- P1 What happened -->
+      <div class="page active" id="p1">
+        <div class="kpis" id="kpis1"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">Orders are sliding month after month</div>
+            <div class="cs">Orders per month</div>
+            <div class="cwrap"><canvas id="c1"></canvas></div>
+            <div class="csrc">Source: monthly seller data, Jan to Jun 2026.</div>
+          </div>
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">Sales held up only because baskets grew</div>
+            <div class="cs">Sales after discounts (bars) vs average order (line)</div>
+            <div class="cwrap"><canvas id="c2"></canvas></div>
+            <div class="csrc">Sales in thousands of ringgit (RM k); average order in ringgit.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P2 Growth engine -->
+      <div class="page" id="p2">
+        <div class="kpis" id="kpis2"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">Two levers down, one cushioning up</div>
+            <div class="cs">Change from January to June</div>
+            <div class="cwrap"><canvas id="c3"></canvas></div>
+            <div class="csrc">Sales = menu traffic x ordering rate x basket size.</div>
+          </div>
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">Fewer menu views, and fewer of them order</div>
+            <div class="cs">Menu views (bars) and ordering rate (line)</div>
+            <div class="cwrap"><canvas id="c4"></canvas></div>
+            <div class="csrc">Ordering rate is the share of menu views that become orders.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P3 Customer journey -->
+      <div class="page" id="p3">
+        <div class="kpis" id="kpis3"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">The biggest drop is at the very first step</div>
+            <div class="cs">People remaining at each step, June</div>
+            <div class="cwrap"><canvas id="c5"></canvas></div>
+            <div class="csrc">Menu view, add to cart, reach payment, complete order.</div>
+          </div>
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">The ordering rate keeps slipping</div>
+            <div class="cs">Share of menu views that become orders</div>
+            <div class="cwrap"><canvas id="c6"></canvas></div>
+            <div class="csrc">Source: monthly seller data, Jan to Jun 2026.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P4 What moves what -->
+      <div class="page" id="p4">
+        <div class="kpis" id="kpis4"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">What moves together across the shop</div>
+            <div class="cs">Strength of link, +1 (together) to -1 (opposite)</div>
+            <div class="cwrap"><canvas id="c7"></canvas></div>
+            <div class="csrc">Read with care: six months only, a link is not proof of cause.</div>
+          </div>
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">Winning a customer costs more, still under an order</div>
+            <div class="cs">Cost to win a new order (dashed) vs order value (solid)</div>
+            <div class="cwrap"><canvas id="c8"></canvas></div>
+            <div class="csrc">Cost to win = ad spend divided by new orders.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P5 Hidden risks -->
+      <div class="page" id="p5">
+        <div class="kpis" id="kpis5"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">Ads pay back less and less</div>
+            <div class="cs">Sales returned per unit of ad spend</div>
+            <div class="cwrap"><canvas id="c9"></canvas></div>
+            <div class="csrc">Source: monthly seller data. Higher is better.</div>
+          </div>
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">The loyal base is thinning out</div>
+            <div class="cs">Repeat orders (line) vs new orders (line)</div>
+            <div class="cwrap"><canvas id="c10"></canvas></div>
+            <div class="csrc">Repeat customers are cheaper to serve than bought ones.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P6 What to do -->
+      <div class="page" id="p6">
+        <div class="kpis" id="kpis6"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">When customers order, June</div>
+            <div class="cs">Share of orders by time of day</div>
+            <div class="cwrap"><canvas id="c11"></canvas></div>
+            <div class="csrc">Dinner and late night carry most orders.</div>
+          </div>
+          <div class="ccard"><span class="tab"></span>
+            <div class="ct">Priority actions, ranked</div>
+            <div class="cs">Top rows protect money being lost now</div>
+            <table>
+              <thead><tr><th>#</th><th>Do this</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td><span class="pill h">1</span></td><td>Fix menu to cart step</td><td>Biggest leak, ~25% reach cart</td></tr>
+                <tr><td><span class="pill h">2</span></td><td>Cut blanket discounts</td><td>Orders track discounts, sales do not</td></tr>
+                <tr><td><span class="pill m">3</span></td><td>Win back repeat customers</td><td>Loyal base is thinning</td></tr>
+                <tr><td><span class="pill m">4</span></td><td>Cap and re-target ads</td><td>Return halved, cost per customer doubled</td></tr>
+                <tr><td><span class="pill l">5</span></td><td>Lift burger basket with bundles</td><td>Burger order worth less than pizza</td></tr>
+              </tbody>
+            </table>
+            <div class="csrc">Full list in the analyst report and priority-action-list.csv.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  // ===== Data (monthly, Jan-Jun 2026) =====
+  const MO=['Jan','Feb','Mar','Apr','May','Jun'];
+  const D={
+    Burger:{ orders:[6873,7644,7859,5440,6050,4204], gmv:[159909,153675,171265,144318,172214,125957],
+      menu:[51574,48491,58426,50207,58232,41563], cart:[14575,15333,16937,13937,15271,10900],
+      pay:[9459,10141,10780,7996,9070,6273], ord:[6818,7508,7806,5222,5951,4154],
+      disc:[51737,57190,56961,30470,32965,22779], rep:[4166,4946,5084,3153,3221,2315],
+      neu:[2659,2566,2724,2071,2732,1842], adSpend:[14453,13293,16142,15142,18278,17069],
+      adGMV:[110329,98584,116078,82486,100316,78223], adOrd:[3825,3764,4181,2760,3159,2371],
+      avail:[98.9,96.9,97.4,90.4,94.2,96.8], dayJun:{Lunch:712,Snacks:574,Dinner:1749,'Late night':1155} },
+    Pizza:{ orders:[3625,3078,3787,3112,2825,2381], gmv:[157030,132884,166672,135030,137940,118525],
+      menu:[26696,24186,31620,26068,26615,21127], cart:[6229,5456,6948,5873,5567,4417],
+      pay:[4663,4017,5077,4025,3799,3037], ord:[3588,3038,3778,2989,2766,2333],
+      disc:[30087,25597,32614,23235,15902,13912], rep:[2251,1942,2282,1844,1727,1467],
+      neu:[1340,1099,1498,1147,1040,867], adSpend:[6366,8528,13029,10970,8790,9678],
+      adGMV:[81402,69672,96962,81073,69669,66386], adOrd:[1697,1492,1967,1682,1400,1338],
+      avail:[99.0,97.2,97.4,90.9,95.0,96.6], dayJun:{Lunch:335,Snacks:288,Dinner:1096,'Late night':634} }
+  };
+  const sum=(a,b)=>a.map((v,i)=>v+b[i]);
+  const div=(a,b)=>a.map((v,i)=>b[i]?v/b[i]:0);
+  function agg(prod){
+    let s;
+    if(prod==='both'){ s={}; ['orders','gmv','menu','cart','pay','ord','disc','rep','neu','adSpend','adGMV','adOrd'].forEach(k=>s[k]=sum(D.Burger[k],D.Pizza[k]));
+      s.avail=D.Burger.avail.map((v,i)=>(v*D.Burger.orders[i]+D.Pizza.avail[i]*D.Pizza.orders[i])/(D.Burger.orders[i]+D.Pizza.orders[i]));
+      s.dayJun={}; Object.keys(D.Burger.dayJun).forEach(k=>s.dayJun[k]=D.Burger.dayJun[k]+D.Pizza.dayJun[k]);
+    } else { s=Object.assign({},D[prod]); }
+    s.aov=div(s.gmv,s.orders);
+    s.m2o=s.ord.map((v,i)=>v/s.menu[i]*100);
+    s.roi=div(s.adGMV,s.adSpend);
+    s.adPct=s.adOrd.map((v,i)=>v/s.orders[i]*100);
+    s.cac=div(s.adSpend,s.neu);
+    s.cartRate=s.cart.map((v,i)=>v/s.menu[i]*100);
+    return s;
+  }
+
+  const NAVY='#1E3A5F', GOLD='#B8860B', TEAL='#2E7D6F', BLUE='#4A7FB5', RED='#B85450', GREY='#9aa3ad', GRID='#e8e8e8';
+  const FONT={ family:'Arial', size:11 };
+  const charts={};
+  function axes(opts){ return Object.assign({ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } } }, opts); }
+  const yTick=(fn)=>({ grid:{color:GRID}, border:{display:false}, ticks:{ color:'#555', font:FONT, callback:fn } });
+  const xCat={ grid:{display:false}, border:{color:'#c4c4c4'}, ticks:{ color:'#555', font:FONT } };
+  const legTop={ display:true, position:'top', align:'start', labels:{ font:FONT, boxWidth:10, padding:12, color:'#444' } };
+  function mk(id,cfg){ const el=document.getElementById(id); if(!el) return; if(charts[id]) charts[id].destroy(); charts[id]=new Chart(el,cfg); }
+
+  const fmt=(n)=>Math.abs(n)>=1e6?(n/1e6).toFixed(2)+'M':Math.abs(n)>=1e3?(n/1e3).toFixed(1)+'k':Math.round(n).toLocaleString();
+  const pct=(a,b)=>((a/b-1)*100);
+  const dl=(x,unit)=>`<div class="d ${x>0?'up':x<0?'down':'flat'}">${x>0?'+':''}${x.toFixed(0)}${unit} vs Jan</div>`;
+  function kpi(v,l,d){ return `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div>${d||''}</div>`; }
+
+  function render(prod){
+    const s=agg(prod);
+    const cur='RM';
+    const bothSeries = prod==='both';
+    // ---- KPIs ----
+    document.getElementById('kpis1').innerHTML =
+      kpi(fmt(s.orders[5]),'orders in June', dl(pct(s.orders[5],s.orders[0]),'%')) +
+      kpi(cur+fmt(s.gmv[5]),'sales in June (after discounts)', dl(pct(s.gmv[5],s.gmv[0]),'%')) +
+      kpi(cur+Math.round(s.aov[5]),'average order (June)', dl(pct(s.aov[5],s.aov[0]),'%')) +
+      kpi(s.m2o[5].toFixed(1)+'%','ordering rate (June)', dl(s.m2o[5]-s.m2o[0],' pts'));
+    document.getElementById('kpis2').innerHTML =
+      kpi(pct(s.menu[5],s.menu[0]).toFixed(0)+'%','menu views, Jan to Jun') +
+      kpi((s.m2o[5]-s.m2o[0]).toFixed(1)+' pts','ordering rate, Jan to Jun') +
+      kpi('+'+pct(s.aov[5],s.aov[0]).toFixed(0)+'%','basket size, Jan to Jun') +
+      kpi(pct(s.gmv[5],s.gmv[0]).toFixed(0)+'%','sales, Jan to Jun');
+    document.getElementById('kpis3').innerHTML =
+      kpi(fmt(s.menu[5]),'menu views (June)') +
+      kpi(s.cartRate[5].toFixed(0)+'%','reach the cart (June)') +
+      kpi(s.m2o[5].toFixed(1)+'%','complete an order (June)') +
+      kpi((100-s.cartRate[5]).toFixed(0)+'%','leave after the menu (June)');
+    document.getElementById('kpis4').innerHTML =
+      kpi('+0.93','discounts move with orders') +
+      kpi('-0.91','repeat orders vs basket size') +
+      kpi(cur+Math.round(s.cac[5]),'cost to win a customer (June)', dl(pct(s.cac[5],s.cac[0]),'%')) +
+      kpi(cur+Math.round(s.aov[5]),'value of one order (June)');
+    document.getElementById('kpis5').innerHTML =
+      kpi(s.roi[5].toFixed(1)+'x','ad payback (June)', dl(s.roi[5]-s.roi[0],'x')) +
+      kpi(s.adPct[5].toFixed(0)+'%','orders from ads (June)') +
+      kpi(pct(s.rep[5],s.rep[0]).toFixed(0)+'%','repeat orders, Jan to Jun') +
+      kpi(Math.min.apply(null,s.avail).toFixed(0)+'%','lowest availability (April)');
+    const day=s.dayJun; const dTot=Object.values(day).reduce((a,b)=>a+b,0);
+    document.getElementById('kpis6').innerHTML =
+      kpi(s.m2o[5].toFixed(1)+'%','ordering rate to lift') +
+      kpi(pct(s.orders[5],s.orders[0]).toFixed(0)+'%','orders, Jan to Jun') +
+      kpi(Math.round(day.Dinner/dTot*100)+'%','orders at dinner (June)') +
+      kpi(Math.round((day.Dinner+day['Late night'])/dTot*100)+'%','dinner + late night (June)');
+
+    // ---- Charts ----
+    // c1 orders
+    const oData = bothSeries
+      ? [{label:'Burger',data:D.Burger.orders,backgroundColor:GOLD},{label:'Pizza',data:D.Pizza.orders,backgroundColor:NAVY}]
+      : [{label:prod,data:s.orders,backgroundColor:prod==='Pizza'?NAVY:GOLD}];
+    mk('c1',{type:'bar',data:{labels:MO,datasets:oData},
+      options:axes({plugins:{legend:bothSeries?legTop:{display:false}},scales:{y:yTick(v=>fmt(v)),x:xCat}})});
+    // c2 sales vs aov
+    mk('c2',{data:{labels:MO,datasets:[
+      {type:'bar',label:'Sales (RM k)',data:s.gmv.map(v=>Math.round(v/1e3)),backgroundColor:NAVY,yAxisID:'y'},
+      {type:'line',label:'Average order (RM)',data:s.aov.map(v=>Math.round(v)),borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,pointRadius:0,yAxisID:'y1'}]},
+      options:axes({plugins:{legend:legTop},scales:{
+        y:Object.assign({position:'left'},yTick(v=>'RM'+v+'k')),
+        y1:Object.assign({position:'right',grid:{drawOnChartArea:false}},yTick(v=>'RM'+v))}})});
+    // c3 growth levers
+    mk('c3',{type:'bar',data:{labels:['Menu traffic','Ordering rate','Basket size','= Sales'],datasets:[
+      {data:[pct(s.menu[5],s.menu[0]),pct(s.m2o[5],s.m2o[0]),pct(s.aov[5],s.aov[0]),pct(s.gmv[5],s.gmv[0])].map(v=>+v.toFixed(0)),
+       backgroundColor:[RED,RED,TEAL,NAVY]}]},
+      options:axes({scales:{y:yTick(v=>v+'%'),x:xCat}})});
+    // c4 menu views + ordering rate
+    mk('c4',{data:{labels:MO,datasets:[
+      {type:'bar',label:'Menu views',data:s.menu,backgroundColor:BLUE,yAxisID:'y'},
+      {type:'line',label:'Ordering rate (%)',data:s.m2o.map(v=>+v.toFixed(1)),borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,pointRadius:0,yAxisID:'y1'}]},
+      options:axes({plugins:{legend:legTop},scales:{
+        y:Object.assign({position:'left'},yTick(v=>fmt(v))),
+        y1:Object.assign({position:'right',grid:{drawOnChartArea:false}},yTick(v=>v+'%'))}})});
+    // c5 funnel June
+    mk('c5',{type:'bar',data:{labels:['Menu','Cart','Payment','Order'],datasets:[
+      {data:[s.menu[5],s.cart[5],s.pay[5],s.ord[5]],backgroundColor:[BLUE,TEAL,GOLD,NAVY]}]},
+      options:axes({scales:{y:yTick(v=>fmt(v)),x:xCat}})});
+    // c6 ordering rate trend
+    const rData = bothSeries
+      ? [{label:'Burger',data:agg('Burger').m2o.map(v=>+v.toFixed(1)),borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,pointRadius:0},
+         {label:'Pizza',data:agg('Pizza').m2o.map(v=>+v.toFixed(1)),borderColor:NAVY,backgroundColor:NAVY,borderWidth:3,tension:.3,pointRadius:0}]
+      : [{label:prod,data:s.m2o.map(v=>+v.toFixed(1)),borderColor:prod==='Pizza'?NAVY:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,pointRadius:0}];
+    mk('c6',{type:'line',data:{labels:MO,datasets:rData},
+      options:axes({plugins:{legend:bothSeries?legTop:{display:false}},scales:{y:yTick(v=>v+'%'),x:xCat}})});
+    // c7 relationships (fixed, whole shop)
+    mk('c7',{type:'bar',data:{labels:['Discounts & orders','Discounts & sales','Ad spend & sales','Ordering rate & sales','Repeat orders & basket','Ad depth & ad payback'],
+      datasets:[{data:[0.93,0.71,0.40,0.38,-0.91,-0.91],backgroundColor:c=>c.raw>=0?TEAL:RED}]},
+      options:axes({indexAxis:'y',scales:{x:Object.assign({min:-1,max:1},yTick(v=>v)),y:{grid:{display:false},ticks:{font:FONT,color:'#555'}}}})});
+    // c8 cac vs aov
+    const acDs = bothSeries
+      ? [{label:'Cost to win - Burger',data:agg('Burger').cac.map(v=>Math.round(v)),borderColor:GOLD,borderDash:[5,4],backgroundColor:GOLD,borderWidth:2,tension:.3,pointRadius:0},
+         {label:'Order value - Burger',data:D.Burger.gmv.map((v,i)=>Math.round(v/D.Burger.orders[i])),borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,pointRadius:0},
+         {label:'Cost to win - Pizza',data:agg('Pizza').cac.map(v=>Math.round(v)),borderColor:NAVY,borderDash:[5,4],backgroundColor:NAVY,borderWidth:2,tension:.3,pointRadius:0},
+         {label:'Order value - Pizza',data:D.Pizza.gmv.map((v,i)=>Math.round(v/D.Pizza.orders[i])),borderColor:NAVY,backgroundColor:NAVY,borderWidth:3,tension:.3,pointRadius:0}]
+      : [{label:'Cost to win a customer',data:s.cac.map(v=>Math.round(v)),borderColor:GOLD,borderDash:[5,4],backgroundColor:GOLD,borderWidth:2,tension:.3,pointRadius:0},
+         {label:'Order value',data:s.aov.map(v=>Math.round(v)),borderColor:NAVY,backgroundColor:NAVY,borderWidth:3,tension:.3,pointRadius:0}];
+    mk('c8',{type:'line',data:{labels:MO,datasets:acDs},
+      options:axes({plugins:{legend:{display:true,position:'top',align:'start',labels:{font:{family:'Arial',size:10},boxWidth:10,padding:8,color:'#444'}}},scales:{y:yTick(v=>'RM'+fmt(v)),x:xCat}})});
+    // c9 roi
+    const roiDs = bothSeries
+      ? [{label:'Burger',data:agg('Burger').roi.map(v=>+v.toFixed(1)),borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,pointRadius:0},
+         {label:'Pizza',data:agg('Pizza').roi.map(v=>+v.toFixed(1)),borderColor:NAVY,backgroundColor:NAVY,borderWidth:3,tension:.3,pointRadius:0}]
+      : [{label:prod,data:s.roi.map(v=>+v.toFixed(1)),borderColor:prod==='Pizza'?NAVY:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,pointRadius:0}];
+    mk('c9',{type:'line',data:{labels:MO,datasets:roiDs},
+      options:axes({plugins:{legend:bothSeries?legTop:{display:false}},scales:{y:yTick(v=>v+'x'),x:xCat}})});
+    // c10 repeat vs new
+    mk('c10',{type:'line',data:{labels:MO,datasets:[
+      {label:'Repeat orders',data:s.rep,borderColor:TEAL,backgroundColor:TEAL,borderWidth:3,tension:.3,pointRadius:0},
+      {label:'New orders',data:s.neu,borderColor:BLUE,backgroundColor:BLUE,borderWidth:3,tension:.3,pointRadius:0}]},
+      options:axes({plugins:{legend:legTop},scales:{y:yTick(v=>fmt(v)),x:xCat}})});
+    // c11 daypart doughnut
+    mk('c11',{type:'doughnut',data:{labels:Object.keys(day),datasets:[{data:Object.values(day),backgroundColor:[BLUE,TEAL,GOLD,NAVY],borderWidth:0}]},
+      options:axes({cutout:'58%',plugins:{legend:{display:true,position:'right',labels:{font:FONT,boxWidth:10,padding:8,color:'#444'}}}})});
+
+    setTimeout(postH,60);
+  }
+
+  document.getElementById('fProduct').addEventListener('change', e=>render(e.target.value));
+  document.querySelector('.pagenav').addEventListener('click', e=>{
+    const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('p'+b.dataset.p).classList.add('active');
+    setTimeout(postH,40);
+  });
+
+  function boot(){ if(window.Chart){ render('both'); } else { setTimeout(boot,120); } }
+  boot();
+  window.addEventListener('load', ()=>setTimeout(()=>{ if(window.Chart && !charts.c1) render('both'); postH(); }, 250));
+</script>
+</body>
+</html>

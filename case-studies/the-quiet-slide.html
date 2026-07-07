@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Quiet Slide | Data Stories Lab</title>
+<meta name="description" content="Why higher average order value can mislead">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;flex-direction:column;gap:4px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.3rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  figure.chart{margin:16px 0 6px;}
+  .chart-box{position:relative;height:320px;background:#fff;border:1px solid var(--hair);padding:12px 12px 6px;}
+  .figcap{font-family:Arial,Helvetica,sans-serif;font-size:.8rem;color:var(--mute);font-style:italic;margin-top:8px;}
+  .caveat{border:1px solid var(--hair);border-left:4px solid #c0392b;background:#fdf6f4;padding:12px 16px;margin:14px 0;font-family:Arial,Helvetica,sans-serif;font-size:.9rem;color:#7a4a3a;}
+  .tease{border:1px dashed #9db4cc;background:#f2f6fa;padding:12px 16px;margin:14px 0;font-family:Arial,Helvetica,sans-serif;font-size:.9rem;color:#3a5573;}
+  table.rec{width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:.86rem;margin-top:14px;}
+  table.rec th{text-align:left;color:var(--navy);border-bottom:2px solid var(--accent);padding:8px;font-size:.6rem;text-transform:uppercase;letter-spacing:.4px;}
+  table.rec td{padding:8px;border-bottom:1px solid #eee;vertical-align:top;}
+  .body ul{margin:.7rem 0 .2rem 1.2rem;} .body li{font-size:1.04rem;margin-top:.45rem;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/optimization-analysis.html">Optimization Analysis</a>
+    <span class="sep">/</span><span>The Quiet Slide</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-quiet-slide/cover%20image.jpeg" alt="A burger and pizza on a doctor's examination table with a stethoscope, a delivery scooter waiting outside">
+    <figcaption><span>A health check on a burger and pizza shop selling through a delivery app.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Delivery-app seller &middot; Business health check</div>
+  <h1 class="title">The Quiet Slide</h1>
+  <p class="standfirst">Why higher average order value can mislead</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Burger &amp; Pizza shop &middot; Jan&ndash;Jun 2026</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/the-quiet-slide-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>This burger and pizza shop is quietly shrinking. Orders fell about 37% from January to June, across both products. Total sales fell 23% over the same months.</p>
+    <p>Sales held up better than orders because the average order grew. The shop lifted its basket size mainly by cutting discounts. It now serves fewer customers, but each one spends more.</p>
+    <p>The danger is that fewer people open the menu, and fewer of them order. Bigger baskets are hiding this, but that cushion will run out. The shop should fix how many menu views turn into orders, and lean less on discounts and ads, before it does.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs">
+    <div class="fig"><div class="n">6,585</div><div class="l">orders in June (-37% vs Jan)</div></div>
+    <div class="fig"><div class="n">RM 244k</div><div class="l">sales in June (-23% vs Jan)</div></div>
+    <div class="fig"><div class="n">RM 37</div><div class="l">average order (+23% vs Jan)</div></div>
+    <div class="fig"><div class="n">10.3%</div><div class="l">menu views that order</div></div>
+  </div>
+
+  <div class="pull"><p>&ldquo;Steady sales today is not proof of health; it is borrowed time.&rdquo;</p></div>
+
+  <div class="skicker">What the numbers say</div>
+
+  <article class="finding"><h3 class="fq">1. What happened this half-year</h3><div class="ftext">
+    <p>Both products sold fewer orders every direction the data is read. Burger orders fell from about 6,900 in January to 4,200 in June, a 39% drop, and pizza fell from 3,600 to 2,400, down 34%. Put together, the business went from around 10,500 orders a month to 6,600. This is a steady slide across the whole half-year, so the honest answer to "are we growing" is no.</p>
+    <p>Yet the money did not fall as fast. Total sales dropped 23%, less than the 37% fall in orders, because the average order grew from about RM 30 to RM 37. The shop is serving fewer customers but charging more per order, mostly because it stopped giving away so much in discounts. Burger is the bigger engine by orders, but pizza brings in far more per order (about RM 50 against burger's RM 30): burger is volume, pizza is value.</p>
+    <figure class="chart"><div class="chart-box"><canvas id="c1"></canvas></div><div class="figcap">Orders fell steadily for both products through the half-year.</div></figure>
+    <figure class="chart"><div class="chart-box"><canvas id="c2"></canvas></div><div class="figcap">Sales held up better than orders because the average order kept rising.</div></figure>
+    <p>Making money is good, so why worry when sales are holding up? Because a sales figure that stays steady while orders fall is hiding a real problem: fewer people are ordering. Every order is a customer choosing this shop, so falling orders mean the customer base is shrinking. It is tempting to read the rising average order as a reason to chase a few high-value customers and let the volume go, but the numbers say that will not work here: the shop has, in effect, already run that experiment. The average order rose 23%, yet sales still fell 23%, because losing 37% of the orders swallowed the gain whole. The higher average also came as repeat orders fell, so leaning on value keeps pushing the loyal base away. Chasing a few big spenders is not a safe strategy here; it is the path that just cost the shop about a fifth of its sales.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">2. Why it happened: the growth engine</h3><div class="ftext">
+    <p>Think of sales as three things multiplied together: how many people look at the menu, how many of those actually order, and how much each order is worth. Splitting the 23% drop across these three shows a clear story. Menu traffic fell about 22%, and the share of browsers who ordered fell about 24%. Those two together pulled sales down hard. Basket size rose about 21%, which softened the blow, but not enough to cover both losses.</p>
+    <p>So growth did not fail for one reason; it failed for two at once. Fewer people are opening the menu, and fewer of those who do are going through with an order. The bigger baskets are a cushion, not an engine, and a cushion only lasts until it is used up. Menu traffic and the ordering rate are the two levers that actually grow a shop like this, and both are pointing down.</p>
+    <figure class="chart"><div class="chart-box"><canvas id="c3"></canvas></div><div class="figcap">What moved sales from January to June: two levers down, one cushioning up.</div></figure>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">3. Where customers are being lost</h3><div class="ftext">
+    <p>Every order passes through four steps: opening the menu, adding to the cart, reaching payment, and completing the order. The biggest fall happens at the very first step. Out of about 62,700 menu views in June, only around a quarter reach the cart. Once a customer has a cart, most finish. So the leak is at the top of the journey, getting people from the menu to starting an order, not at checkout.</p>
+    <p>It is also getting worse. The share of menu views that end in an order slipped from about 13% to 10% for burger and 13% to 11% for pizza. The menu-to-cart step is the single most valuable thing to fix, because it is where the most people fall away and it feeds every step after it. Menu views are down 22% but orders are down 37%, and that widening gap is the leak: closing even part of it turns views the shop already has into orders, with no extra ad spend.</p>
+    <figure class="chart"><div class="chart-box"><canvas id="c4"></canvas></div><div class="figcap">The journey narrows most at the first step, from menu view to cart.</div></figure>
+    <figure class="chart"><div class="chart-box"><canvas id="c5"></canvas></div><div class="figcap">The share of menu views that order has slipped for both products.</div></figure>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">4. How the parts pull on each other</h3><div class="ftext">
+    <p>Looking at how the numbers move together over these six months shows a few strong patterns. Discounts and orders rise and fall almost in lockstep: spend more on discounts and orders go up, cut them and orders fall. That is the clearest link in the shop, and it explains the slide. But bigger discounts do not clearly grow sales the way they grow orders, because a discounted order is worth less, so heavy discounting buys volume more than money.</p>
+    <p>A second pattern: as repeat orders fell, the average order rose. The likely reason is that cutting discounts pushed away the deal-chasing repeat buyers, leaving a smaller group who spend more. That lifts the basket now but thins the loyal base. The sharpest question is whether buying a new customer through ads still pays. The cost to win one new order roughly doubled over the half-year, from about RM 5 to RM 9 for burger and RM 5 to RM 11 for pizza. That is still well below the value of an order, only about a third of a burger order and a fifth of a pizza order, so winning customers still pays today. But the cost is climbing fast while the return on ad spend falls, so the safety margin is shrinking.</p>
+    <div class="caveat"><b>How to read this section:</b> six months is a short window, so these are observed relationships, things that moved together, not proof that one causes the other. Strong enough to act on with judgement, not to treat as fixed rules.</div>
+    <figure class="chart"><div class="chart-box"><canvas id="c6"></canvas></div><div class="figcap">How strongly pairs of numbers moved together over the half-year (read with care).</div></figure>
+    <figure class="chart"><div class="chart-box"><canvas id="c7"></canvas></div><div class="figcap">The cost to win a new customer is rising toward, but still under, the value of an order.</div></figure>
+    <div class="tease"><b>A closer look is coming.</b> This section shows which numbers move together. A companion study tests the same questions properly on daily data, measuring how much each lever really moves orders and basket size, and how far discounts and ad spend can be pushed before they stop paying.</div>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">5. Hidden risks building up</h3><div class="ftext">
+    <p>The first risk is that the ordering rate keeps sliding while traffic is also falling. The shop is not just getting fewer visitors; it is turning a smaller share of them into orders. When both move down together, the ordering journey is leaking more from the inside, and steady-looking sales hide it.</p>
+    <p>The second risk is a growing dependence on paid ads at a worse and worse price. Ads bring in more than half of all orders, and the return on ad spend fell from about 7.6 to 4.6 for burger and 12.8 to 6.9 for pizza. The shop is paying more to stand still. The third risk is the loyal base thinning out: repeat customers order less often, and because they are cheaper to serve than bought ones, a shrinking repeat base quietly raises the cost of every future order. Burger is also weakening faster than pizza, so one product's steadiness can mask the other's decline in the combined numbers.</p>
+    <figure class="chart"><div class="chart-box"><canvas id="c8"></canvas></div><div class="figcap">Return on ad spend is falling for both products as the cost of attention rises.</div></figure>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">6. What to do first</h3><div class="ftext">
+    <p>The through-line is simple: the shop is using price and discounts to hide a weakening ordering journey. The fix is to rebuild the journey and the loyal base so growth stops depending on ever-higher baskets and ever-pricier ads. The single most valuable move is to get more menu views to start an order, because that is the biggest leak and it turns views already paid for into sales. The priorities below are ranked by impact for the effort; the top rows protect money being lost now.</p>
+    <table class="rec">
+      <tr><th>Priority</th><th>Do this</th><th>Why (from the data)</th><th>Expected impact</th></tr>
+      <tr><td>High</td><td>Fix the menu-to-cart step (photos, prices, offers, speed)</td><td>Biggest leak: only ~25% of menu views reach the cart</td><td>More orders from views already paid for</td></tr>
+      <tr><td>High</td><td>Wean off blanket discounts</td><td>Orders track discounts 1-to-1, but sales do not</td><td>Protects sales and margin</td></tr>
+      <tr><td>Medium</td><td>Win back repeat customers (non-discount)</td><td>Repeat orders and repeat ordering rate are falling</td><td>Cheaper orders than paid acquisition</td></tr>
+      <tr><td>Medium</td><td>Cap and re-target ad spend</td><td>Return nearly halved; cost per new customer doubled</td><td>Stops paying more to stand still</td></tr>
+      <tr><td>Low</td><td>Lift burger basket with bundles and sides</td><td>Burger order ~RM 30 vs pizza ~RM 50</td><td>More value per order</td></tr>
+    </table>
+  </div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>This report is based on six months of monthly performance data (January to June 2026) for a single burger and pizza shop selling through a food delivery app. It covers orders, sales before and after discounts, average order value, discount and coupon spend, the full ordering journey (menu, cart, payment, order), new versus repeat customers, advertising cost and return, and operational measures such as kitchen availability. Money figures are in Malaysian Ringgit (RM). Because the data is monthly, the analysis rests on six points per product, which is enough to read clear trends and to show which measures move together, but not enough to prove cause and effect. For that reason the relationships section is written as observed associations, and a companion study tests them properly on daily data.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>The most important finding is that this shop is shrinking behind a steady-looking sales line. Orders are down 37% and sales down 23%, and the only reason the two differ is that bigger baskets, bought by cutting discounts, are cushioning the fall. Both real growth levers, menu traffic and the rate at which views become orders, are weakening at once.</p><p>That matters because a cushion runs out. Once basket size stops rising, or the discount cuts push away too many customers, sales fall in line with orders, and the cost of buying new customers through ads is already climbing toward the point where growth-by-spending stops paying. The recommended direction is clear: rebuild the ordering journey and the repeat base so the shop grows on healthy demand, not on price. Start where the leak is biggest, getting menu views to start an order, and lean less on discounts and paid ads while the basket cushion still buys time.</p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+
+  const MO=['Jan','Feb','Mar','Apr','May','Jun'];
+  const GOLD='#c08a2d', NAVY='#1f3a5f', RED='#c0392b', GREEN='#2e7d32', GREY='#9aa4b0';
+  Chart.defaults.font.family="Arial, Helvetica, sans-serif"; Chart.defaults.font.size=11; Chart.defaults.color='#4a4a4a';
+  function draw(){
+    new Chart(c1,{type:'bar',data:{labels:MO,datasets:[
+     {label:'Burger',data:[6873,7644,7859,5440,6050,4204],backgroundColor:GOLD},
+     {label:'Pizza',data:[3625,3078,3787,3112,2825,2381],backgroundColor:NAVY}]},
+     options:{maintainAspectRatio:false,scales:{y:{title:{display:true,text:'Orders per month'},beginAtZero:true}}}});
+    new Chart(c2,{data:{labels:MO,datasets:[
+     {type:'bar',label:'Sales after discounts (RM k)',data:[317,287,338,279,310,244],backgroundColor:NAVY,yAxisID:'y'},
+     {type:'line',label:'Avg order value (RM)',data:[30,27,29,33,35,37],borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3,yAxisID:'y1'}]},
+     options:{maintainAspectRatio:false,scales:{
+      y:{position:'left',title:{display:true,text:'Sales (RM k)'},beginAtZero:true},
+      y1:{position:'right',title:{display:true,text:'Avg order value (RM)'},grid:{drawOnChartArea:false},beginAtZero:true}}}});
+    new Chart(c3,{type:'bar',data:{labels:['Menu traffic','Ordering rate','Basket size','= Sales'],datasets:[
+     {label:'Change Jan to Jun',data:[-22,-24,21,-23],backgroundColor:['#c0392b','#c0392b',GREEN,NAVY]}]},
+     options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'% change Jan to Jun'}}}}});
+    new Chart(c4,{type:'bar',data:{labels:['Menu','Cart','Payment','Order'],datasets:[
+     {label:'January',data:[78270,20804,14122,10406],backgroundColor:GREY},
+     {label:'June',data:[62690,15317,9310,6487],backgroundColor:NAVY}]},
+     options:{maintainAspectRatio:false,scales:{y:{title:{display:true,text:'Sessions'},beginAtZero:true}}}});
+    new Chart(c5,{type:'line',data:{labels:MO,datasets:[
+     {label:'Burger',data:[13.2,15.5,13.4,10.4,10.2,10.0],borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3},
+     {label:'Pizza',data:[13.4,12.6,11.9,11.5,10.4,11.0],borderColor:NAVY,backgroundColor:NAVY,borderWidth:3,tension:.3}]},
+     options:{maintainAspectRatio:false,scales:{y:{title:{display:true,text:'% of menu views that order'}}}}});
+    new Chart(c6,{type:'bar',data:{labels:['Discounts & orders','Discounts & sales','Ad spend & sales','Ordering rate & sales','Repeat orders & basket','Ad depth & ad payback'],datasets:[
+     {label:'move together (-1 to +1)',data:[0.93,0.71,0.40,0.38,-0.91,-0.91],backgroundColor:d=>d.raw>=0?GREEN:RED}]},
+     options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:-1,max:1,title:{display:true,text:'move together (+)   ...   move opposite (-)'}}}}});
+    new Chart(c7,{type:'line',data:{labels:MO,datasets:[
+     {label:'Cost to win - Burger',data:[5,5,6,7,7,9],borderColor:GOLD,borderDash:[5,4],backgroundColor:GOLD,borderWidth:2,tension:.3},
+     {label:'Order value - Burger',data:[23,20,22,27,28,30],borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3},
+     {label:'Cost to win - Pizza',data:[5,8,9,10,8,11],borderColor:NAVY,borderDash:[5,4],backgroundColor:NAVY,borderWidth:2,tension:.3},
+     {label:'Order value - Pizza',data:[43,43,44,43,49,50],borderColor:NAVY,backgroundColor:NAVY,borderWidth:3,tension:.3}]},
+     options:{maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:12,font:{size:10}}}},scales:{y:{title:{display:true,text:'RM per order'},beginAtZero:true}}}});
+    new Chart(c8,{type:'line',data:{labels:MO,datasets:[
+     {label:'Ad ROI - Burger',data:[7.6,7.4,7.2,5.4,5.5,4.6],borderColor:GOLD,backgroundColor:GOLD,borderWidth:3,tension:.3},
+     {label:'Ad ROI - Pizza',data:[12.8,8.2,7.4,7.4,7.9,6.9],borderColor:NAVY,backgroundColor:NAVY,borderWidth:3,tension:.3}]},
+     options:{maintainAspectRatio:false,scales:{y:{title:{display:true,text:'Return per RM of ad spend'},beginAtZero:true}}}});
+    setTimeout(postH,120);
+  }
+  if(window.Chart) draw(); else window.addEventListener('load',draw);
+</script>
+</body></html>

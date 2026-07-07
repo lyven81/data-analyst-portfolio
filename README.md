@@ -6,10 +6,11 @@ An auto-maintained index of every published case study, **newest first**. The da
 
 > Maintenance: this list is updated by the `portfolio-publish` skill whenever a case study (analyst report, dashboard, or AI assistant) is pushed and deployed. New entries go at the top.
 
-**Total published case studies: 134**
+**Total published case studies: 135**
 
 | # | Date pushed | Case study | Page |
 |---|---|---|---|
+| 135 | 2026-07-07 | The Quiet Slide | [the-quiet-slide](https://lyven81.github.io/data-analyst-portfolio/case-studies/the-quiet-slide.html) |
 | 134 | 2026-07-04 | When Blooms Arrive Late | [when-blooms-arrive-late](https://lyven81.github.io/data-analyst-portfolio/case-studies/when-blooms-arrive-late.html) |
 | 133 | 2026-07-01 | Mosques, Crime and Drugs | [religious-density](https://lyven81.github.io/data-analyst-portfolio/case-studies/religious-density.html) |
 | 132 | 2026-06-30 | One Brand, Four Reputations | [one-brand-four-reputations](https://lyven81.github.io/data-analyst-portfolio/case-studies/one-brand-four-reputations.html) |
