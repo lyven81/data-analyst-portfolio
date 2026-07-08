@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Influences Property Price | Data Stories Lab</title>
+<meta name="description" content="Where five Kuala Lumpur highrise buildings sit in their price cycle">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .wip{border:1px solid var(--hair);background:#fbfaf7;border-top:3px solid var(--accent);padding:54px 36px;margin:30px 0;text-align:center;}
+  .wip .lab{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  .wip h2{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.9rem;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em;}
+  .wip p{font-size:1.06rem;color:#444;max-width:56ch;margin:0 auto;}
+  .wip .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .wip .btn{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:12px 22px;border:1px solid #222;background:#222;color:#fff;text-decoration:none;}
+  .wip .btn:hover{background:var(--accent);border-color:var(--accent);}
+  .wip .btn.ghost{background:#fff;color:#222;} .wip .btn.ghost:hover{color:var(--accent);border-color:var(--accent);}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding + .finding, .subsection + .finding{}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+  table.appx{width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:.82rem;margin-top:14px;}
+  table.appx th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-size:.7rem;letter-spacing:.5px;text-transform:uppercase;}
+  table.appx td{padding:9px 10px;border-bottom:1px solid var(--hair);vertical-align:top;color:#333;}
+  table.appx tr:nth-child(even) td{background:#f7f9fb;}
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/regression-analysis.html">Regression Analysis</a>
+    <span class="sep">/</span><span>What Influences Property Price</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/cover.jpeg" alt="Five Kuala Lumpur highrise buildings of different eras side by side">
+    <figcaption><span>How five Kuala Lumpur highrise buildings price, and where each sits in its cycle.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Property valuation</div>
+  <h1 class="title">What Influences Property Price</h1>
+  <p class="standfirst">Where five highrise buildings sit in their price cycle</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>KL highrise &middot; five buildings</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>Five highrise buildings in Kuala Lumpur, bought and sold over three decades, share one market and, at a glance, one story: a steady climb that carries them upward together. A single average across their sales seems to describe every one, which makes that story easy to accept. This report reads 249 of those sales, one building at a time, to test that story and to show what really sets each building's price.</p>
+    <p>Two findings make the answer surprising. The five hardly move together at all: three of the buildings have eased while only one is still climbing, so the market average flatters most of them. And age barely matters, because the dearest building of the five is one of the oldest while the newest sits near the bottom. What follows is where each building stands, what moves its price, and a worked value for a unit in every one.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs">
+    <div class="fig"><div class="n">249 sales</div><div class="l">across five buildings, 1986&ndash;2019</div></div>
+    <div class="fig"><div class="n">89%</div><div class="l">of price differences explained</div></div>
+    <div class="fig"><div class="n">3 of 5</div><div class="l">buildings falling, only one rising</div></div>
+    <div class="fig"><div class="n">6&times;</div><div class="l">rate gap, dearest vs cheapest building</div></div>
+  </div>
+
+  <div class="pull"><p>&ldquo;Pooled together, the five look like they rose about 4% a year. That single number is carried by one building and hides that most are flat or falling.&rdquo;</p></div>
+
+  <div class="skicker">What the numbers show</div>
+
+  <article class="finding"><h3 class="fq">Executive summary</h3><div class="ftext">
+    <p>For anyone putting a price on a unit here, the consequence is that these five cannot share one rate or one trend. Property 3 is dear and still rising, Property 2 is dear but has levelled off, and Property 1, Property 4 and Property 5 are all easing, Property 1 despite being the newest of the five. A rate or a trend taken from the market as a whole would misprice almost every one.</p>
+    <p>Two adjustments carry most of the weight in pricing these buildings, and the data gives each a clear direction. On timing, an upward move for the passage of time fits Property 3, which is still rising, while Property 2 has held level and Property 1, Property 4 and Property 5 have eased. On the building itself, price tracks standing rather than age: Property 3, one of the oldest, is the dearest of all, while Property 1, the newest, sits near the bottom. Age is not the story; the address is.</p>
+    <p>The approach that follows is three steps: start from each building's own going rate, scale by the unit's floor area, and adjust for time in the direction that building is actually moving. Set out this way, the five resolve into five clear pricing problems, each answered below and each turned into a worked valuation at the end.</p>
+  </div></article>
+
+  <!-- SECTION 1 -->
+  <h2 class="subsection">1. What sets a unit's price</h2>
+
+  <article class="finding"><h3 class="fq">How much does size shift price?</h3><div class="ftext">
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/q1_pricesize.png" alt="Sale price against unit size"><figcaption>Sale price against unit size, all 249 sales. The line is nearly straight: more space, proportionally more money.</figcaption></figure>
+    <p>A unit's price follows its floor area almost exactly. Across all 249 sales, a unit that is 10% larger sells for about 11% more, the tightest relationship anywhere in the data. Floor area is the first and firmest thing that sets a price.</p>
+    <p>This holds in every building, whatever their rates, which is why area is the safe backbone of a valuation here. Property 5 trades in large units of around 2,070 square feet and Property 2 in small ones of around 370, with Property 1 near 1,100, Property 3 near 760 and Property 4 near 620, yet inside each the same rule applies: proportionally more space, proportionally more money.</p>
+    <p>Price a unit first on its size: take the building's going rate per square foot and multiply by the floor area. Everything else in this report is an adjustment sitting on top of that backbone, never a replacement for it.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">Do bigger units cost less?</h3><div class="ftext">
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/q1_size.png" alt="Rate change for a larger unit, by building"><figcaption>How the per-square-foot rate changes for a unit 100 sq ft larger, by building. The directions disagree, so there is no common rule.</figcaption></figure>
+    <p>Within a single building, the rate per square foot hardly changes as units get larger, and where it does change it does not change the same way everywhere. There is no one size adjustment that carries across all five buildings.</p>
+    <p>In Property 2 a larger unit carries a slightly higher rate, about RM15 more per square foot for each extra 100 square feet, while in Property 4 and Property 5 a larger unit is a little cheaper, by roughly RM30 and RM26. Property 1 eases gently, about RM7, and Property 3 is essentially flat. The direction of the size adjustment belongs to the building, not to the market as a whole.</p>
+    <p>Apply only the small, building-specific tilt where it exists: a touch up in Property 2, a touch down in Property 4 and Property 5, and none worth making in Property 1 or Property 3. Do not carry one building's size adjustment across to another.</p>
+  </div></article>
+
+  <!-- SECTION 2 -->
+  <h2 class="subsection">2. Where each building stands</h2>
+
+  <article class="finding"><h3 class="fq">What is each building's going rate?</h3><div class="ftext">
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/q2_rate.png" alt="Going rate per square foot by building"><figcaption>Going rate per square foot, size-adjusted, most recent sales. The starting point for any valuation.</figcaption></figure>
+    <p>Stripped of unit size and read at today's market, the five buildings sit far apart. Property 3 is the dearest at about RM1,300 per square foot, then Property 2 at about RM1,010, Property 5 at about RM830, Property 1 at about RM450, and Property 4 the cheapest at about RM210.</p>
+    <p>These rates are the anchor a valuer starts from, and the spread is wide: the top building trades at more than six times the rate of the bottom one. Even the gap between the two dearest, Property 3 and Property 2, is about RM290 per square foot, enough to swing a mid-sized unit by a quarter of a million ringgit.</p>
+    <p>Start from each building's own going rate, never a blended market average. A single area rate applied across these five would overprice Property 1 and Property 4 and underprice Property 3 and Property 2 by a wide margin.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">How fast is each building appreciating?</h3><div class="ftext">
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/q3_appreciation.png" alt="Yearly price change by building"><figcaption>Yearly price change 2015&ndash;2019, size-adjusted. The dashed line is the misleading five-building average.</figcaption></figure>
+    <p>Only one of the five is genuinely rising. Property 3 has gained about 8% a year in recent years, while Property 2 has held flat, and Property 1, Property 4 and Property 5 have all lost ground, Property 1 by about 5% a year, Property 5 by about 2%, and Property 4 drifting slightly down.</p>
+    <p>Averaged together, the five look like they rose about 4% a year, the kind of number that makes "property always goes up" feel true. That average is carried almost entirely by Property 3 and hides that most of these buildings are flat or falling. Read from that market average alone, the timing adjustment would point up for four buildings that have actually moved down or sideways.</p>
+    <p>Treat appreciation as a building-by-building fact, not a market rule. Only Property 3 justifies revising an older comparable upward for the passage of time; for the other four, time is flat or works against the price.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">Which buildings are peaking or sliding?</h3><div class="ftext">
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/q5_cycle.png" alt="Size-adjusted price path by building"><figcaption>Size-adjusted price per square foot by year. Five buildings, five different paths through the cycle.</figcaption></figure>
+    <p>The five sit at different points of the price cycle. Property 3 is still climbing and has just set its highest level. Property 2 has plateaued after years of growth and now holds steady near the top. Property 1 has turned down from a 2016 peak and sits about 15% below it, while Property 4 drifts lower and Property 5 has dropped sharply from its 2018 high.</p>
+    <p>The most useful surprise is Property 1: it is the newest building of the five, yet it is the clearest faller, which cuts against the common expectation that a newer building holds its value. A building can look busy on sales volume while its price has quietly rolled over, and that is exactly what has happened here.</p>
+    <p>Let the stage set the direction of the time adjustment. Revise a comparable upward only in Property 3, leave it broadly as it stands in Property 2, and revise downward in Property 1, Property 4 and Property 5, most steeply in Property 5. Getting this direction wrong is the single largest pricing error available in these five buildings.</p>
+  </div></article>
+
+  <!-- SECTION 3 -->
+  <h2 class="subsection">3. Why the buildings differ</h2>
+
+  <article class="finding"><h3 class="fq">Is it age, or the address?</h3><div class="ftext">
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/q6_age.png" alt="Going rate against building age"><figcaption>Going rate against building age. Older does not mean cheaper; the dearest building is one of the oldest.</figcaption></figure>
+    <p>Age does not set the price. Property 3 was completed in 1994 yet commands the highest rate of all five, while Property 1, finished in 2009 and the newest, sits near the bottom, and Property 4, the oldest at 1986, is the cheapest. Lined up across the five buildings, age and price show no real relationship.</p>
+    <p>What is left, once floor area, unit type and the passage of time are set aside, is the building itself: where it stands, how it is regarded, and the tier of buyer it draws. That standing is what separates Property 3 and Property 2 at the top from Property 1 near the middle and Property 4 at the bottom, with Property 5 in between. The year on the title deed explains none of it.</p>
+    <p>Judge a building on its address and standing, not its completion year. Do not discount Property 3 for its age, and do not pay up for Property 1 because it is new; this market rewards where a building is, not how recently it was built.</p>
+  </div></article>
+
+  <!-- COOKBOOK -->
+  <div class="skicker" style="margin-top:42px">The valuation cookbook</div>
+  <div class="body">
+    <p>Putting the findings together, each building has a simple recipe: start from its going rate, multiply by the unit's floor area, then adjust for time in the direction the building is moving. Below is a worked value for a standard, median-sized unit in each building at today's market, with the time rule a valuer applies to an older comparable. The two thinnest buildings, Property 4 and Property 5, rest on the fewest sales, so their values are shown as wider ranges.</p>
+    <table class="appx">
+      <tr><th>Building</th><th>Standard unit</th><th>Going rate</th><th>Worked value</th><th>Stage &middot; time rule</th></tr>
+      <tr><td>Property 3 (condo, 1994)</td><td>~760 sq ft</td><td>~RM1,300/sq ft</td><td>~RM990,000 (RM911k&ndash;1.07m)</td><td>Rising &middot; revise an older sale up</td></tr>
+      <tr><td>Property 2 (service apt, 2004)</td><td>~370 sq ft</td><td>~RM1,010/sq ft</td><td>~RM370,000 (RM341k&ndash;400k)</td><td>Plateau &middot; recent sales stand as they are</td></tr>
+      <tr><td>Property 5 (condo, 1987)</td><td>~2,070 sq ft</td><td>~RM830/sq ft</td><td>~RM1.71m (RM1.45m&ndash;1.96m)</td><td>Falling &middot; price off the newest sale, wide range</td></tr>
+      <tr><td>Property 1 (condo, 2009)</td><td>~1,100 sq ft</td><td>~RM450/sq ft</td><td>~RM490,000 (RM451k&ndash;529k)</td><td>Falling &middot; revise an older sale down</td></tr>
+      <tr><td>Property 4 (medium cost, 1986)</td><td>~620 sq ft</td><td>~RM210/sq ft</td><td>~RM130,000 (RM110k&ndash;149k)</td><td>Soft &middot; use the median, wide range</td></tr>
+    </table>
+  </div>
+
+  <!-- RECOMMENDATIONS -->
+  <div class="skicker" style="margin-top:42px">What to do</div>
+  <div class="body">
+    <p><strong>1. Start from the building's own going rate</strong> (section 2). The five rates run from about RM210 to RM1,300 per square foot, so a blended market rate misprices both ends. Expected result: the largest single source of error removed at the first step.</p>
+    <p><strong>2. Price on area times rate</strong> (section 1). A unit's price scales almost exactly with its floor area, and the per-square-foot rate barely bends with size. Expected result: simpler, more defensible unit adjustments, with only a small building-specific tilt where it exists.</p>
+    <p><strong>3. Set the time adjustment by the building's stage, not the market</strong> (section 2). Up for Property 3, flat for Property 2, down for Property 1, Property 4 and Property 5. Expected result: the three falling buildings are not marked up when time is assumed to raise value.</p>
+    <p><strong>4. Judge value by address, not age</strong> (section 3). No age discount on Property 3, no youth premium on Property 1. Expected result: valuations that match what buyers in this market actually pay for.</p>
+    <p><strong>5. Widen the range for Property 4 and Property 5.</strong> Both rest on fewer than 25 sales, so their trends and values are less certain. Expected result: honest confidence, a stated range rather than false precision.</p>
+  </div>
+
+  <!-- METHOD -->
+  <div class="skicker" style="margin-top:42px">Where the numbers come from</div>
+  <div class="body">
+    <p>The analysis uses 249 highrise sales across five buildings, spanning 1986 to 2019 with most sales from 2014 onward, and about RM162 million of transactions in all. Each sale carries its price, floor area, building, unit type and sale quarter. Two sales dated before their building was completed were set aside, and the five buildings were relabelled Property 1 to Property 5 in place of their real names.</p>
+    <p>Building, size and timing together account for about 89% of why prices differ, and allowing each building its own trend was what lifted the accuracy, confirming the five move separately rather than as one market. Size was tested directly and found to scale price almost exactly, with no rate premium for larger units. Property 4 and Property 5 rest on 22 and 18 sales, so their trends and values carry wider uncertainty and are shown as ranges. Each building's direction is clear; the exact turning point is not, so the stages describe direction, not a precise date.</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="skicker" style="margin-top:42px">The bottom line</div>
+  <div class="body">
+    <p>Five highrise buildings that look like one market are really five separate pricing problems. Their rates run six to one, only one is rising while three are falling, and the dearest of them is one of the oldest. Averaging them together produces a tidy growth story that would misprice almost every one.</p>
+    <p>The way to price them is not a market rule but a building rule: start from each building's own going rate, scale by the unit's floor area, and move the price in the direction that building is actually heading. Age barely matters; the address is what buyers pay for.</p>
+    <p>Read this way, every adjustment carries a number and a reason: the building's own rate, the unit's floor area, and the direction the market has taken. That is what makes a valuation straightforward to explain and to stand behind.</p>
+  </div>
+
+  <!-- APPENDIX ACTION LIST -->
+  <div class="skicker" style="margin-top:42px">Action list</div>
+  <div class="body">
+    <p>Ranked by impact, tied to the findings above. Companion file: <strong>action-list.csv</strong>.</p>
+    <table class="appx">
+      <tr><th>#</th><th>Action</th><th>How</th><th>Expected impact</th></tr>
+      <tr><td>1</td><td>Start from each building's own going rate</td><td>Use the building rate (RM210&ndash;1,300/sq ft), never a blended average</td><td>Removes the biggest pricing error at step one</td></tr>
+      <tr><td>2</td><td>Set the time adjustment by stage</td><td>Up for Property 3, flat for Property 2, down for Property 1, 4 and 5</td><td>Stops overpricing the three falling buildings</td></tr>
+      <tr><td>3</td><td>Price on area times rate</td><td>Multiply floor area by rate; no size premium beyond a small per-building tilt</td><td>Simpler, defensible unit adjustments</td></tr>
+      <tr><td>4</td><td>Judge value by address, not age</td><td>No age discount on Property 3, no youth premium on Property 1</td><td>Valuations match what buyers pay for</td></tr>
+      <tr><td>5</td><td>Widen the range on thin buildings</td><td>Show Property 4 and Property 5 as ranges, priced off the newest sales</td><td>Honest confidence where evidence is thin</td></tr>
+    </table>
+  </div>
+
+  <hr class="endrule">
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>
