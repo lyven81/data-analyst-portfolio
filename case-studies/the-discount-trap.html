@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Discount Trap | Data Stories Lab</title>
+<meta name="description" content="How cutting price quietly drains delivery profit">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .topbar{position:sticky;top:0;z-index:120;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.06);}
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;flex-direction:column;gap:4px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.1rem;color:var(--navy);letter-spacing:-.01em;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  .finding{margin-top:30px;padding-top:20px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.28rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  figure.chart figcaption{font-family:Arial,Helvetica,sans-serif;font-style:italic;font-size:.8rem;color:#8a8f98;line-height:1.4;margin-top:8px;}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .body li{font-size:1.04rem;margin-top:.5rem;}
+  .body strong,.lead strong,.ftext strong{font-weight:600;}
+  table.appx{width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:.82rem;margin-top:14px;}
+  table.appx th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-size:.7rem;letter-spacing:.5px;text-transform:uppercase;}
+  table.appx td{padding:9px 10px;border-bottom:1px solid var(--hair);vertical-align:top;color:#333;}
+  table.appx tr:nth-child(even) td{background:#f7f9fb;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} .mast-nav{display:none;} }
+  .crumb a{color:inherit;text-decoration:none} .crumb a:hover{color:var(--accent)}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:8px}
+  .switch-tabs{display:flex}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none}
+  .sw:first-child{padding-left:0} a.sw:hover{color:var(--ink)}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent)}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none}
+  .sw-home:hover{color:var(--accent)} .sw-home .ico{font-size:1.05rem;line-height:1}
+</style></head>
+<body>
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a> <span class="sep">/</span> <a href="/data-analyst-portfolio/regression-analysis.html">Regression Analysis</a> <span class="sep">/</span> The Discount Trap</div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/cover%20image.jpeg" alt="The Discount Trap">
+    <figcaption><span>Where a burger and pizza delivery kitchen's profit really comes from.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Delivery-app profit</div>
+  <h1 class="title">The Discount Trap</h1>
+  <p class="standfirst">How cutting price quietly drains delivery profit</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>Burger &amp; pizza &middot; food-ordering apps</span></div>
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/the-discount-trap-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>A burger and pizza shop that sells through the food-ordering apps faces the same decision every week: where to put the next ringgit and the next hour. Into ads, into discounts, into a faster kitchen, or into pushing certain dishes. The order screen is always busy, so it is easy to assume the business is healthy. This report reads a full year of the shop's daily numbers to test that assumption and to show where the profit actually comes from.</p>
+    <p>Two things make the answer surprising. The busiest product turns out to be the weaker earner once the app takes its cut, and the discounts meant to grow the business are quietly draining it. What follows is the real state of the shop and the specific moves that lift profit without adding a single hour to the kitchen.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs">
+    <div class="fig"><div class="n">RM6.60 vs RM14.60</div><div class="l">profit per order: burger vs pizza</div></div>
+    <div class="fig"><div class="n">30%</div><div class="l">the app's cut of every sale</div></div>
+    <div class="fig"><div class="n">~RM826k/yr</div><div class="l">from cutting burger's discount</div></div>
+    <div class="fig"><div class="n">8&times;</div><div class="l">being seen beats discounting</div></div>
+  </div>
+
+  <div class="pull"><p>&ldquo;A delivery kitchen can be busy, growing, and still going backwards, because the orders it buys with discounts cost more than they bring back.&rdquo;</p></div>
+
+  <div class="skicker">What the numbers show</div>
+
+  <article class="finding"><h3 class="fq">Executive summary</h3><div class="ftext">
+    <p>The shop looks healthy on the order screen, and in one sense it is: it runs close to 1,000 burger orders and 470 pizza orders a day across the year. The trouble sits underneath. After the app takes its 30% cut and the discounts are paid, the busy burger line earns barely more than the quieter pizza line, and on every single order pizza earns more than twice as much (RM14.60 against RM6.60).</p>
+    <p>Two habits are doing the damage. The shop leans on discounts to pull orders, but discounts are the weakest lever it has: being seen in the app drives orders about eight times harder than cutting price, and every ringgit of discount both costs money and shrinks the order it wins. The result is a business that mistakes being busy for being paid.</p>
+    <p>The path forward is three moves: fight for visibility instead of buying orders with discounts, cut the discount that is bleeding profit (burger hardest), and build the menu around the dishes that actually earn once the app is paid. The same kitchen and the same traffic can produce materially more profit.</p>
+  </div></article>
+
+  <!-- SECTION 1 -->
+  <h2 class="subsection">1. What brings in more orders?</h2>
+
+  <article class="finding"><h3 class="fq">Being seen beats being cheap</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s1_drivers.png" alt="Driver strength on daily orders"><figcaption>How hard each lever pulls on daily orders. Being seen on the app dwarfs everything the shop can do with price.</figcaption></figure>
+    <p>The single biggest driver of orders is being seen on the app, far ahead of anything the shop does with price. Its pull is about eight times stronger than discounting. Weekends add a steady lift, ads and discounts help but only modestly, staying in stock matters, and a slow kitchen is the one thing that pushes orders down.</p>
+    <p>This reframes the whole fight for orders. It is a fight for visibility, ranking high, good photos, staying open and in stock, not a fight to be the cheapest shop on the app. A shop that pours money into discounts to climb is spending hard on its weakest lever.</p>
+    <p>Put budget and effort into ranking and presentation before touching price, and treat being in stock as a sales target, not just an operations one. The cheapest way to more orders is to be more visible, not more discounted.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">Ads still pay, and a slow kitchen quietly costs orders</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s1_ad_prep.png" alt="Ad return and kitchen speed"><figcaption>Left: what RM1 of ads brings back. Right: orders lost for every extra minute the kitchen is slower.</figcaption></figure>
+    <p>Ads are still paying at current levels. Every RM1 spent on ads brings back about RM1.44 on burger and RM2.57 on pizza, and there is no point in the year's data where spending more stops working. At the same time, every extra minute of kitchen prep costs about 22 burger orders and 12 pizza orders a day.</p>
+    <p>So advertising is profitable, and it is far more profitable on pizza. The kitchen's speed is not only a service issue: a slow line during a rush silently turns away demand the shop has already paid to attract.</p>
+    <p>Keep advertising, and lean the ad budget toward pizza where each ringgit works hardest. Treat prep time as a revenue number, especially at peak, because minutes lost in the kitchen are orders lost on the app.</p>
+  </div></article>
+
+  <!-- SECTION 2 -->
+  <h2 class="subsection">2. What makes each order bigger?</h2>
+
+  <article class="finding"><h3 class="fq">Discounts do not just cost money, they shrink the order</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s2_discount_aov.png" alt="Discount versus spend per order"><figcaption>As the discount per order rises, the amount each customer spends falls, for both products.</figcaption></figure>
+    <p>A discount carries a second, hidden cost. Every RM1 of discount given lowers the amount a customer spends by about RM0.59. A deep discount is therefore a double hit: the giveaway itself, plus a smaller order to show for it.</p>
+    <p>This is the quiet way chasing orders erodes takings. The shop can end up with more orders that are each worth less, so the extra orders do not turn into the extra money they promised.</p>
+    <p>Use discounts sparingly and keep them shallow. When the goal is a bigger order, add-ons and bundles lift spend without the shrink that a straight price cut brings.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">Pizza is the bigger-order product, and weekends are the time to push it</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s2_ordersize.png" alt="Order size by product and weekend"><figcaption>Pizza orders run well above burger orders, and every order is a little bigger on weekends.</figcaption></figure>
+    <p>Pizza is the bigger-order product by a wide margin: a pizza order is worth about RM18 more than a burger order. Weekends add roughly RM1.25 to every order on top of bringing more of them.</p>
+    <p>The menu, not the marketing, sets the ceiling on how big an order can be. Pizza's higher prices and larger orders make it the natural engine for money per order, and weekends are the natural time to push the bigger, richer orders.</p>
+    <p>Feature pizza and premium bundles in weekend promotions, when customers already spend more. Do not expect a burger-led push to raise the average order; that ceiling is fixed by the menu.</p>
+  </div></article>
+
+  <!-- SECTION 3 -->
+  <h2 class="subsection">3. Sell more, or earn more each?</h2>
+
+  <article class="finding"><h3 class="fq">The app's cut flips who is winning</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s3_appcut.png" alt="Profit before and after the app's cut"><figcaption>Before the platform's cut, burger leads; after the 30% commission, pizza is the stronger earner.</figcaption></figure>
+    <p>The order screen and the profit sheet tell different stories. Before the app takes its cut, burger makes the most money, about RM14,040 a day against pizza's RM13,253. After the app's 30% cut, the ranking flips: pizza clears about RM6,899 a day and burger only RM6,477.</p>
+    <p>The commission does not land evenly. It hits the busy, lower-priced burger hardest, because burger leans on order count and discounts, exactly the parts of a sale that the app's cut and the giveaways eat first. The product that looks like the winner on the sales screen is the smaller earner once the platform is paid.</p>
+    <p>Judge each product on profit after the app's cut, not on order count or gross sales. On that honest measure, pizza is the stronger business and deserves more of the shop's attention.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">Busy is not the same as paid</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s3_busy.png" alt="Orders per day versus profit per order"><figcaption>Burger carries the order count; pizza carries the profit per order. They end the day close, on very different effort.</figcaption></figure>
+    <p>Burger runs about 983 orders a day and pizza about 473, yet pizza earns more than twice as much per order (RM14.60 against RM6.60). The two lines finish the day at almost the same profit, but burger gets there with double the orders, double the kitchen work, and double the food cost.</p>
+    <p>Being busy is not the same as making money. The burger line is working twice as hard for the same reward. That is acceptable when the kitchen has spare capacity to fill, and a warning sign when it does not.</p>
+    <p>When the kitchen is near its limit, shift the mix toward pizza: more profit for less load. Chase burger order count only when there is idle capacity that would otherwise sit empty.</p>
+  </div></article>
+
+  <!-- SECTION 4 -->
+  <h2 class="subsection">4. Discount: keep or cut?</h2>
+
+  <article class="finding"><h3 class="fq">The shop is discounting past the point where it pays</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s4_discount_curve.png" alt="Profit against discount level"><figcaption>Reading right to left, profit climbs as the discount comes down. The dots mark where the shop sits today.</figcaption></figure>
+    <p>Profit rises as the discount comes down. For both products, the most profitable discount sits at the very bottom of the range the shop has ever tried. Cutting burger's discount from its current RM8.30 toward the floor is worth about RM2,260 a day, roughly RM826,000 a year. Pizza gains too, but far less, about RM370 a day. Cutting a discount does lose some orders (burger loses orders almost twice as fast as pizza), but each order that stays is worth much more.</p>
+    <p>The shop is discounting well past the point where it pays, and burger is the worst offender: it gives the deepest discount and gets the least back, because each ringgit off buys orders that never cover the money given away. One honest limit: the data points to a clear direction, cut, rather than an exact stopping point, because the shop has never run at zero discount.</p>
+    <p>Cut burger's discount hard and trim pizza's more gently, then move that money into visibility, the lever that actually drives orders. Step the discount down in stages and watch the profit rather than dropping to zero overnight.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">Two dishes are too costly to discount</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s4_foodcost.png" alt="Food cost as a share of price, by item"><figcaption>The two items in red spend the most of their price on ingredients, so a deep discount tips them toward a loss.</figcaption></figure>
+    <p>Discounts also bite unevenly across the menu. Two dishes are too costly to discount: the Double Cheeseburger, whose ingredients eat 36% of its price, and the Seafood Deluxe pizza at 38%. A deep promotion on either pushes it close to losing money, while a leaner dish like the Margherita or Classic Chicken can carry a discount and still earn.</p>
+    <p>A single shop-wide discount is a blunt tool. It overpays on the high-cost dishes and wastes the room the low-cost dishes have. Because burger orders also respond to discounts almost twice as strongly as pizza orders, the same promotion pulls very differently on each side of the menu.</p>
+    <p>Never put the deepest discount on the two high-cost dishes. Aim promotions at low-ingredient-cost items and at the burger side, where a small price move moves the most orders.</p>
+  </div></article>
+
+  <!-- SECTION 5 -->
+  <h2 class="subsection">5. Which items to push?</h2>
+
+  <article class="finding"><h3 class="fq">On burgers, the best seller and the best earner are not the same plate</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s5_burger_map.png" alt="Burger menu: units sold versus profit per plate"><figcaption>Bottom-right sells a lot for little; top-left earns a lot but sells little. No burger sits top-right.</figcaption></figure>
+    <p>On the burger menu, the crowd-pleaser and the money-maker are different dishes. The Classic Chicken sells the most, about 160,000 a year, but earns the least per plate at RM3.68. The Mushroom Swiss is its mirror image: the fewest sold, yet the most profit per plate at RM4.97. No burger both sells well and earns well.</p>
+    <p>Because it sells in such numbers, the Classic Chicken still brings the most total burger profit, so it earns its place as the anchor. But every one of those orders is thin, and the richer plates sit under-sold. So the answer to focus on the best seller or the most profitable is: keep the best seller as the anchor and work the higher-earning plates for extra.</p>
+    <p>Keep the Classic Chicken front and center to hold the order count, but actively upsell the Mushroom Swiss and Spicy BBQ, where each sale is worth far more, and keep the Double Cheeseburger off deep discounts.</p>
+  </div></article>
+
+  <article class="finding"><h3 class="fq">On pizza, the best seller is also one of the best earners</h3><div class="ftext">
+    <figure class="chart"><img src="https://raw.githubusercontent.com/lyven81/data-analyst-portfolio/main/images/the-discount-trap/s5_pizza_map.png" alt="Pizza menu: units sold versus profit per plate"><figcaption>The Pepperoni sits high and to the right: it sells the most and still earns well.</figcaption></figure>
+    <p>Pizza is a happier story. The Pepperoni is both the best seller, about 66,000 a year, and the top total earner, and it holds a healthy RM8.89 per plate. The Meat Lovers sells less but earns well at RM9.44, while the Margherita sells a lot but earns the least per plate at RM7.74.</p>
+    <p>On the pizza side there is no trade-off at the top: the most popular pizza is also one of the most profitable, so pushing it costs the shop nothing. The Meat Lovers is the dish worth lifting out of the sells-little corner.</p>
+    <p>Make the Pepperoni the hero of pizza marketing, it grows sales and profit together. Give the Meat Lovers more visibility to turn a high-margin dish into a bigger seller, and keep the Seafood Deluxe off deep discounts.</p>
+  </div></article>
+
+  <!-- RECOMMENDATIONS -->
+  <div class="skicker" style="margin-top:42px">What to do</div>
+  <div class="body">
+    <p><strong>1. Fight for visibility before price</strong> (sections 1&ndash;2). Being seen drives orders about eight times more than discounting, so invest in menu ranking, photos, staying in stock and a fast kitchen. Expected result: more orders without giving away profit.</p>
+    <p><strong>2. Cut discounts, burger hardest</strong> (section 4). The shop is discounting past the point where it pays. Stepping burger's discount down toward the floor is worth about RM2,260 a day (roughly RM826,000 a year), and pizza about RM370 a day. Redirect the saved spend into visibility.</p>
+    <p><strong>3. Protect the two high-cost dishes</strong> (section 4). Never put the deepest discount on the Double Cheeseburger or the Seafood Deluxe; aim promotions at low-ingredient-cost dishes instead. Expected result: promotions stop tipping items into a loss.</p>
+    <p><strong>4. Run the business on profit after the app's cut, and tilt toward pizza</strong> (section 3). Pizza earns more than twice per order and wins once the 30% commission is paid. When the kitchen is busy, shift the mix to pizza for more profit at less load.</p>
+    <p><strong>5. Push the right dishes</strong> (section 5). Anchor on the Classic Chicken and the Pepperoni for order count, and upsell the Mushroom Swiss and the Meat Lovers for extra profit. Expected result: higher profit per order on the same traffic.</p>
+  </div>
+
+  <!-- METHOD -->
+  <div class="skicker" style="margin-top:42px">Where the numbers come from</div>
+  <div class="body">
+    <p>The analysis uses a full year of daily records for both products, 730 days in all. Each day captures the levers the shop controls: menu views, discount, ad spend, how often the kitchen was in stock and how fast it cooked, and the day of the week. From this, two models were built, one for how many orders come in and one for how much each customer spends.</p>
+    <p>The order model explains 99% of the day-to-day swing and the spending model 97%, and every effect named here is statistically firm. Profit is counted all the way down: each dish's ingredient cost from the shop's own menu, then discounts, ad spend and the platform's 30% cut removed, so profit means the money left after the app is paid. The discount advice gives a clear direction rather than an exact floor, so the shop should step the discount down and watch rather than jump straight to zero.</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="skicker" style="margin-top:42px">The bottom line</div>
+  <div class="body">
+    <p>A burger and pizza shop on the food-ordering apps can look healthy on the order screen and still be leaking profit underneath. The busiest product is not the best earner, deep discounts are draining more than they bring in, and the platform's cut lands hardest on exactly the high-orders-and-discount habit the shop leans on. Being busy has been mistaken for being paid.</p>
+    <p>The way forward is not to work harder at the same game. It is to fight for visibility instead of buying orders with discounts, to cut the discount that is quietly bleeding profit, and to build the business around the dishes that actually earn once the app is paid.</p>
+    <p>Do that, and the same kitchen, the same traffic and the same menu produce materially more profit. That is the difference between a shop that is busy and a shop that is paid.</p>
+  </div>
+
+  <!-- APPENDIX ACTION LIST -->
+  <div class="skicker" style="margin-top:42px">Action list</div>
+  <div class="body">
+    <p>Ranked by impact, tied to the findings above. Companion file: <strong>action-list.csv</strong>.</p>
+    <table class="appx">
+      <tr><th>#</th><th>Action</th><th>How</th><th>Expected impact</th></tr>
+      <tr><td>1</td><td>Fight for visibility before price</td><td>Menu ranking, photos, in-stock, fast kitchen</td><td>More orders, no profit given away</td></tr>
+      <tr><td>2</td><td>Cut discounts, burger hardest</td><td>Step burger from RM8.30 toward the floor; trim pizza gently</td><td>~RM2,260/day burger (~RM826k/yr) + ~RM370/day pizza</td></tr>
+      <tr><td>3</td><td>Protect the two high-cost dishes</td><td>Never deep-discount Double Cheeseburger or Seafood Deluxe</td><td>Stops promotions tipping items into loss</td></tr>
+      <tr><td>4</td><td>Run on profit after the app's cut; tilt to pizza</td><td>Shift mix to pizza when the kitchen is busy</td><td>More profit per order, less kitchen load</td></tr>
+      <tr><td>5</td><td>Push the right dishes</td><td>Anchor Classic Chicken + Pepperoni; upsell Mushroom Swiss + Meat Lovers</td><td>Higher profit per order, same traffic</td></tr>
+    </table>
+  </div>
+
+  <hr class="endrule">
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+</body></html>
