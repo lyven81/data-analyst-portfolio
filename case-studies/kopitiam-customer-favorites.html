@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nasi Lemak Runs Everything | Data Stories Lab</title>
+<meta name="description" content="One dish fills eight of ten orders here.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  .fnum{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:.9rem;color:var(--accent);letter-spacing:1px;}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  h2.subsection{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.55rem;line-height:1.12;letter-spacing:-.012em;color:var(--navy);margin:44px 0 2px;padding-top:18px;border-top:3px solid var(--ink);}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  .colophon{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;color:var(--mute);margin-top:14px;line-height:1.6;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} }
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/optimization-analysis.html">Optimization Analysis</a>
+    <span class="sep">/</span><span>Nasi Lemak Runs Everything</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://lyven81.github.io/data-analyst-portfolio/images/kopitiam-customer-favorites/cover%20image.jpeg" alt="Nasi Lemak Runs Everything">
+    <figcaption><span>A busy kopitiam at breakfast, a plate of nasi lemak in the foreground.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Menu &amp; demand</div>
+  <h1 class="title">Nasi Lemak Runs Everything</h1>
+  <p class="standfirst">One dish fills eight of ten orders here.</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>2,421 orders &middot; 2019&ndash;2020</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>Walk into this kopitiam and you would guess two things sell hardest: nasi lemak on the plate and Kopi O in the cup. Eleven months of real orders, 2,421 of them, say only half of that is true. Nasi lemak is not just popular, it is the shop. Kopi O is an afterthought.</p> <p>Nasi lemak shows up in 81.5% of all orders and makes up nearly a third of every item sold. Kopi O, the drink most people picture first, lands at number seven, in only 17% of orders. The gap between the two is the most useful thing this data has to say, and it points to a clear set of menu decisions.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">81.5%</div><div class="l">of orders include nasi lemak</div></div><div class="fig"><div class="n">#7</div><div class="l">where Kopi O actually ranks</div></div><div class="fig"><div class="n">85%</div><div class="l">of everything sold is food</div></div><div class="fig"><div class="n">4.48</div><div class="l">items in the average order</div></div></div>
+
+  <div class="pull"><p>&ldquo;Nasi lemak is not a favorite here, it is the whole shop.&rdquo;</p></div>
+
+  <div class="skicker">What the data shows</div>
+
+    <article class="finding"><h3 class="fq">1. Nasi lemak is the anchor, not just a favorite</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/kopitiam-customer-favorites/fav-units.png" alt="Top 10 items by units sold, nasi lemak far ahead"></figure> <p>Nasi lemak sold 3,229 plates, 29.8% of all units, more than the next three items combined. Four out of five orders carry it. A dish this central is not a menu item to manage, it is the reason people come.</p> <p>The rule is simple: nasi lemak must never run out, and the kitchen's morning should be built around it. A sold-out nasi lemak at 10am is not a small miss, it is most of the day's demand walking away.</p></div></article>
+
+    <article class="finding"><h3 class="fq">2. Kopi O is not the favorite everyone assumes</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/kopitiam-customer-favorites/fav-frequency.png" alt="Share of orders that included each item, nasi lemak dominant"></figure> <p>Here is the comforting story to challenge: we are a kopitiam, so of course Kopi O sells. The orders disagree. Kopi O appears in 17% of orders and 4.7% of units, seventh on both counts. Six food items outsell it.</p> <p>That does not mean drop it, it means stop building pricing, promotions and stock planning around a drink that only one in six customers buys. The attention Kopi O gets in the owner's head is far larger than the attention it gets from customers.</p></div></article>
+
+    <article class="finding"><h3 class="fq">3. This is a food shop, not a drinks shop</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/kopitiam-customer-favorites/food-vs-drinks.png" alt="Food versus drinks by units sold, food 85 percent"></figure> <p>Group the menu into food and drinks and the shape of the business is obvious: food is 85% of everything sold, drinks just 15%. Even the best-selling drink trails six different foods.</p> <p>Customers come here to eat, and the drink is a small add-on to the plate. Every decision, the counter layout, the specials, the photos out front, should lead with food and treat drinks as the thing you tack on at the till.</p></div></article>
+
+    <article class="finding"><h3 class="fq">4. The reliable seconds are three cooked foods</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/kopitiam-customer-favorites/drinks-ranked.png" alt="Drinks ranked by units sold, Kopi O leading a small group"></figure> <p>Behind nasi lemak sit three dependable seconds: mee goreng, roti bakar and char kuey teow, each in roughly 30 to 35% of orders. These pair with nasi lemak and fill the average 4.48-item order. Keep them always available and prep them alongside nasi lemak.</p> <p>Among drinks, Kopi O leads only a small pack, as the chart shows, so the drinks menu can stay lean without losing sales. Trim it to the few that sell and price them as add-ons.</p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>The data is 11 months of the kopitiam's own orders (July 2019 to June 2020), 2,421 valid orders after removing blank rows. Each order lists the quantity of every menu item, so favorites are ranked two honest ways: total units sold, and how often an item appears in an order.</p> <p>One note on method: we did not rank items by ringgit sales. The order-total column carried an unreliable value (an extreme outlier and unclear units) and the data holds no per-item prices, so a sales-value ranking would be a guess. Counting units and order frequency needs no prices and is the reliable read this data supports.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>This is a nasi lemak shop with a menu attached. One dish sits in eight of ten orders and a third of everything sold, three cooked foods back it up, and the drink everyone pictures first is a minor line. The shop's demand is concentrated and food-led, and its planning should be too.</p> <p>The moves follow directly: protect nasi lemak first and never let it sell out before mid-afternoon; keep mee goreng, roti bakar and char kuey teow always on; trim the drinks menu and price it as an add-on; and lead every promotion and the shopfront with food. None of this needs a bigger budget, only stocking and promoting what customers actually buy.</p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

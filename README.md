@@ -6,10 +6,11 @@ An auto-maintained index of every published case study, **newest first**. The da
 
 > Maintenance: this list is updated by the `portfolio-publish` skill whenever a case study (analyst report, dashboard, or AI assistant) is pushed and deployed. New entries go at the top.
 
-**Total published case studies: 136**
+**Total published case studies: 137**
 
 | # | Date pushed | Case study | Page |
 |---|---|---|---|
+| 137 | 2026-07-09 | Nasi Lemak Runs Everything | [kopitiam-customer-favorites](https://lyven81.github.io/data-analyst-portfolio/case-studies/kopitiam-customer-favorites.html) |
 | 136 | 2026-07-08 | What Influences Property Price | [what-influences-property-price](https://lyven81.github.io/data-analyst-portfolio/case-studies/what-influences-property-price.html) |
 | 135 | 2026-07-07 | The Quiet Slide | [the-quiet-slide](https://lyven81.github.io/data-analyst-portfolio/case-studies/the-quiet-slide.html) |
 | 134 | 2026-07-04 | When Blooms Arrive Late | [when-blooms-arrive-late](https://lyven81.github.io/data-analyst-portfolio/case-studies/when-blooms-arrive-late.html) |
