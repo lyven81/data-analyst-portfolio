@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nasi Lemak Runs Everything Dashboard | Data Stories Lab</title>
+<meta name="description" content="The kopitiam order pattern: what sells, what is rising or falling, what is ordered together, and what to promote next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a1a1a; --gray:#555; --mute:#6b7280; --hair:#e2e2e2; --accent:#B8860B; --navy:#1E3A5F; --paper:#fff; --teal:#2E7D6F; --blue:#4A7FB5; --red:#B85450; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; } .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; } .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; } a.sw:hover{ color:var(--ink); } .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  .tool{ padding:22px 0 8px; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); } .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.5rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; min-width:0; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:264px; margin-top:14px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+  .recs{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:14px; }
+  .rec{ border:1px solid var(--hair); border-top:3px solid var(--accent); padding:14px 15px; }
+  .rec h4{ font-size:.95rem; color:var(--navy); margin-bottom:6px; } .rec p{ font-size:.85rem; color:#444; }
+  .combos{ margin-top:12px; } .combo{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px dashed var(--hair); font-size:.9rem; }
+  .combo b{ color:var(--navy); } .combo .pct{ margin-left:auto; color:var(--mute); font-size:.8rem; }
+  .gap{ background:#fbe7e5; border:1px solid #e7b7b0; border-radius:6px; padding:12px 14px; margin-top:12px; font-size:.9rem; color:#7a2e26; }
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; } .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .kpis{ grid-template-columns:1fr 1fr; } .grid{ grid-template-columns:1fr; } .recs{ grid-template-columns:1fr; } }
+  @media print{ *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } .topbar,.drawer,.overlay,.pagenav,footer.site{ display:none !important; } .page{ display:block !important; page-break-inside:avoid; margin-bottom:20px; } .ccard,.kpi{ break-inside:avoid; } }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer"><button class="drawer-close" id="drawerClose">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="topbar"><div class="masthead"><div class="mast-left">
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+    <nav class="mast-nav"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a></nav>
+  </div></div><hr class="rule-top"></div>
+  <div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><span class="sep">/</span><a href="/data-analyst-portfolio/optimization-analysis.html">Optimization Analysis</a><span class="sep">/</span><span>Nasi Lemak Runs Everything</span></div>
+  <div class="wrap"><div class="head">
+    <figure class="hero"><img src="https://lyven81.github.io/data-analyst-portfolio/images/kopitiam-customer-favorites/cover%20image.jpeg" alt="A busy kopitiam at breakfast"><figcaption><span>Eleven months of one kopitiam's orders, read for the pattern behind the plates.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption></figure>
+    <span class="kicker">Kopitiam order pattern</span>
+    <h1 class="title">Nasi Lemak Runs Everything</h1>
+    <p class="standfirst">One dish fills eight of ten orders here.</p>
+    <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>2,421 orders &middot; 2019&ndash;2020</span></div>
+    <nav class="switch"><div class="switch-tabs"><a class="sw" href="/data-analyst-portfolio/case-studies/kopitiam-customer-favorites.html">Analyst Report</a><span class="sw active">Dashboard</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+  </div>
+  <div class="tool">
+    <div class="pagenav">
+      <button class="pbtn active" data-p="1">Overview</button>
+      <button class="pbtn" data-p="2">Trends</button>
+      <button class="pbtn" data-p="3">Baskets</button>
+      <button class="pbtn" data-p="4">Plan</button>
+    </div>
+
+    <div class="page active" id="p1">
+      <div class="kpis" id="k1"></div>
+      <div class="grid">
+        <div class="ccard full"><span class="tab"></span><div class="ct">How busy the shop was, month by month</div><div class="cs">Orders per month; the drop from May 2020 is the pandemic shutdown</div><div class="cwrap" style="height:300px"><canvas id="c_month"></canvas></div><div class="csrc">Volume held near 200-300 a month, then fell away sharply in May-June 2020.</div></div>
+        <div class="ccard"><span class="tab"></span><div class="ct">What is on most tables</div><div class="cs">Share of orders that include each item (top 10)</div><div class="cwrap"><canvas id="c_top"></canvas></div><div class="csrc">Nasi lemak is in eight of ten orders; the rest are cooked foods.</div></div>
+        <div class="ccard"><span class="tab"></span><div class="ct">How big is a typical order</div><div class="cs">Share of orders by number of items</div><div class="cwrap"><canvas id="c_basket"></canvas></div><div class="csrc">Most orders are a spread of a few items; single-item orders are rare.</div></div>
+      </div>
+    </div>
+
+    <div class="page" id="p2">
+      <div class="kpis" id="k2"></div>
+      <div class="grid">
+        <div class="ccard full"><span class="tab"></span><div class="ct">Which foods are gaining or losing demand</div><div class="cs">Change in each item's share of orders, earlier vs later months (percentage points)</div><div class="cwrap" style="height:300px"><canvas id="c_shift"></canvas></div><div class="csrc">Read on share, not raw counts, so it is not distorted by the volume drop. Green = rising, red = falling.</div></div>
+        <div class="ccard"><span class="tab"></span><div class="ct">Nasi lemak stays king</div><div class="cs">Nasi lemak's share of orders by month</div><div class="cwrap"><canvas id="c_nl"></canvas></div><div class="csrc">It eases a little but holds around eight in ten orders throughout.</div></div>
+        <div class="ccard"><span class="tab"></span><div class="ct">The riser vs the slider</div><div class="cs">Char kuey teow (rising) against popiah (falling), share by month</div><div class="cwrap"><canvas id="c_rs"></canvas></div><div class="csrc">Char kuey teow climbs while popiah slips: the clearest mix shift.</div></div>
+      </div>
+    </div>
+
+    <div class="page" id="p3">
+      <div class="kpis" id="k3"></div>
+      <div class="grid">
+        <div class="ccard"><span class="tab"></span><div class="ct">What is ordered with nasi lemak</div><div class="cs">Share of nasi-lemak orders that also include each item</div><div class="cwrap"><canvas id="c_attach"></canvas></div><div class="csrc">Nasi lemak anchors the table; the cooked foods ride alongside it.</div></div>
+        <div class="ccard"><span class="tab"></span><div class="ct">More than half of orders skip a drink</div><div class="cs">Orders with a drink vs food only</div><div class="cwrap"><canvas id="c_drink"></canvas></div><div class="csrc">Food is in nearly every order; a drink in fewer than half. The clearest upsell gap.</div></div>
+        <div class="ccard full"><span class="tab"></span><div class="ct">A food shop first</div><div class="cs">Food vs drinks, share of all items sold</div><div class="cwrap" style="height:210px"><canvas id="c_fd"></canvas></div><div class="csrc">Drinks are a small slice of a food-led shop, room to grow the attach.</div></div>
+      </div>
+    </div>
+
+    <div class="page" id="p4">
+      <div class="kpis" id="k4"></div>
+      <div class="grid">
+        <div class="ccard full"><span class="tab"></span><div class="ct">The menu to promote (cash cows)</div><div class="cs">Items customers like AND spend most on: estimated revenue share, with demand direction</div><div class="cwrap" style="height:300px"><canvas id="c_cash"></canvas></div><div class="csrc">Revenue share is estimated by splitting order totals across items (a model, shown as share not ringgit). Feature these in campaigns.</div></div>
+        <div class="ccard"><span class="tab"></span><div class="ct">Upsell combos to lift revenue</div><div class="cs">Build on what already sells together</div>
+          <div class="combos" id="combos"></div>
+          <div class="gap" id="drinkgap"></div>
+        </div>
+        <div class="ccard"><span class="tab"></span><div class="ct">New items to add, from the demand</div><div class="cs">Where the orders point next</div>
+          <div class="recs">
+            <div class="rec"><h4>Grow the fried-noodle line</h4><p>Char kuey teow is the fastest-rising dish. Add a variant or two (special / with egg, fried bee hoon) to ride the demand you already have.</p></div>
+            <div class="rec"><h4>Fix the drink attach</h4><p>Over half of orders have no drink. Add a couple of signature iced drinks and price them as an add-on so more tables take one.</p></div>
+            <div class="rec"><h4>Nasi lemak add-ons</h4><p>Eight in ten order nasi lemak. Offer paid upgrades (extra ayam, rendang, egg) to lift the value of the order the shop already wins.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  document.getElementById('hamburger').addEventListener('click',()=>{drawer.classList.add('open');overlay.classList.add('open');});
+  const cl=()=>{drawer.classList.remove('open');overlay.classList.remove('open');};
+  document.getElementById('drawerClose').addEventListener('click',cl); overlay.addEventListener('click',cl);
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  const D={"mlabels":["Jul '19","Aug '19","Sep '19","Oct '19","Nov '19","Dec '19","Jan '20","Feb '20","Mar '20","Apr '20","May '20","Jun '20"],"orders":[135,294,235,198,225,244,217,307,314,236,15,1],"topItems":[{"n":"Nasi Lemak","v":81.5},{"n":"Roti Bakar","v":35.4},{"n":"Char Kuey Teow","v":32.2},{"n":"Mee Goreng","v":30.9},{"n":"Roti Canai","v":24.2},{"n":"Rojak","v":21.4},{"n":"Kopi O","v":17.0},{"n":"Popiah","v":14.7},{"n":"Pulut Panggang","v":14.2},{"n":"Milo Ais","v":13.3}],"basket":[4.0,52.8,41.7,1.4],"avgItems":4.5,"nOrders":2421,"nMonths":12,"nlOverall":81.5,"shift":[{"n":"Popiah","k":"popiah","pp":-6.0},{"n":"Mee Goreng","k":"mee_goreng","pp":-4.8},{"n":"Roti Canai","k":"roti_canai","pp":-4.2},{"n":"Pulut Panggang","k":"pulut_panggang","pp":-3.2},{"n":"Mee Rebus","k":"mee_rebus","pp":-2.5},{"n":"Milo Ais","k":"milo_ais","pp":2.4},{"n":"Rojak","k":"rojak","pp":3.3},{"n":"Tau Fu Fah","k":"tau_fu_fah","pp":3.4},{"n":"Kopi O","k":"kopi_o","pp":3.9},{"n":"Roti Bakar","k":"roti_bakar","pp":4.4},{"n":"Char Kuey Teow","k":"char_kuey_teow","pp":8.5}],"tlabels":["Jul '19","Aug '19","Sep '19","Oct '19","Nov '19","Dec '19","Jan '20","Feb '20","Mar '20","Apr '20"],"nlShare":[90.4,84.0,82.6,81.3,84.9,78.3,78.8,78.5,79.3,82.6],"cktShare":[34.1,23.1,28.5,26.3,31.1,39.8,30.4,29.3,37.6,41.1],"popShare":[9.6,25.5,17.4,15.7,12.9,13.5,13.4,12.7,8.9,15.3],"attach":[{"n":"Roti Bakar","v":32.8},{"n":"Char Kuey Teow","v":30.5},{"n":"Mee Goreng","v":28.3},{"n":"Roti Canai","v":22.3},{"n":"Rojak","v":20.6},{"n":"Kopi O","v":16.5},{"n":"Popiah","v":13.5},{"n":"Pulut Panggang","v":13.4}],"drinkOrders":45.4,"foodOnly":54.6,"foodPct":85.4,"drinkPct":14.6,"cashcow":[{"n":"Nasi Lemak","rev":34.3,"ord":81.0,"tag":"Steady"},{"n":"Char Kuey Teow","rev":9.3,"ord":32.0,"tag":"Rising"},{"n":"Roti Bakar","rev":8.5,"ord":35.0,"tag":"Rising"},{"n":"Mee Goreng","rev":8.0,"ord":31.0,"tag":"Falling"},{"n":"Roti Canai","rev":5.8,"ord":24.0,"tag":"Steady"},{"n":"Rojak","rev":5.6,"ord":21.0,"tag":"Rising"},{"n":"Kopi O","rev":4.7,"ord":17.0,"tag":"Rising"}],"top7rev":76};
+  const NAVY='#1E3A5F', GOLD='#B8860B', TEAL='#2E7D6F', BLUE='#4A7FB5', RED='#B85450', GREY='#9aa3ad', GRID='#e8e8e8';
+  const FONT={ family:'Arial', size:11 }; const charts={}; let active=1;
+  function mk(id,cfg){ const el=document.getElementById(id); if(!el) return; if(charts[id]){charts[id].destroy();} charts[id]=new Chart(el,cfg); }
+  function ax(o){ return Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}},o); }
+  const yT=fn=>({grid:{color:GRID},border:{display:false},ticks:{color:'#555',font:FONT,callback:fn}});
+  const xC={grid:{display:false},border:{color:'#c4c4c4'},ticks:{color:'#555',font:FONT}};
+  function kpi(el,items){ document.getElementById(el).innerHTML=items.map(i=>`<div class="kpi"><div class="v">${i[0]}</div><div class="l">${i[1]}</div></div>`).join(''); }
+
+  function r1(){
+    kpi('k1',[[D.nOrders.toLocaleString(),'orders logged'],[D.nMonths+' months','Jul 2019 - Jun 2020'],['~'+D.avgItems,'items per order'],[D.nlOverall+'%','orders with nasi lemak']]);
+    mk('c_month',{type:'line',data:{labels:D.mlabels,datasets:[{data:D.orders,borderColor:NAVY,backgroundColor:'rgba(30,58,95,.08)',fill:true,tension:.3,pointRadius:3,borderWidth:2.4}]},options:ax({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' orders'}}},scales:{y:yT(v=>v),x:xC}})});
+    mk('c_top',{type:'bar',data:{labels:D.topItems.map(x=>x.n),datasets:[{data:D.topItems.map(x=>x.v),backgroundColor:D.topItems.map((x,i)=>i===0?NAVY:GOLD)}]},options:ax({indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'% of orders'}}},scales:{x:yT(v=>v+'%'),y:xC}})});
+    mk('c_basket',{type:'bar',data:{labels:['1 item','2-3','4-6','7+'],datasets:[{data:D.basket,backgroundColor:[GREY,BLUE,NAVY,TEAL]}]},options:ax({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'% of orders'}}},scales:{y:yT(v=>v+'%'),x:xC}})});
+  }
+  function r2(){
+    const up=D.shift.filter(s=>s.pp>0).length, dn=D.shift.filter(s=>s.pp<0).length;
+    kpi('k2',[[up,'foods gaining share'],[dn,'foods losing share'],['Char Kuey Teow','fastest riser (+'+Math.max(...D.shift.map(s=>s.pp))+'pp)'],['Popiah','fastest slider ('+Math.min(...D.shift.map(s=>s.pp))+'pp)']]);
+    mk('c_shift',{type:'bar',data:{labels:D.shift.map(x=>x.n),datasets:[{data:D.shift.map(x=>x.pp),backgroundColor:D.shift.map(x=>x.pp>0?TEAL:RED)}]},options:ax({indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>(c.parsed.x>0?'+':'')+c.parsed.x+' pp'}}},scales:{x:yT(v=>v+'pp'),y:xC}})});
+    mk('c_nl',{type:'line',data:{labels:D.tlabels,datasets:[{data:D.nlShare,borderColor:NAVY,backgroundColor:NAVY,tension:.3,pointRadius:2,borderWidth:2.4}]},options:ax({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'% of orders'}}},scales:{y:Object.assign({suggestedMin:60,suggestedMax:100},yT(v=>v+'%')),x:xC}})});
+    mk('c_rs',{type:'line',data:{labels:D.tlabels,datasets:[{label:'Char Kuey Teow',data:D.cktShare,borderColor:TEAL,backgroundColor:TEAL,tension:.3,pointRadius:2,borderWidth:2.4},{label:'Popiah',data:D.popShare,borderColor:RED,backgroundColor:RED,tension:.3,pointRadius:2,borderWidth:2.4}]},options:ax({plugins:{legend:{display:true,position:'top',align:'start',labels:{font:FONT,boxWidth:10,padding:10,color:'#444'}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},scales:{y:yT(v=>v+'%'),x:xC}})});
+  }
+  function r3(){
+    kpi('k3',[[D.attach[0].v+'%','top pairing: '+D.attach[0].n],[D.drinkOrders+'%','orders with a drink'],[D.foodOnly+'%','orders with no drink'],[D.foodPct+'%','of items are food']]);
+    mk('c_attach',{type:'bar',data:{labels:D.attach.map(x=>x.n),datasets:[{data:D.attach.map(x=>x.v),backgroundColor:GOLD}]},options:ax({indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'% of nasi lemak orders'}}},scales:{x:yT(v=>v+'%'),y:xC}})});
+    mk('c_drink',{type:'doughnut',data:{labels:['Has a drink','Food only'],datasets:[{data:[D.drinkOrders,D.foodOnly],backgroundColor:[TEAL,'#d8d2c4'],borderWidth:0}]},options:ax({cutout:'58%',plugins:{legend:{display:true,position:'right',labels:{font:FONT,boxWidth:10,padding:10,color:'#444'}},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+'%'}}}})});
+    mk('c_fd',{type:'bar',data:{labels:['All items sold'],datasets:[{label:'Food',data:[D.foodPct],backgroundColor:GOLD},{label:'Drinks',data:[D.drinkPct],backgroundColor:NAVY}]},options:ax({indexAxis:'y',plugins:{legend:{display:true,position:'top',align:'start',labels:{font:FONT,boxWidth:10,padding:10,color:'#444'}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%'}}},scales:{x:Object.assign({stacked:true,max:100},yT(v=>v+'%')),y:Object.assign({stacked:true},xC)}})});
+  }
+  function r4(){
+    kpi('k4',[[D.cashcow[0].n,'the top cash cow'],[D.cashcow[0].rev+'%','its share of revenue'],[D.top7rev+'%','revenue from the top 7'],[D.foodOnly+'%','orders with no drink (upsell)']]);
+    const TC={Rising:TEAL,Falling:RED,Steady:GREY};
+    mk('c_cash',{type:'bar',data:{labels:D.cashcow.map(x=>x.n),datasets:[{data:D.cashcow.map(x=>x.rev),backgroundColor:D.cashcow.map(x=>TC[x.tag])}]},options:ax({indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const x=D.cashcow[c.dataIndex];return x.rev+'% of revenue, in '+x.ord+'% of orders ('+x.tag+')';}}}},scales:{x:yT(v=>v+'%'),y:xC}})});
+    const combos=[['Nasi Lemak + Roti Bakar + Kopi O','the classic table, add the drink',D.attach[0].v],['Nasi Lemak + Char Kuey Teow','pair the anchor with the riser',D.attach[1]?D.attach[1].v:0],['Any food + a drink','the biggest lever',D.drinkOrders]];
+    document.getElementById('combos').innerHTML=combos.map(c=>`<div class="combo"><b>${c[0]}</b> <span>${c[1]}</span><span class="pct">${c[2]}% now</span></div>`).join('');
+    document.getElementById('drinkgap').innerHTML='<b>The drink gap:</b> '+D.foodOnly+'% of orders take no drink. A food+drink combo at a small saving is the fastest way to lift the bill.';
+  }
+  const R={1:r1,2:r2,3:r3,4:r4};
+  function renderActive(){ R[active](); requestAnimationFrame(()=>{ Object.values(charts).forEach(c=>{try{c.resize();}catch(e){}}); postH(); }); }
+  document.querySelector('.pagenav').addEventListener('click',e=>{ const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById('p'+b.dataset.p).classList.add('active');
+    active=+b.dataset.p; renderActive(); });
+  function boot(){ if(window.Chart){ renderActive(); } else { setTimeout(boot,150); } }
+  window.addEventListener('load',boot);
+</script>
+</body>
+</html>

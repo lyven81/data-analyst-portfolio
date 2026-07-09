@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Influences Property Price Dashboard | Data Stories Lab</title>
+<meta name="description" content="Five KL buildings, one tab each: how size, the building's rate, and its price cycle set every valuation differently.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{ --ink:#1a1a1a; --gray:#555; --mute:#6b7280; --hair:#e2e2e2; --accent:#B8860B; --navy:#1E3A5F; --paper:#fff;
+         --teal:#2E7D6F; --blue:#4A7FB5; --red:#B85450; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.6; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
+  .masthead{ display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:90%; margin:0 auto; gap:18px; }
+  .mast-left{ display:flex; align-items:center; gap:20px; }
+  .logo{ background:#222; color:#fff; font-weight:700; letter-spacing:3px; font-size:.95rem; padding:8px 12px; white-space:nowrap; }
+  .mast-nav{ display:flex; gap:20px; font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; }
+  .mast-nav a:hover{ color:var(--accent); }
+  .hamburger{ display:none; flex-direction:column; gap:4px; background:none; border:none; cursor:pointer; padding:6px; }
+  .hamburger span{ width:22px; height:2px; background:#222; display:block; }
+  .rule-top{ border:none; border-top:3px solid #222; max-width:90%; margin:0 auto; }
+  .crumb{ max-width:90%; margin:0 auto; padding:20px 28px 0; font-size:.6rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute); }
+  .crumb a:hover{ color:var(--accent); } .crumb .sep{ color:var(--hair); margin:0 8px; }
+  footer.site{ background:#222; max-width:90%; margin:34px auto 0; padding:24px 28px; font-size:.8rem; letter-spacing:.5px; color:#fff; text-align:center; }
+  .drawer{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#fff; z-index:200; box-shadow:2px 0 14px rgba(0,0,0,.15); transition:left .28s ease; padding:74px 26px 26px; }
+  .drawer.open{ left:0; }
+  .drawer a{ display:block; font-size:.82rem; letter-spacing:1.2px; text-transform:uppercase; padding:14px 0; border-bottom:1px solid var(--hair); }
+  .overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; } .overlay.open{ display:block; }
+  .drawer-close{ position:absolute; top:20px; right:20px; font-size:1.4rem; background:none; border:none; cursor:pointer; }
+  .wrap{ max-width:90%; margin:0 auto; padding:0 28px; }
+  .head{ padding-top:28px; }
+  .hero{ margin:0 0 4px; line-height:0; }
+  .hero img{ width:100%; height:auto; display:block; max-height:340px; object-fit:cover; }
+  .hero figcaption{ display:flex; justify-content:space-between; gap:14px; line-height:1.4; margin-top:9px; font-size:.74rem; color:#8a8f98; }
+  .hero figcaption .credit{ text-transform:uppercase; letter-spacing:.6px; font-size:.62rem; color:#b0b4ba; white-space:nowrap; }
+  .kicker{ font-size:.72rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--accent); margin-top:18px; display:block; }
+  h1.title{ font-weight:800; font-size:2.7rem; line-height:1.05; letter-spacing:-.018em; margin-top:8px; color:var(--ink); }
+  .standfirst{ font-family:"Source Serif 4", Georgia, serif; font-size:1.28rem; line-height:1.45; color:#3a3a3a; margin-top:12px; max-width:none; }
+  .dateline{ font-size:.64rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--mute);
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:10px 0; margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:18px; }
+  .dateline .red{ color:var(--accent); }
+  .switch{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--hair); margin-top:2px; }
+  .switch-tabs{ display:flex; }
+  .sw{ font-size:.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); padding:13px 20px; border-bottom:3px solid transparent; }
+  .sw:first-child{ padding-left:0; } a.sw:hover{ color:var(--ink); }
+  .sw.active{ color:var(--navy); border-bottom-color:var(--accent); }
+  .sw-home{ font-size:.64rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--mute); display:inline-flex; align-items:center; gap:7px; }
+  .sw-home:hover{ color:var(--accent); } .sw-home .ico{ font-size:1.05rem; line-height:1; }
+  body.embed .switch{ display:none; }
+  .tool{ padding:22px 0 8px; }
+  .pagenav{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .pbtn{ padding:9px 16px; border:1px solid var(--hair); background:#fff; font-size:.62rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gray); cursor:pointer; }
+  .pbtn.active{ background:#222; color:#fff; border-color:#222; }
+  .page{ display:none; } .page.active{ display:block; }
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--hair); margin-bottom:18px; }
+  .kpi{ padding:18px 16px; border-right:1px solid var(--hair); } .kpi:last-child{ border-right:none; }
+  .kpi .v{ font-size:1.5rem; font-weight:800; color:var(--navy); letter-spacing:-.01em; }
+  .kpi .l{ font-size:.58rem; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:var(--mute); margin-top:6px; line-height:1.35; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .ccard{ border:1px solid var(--hair); padding:16px 16px 12px; background:#fff; min-width:0; }
+  .ccard.full{ grid-column:1 / -1; }
+  .ccard .tab{ display:block; width:34px; height:9px; background:var(--accent); margin-bottom:11px; }
+  .ccard .ct{ font-size:1.02rem; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.16; }
+  .ccard .cs{ font-size:.82rem; color:var(--mute); margin-top:3px; }
+  .ccard .cwrap{ position:relative; height:264px; margin-top:14px; }
+  .ccard .csrc{ font-size:.68rem; color:#aab0b6; margin-top:10px; border-top:1px solid var(--hair); padding-top:8px; }
+  .txtcard{ font-size:.98rem; line-height:1.65; color:#333; margin-top:12px; max-width:none; }
+  .note{ border:1px solid var(--hair); border-left:4px solid var(--accent); background:#fbfaf7; padding:14px 16px; font-size:.92rem; color:#333; margin-top:2px; }
+  table{ width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px; }
+  th{ text-align:left; color:var(--navy); border-bottom:2px solid var(--accent); padding:8px; font-size:.6rem; text-transform:uppercase; letter-spacing:.4px; }
+  td{ padding:8px; border-bottom:1px solid #eee; } td.r{ text-align:right; font-variant-numeric:tabular-nums; }
+  .up{ color:var(--teal); font-weight:700; } .down{ color:var(--red); font-weight:700; } .flat{ color:var(--mute); font-weight:700; }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{ display:none; }
+  @media(max-width:820px){ .mast-nav{ display:none; } .hamburger{ display:flex; } .masthead{ padding:12px 16px; }
+    .logo{ font-size:.72rem; letter-spacing:1.5px; padding:6px 8px; } h1.title{ font-size:2rem; } }
+  @media(max-width:760px){ .kpis{ grid-template-columns:1fr 1fr; } .grid{ grid-template-columns:1fr; } }
+  @media print{ *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .topbar,.drawer,.overlay,.pagenav,footer.site{ display:none !important; }
+    .page{ display:block !important; page-break-inside:avoid; margin-bottom:20px; } .ccard,.kpi,table{ break-inside:avoid; } }
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+        <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+        <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+        <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+        <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+        <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/regression-analysis.html">Regression Analysis</a>
+    <span class="sep">/</span><span>What Influences Property Price</span>
+  </div>
+  <div class="wrap">
+    <div class="head">
+      <figure class="hero">
+        <img src="https://lyven81.github.io/data-analyst-portfolio/images/what-influences-property-price/cover.jpeg" alt="Five KL highrise buildings against the skyline">
+        <figcaption><span>Five KL highrise buildings, read one at a time through 249 real resale prices.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+      </figure>
+      <span class="kicker">Property pricing explorer</span>
+      <h1 class="title">What Influences Property Price</h1>
+      <p class="standfirst">Where five highrise buildings sit in their price cycle</p>
+      <div class="dateline"><span class="red">Data Stories Lab</span><span>Interactive dashboard</span><span>249 sales &middot; 1986&ndash;2019</span></div>
+      <nav class="switch" aria-label="Case study instruments">
+        <div class="switch-tabs">
+          <a class="sw" href="/data-analyst-portfolio/case-studies/what-influences-property-price.html">Analyst Report</a>
+          <span class="sw active" aria-current="page">Dashboard</span>
+        </div>
+        <a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a>
+      </nav>
+    </div>
+    <div class="tool">
+      <div class="pagenav"><button class="pbtn active" data-p="ov">Overview</button><button class="pbtn" data-p="P1">Property 1</button><button class="pbtn" data-p="P2">Property 2</button><button class="pbtn" data-p="P3">Property 3</button><button class="pbtn" data-p="P4">Property 4</button><button class="pbtn" data-p="P5">Property 5</button></div>
+
+      <div class="page active" id="p_ov">
+        <div class="kpis" id="k_ov"></div>
+        <div class="note">Every unit's price is set by three things: <b>its size</b> (bigger costs proportionally more, everywhere), <b>the building's own going rate</b> (which runs 6&times; apart and reflects the address, not the age), and <b>which way that building is heading</b> (its own price cycle). A market-wide average hides all three. Open a building's tab to see how they land on it.</div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">The going rate runs 6&times; apart</div><div class="cs">Size-adjusted rate per sq ft, by building</div><div class="cwrap"><canvas id="ov_rate"></canvas></div><div class="csrc">The address sets this, not the age. Start every valuation here.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Only one building is genuinely rising</div><div class="cs">Yearly change 2015&ndash;2019; dashed line is the misleading average</div><div class="cwrap"><canvas id="ov_dir"></canvas></div><div class="csrc">The +4%/yr average is carried by Property 3 and hides that three are falling.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Age does not set the price</div><div class="cs">Going rate against the year completed</div><div class="cwrap"><canvas id="ov_age"></canvas></div><div class="csrc">Oldest-priced Property 3 (1994) is dearest; newest Property 1 (2009) near the bottom.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">What a typical unit is worth</div><div class="cs">Market value of a typical unit, by building</div><div class="cwrap"><canvas id="ov_val"></canvas></div><div class="csrc">Big units make Property 5 the priciest ticket, though not the priciest rate.</div></div>
+        </div>
+      </div>
+
+      <div class="page" id="p_P1">
+        <div class="kpis" id="k_P1"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Which way Property 1 is heading</div><div class="cs">Falling, about -5% a year, roughly 15% below its 2016 peak</div><div class="cwrap"><canvas id="cyc_P1"></canvas></div><div class="csrc">Price per sq ft by year, this building only.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Bigger units, proportionally more</div><div class="cs">A unit's value at this building's rate, by size</div><div class="cwrap"><canvas id="siz_P1"></canvas></div><div class="csrc">Larger units cost slightly less per sq ft (about RM7 per +100 sq ft).</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">What sets Property 1's price</div><div class="cs">The three factors, and whether it is worth buying</div><p class="txtcard">Property 1 is the newest building of the five (completed 2009), yet it is the clearest faller: down about 5% a year and roughly 15% below its 2016 peak. Its going rate, about RM450 per sq ft, is low for the group, which shows this market pays for a building's standing, not how new it is. Larger units cost slightly less per sq ft. For a buyer: expect the value to keep easing; price off a recent sale, revised down.</p></div>
+        </div>
+      </div>
+      <div class="page" id="p_P2">
+        <div class="kpis" id="k_P2"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Which way Property 2 is heading</div><div class="cs">Plateau, holding steady near the top</div><div class="cwrap"><canvas id="cyc_P2"></canvas></div><div class="csrc">Price per sq ft by year, this building only.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Bigger units, proportionally more</div><div class="cs">A unit's value at this building's rate, by size</div><div class="cwrap"><canvas id="siz_P2"></canvas></div><div class="csrc">Larger units carry a slightly higher rate (about +RM15 per +100 sq ft), the only building where bigger costs a touch more per sq ft.</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">What sets Property 2's price</div><div class="cs">The three factors, and whether it is worth buying</div><p class="txtcard">Property 2 is a small-unit service apartment (typical unit about 370 sq ft) carrying the second-highest rate, about RM1,010 per sq ft. After years of growth it has plateaued and now holds steady near the top. It is the one building where larger units carry a slightly higher rate per sq ft. For a buyer: steady, buy on price rather than on expected further gains.</p></div>
+        </div>
+      </div>
+      <div class="page" id="p_P3">
+        <div class="kpis" id="k_P3"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Which way Property 3 is heading</div><div class="cs">Rising, about +8% a year, at a fresh high</div><div class="cwrap"><canvas id="cyc_P3"></canvas></div><div class="csrc">Price per sq ft by year, this building only.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Bigger units, proportionally more</div><div class="cs">A unit's value at this building's rate, by size</div><div class="cwrap"><canvas id="siz_P3"></canvas></div><div class="csrc">The per-sq-ft rate is essentially flat across unit sizes.</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">What sets Property 3's price</div><div class="cs">The three factors, and whether it is worth buying</div><p class="txtcard">Property 3 is the dearest of all at about RM1,300 per sq ft and the only building genuinely rising, up about 8% a year to a fresh high. Completed in 1994, it is one of the oldest yet commands the top rate: address beats age here. Its rate barely changes with unit size. For a buyer: the one property that still rewards holding; a recent comparable can be revised upward for time.</p></div>
+        </div>
+      </div>
+      <div class="page" id="p_P4">
+        <div class="kpis" id="k_P4"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Which way Property 4 is heading</div><div class="cs">Soft, drifting slightly lower</div><div class="cwrap"><canvas id="cyc_P4"></canvas></div><div class="csrc">Price per sq ft by year, this building only.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Bigger units, proportionally more</div><div class="cs">A unit's value at this building's rate, by size</div><div class="cwrap"><canvas id="siz_P4"></canvas></div><div class="csrc">Larger units are cheaper per sq ft (about RM30 per +100 sq ft).</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">What sets Property 4's price</div><div class="cs">The three factors, and whether it is worth buying</div><p class="txtcard">Property 4 is the cheapest at about RM210 per sq ft and the oldest (1986). It drifts slightly lower and rests on just 22 sales, so its value is best read as a wide range. Larger units are a little cheaper per sq ft. For a buyer: soft; use the median and keep a margin for uncertainty.</p></div>
+        </div>
+      </div>
+      <div class="page" id="p_P5">
+        <div class="kpis" id="k_P5"></div>
+        <div class="grid">
+          <div class="ccard"><span class="tab"></span><div class="ct">Which way Property 5 is heading</div><div class="cs">Falling, dropped sharply from its 2018 high</div><div class="cwrap"><canvas id="cyc_P5"></canvas></div><div class="csrc">Price per sq ft by year, this building only.</div></div>
+          <div class="ccard"><span class="tab"></span><div class="ct">Bigger units, proportionally more</div><div class="cs">A unit's value at this building's rate, by size</div><div class="cwrap"><canvas id="siz_P5"></canvas></div><div class="csrc">Larger units cost less per sq ft (about RM26 per +100 sq ft).</div></div>
+          <div class="ccard full"><span class="tab"></span><div class="ct">What sets Property 5's price</div><div class="cs">The three factors, and whether it is worth buying</div><p class="txtcard">Property 5 trades in large units (typical about 2,070 sq ft) at a mid rate of about RM830 per sq ft, which makes it the highest total ticket at roughly RM1.71m. It has dropped sharply from its 2018 high and rests on only 18 sales. Larger units cost less per sq ft. For a buyer: falling; price off the newest sale and keep a wide range.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){ try{ parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH); window.addEventListener('resize',postH);
+
+  const B=[{"b":"P1","name":"Property 1","type":"Condo","yr":2009,"size":1100,"rate":450,"value":490000,"lo":451000,"hi":529000,"chg":-5,"stage":"Falling","dir":"Falling, about -5% a year, roughly 15% below its 2016 peak","tilt":"Larger units cost slightly less per sq ft (about RM7 per +100 sq ft).","narr":"Property 1 is the newest building of the five (completed 2009), yet it is the clearest faller: down about 5% a year and roughly 15% below its 2016 peak. Its going rate, about RM450 per sq ft, is low for the group, which shows this market pays for a building's standing, not how new it is. Larger units cost slightly less per sq ft. For a buyer: expect the value to keep easing; price off a recent sale, revised down.","rank":4},{"b":"P2","name":"Property 2","type":"Service Apt","yr":2004,"size":370,"rate":1010,"value":370000,"lo":341000,"hi":400000,"chg":0,"stage":"Plateau","dir":"Plateau, holding steady near the top","tilt":"Larger units carry a slightly higher rate (about +RM15 per +100 sq ft), the only building where bigger costs a touch more per sq ft.","narr":"Property 2 is a small-unit service apartment (typical unit about 370 sq ft) carrying the second-highest rate, about RM1,010 per sq ft. After years of growth it has plateaued and now holds steady near the top. It is the one building where larger units carry a slightly higher rate per sq ft. For a buyer: steady, buy on price rather than on expected further gains.","rank":2},{"b":"P3","name":"Property 3","type":"Condo","yr":1994,"size":760,"rate":1300,"value":990000,"lo":911000,"hi":1070000,"chg":8,"stage":"Rising","dir":"Rising, about +8% a year, at a fresh high","tilt":"The per-sq-ft rate is essentially flat across unit sizes.","narr":"Property 3 is the dearest of all at about RM1,300 per sq ft and the only building genuinely rising, up about 8% a year to a fresh high. Completed in 1994, it is one of the oldest yet commands the top rate: address beats age here. Its rate barely changes with unit size. For a buyer: the one property that still rewards holding; a recent comparable can be revised upward for time.","rank":1},{"b":"P4","name":"Property 4","type":"Medium Cost","yr":1986,"size":620,"rate":210,"value":130000,"lo":110000,"hi":149000,"chg":-1,"stage":"Soft","dir":"Soft, drifting slightly lower","tilt":"Larger units are cheaper per sq ft (about RM30 per +100 sq ft).","narr":"Property 4 is the cheapest at about RM210 per sq ft and the oldest (1986). It drifts slightly lower and rests on just 22 sales, so its value is best read as a wide range. Larger units are a little cheaper per sq ft. For a buyer: soft; use the median and keep a margin for uncertainty.","rank":5},{"b":"P5","name":"Property 5","type":"Condo","yr":1987,"size":2070,"rate":830,"value":1710000,"lo":1450000,"hi":1960000,"chg":-2,"stage":"Falling","dir":"Falling, dropped sharply from its 2018 high","tilt":"Larger units cost less per sq ft (about RM26 per +100 sq ft).","narr":"Property 5 trades in large units (typical about 2,070 sq ft) at a mid rate of about RM830 per sq ft, which makes it the highest total ticket at roughly RM1.71m. It has dropped sharply from its 2018 high and rests on only 18 sales. Larger units cost less per sq ft. For a buyer: falling; price off the newest sale and keep a wide range.","rank":3}], RAW=[{"b":"P2","sz":905,"p":888200,"psf":981.4,"y":2015},{"b":"P2","sz":905,"p":950000,"psf":1049.7,"y":2015},{"b":"P2","sz":367,"p":327500,"psf":892.4,"y":2014},{"b":"P2","sz":356,"p":377900,"psf":1061.5,"y":2014},{"b":"P2","sz":841,"p":890900,"psf":1059.3,"y":2014},{"b":"P2","sz":367,"p":366900,"psf":999.7,"y":2016},{"b":"P2","sz":819,"p":742800,"psf":907.0,"y":2015},{"b":"P2","sz":905,"p":878700,"psf":970.9,"y":2016},{"b":"P2","sz":410,"p":409900,"psf":999.8,"y":2016},{"b":"P2","sz":819,"p":810400,"psf":989.5,"y":2016},{"b":"P2","sz":905,"p":926200,"psf":1023.4,"y":2015},{"b":"P2","sz":841,"p":841100,"psf":1000.1,"y":2014},{"b":"P2","sz":356,"p":320200,"psf":899.4,"y":2016},{"b":"P2","sz":367,"p":386000,"psf":1051.8,"y":2016},{"b":"P2","sz":905,"p":855000,"psf":944.8,"y":2016},{"b":"P2","sz":604,"p":654500,"psf":1083.6,"y":2016},{"b":"P2","sz":367,"p":389200,"psf":1060.5,"y":2016},{"b":"P2","sz":819,"p":895900,"psf":1093.9,"y":2017},{"b":"P2","sz":367,"p":375800,"psf":1024.0,"y":2017},{"b":"P2","sz":981,"p":981200,"psf":1000.2,"y":2017},{"b":"P2","sz":410,"p":409900,"psf":999.8,"y":2017},{"b":"P2","sz":819,"p":720300,"psf":879.5,"y":2017},{"b":"P2","sz":367,"p":375800,"psf":1024.0,"y":2017},{"b":"P2","sz":367,"p":375800,"psf":1024.0,"y":2017},{"b":"P2","sz":819,"p":810400,"psf":989.5,"y":2018},{"b":"P2","sz":367,"p":375800,"psf":1024.0,"y":2018},{"b":"P2","sz":518,"p":225200,"psf":434.7,"y":2004},{"b":"P2","sz":841,"p":325300,"psf":386.8,"y":2004},{"b":"P2","sz":356,"p":157000,"psf":441.0,"y":2005},{"b":"P2","sz":905,"p":407000,"psf":449.7,"y":2006},{"b":"P2","sz":367,"p":137000,"psf":373.3,"y":2006},{"b":"P2","sz":367,"p":140000,"psf":381.5,"y":2018},{"b":"P2","sz":410,"p":174000,"psf":424.4,"y":2004},{"b":"P2","sz":356,"p":139000,"psf":390.4,"y":2005},{"b":"P2","sz":367,"p":158000,"psf":430.5,"y":2006},{"b":"P2","sz":367,"p":163000,"psf":444.1,"y":2006},{"b":"P2","sz":356,"p":136000,"psf":382.0,"y":2005},{"b":"P2","sz":367,"p":148000,"psf":403.3,"y":2006},{"b":"P2","sz":367,"p":354000,"psf":964.6,"y":2018},{"b":"P2","sz":905,"p":888000,"psf":981.2,"y":2015},{"b":"P2","sz":367,"p":375000,"psf":1021.8,"y":2017},{"b":"P2","sz":367,"p":137000,"psf":373.3,"y":2006},{"b":"P2","sz":819,"p":787000,"psf":960.9,"y":2018},{"b":"P2","sz":421,"p":165000,"psf":391.9,"y":2004},{"b":"P2","sz":367,"p":375000,"psf":1021.8,"y":2018},{"b":"P2","sz":819,"p":810000,"psf":989.0,"y":2018},{"b":"P2","sz":851,"p":361000,"psf":424.2,"y":2004},{"b":"P2","sz":367,"p":150000,"psf":408.7,"y":2006},{"b":"P2","sz":367,"p":137000,"psf":373.3,"y":2006},{"b":"P2","sz":367,"p":136000,"psf":370.6,"y":2005},{"b":"P2","sz":367,"p":168000,"psf":457.8,"y":2006},{"b":"P2","sz":367,"p":386000,"psf":1051.8,"y":2016},{"b":"P2","sz":367,"p":119000,"psf":324.3,"y":2006},{"b":"P2","sz":1637,"p":535000,"psf":326.8,"y":2006},{"b":"P2","sz":367,"p":119000,"psf":324.3,"y":2006},{"b":"P2","sz":367,"p":324000,"psf":882.8,"y":2013},{"b":"P2","sz":905,"p":855000,"psf":944.8,"y":2016},{"b":"P2","sz":367,"p":344000,"psf":937.3,"y":2014},{"b":"P2","sz":367,"p":370000,"psf":1008.2,"y":2018},{"b":"P2","sz":905,"p":855000,"psf":944.8,"y":2016},{"b":"P2","sz":1637,"p":1613000,"psf":985.3,"y":2018},{"b":"P2","sz":367,"p":362000,"psf":986.4,"y":2018},{"b":"P2","sz":1002,"p":413000,"psf":412.2,"y":2005},{"b":"P2","sz":819,"p":864000,"psf":1054.9,"y":2018},{"b":"P2","sz":421,"p":170000,"psf":403.8,"y":2004},{"b":"P2","sz":367,"p":531000,"psf":1446.9,"y":2017},{"b":"P2","sz":367,"p":534000,"psf":1455.0,"y":2018},{"b":"P2","sz":862,"p":856000,"psf":993.0,"y":2018},{"b":"P2","sz":367,"p":208000,"psf":566.8,"y":2007},{"b":"P2","sz":367,"p":362000,"psf":986.4,"y":2018},{"b":"P2","sz":905,"p":760000,"psf":839.8,"y":2018},{"b":"P2","sz":367,"p":157000,"psf":427.8,"y":2005},{"b":"P2","sz":367,"p":230000,"psf":626.7,"y":2009},{"b":"P2","sz":819,"p":810000,"psf":989.0,"y":2018},{"b":"P2","sz":367,"p":366000,"psf":997.3,"y":2018},{"b":"P2","sz":905,"p":855000,"psf":944.8,"y":2018},{"b":"P2","sz":356,"p":380000,"psf":1067.4,"y":2017},{"b":"P2","sz":367,"p":158000,"psf":430.5,"y":2006},{"b":"P2","sz":367,"p":375000,"psf":1021.8,"y":2016},{"b":"P2","sz":216,"p":89000,"psf":412.0,"y":2005},{"b":"P4","sz":623,"p":130000,"psf":208.6,"y":2014},{"b":"P4","sz":623,"p":100000,"psf":160.5,"y":2015},{"b":"P4","sz":623,"p":160000,"psf":256.7,"y":2015},{"b":"P4","sz":640,"p":40000,"psf":62.5,"y":1990},{"b":"P4","sz":568,"p":145000,"psf":255.1,"y":2015},{"b":"P4","sz":623,"p":118000,"psf":189.3,"y":2016},{"b":"P4","sz":568,"p":187000,"psf":329.0,"y":2016},{"b":"P4","sz":623,"p":80000,"psf":128.4,"y":2015},{"b":"P4","sz":623,"p":130000,"psf":208.6,"y":2015},{"b":"P4","sz":623,"p":140000,"psf":224.6,"y":2016},{"b":"P4","sz":623,"p":150000,"psf":240.7,"y":2016},{"b":"P4","sz":623,"p":85000,"psf":136.4,"y":2015},{"b":"P4","sz":568,"p":150000,"psf":263.9,"y":2016},{"b":"P4","sz":568,"p":155000,"psf":272.7,"y":2016},{"b":"P4","sz":568,"p":46000,"psf":80.9,"y":1986},{"b":"P4","sz":767,"p":200000,"psf":260.6,"y":2017},{"b":"P4","sz":767,"p":150000,"psf":195.4,"y":2017},{"b":"P4","sz":568,"p":100000,"psf":176.0,"y":2017},{"b":"P4","sz":623,"p":150000,"psf":240.7,"y":2018},{"b":"P4","sz":767,"p":46000,"psf":59.9,"y":1986},{"b":"P4","sz":623,"p":130000,"psf":208.6,"y":2019},{"b":"P4","sz":623,"p":100000,"psf":160.5,"y":2019},{"b":"P3","sz":743,"p":680000,"psf":915.6,"y":2014},{"b":"P3","sz":730,"p":800000,"psf":1095.9,"y":2014},{"b":"P3","sz":1313,"p":980000,"psf":746.3,"y":2015},{"b":"P3","sz":1755,"p":1800000,"psf":1025.9,"y":2015},{"b":"P3","sz":743,"p":825000,"psf":1110.8,"y":2015},{"b":"P3","sz":743,"p":818000,"psf":1101.4,"y":2015},{"b":"P3","sz":764,"p":750000,"psf":981.4,"y":2015},{"b":"P3","sz":1389,"p":1250000,"psf":900.2,"y":2015},{"b":"P3","sz":743,"p":850000,"psf":1144.5,"y":2016},{"b":"P3","sz":764,"p":850000,"psf":1112.2,"y":2016},{"b":"P3","sz":743,"p":880000,"psf":1184.9,"y":2016},{"b":"P3","sz":743,"p":860000,"psf":1157.9,"y":2016},{"b":"P3","sz":3455,"p":4100000,"psf":1186.6,"y":2016},{"b":"P3","sz":797,"p":850000,"psf":1066.5,"y":2016},{"b":"P3","sz":1389,"p":1425000,"psf":1026.3,"y":2016},{"b":"P3","sz":1776,"p":2100000,"psf":1182.4,"y":2016},{"b":"P3","sz":764,"p":840000,"psf":1099.1,"y":2016},{"b":"P3","sz":1421,"p":1400000,"psf":985.3,"y":2016},{"b":"P3","sz":764,"p":700000,"psf":915.9,"y":2016},{"b":"P3","sz":1313,"p":1400000,"psf":1066.1,"y":2017},{"b":"P3","sz":764,"p":950000,"psf":1243.1,"y":2018},{"b":"P3","sz":764,"p":1080000,"psf":1413.2,"y":2018},{"b":"P3","sz":1389,"p":1400000,"psf":1008.2,"y":2018},{"b":"P3","sz":1755,"p":2300000,"psf":1310.9,"y":2018},{"b":"P3","sz":1421,"p":1800000,"psf":1266.9,"y":2018},{"b":"P3","sz":743,"p":880000,"psf":1184.9,"y":2018},{"b":"P3","sz":1313,"p":1715000,"psf":1306.0,"y":2018},{"b":"P3","sz":743,"p":950000,"psf":1279.1,"y":2018},{"b":"P3","sz":1313,"p":1550000,"psf":1180.3,"y":2018},{"b":"P3","sz":743,"p":1080000,"psf":1453.6,"y":2018},{"b":"P3","sz":743,"p":1050000,"psf":1413.2,"y":2018},{"b":"P1","sz":2153,"p":625000,"psf":290.3,"y":2014},{"b":"P1","sz":1098,"p":540000,"psf":491.8,"y":2015},{"b":"P1","sz":1098,"p":570000,"psf":519.2,"y":2014},{"b":"P1","sz":1098,"p":615000,"psf":560.2,"y":2015},{"b":"P1","sz":1098,"p":570000,"psf":519.2,"y":2015},{"b":"P1","sz":2088,"p":1200000,"psf":574.7,"y":2015},{"b":"P1","sz":1098,"p":565000,"psf":514.6,"y":2015},{"b":"P1","sz":1098,"p":570000,"psf":519.2,"y":2015},{"b":"P1","sz":1098,"p":610000,"psf":555.6,"y":2015},{"b":"P1","sz":1098,"p":590000,"psf":537.4,"y":2015},{"b":"P1","sz":1098,"p":615000,"psf":560.2,"y":2015},{"b":"P1","sz":1098,"p":615000,"psf":560.2,"y":2015},{"b":"P1","sz":1098,"p":500000,"psf":455.4,"y":2015},{"b":"P1","sz":1098,"p":590000,"psf":537.4,"y":2016},{"b":"P1","sz":1098,"p":500000,"psf":455.4,"y":2016},{"b":"P1","sz":1098,"p":575000,"psf":523.7,"y":2016},{"b":"P1","sz":1098,"p":630000,"psf":573.8,"y":2016},{"b":"P1","sz":1098,"p":475000,"psf":432.6,"y":2015},{"b":"P1","sz":1098,"p":600000,"psf":546.5,"y":2016},{"b":"P1","sz":1098,"p":560000,"psf":510.1,"y":2016},{"b":"P1","sz":1098,"p":780000,"psf":710.4,"y":2016},{"b":"P1","sz":1098,"p":780000,"psf":710.4,"y":2016},{"b":"P1","sz":1098,"p":560000,"psf":510.1,"y":2016},{"b":"P1","sz":1098,"p":559000,"psf":509.1,"y":2016},{"b":"P1","sz":1098,"p":780000,"psf":710.4,"y":2016},{"b":"P1","sz":1098,"p":618000,"psf":562.9,"y":2015},{"b":"P1","sz":1098,"p":638000,"psf":581.1,"y":2015},{"b":"P1","sz":1098,"p":565000,"psf":514.6,"y":2015},{"b":"P1","sz":1098,"p":545000,"psf":496.4,"y":2015},{"b":"P1","sz":1098,"p":550000,"psf":500.9,"y":2015},{"b":"P1","sz":1098,"p":500000,"psf":455.4,"y":2014},{"b":"P1","sz":1098,"p":545000,"psf":496.4,"y":2015},{"b":"P1","sz":1098,"p":580000,"psf":528.3,"y":2015},{"b":"P1","sz":1098,"p":515000,"psf":469.1,"y":2016},{"b":"P1","sz":1098,"p":275000,"psf":250.5,"y":2009},{"b":"P1","sz":1098,"p":600000,"psf":546.5,"y":2015},{"b":"P1","sz":1098,"p":580000,"psf":528.3,"y":2015},{"b":"P1","sz":1098,"p":500000,"psf":455.4,"y":2015},{"b":"P1","sz":1098,"p":645000,"psf":587.5,"y":2015},{"b":"P1","sz":1098,"p":520000,"psf":473.6,"y":2015},{"b":"P1","sz":1098,"p":545000,"psf":496.4,"y":2015},{"b":"P1","sz":1098,"p":570000,"psf":519.2,"y":2016},{"b":"P1","sz":1098,"p":570000,"psf":519.2,"y":2016},{"b":"P1","sz":1098,"p":760000,"psf":692.2,"y":2016},{"b":"P1","sz":1098,"p":680000,"psf":619.4,"y":2016},{"b":"P1","sz":1098,"p":530000,"psf":482.7,"y":2015},{"b":"P1","sz":1098,"p":760000,"psf":692.2,"y":2015},{"b":"P1","sz":1098,"p":579000,"psf":527.4,"y":2016},{"b":"P1","sz":1098,"p":430000,"psf":391.7,"y":2016},{"b":"P1","sz":1098,"p":650000,"psf":592.0,"y":2016},{"b":"P1","sz":1098,"p":530000,"psf":482.7,"y":2016},{"b":"P1","sz":1098,"p":530000,"psf":482.7,"y":2016},{"b":"P1","sz":1098,"p":585000,"psf":532.8,"y":2017},{"b":"P1","sz":1098,"p":480000,"psf":437.2,"y":2017},{"b":"P1","sz":1098,"p":610000,"psf":555.6,"y":2016},{"b":"P1","sz":1098,"p":545000,"psf":496.4,"y":2017},{"b":"P1","sz":1098,"p":510000,"psf":464.5,"y":2017},{"b":"P1","sz":1098,"p":490000,"psf":446.3,"y":2017},{"b":"P1","sz":1098,"p":650000,"psf":592.0,"y":2017},{"b":"P1","sz":1098,"p":535000,"psf":487.3,"y":2017},{"b":"P1","sz":1098,"p":480000,"psf":437.2,"y":2017},{"b":"P1","sz":1098,"p":600000,"psf":546.5,"y":2017},{"b":"P1","sz":1098,"p":486000,"psf":442.7,"y":2017},{"b":"P1","sz":1098,"p":555000,"psf":505.5,"y":2017},{"b":"P1","sz":1098,"p":525000,"psf":478.2,"y":2017},{"b":"P1","sz":1098,"p":520000,"psf":473.6,"y":2017},{"b":"P1","sz":1098,"p":350000,"psf":318.8,"y":2017},{"b":"P1","sz":1098,"p":525000,"psf":478.2,"y":2017},{"b":"P1","sz":1098,"p":500000,"psf":455.4,"y":2017},{"b":"P1","sz":1098,"p":480000,"psf":437.2,"y":2017},{"b":"P1","sz":1098,"p":495000,"psf":450.9,"y":2017},{"b":"P1","sz":1098,"p":540000,"psf":491.8,"y":2017},{"b":"P1","sz":1098,"p":700000,"psf":637.6,"y":2018},{"b":"P1","sz":1098,"p":550000,"psf":500.9,"y":2017},{"b":"P1","sz":1100,"p":650000,"psf":590.9,"y":2018},{"b":"P1","sz":1098,"p":488000,"psf":444.5,"y":2018},{"b":"P1","sz":1098,"p":490000,"psf":446.3,"y":2018},{"b":"P1","sz":1098,"p":490000,"psf":446.3,"y":2018},{"b":"P1","sz":1098,"p":680000,"psf":619.4,"y":2018},{"b":"P1","sz":1098,"p":480000,"psf":437.2,"y":2018},{"b":"P1","sz":1098,"p":430000,"psf":391.7,"y":2018},{"b":"P1","sz":1100,"p":500000,"psf":454.6,"y":2018},{"b":"P1","sz":1098,"p":500000,"psf":455.4,"y":2018},{"b":"P1","sz":1098,"p":495000,"psf":450.9,"y":2018},{"b":"P1","sz":1098,"p":700000,"psf":637.6,"y":2015},{"b":"P1","sz":1098,"p":492000,"psf":448.1,"y":2018},{"b":"P1","sz":1098,"p":500000,"psf":455.4,"y":2018},{"b":"P1","sz":1098,"p":492000,"psf":448.1,"y":2018},{"b":"P1","sz":1098,"p":410000,"psf":373.4,"y":2018},{"b":"P1","sz":1098,"p":530000,"psf":482.7,"y":2018},{"b":"P1","sz":1098,"p":480000,"psf":437.2,"y":2018},{"b":"P1","sz":1098,"p":490000,"psf":446.3,"y":2018},{"b":"P1","sz":1033,"p":368550,"psf":356.7,"y":2018},{"b":"P1","sz":1098,"p":480000,"psf":437.2,"y":2018},{"b":"P1","sz":1098,"p":485000,"psf":441.7,"y":2018},{"b":"P1","sz":1098,"p":457725,"psf":416.9,"y":2018},{"b":"P1","sz":1098,"p":480000,"psf":437.2,"y":2018},{"b":"P1","sz":1098,"p":488000,"psf":444.5,"y":2018},{"b":"P5","sz":2066,"p":1571000,"psf":760.4,"y":2015},{"b":"P5","sz":2066,"p":1687000,"psf":816.6,"y":2015},{"b":"P5","sz":2066,"p":1396000,"psf":675.7,"y":2015},{"b":"P5","sz":2066,"p":1552000,"psf":751.2,"y":2016},{"b":"P5","sz":2066,"p":737000,"psf":356.7,"y":2017},{"b":"P5","sz":2066,"p":1842000,"psf":891.6,"y":2016},{"b":"P5","sz":2066,"p":1648000,"psf":797.7,"y":2017},{"b":"P5","sz":2066,"p":1707000,"psf":826.2,"y":2018},{"b":"P5","sz":2066,"p":1823000,"psf":882.4,"y":2018},{"b":"P5","sz":2066,"p":1707000,"psf":826.2,"y":2018},{"b":"P5","sz":2453,"p":1604000,"psf":653.9,"y":2018},{"b":"P5","sz":2485,"p":1841000,"psf":740.8,"y":2015},{"b":"P5","sz":2485,"p":1791000,"psf":720.7,"y":2016},{"b":"P5","sz":2485,"p":1004000,"psf":404.0,"y":2019},{"b":"P5","sz":2733,"p":1404000,"psf":513.7,"y":2015},{"b":"P5","sz":2733,"p":1136000,"psf":415.7,"y":2017},{"b":"P5","sz":2755,"p":2120000,"psf":769.5,"y":2016},{"b":"P5","sz":2755,"p":1791000,"psf":650.1,"y":2017}];
+  const NAVY='#1E3A5F', GOLD='#B8860B', TEAL='#2E7D6F', BLUE='#4A7FB5', RED='#B85450', GREY='#9aa3ad', GRID='#e8e8e8';
+  const FONT={ family:'Arial', size:11 };
+  const BCOL={P1:BLUE,P2:GOLD,P3:TEAL,P4:GREY,P5:NAVY};
+  const charts={}; let active='ov';
+  const rm=v=>{ if(Math.abs(v)>=1e6) return 'RM '+(v/1e6).toFixed(2)+'m'; if(Math.abs(v)>=1e3) return 'RM '+Math.round(v/1e3)+'k'; return 'RM '+Math.round(v); };
+  const psf=v=>'RM '+Math.round(v);
+  const med=a=>{ if(!a.length) return 0; const s=[...a].sort((x,y)=>x-y); const m=Math.floor(s.length/2); return s.length%2? s[m] : (s[m-1]+s[m])/2; };
+  const pct=(a,q)=>{ if(!a.length) return 0; const s=[...a].sort((x,y)=>x-y); const i=(s.length-1)*q, lo=Math.floor(i), hi=Math.ceil(i); return s[lo]+(s[hi]-s[lo])*(i-lo); };
+  function mk(id,cfg){ const el=document.getElementById(id); if(!el) return; if(charts[id]){charts[id].destroy();} charts[id]=new Chart(el,cfg); }
+  function axes(o){ return Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}},o); }
+  const yTick=fn=>({grid:{color:GRID},border:{display:false},ticks:{color:'#555',font:FONT,callback:fn}});
+  const xCat={grid:{display:false},border:{color:'#c4c4c4'},ticks:{color:'#555',font:FONT}};
+  function kpi(el,items){ document.getElementById(el).innerHTML=items.map(i=>`<div class="kpi"><div class="v">${i[0]}</div><div class="l">${i[1]}</div></div>`).join(''); }
+  const valLabels={id:'valLabels',afterDatasetsDraw(ch){const m=ch.getDatasetMeta(0); if(!m||m.type!=='bar') return; const ctx=ch.ctx, ds=ch.data.datasets[0].data; ctx.save(); ctx.font='700 12px Arial'; ctx.textAlign='center'; m.data.forEach((bar,i)=>{const val=ds[i]; ctx.fillStyle=val>0?TEAL:val<0?RED:'#777'; const y= val>0? bar.y-6 : bar.y+15; ctx.fillText((val>0?'+':'')+val+'%', bar.x, y);}); ctx.restore();}};
+
+  function renderOverview(){
+    kpi('k_ov',[['249','sales, 1986-2019'],['6.2x','dearest vs cheapest rate'],['1 / 3','rising / falling'],['89%','of price differences explained']]);
+    mk('ov_rate',{type:'bar',data:{labels:B.map(x=>x.b),datasets:[{data:B.map(x=>x.rate),backgroundColor:B.map(x=>BCOL[x.b])}]},options:axes({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>psf(c.parsed.y)}}},scales:{y:yTick(x=>psf(x)),x:xCat}})});
+    mk('ov_dir',{plugins:[valLabels],data:{labels:B.map(x=>x.b),datasets:[
+      {type:'bar',data:B.map(x=>x.chg),backgroundColor:B.map(x=>x.chg>0?TEAL:x.chg<0?RED:GREY),minBarLength:4},
+      {type:'line',data:B.map(()=>4),borderColor:'#c0392b',borderDash:[6,5],borderWidth:1.6,pointRadius:0,label:'5-building average (misleading)'}
+    ]},options:axes({layout:{padding:{top:18,bottom:18}},plugins:{legend:{display:true,position:'top',align:'end',labels:{font:FONT,boxWidth:14,color:'#777',filter:i=>i.text}}},scales:{y:yTick(x=>x+'%'),x:xCat}})});
+    mk('ov_age',{type:'scatter',data:{datasets:B.map(x=>({label:x.b,data:[{x:x.yr,y:x.rate}],backgroundColor:BCOL[x.b],pointRadius:8,pointHoverRadius:10}))},options:axes({plugins:{legend:{display:true,position:'right',labels:{font:FONT,boxWidth:8,padding:7,color:'#444'}},tooltip:{callbacks:{label:c=>c.dataset.label+': built '+c.parsed.x+', '+psf(c.parsed.y)}}},scales:{x:Object.assign({title:{display:true,text:'year completed',font:FONT,color:'#555'}},yTick(x=>x)),y:Object.assign({title:{display:true,text:'going rate / sq ft',font:FONT,color:'#555'}},yTick(x=>psf(x)))}})});
+    mk('ov_val',{type:'bar',data:{labels:B.map(x=>x.b),datasets:[{data:B.map(x=>x.value),backgroundColor:B.map(x=>BCOL[x.b])}]},options:axes({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>rm(c.parsed.y)}}},scales:{y:yTick(x=>rm(x)),x:xCat}})});
+  }
+  function renderProp(b){
+    const x=B.find(o=>o.b===b); const rr=RAW.filter(r=>r.b===b);
+    kpi('k_'+b,[[psf(x.rate),'going rate ('+x.rank+' of 5)'],[rm(x.value),'typical '+x.size+' sqft unit'],[(x.chg>0?'+':'')+x.chg+'%/yr','recent direction'],[x.stage,'cycle stage']]);
+    const yrs=[...new Set(rr.map(r=>r.y))].sort((a,c)=>a-c);
+    const byy=yrs.map(y=>Math.round(med(rr.filter(r=>r.y===y).map(r=>r.psf))));
+    mk('cyc_'+b,{type:'line',data:{labels:yrs,datasets:[{data:byy,borderColor:BCOL[b],backgroundColor:BCOL[b],tension:.3,pointRadius:2,borderWidth:2.4,spanGaps:true}]},options:axes({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>psf(c.parsed.y)+'/sqft'}}},scales:{y:yTick(v=>psf(v)),x:xCat}})});
+    const szs=rr.map(r=>r.sz); const bands=[['smaller','~'+Math.round(pct(szs,.25))+' sqft',pct(szs,.25)],['typical','~'+Math.round(pct(szs,.5))+' sqft',pct(szs,.5)],['larger','~'+Math.round(pct(szs,.75))+' sqft',pct(szs,.75)]];
+    mk('siz_'+b,{type:'bar',data:{labels:bands.map(z=>z[1]),datasets:[{data:bands.map(z=>Math.round(x.rate*z[2])),backgroundColor:[BLUE,BCOL[b],NAVY]}]},options:axes({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>rm(c.parsed.y)}}},scales:{y:yTick(v=>rm(v)),x:xCat}})});
+  }
+  function renderActive(){ if(active==='ov') renderOverview(); else renderProp(active); requestAnimationFrame(()=>{ Object.values(charts).forEach(c=>{try{c.resize();}catch(e){}}); postH(); }); }
+  document.querySelector('.pagenav').addEventListener('click',e=>{ const b=e.target.closest('.pbtn'); if(!b) return;
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById('p_'+b.dataset.p).classList.add('active');
+    active=b.dataset.p; renderActive(); });
+  function boot(){ if(window.Chart){ renderActive(); } else { setTimeout(boot,150); } }
+  window.addEventListener('load',boot);
+</script>
+</body>
+</html>
