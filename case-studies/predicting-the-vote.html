@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predicting the Vote | Data Stories Lab</title>
+<meta name="description" content="A Johor election forecast tested against reality">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .dtable{width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:.82rem;margin:16px 0 4px;}
+  .dtable th,.dtable td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--hair);}
+  .dtable th{background:#f2f6fb;color:var(--navy);font-weight:700;font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;}
+  .dtable tr.miss{background:#fbeeee;}
+  .verdict{font-family:Arial,Helvetica,sans-serif;background:#eef4fb;border-left:4px solid var(--accent);padding:14px 16px;margin:14px 0;font-weight:700;color:var(--navy);}
+  .caption{font-family:Arial,Helvetica,sans-serif;font-size:.74rem;color:var(--mute);text-align:center;margin-top:4px;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} .dtable{font-size:.76rem;} }
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/predictive-modeling.html">Predictive Modeling</a>
+    <span class="sep">/</span><span>Predicting the Vote</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://lyven81.github.io/data-analyst-portfolio/images/predicting-the-vote/cover%20image.jpeg" alt="An analyst pins coloured markers to a wall map of constituencies.">
+    <figcaption><span>An analyst maps a state's constituencies before the votes are counted.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Election forecasting</div>
+  <h1 class="title">Predicting the Vote</h1>
+  <p class="standfirst">A Johor election forecast tested against reality</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>56 seats &middot; Johor 2026</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/predicting-the-vote-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>This case study answers one question for anyone who wants to forecast a Malaysian state election: can a model built only from past results and local demographics call the seats before the vote, and how far can its answer be trusted? It uses the Johor state election of 11 July 2026, 56 seats already decided, as a test bed. The real aim is to judge whether the same method is ready to forecast Negeri Sembilan on 1 August 2026.</p>
+    <p>The report follows a strict order so the forecast can be judged on its own terms. The forecast comes first, using only information available before polling day, and the model was fitted on the 2018 and 2022 elections without ever seeing the 2026 result. Only then is it scored against what actually happened. The finding is clear: the method names the winner of most seats accurately, is honest about the few it cannot call, and is weaker on the margin of victory, saying who wins more reliably than by how much.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">53 of 56</div><div class="l">seats called correctly</div></div><div class="fig"><div class="n">8 in 10</div><div class="l">accuracy on contested seats</div></div><div class="fig"><div class="n">13.5 pts</div><div class="l">average margin error</div></div><div class="fig"><div class="n">42 of 56</div><div class="l">seats never in doubt</div></div></div>
+
+  <div class="pull"><p>&ldquo;A forecast can name who wins a seat long before it can say by how much.&rdquo;</p></div>
+
+  <div class="skicker">Part 1 &middot; The forecast, before the vote</div>
+
+    <article class="finding"><h3 class="fq">1. How is the forecast built?</h3><div class="ftext"><p>The forecast is built in four plain steps. First, describe each seat: how it voted last time, and who lives there, from the census. Second, learn from history how those factors turned into wins when Johor moved from 2018 to 2022. Third, apply that learned pattern to each seat's 2022 numbers to work out each side's chance of winning, and call the seat for whoever is ahead. Fourth, record how sure the method is in each seat, so the close calls stand apart from the safe ones.</p><p>The method's engine is the assumption that the recent swing continues. It carries the 2018-to-2022 movement one step further. If Johor's mood in 2026 turns calmer or sharper than that, the forecast will drift.</p></div></article>
+
+    <article class="finding"><h3 class="fq">2. What does the forecast project?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/predicting-the-vote/chart-projection.png" alt="Bar chart of projected 2026 seats against the 2022 result, by coalition."></figure><p class="caption">The projected 2026 seats against the 2022 starting point.</p><p>On the pre-election evidence, the method projects BN to remain the largest coalition with 48 of the 56 seats, PH on 6, PN on 1, and one seat to a small party standing alone. This is the 2022 picture with the swing carried one step further.</p><p>The projection is only as strong as the confidence behind it. The next question is how much of it the method is actually sure about.</p></div></article>
+
+    <article class="finding"><h3 class="fq">3. Which seats is the forecast unsure about, and why?</h3><div class="ftext"><p>The method is highly confident in 42 of the 56 seats. It flags the other 14 as genuine contests, and six of those are true toss-ups. What makes a seat a contest comes from two things the method can see. The first is a mixed community make-up: the contested seats are 37% Chinese on average against 26% for the safe ones, and ten of the fourteen sit in the mixed 30-to-50 percent Chinese band, where neither the Malay nor the Chinese vote settles the outcome. The second is a starting position that the expected swing brings to the tipping point. When a seat lands near fifty-fifty, the method lowers its confidence rather than pretend to a certainty it does not have.</p>
+    <table class="dtable"><thead><tr><th>Seat</th><th>Chinese %</th><th>Forecast leans</th><th>Model sure %</th></tr></thead><tbody>
+<tr><td>Endau</td><td>12</td><td>BN</td><td>55</td></tr>
+<tr><td>Bukit Batu</td><td>41</td><td>BN</td><td>55</td></tr>
+<tr><td>Bukit Pasir</td><td>27</td><td>BN</td><td>56</td></tr>
+<tr><td>Stulang</td><td>52</td><td>PH</td><td>60</td></tr>
+<tr><td>Jementah</td><td>36</td><td>BN</td><td>64</td></tr>
+<tr><td>Kemelah</td><td>34</td><td>BN</td><td>65</td></tr>
+<tr><td>Puteri Wangsa</td><td>53</td><td>MUDA</td><td>67</td></tr>
+<tr><td>Senai</td><td>38</td><td>BN</td><td>67</td></tr>
+<tr><td>Maharani</td><td>34</td><td>PN</td><td>68</td></tr>
+<tr><td>Johor Jaya</td><td>41</td><td>BN</td><td>69</td></tr>
+<tr><td>Parit Yaani</td><td>40</td><td>BN</td><td>72</td></tr>
+<tr><td>Bukit Naning</td><td>31</td><td>BN</td><td>72</td></tr>
+<tr><td>Tangkak</td><td>31</td><td>BN</td><td>72</td></tr>
+<tr><td>Perling</td><td>48</td><td>BN</td><td>73</td></tr>
+    </tbody></table>
+    <p>An honest forecast should be judged first on these contested seats. The safe seats are easy; these are the ones that decide whether the projection holds.</p></div></article>
+
+  <div class="skicker">Part 2 &middot; The comparison, after the vote</div>
+
+    <article class="finding"><h3 class="fq">4. Did the forecast call the winners?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/predicting-the-vote/chart-forecast-vs-actual.png" alt="Bar chart comparing forecast and actual seats by coalition."></figure><p class="caption">Forecast seats against the actual result, by coalition. The actual result was BN 48, PH 8, PN 0.</p><p>Yes, on direction. The forecast called 53 of the 56 seats correctly, about 95 in every 100, and matched BN's seat total exactly. That headline needs context: 42 of those seats were never in doubt. The real test is the 14 genuine contests, where the record was 11 of 14, or about 8 in 10.</p><p>A high overall score mostly reflects how many safe seats a state has. A forecast should be judged on the seats that were actually close, not on the full board. Every seat the forecast got wrong was one it had already flagged as a contest; it did not miss a single seat it was confident about.</p></div></article>
+
+    <article class="finding"><h3 class="fq">5. Did the contested seats decide the outcome?</h3><div class="ftext"><p>This decides whether the contested seats are truly where the election is won. Before a single contested seat is counted, BN already holds 37 safe seats, the ones the method was sure about and got right. That alone clears the 29 needed for a majority. BN had won the state on its safe seats before the close races were decided.</p><p>So in Johor the 14 contested seats did not decide who governs; they decided the size of the win. BN took 11 of the 14, turning a solid majority into a landslide. They also carried all of the difficulty: the method got 11 of the 14 right, and all three of its wrong calls, Maharani, Puteri Wangsa and Senai, sat here. The lesson for Negeri Sembilan is a warning, not a shortcut. Where the two sides start more evenly, these mixed contested seats stop deciding the margin and start deciding who wins.</p></div></article>
+
+    <article class="finding"><h3 class="fq">6. Did the forecast call the size of each win?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/predicting-the-vote/chart-margin.png" alt="Scatter plot of forecast BN share against actual BN share, one dot per seat."></figure><p class="caption">Each dot is a seat: forecast BN share across, actual up. The line marks a perfect forecast.</p><p>No. Getting the winner right is not the same as getting the margin right. Across the 56 seats, the forecast of BN's share of the vote was off by about 13 to 14 points on average, and the misses all leaned one way: BN did better than the forecast almost everywhere. The 2026 swing was larger than the earlier one the method had learned from.</p><p>Trust the winner, not the exact figure. A forecast can name who wins a seat long before it can say by how much, so any precise margin should be read as a rough guide, not a number.</p></div></article>
+
+    <article class="finding"><h3 class="fq">7. Did the forecast catch the seats that changed hands?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/predicting-the-vote/chart-swing.png" alt="Bar chart of the nine seats that changed hands and the model's confidence in each."></figure><p class="caption">The nine seats that changed hands, and how sure the forecast was that BN would win each.</p><p>Out of 56 seats, only nine changed hands between 2022 and 2026, and eight of those flipped to BN. That is what turned a comfortable 2022 win into a 2026 landslide. The forecast caught seven of the nine, and missed two. Eight of these nine were among the 14 seats it had already flagged as contests; only Bukit Kepong was a confident flip call. A seat is forecast to change hands for a plain reason: it was close enough in 2022 that the expected swing carries the leading side's predicted vote across the winning line.</p>
+    <table class="dtable"><thead><tr><th>Seat</th><th>Held in 2022</th><th>Forecast 2026</th><th>Actual 2026</th><th>Call</th></tr></thead><tbody>
+<tr><td>Jementah</td><td>PH</td><td>BN</td><td>BN</td><td>&#10003;</td></tr>
+<tr><td>Bukit Kepong</td><td>PN</td><td>BN</td><td>BN</td><td>&#10003;</td></tr>
+<tr><td>Tangkak</td><td>PH</td><td>BN</td><td>BN</td><td>&#10003;</td></tr>
+<tr class="miss"><td>Maharani</td><td>PN</td><td>PN</td><td>BN</td><td>&#10007;</td></tr>
+<tr><td>Endau</td><td>PN</td><td>BN</td><td>BN</td><td>&#10003;</td></tr>
+<tr class="miss"><td>Puteri Wangsa</td><td>MUDA</td><td>MUDA</td><td>PH</td><td>&#10007;</td></tr>
+<tr><td>Johor Jaya</td><td>PH</td><td>BN</td><td>BN</td><td>&#10003;</td></tr>
+<tr><td>Perling</td><td>PH</td><td>BN</td><td>BN</td><td>&#10003;</td></tr>
+<tr><td>Bukit Batu</td><td>PH</td><td>BN</td><td>BN</td><td>&#10003;</td></tr>
+    </tbody></table></div></article>
+
+    <article class="finding"><h3 class="fq">8. What decides a seat?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/predicting-the-vote/chart-community.png" alt="Bar chart of BN win rate by the community make-up of the seat."></figure><p class="caption">BN win rate by the community make-up of the seat, from Malay-majority to Chinese-majority.</p><p>Each seat's own past vote was the strongest signal, but who lives there came a close second, and it is a two-sided lock, not a story of one community deciding the election. Malay-majority seats lock for BN, Chinese-majority seats for PH, and only the mixed middle is genuinely in play. BN won every seat outside the heavily-Chinese group, and none of the five seats where Chinese voters are the majority.</p><p>Who governed was decided by BN's floor of Malay-majority safe seats; the size of the win was decided by the mixed seats and a swing that was largest in Malay-majority seats. The Chinese-majority seats are a small, locked minority, not the kingmaker.</p></div></article>
+
+  <div class="skicker">Part 3 &middot; The verdict</div>
+
+    <article class="finding"><h3 class="fq">9. Can this method forecast Negeri Sembilan?</h3><div class="ftext"><div class="verdict">Short answer: yes as a structural baseline, but not as a confident single prediction, and only after it is retrained on Negeri Sembilan's own data.</div><p>What Johor shows: the method called direction well, 53 of 56 seats and about 8 in 10 on the genuinely close seats, and every seat it got wrong was one it had already flagged as close. Where the caution lies: the method leans on the assumption that the recent swing continues. Negeri Sembilan is less predictable on this point, because its 2026 election is a snap poll triggered by a political crisis rather than a normal cycle, and it is a different state with a different community mix, so the model must be retrained on its own history.</p><p>Use the method for Negeri Sembilan as a structural baseline that names the likely winners and, above all, flags the contested seats. Present it as ranges and probabilities, never as a confident single call.</p></div></article>
+
+  <div class="skicker" style="margin-top:42px">Working hypotheses for Negeri Sembilan</div>
+  <div class="body"><p>The real payoff of this exercise is a set of testable rules about how Malaysian seats behave. Each is backed by the Johor result and should be re-tested on Negeri Sembilan's own data, because it has a larger Indian population and a crisis-driven race. First, Malay-majority seats favour BN: BN won all 29 seats under 30 percent Chinese. Second, Chinese-majority seats favour PH: BN won none of the five seats over 50 percent Chinese. Third, the lock thresholds are about 50 percent Chinese and 65 percent Malay, and a 75 percent super-majority adds no further certainty. Fourth, the mixed 30-to-50 percent seats are the battleground, the only band genuinely in doubt.</p>
+  <table class="dtable"><thead><tr><th>Chinese share of the seat</th><th>Seats</th><th>BN win rate</th><th>Avg BN vote share</th></tr></thead><tbody>
+<tr><td>Under 15% (Malay-heavy)</td><td>11</td><td>100%</td><td>76%</td></tr>
+<tr><td>15 to 30%</td><td>18</td><td>100%</td><td>68%</td></tr>
+<tr class="miss" style="background:#fff7e6"><td>30 to 50% (mixed)</td><td>22</td><td>86%</td><td>56%</td></tr>
+<tr><td>Over 50% (Chinese-majority)</td><td>5</td><td>0%</td><td>41%</td></tr>
+  </tbody></table></div>
+
+  <div class="skicker" style="margin-top:42px">Method &amp; data</div>
+  <div class="body"><p>The winner in each seat was modelled with a multiple logistic regression estimating the probability of a BN win, trained on the 2018-to-2022 transition (outcome: 2022 winner; predictors: 2018 vote share plus 2020 census measures of ethnic composition, median income and adult-age share) and applied out-of-sample to 2026 using the 2022 vote share. A companion linear regression estimated each seat's vote share to measure margin error, and a no-change baseline assigned each seat to its 2022 winner. Training discrimination was strong and coefficient signs matched domain knowledge. Data is real: candidate-level results are from the Malaysian Election Corpus (MECo), a peer-reviewed archive, and demographics from the 2020 census by state constituency; the 2026 result was cross-checked against two independent published sources. Scope: the forecast is structural, using past results and demographics rather than polling, and Johor provides one out-of-sample test, so this result sets expectations for the method rather than settling them on its own.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Recommendations</div>
+  <div class="body"><p>For anyone curious about forecasting an election with data, this study points to a handful of simple rules. Forecast seats, not the popular vote: under a first-past-the-post system a modest vote lead can turn into a large seat lead. Always beat the no-change guess, because a model earns its keep mainly on the seats that move. Lean on the last result and who lives there, which explain most of the map. Separate the safe seats from the contests, and trust the model's own confidence, publishing a short list of the close ones to watch. Trust the winner, not the margin. And publish before the vote, treating one election as a hypothesis, not proof.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Conclusion</div>
+  <div class="body"><p>Judged fairly, the forecast did well on direction and poorly on size. It called 53 of 56 seats and matched BN's seat total, but nearly all of that came from safe seats; on the genuine contests it was right about 8 times in 10, and it could not say by how much anyone would win. Every seat it got wrong was one it had already marked as close, the most reassuring thing in the whole test: the method knows where it is weak.</p><p>The wider lesson matches the popular belief only halfway. A data model can call most seats in a Malaysian state election before polling day, because voting runs along steady lines. It is weaker on the margins and the closest races, and one election sets expectations rather than settling them. The Negeri Sembilan forecast, published before the vote, is where the method proves itself.</p></div>
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predicting the Vote, Interactive Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#eef2f7;color:#1f2933;}
+.dashwrap{max-width:1080px;margin:0 auto;padding:6px 18px 18px;}
+.topbar{position:sticky;top:0;z-index:120;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.06);}
+.masthead{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:1100px;margin:0 auto;gap:18px;}
+.mast-left{display:flex;align-items:center;gap:20px;}
+.logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+.mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+.mast-nav a{color:#222;text-decoration:none;} .mast-nav a:hover{color:#004B87;}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+.hamburger span{width:22px;height:2px;background:#222;display:block;}
+.rule-top{border:none;border-top:3px solid #222;max-width:1100px;margin:0 auto;}
+@media(max-width:820px){.mast-nav{display:none;}.hamburger{display:flex;}}
+.crumb{max-width:1080px;margin:0 auto;padding:16px 24px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;}
+.crumb a{color:inherit;text-decoration:none;} .crumb .sep{color:#C9D6E5;margin:0 8px;}
+.hero{max-width:1080px;margin:10px auto 0;line-height:0;padding:0 24px;}
+.hero img{width:100%;aspect-ratio:2/1;object-fit:cover;border-radius:14px;display:block;}
+.mtitle{max-width:1080px;margin:16px auto 0;padding:0 24px;}
+.mtitle .kk{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#004B87;}
+.mtitle h1{font-size:30px;color:#12507b;margin:6px 0 4px;letter-spacing:-.01em;}
+.mtitle p.sub{color:#3a4653;font-size:17px;}
+.switch{max-width:1080px;margin:16px auto 0;padding:0 24px;display:flex;gap:16px;align-items:center;justify-content:space-between;border-bottom:1px solid #C9D6E5;flex-wrap:wrap;}
+.switch-tabs{display:flex;}
+.sw{font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#6b7280;padding:12px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+.sw:first-child{padding-left:0;} .sw.active{color:#12507b;border-bottom-color:#004B87;}
+.sw-home{font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#6b7280;text-decoration:none;}
+footer.site{background:#222;max-width:1100px;margin:30px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+.drawer{position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+.drawer.open{left:0;} .drawer a{display:block;color:#222;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid #C9D6E5;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+.drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+@media print{.topbar,.switch,.drawer,.overlay,.crumb{display:none!important;}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0;}
+.kpi{background:#fff;border-radius:14px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(20,40,80,.06);min-width:0;}
+.kpi .n{font-size:22px;font-weight:700;color:#0d47a1;} .kpi .l{font-size:12px;color:#5b6774;margin-top:4px;}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px;}
+.tab{background:#fff;border:1px solid #d9e2ec;border-radius:999px;padding:8px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#33404d;}
+.tab.active{background:#12507b;color:#fff;border-color:#12507b;}
+.panel{display:none;} .panel.active{display:block;}
+.card{background:#fff;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(20,40,80,.05);min-width:0;}
+.card h3{font-size:17px;color:#12507b;margin-bottom:4px;}
+.insight{background:#eef4fb;border-left:4px solid #2b7bb9;border-radius:8px;padding:12px 14px;margin:6px 0 14px;font-size:14px;color:#22405c;}
+.insight b{color:#12507b;}
+.chartwrap{position:relative;width:100%;min-width:0;height:300px;margin-top:8px;} .chartwrap.tall{height:420px;} .chartwrap canvas{max-width:100%;}
+.legend{text-align:center;font-size:13px;color:#5b6774;margin-top:8px;} .legend span{font-size:15px;vertical-align:-1px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;} @media(max-width:760px){.grid2{grid-template-columns:1fr;}}
+.hyp{background:#f6f8fb;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin-bottom:10px;font-size:14px;}
+.hyp b{color:#12507b;}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px;}
+.filters select{padding:7px 10px;border-radius:8px;border:1px solid #cfd8e3;font-size:14px;}
+.filters .stat{margin-left:auto;font-size:14px;color:#12507b;font-weight:600;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid #eef2f7;}
+th{background:#12507b;color:#fff;position:sticky;top:0;font-weight:600;font-size:12px;}
+#tbl th{cursor:pointer;user-select:none;} #tbl th:hover{background:#1a6098;} tr.bad{background:#fdecec;}
+td.m{text-align:center;font-weight:700;} tr.ok td.m{color:#2e7d32;} tr.bad td.m{color:#c62828;}
+td.pos{color:#1b5e20;} td.neg{color:#c62828;}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.btns a{background:#12507b;color:#fff;text-decoration:none;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;}
+footer{text-align:center;color:#5b6774;font-size:12px;padding:16px 0;}
+h2.printonly{display:none;}
+@media print{.tab,.tabs{display:none!important;}.panel{display:block!important;page-break-before:always;}
+ h2.printonly{display:block;font-size:18px;color:#12507b;margin:10px 0;} .card,.kpi,table{break-inside:avoid;page-break-inside:avoid;} body{background:#fff;}}
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+</head><body>
+<div class="overlay" id="overlay"></div>
+<nav class="drawer" id="drawer"><button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+<a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a></nav>
+<div class="topbar"><div class="masthead"><div class="mast-left">
+<button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+<a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+<nav class="mast-nav"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a></nav>
+</div></div><hr class="rule-top"></div>
+<div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><span class="sep">/</span><a href="/data-analyst-portfolio/predictive-modeling.html">Predictive Modeling</a><span class="sep">/</span><span>Predicting the Vote</span></div>
+<figure class="hero"><img src="https://lyven81.github.io/data-analyst-portfolio/images/predicting-the-vote/cover%20image.jpeg" alt="An analyst maps a state's constituencies before the votes are counted."></figure>
+<div class="mtitle"><div class="kk">Election Forecasting &middot; Interactive Dashboard</div><h1>Predicting the Vote</h1><p class="sub">A Johor election forecast tested against reality.</p></div>
+<nav class="switch"><div class="switch-tabs"><a class="sw" href="/data-analyst-portfolio/case-studies/predicting-the-vote.html">Analyst Report</a><span class="sw active" aria-current="page">Dashboard</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html">&#8962; Home</a></nav>
+<div class="dashwrap">
+
+<div class="kpis">
+ <div class="kpi"><div class="n">53 of 56</div><div class="l">seats called correctly</div></div>
+ <div class="kpi"><div class="n">48 vs 48</div><div class="l">forecast vs actual BN seats</div></div>
+ <div class="kpi"><div class="n">8 in 10</div><div class="l">accuracy on the contested seats</div></div>
+ <div class="kpi"><div class="n">13.5 pts</div><div class="l">average error on the margin</div></div>
+ <div class="kpi"><div class="n">42 of 56</div><div class="l">seats never in doubt</div></div>
+</div>
+
+<div class="tabs">
+ <div class="tab active" data-p="p1">The forecast</div>
+ <div class="tab" data-p="p2">Forecast vs reality</div>
+ <div class="tab" data-p="p3">What decides a seat</div>
+ <div class="tab" data-p="p4">Explore every seat</div>
+</div>
+
+<div id="p1" class="panel active">
+ <h2 class="printonly">The forecast, before the vote</h2>
+ <div class="card"><h3>The projection: seats by coalition</h3>
+  <div class="insight">Built from the 2018 and 2022 results and the 2020 census, with nothing from the 2026 vote. The method projects <b>BN 48, PH 6, PN 1, and one seat to a small party</b>, the 2022 picture with the recent swing carried one step further.</div>
+  <div class="chartwrap"><canvas id="cProj"></canvas></div>
+ </div>
+ <div class="card"><h3>The 14 seats the forecast flags as contests</h3>
+  <div class="insight">The method is sure of 42 seats and flags 14 as genuine contests. These are the seats to watch: mostly mixed seats (30 to 50 percent Chinese) where the swing lands the result near even. Each bar shows how sure the method is of its call in that seat.</div>
+  <div class="chartwrap tall"><canvas id="cCont"></canvas></div>
+  <div class="legend"><span style="color:#1c3a5e;">&#9632;</span> Forecast leans BN &nbsp;&nbsp; <span style="color:#bf9000;">&#9632;</span> Forecast leans another side</div>
+ </div>
+</div>
+
+<div id="p2" class="panel">
+ <h2 class="printonly">Forecast versus reality</h2>
+ <div class="card"><h3>Forecast versus the actual result, by coalition</h3>
+  <div class="insight">The forecast called 53 of 56 seats and matched BN's total exactly. On the 14 genuine contests it went <b>11 of 14</b>, about 8 in 10. Every seat it got wrong was one it had already flagged.</div>
+  <div class="chartwrap"><canvas id="cVs"></canvas></div>
+ </div>
+ <div class="card"><h3>Forecast share versus actual share, one dot per seat</h3>
+  <div class="insight">Each dot is a seat: forecast BN share across, actual up. The line is a perfect forecast. Almost every dot sits above it, so <b>BN did better than the forecast nearly everywhere</b>. The method names the winner well but under-calls the margin, by 13.5 points on average.</div>
+  <div class="chartwrap"><canvas id="cSc"></canvas></div>
+ </div>
+</div>
+
+<div id="p3" class="panel">
+ <h2 class="printonly">What decides a seat</h2>
+ <div class="card"><h3>Which side a seat locks for, by its community make-up</h3>
+  <div class="insight">A seat's community make-up settles which side it is safe for. <b>Malay-majority seats lock for BN, Chinese-majority seats for PH</b>, and only the mixed middle is genuinely in play. This is not a story of one community deciding the election; it is about which side each kind of seat is already safe for. Note the ends: Chinese-majority seats are only 5 of 56 and all lock for PH, while the many Malay-majority seats form BN's floor.</div>
+  <div class="chartwrap"><canvas id="cEth"></canvas></div>
+  <div class="legend"><span style="color:#1c3a5e;">&#9632;</span> BN locks the seat &nbsp;&nbsp; <span style="color:#5a86bd;">&#9632;</span> Mixed, genuinely in doubt &nbsp;&nbsp; <span style="color:#b0342d;">&#9632;</span> PH locks the seat</div>
+ </div>
+ <div class="card"><h3>Where the 2026 surge came from</h3>
+  <div class="insight">The landslide was built on a swing, and the swing was <b>largest in Malay-majority seats</b>, where BN beat the forecast by about 20 points, and smallest in Chinese-majority ones. The movement that turned a majority into a landslide came from Malay-majority seats, not Chinese. Chinese-majority seats stayed locked for PH and did not shape the outcome.</div>
+  <div class="chartwrap"><canvas id="cWave"></canvas></div>
+ </div>
+ <div class="card"><h3>So who shapes the result?</h3>
+  <div class="insight">Two things, and neither is the Chinese-majority seat. <b>Who governs</b> was decided by BN's floor of Malay-majority safe seats, which alone passed the majority. <b>The size of the win</b> was decided by the mixed seats and the Malay swing. The Chinese-majority seats are a small, locked minority. In a more balanced state the mixed seats would decide government too, which is why they matter most for Negeri Sembilan.</div>
+ </div>
+ <div class="card"><h3>Four hypotheses to test in Negeri Sembilan</h3>
+  <div class="hyp"><b>1. Malay-majority seats favour BN.</b> BN won all 29 Johor seats under 30 percent Chinese, and every seat over 65 percent Malay.</div>
+  <div class="hyp"><b>2. Chinese-majority seats favour PH.</b> BN won none of the five seats over 50 percent Chinese.</div>
+  <div class="hyp"><b>3. The locks are about 50 percent Chinese and 65 percent Malay.</b> A 75 percent super-majority adds no further certainty.</div>
+  <div class="hyp"><b>4. Mixed seats (30 to 50 percent Chinese) are the battleground.</b> The only band in doubt (86 percent BN), holding 10 of 14 contests and most of the seats that changed hands.</div>
+ </div>
+</div>
+
+<div id="p4" class="panel">
+ <h2 class="printonly">Explore every seat</h2>
+ <div class="card">
+  <div class="filters">
+   <label>Actual winner: <select id="fWin"><option value="all">All</option><option>BN</option><option>PH</option></select></label>
+   <label>Result: <select id="fHit"><option value="all">All</option><option value="hit">Correct</option><option value="miss">Wrong</option></select></label>
+   <label>Chinese share: <select id="fEth"><option value="all">All</option><option value="lo">Under 30%</option><option value="mid">30-50%</option><option value="hi">Over 50%</option></select></label>
+   <span class="stat" id="tStat"></span>
+  </div>
+  <p style="font-size:13px;color:#5b6774;margin-bottom:8px;">Click any heading to sort. "Model sure %" is the forecast's confidence in its own call; "Miss (pts)" is how much BN beat the forecast.</p>
+  <div style="overflow-x:auto;"><table id="tbl"><thead><tr>
+   <th data-k="no">Seat</th><th data-k="seat">Constituency</th><th data-k="chinese">Chinese %</th>
+   <th data-k="conf">Model sure %</th><th data-k="fc">Forecast</th><th data-k="act">Actual</th>
+   <th data-k="ps">Forecast BN %</th><th data-k="as">Actual BN %</th><th data-k="err">Miss (pts)</th><th data-k="hit">Hit</th>
+  </tr></thead><tbody id="tbody"></tbody></table></div>
+ </div>
+</div>
+
+<div style="margin-top:8px;font-size:12px;color:#5b6774;">Data: Malaysian Election Corpus (MECo) + 2020 Census. Companion to the <a href="/data-analyst-portfolio/case-studies/predicting-the-vote.html" style="color:#12507b;">analyst report</a>.</div>
+</div>
+<footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+const DATA=[{"no": "N.01", "seat": "Buloh Kasap", "chinese": 29.4, "conf": 98.0, "fc": "BN", "act": "BN", "ps": 62.3, "as": 72.0, "err": 9.7, "hit": true}, {"no": "N.02", "seat": "Jementah", "chinese": 35.7, "conf": 64.0, "fc": "BN", "act": "BN", "ps": 42.2, "as": 46.3, "err": 4.1, "hit": true}, {"no": "N.03", "seat": "Pemanis", "chinese": 35.9, "conf": 94.0, "fc": "BN", "act": "BN", "ps": 53.8, "as": 68.1, "err": 14.3, "hit": true}, {"no": "N.04", "seat": "Kemelah", "chinese": 34.3, "conf": 65.0, "fc": "BN", "act": "BN", "ps": 43.6, "as": 50.6, "err": 7.0, "hit": true}, {"no": "N.05", "seat": "Tenang", "chinese": 33.7, "conf": 85.0, "fc": "BN", "act": "BN", "ps": 50.8, "as": 56.2, "err": 5.4, "hit": true}, {"no": "N.06", "seat": "Bekok", "chinese": 33.1, "conf": 94.0, "fc": "BN", "act": "BN", "ps": 61.6, "as": 63.2, "err": 1.6, "hit": true}, {"no": "N.07", "seat": "Bukit Kepong", "chinese": 18.9, "conf": 83.0, "fc": "BN", "act": "BN", "ps": 40.6, "as": 61.4, "err": 20.8, "hit": true}, {"no": "N.08", "seat": "Bukit Pasir", "chinese": 27.0, "conf": 56.0, "fc": "BN", "act": "BN", "ps": 33.8, "as": 57.5, "err": 23.7, "hit": true}, {"no": "N.09", "seat": "Gambir", "chinese": 30.6, "conf": 86.0, "fc": "BN", "act": "BN", "ps": 48.6, "as": 61.0, "err": 12.5, "hit": true}, {"no": "N.10", "seat": "Tangkak", "chinese": 31.0, "conf": 72.0, "fc": "BN", "act": "BN", "ps": 44.3, "as": 56.4, "err": 12.1, "hit": true}, {"no": "N.11", "seat": "Serom", "chinese": 23.2, "conf": 79.0, "fc": "BN", "act": "BN", "ps": 39.2, "as": 60.0, "err": 20.9, "hit": true}, {"no": "N.12", "seat": "Bentayan", "chinese": 62.1, "conf": 97.0, "fc": "PH", "act": "PH", "ps": 25.5, "as": 35.9, "err": 10.4, "hit": true}, {"no": "N.13", "seat": "Simpang Jeram", "chinese": 45.4, "conf": 76.0, "fc": "PH", "act": "PH", "ps": 32.2, "as": 40.5, "err": 8.2, "hit": true}, {"no": "N.14", "seat": "Bukit Naning", "chinese": 30.7, "conf": 72.0, "fc": "BN", "act": "BN", "ps": 39.4, "as": 52.8, "err": 13.5, "hit": true}, {"no": "N.15", "seat": "Maharani", "chinese": 33.7, "conf": 68.0, "fc": "PN", "act": "BN", "ps": 29.9, "as": 38.9, "err": 9.1, "hit": false}, {"no": "N.16", "seat": "Sungai Balang", "chinese": 22.5, "conf": 95.0, "fc": "BN", "act": "BN", "ps": 47.3, "as": 60.8, "err": 13.5, "hit": true}, {"no": "N.17", "seat": "Semerah", "chinese": 14.5, "conf": 95.0, "fc": "BN", "act": "BN", "ps": 45.2, "as": 67.0, "err": 21.8, "hit": true}, {"no": "N.18", "seat": "Sri Medan", "chinese": 5.2, "conf": 100.0, "fc": "BN", "act": "BN", "ps": 60.2, "as": 75.5, "err": 15.4, "hit": true}, {"no": "N.19", "seat": "Yong Peng", "chinese": 47.0, "conf": 92.0, "fc": "BN", "act": "BN", "ps": 58.8, "as": 60.2, "err": 1.4, "hit": true}, {"no": "N.20", "seat": "Semarang", "chinese": 10.1, "conf": 100.0, "fc": "BN", "act": "BN", "ps": 62.9, "as": 78.0, "err": 15.1, "hit": true}, {"no": "N.21", "seat": "Parit Yaani", "chinese": 40.0, "conf": 72.0, "fc": "BN", "act": "BN", "ps": 42.2, "as": 62.0, "err": 19.8, "hit": true}, {"no": "N.22", "seat": "Parit Raja", "chinese": 17.3, "conf": 99.0, "fc": "BN", "act": "BN", "ps": 54.1, "as": 69.2, "err": 15.1, "hit": true}, {"no": "N.23", "seat": "Penggaram", "chinese": 55.7, "conf": 91.0, "fc": "PH", "act": "PH", "ps": 28.9, "as": 45.4, "err": 16.5, "hit": true}, {"no": "N.24", "seat": "Senggarang", "chinese": 31.9, "conf": 86.0, "fc": "BN", "act": "BN", "ps": 46.7, "as": 60.6, "err": 13.9, "hit": true}, {"no": "N.25", "seat": "Rengit", "chinese": 11.5, "conf": 98.0, "fc": "BN", "act": "BN", "ps": 48.6, "as": 72.1, "err": 23.4, "hit": true}, {"no": "N.26", "seat": "Machap", "chinese": 25.5, "conf": 97.0, "fc": "BN", "act": "BN", "ps": 58.4, "as": 80.3, "err": 21.9, "hit": true}, {"no": "N.27", "seat": "Layang-Layang", "chinese": 23.4, "conf": 94.0, "fc": "BN", "act": "BN", "ps": 57.6, "as": 67.2, "err": 9.6, "hit": true}, {"no": "N.28", "seat": "Mengkibol", "chinese": 41.0, "conf": 83.0, "fc": "PH", "act": "PH", "ps": 33.6, "as": 45.1, "err": 11.5, "hit": true}, {"no": "N.29", "seat": "Mahkota", "chinese": 33.3, "conf": 83.0, "fc": "BN", "act": "BN", "ps": 49.6, "as": 66.5, "err": 16.9, "hit": true}, {"no": "N.30", "seat": "Paloh", "chinese": 27.3, "conf": 95.0, "fc": "BN", "act": "BN", "ps": 60.4, "as": 66.4, "err": 6.1, "hit": true}, {"no": "N.31", "seat": "Kahang", "chinese": 17.7, "conf": 99.0, "fc": "BN", "act": "BN", "ps": 63.5, "as": 71.7, "err": 8.3, "hit": true}, {"no": "N.32", "seat": "Endau", "chinese": 11.6, "conf": 55.0, "fc": "BN", "act": "BN", "ps": 31.2, "as": 51.6, "err": 20.4, "hit": true}, {"no": "N.33", "seat": "Tenggaroh", "chinese": 8.1, "conf": 97.0, "fc": "BN", "act": "BN", "ps": 47.4, "as": 74.6, "err": 27.2, "hit": true}, {"no": "N.34", "seat": "Panti", "chinese": 12.5, "conf": 99.0, "fc": "BN", "act": "BN", "ps": 58.6, "as": 76.5, "err": 18.0, "hit": true}, {"no": "N.35", "seat": "Pasir Raja", "chinese": 17.4, "conf": 99.0, "fc": "BN", "act": "BN", "ps": 62.7, "as": 74.9, "err": 12.2, "hit": true}, {"no": "N.36", "seat": "Sedili", "chinese": 0.4, "conf": 100.0, "fc": "BN", "act": "BN", "ps": 60.2, "as": 85.2, "err": 25.0, "hit": true}, {"no": "N.37", "seat": "Johor Lama", "chinese": 5.7, "conf": 100.0, "fc": "BN", "act": "BN", "ps": 60.8, "as": 79.9, "err": 19.1, "hit": true}, {"no": "N.38", "seat": "Penawar", "chinese": 0.9, "conf": 100.0, "fc": "BN", "act": "BN", "ps": 67.2, "as": 82.1, "err": 14.9, "hit": true}, {"no": "N.39", "seat": "Tanjung Surat", "chinese": 12.9, "conf": 100.0, "fc": "BN", "act": "BN", "ps": 67.9, "as": 90.5, "err": 22.6, "hit": true}, {"no": "N.40", "seat": "Tiram", "chinese": 19.1, "conf": 84.0, "fc": "BN", "act": "BN", "ps": 43.5, "as": 60.1, "err": 16.6, "hit": true}, {"no": "N.41", "seat": "Puteri Wangsa", "chinese": 53.2, "conf": 67.0, "fc": "MUDA", "act": "PH", "ps": 38.7, "as": 41.8, "err": 3.1, "hit": false}, {"no": "N.42", "seat": "Johor Jaya", "chinese": 40.9, "conf": 69.0, "fc": "BN", "act": "BN", "ps": 44.2, "as": 53.8, "err": 9.5, "hit": true}, {"no": "N.43", "seat": "Permas", "chinese": 25.0, "conf": 88.0, "fc": "BN", "act": "BN", "ps": 46.6, "as": 64.8, "err": 18.2, "hit": true}, {"no": "N.44", "seat": "Larkin", "chinese": 28.3, "conf": 90.0, "fc": "BN", "act": "BN", "ps": 47.3, "as": 67.5, "err": 20.1, "hit": true}, {"no": "N.45", "seat": "Stulang", "chinese": 51.5, "conf": 60.0, "fc": "PH", "act": "PH", "ps": 40.5, "as": 45.6, "err": 5.1, "hit": true}, {"no": "N.46", "seat": "Perling", "chinese": 47.5, "conf": 73.0, "fc": "BN", "act": "BN", "ps": 47.8, "as": 49.0, "err": 1.2, "hit": true}, {"no": "N.47", "seat": "Kempas", "chinese": 27.1, "conf": 78.0, "fc": "BN", "act": "BN", "ps": 43.8, "as": 65.2, "err": 21.4, "hit": true}, {"no": "N.48", "seat": "Skudai", "chinese": 54.5, "conf": 90.0, "fc": "PH", "act": "PH", "ps": 36.2, "as": 36.2, "err": -0.1, "hit": true}, {"no": "N.49", "seat": "Kota Iskandar", "chinese": 32.6, "conf": 92.0, "fc": "BN", "act": "BN", "ps": 50.7, "as": 58.4, "err": 7.7, "hit": true}, {"no": "N.50", "seat": "Bukit Permai", "chinese": 26.2, "conf": 96.0, "fc": "BN", "act": "BN", "ps": 55.8, "as": 67.2, "err": 11.4, "hit": true}, {"no": "N.51", "seat": "Bukit Batu", "chinese": 40.9, "conf": 55.0, "fc": "BN", "act": "BN", "ps": 44.0, "as": 47.7, "err": 3.7, "hit": true}, {"no": "N.52", "seat": "Senai", "chinese": 37.8, "conf": 67.0, "fc": "BN", "act": "PH", "ps": 41.5, "as": 44.3, "err": 2.8, "hit": false}, {"no": "N.53", "seat": "Benut", "chinese": 15.7, "conf": 99.0, "fc": "BN", "act": "BN", "ps": 62.7, "as": 86.9, "err": 24.2, "hit": true}, {"no": "N.54", "seat": "Pulai Sebatang", "chinese": 24.4, "conf": 97.0, "fc": "BN", "act": "BN", "ps": 52.4, "as": 70.5, "err": 18.1, "hit": true}, {"no": "N.55", "seat": "Pekan Nanas", "chinese": 32.2, "conf": 97.0, "fc": "BN", "act": "BN", "ps": 55.2, "as": 72.2, "err": 17.1, "hit": true}, {"no": "N.56", "seat": "Kukup", "chinese": 30.9, "conf": 98.0, "fc": "BN", "act": "BN", "ps": 61.5, "as": 72.3, "err": 10.8, "hit": true}];
+const FC=[48, 6, 1, 1],BASE=[40, 12, 3, 1],ACT=[48, 8, 0, 0],SC=[{"x": 62.3, "y": 72.0}, {"x": 42.2, "y": 46.3}, {"x": 53.8, "y": 68.1}, {"x": 43.6, "y": 50.6}, {"x": 50.8, "y": 56.2}, {"x": 61.6, "y": 63.2}, {"x": 40.6, "y": 61.4}, {"x": 33.8, "y": 57.5}, {"x": 48.6, "y": 61.0}, {"x": 44.3, "y": 56.4}, {"x": 39.2, "y": 60.0}, {"x": 25.5, "y": 35.9}, {"x": 32.2, "y": 40.5}, {"x": 39.4, "y": 52.8}, {"x": 29.9, "y": 38.9}, {"x": 47.3, "y": 60.8}, {"x": 45.2, "y": 67.0}, {"x": 60.2, "y": 75.5}, {"x": 58.8, "y": 60.2}, {"x": 62.9, "y": 78.0}, {"x": 42.2, "y": 62.0}, {"x": 54.1, "y": 69.2}, {"x": 28.9, "y": 45.4}, {"x": 46.7, "y": 60.6}, {"x": 48.6, "y": 72.1}, {"x": 58.4, "y": 80.3}, {"x": 57.6, "y": 67.2}, {"x": 33.6, "y": 45.1}, {"x": 49.6, "y": 66.5}, {"x": 60.4, "y": 66.4}, {"x": 63.5, "y": 71.7}, {"x": 31.2, "y": 51.6}, {"x": 47.4, "y": 74.6}, {"x": 58.6, "y": 76.5}, {"x": 62.7, "y": 74.9}, {"x": 60.2, "y": 85.2}, {"x": 60.8, "y": 79.9}, {"x": 67.2, "y": 82.1}, {"x": 67.9, "y": 90.5}, {"x": 43.5, "y": 60.1}, {"x": 38.7, "y": 41.8}, {"x": 44.2, "y": 53.8}, {"x": 46.6, "y": 64.8}, {"x": 47.3, "y": 67.5}, {"x": 40.5, "y": 45.6}, {"x": 47.8, "y": 49.0}, {"x": 43.8, "y": 65.2}, {"x": 36.2, "y": 36.2}, {"x": 50.7, "y": 58.4}, {"x": 55.8, "y": 67.2}, {"x": 44.0, "y": 47.7}, {"x": 41.5, "y": 44.3}, {"x": 62.7, "y": 86.9}, {"x": 52.4, "y": 70.5}, {"x": 55.2, "y": 72.2}, {"x": 61.5, "y": 72.3}];
+const CL=["Endau", "Bukit Batu", "Bukit Pasir", "Stulang", "Jementah", "Kemelah", "Puteri Wangsa", "Senai", "Maharani", "Johor Jaya", "Parit Yaani", "Bukit Naning", "Tangkak", "Perling"],CCONF=[55, 55, 56, 60, 64, 65, 67, 67, 68, 69, 72, 72, 72, 73],CCOL=["#1c3a5e", "#1c3a5e", "#1c3a5e", "#bf9000", "#1c3a5e", "#1c3a5e", "#bf9000", "#1c3a5e", "#bf9000", "#1c3a5e", "#1c3a5e", "#1c3a5e", "#1c3a5e", "#1c3a5e"];
+const ETH=[100, 100, 86, 0],ETHN=[11, 18, 22, 5],WAVE=[20.3, 16.2, 9.3, 7.0];
+const BANDS=['Malay-majority','Malay-lean','Mixed','Chinese-majority'];
+const BANDINFO=['under 15% Chinese','15-30% Chinese','30-50% Chinese','over 50% Chinese'];
+const charts={};
+Chart.defaults.font.family="-apple-system,'Segoe UI',Roboto,Arial,sans-serif";Chart.defaults.font.size=12;
+const NAVY='#1c3a5e',BLUE='#4f8fd0',GREY='#9aa7b4',RED='#b0342d',GRN='#2e7d32';
+
+function build(){
+ charts.proj=new Chart(cProj,{type:'bar',data:{labels:['BN','PH','PN','Others'],datasets:[
+   {label:'2022 result',data:BASE,backgroundColor:GREY},{label:'Forecast 2026',data:FC,backgroundColor:NAVY}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{title:{display:true,text:'Seats'}}}}});
+ charts.cont=new Chart(cCont,{type:'bar',data:{labels:CL,datasets:[{label:'Model confidence (%)',data:CCONF,backgroundColor:CCOL}]},
+  options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{min:0,max:100,title:{display:true,text:'How sure the method is (%)'}}}}});
+ charts.vs=new Chart(cVs,{type:'bar',data:{labels:['BN','PH','PN','Others'],datasets:[
+   {label:'Forecast',data:FC,backgroundColor:BLUE},{label:'Actual',data:ACT,backgroundColor:NAVY}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{title:{display:true,text:'Seats'}}}}});
+ charts.sc=new Chart(cSc,{type:'scatter',data:{datasets:[
+   {label:'Seats',data:SC,backgroundColor:'rgba(28,58,94,.6)',pointRadius:4},
+   {label:'Perfect forecast',type:'line',data:[{x:20,y:20},{x:95,y:95}],borderColor:RED,borderDash:[6,5],pointRadius:0}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{x:{min:20,max:95,title:{display:true,text:'Forecast BN share (%)'}},y:{min:20,max:95,title:{display:true,text:'Actual BN share (%)'}}}}});
+ charts.eth=new Chart(cEth,{type:'bar',data:{labels:BANDS,datasets:[{label:'BN win rate (%)',data:ETH,backgroundColor:[NAVY,NAVY,'#5a86bd',RED]}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:(x)=>BANDINFO[x.dataIndex]+', '+ETHN[x.dataIndex]+' seats'}}},scales:{y:{min:0,max:100,title:{display:true,text:'Seats won by BN (%)'}},x:{title:{display:true,text:'Community make-up (Malay-majority to Chinese-majority)'}}}}});
+ charts.wave=new Chart(cWave,{type:'bar',data:{labels:BANDS,datasets:[{label:'Points BN beat the forecast',data:WAVE,backgroundColor:[NAVY,'#3a6ea5','#5a86bd','#9aa7b4']}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:(x)=>BANDINFO[x.dataIndex]+', '+ETHN[x.dataIndex]+' seats'}}},scales:{y:{title:{display:true,text:'Points BN did better than forecast'}},x:{title:{display:true,text:'Community make-up of the seat'}}}}});
+ raf();
+}
+function raf(){requestAnimationFrame(()=>{Object.values(charts).forEach(c=>c&&c.resize());});}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+ t.classList.add('active');document.getElementById(t.dataset.p).classList.add('active');raf();});
+
+let sortKey='no',sortDir=1;
+function ethBand(v){return v<30?'lo':(v<50?'mid':'hi');}
+function renderTable(){
+ const w=fWin.value,h=fHit.value,e=fEth.value;
+ let rw=DATA.filter(r=>{
+   if(w!=='all'&&r.act!==w)return false;
+   if(h==='hit'&&!r.hit)return false; if(h==='miss'&&r.hit)return false;
+   if(e!=='all'&&ethBand(r.chinese)!==e)return false; return true;});
+ rw.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];if(typeof x==='string'){return x.localeCompare(y)*sortDir;}return (x-y)*sortDir;});
+ tbody.innerHTML=rw.map(r=>{const ec=r.err>0?'pos':(r.err<0?'neg':'');
+   return `<tr class="${r.hit?'ok':'bad'}"><td>${r.no}</td><td>${r.seat}</td><td>${r.chinese}</td>`+
+   `<td>${r.conf}</td><td><b>${r.fc}</b></td><td><b>${r.act}</b></td><td>${r.ps}</td><td>${r.as}</td>`+
+   `<td class="${ec}">${r.err>0?'+':''}${r.err}</td><td class="m">${r.hit?'✓':'✗'}</td></tr>`;}).join('');
+ tStat.textContent=`${rw.length} seats shown, ${rw.filter(r=>r.hit).length} correct`;
+}
+document.querySelectorAll('#tbl th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k===sortKey){sortDir*=-1;}else{sortKey=k;sortDir=1;}renderTable();});
+['fWin','fHit','fEth'].forEach(id=>document.getElementById(id).addEventListener('change',renderTable));
+window.addEventListener('load',()=>{build();renderTable();});
+window.addEventListener('beforeprint',()=>{Object.values(charts).forEach(c=>{if(c){c.options.maintainAspectRatio=false;c.resize();}});});
+const _d=document.getElementById('drawer'),_o=document.getElementById('overlay');
+const _open=()=>{_d.classList.add('open');_o.classList.add('open');},_close=()=>{_d.classList.remove('open');_o.classList.remove('open');};
+document.getElementById('hamburger').addEventListener('click',_open);
+document.getElementById('drawerClose').addEventListener('click',_close);
+_o.addEventListener('click',_close);
+_d.querySelectorAll('a').forEach(a=>a.addEventListener('click',_close));
+</script></body></html>
