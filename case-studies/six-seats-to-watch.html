@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Six Seats to Watch | Data Stories Lab</title>
+<meta name="description" content="Forecasting the Negeri Sembilan state election, seat by seat, before the vote">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#002D55;--gray:#555;--mute:#6b7280;--hair:#C9D6E5;--accent:#004B87;--navy:#002D55;--paper:#fff;}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.65;}
+  .wrap{max-width:760px;margin:0 auto;padding:30px 28px 56px;}
+  .topbar{ position:sticky; top:0; z-index:120; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+  body.embed .topbar{ display:none; }
+  .masthead{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:90%;margin:0 auto;gap:18px;}
+  .mast-left{display:flex;align-items:center;gap:20px;}
+  .logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+  .mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+  .mast-nav a{color:inherit;text-decoration:none;} .mast-nav a:hover{color:var(--accent);}
+  .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2px;background:#222;display:block;}
+  .rule-top{border:none;border-top:3px solid #222;max-width:90%;margin:0 auto;}
+  .crumb{font-family:Arial,Helvetica,sans-serif;max-width:90%;margin:0 auto;padding:20px 28px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);}
+  .crumb a{color:inherit;text-decoration:none;} .crumb a:hover{color:var(--accent);}
+  .crumb .sep{color:var(--hair);margin:0 8px;}
+  .hero{margin:0 0 4px;line-height:0;}
+  .hero img{width:100%;aspect-ratio:2/1;object-fit:cover;height:auto;display:block;}
+  .hero figcaption{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;gap:14px;line-height:1.4;margin-top:9px;font-size:.74rem;color:#8a8f98;}
+  .hero figcaption .credit{text-transform:uppercase;letter-spacing:.6px;font-size:.62rem;color:#b0b4ba;white-space:nowrap;}
+  footer.site{font-family:Arial,Helvetica,sans-serif;background:#222;max-width:90%;margin:34px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+  .drawer{font-family:Arial,Helvetica,sans-serif;position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+  .drawer.open{left:0;}
+  .drawer a{display:block;color:inherit;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--hair);}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+  .drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+  @media(max-width:820px){ .mast-nav{display:none;} .hamburger{display:flex;} .masthead{padding:12px 16px;} .logo{font-size:.72rem;letter-spacing:1.5px;padding:6px 8px;} }
+  body.embed .masthead, body.embed .rule-top, body.embed .crumb, body.embed footer.site, body.embed .drawer, body.embed .overlay{display:none;}
+  .kicker{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);}
+  h1.title{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:2.9rem;line-height:1.05;letter-spacing:-.018em;margin:10px 0 0;color:var(--ink);}
+  .standfirst{font-size:1.32rem;line-height:1.45;color:#3a3a3a;margin-top:14px;font-weight:400;}
+  .dateline{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mute);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;margin:22px 0 6px;display:flex;gap:18px;flex-wrap:wrap;}
+  .dateline .red{color:var(--accent);}
+  .switch{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--hair);margin-top:2px;}
+  .switch-tabs{display:flex;}
+  .sw{font-family:Arial,Helvetica,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);padding:13px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+  .sw:first-child{padding-left:0;} a.sw:hover{color:var(--ink);}
+  .sw.active{color:var(--navy);border-bottom-color:var(--accent);}
+  .sw-home{font-family:Arial,Helvetica,sans-serif;font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .sw-home:hover{color:var(--accent);} .sw-home .ico{font-size:1.05rem;line-height:1;}
+  body.embed .switch{display:none;}
+  @media(max-width:560px){ .sw{padding:11px 12px;} .sw:first-child{padding-left:0;} }
+  .lead{margin-top:20px;}
+  .lead p,.body p{font-size:1.08rem;margin-top:1rem;}
+  .lead p:first-of-type::first-letter{float:left;font-family:Arial,Helvetica,sans-serif;font-weight:800;color:var(--navy);font-size:3.6rem;line-height:.82;padding:6px 10px 0 0;}
+  .skicker{font-family:Arial,Helvetica,sans-serif;font-size:1.32rem;font-weight:800;letter-spacing:.2px;text-transform:none;color:var(--accent);margin:38px 0 6px;padding-top:14px;border-top:2px solid var(--ink);display:inline-block;}
+  h2.sec{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.01em;line-height:1.12;color:var(--ink);margin-bottom:4px;}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin:18px 0 4px;}
+  .fig{display:flex;align-items:baseline;gap:6px;padding:14px 12px;border-right:1px solid var(--hair);} .fig:last-child{border-right:none;}
+  .fig .n{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.15rem;color:var(--navy);letter-spacing:-.01em;white-space:nowrap;}
+  .fig .l{font-family:Arial,Helvetica,sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--mute);margin-top:0;line-height:1.25;}
+  .pull{border-top:2px solid var(--accent);border-bottom:1px solid var(--hair);margin:30px 0;padding:18px 0 20px;}
+  .pull p{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.25;color:var(--navy);letter-spacing:-.01em;}
+  .finding{margin-top:34px;padding-top:22px;border-top:1px solid var(--hair);}
+  h3.fq{font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:1.32rem;line-height:1.16;letter-spacing:-.01em;color:var(--accent);margin:4px 0 0;}
+  figure.chart{margin:16px 0 6px;line-height:0;}
+  figure.chart img{width:100%;height:auto;display:block;border:1px solid var(--hair);}
+  .ftext p{font-size:1.06rem;margin-top:.85rem;}
+  .ftext ul,.body ul,.lead ul{margin:.7rem 0 .2rem 1.2rem;} .ftext li,.body li,.lead li{font-size:1.04rem;margin-top:.45rem;}
+  .ftext strong,.body strong,.lead strong{font-weight:600;}
+  .seatlist{font-family:Arial,Helvetica,sans-serif;font-size:.9rem;line-height:1.5;background:#f2f6fb;border:1px solid var(--hair);border-radius:6px;padding:11px 14px;margin:12px 0 2px;}
+  .seatlist strong{color:var(--navy);}
+  .dtable{width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:.82rem;margin:16px 0 4px;}
+  .dtable th,.dtable td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--hair);}
+  .dtable th{background:#f2f6fb;color:var(--navy);font-weight:700;font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;}
+  .dtable tr.contest{background:#fdefdc;} .dtable tr.contest td:last-child{color:#b0342d;font-weight:700;}
+  .dtable td:nth-child(n+2){text-align:left;}
+  .verdict{font-family:Arial,Helvetica,sans-serif;background:#eef4fb;border-left:4px solid var(--accent);padding:14px 16px;margin:14px 0;font-weight:700;color:var(--navy);}
+  .caption{font-family:Arial,Helvetica,sans-serif;font-size:.74rem;color:var(--mute);text-align:center;margin-top:4px;}
+  .note{font-family:Arial,Helvetica,sans-serif;font-size:.76rem;color:var(--mute);margin-top:6px;}
+  .endrule{border:0;border-top:2px solid var(--ink);margin:40px 0 0;}
+  @media(max-width:680px){ h1.title{font-size:2.1rem;} .standfirst{font-size:1.15rem;} .figs{grid-template-columns:1fr 1fr;} .fig:nth-child(2){border-right:none;} .wrap{padding:24px 18px 40px;} .dtable{font-size:.76rem;} }
+</style><link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/data-analyst-portfolio/favicon.svg">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <nav class="drawer" id="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+  </nav>
+  <div class="topbar">
+  <div class="masthead">
+    <div class="mast-left">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+      <nav class="mast-nav">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a>
+    <a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a>
+    <a href="/data-analyst-portfolio/about-this-work.html">About</a>
+    <a href="/data-analyst-portfolio/contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <hr class="rule-top">
+  </div>
+  <div class="crumb">
+    <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
+    <span class="sep">/</span><a href="/data-analyst-portfolio/predictive-modeling.html">Predictive Modeling</a>
+    <span class="sep">/</span><span>Six Seats to Watch</span>
+  </div>
+
+<div class="wrap">
+
+  <figure class="hero">
+    <img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/cover%20image.jpeg" alt="Minangkabau village houses above terraced paddy fields in Negeri Sembilan.">
+    <figcaption><span>A state mapped seat by seat before the vote, in the heartland of the Minangkabau house.</span><span class="credit">Illustration &middot; Data Stories Lab</span></figcaption>
+  </figure>
+
+  <div class="kicker">Election forecasting</div>
+  <h1 class="title">Six Seats to Watch</h1>
+  <p class="standfirst">Forecasting the Negeri Sembilan state election</p>
+  <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>36 seats &middot; Negeri Sembilan 2026</span></div>
+
+  <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/six-seats-to-watch-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
+
+  <div class="lead body">
+    <p>Negeri Sembilan votes on 1 August 2026 to fill 36 state-assembly seats. This forecast, written before the vote, works out who is likely to win each seat and, more importantly, where the result will actually be decided. It uses only what is knowable in advance: the last two state elections and the make-up of each seat.</p>
+    <p>The contest has narrowed to two blocs. Barisan Nasional (BN) is contesting alongside Perikatan Nasional (PN) as a single grand coalition, against Pakatan Harapan (PH). Thirty of the 36 seats are already settled and split almost evenly, so the government comes down to six Malay-majority seats: Ampangan, Klawang, Labu, Pilah, Sikamat and Paroi. The BN-PN bloc is the favourite, but its majority rides entirely on that handful.</p>
+  </div>
+
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">19 vs 17</div><div class="l">forecast seats, BN-PN vs PH</div></div><div class="fig"><div class="n">6 of 36</div><div class="l">seats that decide the government</div></div><div class="fig"><div class="n">30 of 36</div><div class="l">seats already settled</div></div><div class="fig"><div class="n">2 of 6</div><div class="l">contests BN-PN needs for a majority</div></div></div>
+
+  <div class="pull"><p>&ldquo;Thirty seats are settled before the campaign begins; six Malay-majority seats decide who governs.&rdquo;</p></div>
+
+  <div class="skicker">How a seat is settled or contested</div>
+  <div class="body">
+    <p>Each seat is scored as a two-way match: PH against the combined BN-PN bloc. PH's score is the share of the vote it won in 2023. The BN-PN score pools BN and PN together, keeping most of the smaller partner's vote, since a merged ticket loses a few supporters.</p>
+    <p>The gap between the two scores is what settles the seat. When one side leads by fifteen points or more, the seat is settled, too far ahead for a normal swing to close. When the gap is under fifteen points, the seat is a contest, close enough to fall either way.</p>
+    <p>Across all 36 seats, 30 come out settled and six stay close. The settled 30 split BN-PN 17 and PH 13, so neither side reaches the 19 needed to govern. That leaves the six close seats to decide who gets there and forms the next government.</p>
+  </div>
+
+  <div class="skicker">The forecast, before the vote</div>
+
+    <article class="finding"><h3 class="fq">1. How is the forecast built?</h3><div class="ftext"><p>The forecast is built in four plain steps. First, describe each seat: how it voted in 2023, and who lives there, from the census. Second, treat BN and PN as one bloc, since they are contesting together, and combine their vote where they no longer stand against each other. Third, set that combined bloc against PH in every seat to call a winner. Fourth, record how sure the method is in each seat, so the close calls stand apart from the safe ones.</p><p>Its main assumption is that voters largely follow their coalitions once BN and PN pool their support. Where that transfer is imperfect the bloc's margins narrow, which is built into the six contests below.</p></div></article>
+
+    <article class="finding"><h3 class="fq">2. What does the forecast project?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-projection.png" alt="Stacked bar chart of forecast seats: BN-PN 19, PH 17, split into settled seats and seats won from the six contests."></figure><p class="caption">The projected seats: a one-seat BN-PN majority, 19 to 17.</p><p>On the pre-election evidence, the BN-PN bloc wins 19 of the 36 seats and PH 17, a majority of one. The bloc reaches 19 from 17 settled seats plus two of the six contests; PH reaches 17 from 13 settled seats plus four contests. The result is close, and every seat above the majority line comes from the six.</p></div></article>
+
+    <article class="finding"><h3 class="fq">3. Which seats are already safe?</h3><div class="ftext"><p>Thirty seats are settled by a comfortable margin, and they split into two floors. The BN-PN bloc is safe in 17 seats, its Malay heartland. PH is safe in 13 seats, its non-Malay and mixed strongholds. Because 19 is needed to govern, neither floor is a majority on its own: the BN-PN floor is two short, the PH floor is six short.</p>
+    <div class="seatlist"><strong>BN-PN safe (17):</strong> Rantau, Pertang, Johol, Chembong, Bagan Pinang, Gemencheh, Gemas, Linggi, Senaling, Jeram Padang, Seri Menanti, Serting, Sungai Lui, Palong, Kota, Juasseh, Lenggeng</div>
+    <div class="seatlist"><strong>PH safe (13):</strong> Lobak, Mambau, Bukit Kepayang, Chuah, Seremban Jaya, Lukut, Bahau, Rahang, Nilai, Repah, Temiang, Sri Tanjung, Chennah</div>
+    <p>These 30 are not where the election is won. They set the starting line; the finish is in the six seats neither bloc has locked.</p></div></article>
+
+    <article class="finding"><h3 class="fq">4. What decides a seat?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-community.png" alt="Stacked bar chart of seats won by PH and BN-PN across community make-up bands."></figure><p class="caption">Make-up sorts the map: PH holds the non-Malay seats, BN-PN the Malay seats.</p><p>The make-up of a seat sorts the map. PH wins almost every non-Malay and mixed seat; the BN-PN bloc wins almost every Malay-majority seat. This two-sided lock is why 30 seats are settled: most sit clearly on one side of the divide. There is only one Chinese-majority seat in the whole state, and the larger-than-usual Indian vote sits inside the non-Malay and mixed seats that PH already holds.</p><p>The contest survives only where the divide is blurred, in the Malay-majority seats that are not quite lopsided enough to be safe. That is where the six are.</p></div></article>
+
+    <article class="finding"><h3 class="fq">5. The six seats to watch</h3><div class="ftext"><p>These are the seats the method is least sure about: Malay-majority seats where the gap between PH and the BN-PN bloc is under fifteen points. They are where the government will be won or lost.</p>
+    <table class="dtable"><thead><tr><th>Seat</th><th>Malay %</th><th>Held 2023</th><th>Forecast</th><th>Margin (pts)</th></tr></thead><tbody>
+<tr><td>Ampangan</td><td>78</td><td>PH</td><td>PH</td><td>2</td></tr>
+<tr><td>Klawang</td><td>71</td><td>PH</td><td>PH</td><td>6</td></tr>
+<tr><td>Labu</td><td>78</td><td>PN</td><td>BN-PN</td><td>8</td></tr>
+<tr><td>Pilah</td><td>69</td><td>PH</td><td>PH</td><td>9</td></tr>
+<tr><td>Sikamat</td><td>77</td><td>PH</td><td>PH</td><td>11</td></tr>
+<tr><td>Paroi</td><td>83</td><td>PN</td><td>BN-PN</td><td>13</td></tr>
+    </tbody></table>
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-six-seats.png" alt="Horizontal bar chart of the six contests by winning margin, all under fifteen points."></figure><p class="caption">The six contests by margin: all under fifteen points, four leaning PH, two BN-PN.</p><p>Each is a contest for a plain reason: it is Malay-majority, and the gap between the two blocs is small enough that a modest swing carries it either way. In the central forecast PH holds four (Ampangan, Klawang, Pilah, Sikamat) and the BN-PN bloc takes two (Labu, Paroi), which is exactly what delivers the 19-17 result.</p></div></article>
+
+  <div class="skicker">What the six decide</div>
+
+    <article class="finding"><h3 class="fq">6. Do the six decide it, or is it foregone?</h3><div class="ftext"><p>It is not foregone. Neither bloc reaches a majority on its 30 settled seats, so the six carry the government. But the maths is one-sided. The BN-PN bloc, on 17 safe seats, needs only two of the six to reach 19, and it is favoured in two of them. PH, on 13 safe seats, would have to win all six, including overturning the two seats that lean BN-PN, just to reach a bare majority of its own.</p><div class="verdict">The BN-PN bloc is the clear favourite, but its majority is not locked: it rests entirely on these six seats.</div><p>So the six decide two things: whether the BN-PN bloc secures its majority, and how large it is. If the bloc holds its two and takes one or two of PH's close seats, the majority grows comfortable. If PH defends all four of its Malay seats and steals the bloc's two, the majority is denied and the result is level.</p></div></article>
+
+    <article class="finding"><h3 class="fq">7. Who is likely to govern?</h3><div class="ftext"><p>The BN-PN bloc is favoured to form the next Negeri Sembilan government, on a bare majority built out of the Malay-majority seats. PH is favoured to be the opposition, anchored by the non-Malay and mixed seats it cannot be dislodged from but unable to reach a majority through them alone. The state's next government is decided less by a broad statewide mood than by six Malay-majority seats where the two blocs run close.</p></div></article>
+
+  <div class="skicker" style="margin-top:42px">What this forecast can and cannot say</div>
+  <div class="body"><p>The forecast is confident about the shape of the result: the two floors are secure, PH owns the non-Malay seats, the BN-PN bloc owns the Malay heartland, and the government is decided in six seats. It is deliberately cautious about the exact seat count, because that rests on how those six break and on how cleanly BN and PN voters transfer to a single candidate, neither of which can be pinned down before the vote. Read the favourite and the battleground as firm, and the final margin as a range.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Working hypotheses</div>
+  <div class="body"><p>This forecast rests on three rules the 1 August result will test. First, make-up locks most seats: PH holds the non-Malay and mixed seats, the BN-PN bloc holds the Malay heartland, and that alone settles 30 of 36. Second, the Malay-majority seats are the whole battleground: every seat still in play is Malay-majority, and the government is decided there. Third, pooling the vote is the BN-PN edge: by fielding one candidate where they once split, BN and PN convert narrow three-way losses into wins, and a poor transfer between them would blunt this, the bloc's main risk.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Recommendations</div>
+  <div class="body"><p>To forecast an election with data, start by counting seats, not the popular vote. The map decides who governs, and a bloc can trail the statewide vote yet still win it. So find each side's safe floor first, and check whether either already reaches a majority.</p><p>If neither does, the election lives in the seats left over. Name that short list up front, and read every seat on it as open. And when two parties pool their vote, forecast the combined bloc, treating an imperfect transfer between them as the biggest source of doubt.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Method and data</div>
+  <div class="body"><p>Each seat was treated as a two-way race, PH against a combined BN-PN candidate. The scores come from the 2023 vote and the 2020 census, with BN and PN pooled behind the stronger of the two. A seat counts as settled when the lead is fifteen points or more, and a contest when it is less.</p><p>The data is real: candidate results from the Malaysian Election Corpus and census figures from 2020, all on the current boundaries. The forecast reads past results, not polls, so its main risk is how cleanly BN and PN voters move behind one candidate. It will be checked against the actual result after 1 August 2026.</p></div>
+
+  <div class="skicker" style="margin-top:42px">Appendix: every seat's score</div>
+  <div class="body"><p>The full scoreboard behind the forecast, sorted from the closest race to the safest. Each row shows PH's 2023 vote share, the combined BN-PN score (the stronger of the two plus most of the other), and the gap between them. The six rows shaded amber are the contests, where the gap is under fifteen points; they are exactly the seats to watch named earlier.</p>
+  <table class="dtable"><thead><tr><th>Seat</th><th>PH score</th><th>BN-PN score</th><th>Gap (pts)</th><th>Status</th></tr></thead><tbody>
+<tr class="contest"><td>Ampangan</td><td>41</td><td>38</td><td>2</td><td>Contest</td></tr>
+<tr class="contest"><td>Klawang</td><td>51</td><td>45</td><td>6</td><td>Contest</td></tr>
+<tr class="contest"><td>Labu</td><td>46</td><td>54</td><td>8</td><td>Contest</td></tr>
+<tr class="contest"><td>Pilah</td><td>55</td><td>45</td><td>10</td><td>Contest</td></tr>
+<tr class="contest"><td>Sikamat</td><td>55</td><td>43</td><td>12</td><td>Contest</td></tr>
+<tr class="contest"><td>Paroi</td><td>42</td><td>55</td><td>13</td><td>Contest</td></tr>
+<tr><td>Chennah</td><td>62</td><td>38</td><td>23</td><td>Settled</td></tr>
+<tr><td>Sri Tanjung</td><td>66</td><td>34</td><td>32</td><td>Settled</td></tr>
+<tr><td>Temiang</td><td>64</td><td>29</td><td>34</td><td>Settled</td></tr>
+<tr><td>Repah</td><td>67</td><td>33</td><td>35</td><td>Settled</td></tr>
+<tr><td>Nilai</td><td>66</td><td>29</td><td>38</td><td>Settled</td></tr>
+<tr><td>Rahang</td><td>74</td><td>26</td><td>48</td><td>Settled</td></tr>
+<tr><td>Bahau</td><td>77</td><td>23</td><td>54</td><td>Settled</td></tr>
+<tr><td>Lukut</td><td>79</td><td>21</td><td>59</td><td>Settled</td></tr>
+<tr><td>Seremban Jaya</td><td>80</td><td>20</td><td>59</td><td>Settled</td></tr>
+<tr><td>Chuah</td><td>81</td><td>19</td><td>63</td><td>Settled</td></tr>
+<tr><td>Bukit Kepayang</td><td>81</td><td>16</td><td>65</td><td>Settled</td></tr>
+<tr><td>Mambau</td><td>88</td><td>11</td><td>77</td><td>Settled</td></tr>
+<tr><td>Lenggeng</td><td>0</td><td>88</td><td>88</td><td>Settled</td></tr>
+<tr><td>Lobak</td><td>94</td><td>6</td><td>89</td><td>Settled</td></tr>
+<tr><td>Juasseh</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
+<tr><td>Kota</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
+<tr><td>Sungai Lui</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
+<tr><td>Serting</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
+<tr><td>Palong</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
+<tr><td>Seri Menanti</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
+<tr><td>Jeram Padang</td><td>0</td><td>91</td><td>91</td><td>Settled</td></tr>
+<tr><td>Senaling</td><td>0</td><td>91</td><td>91</td><td>Settled</td></tr>
+<tr><td>Linggi</td><td>0</td><td>91</td><td>91</td><td>Settled</td></tr>
+<tr><td>Gemas</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
+<tr><td>Gemencheh</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
+<tr><td>Bagan Pinang</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
+<tr><td>Chembong</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
+<tr><td>Johol</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
+<tr><td>Pertang</td><td>0</td><td>93</td><td>93</td><td>Settled</td></tr>
+<tr><td>Rantau</td><td>0</td><td>94</td><td>94</td><td>Settled</td></tr>
+  </tbody></table>
+  <p class="note">Scores are each bloc's 2023 vote share, in percent; a score of 0 means that bloc did not stand a candidate in the seat. Figures are rounded, so a gap may differ by a point from the subtraction shown.</p></div>
+
+  <hr class="endrule">
+
+</div>
+
+  <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+  if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('embed');
+  const drawer=document.getElementById('drawer'), overlay=document.getElementById('overlay');
+  const openMenu=()=>{ drawer.classList.add('open'); overlay.classList.add('open'); };
+  const closeMenu=()=>{ drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('hamburger').addEventListener('click', openMenu);
+  document.getElementById('drawerClose').addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+  function postH(){try{parent.postMessage({type:'ih',h:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
+  window.addEventListener('load',postH);window.addEventListener('resize',postH);
+  document.querySelectorAll('img').forEach(i=>i.addEventListener('load',postH));
+  setTimeout(postH,400);setTimeout(postH,1400);
+</script>
+</body></html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Six Seats to Watch, Interactive Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#eef2f7;color:#1f2933;}
+.dashwrap{max-width:1080px;margin:0 auto;padding:6px 18px 18px;}
+.topbar{position:sticky;top:0;z-index:120;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.06);}
+.masthead{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:1100px;margin:0 auto;gap:18px;}
+.mast-left{display:flex;align-items:center;gap:20px;}
+.logo{background:#222;color:#fff;font-weight:700;letter-spacing:3px;font-size:.95rem;padding:8px 12px;white-space:nowrap;text-decoration:none;}
+.mast-nav{display:flex;gap:20px;font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;}
+.mast-nav a{color:#222;text-decoration:none;} .mast-nav a:hover{color:#004B87;}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;}
+.hamburger span{width:22px;height:2px;background:#222;display:block;}
+.rule-top{border:none;border-top:3px solid #222;max-width:1100px;margin:0 auto;}
+@media(max-width:820px){.mast-nav{display:none;}.hamburger{display:flex;}}
+.crumb{max-width:1080px;margin:0 auto;padding:16px 24px 0;font-size:.6rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;}
+.crumb a{color:inherit;text-decoration:none;} .crumb .sep{color:#C9D6E5;margin:0 8px;}
+.hero{max-width:1080px;margin:10px auto 0;line-height:0;padding:0 24px;}
+.hero figure{background:linear-gradient(160deg,#1c3a5e,#24466b);border-radius:14px;aspect-ratio:2/1;overflow:hidden;}
+.hero img{width:100%;aspect-ratio:2/1;object-fit:cover;border-radius:14px;display:block;}
+.mtitle{max-width:1080px;margin:16px auto 0;padding:0 24px;}
+.mtitle .kk{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#004B87;}
+.mtitle h1{font-size:30px;color:#12507b;margin:6px 0 4px;letter-spacing:-.01em;}
+.mtitle p.sub{color:#3a4653;font-size:17px;}
+.switch{max-width:1080px;margin:16px auto 0;padding:0 24px;display:flex;gap:16px;align-items:center;justify-content:space-between;border-bottom:1px solid #C9D6E5;flex-wrap:wrap;}
+.switch-tabs{display:flex;}
+.sw{font-size:.68rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#6b7280;padding:12px 20px;border-bottom:3px solid transparent;text-decoration:none;}
+.sw:first-child{padding-left:0;} .sw.active{color:#12507b;border-bottom-color:#004B87;}
+.sw-home{font-size:.64rem;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#6b7280;text-decoration:none;}
+footer.site{background:#222;max-width:1100px;margin:30px auto 0;padding:24px 28px;font-size:.8rem;letter-spacing:.5px;color:#fff;text-align:center;}
+.drawer{position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#fff;z-index:200;box-shadow:2px 0 14px rgba(0,0,0,.15);transition:left .28s ease;padding:74px 26px 26px;}
+.drawer.open{left:0;} .drawer a{display:block;color:#222;text-decoration:none;font-size:.82rem;letter-spacing:1.2px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid #C9D6E5;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;} .overlay.open{display:block;}
+.drawer-close{position:absolute;top:20px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;}
+@media print{.topbar,.switch,.drawer,.overlay,.crumb{display:none!important;}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0;}
+.kpi{background:#fff;border-radius:14px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(20,40,80,.06);min-width:0;}
+.kpi .n{font-size:22px;font-weight:700;color:#0d47a1;} .kpi .l{font-size:12px;color:#5b6774;margin-top:4px;}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px;}
+.tab{background:#fff;border:1px solid #d9e2ec;border-radius:999px;padding:8px 16px;cursor:pointer;font-size:14px;font-weight:600;color:#33404d;}
+.tab.active{background:#12507b;color:#fff;border-color:#12507b;}
+.panel{display:none;} .panel.active{display:block;}
+.card{background:#fff;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px rgba(20,40,80,.05);min-width:0;}
+.card h3{font-size:17px;color:#12507b;margin-bottom:4px;}
+.insight{background:#eef4fb;border-left:4px solid #2b7bb9;border-radius:8px;padding:12px 14px;margin:6px 0 14px;font-size:14px;color:#22405c;}
+.insight b{color:#12507b;}
+.chartwrap{position:relative;width:100%;min-width:0;height:300px;margin-top:8px;} .chartwrap.tall{height:420px;} .chartwrap canvas{max-width:100%;}
+.legend{text-align:center;font-size:13px;color:#5b6774;margin-top:8px;} .legend span{font-size:15px;vertical-align:-1px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;} @media(max-width:760px){.grid2{grid-template-columns:1fr;}}
+.hyp{background:#f6f8fb;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin-bottom:10px;font-size:14px;}
+.hyp b{color:#12507b;}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px;}
+.filters select{padding:7px 10px;border-radius:8px;border:1px solid #cfd8e3;font-size:14px;}
+.filters .stat{margin-left:auto;font-size:14px;color:#12507b;font-weight:600;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid #eef2f7;}
+th{background:#12507b;color:#fff;position:sticky;top:0;font-weight:600;font-size:12px;}
+#tbl th{cursor:pointer;user-select:none;} #tbl th:hover{background:#1a6098;} tr.contest{background:#fff8ec;}
+td.m{text-align:center;font-weight:700;} td.bp{color:#1c3a5e;font-weight:700;} td.ph{color:#b0342d;font-weight:700;}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.btns a{background:#12507b;color:#fff;text-decoration:none;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;}
+footer{text-align:center;color:#5b6774;font-size:12px;padding:16px 0;}
+h2.printonly{display:none;}
+@media print{.tab,.tabs{display:none!important;}.panel{display:block!important;page-break-before:always;}
+ h2.printonly{display:block;font-size:18px;color:#12507b;margin:10px 0;} .card,.kpi,table{break-inside:avoid;page-break-inside:avoid;} body{background:#fff;}}
+</style>
+<link rel="icon" type="image/x-icon" href="/data-analyst-portfolio/favicon.ico">
+</head><body>
+<div class="overlay" id="overlay"></div>
+<nav class="drawer" id="drawer"><button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+<a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a></nav>
+<div class="topbar"><div class="masthead"><div class="mast-left">
+<button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+<a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
+<nav class="mast-nav"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a></nav>
+</div></div><hr class="rule-top"></div>
+<div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><span class="sep">/</span><a href="/data-analyst-portfolio/predictive-modeling.html">Predictive Modeling</a><span class="sep">/</span><span>Six Seats to Watch</span></div>
+<div class="hero"><figure><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/cover%20image.jpeg" alt="Minangkabau village houses above a state mapped seat by seat before the vote." onerror="this.style.display='none'"></figure></div>
+<div class="mtitle"><div class="kk">Election Forecasting &middot; Interactive Dashboard</div><h1>Six Seats to Watch</h1><p class="sub">Forecasting the Negeri Sembilan state election.</p></div>
+<nav class="switch"><div class="switch-tabs"><a class="sw" href="/data-analyst-portfolio/case-studies/six-seats-to-watch.html">Analyst Report</a><span class="sw active" aria-current="page">Dashboard</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html">&#8962; Home</a></nav>
+<div class="dashwrap">
+
+<div class="kpis">
+ <div class="kpi"><div class="n">19 vs 17</div><div class="l">forecast seats, BN-PN vs PH</div></div>
+ <div class="kpi"><div class="n">6 of 36</div><div class="l">seats that decide the government</div></div>
+ <div class="kpi"><div class="n">30 of 36</div><div class="l">seats already settled</div></div>
+ <div class="kpi"><div class="n">2 of 6</div><div class="l">contests BN-PN needs for a majority</div></div>
+</div>
+
+<div class="tabs">
+ <div class="tab active" data-p="p1">The race to 19</div>
+ <div class="tab" data-p="p2">How settled is it?</div>
+ <div class="tab" data-p="p3">How sure is the method?</div>
+ <div class="tab" data-p="p4">Explore every seat</div>
+</div>
+
+<div id="p1" class="panel active">
+ <h2 class="printonly">The race to a majority</h2>
+ <div class="card"><h3>Each bloc's safe floor, plus the seats it takes from the six</h3>
+  <div class="insight">A majority is 19 of 36. Neither bloc gets there on its safe seats alone: the <b>BN-PN floor is 17</b> and the <b>PH floor is 13</b>. The central forecast tops each up from the six contests, BN-PN by two and PH by four, landing on <b>19 to 17</b>. Every seat above the line comes from the six.</div>
+  <div class="chartwrap"><canvas id="cRace"></canvas></div>
+  <div class="legend"><span style="color:#7a8a9a;">&#9632;</span> Safe floor &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> BN-PN wins from the six &nbsp;&nbsp; <span style="color:#b0342d;">&#9632;</span> PH wins from the six</div>
+ </div>
+ <div class="card"><h3>Distance to a majority: how much of the six each bloc still needs</h3>
+  <div class="insight">The maths is lopsided. From 17 safe seats the <b>BN-PN bloc needs only two of the six</b> to reach 19, and it is favoured in two of them. From 13 safe seats <b>PH would have to win all six</b>, including the two that lean BN-PN, just to reach a bare majority. That asymmetry, not a statewide mood, is why one bloc is the clear favourite.</div>
+  <div class="chartwrap"><canvas id="cNeed"></canvas></div>
+  <div class="legend">Bars show seats still needed from the six-seat battleground to reach 19. Six are available.</div>
+ </div>
+</div>
+
+<div id="p2" class="panel">
+ <h2 class="printonly">How settled is it, really?</h2>
+ <div class="card"><h3>Winning margins across all 36 seats</h3>
+  <div class="insight">The one-seat headline hides how lopsided the map is. <b>25 of the 36 seats are won by more than 40 points</b>, and only six are decided by less than 15. The election looks close in the seat total, but nearly every individual seat is a blowout. The contest lives entirely in the thin left tail.</div>
+  <div class="chartwrap"><canvas id="cMarg"></canvas></div>
+  <div class="legend"><span style="color:#c98a2e;">&#9632;</span> In play (margin under 15) &nbsp;&nbsp; <span style="color:#7a8a9a;">&#9632;</span> Settled (margin 15 or more)</div>
+ </div>
+ <div class="card"><h3>Settled seats versus seats in play</h3>
+  <div class="insight">Sorted by certainty, the board is <b>30 settled and 6 in play</b>. The settled 30 split BN-PN 17, PH 13, so they cancel close to even and hand the decision to the six. The six are the whole election; the other 30 only set the starting line.</div>
+  <div class="chartwrap"><canvas id="cSettle"></canvas></div>
+  <div class="legend"><span style="color:#1c3a5e;">&#9632;</span> BN-PN &nbsp;&nbsp; <span style="color:#b0342d;">&#9632;</span> PH &nbsp;&nbsp; <span style="color:#c98a2e;">&#9632;</span> In play</div>
+ </div>
+</div>
+
+<div id="p3" class="panel">
+ <h2 class="printonly">How sure is the method?</h2>
+ <div class="card"><h3>How settled each seat is, by the winning margin</h3>
+  <div class="insight">The method is <b>sure of the 30 settled seats</b>, each won by more than 15 points, and flags exactly six as contests. The split is clean: no settled seat is closer than 23 points, and every one of the six is under 13, so a roughly 10-point gap separates the watch-list from the safe seats. Nothing close hides outside the six, which is what lets the forecast name a short watch-list instead of claiming false certainty across the board.</div>
+  <div class="chartwrap"><canvas id="cCalib"></canvas></div>
+  <div class="legend">Seats grouped by how far the winning bloc leads. The 30 settled seats are sure; the six are the watch-list.</div>
+ </div>
+ <div class="card"><h3>The six contests, head to head</h3>
+  <div class="insight">Each bar pair is one contest: PH's share against the combined BN-PN share. <b>Ampangan is neck-and-neck</b>, while Paroi has the clearest lead of the six. The four the method leans PH (Ampangan, Klawang, Pilah, Sikamat) and the two it leans BN-PN (Labu, Paroi) are exactly what delivers the 19-17 result.</div>
+  <div class="chartwrap"><canvas id="cSix"></canvas></div>
+  <div class="legend"><span style="color:#b0342d;">&#9632;</span> PH share &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> BN-PN share</div>
+ </div>
+</div>
+
+<div id="p4" class="panel">
+ <h2 class="printonly">What decides a seat, and every seat</h2>
+ <div class="card"><h3>Which bloc a seat locks for, by its community make-up</h3>
+  <div class="insight">A seat's make-up sorts the map. <b>PH wins almost every non-Malay and mixed seat; BN-PN wins almost every Malay-majority seat.</b> This is a two-sided lock, not one community deciding the state: each kind of seat is already safe for a different side. The contest survives only in the Malay-majority band that is not quite lopsided enough to settle, which is where the six sit.</div>
+  <div class="chartwrap"><canvas id="cBand"></canvas></div>
+  <div class="legend"><span style="color:#b0342d;">&#9632;</span> PH &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> BN-PN</div>
+ </div>
+ <div class="card">
+  <div class="filters">
+   <label>Forecast: <select id="fWin"><option value="all">All</option><option>BN-PN</option><option>PH</option></select></label>
+   <label>Status: <select id="fSt"><option value="all">All</option><option value="safe">Settled</option><option value="contest">In play</option></select></label>
+   <label>Make-up: <select id="fEth"><option value="all">All</option><option value="malay">Malay-majority (65%+)</option><option value="mix">Mixed (50-65%)</option><option value="non">Non-Malay (under 50%)</option></select></label>
+   <span class="stat" id="tStat"></span>
+  </div>
+  <p style="font-size:13px;color:#5b6774;margin-bottom:8px;">Click any heading to sort. "Margin" is how far the winning bloc leads, in points; the smaller it is, the closer the contest. Rows shaded amber are the six seats in play.</p>
+  <div style="overflow-x:auto;"><table id="tbl"><thead><tr>
+   <th data-k="no">Seat</th><th data-k="seat">Constituency</th><th data-k="malay">Malay %</th><th data-k="chinese">Chinese %</th>
+   <th data-k="held">Held 2023</th><th data-k="fc">Forecast</th>
+   <th data-k="bp">BN-PN %</th><th data-k="ph">PH %</th><th data-k="marg">Margin</th><th data-k="safe">Status</th>
+  </tr></thead><tbody id="tbody"></tbody></table></div>
+ </div>
+</div>
+
+<div style="margin-top:8px;font-size:12px;color:#5b6774;">Pre-vote forecast for 1 August 2026. Data: Malaysian Election Corpus (MECo) + 2020 Census. Companion to the <a href="/data-analyst-portfolio/case-studies/six-seats-to-watch.html" style="color:#12507b;">analyst report</a>.</div>
+</div>
+<footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
+
+<script>
+const DATA=[{"no":"N.01","seat":"Chennah","malay":67,"chinese":29,"conf":99,"held":"PH","fc":"PH","bp":38.5,"ph":61.5,"marg":23,"safe":true},{"no":"N.02","seat":"Pertang","malay":78,"chinese":14,"conf":99,"held":"BN","fc":"BN-PN","bp":93.3,"ph":0,"marg":93.3,"safe":true},{"no":"N.03","seat":"Sungai Lui","malay":89,"chinese":2,"conf":99,"held":"BN","fc":"BN-PN","bp":90.4,"ph":0,"marg":90.4,"safe":true},{"no":"N.04","seat":"Klawang","malay":71,"chinese":25,"conf":71,"held":"PH","fc":"PH","bp":44.8,"ph":51.2,"marg":6.4,"safe":false},{"no":"N.05","seat":"Serting","malay":83,"chinese":9,"conf":99,"held":"PN","fc":"BN-PN","bp":90.4,"ph":0,"marg":90.4,"safe":true},{"no":"N.06","seat":"Palong","malay":92,"chinese":2,"conf":99,"held":"BN","fc":"BN-PN","bp":90.4,"ph":0,"marg":90.4,"safe":true},{"no":"N.07","seat":"Jeram Padang","malay":58,"chinese":14,"conf":99,"held":"BN","fc":"BN-PN","bp":90.7,"ph":0,"marg":90.7,"safe":true},{"no":"N.08","seat":"Bahau","malay":40,"chinese":46,"conf":99,"held":"PH","fc":"PH","bp":22.8,"ph":77.2,"marg":54.4,"safe":true},{"no":"N.09","seat":"Lenggeng","malay":85,"chinese":11,"conf":99,"held":"BN","fc":"BN-PN","bp":88.5,"ph":0,"marg":88.5,"safe":true},{"no":"N.10","seat":"Nilai","malay":60,"chinese":22,"conf":99,"held":"PH","fc":"PH","bp":28.6,"ph":66.3,"marg":37.7,"safe":true},{"no":"N.11","seat":"Lobak","malay":13,"chinese":65,"conf":99,"held":"PH","fc":"PH","bp":5.6,"ph":94.4,"marg":88.8,"safe":true},{"no":"N.12","seat":"Temiang","malay":50,"chinese":37,"conf":99,"held":"PH","fc":"PH","bp":29.4,"ph":63.5,"marg":34.1,"safe":true},{"no":"N.13","seat":"Sikamat","malay":77,"chinese":16,"conf":87,"held":"PH","fc":"PH","bp":43.4,"ph":54.8,"marg":11.5,"safe":false},{"no":"N.14","seat":"Ampangan","malay":78,"chinese":14,"conf":57,"held":"PH","fc":"PH","bp":38.5,"ph":40.7,"marg":2.2,"safe":false},{"no":"N.15","seat":"Juasseh","malay":85,"chinese":9,"conf":99,"held":"BN","fc":"BN-PN","bp":90.1,"ph":0,"marg":90.1,"safe":true},{"no":"N.16","seat":"Seri Menanti","malay":97,"chinese":1,"conf":99,"held":"BN","fc":"BN-PN","bp":90.5,"ph":0,"marg":90.5,"safe":true},{"no":"N.17","seat":"Senaling","malay":88,"chinese":7,"conf":99,"held":"BN","fc":"BN-PN","bp":91,"ph":0,"marg":91,"safe":true},{"no":"N.18","seat":"Pilah","malay":69,"chinese":24,"conf":80,"held":"PH","fc":"PH","bp":45.3,"ph":54.7,"marg":9.5,"safe":false},{"no":"N.19","seat":"Johol","malay":81,"chinese":13,"conf":99,"held":"BN","fc":"BN-PN","bp":92.5,"ph":0,"marg":92.5,"safe":true},{"no":"N.20","seat":"Labu","malay":78,"chinese":10,"conf":74,"held":"PN","fc":"BN-PN","bp":53.8,"ph":46.2,"marg":7.6,"safe":false},{"no":"N.21","seat":"Bukit Kepayang","malay":39,"chinese":42,"conf":99,"held":"PH","fc":"PH","bp":16.2,"ph":80.8,"marg":64.6,"safe":true},{"no":"N.22","seat":"Rahang","malay":35,"chinese":38,"conf":99,"held":"PH","fc":"PH","bp":25.8,"ph":74.2,"marg":48.3,"safe":true},{"no":"N.23","seat":"Mambau","malay":31,"chinese":45,"conf":99,"held":"PH","fc":"PH","bp":10.9,"ph":88.3,"marg":77.4,"safe":true},{"no":"N.24","seat":"Seremban Jaya","malay":38,"chinese":38,"conf":99,"held":"PH","fc":"PH","bp":20.4,"ph":79.6,"marg":59.2,"safe":true},{"no":"N.25","seat":"Paroi","malay":83,"chinese":5,"conf":91,"held":"PN","fc":"BN-PN","bp":55.3,"ph":42.5,"marg":12.9,"safe":false},{"no":"N.26","seat":"Chembong","malay":87,"chinese":4,"conf":99,"held":"BN","fc":"BN-PN","bp":92.4,"ph":0,"marg":92.4,"safe":true},{"no":"N.27","seat":"Rantau","malay":65,"chinese":12,"conf":99,"held":"BN","fc":"BN-PN","bp":94.3,"ph":0,"marg":94.3,"safe":true},{"no":"N.28","seat":"Kota","malay":86,"chinese":7,"conf":99,"held":"BN","fc":"BN-PN","bp":90.1,"ph":0,"marg":90.1,"safe":true},{"no":"N.29","seat":"Chuah","malay":34,"chinese":44,"conf":99,"held":"PH","fc":"PH","bp":18.7,"ph":81.3,"marg":62.7,"safe":true},{"no":"N.30","seat":"Lukut","malay":41,"chinese":35,"conf":99,"held":"PH","fc":"PH","bp":20.6,"ph":79.4,"marg":58.7,"safe":true},{"no":"N.31","seat":"Bagan Pinang","malay":79,"chinese":10,"conf":99,"held":"PN","fc":"BN-PN","bp":91.9,"ph":0,"marg":91.9,"safe":true},{"no":"N.32","seat":"Linggi","malay":50,"chinese":25,"conf":99,"held":"BN","fc":"BN-PN","bp":91,"ph":0,"marg":91,"safe":true},{"no":"N.33","seat":"Sri Tanjung","malay":62,"chinese":22,"conf":99,"held":"PH","fc":"PH","bp":34,"ph":66,"marg":32,"safe":true},{"no":"N.34","seat":"Gemas","malay":89,"chinese":6,"conf":99,"held":"PN","fc":"BN-PN","bp":91.5,"ph":0,"marg":91.5,"safe":true},{"no":"N.35","seat":"Gemencheh","malay":63,"chinese":17,"conf":99,"held":"BN","fc":"BN-PN","bp":91.6,"ph":0,"marg":91.6,"safe":true},{"no":"N.36","seat":"Repah","malay":39,"chinese":44,"conf":99,"held":"PH","fc":"PH","bp":32.6,"ph":67.4,"marg":34.9,"safe":true}];
+const CALIB_L=["Settled (won by 15+ pts)","Watch: lean (10-15)","Watch: close (5-10)","Watch: toss-up (under 5)"],CALIB_N=[30,2,3,1];
+const MARG_L=["0-5","5-10","10-15","15-25","25-40","40+"],MARG_N=[1,3,2,1,4,25];
+const MARG_C=["#c98a2e","#c98a2e","#c98a2e","#7a8a9a","#7a8a9a","#7a8a9a"];
+const BANDS=["Non-Malay (<50%)","Mixed (50-70%)","Malay (70-85%)","Malay-dominant (>85%)"];
+const BAND_PH=[10,4,3,0],BAND_BP=[1,3,8,7],BAND_N=[11,7,11,7];
+const SIX=DATA.filter(d=>!d.safe).sort((a,b)=>a.marg-b.marg);
+const charts={};
+Chart.defaults.font.family="-apple-system,'Segoe UI',Roboto,Arial,sans-serif";Chart.defaults.font.size=12;
+const PH='#b0342d',BP='#1c3a5e',GREY='#7a8a9a',AMBER='#c98a2e';
+
+function build(){
+ // race to 19: stacked horizontal, floor + won-from-six per bloc
+ charts.race=new Chart(cRace,{type:'bar',data:{labels:['BN-PN','PH'],datasets:[
+   {label:'Safe floor',data:[17,13],backgroundColor:GREY,stack:'s'},
+   {label:'Won from the six',data:[2,4],backgroundColor:[BP,PH],stack:'s'}]},
+  options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},
+    tooltip:{callbacks:{afterLabel:(x)=>x.dataIndex===0?'BN-PN total 19':'PH total 17'}}},
+   scales:{x:{stacked:true,max:24,title:{display:true,text:'Seats (19 for a majority)'}},y:{stacked:true}}}});
+ // distance to majority
+ charts.need=new Chart(cNeed,{type:'bar',data:{labels:['BN-PN','PH'],datasets:[
+   {label:'Seats still needed from the six',data:[2,6],backgroundColor:[BP,PH]}]},
+  options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},
+   scales:{x:{min:0,max:6,ticks:{stepSize:1},title:{display:true,text:'Of the six contests, seats needed to reach 19'}}}}});
+ // margin cliff
+ charts.marg=new Chart(cMarg,{type:'bar',data:{labels:MARG_L,datasets:[{label:'Seats',data:MARG_N,backgroundColor:MARG_C}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{title:(x)=>'Margin '+x[0].label+' pts',label:(x)=>x.raw+' seats'}}},
+   scales:{y:{title:{display:true,text:'Number of seats'}},x:{title:{display:true,text:'Winning margin (points)'}}}}});
+ // settled vs in play
+ charts.settle=new Chart(cSettle,{type:'bar',data:{labels:['The 36 seats'],datasets:[
+   {label:'Settled BN-PN',data:[17],backgroundColor:BP,stack:'s'},
+   {label:'Settled PH',data:[13],backgroundColor:PH,stack:'s'},
+   {label:'In play',data:[6],backgroundColor:AMBER,stack:'s'}]},
+  options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{position:'bottom'}},
+   scales:{x:{stacked:true,max:36,title:{display:true,text:'Seats'}},y:{stacked:true}}}});
+ // confidence calibration
+ charts.calib=new Chart(cCalib,{type:'bar',data:{labels:CALIB_L,datasets:[{label:'Seats',data:CALIB_N,
+   backgroundColor:['#2e6f4e','#c9a227','#c98a2e','#b0342d']}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:(x)=>x.raw+' seats'}}},
+   scales:{y:{title:{display:true,text:'Number of seats'}},x:{title:{display:true,text:'Certainty of the call (by winning margin)'}}}}});
+ // the six, head to head: PH share vs combined BN-PN share
+ charts.six=new Chart(cSix,{type:'bar',data:{labels:SIX.map(s=>s.seat),datasets:[
+   {label:'PH %',data:SIX.map(s=>s.ph),backgroundColor:PH},
+   {label:'BN-PN %',data:SIX.map(s=>s.bp),backgroundColor:BP}]},
+  options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},
+    tooltip:{callbacks:{afterLabel:(x)=>{const s=SIX[x.dataIndex];return 'Leans '+s.fc+', by '+s.marg+' pts';}}}},
+   scales:{x:{min:0,max:100,title:{display:true,text:'Vote share (%)'}}}}});
+ // community bands
+ charts.band=new Chart(cBand,{type:'bar',data:{labels:BANDS,datasets:[
+   {label:'PH',data:BAND_PH,backgroundColor:PH},{label:'BN-PN',data:BAND_BP,backgroundColor:BP}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{afterLabel:(x)=>BAND_N[x.dataIndex]+' seats in this band'}}},
+   scales:{x:{stacked:true,title:{display:true,text:'Community make-up (non-Malay to Malay-dominant)'}},
+     y:{stacked:true,title:{display:true,text:'Seats'}}}}});
+ raf();
+}
+function raf(){requestAnimationFrame(()=>{Object.values(charts).forEach(c=>c&&c.resize());});}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+ t.classList.add('active');document.getElementById(t.dataset.p).classList.add('active');raf();});
+
+let sortKey='no',sortDir=1;
+function ethBand(v){return v>=65?'malay':(v>=50?'mix':'non');}
+function renderTable(){
+ const w=fWin.value,s=fSt.value,e=fEth.value;
+ let rw=DATA.filter(r=>{
+   if(w!=='all'&&r.fc!==w)return false;
+   if(s==='safe'&&!r.safe)return false; if(s==='contest'&&r.safe)return false;
+   if(e!=='all'&&ethBand(r.malay)!==e)return false; return true;});
+ rw.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];if(typeof x==='string'){return x.localeCompare(y)*sortDir;}return (x-y)*sortDir;});
+ tbody.innerHTML=rw.map(r=>{const fcc=r.fc==='PH'?'ph':'bp';
+   return `<tr class="${r.safe?'':'contest'}"><td>${r.no}</td><td>${r.seat}</td><td>${r.malay}</td><td>${r.chinese}</td>`+
+   `<td>${r.conf}</td><td>${r.held}</td><td class="${fcc}">${r.fc}</td><td>${r.bp}</td><td>${r.ph}</td>`+
+   `<td class="m">${r.marg}</td><td>${r.safe?'Settled':'In play'}</td></tr>`;}).join('');
+ tStat.textContent=`${rw.length} seats shown, ${rw.filter(r=>!r.safe).length} in play`;
+}
+document.querySelectorAll('#tbl th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k===sortKey){sortDir*=-1;}else{sortKey=k;sortDir=1;}renderTable();});
+['fWin','fSt','fEth'].forEach(id=>document.getElementById(id).addEventListener('change',renderTable));
+window.addEventListener('load',()=>{build();renderTable();});
+window.addEventListener('beforeprint',()=>{Object.values(charts).forEach(c=>{if(c){c.options.maintainAspectRatio=false;c.resize();}});});
+const _d=document.getElementById('drawer'),_o=document.getElementById('overlay');
+const _open=()=>{_d.classList.add('open');_o.classList.add('open');},_close=()=>{_d.classList.remove('open');_o.classList.remove('open');};
+document.getElementById('hamburger').addEventListener('click',_open);
+document.getElementById('drawerClose').addEventListener('click',_close);
+_o.addEventListener('click',_close);
+_d.querySelectorAll('a').forEach(a=>a.addEventListener('click',_close));
+</script></body></html>
