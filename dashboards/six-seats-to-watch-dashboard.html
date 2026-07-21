@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Six Seats to Watch, Interactive Dashboard</title>
+<title>The Hung State Assembly, Interactive Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
@@ -77,72 +77,72 @@ h2.printonly{display:none;}
 <a class="logo" href="/data-analyst-portfolio/index.html">DATA STORIES LAB</a>
 <nav class="mast-nav"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><a href="/data-analyst-portfolio/interactive-dashboard.html">Dashboards</a><a href="/data-analyst-portfolio/ai-assistant.html">AI Assistants</a><a href="/data-analyst-portfolio/about-this-work.html">About</a><a href="/data-analyst-portfolio/contact.html">Contact</a></nav>
 </div></div><hr class="rule-top"></div>
-<div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><span class="sep">/</span><a href="/data-analyst-portfolio/predictive-modeling.html">Predictive Modeling</a><span class="sep">/</span><span>Six Seats to Watch</span></div>
+<div class="crumb"><a href="/data-analyst-portfolio/case-studies.html">Case Studies</a><span class="sep">/</span><a href="/data-analyst-portfolio/predictive-modeling.html">Predictive Modeling</a><span class="sep">/</span><span>The Hung State Assembly</span></div>
 <div class="hero"><figure><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/cover%20image.jpeg" alt="Minangkabau village houses above a state mapped seat by seat before the vote." onerror="this.style.display='none'"></figure></div>
-<div class="mtitle"><div class="kk">Election Forecasting &middot; Interactive Dashboard</div><h1>Six Seats to Watch</h1><p class="sub">Forecasting the Negeri Sembilan state election.</p></div>
+<div class="mtitle"><div class="kk">Election Forecasting &middot; Interactive Dashboard</div><h1>The Hung State Assembly</h1><p class="sub">How one seat decides who governs Negeri Sembilan.</p></div>
 <nav class="switch"><div class="switch-tabs"><a class="sw" href="/data-analyst-portfolio/case-studies/six-seats-to-watch.html">Analyst Report</a><span class="sw active" aria-current="page">Dashboard</span></div><a class="sw-home" href="/data-analyst-portfolio/index.html">&#8962; Home</a></nav>
 <div class="dashwrap">
 
 <div class="kpis">
- <div class="kpi"><div class="n">19 vs 17</div><div class="l">forecast seats, BN-PN vs PH</div></div>
+ <div class="kpi"><div class="n">18 vs 18</div><div class="l">central forecast, a hung assembly (19 for a majority)</div></div>
  <div class="kpi"><div class="n">6 of 36</div><div class="l">seats that decide the government</div></div>
- <div class="kpi"><div class="n">30 of 36</div><div class="l">seats already settled</div></div>
- <div class="kpi"><div class="n">2 of 6</div><div class="l">contests BN-PN needs for a majority</div></div>
+ <div class="kpi"><div class="n">24 of 36</div><div class="l">seats now three-cornered (Bersatu stands)</div></div>
+ <div class="kpi"><div class="n">1 seat</div><div class="l">Labu decides: a majority or deadlock</div></div>
 </div>
 
 <div class="tabs">
- <div class="tab active" data-p="p1">The race to 19</div>
- <div class="tab" data-p="p2">How settled is it?</div>
- <div class="tab" data-p="p3">How sure is the method?</div>
+ <div class="tab active" data-p="p1">The race to a majority</div>
+ <div class="tab" data-p="p2">The six, who leads</div>
+ <div class="tab" data-p="p3">What the split does</div>
  <div class="tab" data-p="p4">Explore every seat</div>
 </div>
 
 <div id="p1" class="panel active">
  <h2 class="printonly">The race to a majority</h2>
  <div class="card"><h3>Each bloc's safe floor, plus the seats it takes from the six</h3>
-  <div class="insight">A majority is 19 of 36. Neither bloc gets there on its safe seats alone: the <b>BN-PN floor is 17</b> and the <b>PH floor is 13</b>. The central forecast tops each up from the six contests, BN-PN by two and PH by four, landing on <b>19 to 17</b>. Every seat above the line comes from the six.</div>
+  <div class="insight">A majority is 19 of 36. Neither bloc gets there on its safe seats alone: the <b>BN-PN floor is 17</b> and the <b>PH floor is 13</b>. On the confirmed field the six break <b>PH five, BN-PN one</b>, so each side lands on <b>18</b>. Neither crosses the line, and the assembly is hung.</div>
   <div class="chartwrap"><canvas id="cRace"></canvas></div>
   <div class="legend"><span style="color:#7a8a9a;">&#9632;</span> Safe floor &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> BN-PN wins from the six &nbsp;&nbsp; <span style="color:#b0342d;">&#9632;</span> PH wins from the six</div>
  </div>
- <div class="card"><h3>Distance to a majority: how much of the six each bloc still needs</h3>
-  <div class="insight">The maths is lopsided. From 17 safe seats the <b>BN-PN bloc needs only two of the six</b> to reach 19, and it is favoured in two of them. From 13 safe seats <b>PH would have to win all six</b>, including the two that lean BN-PN, just to reach a bare majority. That asymmetry, not a statewide mood, is why one bloc is the clear favourite.</div>
-  <div class="chartwrap"><canvas id="cNeed"></canvas></div>
-  <div class="legend">Bars show seats still needed from the six-seat battleground to reach 19. Six are available.</div>
+ <div class="card"><h3>The range: three ways the six can break</h3>
+  <div class="insight">The outcome depends on how much of the pact vote Bersatu takes in the close seats. If the pact holds Labu, it keeps a <b>19-17 majority</b>. If Labu flips, as its sitting-member candidacy suggests, the assembly is level at <b>18-18</b>: the central case. If Paroi flips too, PH edges a <b>19-17 majority</b>. Across the plausible range the result runs from a bare BN-PN majority to a bare PH one, centred on a hung assembly.</div>
+  <div class="chartwrap"><canvas id="cRange"></canvas></div>
+  <div class="legend"><span style="color:#1c3a5e;">&#9632;</span> BN-PN &nbsp;&nbsp; <span style="color:#b0342d;">&#9632;</span> PH &nbsp;&nbsp; 19 seats form a majority.</div>
  </div>
 </div>
 
 <div id="p2" class="panel">
- <h2 class="printonly">How settled is it, really?</h2>
- <div class="card"><h3>Winning margins across all 36 seats</h3>
-  <div class="insight">The one-seat headline hides how lopsided the map is. <b>25 of the 36 seats are won by more than 40 points</b>, and only six are decided by less than 15. The election looks close in the seat total, but nearly every individual seat is a blowout. The contest lives entirely in the thin left tail.</div>
-  <div class="chartwrap"><canvas id="cMarg"></canvas></div>
-  <div class="legend"><span style="color:#c98a2e;">&#9632;</span> In play (margin under 15) &nbsp;&nbsp; <span style="color:#7a8a9a;">&#9632;</span> Settled (margin 15 or more)</div>
+ <h2 class="printonly">The six, who leads each contest</h2>
+ <div class="card"><h3>The six, three ways: points for each side, and who leads</h3>
+  <div class="insight">For each of the six, PH's 2023 share against the pact candidate and Bersatu once the non-PH vote divides. The tallest bar wins the seat. <b>PH leads five</b> (Ampangan, Klawang, Pilah, Sikamat, Labu); the pact holds <b>Paroi</b>. This is an illustrative central split: the exact Bersatu share is the unknown, so read it as the central scenario, not a fixed prediction.</div>
+  <div class="chartwrap tall"><canvas id="cSixWho"></canvas></div>
+  <div class="legend"><span style="color:#b0342d;">&#9632;</span> PH &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> Pact (BN/PN) &nbsp;&nbsp; <span style="color:#2f8f83;">&#9632;</span> Bersatu</div>
  </div>
  <div class="card"><h3>Settled seats versus seats in play</h3>
-  <div class="insight">Sorted by certainty, the board is <b>30 settled and 6 in play</b>. The settled 30 split BN-PN 17, PH 13, so they cancel close to even and hand the decision to the six. The six are the whole election; the other 30 only set the starting line.</div>
+  <div class="insight">Sorted by certainty, the board is <b>30 settled and 6 in play</b>, unchanged from the two-way view. The settled 30 split BN-PN 17, PH 13, so they cancel close to even and hand the decision to the six. What changed is inside the six: five now carry a third candidate, and they break PH five, BN-PN one.</div>
   <div class="chartwrap"><canvas id="cSettle"></canvas></div>
   <div class="legend"><span style="color:#1c3a5e;">&#9632;</span> BN-PN &nbsp;&nbsp; <span style="color:#b0342d;">&#9632;</span> PH &nbsp;&nbsp; <span style="color:#c98a2e;">&#9632;</span> In play</div>
  </div>
 </div>
 
 <div id="p3" class="panel">
- <h2 class="printonly">How sure is the method?</h2>
- <div class="card"><h3>How settled each seat is, by the winning margin</h3>
-  <div class="insight">The method is <b>sure of the 30 settled seats</b>, each won by more than 15 points, and flags exactly six as contests. The split is clean: no settled seat is closer than 23 points, and every one of the six is under 13, so a roughly 10-point gap separates the watch-list from the safe seats. Nothing close hides outside the six, which is what lets the forecast name a short watch-list instead of claiming false certainty across the board.</div>
-  <div class="chartwrap"><canvas id="cCalib"></canvas></div>
-  <div class="legend">Seats grouped by how far the winning bloc leads. The 30 settled seats are sure; the six are the watch-list.</div>
+ <h2 class="printonly">What the split does</h2>
+ <div class="card"><h3>The six, head to head: PH against the pooled pact</h3>
+  <div class="insight">Each seat shows PH's 2023 share against the pooled BN-PN share. <b>PH leads four outright</b> (Ampangan, Klawang, Pilah, Sikamat). In <b>Labu</b> and <b>Paroi</b> the pact leads on the two-way score, but a third candidate, Bersatu, now splits that pact bar. A split of about 15% of the pact vote flips Labu to PH, where the Bersatu candidate is the sitting member; Paroi needs about 24% and is more likely to hold.</div>
+  <div class="chartwrap"><canvas id="cSixHH"></canvas></div>
+  <div class="legend"><span style="color:#b0342d;">&#9632;</span> PH share &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> Pooled BN-PN share (before the split)</div>
  </div>
- <div class="card"><h3>The six contests, head to head</h3>
-  <div class="insight">Each bar pair is one contest: PH's share against the combined BN-PN share. <b>Ampangan is neck-and-neck</b>, while Paroi has the clearest lead of the six. The four the method leans PH (Ampangan, Klawang, Pilah, Sikamat) and the two it leans BN-PN (Labu, Paroi) are exactly what delivers the 19-17 result.</div>
-  <div class="chartwrap"><canvas id="cSix"></canvas></div>
-  <div class="legend"><span style="color:#b0342d;">&#9632;</span> PH share &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> BN-PN share</div>
+ <div class="card"><h3>Bersatu: spoiler or kingmaker? It turns on Labu</h3>
+  <div class="insight">Bersatu is placed to win <b>at most one seat, Labu</b>. If Labu goes to PH, Bersatu holds nothing and is a pure spoiler: the split alone levels the assembly at 18 each. If the sitting member holds Labu, the count is PH 17, BN-PN 18, Bersatu 1, and in a hung chamber that single seat is the one that lets the pact reach 19. Its weight is large as a splitter and small as a seat-winner.</div>
+  <div class="chartwrap"><canvas id="cKing"></canvas></div>
+  <div class="legend"><span style="color:#b0342d;">&#9632;</span> PH &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> BN-PN &nbsp;&nbsp; <span style="color:#2f8f83;">&#9632;</span> Bersatu &nbsp;&nbsp; Both scenarios are hung; only the second makes Bersatu a kingmaker.</div>
  </div>
 </div>
 
 <div id="p4" class="panel">
  <h2 class="printonly">What decides a seat, and every seat</h2>
  <div class="card"><h3>Which bloc a seat locks for, by its community make-up</h3>
-  <div class="insight">A seat's make-up sorts the map. <b>PH wins almost every non-Malay and mixed seat; BN-PN wins almost every Malay-majority seat.</b> This is a two-sided lock, not one community deciding the state: each kind of seat is already safe for a different side. The contest survives only in the Malay-majority band that is not quite lopsided enough to settle, which is where the six sit.</div>
+  <div class="insight">A seat's make-up sorts the map. <b>PH wins almost every non-Malay and mixed seat; BN-PN wins almost every Malay-majority seat.</b> This is a two-sided lock, not one community deciding the state: each kind of seat is already safe for a different side. A third Malay candidate reopens the Malay-majority band that is not quite lopsided enough to settle, which is where the six sit.</div>
   <div class="chartwrap"><canvas id="cBand"></canvas></div>
   <div class="legend"><span style="color:#b0342d;">&#9632;</span> PH &nbsp;&nbsp; <span style="color:#1c3a5e;">&#9632;</span> BN-PN</div>
  </div>
@@ -153,49 +153,54 @@ h2.printonly{display:none;}
    <label>Make-up: <select id="fEth"><option value="all">All</option><option value="malay">Malay-majority (65%+)</option><option value="mix">Mixed (50-65%)</option><option value="non">Non-Malay (under 50%)</option></select></label>
    <span class="stat" id="tStat"></span>
   </div>
-  <p style="font-size:13px;color:#5b6774;margin-bottom:8px;">Click any heading to sort. "Margin" is how far the winning bloc leads, in points; the smaller it is, the closer the contest. Rows shaded amber are the six seats in play.</p>
+  <p style="font-size:13px;color:#5b6774;margin-bottom:8px;">Click any heading to sort. "Field 2026" is who stands in the seat on the confirmed list. "2-way gap" is the pre-split lead in points; where a third candidate splits it, a seat can still change hands. Rows shaded amber are the six seats in play.</p>
   <div style="overflow-x:auto;"><table id="tbl"><thead><tr>
    <th data-k="no">Seat</th><th data-k="seat">Constituency</th><th data-k="malay">Malay %</th><th data-k="chinese">Chinese %</th>
-   <th data-k="held">Held 2023</th><th data-k="fc">Forecast</th>
-   <th data-k="bp">BN-PN %</th><th data-k="ph">PH %</th><th data-k="marg">Margin</th><th data-k="safe">Status</th>
+   <th data-k="field">Field 2026</th><th data-k="held">Held 2023</th><th data-k="fc">Forecast</th>
+   <th data-k="marg">2-way gap</th><th data-k="safe">Status</th>
   </tr></thead><tbody id="tbody"></tbody></table></div>
  </div>
 </div>
 
-<div style="margin-top:8px;font-size:12px;color:#5b6774;">Pre-vote forecast for 1 August 2026. Data: Malaysian Election Corpus (MECo) + 2020 Census. Companion to the <a href="/data-analyst-portfolio/case-studies/six-seats-to-watch.html" style="color:#12507b;">analyst report</a>.</div>
+<div style="margin-top:8px;font-size:12px;color:#5b6774;">Pre-vote forecast for 1 August 2026, on the confirmed candidate list. Data: Malaysian Election Corpus (MECo), 2020 Census, and the 2026 nomination list. Companion to the <a href="/data-analyst-portfolio/case-studies/six-seats-to-watch.html" style="color:#12507b;">analyst report</a>.</div>
 </div>
 <footer class="site">&copy; 2026 Lee Yih Ven | Data-Driven Solutions</footer>
 
 <script>
-const DATA=[{"no":"N.01","seat":"Chennah","malay":67,"chinese":29,"conf":99,"held":"PH","fc":"PH","bp":38.5,"ph":61.5,"marg":23,"safe":true},{"no":"N.02","seat":"Pertang","malay":78,"chinese":14,"conf":99,"held":"BN","fc":"BN-PN","bp":93.3,"ph":0,"marg":93.3,"safe":true},{"no":"N.03","seat":"Sungai Lui","malay":89,"chinese":2,"conf":99,"held":"BN","fc":"BN-PN","bp":90.4,"ph":0,"marg":90.4,"safe":true},{"no":"N.04","seat":"Klawang","malay":71,"chinese":25,"conf":71,"held":"PH","fc":"PH","bp":44.8,"ph":51.2,"marg":6.4,"safe":false},{"no":"N.05","seat":"Serting","malay":83,"chinese":9,"conf":99,"held":"PN","fc":"BN-PN","bp":90.4,"ph":0,"marg":90.4,"safe":true},{"no":"N.06","seat":"Palong","malay":92,"chinese":2,"conf":99,"held":"BN","fc":"BN-PN","bp":90.4,"ph":0,"marg":90.4,"safe":true},{"no":"N.07","seat":"Jeram Padang","malay":58,"chinese":14,"conf":99,"held":"BN","fc":"BN-PN","bp":90.7,"ph":0,"marg":90.7,"safe":true},{"no":"N.08","seat":"Bahau","malay":40,"chinese":46,"conf":99,"held":"PH","fc":"PH","bp":22.8,"ph":77.2,"marg":54.4,"safe":true},{"no":"N.09","seat":"Lenggeng","malay":85,"chinese":11,"conf":99,"held":"BN","fc":"BN-PN","bp":88.5,"ph":0,"marg":88.5,"safe":true},{"no":"N.10","seat":"Nilai","malay":60,"chinese":22,"conf":99,"held":"PH","fc":"PH","bp":28.6,"ph":66.3,"marg":37.7,"safe":true},{"no":"N.11","seat":"Lobak","malay":13,"chinese":65,"conf":99,"held":"PH","fc":"PH","bp":5.6,"ph":94.4,"marg":88.8,"safe":true},{"no":"N.12","seat":"Temiang","malay":50,"chinese":37,"conf":99,"held":"PH","fc":"PH","bp":29.4,"ph":63.5,"marg":34.1,"safe":true},{"no":"N.13","seat":"Sikamat","malay":77,"chinese":16,"conf":87,"held":"PH","fc":"PH","bp":43.4,"ph":54.8,"marg":11.5,"safe":false},{"no":"N.14","seat":"Ampangan","malay":78,"chinese":14,"conf":57,"held":"PH","fc":"PH","bp":38.5,"ph":40.7,"marg":2.2,"safe":false},{"no":"N.15","seat":"Juasseh","malay":85,"chinese":9,"conf":99,"held":"BN","fc":"BN-PN","bp":90.1,"ph":0,"marg":90.1,"safe":true},{"no":"N.16","seat":"Seri Menanti","malay":97,"chinese":1,"conf":99,"held":"BN","fc":"BN-PN","bp":90.5,"ph":0,"marg":90.5,"safe":true},{"no":"N.17","seat":"Senaling","malay":88,"chinese":7,"conf":99,"held":"BN","fc":"BN-PN","bp":91,"ph":0,"marg":91,"safe":true},{"no":"N.18","seat":"Pilah","malay":69,"chinese":24,"conf":80,"held":"PH","fc":"PH","bp":45.3,"ph":54.7,"marg":9.5,"safe":false},{"no":"N.19","seat":"Johol","malay":81,"chinese":13,"conf":99,"held":"BN","fc":"BN-PN","bp":92.5,"ph":0,"marg":92.5,"safe":true},{"no":"N.20","seat":"Labu","malay":78,"chinese":10,"conf":74,"held":"PN","fc":"BN-PN","bp":53.8,"ph":46.2,"marg":7.6,"safe":false},{"no":"N.21","seat":"Bukit Kepayang","malay":39,"chinese":42,"conf":99,"held":"PH","fc":"PH","bp":16.2,"ph":80.8,"marg":64.6,"safe":true},{"no":"N.22","seat":"Rahang","malay":35,"chinese":38,"conf":99,"held":"PH","fc":"PH","bp":25.8,"ph":74.2,"marg":48.3,"safe":true},{"no":"N.23","seat":"Mambau","malay":31,"chinese":45,"conf":99,"held":"PH","fc":"PH","bp":10.9,"ph":88.3,"marg":77.4,"safe":true},{"no":"N.24","seat":"Seremban Jaya","malay":38,"chinese":38,"conf":99,"held":"PH","fc":"PH","bp":20.4,"ph":79.6,"marg":59.2,"safe":true},{"no":"N.25","seat":"Paroi","malay":83,"chinese":5,"conf":91,"held":"PN","fc":"BN-PN","bp":55.3,"ph":42.5,"marg":12.9,"safe":false},{"no":"N.26","seat":"Chembong","malay":87,"chinese":4,"conf":99,"held":"BN","fc":"BN-PN","bp":92.4,"ph":0,"marg":92.4,"safe":true},{"no":"N.27","seat":"Rantau","malay":65,"chinese":12,"conf":99,"held":"BN","fc":"BN-PN","bp":94.3,"ph":0,"marg":94.3,"safe":true},{"no":"N.28","seat":"Kota","malay":86,"chinese":7,"conf":99,"held":"BN","fc":"BN-PN","bp":90.1,"ph":0,"marg":90.1,"safe":true},{"no":"N.29","seat":"Chuah","malay":34,"chinese":44,"conf":99,"held":"PH","fc":"PH","bp":18.7,"ph":81.3,"marg":62.7,"safe":true},{"no":"N.30","seat":"Lukut","malay":41,"chinese":35,"conf":99,"held":"PH","fc":"PH","bp":20.6,"ph":79.4,"marg":58.7,"safe":true},{"no":"N.31","seat":"Bagan Pinang","malay":79,"chinese":10,"conf":99,"held":"PN","fc":"BN-PN","bp":91.9,"ph":0,"marg":91.9,"safe":true},{"no":"N.32","seat":"Linggi","malay":50,"chinese":25,"conf":99,"held":"BN","fc":"BN-PN","bp":91,"ph":0,"marg":91,"safe":true},{"no":"N.33","seat":"Sri Tanjung","malay":62,"chinese":22,"conf":99,"held":"PH","fc":"PH","bp":34,"ph":66,"marg":32,"safe":true},{"no":"N.34","seat":"Gemas","malay":89,"chinese":6,"conf":99,"held":"PN","fc":"BN-PN","bp":91.5,"ph":0,"marg":91.5,"safe":true},{"no":"N.35","seat":"Gemencheh","malay":63,"chinese":17,"conf":99,"held":"BN","fc":"BN-PN","bp":91.6,"ph":0,"marg":91.6,"safe":true},{"no":"N.36","seat":"Repah","malay":39,"chinese":44,"conf":99,"held":"PH","fc":"PH","bp":32.6,"ph":67.4,"marg":34.9,"safe":true}];
-const CALIB_L=["Settled (won by 15+ pts)","Watch: lean (10-15)","Watch: close (5-10)","Watch: toss-up (under 5)"],CALIB_N=[30,2,3,1];
-const MARG_L=["0-5","5-10","10-15","15-25","25-40","40+"],MARG_N=[1,3,2,1,4,25];
-const MARG_C=["#c98a2e","#c98a2e","#c98a2e","#7a8a9a","#7a8a9a","#7a8a9a"];
+const DATA=[{"no":"N.01","seat":"Chennah","malay":67,"chinese":29,"held":"PH","fc":"PH","marg":23,"safe":true},{"no":"N.02","seat":"Pertang","malay":78,"chinese":14,"held":"BN","fc":"BN-PN","marg":93.3,"safe":true},{"no":"N.03","seat":"Sungai Lui","malay":89,"chinese":2,"held":"BN","fc":"BN-PN","marg":90.4,"safe":true},{"no":"N.04","seat":"Klawang","malay":71,"chinese":25,"held":"PH","fc":"PH","marg":6.4,"safe":false},{"no":"N.05","seat":"Serting","malay":83,"chinese":9,"held":"PN","fc":"BN-PN","marg":90.4,"safe":true},{"no":"N.06","seat":"Palong","malay":92,"chinese":2,"held":"BN","fc":"BN-PN","marg":90.4,"safe":true},{"no":"N.07","seat":"Jeram Padang","malay":58,"chinese":14,"held":"BN","fc":"BN-PN","marg":90.7,"safe":true},{"no":"N.08","seat":"Bahau","malay":40,"chinese":46,"held":"PH","fc":"PH","marg":54.4,"safe":true},{"no":"N.09","seat":"Lenggeng","malay":85,"chinese":11,"held":"BN","fc":"BN-PN","marg":88.5,"safe":true},{"no":"N.10","seat":"Nilai","malay":60,"chinese":22,"held":"PH","fc":"PH","marg":37.7,"safe":true},{"no":"N.11","seat":"Lobak","malay":13,"chinese":65,"held":"PH","fc":"PH","marg":88.8,"safe":true},{"no":"N.12","seat":"Temiang","malay":50,"chinese":37,"held":"PH","fc":"PH","marg":34.1,"safe":true},{"no":"N.13","seat":"Sikamat","malay":77,"chinese":16,"held":"PH","fc":"PH","marg":11.5,"safe":false},{"no":"N.14","seat":"Ampangan","malay":78,"chinese":14,"held":"PH","fc":"PH","marg":2.2,"safe":false},{"no":"N.15","seat":"Juasseh","malay":85,"chinese":9,"held":"BN","fc":"BN-PN","marg":90.1,"safe":true},{"no":"N.16","seat":"Seri Menanti","malay":97,"chinese":1,"held":"BN","fc":"BN-PN","marg":90.5,"safe":true},{"no":"N.17","seat":"Senaling","malay":88,"chinese":7,"held":"BN","fc":"BN-PN","marg":91,"safe":true},{"no":"N.18","seat":"Pilah","malay":69,"chinese":24,"held":"PH","fc":"PH","marg":9.5,"safe":false},{"no":"N.19","seat":"Johol","malay":81,"chinese":13,"held":"BN","fc":"BN-PN","marg":92.5,"safe":true},{"no":"N.20","seat":"Labu","malay":78,"chinese":10,"held":"PN","fc":"PH","marg":7.6,"safe":false},{"no":"N.21","seat":"Bukit Kepayang","malay":39,"chinese":42,"held":"PH","fc":"PH","marg":64.6,"safe":true},{"no":"N.22","seat":"Rahang","malay":35,"chinese":38,"held":"PH","fc":"PH","marg":48.3,"safe":true},{"no":"N.23","seat":"Mambau","malay":31,"chinese":45,"held":"PH","fc":"PH","marg":77.4,"safe":true},{"no":"N.24","seat":"Seremban Jaya","malay":38,"chinese":38,"held":"PH","fc":"PH","marg":59.2,"safe":true},{"no":"N.25","seat":"Paroi","malay":83,"chinese":5,"held":"PN","fc":"BN-PN","marg":12.9,"safe":false},{"no":"N.26","seat":"Chembong","malay":87,"chinese":4,"held":"BN","fc":"BN-PN","marg":92.4,"safe":true},{"no":"N.27","seat":"Rantau","malay":65,"chinese":12,"held":"BN","fc":"BN-PN","marg":94.3,"safe":true},{"no":"N.28","seat":"Kota","malay":86,"chinese":7,"held":"BN","fc":"BN-PN","marg":90.1,"safe":true},{"no":"N.29","seat":"Chuah","malay":34,"chinese":44,"held":"PH","fc":"PH","marg":62.7,"safe":true},{"no":"N.30","seat":"Lukut","malay":41,"chinese":35,"held":"PH","fc":"PH","marg":58.7,"safe":true},{"no":"N.31","seat":"Bagan Pinang","malay":79,"chinese":10,"held":"PN","fc":"BN-PN","marg":91.9,"safe":true},{"no":"N.32","seat":"Linggi","malay":50,"chinese":25,"held":"BN","fc":"BN-PN","marg":91,"safe":true},{"no":"N.33","seat":"Sri Tanjung","malay":62,"chinese":22,"held":"PH","fc":"PH","marg":32,"safe":true},{"no":"N.34","seat":"Gemas","malay":89,"chinese":6,"held":"PN","fc":"BN-PN","marg":91.5,"safe":true},{"no":"N.35","seat":"Gemencheh","malay":63,"chinese":17,"held":"BN","fc":"BN-PN","marg":91.6,"safe":true},{"no":"N.36","seat":"Repah","malay":39,"chinese":44,"held":"PH","fc":"PH","marg":34.9,"safe":true}];
+const FIELD={"N.01":"PH, BN","N.02":"PH, BN, Bersatu","N.03":"PH, BN, Bersatu","N.04":"PH, PN, Bersatu","N.05":"PH, PN, Bersatu","N.06":"PH, BN, Bersatu","N.07":"PH, BN, Bersatu, POAM","N.08":"PH, BN","N.09":"PH, BN, Bersatu","N.10":"PH, BN, Bersatu, +2","N.11":"PH, PN","N.12":"PH, BN, Bersatu","N.13":"PH, PN, Bersatu","N.14":"PH, PN, Bersatu","N.15":"PH, BN, Bersatu","N.16":"PH, BN, Bersatu","N.17":"PH, BN, Bersatu","N.18":"PH, BN","N.19":"PH, BN","N.20":"PH, BN, Bersatu","N.21":"PH, PN","N.22":"PH, BN, Bersatu, PSM","N.23":"PH, PN, Bersatu","N.24":"PH, BN, Bersatu","N.25":"PH, PN, Bersatu","N.26":"PH, BN","N.27":"PH, BN","N.28":"PH, BN, Bersatu","N.29":"PH, BN","N.30":"PH, PN, Ind","N.31":"PH, PN, Bersatu","N.32":"PH, BN, Bersatu","N.33":"PH, BN, Bersatu, +2","N.34":"PH, PN, Bersatu","N.35":"PH, BN","N.36":"PH, BN"};
+DATA.forEach(d=>d.field=FIELD[d.no]);
+const SIXWHO_PH=[41,51,55,55,46,42],SIXWHO_PACT=[23,27,45,26,22,44],SIXWHO_BER=[16,18,0,17,32,11];
 const BANDS=["Non-Malay (<50%)","Mixed (50-70%)","Malay (70-85%)","Malay-dominant (>85%)"];
 const BAND_PH=[10,4,3,0],BAND_BP=[1,3,8,7],BAND_N=[11,7,11,7];
-const SIX=DATA.filter(d=>!d.safe).sort((a,b)=>a.marg-b.marg);
+const SIXHH=[{s:"Ampangan",ph:41,bp:39},{s:"Klawang",ph:51,bp:45},{s:"Pilah",ph:55,bp:45},{s:"Sikamat",ph:55,bp:43},{s:"Labu",ph:46,bp:54},{s:"Paroi",ph:42,bp:55}];
 const charts={};
 Chart.defaults.font.family="-apple-system,'Segoe UI',Roboto,Arial,sans-serif";Chart.defaults.font.size=12;
-const PH='#b0342d',BP='#1c3a5e',GREY='#7a8a9a',AMBER='#c98a2e';
+const PH='#b0342d',BP='#1c3a5e',GREY='#7a8a9a',AMBER='#c98a2e',TEAL='#2f8f83';
 
 function build(){
- // race to 19: stacked horizontal, floor + won-from-six per bloc
+ // race to a majority: floor + won-from-six per bloc, both land on 18
  charts.race=new Chart(cRace,{type:'bar',data:{labels:['BN-PN','PH'],datasets:[
    {label:'Safe floor',data:[17,13],backgroundColor:GREY,stack:'s'},
-   {label:'Won from the six',data:[2,4],backgroundColor:[BP,PH],stack:'s'}]},
+   {label:'Won from the six',data:[1,5],backgroundColor:[BP,PH],stack:'s'}]},
   options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},
-    tooltip:{callbacks:{afterLabel:(x)=>x.dataIndex===0?'BN-PN total 19':'PH total 17'}}},
+    tooltip:{callbacks:{afterLabel:(x)=>x.dataIndex===0?'BN-PN total 18':'PH total 18'}}},
    scales:{x:{stacked:true,max:24,title:{display:true,text:'Seats (19 for a majority)'}},y:{stacked:true}}}});
- // distance to majority
- charts.need=new Chart(cNeed,{type:'bar',data:{labels:['BN-PN','PH'],datasets:[
-   {label:'Seats still needed from the six',data:[2,6],backgroundColor:[BP,PH]}]},
-  options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},
-   scales:{x:{min:0,max:6,ticks:{stepSize:1},title:{display:true,text:'Of the six contests, seats needed to reach 19'}}}}});
- // margin cliff
- charts.marg=new Chart(cMarg,{type:'bar',data:{labels:MARG_L,datasets:[{label:'Seats',data:MARG_N,backgroundColor:MARG_C}]},
+ // the range: three discrete scenarios for how the six break
+ charts.range=new Chart(cRange,{type:'bar',data:{labels:['Pact holds Labu','Central: Labu flips','Paroi flips too'],datasets:[
+   {label:'BN-PN',data:[19,18,17],backgroundColor:BP},
+   {label:'PH',data:[17,18,19],backgroundColor:PH}]},
   options:{maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{title:(x)=>'Margin '+x[0].label+' pts',label:(x)=>x.raw+' seats'}}},
-   scales:{y:{title:{display:true,text:'Number of seats'}},x:{title:{display:true,text:'Winning margin (points)'}}}}});
+    tooltip:{callbacks:{afterLabel:(x)=>x.dataIndex===1?'Hung, no majority':(x.raw>=19?'Majority':'One short of 19')}}},
+   scales:{y:{min:14,max:20,ticks:{stepSize:1},title:{display:true,text:'Seats (19 for a majority)'}}}}});
+ // the six, three ways: PH vs pact vs Bersatu on an illustrative central split
+ charts.sixwho=new Chart(cSixWho,{type:'bar',data:{labels:['Ampangan','Klawang','Pilah','Sikamat','Labu','Paroi'],datasets:[
+   {label:'PH',data:SIXWHO_PH,backgroundColor:PH},
+   {label:'Pact (BN/PN)',data:SIXWHO_PACT,backgroundColor:BP},
+   {label:'Bersatu',data:SIXWHO_BER,backgroundColor:TEAL}]},
+  options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},
+    tooltip:{callbacks:{afterLabel:(x)=>'Seat leans '+(['PH','PH','PH','PH','PH','BN-PN'][x.dataIndex])}}},
+   scales:{x:{min:0,max:60,title:{display:true,text:'Estimated vote share (%), central split'}}}}});
  // settled vs in play
  charts.settle=new Chart(cSettle,{type:'bar',data:{labels:['The 36 seats'],datasets:[
    {label:'Settled BN-PN',data:[17],backgroundColor:BP,stack:'s'},
@@ -203,19 +208,21 @@ function build(){
    {label:'In play',data:[6],backgroundColor:AMBER,stack:'s'}]},
   options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{position:'bottom'}},
    scales:{x:{stacked:true,max:36,title:{display:true,text:'Seats'}},y:{stacked:true}}}});
- // confidence calibration
- charts.calib=new Chart(cCalib,{type:'bar',data:{labels:CALIB_L,datasets:[{label:'Seats',data:CALIB_N,
-   backgroundColor:['#2e6f4e','#c9a227','#c98a2e','#b0342d']}]},
-  options:{maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{callbacks:{label:(x)=>x.raw+' seats'}}},
-   scales:{y:{title:{display:true,text:'Number of seats'}},x:{title:{display:true,text:'Certainty of the call (by winning margin)'}}}}});
- // the six, head to head: PH share vs combined BN-PN share
- charts.six=new Chart(cSix,{type:'bar',data:{labels:SIX.map(s=>s.seat),datasets:[
-   {label:'PH %',data:SIX.map(s=>s.ph),backgroundColor:PH},
-   {label:'BN-PN %',data:SIX.map(s=>s.bp),backgroundColor:BP}]},
+ // the six, head to head: PH share vs pooled pact share (a bar for each of the six)
+ charts.sixhh=new Chart(cSixHH,{type:'bar',data:{labels:SIXHH.map(d=>d.s),datasets:[
+   {label:'PH share',data:SIXHH.map(d=>d.ph),backgroundColor:PH},
+   {label:'Pooled BN-PN share',data:SIXHH.map(d=>d.bp),backgroundColor:BP}]},
   options:{maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},
-    tooltip:{callbacks:{afterLabel:(x)=>{const s=SIX[x.dataIndex];return 'Leans '+s.fc+', by '+s.marg+' pts';}}}},
-   scales:{x:{min:0,max:100,title:{display:true,text:'Vote share (%)'}}}}});
+    tooltip:{callbacks:{afterLabel:(x)=>{const d=SIXHH[x.dataIndex];return d.ph>d.bp?'PH leads on the two-way score':'Pact leads; a Bersatu split can flip it';}}}},
+   scales:{x:{min:0,max:70,title:{display:true,text:'Vote share (%)'}}}}});
+ // spoiler or kingmaker: Labu scenarios
+ charts.king=new Chart(cKing,{type:'bar',data:{labels:['Labu to PH','Labu to Bersatu'],datasets:[
+   {label:'PH',data:[18,17],backgroundColor:PH,stack:'s'},
+   {label:'BN-PN',data:[18,18],backgroundColor:BP,stack:'s'},
+   {label:'Bersatu',data:[0,1],backgroundColor:TEAL,stack:'s'}]},
+  options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom'},
+    tooltip:{callbacks:{afterLabel:(x)=>x.dataIndex===0?'Hung, no majority':'Hung; pact reaches 19 with Bersatu'}}},
+   scales:{x:{stacked:true,max:36,title:{display:true,text:'Seats (of 36)'}},y:{stacked:true}}}});
  // community bands
  charts.band=new Chart(cBand,{type:'bar',data:{labels:BANDS,datasets:[
    {label:'PH',data:BAND_PH,backgroundColor:PH},{label:'BN-PN',data:BAND_BP,backgroundColor:BP}]},
@@ -242,7 +249,7 @@ function renderTable(){
  rw.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];if(typeof x==='string'){return x.localeCompare(y)*sortDir;}return (x-y)*sortDir;});
  tbody.innerHTML=rw.map(r=>{const fcc=r.fc==='PH'?'ph':'bp';
    return `<tr class="${r.safe?'':'contest'}"><td>${r.no}</td><td>${r.seat}</td><td>${r.malay}</td><td>${r.chinese}</td>`+
-   `<td>${r.conf}</td><td>${r.held}</td><td class="${fcc}">${r.fc}</td><td>${r.bp}</td><td>${r.ph}</td>`+
+   `<td>${r.field}</td><td>${r.held}</td><td class="${fcc}">${r.fc}</td>`+
    `<td class="m">${r.marg}</td><td>${r.safe?'Settled':'In play'}</td></tr>`;}).join('');
  tStat.textContent=`${rw.length} seats shown, ${rw.filter(r=>!r.safe).length} in play`;
 }

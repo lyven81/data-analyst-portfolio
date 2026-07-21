@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Six Seats to Watch | Data Stories Lab</title>
-<meta name="description" content="Forecasting the Negeri Sembilan state election, seat by seat, before the vote">
+<title>The Hung State Assembly | Data Stories Lab</title>
+<meta name="description" content="Re-forecasting the Negeri Sembilan state election on the confirmed candidate list, where one seat decides who governs">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <style>
@@ -68,6 +68,8 @@
   .ftext strong,.body strong,.lead strong{font-weight:600;}
   .seatlist{font-family:Arial,Helvetica,sans-serif;font-size:.9rem;line-height:1.5;background:#f2f6fb;border:1px solid var(--hair);border-radius:6px;padding:11px 14px;margin:12px 0 2px;}
   .seatlist strong{color:var(--navy);}
+  .bridge{font-family:Arial,Helvetica,sans-serif;font-size:.95rem;line-height:1.55;background:#fdf4e3;border-left:4px solid #c98a1e;border-radius:6px;padding:14px 16px;margin:20px 0 2px;color:#5c4718;}
+  .bridge strong{color:#7a5c12;}
   .dtable{width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:.82rem;margin:16px 0 4px;}
   .dtable th,.dtable td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--hair);}
   .dtable th{background:#f2f6fb;color:var(--navy);font-weight:700;font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;}
@@ -110,7 +112,7 @@
   <div class="crumb">
     <a href="/data-analyst-portfolio/case-studies.html">Case Studies</a>
     <span class="sep">/</span><a href="/data-analyst-portfolio/predictive-modeling.html">Predictive Modeling</a>
-    <span class="sep">/</span><span>Six Seats to Watch</span>
+    <span class="sep">/</span><span>The Hung State Assembly</span>
   </div>
 
 <div class="wrap">
@@ -121,112 +123,116 @@
   </figure>
 
   <div class="kicker">Election forecasting</div>
-  <h1 class="title">Six Seats to Watch</h1>
-  <p class="standfirst">Forecasting the Negeri Sembilan state election</p>
+  <h1 class="title">The Hung State Assembly</h1>
+  <p class="standfirst">How one seat decides who governs Negeri Sembilan</p>
   <div class="dateline"><span class="red">Data Stories Lab</span><span>Analyst report</span><span>36 seats &middot; Negeri Sembilan 2026</span></div>
 
   <nav class="switch" aria-label="Case study instruments"><div class="switch-tabs"><span class="sw active" aria-current="page">Analyst Report</span><a class="sw" href="/data-analyst-portfolio/dashboards/six-seats-to-watch-dashboard.html">Dashboard</a></div><a class="sw-home" href="/data-analyst-portfolio/index.html"><span class="ico">&#8962;</span> Home</a></nav>
 
   <div class="lead body">
-    <p>Negeri Sembilan votes on 1 August 2026 to fill 36 state-assembly seats. This forecast, written before the vote, works out who is likely to win each seat and, more importantly, where the result will actually be decided. It uses only what is knowable in advance: the last two state elections and the make-up of each seat.</p>
-    <p>The contest has narrowed to two blocs. Barisan Nasional (BN) is contesting alongside Perikatan Nasional (PN) as a single grand coalition, against Pakatan Harapan (PH). Thirty of the 36 seats are already settled and split almost evenly, so the government comes down to six Malay-majority seats: Ampangan, Klawang, Labu, Pilah, Sikamat and Paroi. The BN-PN bloc is the favourite, but its majority rides entirely on that handful.</p>
+    <p>Negeri Sembilan votes on 1 August 2026 to fill 36 state-assembly seats. This forecast is built after nomination day, on the confirmed list of candidates, and it reaches a different conclusion from a forecast made before that list was known. The change is not a swing in opinion; it is a change in who is actually on the ballot.</p>
+    <p>The race was expected to be a straight two-way fight: Pakatan Harapan (PH) against a single combined Barisan Nasional and Perikatan Nasional (BN-PN) candidate. The filed list is different. BN and PN have shared out the seats, so they do not stand against each other, but a third Malay contender, Bersatu, now stands separately in 24 of the 36 seats. The government still turns on the same six Malay-majority seats: Ampangan, Klawang, Labu, Pilah, Sikamat and Paroi. With the non-PH vote split in five of them, a one-seat BN-PN majority becomes a hung assembly of 18 seats each.</p>
   </div>
 
-  <div class="skicker">The numbers</div>
-  <div class="figs"><div class="fig"><div class="n">19 vs 17</div><div class="l">forecast seats, BN-PN vs PH</div></div><div class="fig"><div class="n">6 of 36</div><div class="l">seats that decide the government</div></div><div class="fig"><div class="n">30 of 36</div><div class="l">seats already settled</div></div><div class="fig"><div class="n">2 of 6</div><div class="l">contests BN-PN needs for a majority</div></div></div>
+  <div class="bridge"><strong>Why this forecast replaces the first.</strong> An earlier version, written before nominations closed, assumed BN and PN would field one combined candidate against PH, and on that basis projected BN-PN 19, PH 17. That assumption did not survive nomination day: the confirmed list shows a third Malay candidate, Bersatu, in 24 seats, which a two-way model cannot represent. This report rebuilds the forecast on the field that will actually be voted on, using the same method and the same six-seat frame; only the candidate configuration, the one input the earlier version had to guess, has been corrected.</div>
 
-  <div class="pull"><p>&ldquo;Thirty seats are settled before the campaign begins; six Malay-majority seats decide who governs.&rdquo;</p></div>
+  <div class="skicker">The numbers</div>
+  <div class="figs"><div class="fig"><div class="n">18 vs 18</div><div class="l">central forecast, a hung assembly</div></div><div class="fig"><div class="n">6 of 36</div><div class="l">seats that decide the government</div></div><div class="fig"><div class="n">24 of 36</div><div class="l">seats now three-cornered (Bersatu stands)</div></div><div class="fig"><div class="n">1 seat</div><div class="l">Labu decides: a majority or deadlock</div></div></div>
+
+  <div class="pull"><p>&ldquo;Thirty seats are settled before the campaign begins; a single seat, Labu, now decides whether anyone governs.&rdquo;</p></div>
 
   <div class="skicker">How a seat is settled or contested</div>
   <div class="body">
-    <p>Each seat is scored as a two-way match: PH against the combined BN-PN bloc. PH's score is the share of the vote it won in 2023. The BN-PN score pools BN and PN together, keeping most of the smaller partner's vote, since a merged ticket loses a few supporters.</p>
-    <p>The gap between the two scores is what settles the seat. When one side leads by fifteen points or more, the seat is settled, too far ahead for a normal swing to close. When the gap is under fifteen points, the seat is a contest, close enough to fall either way.</p>
-    <p>Across all 36 seats, 30 come out settled and six stay close. The settled 30 split BN-PN 17 and PH 13, so neither side reaches the 19 needed to govern. That leaves the six close seats to decide who gets there and forms the next government.</p>
+    <p>Each seat starts as a two-way score: PH against the stronger of the BN-PN pact. PH's score is the share of the vote it won in 2023. The pact score pools BN and PN together, keeping most of the smaller partner's vote, since only one of them stands in each seat.</p>
+    <p>The gap between the two scores still sets the seat. When one side leads by fifteen points or more, the seat is settled, too far ahead for a normal swing to close. When the gap is under fifteen points, the seat is a contest, close enough to fall either way.</p>
+    <p>Across all 36 seats, 30 come out settled and six stay close, exactly as before. What changed is inside the six. Where three candidates now stand, the winner is the one with the most votes, not a majority, so the deciding question becomes how the non-PH vote divides between the pact candidate and Bersatu. That split, not a change of heart among voters, is what moves the seats.</p>
   </div>
 
-  <div class="skicker">The forecast, before the vote</div>
+  <div class="skicker">The forecast, on the confirmed field</div>
 
-    <article class="finding"><h3 class="fq">1. How is the forecast built?</h3><div class="ftext"><p>The forecast is built in four plain steps. First, describe each seat: how it voted in 2023, and who lives there, from the census. Second, treat BN and PN as one bloc, since they are contesting together, and combine their vote where they no longer stand against each other. Third, set that combined bloc against PH in every seat to call a winner. Fourth, record how sure the method is in each seat, so the close calls stand apart from the safe ones.</p><p>Its main assumption is that voters largely follow their coalitions once BN and PN pool their support. Where that transfer is imperfect the bloc's margins narrow, which is built into the six contests below.</p></div></article>
+    <article class="finding"><h3 class="fq">1. How is the forecast built?</h3><div class="ftext"><p>The forecast is built in four plain steps. First, describe each seat: how it voted in 2023, and who lives there, from the census. Second, read the confirmed candidate list and record who actually stands in each seat, coalition by coalition. Third, call a winner in each seat: where two stand, the higher score wins; where three stand, split the non-PH vote between the pact candidate and Bersatu and take the plurality leader. Fourth, record how sure the method is in each seat, so the close calls stand apart from the safe ones.</p><p>Its main assumption has changed. The earlier version assumed BN and PN voters would move cleanly behind one candidate. The confirmed field replaces that with a sharper question: how much of the non-PH Malay vote moves to Bersatu instead of the pact candidate. A larger Bersatu share favours PH on a plurality; a smaller one keeps the pact ahead. That split is the biggest source of doubt and is built into the range below.</p></div></article>
 
-    <article class="finding"><h3 class="fq">2. What does the forecast project?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-projection.png" alt="Stacked bar chart of forecast seats: BN-PN 19, PH 17, split into settled seats and seats won from the six contests."></figure><p class="caption">The projected seats: a one-seat BN-PN majority, 19 to 17.</p><p>On the pre-election evidence, the BN-PN bloc wins 19 of the 36 seats and PH 17, a majority of one. The bloc reaches 19 from 17 settled seats plus two of the six contests; PH reaches 17 from 13 settled seats plus four contests. The result is close, and every seat above the majority line comes from the six.</p></div></article>
+    <article class="finding"><h3 class="fq">2. What does the forecast project?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-projection.png" alt="Stacked bar chart of forecast seats: BN-PN 18 and PH 18, each from a settled floor plus seats won from the six contests."></figure><p class="caption">The projected seats: a hung assembly, 18 each, with 19 needed for a majority.</p><p>On the confirmed field, the central forecast is PH 18 and BN-PN 18: a hung assembly. PH reaches 18 from 13 settled seats plus five of the six contests; the BN-PN pact reaches 18 from 17 settled seats plus one contest. Neither crosses the 19-seat line. The whole shift from the earlier two-way projection is one seat, Labu, moving from the pact to PH, and that one seat is the difference between a majority and a tie.</p></div></article>
 
-    <article class="finding"><h3 class="fq">3. Which seats are already safe?</h3><div class="ftext"><p>Thirty seats are settled by a comfortable margin, and they split into two floors. The BN-PN bloc is safe in 17 seats, its Malay heartland. PH is safe in 13 seats, its non-Malay and mixed strongholds. Because 19 is needed to govern, neither floor is a majority on its own: the BN-PN floor is two short, the PH floor is six short.</p>
+    <article class="finding"><h3 class="fq">3. Which seats are already safe?</h3><div class="ftext"><p>Thirty seats are settled by a comfortable margin, and they split into two floors. The BN-PN pact is safe in 17 seats, its Malay heartland. PH is safe in 13 seats, its non-Malay and mixed strongholds. Because 19 is needed to govern, neither floor is a majority on its own: the pact floor is two short, the PH floor is six short.</p>
     <div class="seatlist"><strong>BN-PN safe (17):</strong> Rantau, Pertang, Johol, Chembong, Bagan Pinang, Gemencheh, Gemas, Linggi, Senaling, Jeram Padang, Seri Menanti, Serting, Sungai Lui, Palong, Kota, Juasseh, Lenggeng</div>
     <div class="seatlist"><strong>PH safe (13):</strong> Lobak, Mambau, Bukit Kepayang, Chuah, Seremban Jaya, Lukut, Bahau, Rahang, Nilai, Repah, Temiang, Sri Tanjung, Chennah</div>
-    <p>These 30 are not where the election is won. They set the starting line; the finish is in the six seats neither bloc has locked.</p></div></article>
+    <p>Bersatu stands in most of the safe Malay seats too, which narrows the pact's winning margins there. In the central forecast it does not change who holds them: those margins run from the twenties into the nineties, too wide for a split to overturn. These 30 are not where the election is won; they set the starting line.</p></div></article>
 
-    <article class="finding"><h3 class="fq">4. What decides a seat?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-community.png" alt="Stacked bar chart of seats won by PH and BN-PN across community make-up bands."></figure><p class="caption">Make-up sorts the map: PH holds the non-Malay seats, BN-PN the Malay seats.</p><p>The make-up of a seat sorts the map. PH wins almost every non-Malay and mixed seat; the BN-PN bloc wins almost every Malay-majority seat. This two-sided lock is why 30 seats are settled: most sit clearly on one side of the divide. There is only one Chinese-majority seat in the whole state, and the larger-than-usual Indian vote sits inside the non-Malay and mixed seats that PH already holds.</p><p>The contest survives only where the divide is blurred, in the Malay-majority seats that are not quite lopsided enough to be safe. That is where the six are.</p></div></article>
+    <article class="finding"><h3 class="fq">4. What decides a seat?</h3><div class="ftext"><figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-community.png" alt="Stacked bar chart of seats won by PH and BN-PN across community make-up bands."></figure><p class="caption">Make-up sorts the map: PH holds the non-Malay seats, BN-PN the Malay seats.</p><p>The make-up of a seat sorts the map. PH wins almost every non-Malay and mixed seat; the BN-PN pact wins almost every Malay-majority seat. This two-sided lock is why 30 seats are settled: most sit clearly on one side of the divide. What the confirmed field adds is a crack in the lock. In the Malay-majority seats that were only just safe for the pact, a third Malay candidate divides the non-PH vote, and a plurality contest is easier to lose than a two-way one.</p><p>The contest survives, and in places deepens, where the divide is blurred and a third candidate is on the ballot. That is where the six are, and it is why five of them are now three-cornered.</p></div></article>
 
-    <article class="finding"><h3 class="fq">5. The six seats to watch</h3><div class="ftext"><p>These are the seats the method is least sure about: Malay-majority seats where the gap between PH and the BN-PN bloc is under fifteen points. They are where the government will be won or lost.</p>
-    <table class="dtable"><thead><tr><th>Seat</th><th>Malay %</th><th>Held 2023</th><th>Forecast</th><th>Margin (pts)</th></tr></thead><tbody>
-<tr><td>Ampangan</td><td>78</td><td>PH</td><td>PH</td><td>2</td></tr>
-<tr><td>Klawang</td><td>71</td><td>PH</td><td>PH</td><td>6</td></tr>
-<tr><td>Labu</td><td>78</td><td>PN</td><td>BN-PN</td><td>8</td></tr>
-<tr><td>Pilah</td><td>69</td><td>PH</td><td>PH</td><td>9</td></tr>
-<tr><td>Sikamat</td><td>77</td><td>PH</td><td>PH</td><td>11</td></tr>
-<tr><td>Paroi</td><td>83</td><td>PN</td><td>BN-PN</td><td>13</td></tr>
+    <article class="finding"><h3 class="fq">5. The six seats to watch</h3><div class="ftext"><p>These are the seats the method is least sure about: Malay-majority seats where the gap between PH and the pact is under fifteen points. Five of the six now carry a third candidate.</p>
+    <table class="dtable"><thead><tr><th>Seat</th><th>Malay %</th><th>Held 2023</th><th>Candidates (2026)</th><th>Central call</th><th>Split to flip</th></tr></thead><tbody>
+<tr><td>Ampangan</td><td>78</td><td>PH</td><td>PH, PN, Bersatu</td><td>PH</td><td>Already PH</td></tr>
+<tr><td>Klawang</td><td>71</td><td>PH</td><td>PH, PN, Bersatu</td><td>PH</td><td>Already PH</td></tr>
+<tr><td>Pilah</td><td>69</td><td>PH</td><td>PH, BN</td><td>PH</td><td>Already PH</td></tr>
+<tr><td>Sikamat</td><td>77</td><td>PH</td><td>PH, PN, Bersatu</td><td>PH</td><td>Already PH</td></tr>
+<tr><td>Labu</td><td>78</td><td>PN</td><td>PH, BN, Bersatu (sitting member)</td><td>PH</td><td>15% of the pact vote</td></tr>
+<tr><td>Paroi</td><td>83</td><td>PN</td><td>PH, PN (sitting member), Bersatu</td><td>BN-PN</td><td>24% of the pact vote</td></tr>
     </tbody></table>
-    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-six-seats.png" alt="Horizontal bar chart of the six contests by winning margin, all under fifteen points."></figure><p class="caption">The six contests by margin: all under fifteen points, four leaning PH, two BN-PN.</p><p>Each is a contest for a plain reason: it is Malay-majority, and the gap between the two blocs is small enough that a modest swing carries it either way. In the central forecast PH holds four (Ampangan, Klawang, Pilah, Sikamat) and the BN-PN bloc takes two (Labu, Paroi), which is exactly what delivers the 19-17 result.</p></div></article>
+    <figure class="chart"><img src="https://lyven81.github.io/data-analyst-portfolio/images/six-seats-to-watch/chart-six-seats.png" alt="Horizontal bar chart of the six contests, PH share against the pooled BN-PN share."></figure><p class="caption">The six, head to head: PH leads four outright; the pact leads Labu and Paroi before the split.</p><p>PH already leads four of the six (Ampangan, Klawang, Pilah, Sikamat), so a third candidate only makes them safer. Labu is the pivot: the member who won it in 2023 now stands as Bersatu, while BN fields a separate candidate, dividing the pact vote between an established local name and a new one. It takes only a fifteen-point share of the pact vote for the pact's plurality to fall below PH, and a sitting member usually carries far more than that. Paroi is more resistant: the PN member won by more than five thousand votes in 2023, so Bersatu would have to take almost a quarter of the pact vote to pull it to PH.</p></div></article>
+
+    <article class="finding"><h3 class="fq">6. Does Bersatu win a seat, or only split the vote?</h3><div class="ftext"><p>Bersatu stands in 24 seats but is placed to win at most one. In the five contests where it divides the non-PH vote it is a new name without a local base, so it lowers the pact's plurality and passes the seat to PH rather than taking it. In the safe Malay seats the established BN or PN margins are too wide for a first-time candidate to overtake. The single exception is Labu, where the 2023 winner now stands under the Bersatu banner and carries a personal vote, turning the seat into a straight fight between PH and Bersatu.</p><p>That one seat is what separates a spoiler from a kingmaker. If Labu falls to PH, Bersatu wins nothing and its whole effect is the split that levels the assembly at 18 each: a party that changes who governs without governing. If the sitting member holds Labu, the count becomes PH 17, the pact 18 and Bersatu 1, and in a chamber where 19 is a majority that single seat is the one that lets the pact reach 19. Either way Bersatu's own haul is zero or one seat, and its weight is large as a splitter and small as a seat-winner.</p></div></article>
 
   <div class="skicker">What the six decide</div>
 
-    <article class="finding"><h3 class="fq">6. Do the six decide it, or is it foregone?</h3><div class="ftext"><p>It is not foregone. Neither bloc reaches a majority on its 30 settled seats, so the six carry the government. But the maths is one-sided. The BN-PN bloc, on 17 safe seats, needs only two of the six to reach 19, and it is favoured in two of them. PH, on 13 safe seats, would have to win all six, including overturning the two seats that lean BN-PN, just to reach a bare majority of its own.</p><div class="verdict">The BN-PN bloc is the clear favourite, but its majority is not locked: it rests entirely on these six seats.</div><p>So the six decide two things: whether the BN-PN bloc secures its majority, and how large it is. If the bloc holds its two and takes one or two of PH's close seats, the majority grows comfortable. If PH defends all four of its Malay seats and steals the bloc's two, the majority is denied and the result is level.</p></div></article>
+    <article class="finding"><h3 class="fq">7. Do the six decide it, or is it foregone?</h3><div class="ftext"><p>They decide it, and the maths is no longer one-sided. Neither bloc reaches 19 on its settled seats, so the six carry the government. The pact holds 17 safe seats and needs two of the six; it is now favoured in only one of them, Paroi. PH holds 13 safe seats and needs all six; it is now favoured in five, one short of the clean sweep that a bare majority would require.</p><div class="verdict">No side is a clear favourite once the third candidate is on the ballot: the central case is a hung assembly, and the split in two seats decides whether it tips to PH or back to the pact.</div><p>The rule has not changed: the pact still needs only two of the six, and PH still needs all six. What changed is that the pact can no longer reach even its low target of two. The split costs it Labu, so it wins one of the six instead of two, and the projected one-seat majority collapses into an 18-18 tie.</p></div></article>
 
-    <article class="finding"><h3 class="fq">7. Who is likely to govern?</h3><div class="ftext"><p>The BN-PN bloc is favoured to form the next Negeri Sembilan government, on a bare majority built out of the Malay-majority seats. PH is favoured to be the opposition, anchored by the non-Malay and mixed seats it cannot be dislodged from but unable to reach a majority through them alone. The state's next government is decided less by a broad statewide mood than by six Malay-majority seats where the two blocs run close.</p></div></article>
+    <article class="finding"><h3 class="fq">8. Who is likely to govern?</h3><div class="ftext"><p>The confirmed field points to a hung assembly with PH holding the plurality edge. PH is favoured in five of the six deciding seats and anchored by non-Malay and mixed seats it cannot be dislodged from, which puts it level with the pact and within one seat of a majority. The BN-PN pact is favoured in its heartland and in Paroi, but its path to 19 now depends on holding Labu against a split it is unlikely to hold. The state's next government is decided less by a broad statewide mood than by how a third Malay candidate divides the vote in six seats.</p></div></article>
 
   <div class="skicker" style="margin-top:42px">What this forecast can and cannot say</div>
-  <div class="body"><p>The forecast is confident about the shape of the result: the two floors are secure, PH owns the non-Malay seats, the BN-PN bloc owns the Malay heartland, and the government is decided in six seats. It gives the exact seat count as a range rather than a fixed number, because that rests on how those six break and on how cleanly BN and PN voters transfer to a single candidate, neither knowable before the vote. Read the favourite and the battleground as firm, and the final margin as a range.</p></div>
+  <div class="body"><p>The forecast is confident about the shape of the result: the two floors are secure, PH owns the non-Malay seats, the pact owns the Malay heartland, and the government is decided in six Malay-majority seats that are now mostly three-cornered. It gives the exact seat count as a range rather than a single number, because that rests on how far Bersatu splits the non-PH vote in those six, which is not knowable before the vote. Read the hung central case and the PH plurality edge as the firm finding, and the final margin as a range from BN-PN 19-17 to PH 19-17.</p></div>
 
   <div class="skicker" style="margin-top:42px">Working hypotheses</div>
-  <div class="body"><p>This forecast rests on three rules the 1 August result will test. First, make-up locks most seats: PH holds the non-Malay and mixed seats, the BN-PN bloc holds the Malay heartland, and that alone settles 30 of 36. Second, the Malay-majority seats are the whole battleground: every seat still in play is Malay-majority, and the government is decided there. Third, pooling the vote is the BN-PN edge: by fielding one candidate where they once split, BN and PN convert narrow three-way losses into wins, and a poor transfer between them would blunt this, the bloc's main risk.</p></div>
+  <div class="body"><p>This forecast rests on three rules the 1 August result will test. First, make-up still locks most seats: PH holds the non-Malay and mixed seats, the pact holds the Malay heartland, and that alone settles 30 of 36 whatever the candidate field. Second, the Malay-majority seats are the whole battleground: every seat still in play is Malay-majority, and the government is decided there. Third, the split, not a swing, is the decisive mechanic: a third Malay candidate dividing the non-PH vote hands plurality seats to PH, and where that candidate is a sitting member, as in Labu, the split is large enough to move the seat.</p></div>
 
   <div class="skicker" style="margin-top:42px">Recommendations</div>
-  <div class="body"><p>To forecast an election with data, start by counting seats, not the popular vote. The map decides who governs, and a bloc can trail the statewide vote yet still win it. So find each side's safe floor first, and check whether either already reaches a majority.</p><p>If neither does, the election lives in the seats left over. Name that short list up front, and read every seat on it as open. And when two parties pool their vote, forecast the combined bloc, treating an imperfect transfer between them as the biggest source of doubt.</p></div>
+  <div class="body"><p>To forecast an election with data, start by counting seats, not the popular vote. The map decides who governs, and a bloc can trail the statewide vote yet still win it. So find each side's safe floor first, and check whether either already reaches a majority.</p><p>Then count the candidates before pooling them. A merger assumed before nominations can dissolve on nomination day, and a single extra candidate in a close seat turns a two-way call into a plurality one. Read every seat on the short list as open, model the vote split rather than a clean transfer, and treat the size of that split as the biggest source of doubt. And publish the forecast, with its contested-seat list, before the vote.</p></div>
 
   <div class="skicker" style="margin-top:42px">Method and data</div>
-  <div class="body"><p>Each seat was treated as a two-way race, PH against a combined BN-PN candidate. The scores come from the 2023 vote and the 2020 census, with BN and PN pooled behind the stronger of the two. A seat counts as settled when the lead is fifteen points or more, and a contest when it is less.</p><p>The data is real: candidate results from the Malaysian Election Corpus and census figures from 2020, all on the current boundaries. The forecast reads past results, not polls, so its main risk is how cleanly BN and PN voters move behind one candidate. It will be checked against the actual result after 1 August 2026.</p></div>
+  <div class="body"><p>Each seat was scored from the 2023 vote and the 2020 census, PH against the stronger of the BN-PN pact. A seat is settled when that lead is fifteen points or more, and a contest when it is less. The confirmed candidate list then sets the field in each seat. Where a third candidate stands, the seat is called on a plurality: PH wins once the pact's share, reduced by the Bersatu split, falls below PH's. The split needed to flip each contest is reported as a share of the pact vote, so the range is reproducible from the published scores.</p><p>The data is real: candidate results from the Malaysian Election Corpus, census figures from 2020, and the official 2026 nomination list, all on the current boundaries. The forecast reads past results and the confirmed field, not polls, so its main risk is how the non-PH vote divides between the pact candidate and Bersatu. This is educational analysis of public election and census data, not advocacy, and it will be checked against the actual result after 1 August 2026.</p></div>
 
-  <div class="skicker" style="margin-top:42px">Appendix: every seat's score</div>
-  <div class="body"><p>The full scoreboard behind the forecast, sorted from the closest race to the safest. Each row shows PH's 2023 vote share, the combined BN-PN score (the stronger of the two plus most of the other), and the gap between them. The six rows shaded amber are the contests, where the gap is under fifteen points; they are exactly the seats to watch named earlier.</p>
-  <table class="dtable"><thead><tr><th>Seat</th><th>PH score</th><th>BN-PN score</th><th>Gap (pts)</th><th>Status</th></tr></thead><tbody>
-<tr class="contest"><td>Ampangan</td><td>41</td><td>38</td><td>2</td><td>Contest</td></tr>
-<tr class="contest"><td>Klawang</td><td>51</td><td>45</td><td>6</td><td>Contest</td></tr>
-<tr class="contest"><td>Labu</td><td>46</td><td>54</td><td>8</td><td>Contest</td></tr>
-<tr class="contest"><td>Pilah</td><td>55</td><td>45</td><td>10</td><td>Contest</td></tr>
-<tr class="contest"><td>Sikamat</td><td>55</td><td>43</td><td>12</td><td>Contest</td></tr>
-<tr class="contest"><td>Paroi</td><td>42</td><td>55</td><td>13</td><td>Contest</td></tr>
-<tr><td>Chennah</td><td>62</td><td>38</td><td>23</td><td>Settled</td></tr>
-<tr><td>Sri Tanjung</td><td>66</td><td>34</td><td>32</td><td>Settled</td></tr>
-<tr><td>Temiang</td><td>64</td><td>29</td><td>34</td><td>Settled</td></tr>
-<tr><td>Repah</td><td>67</td><td>33</td><td>35</td><td>Settled</td></tr>
-<tr><td>Nilai</td><td>66</td><td>29</td><td>38</td><td>Settled</td></tr>
-<tr><td>Rahang</td><td>74</td><td>26</td><td>48</td><td>Settled</td></tr>
-<tr><td>Bahau</td><td>77</td><td>23</td><td>54</td><td>Settled</td></tr>
-<tr><td>Lukut</td><td>79</td><td>21</td><td>59</td><td>Settled</td></tr>
-<tr><td>Seremban Jaya</td><td>80</td><td>20</td><td>59</td><td>Settled</td></tr>
-<tr><td>Chuah</td><td>81</td><td>19</td><td>63</td><td>Settled</td></tr>
-<tr><td>Bukit Kepayang</td><td>81</td><td>16</td><td>65</td><td>Settled</td></tr>
-<tr><td>Mambau</td><td>88</td><td>11</td><td>77</td><td>Settled</td></tr>
-<tr><td>Lenggeng</td><td>0</td><td>88</td><td>88</td><td>Settled</td></tr>
-<tr><td>Lobak</td><td>94</td><td>6</td><td>89</td><td>Settled</td></tr>
-<tr><td>Juasseh</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
-<tr><td>Kota</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
-<tr><td>Sungai Lui</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
-<tr><td>Serting</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
-<tr><td>Palong</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
-<tr><td>Seri Menanti</td><td>0</td><td>90</td><td>90</td><td>Settled</td></tr>
-<tr><td>Jeram Padang</td><td>0</td><td>91</td><td>91</td><td>Settled</td></tr>
-<tr><td>Senaling</td><td>0</td><td>91</td><td>91</td><td>Settled</td></tr>
-<tr><td>Linggi</td><td>0</td><td>91</td><td>91</td><td>Settled</td></tr>
-<tr><td>Gemas</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
-<tr><td>Gemencheh</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
-<tr><td>Bagan Pinang</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
-<tr><td>Chembong</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
-<tr><td>Johol</td><td>0</td><td>92</td><td>92</td><td>Settled</td></tr>
-<tr><td>Pertang</td><td>0</td><td>93</td><td>93</td><td>Settled</td></tr>
-<tr><td>Rantau</td><td>0</td><td>94</td><td>94</td><td>Settled</td></tr>
+  <div class="skicker" style="margin-top:42px">Appendix: every seat's score and field</div>
+  <div class="body"><p>The full scoreboard, sorted from the closest race to the safest. Each row shows PH's 2023 vote share, the pooled BN-PN score, the gap between them, and the confirmed 2026 field. The six rows shaded amber are the contests, where the gap is under fifteen points. A field of three or more names is a plurality contest, not a two-way one.</p>
+  <table class="dtable"><thead><tr><th>Seat</th><th>PH score</th><th>BN-PN score</th><th>Gap (pts)</th><th>Field (2026)</th></tr></thead><tbody>
+<tr class="contest"><td>Ampangan</td><td>41</td><td>39</td><td>2</td><td>PH, PN, Bersatu</td></tr>
+<tr class="contest"><td>Klawang</td><td>51</td><td>45</td><td>6</td><td>PH, PN, Bersatu</td></tr>
+<tr class="contest"><td>Labu</td><td>46</td><td>54</td><td>8</td><td>PH, BN, Bersatu</td></tr>
+<tr class="contest"><td>Pilah</td><td>55</td><td>45</td><td>9</td><td>PH, BN</td></tr>
+<tr class="contest"><td>Sikamat</td><td>55</td><td>43</td><td>11</td><td>PH, PN, Bersatu</td></tr>
+<tr class="contest"><td>Paroi</td><td>42</td><td>55</td><td>13</td><td>PH, PN, Bersatu</td></tr>
+<tr><td>Chennah</td><td>61</td><td>39</td><td>23</td><td>PH, BN</td></tr>
+<tr><td>Sri Tanjung</td><td>66</td><td>34</td><td>32</td><td>PH, BN, Bersatu, 2 Ind</td></tr>
+<tr><td>Temiang</td><td>64</td><td>29</td><td>34</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Repah</td><td>67</td><td>33</td><td>35</td><td>PH, BN</td></tr>
+<tr><td>Nilai</td><td>66</td><td>29</td><td>38</td><td>PH, BN, Bersatu, Berjasa, Ind</td></tr>
+<tr><td>Rahang</td><td>74</td><td>26</td><td>48</td><td>PH, BN, Bersatu, PSM</td></tr>
+<tr><td>Bahau</td><td>77</td><td>23</td><td>54</td><td>PH, BN</td></tr>
+<tr><td>Lukut</td><td>79</td><td>21</td><td>59</td><td>PH, PN, Ind</td></tr>
+<tr><td>Seremban Jaya</td><td>80</td><td>20</td><td>59</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Chuah</td><td>81</td><td>19</td><td>63</td><td>PH, BN</td></tr>
+<tr><td>Bukit Kepayang</td><td>81</td><td>16</td><td>65</td><td>PH, PN</td></tr>
+<tr><td>Mambau</td><td>88</td><td>11</td><td>77</td><td>PH, PN, Bersatu</td></tr>
+<tr><td>Lenggeng</td><td>0</td><td>89</td><td>89</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Lobak</td><td>94</td><td>6</td><td>89</td><td>PH, PN</td></tr>
+<tr><td>Juasseh</td><td>0</td><td>90</td><td>90</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Kota</td><td>0</td><td>90</td><td>90</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Palong</td><td>0</td><td>90</td><td>90</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Sungai Lui</td><td>0</td><td>90</td><td>90</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Serting</td><td>0</td><td>90</td><td>90</td><td>PH, PN, Bersatu</td></tr>
+<tr><td>Seri Menanti</td><td>0</td><td>91</td><td>91</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Jeram Padang</td><td>0</td><td>91</td><td>91</td><td>PH, BN, Bersatu, POAM</td></tr>
+<tr><td>Senaling</td><td>0</td><td>91</td><td>91</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Linggi</td><td>0</td><td>91</td><td>91</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Gemas</td><td>0</td><td>92</td><td>92</td><td>PH, PN, Bersatu</td></tr>
+<tr><td>Gemencheh</td><td>0</td><td>92</td><td>92</td><td>PH, BN</td></tr>
+<tr><td>Bagan Pinang</td><td>0</td><td>92</td><td>92</td><td>PH, PN, Bersatu</td></tr>
+<tr><td>Chembong</td><td>0</td><td>92</td><td>92</td><td>PH, BN</td></tr>
+<tr><td>Johol</td><td>0</td><td>93</td><td>93</td><td>PH, BN</td></tr>
+<tr><td>Pertang</td><td>0</td><td>93</td><td>93</td><td>PH, BN, Bersatu</td></tr>
+<tr><td>Rantau</td><td>0</td><td>94</td><td>94</td><td>PH, BN</td></tr>
   </tbody></table>
-  <p class="note">Scores are each bloc's 2023 vote share, in percent; a score of 0 means that bloc did not stand a candidate in the seat. Figures are rounded, so a gap may differ by a point from the subtraction shown.</p></div>
+  <p class="note">Scores are each bloc's 2023 vote share, in percent; a score of 0 means that bloc did not stand a candidate in that seat in 2023. In 2026 PH contests all 36 seats, BN and PN share the 36 between them without standing against each other, and Bersatu stands in 24. Figures are rounded, so a gap may differ by a point from the subtraction shown. Settled seats are shown at their central-case holder, which assumes the pact anchor holds despite a Bersatu split.</p></div>
 
   <hr class="endrule">
 
